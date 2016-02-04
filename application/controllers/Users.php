@@ -5,8 +5,6 @@ class Users extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        var_dump($this->ion_auth->user()->row());
-        die();
         if(!$this->ion_auth->logged_in())
         {
             $this->session->set_flashdata('error', 'You must be logged in to access this area');
