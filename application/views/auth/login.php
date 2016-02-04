@@ -8,7 +8,7 @@
                          <?php echo form_open("auth/login");?>
                           <h2 class="inner-title text-center">Login</h2>
                             <div class="form-row">
-                                  <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+                                  <?php echo form_input(array('name' => 'identity','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
                             </div>
                             <div class="form-row">
                                 <?php echo form_input(array('name' => 'password', 'value' => '', 'placeholder' => 'Password', 'type' => 'password'));?>
@@ -36,4 +36,3 @@
                 </div>
             </div>
         </div>
-
