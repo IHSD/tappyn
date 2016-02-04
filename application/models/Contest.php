@@ -4,7 +4,7 @@ class Contest extends CI_Model
 {
     protected $errors = false;
     protected $messages = false;
-    
+
     public function __construct()
     {
         parent::__construct();
@@ -21,9 +21,12 @@ class Contest extends CI_Model
         return false;
     }
 
-    public function fetchAll($params = null)
+    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20)
     {
-        $contests = $this->db->select('*')->from('contests')->get();
+        $this->db->select('*')->from('contests');
+        if(!empty($params)) $this->db->where($params);
+        $this->db->order_by($sort_by, $sort_order);
+        $contests = $this->db->get();
         if($contests && $contests->num_rows() > 0)
         {
             $results = $contests->result();

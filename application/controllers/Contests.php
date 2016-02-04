@@ -2,7 +2,7 @@
 
 class Contests extends CI_Controller
 {
-    protected $params = null;
+    protected $params = array();
 
     public function __construct()
     {
@@ -23,7 +23,7 @@ class Contests extends CI_Controller
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
 
-        $contests = $this->contest->fetchAll($this->params);
+        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', 10);
         if($contests !== FALSE)
         {
             $this->data['contests'] = $contests;
@@ -95,7 +95,7 @@ class Contests extends CI_Controller
             $this->data['options'] = array(
                 3 => '3 days',
                 7 => '7 days',
-                14 => '2 weeks' 
+                14 => '2 weeks'
             );
             $this->data['limits'] = array(
                 '50' => 50,

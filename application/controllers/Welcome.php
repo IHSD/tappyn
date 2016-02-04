@@ -7,9 +7,14 @@ class Welcome extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->view('templates/navbar');
+		$this->load->model('contest');
 	}
 
-	public function index() 		{ $this->load->view('home/index'); }
+	public function index()
+	{
+		$this->data['contests'] = $this->contest->fetchAll(array(), 'start_time', 'desc', 10);
+		$this->load->view('home/index', $this->data);
+	}
 
 	public function faq() 			{ $this->load->view('home/faq'); }
 
