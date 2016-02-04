@@ -56,9 +56,10 @@ class Contests extends CI_Controller
      */
     public function create()
     {
-        if(!$this->ion_auth->logged_in())
+        if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-
+            $this->session->set_flashdata('error', 'You must be logged in as a company to launch a contest');
+            redirect('contests/index', 'refresh');
         }
 
         $this->form_validation->set_rules('start_time', 'start_time', 'required');
