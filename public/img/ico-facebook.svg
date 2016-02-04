@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="10px" height="20px" viewBox="0 0 10 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>ico-facebook</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="homepage" sketch:type="MSArtboardGroup" transform="translate(-1189.000000, -3909.000000)" fill="#8E8E8E">
+            <g id="footer" sketch:type="MSLayerGroup" transform="translate(0.000000, 3859.000000)">
+                <g id="facebook31" transform="translate(1189.000000, 50.000000)" sketch:type="MSShapeGroup">
+                    <g id="Capa_1">
+                        <path d="M2.11150662,3.86542923 L2.11150662,6.61336427 L0.0333388219,6.61336427 L0.0333388219,9.97354988 L2.11150662,9.97354988 L2.11150662,19.9588399 L6.38050445,19.9588399 L6.38050445,9.97382831 L9.24520021,9.97382831 C9.24520021,9.97382831 9.51349151,8.36264501 9.64354165,6.60097448 L6.39664696,6.60097448 L6.39664696,4.30348028 C6.39664696,3.96009281 6.86209715,3.49819026 7.32213457,3.49819026 L9.64804431,3.49819026 L9.64804431,4.64037125e-05 L6.48559838,4.64037125e-05 C2.00598159,-0.000185614849 2.11150662,3.36334107 2.11150662,3.86542923 L2.11150662,3.86542923 Z" id="Facebook"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
