@@ -5,13 +5,16 @@
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         <link href="<?php echo base_url().'public/css/foundation.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/app.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/slick.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/jcf.css' ?>" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="<?php echo base_url().'public/js/custom-select.js' ?>" type='text/javascript'></script>
-		<script src="<?php echo base_url().'public/js/foundation.min.js'?>" type='text/javascript'></script>
+		<script src="<?php echo base_url().'public/js/foundation.js'?>" type='text/javascript'></script>
+		<script src="<?php echo base_url().'public/js/slick.js'?>" type='text/javascript'></script>
+		<script src="<?php echo base_url().'public/js/app.js'?>" type='text/javascript'></script>
 	</head>
 
 	<header>
