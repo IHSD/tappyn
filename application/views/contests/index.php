@@ -1,7 +1,5 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
-<?php echo $this->session->flashdata('error') ? $this->session->flashdata('error') : ''; ?>
-
 <?php if(isset($pagination_links)) echo $pagination_links; ?>
 
 <div class="subpage">
