@@ -3,10 +3,10 @@
 	    <div class="row">
 	        <div class="columns medium-6">
 	            <ul class="footer-nav">
-	                <li><a href=''>Contests</a></li>
-	                <li><a href=''>Contact Us</a></li>
-	                <li><a href=''>FAQ</a></li>
-	                <li><a href=''>Terms of Use</a></li>
+	                <li><a href="<?php echo base_url().'contests'; ?>">Contests</a></li>
+	                <li><a href="<?php echo base_url().'contact'; ?>">Contact Us</a></li>
+	                <li><a href="<?php echo base_url().'faq'; ?>">FAQ</a></li>
+	                <li><a href="<?php echo base_url().'terms'; ?>">Terms of Use</a></li>
 	            </ul>
 	        </div>
 	        <div class="column medium-6">
