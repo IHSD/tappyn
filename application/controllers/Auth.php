@@ -48,6 +48,7 @@ class Auth extends CI_Controller {
 	// log the user in
 	function login()
 	{
+		error_log("login function called");
 		$this->data['title'] = "Login";
 
 		//validate form input
@@ -65,7 +66,8 @@ class Auth extends CI_Controller {
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect('/', 'refresh');
+				error_log("About to redirect");
+				redirect('users/profile', 'refresh');
 			}
 			else
 			{
@@ -453,8 +455,11 @@ class Auth extends CI_Controller {
         {
             // check to see if we are creating the user
             // redirect them back to the admin page
-            $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("users/profile", 'refresh');
+            if($this->ion_auth->login($identity, $password))
+			{
+				$this->session->set_flashdata('message', 'Account created successfully!');
+				redirect('users/profile', 'refresh');
+			}
         }
         else
         {
@@ -806,7 +811,7 @@ class Auth extends CI_Controller {
 	{
 		var_dump($this->session->userdata());
 	}
-	
+
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
 	{
 
