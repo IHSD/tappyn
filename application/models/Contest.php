@@ -3,6 +3,8 @@
 class Contest extends CI_Model
 {
     protected $errors = false;
+    protected $messages = false;
+    
     public function __construct()
     {
         parent::__construct();
@@ -65,12 +67,31 @@ class Contest extends CI_Model
 
     public function create($data)
     {
-        $this->errors = 'Database error';
-        return false;
+        if(!$this->validate())
+        {
+            return false;
+        }
+
+        if($this->db->insert('contests', $data))
+        {
+            $this->messages = 'Contest successfully created';
+            return $this->db->insert_id();
+        }
+        return FALSE;
     }
 
     public function errors()
     {
         return $this->errors;
+    }
+
+    public function messages()
+    {
+        return $this->messages;
+    }
+
+    public function validate()
+    {
+        return true;
     }
 }
