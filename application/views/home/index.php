@@ -39,22 +39,22 @@
             <h2 class="title">How It Works</h2>
             <div class="features-box">
                 <div class="medium-3 column">
-                    <img src='public/img/ico-find-contest.svg'>
+                    <img src="<?php echo base_url().'public/img/ico-find-contest.svg' ?>">
                     <h3>Find a contest</h3>
                     <p>Find a contest that you like. We've had over 75 contests launched. </p>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-ad.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-ad.svg' ?>">
                     <h3>Submit an ad</h3>
                     <p>Write an ad based on the type of contest. It only takes 90 seconds.</p>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-money.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-money.svg' ?>">
                     <h3>Win &amp; make money</h3>
                     <p>Only 50 submissions are allowed, so you're odds of winning are great.</p>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-contest.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-contest.svg' ?>">
                     <h3>Find a new contest</h3>
                     <p>The more you submit, the greater chance you have of winning.  </p>
                 </div>
@@ -66,7 +66,7 @@
       <div class="row">
         <div class="columns medium-4">
           <div class="testimonial-img div-center medium-10">
-            <img src='public/img/img-testi.jpg'>
+            <img src="<?php echo base_url().'public/img/img-testi.jpg' ?>">
           </div>
         </div>
         <div class="columns medium-8">
@@ -90,22 +90,22 @@
             <h2 class="title">Why you’ll love tappyn</h2>
             <div class="features-box">
                 <div class="medium-3 column">
-                    <img src='public/img/icon-second.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-second.svg' ?>">
                     <h3>90 second<br>
             		submissions</h3>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-submissions.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-submissions.svg' ?>">
                     <h3>Cap of 50<br>
            			on submissions</h3>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-cash.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-cash.svg' ?>">
                     <h3>Sizeable, immediate <br>
             		payouts</h3>
                 </div>
                 <div class="medium-3 column">
-                    <img src='public/img/icon-school.svg'>
+                    <img src="<?php echo base_url().'public/img/icon-school.svg' ?>">
                     <h3>School specific<br>
             		contests</h3>
                 </div>
@@ -151,7 +151,7 @@
             <div class="boxes">
                 <div class="medium-4 column">
                     <div class="box-width">
-                        <img src='public/img/img-creative.png' width='200' height='200'>
+                        <img src="<?php echo base_url().'public/img/img-creative.png'?>" width='200' height='200'>
                         <h3>Our Creatvies</h3>
                         <p>The minds in our network would make even the A-Team jealous (and we love Mr.T)</p>
                         <a href="#">WANT TO BE RAW?</a>
@@ -159,7 +159,7 @@
                 </div>
                 <div class="medium-4 column">
                     <div class="box-width">
-                        <img src='public/img/img-contest.png' width='200' height='200'>
+                        <img src="<?php echo base_url().'public/img/img-contest.png'?>" width='200' height='200'>
                         <h3>Our Companies</h3>
                         <p>More than 75 companies never look at advertising the same way again.</p>
                         <a href="#">WANT TO BE RAW?</a>
@@ -172,7 +172,7 @@
     <section class="past-companies">
         <Div class="row">
             <h2 class="title">A Few of Our Past Companies</h2>
-            <img src='public/img/img-companies.jpg' width='2000' height='720'>
+            <img src="<?php echo base_url().'public/img/img-companies.jpg'?>" width='2000' height='720'>
         </Div>
     </section>
 

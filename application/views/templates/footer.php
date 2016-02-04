@@ -12,16 +12,16 @@
 	        <div class="column medium-6">
 	            <ul class="socials">
 	                <li>
-	                    <a href="#"><img src='public/img/ico-facebook.svg'></a>
+	                    <a href="#"><img src="<?php echo base_url().'public/img/ico-facebook.svg' ?>"></a>
 	                </li>
 	                <li>
-	                    <a href="#"><img src='public/img/ico-twitter.svg'></a>
+	                    <a href="#"><img src="<?php echo base_url().'public/img/ico-twitter.svg' ?>"></a>
 	                </li>
 	                <li>
-	                    <a href="#"><img src='public/img/ico-linkedin.svg'></a>
+	                    <a href="#"><img src="<?php echo base_url().'public/img/ico-linkedin.svg' ?>"></a>
 	                </li>
 	                <li>
-	                    <a href="#"><img src='public/img/ico-mail.svg'></a>
+	                    <a href="#"><img src="<?php echo base_url().'public/img/ico-mail.svg' ?>"></a>
 	                </li>
 	            </ul>
 	        </div>
