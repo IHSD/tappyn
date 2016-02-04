@@ -1,4 +1,4 @@
-<?php var_dump($error) ?>
+
 <!-- Innerpages Content -->
 <section class="innerpage">
     <!-- Login -->
@@ -8,19 +8,19 @@
                 <div class="medium-6 small-12 div-center">
                     <h2 class="inner-title text-center">Register a new account</h2>
                     <?php echo form_open("auth/create_user");?>
-                      <p>
+                      <p class="medium-6 small-12 columns">
                             <?php echo lang('create_user_fname_label', 'first_name');?> <br />
                             <?php echo form_input($first_name);?>
                       </p>
 
-                      <p>
+                      <p class="medium-6 small-12 columns">
                             <?php echo lang('create_user_lname_label', 'last_name');?> <br />
                             <?php echo form_input($last_name);?>
                       </p>
                       
                       <?php
                       if($identity_column!=='email') {
-                          echo '<p>';
+                          echo '<p class="medium-6 small-12 columns">';
                           echo lang('create_user_identity_label', 'identity');
                           echo '<br />';
                           echo form_error('identity');
@@ -29,33 +29,34 @@
                       }
                       ?>
 
-                      <p>
-                            <?php echo lang('create_user_company_label', 'company');?> <br />
-                            <?php echo form_input($company);?>
-                      </p>
 
-                      <p>
-                            <?php echo lang('create_user_email_label', 'email');?> <br />
-                            <?php echo form_input($email);?>
-                      </p>
-
-                      <p>
-                            <?php echo lang('create_user_phone_label', 'phone');?> <br />
-                            <?php echo form_input($phone);?>
-                      </p>
-
-                      <p>
+                      <p class="medium-6 small-12 columns">
                             <?php echo lang('create_user_password_label', 'password');?> <br />
                             <?php echo form_input($password);?>
                       </p>
 
-                      <p>
+                      <p class="medium-6 small-12 columns">
                             <?php echo lang('create_user_password_confirm_label', 'password_confirm');?> <br />
                             <?php echo form_input($password_confirm);?>
                       </p>
 
+                      <p class="medium-6 small-12 columns">
+                            <?php echo lang('create_user_email_label', 'email');?> <br />
+                            <?php echo form_input($email);?>
+                      </p>
 
-                      <p><?php echo form_submit('submit', lang('create_user_submit_btn'));?></p>
+                      <div class="medium-6 small-12 columns">
+                        <p>
+                          <?php echo form_radio('group_id', '2', TRUE); ?>
+                          <?php echo form_label('I want to write an ad', 'group_id'); ?>
+                        </p>
+                        <p>
+                          <?php echo form_radio('group_id', '3', FALSE); ?>
+                          <?php echo form_label('I want to create a contest', 'group_id'); ?>
+                        </p>
+                      </div>
+
+                      <div class='div-center'<p><?php echo form_submit('submit', lang('create_user_submit_btn'), array("class" => 'btn btn-contest'));?></p>
 
                       <?php echo form_close();?>
                 </div>
