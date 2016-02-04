@@ -2,6 +2,7 @@
 
 class Contest extends CI_Model
 {
+    protected $errors = false;
     public function __construct()
     {
         parent::__construct();
@@ -60,5 +61,16 @@ class Contest extends CI_Model
             return $count->row()->count;
         }
         return false;
+    }
+
+    public function create($data)
+    {
+        $this->errors = 'Database error';
+        return false;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }
