@@ -1,7 +1,6 @@
 <h1><?php echo lang('create_user_heading');?></h1>
 <p><?php echo lang('create_user_subheading');?></p>
 
-<div id="infoMessage"><?php echo $message;?></div>
 
 <?php echo form_open("auth/create_user");?>
 
@@ -14,7 +13,7 @@
             <?php echo lang('create_user_lname_label', 'last_name');?> <br />
             <?php echo form_input($last_name);?>
       </p>
-      
+
       <?php
       if($identity_column!=='email') {
           echo '<p>';

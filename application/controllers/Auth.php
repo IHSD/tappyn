@@ -413,12 +413,7 @@ class Auth extends CI_Controller {
 	// create a new user
 	function create_user()
     {
-        $this->data['title'] = "Create User";
-
-        if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
-        {
-            redirect('auth', 'refresh');
-        }
+        $this->data['title'] = "Register";
 
         $tables = $this->config->item('tables','ion_auth');
         $identity_column = $this->config->item('identity','ion_auth');
@@ -454,12 +449,12 @@ class Auth extends CI_Controller {
                 'phone'      => $this->input->post('phone'),
             );
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data)))
         {
             // check to see if we are creating the user
             // redirect them back to the admin page
             $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect("auth", 'refresh');
+            redirect("users/profile", 'refresh');
         }
         else
         {
@@ -807,6 +802,11 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	function debug()
+	{
+		var_dump($this->session->userdata());
+	}
+	
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
 	{
 

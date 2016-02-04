@@ -928,6 +928,10 @@ class Ion_auth_model extends CI_Model
 
 		$id = $this->db->insert_id();
 
+		if(isset($id))
+		{
+			$this->db->insert('profiles', array('id' => $id));
+		}
 		// add in groups array if it doesn't exits and stop adding into default group if default group ids are set
 		if( isset($default_group->id) && empty($groups) )
 		{
@@ -942,7 +946,6 @@ class Ion_auth_model extends CI_Model
 				$this->add_to_group($group, $id);
 			}
 		}
-
 		$this->trigger_events('post_register');
 
 		return (isset($id)) ? $id : FALSE;
