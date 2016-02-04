@@ -8,7 +8,7 @@ class Welcome extends CI_Controller
 		parent::__construct();
 		$this->load->view('templates/navbar');
 	}
-	
+
 	public function index() 		{ $this->load->view('home/index'); }
 
 	public function faq() 			{ $this->load->view('home/faq'); }

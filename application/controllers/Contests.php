@@ -20,7 +20,7 @@ class Contests extends CI_Controller
     {
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
-        $config['per_page'] = 1;
+        $config['per_page'] = 10;
         $this->pagination->initialize($config);
 
         $contests = $this->contest->fetchAll($this->params);
@@ -56,6 +56,11 @@ class Contests extends CI_Controller
      */
     public function create()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+
+        }
+
         $this->form_validation->set_rules('start_time', 'start_time', 'required');
         $this->form_validation->set_rules('stop_time', 'stop_time', 'required');
         $this->form_validation->set_rules('title', 'title', 'required');
@@ -118,7 +123,6 @@ class Contests extends CI_Controller
                 'type' => 'text',
                 'value' => $this->form_validation->set_value('platform')
             );
-
             $this->load->view('contests/create', $this->data);
         }
     }
