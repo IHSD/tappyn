@@ -20,7 +20,7 @@ class User extends CI_Model
 
     public function saveProfile($uid, $logo, $mission, $extra_info, $name)
     {
-        $check = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
+        $check = $this->db->select('*')->from('profiles')->where('id', $this->ion_auth->user()->row()->id)->limit(1)->get();
         if($check !== FALSE)
         {
             if($check->num_rows() > 0)

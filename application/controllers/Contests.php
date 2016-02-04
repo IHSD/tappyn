@@ -128,6 +128,11 @@ class Contests extends CI_Controller
         }
     }
 
+    public function submissions()
+    {
+        
+    }
+
     /**
      * Edit and update a contest
      * @return void
