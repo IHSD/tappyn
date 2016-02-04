@@ -10,21 +10,55 @@ class Contest extends CI_Model
 
     public function get($id)
     {
-        $contest = $this->db->select('*')->from('contests')->where('id', $id)->get();
-        if($contest)
+        $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
+        if($contest && $contest->num_rows() == 1)
         {
             return $contest->row();
         }
         return false;
     }
 
-    public function fetch()
+    public function fetchAll($params = null)
     {
-
+        $contests = $this->db->select('*')->from('contests')->get();
+        if($contests && $contests->num_rows() > 0)
+        {
+            $results = $contests->result();
+            foreach($results as $result)
+            {
+                $result->submission_count = $this->submissionsCount($result->id);
+            }
+            return $results;
+        }
+        else if($contests && $contests->num_rows() == 0)
+        {
+            return array();
+        }
+        return false;
     }
 
     public function submissions()
     {
 
+    }
+
+    public function submissionsCount($contest_id)
+    {
+        $count = $this->db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $contest_id)->get();
+        if($count !== FALSE)
+        {
+            return $count->row()->count;
+        }
+        return false;
+    }
+
+    public function count($params = null)
+    {
+        $count = $this->db->select("COUNT(*) as count")->from('contests')->get();
+        if($count && $count->num_rows() == 1)
+        {
+            return $count->row()->count;
+        }
+        return false;
     }
 }

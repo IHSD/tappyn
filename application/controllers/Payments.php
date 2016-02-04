@@ -4,6 +4,7 @@ class Payments extends CI_Controller
 {
     public function __construct()
     {
+        $this->load->view('templates/navbar');
         parent::__construct();
     }
 
