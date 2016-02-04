@@ -55,8 +55,8 @@
 	                        <?php else : ?>
 	                          	<li class="login-li">
 	                                <div class="login-box">
-	                                    <a href="<?php echo base_url().'/login'; ?>">LOGIN</a>
-	                                    <a href="<?php echo base_url().'/signup'; ?>">SIGN UP</a>    
+	                                    <a href="<?php echo base_url().'login'; ?>">LOGIN</a>
+	                                    <a href="<?php echo base_url().'signup'; ?>">SIGN UP</a>    
 	                                </div>
 	                            </li>
                             <?php endif ?>                       
