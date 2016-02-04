@@ -12,9 +12,36 @@ class Users extends CI_Controller
         }
         $this->load->view('templates/navbar');
         $this->load->model('user');
+        $this->load->model('submission');
     }
 
     public function index()
+    {
+
+    }
+
+    public function dashboard()
+    {
+        $config['base_url'] = base_url().'users/dashboard';
+        $config['total_rows'] = $this->submission->count(array('owner' => $this->ion_auth->user()->row()->id));
+        $config['per_page'] = 10;
+        $this->pagination->initialize($config);
+
+        $submissions = $this->submission->getByUser($this->ion_auth->user()->row()->id , array());
+        if($submissions !== FALSE)
+        {
+            $this->data['submissions'] = $submissions;
+            $this->data['pagination_links'] = $this->pagination->create_links();
+        }
+        $this->load->view('users/dashboard', $this->data);
+    }
+
+    public function in_progress()
+    {
+
+    }
+
+    public function completed()
     {
 
     }
@@ -43,6 +70,6 @@ class Users extends CI_Controller
 
     public function submissions()
     {
-        
+
     }
 }
