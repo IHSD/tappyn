@@ -26,77 +26,159 @@ class Submissions extends CI_Controller
      */
     public function create($contest_id)
     {
-        if($this->ion_auth->logged_in())
+        if(!$this->ion_auth->logged_in())
         {
             $this->session->set_flashdata('error', 'You have to be logged in to create a submission');
-            redirect("contests/show{$contest_id}");
+            redirect("contests/show/{$contest_id}");
         }
-        
-        $this->form_validation->set_rules('start_time', 'start_time', 'required');
-        $this->form_validation->set_rules('stop_time', 'stop_time', 'required');
-        $this->form_validation->set_rules('title', 'title', 'required');
-        $this->form_validation->set_rules('submission_limit', 'submission_limit', 'required');
-        $this->form_validation->set_rules('prize', 'prize', 'required');
-        $this->form_validation->set_rules('objective', 'objective', 'required');
-        $this->form_validation->set_rules('platform', 'platform', 'required');
 
-        if($this->form_validation->run() == true)
+        // Get the contest, and then dynamically change form validation rules, based on the type of the contest
+        $contest = $this->contest->get($contest_id);
+        if(!$contest)
         {
-            // Do some preliminary formatting
+            $this->session->set_flashdata('error', 'You must be the owner to view all submissions');
+            redirect("contests/show/{$contest_id}", 'refresh');
         }
-        if($this->form_validation->run() == true && ($cid = $this->contest->create(array())))
-        {
-            $this->session->set_flashdata('message', $this->contest->messages());
-            redirect("contests/show/{$cid}");
-        }
-        else
-        {
-            $this->data['error'] = (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : array('An unknown error occured')));
-            $this->data['start_time'] = array(
-                'name' => 'start_time',
-                'id' => 'start_time',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('start_time')
-            );
-            $this->data['stop_time'] = array(
-                'name' => 'stop_time',
-                'id' => 'stop_time',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('stop_time')
-            );
-            $this->data['title'] = array(
-                'name' => 'title',
-                'id' => 'title',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('title')
-            );
-            $this->data['submission_limit'] = array(
-                'name' => 'submission_limit',
-                'id' => 'submission_limit',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('submission_limit')
-            );
-            $this->data['prize'] = array(
-                'name' => 'prize',
-                'id' => 'prize',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('prize')
-            );
-            $this->data['objective'] = array(
-                'name' => 'objective',
-                'id' => 'objective',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('objective')
-            );
-            $this->data['platform'] = array(
-                'name' => 'platform',
-                'id' => 'platform',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('platform')
-            );
 
-            $this->load->view('contests/create', $this->data);
+        $this->data['contest'] = $contest;
+
+        $data = array(
+            'owner' => $this->ion_auth->user()->row()->id,
+            'contest_id' => $contest->id
+        );
+
+        switch($contest->platform)
+        {
+            case 'facebook':
+                $this->form_validation->set_rules('headline', 'Headline', 'required');
+                $this->form_validation->set_rules('text', 'Text', 'required');
+                $this->form_validation->set_rules('link_explanation', 'Link Explanation', '');
+                if($this->form_validation->run() == true)
+                {
+                    $data['text'] = $this->input->post('text');
+                    $data['headline'] = $this->input->post('headline');
+                    $data['link_explanation'] = $this->input->post('llink_explanation');
+                }
+                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                {
+                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    redirect("contests/show/{$contest_id}");
+                }
+                else
+                {
+                    $fields = array();
+                    $fields['Headline'] = array(
+                        'name' => 'headline',
+                        'id' => 'headline',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('headline')
+                    );
+                    $fields['Text'] = array(
+                        'name' => 'text',
+                        'id' => 'text',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('text')
+                    );
+                    $fields['Link Explanation'] = array(
+                        'name' => 'link_explanation',
+                        'id' => 'link_explanation',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('link_explanation')
+                    );
+
+                    // Generate fields for the submission form;
+                    $this->data['fields'] = $fields;
+                }
+            break;
+            case 'google':
+                $this->form_validation->set_rules('headline', 'Headline', 'required');
+                $this->form_validation->set_rules('description', "Description", 'required');
+                if($this->form_validation->run() == true)
+                {
+                    $data['text'] = $this->input->post('text');
+                    $data['description'] = $this->input->post('description');
+                }
+                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                {
+                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    redirect("contests/show/{$contest_id}");
+                }
+                else
+                {
+                    $fields = array();
+                    $fields['Headline'] = array(
+                        'name' => 'headline',
+                        'id' => 'headline',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('headline')
+                    );
+                    $fields['Description'] = array(
+                        'name' => 'description',
+                        'id' => 'description',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('description')
+                    );
+                    // Generate fields for the submission form;
+                    $this->data['fields'] = $fields;
+                }
+            break;
+            case 'twitter':
+                $this->form_validation->set_rules('text', 'Text', 'required');
+                if($this->form_validation->run() == true)
+                {
+                    $data['text'] = $this->input->post('text');
+                }
+                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                {
+                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    redirect("contests/show/{$contest_id}");
+                }
+                else
+                {
+                    $fields = array();
+                    $fields['Text'] = array(
+                        'name' => 'text',
+                        'id' => 'text',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('text')
+                    );
+                    // Generate fields for the submission form;
+                    $this->data['fields'] = $fields;
+                }
+            break;
+            case 'trending':
+
+            break;
+            case 'tagline':
+
+            break;
+            case 'general':
+                $this->form_validation->set_rules('text', 'Text', 'required');
+                if($this->form_validation->run() == true)
+                {
+                    $data['text'] = $this->input->post('text');
+                }
+                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                {
+                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    redirect("contests/show/{$contest_id}");
+                }
+                else
+                {
+                    $fields = array();
+                    $fields['Text'] = array(
+                        'name' => 'text',
+                        'id' => 'text',
+                        'type' => 'text',
+                        'value' => $this->form_validation->set_value('text')
+                    );
+                    // Generate fields for the submission form;
+                    $this->data['fields'] = $fields;
+                }
+            break;
         }
+
+        $this->load->view('submissions/create', $this->data);
     }
 
     /**
