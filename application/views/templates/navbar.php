@@ -1,4 +1,4 @@
-<?php
+
 <html>
     <head>
         <title>Raw</title>
@@ -16,7 +16,7 @@
 	        <div class="column medium-12">
 	            <div class="columns small-3 medium-1">
 	                <div class="logo">
-	                    <a href="#"><%= link_to image_tag('logo.png', size: '68x33'), root_url %></a>
+	                    <a href="#"><img src='public/img/logo.png' width='68' height='33'></a>
 	                </div>
 	            </div>
 	            <div class="columns small-9 medium-11">
@@ -60,4 +60,3 @@
 	    </div>
 	</header>
 
-?>
