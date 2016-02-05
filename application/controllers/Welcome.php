@@ -35,14 +35,14 @@ class Welcome extends CI_Controller
 		$this->form_validation->set_rules('contact', 'Customer Type', 'required');
 		$this->form_validation->set_rules('email', 'Email Address', 'required');
 		$this->form_validation->set_rules('details', 'Message', 'required');
-		if($this->form_validation->run() === true)
+		if($this->form_validation->run() == true)
 		{
 			// Pre process if necessaary
 			$customer = $this->input->post('contact');
 			$email = $this->input->post('email');
 			$message = $this->input->post('details');
 		}
-		if($this->form_validation->run() === true && $this->contact->create($customer, $email, $message))
+		if($this->form_validation->run() == true && $this->contact->create($customer, $email, $message))
 		{
 			$this->data['message'] = 'Your request for contact has been submitted';
 		} else {
