@@ -1,4 +1,7 @@
-
+<?php $this->load->view('templates/notification', array(
+    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+)); ?>
         <!-- Contact Us -->
         <div class="contact-us">
             <div class="row padding">
@@ -17,6 +20,9 @@
                     <div class='form-row'><?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?></div>
                     <?php echo form_close();?>
                 </div>
+               
+            </div>
+        </div>
+
         
 <?php $this->load->view('templates/footer'); ?>
-

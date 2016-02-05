@@ -1998,8 +1998,30 @@ header nav ul li  a {
   	font-size: 14px;
   }
 
-  .alert-container{
-  	z-index : 10000;
-  }
+}
 
+.alert-container{
+  	z-index : 10000;
+  	position:absolute;
+  	top:25%;
+  	height:auto;
+  	opacity:1;
+  }
+  .message-alert{
+  	background-color:#F00;
+  }
+  .error-alert{
+  	color:#eee;
+  	background-color:#BF3F3F;
+  	border-radius:5px;
+  	border : 1px solid #D82626;
+  	height:75px;
+  	text-align: center;
+  }
+.error-alert{
+    opacity:0;
+   -moz-animation-delay: 5s;
+   -webkit-animation-delay: 5s;
+   -o-animation-delay: 5s;
+    animation-delay: 5s;
 }
