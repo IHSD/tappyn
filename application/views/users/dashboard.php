@@ -19,7 +19,7 @@
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus">
                                     <?php foreach($contests as $contest): ?>
-                                        <div class="medium-12 columns end">
+                                        <div class="medium-3 columns end">
                                             <div class="company-post">
                                                 <div class="ad-company-info">
                                                     <h5><?php echo $contest->platform; ?></h5>
