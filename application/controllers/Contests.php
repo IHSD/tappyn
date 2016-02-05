@@ -69,7 +69,7 @@ class Contests extends CI_Controller
                 'submission_limit'      => $this->input->post('submission_limit'),
                 'owner'                 => $this->ion_auth->user()->row()->id,
                 'time_length'           => $this->input->post('time_length'),
-                'stop_time'             => date('Y-m-d H:i:s', strtotime('+'.$this->input->post('time_length'))),
+                'stop_time'             => date('Y-m-d H:i:s', strtotime('+'.$this->input->post('time_length').' days')),
                 'prize'                 => $this->input->post('prize'),
                 'platform'              => $this->input->post('platform'),
                 'objective'             => $this->input->post('objective')
