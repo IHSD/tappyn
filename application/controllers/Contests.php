@@ -151,9 +151,13 @@ class Contests extends CI_Controller
         }
     }
 
-    public function submissions()
+    public function submissions($cid)
     {
-
+        $contest = $this->contest->get($cid);
+        $submissions = $this->contest->submissions($cid);
+        $this->data['contest'] = $contest;
+        $this->data['submissions'] = $submissions;
+        $this->load->view('submissions/index', $this->data);
     }
 
     /**

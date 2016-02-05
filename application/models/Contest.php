@@ -46,7 +46,7 @@ class Contest extends CI_Model
         return false;
     }
 
-    public function submissions()
+    public function submissions($cid)
     {
         $submissions = $this->db->select('*')->from('submissions')->where('contest_id', $cid)->order_by('created_at', 'desc')->get();
         if(!$submissions)
