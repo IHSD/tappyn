@@ -33,6 +33,31 @@ class Submission extends CI_Model
         return FALSE;
     }
 
+    public function getActive($uid, $params = array())
+    {
+        $this->db->select('*')->from('submissions');
+        $this->db->join('contests', 'submissions.contest_id = contests.id');
+        $this->db->where('contests.stop_time >', date('Y-m-d H:i:s'));
+        $this->db->order_by('submissions.created_at', 'desc');
+        $submissions = $this->db->get();
+        if($submissions)
+        {
+            if($submissions->num_rows() > 0)
+            {
+                $submissions = $submissions->result();
+                foreach($submissions as $submission)
+                {
+                    $submission->contest = $this->parentContest($submission->contest_id);
+                }
+
+                return $submissions;
+            } else {
+                return array();
+            }
+        }
+        return FALSE;
+    }
+
     public function count($params)
     {
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where($params)->get();

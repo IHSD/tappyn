@@ -28,6 +28,11 @@ class Submissions extends CI_Controller
         $this->load->view('submissions/index', array('submissions' => $submissions));
     }
 
+    public function show($sid)
+    {
+        $submission = $this->submission->get($sid);
+    }
+
     /**
      * Create a new submission
      *
@@ -41,6 +46,12 @@ class Submissions extends CI_Controller
         {
             $this->session->set_flashdata('error', 'You have to be logged in to create a submission');
             redirect("contests/show/{$contest_id}");
+        }
+
+        if(!$this->ion_auth->in_group(2))
+        {
+            $this->session->set_flashdata('error', 'Only creator not allowed to submit to contests');
+            redirect("contests/show/{$contest_id}", 'refresh');
         }
 
         // Get the contest, and then dynamically change form validation rules, based on the type of the contest
