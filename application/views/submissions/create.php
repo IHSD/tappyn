@@ -1,10 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
-<!-- Innerpages Content -->
-<?php if(isset($error)) var_dump($error); ?>
 <section class="innerpage">
     <!-- Login -->
-    <div class="login-wrap">
-        <div class="login-page signup">
             <div class="row padding">
                 <div class="medium-6 small-12 div-center">
                     <h2 class="inner-title text-center">Submit An Ad</h2>
@@ -27,6 +23,4 @@
                       <?php echo form_close();?>
                 </div>
             </div>
-        </div>
-    </div>
 </section>

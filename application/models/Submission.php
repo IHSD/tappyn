@@ -2,10 +2,33 @@
 
 class Submission extends CI_Model
 {
+    protected $metafields = array(
+        'submissions.id',
+        'submissions.created_at',
+        'submissions.updated_at',
+        'submissions.owner',
+        'submissions.attachment',
+        'submissions.headline',
+        'submissions.description',
+        'submissions.text',
+        'submissions.link_explanation',
+        'submissions.trending',
+        'submissions.contest_id'
+    );
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
+    }
+
+    public function get($sid)
+    {
+        $submission = $this->db->select('*')->from('submissions')->where('id', $sid)->limit(1)->get();
+        if($submission && $submission->num_rows() == 1)
+        {
+            return $submission->row();
+        }
+        return FALSE;
     }
 
     public function getByUser($uid, $params = array())

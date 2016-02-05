@@ -39,15 +39,7 @@ class Contests extends CI_Controller
      */
     public function show($id)
     {
-        $contest = $this->contest->get($id);
-        if($contest !== FALSE)
-        {
-            $this->data['contest'] = $contest;
-            $this->load->view('contests/show', $this->data);
-        } else {
-            $this->session->set_flashdata('error', 'That contest does not exist');
-            redirect('contests/index');
-        }
+        redirect("submissions/create/{$id}", "refresh");
     }
     /**
      * Create a new contest, or render the creation form
