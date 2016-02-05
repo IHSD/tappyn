@@ -68,9 +68,7 @@ class Facebook_ion_auth {
 				$params = null;
 
 				parse_str($response, $params);
-				var_dump($params);
-				die();
-				error_log(json_encode($params));
+	
 				$this->CI->session->set_userdata('access_token', $params['access_token']);
 
 				$graph_url = "https://graph.facebook.com/me?access_token=".$params['access_token'];
