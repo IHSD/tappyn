@@ -21,6 +21,13 @@ class Users extends CI_Controller
 
     }
 
+    /**
+     * Generate a users dashboard.
+     *
+     * If its a company, we pull in all the contests.
+     * Other wise we pull in a users submissions
+     * @return void
+     */
     public function dashboard()
     {
         if($this->ion_auth->in_group(2))
@@ -65,6 +72,10 @@ class Users extends CI_Controller
 
     }
 
+    /**
+     * View a users profile
+     * @return void
+     */
     public function profile()
     {
         $profile = $this->user->profile($this->ion_auth->user()->row()->id);

@@ -27,6 +27,7 @@ class Auth extends CI_Controller {
 		$this->load->library('facebook_ion_auth');
 		if($this->facebook_ion_auth->login())
 		{
+			$this->session->set_flashdata('message', 'Logged In Successfully');
 			redirect('users/profile', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', 'There was an error logging you in with Facebook');

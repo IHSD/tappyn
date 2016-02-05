@@ -16,7 +16,9 @@ class Contest extends CI_Model
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
         if($contest && $contest->num_rows() == 1)
         {
-            return $contest->row();
+            $contest = $contest->row();
+            $contest->submission_count = $this->submissionsCount($contest->id);
+            return $contest;
         }
         return false;
     }

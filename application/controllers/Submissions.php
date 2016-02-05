@@ -8,6 +8,7 @@ class Submissions extends CI_Controller
         $this->load->view('templates/navbar');
         $this->load->model('submission');
         $this->load->model('contest');
+        $this->load->library('ion_auth');
     }
 
     /**
@@ -17,15 +18,24 @@ class Submissions extends CI_Controller
      */
     public function index($contest_id)
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->session->set_flashdata('error', 'You must be logged in to view submissions');
+            redirect('auth/login', 'refresh');
+        }
         $submissions = $this->contest->submissions($contest_id);
+        $this->load->view('submissions/index', array('submissions' => $submissions));
     }
 
     /**
      * Create a new submission
+     *
+     * @todo The long switch statement is butt fugly. Lets go back and reimplement once working
      * @return void
      */
     public function create($contest_id)
     {
+        // Verify user is logged in
         if(!$this->ion_auth->logged_in())
         {
             $this->session->set_flashdata('error', 'You have to be logged in to create a submission');
@@ -40,6 +50,7 @@ class Submissions extends CI_Controller
             redirect("contests/show/{$contest_id}", 'refresh');
         }
 
+        // Set our static data points for the view / creation
         $this->data['contest'] = $contest;
 
         $data = array(
@@ -47,6 +58,7 @@ class Submissions extends CI_Controller
             'contest_id' => $contest->id
         );
 
+        // Generate / validate fields based on the platform type
         switch($contest->platform)
         {
             case 'facebook':
@@ -59,7 +71,7 @@ class Submissions extends CI_Controller
                     $data['headline'] = $this->input->post('headline');
                     $data['link_explanation'] = $this->input->post('llink_explanation');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -98,7 +110,7 @@ class Submissions extends CI_Controller
                     $data['text'] = $this->input->post('text');
                     $data['description'] = $this->input->post('description');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -128,7 +140,7 @@ class Submissions extends CI_Controller
                 {
                     $data['text'] = $this->input->post('text');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -158,7 +170,7 @@ class Submissions extends CI_Controller
                 {
                     $data['text'] = $this->input->post('text');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -178,6 +190,7 @@ class Submissions extends CI_Controller
             break;
         }
 
+        // If we did not create a successful submission, redirect back to the submission page with errors
         $this->load->view("submissions/create", $this->data);
     }
 
