@@ -22,7 +22,7 @@
                             <p><a href="forgot_password"><?php echo lang('login_forgot_password');?></a></p>
 
                              <div class="button-box">
-                                <a href="#0">
+                                <a href="<?php echo base_url().'auth/facebook'; ?>">
                                     <img src="<?php echo base_url().'public/img/img-facebook.png' ?>">
                                 </a>
                             </div>

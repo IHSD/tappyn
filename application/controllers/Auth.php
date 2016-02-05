@@ -45,17 +45,26 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	function facebook()
+	{
+		$this->load->library('facebook_ion_auth');
+		if($this->facebook_ion_auth->login())
+		{
+			redirect('users/profile', 'refresh');
+		} else {
+			$this->session->set_flashdata('error', 'There was an error logging you in with Facebook');
+			redirect('auth/login');
+		}
+	}
 	// log the user in
 	function login()
 	{
-		error_log("login function called");
 		$this->data['title'] = "Login";
 
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
-		var_dump($this->form_validation->run());
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
