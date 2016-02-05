@@ -69,7 +69,7 @@ class Facebook_ion_auth {
 				parse_str($response, $params);
 				$this->CI->session->set_userdata('access_token', $params['access_token']);
 
-				$graph_url = "https://graph.facebook.com/me?access_token=".$params['access_token'];
+				$graph_url = "https://graph.facebook.com/me?fields=email,id,name,gender,age_range&access_token=".$params['access_token'];
 
 				$c = curl_init($graph_url);
 				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
