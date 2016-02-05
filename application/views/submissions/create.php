@@ -1,14 +1,12 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
-
-<?php $this->load->view('templates/notification', array(
-    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
-    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
-)); ?>
-
-    
+   
     <div class="row padding">
         <div class="medium-6 small-12 div-center">
             <h2 class="inner-title text-center">Submit An Ad</h2>
+            ?php $this->load->view('templates/notification', array(
+    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+)); ?>
             <?php echo form_open("submissions/create/{$contest->id}");?>
 
             <!-- Here's your block for pulling in dynamic forms.

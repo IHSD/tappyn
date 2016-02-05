@@ -35,6 +35,7 @@
 	                </div>
 	                <nav>
 	                    <ul>
+	                    	<li><a href="<?php echo base_url().'dashboard'; ?>">Dashboard</a></li>
 	                        <li><a href="<?php echo base_url().'contests'; ?>">Contests</a></li>
 	                        <li><a href="<?php echo base_url().'contests/create'; ?>">Launch</a></li>
 	                        <li><a href="<?php echo base_url().'how_it_works'; ?>">How it Works</a></li>

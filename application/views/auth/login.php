@@ -1,9 +1,3 @@
-<!-- Innerpages Content -->
-<?php $this->load->view('templates/notification', array(
-    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
-    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
-)); ?>
-
         <!-- Login -->
         <div class="login-wrap">
             <div class="login-page">
@@ -12,6 +6,10 @@
                        <div class="medium-6 small-12 div-center">
                          <?php echo form_open("auth/login");?>
                           <h2 class="inner-title text-center">Login</h2>
+                          <?php $this->load->view('templates/notification', array(
+    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+)); ?>
                             <div class="form-row">
                                   <?php echo form_input(array('name' => 'identity','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
                             </div>

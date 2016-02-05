@@ -8,15 +8,15 @@
             <ul>
                 <li>
                     <strong>$500</strong>
-                    <span><img src="images/ico-cup.svg" alt=""> Every Week</span>
+                    <span><img src="<?php echo base_url().'public/img/ico-cup.svg'; ?>" alt=""> Every Week</span>
                 </li>
                 <li>
                     <strong>75</strong>
-                    <span><img src="images/ico-cap.svg" alt=""> Winners</span>
+                    <span><img src="<?php echo base_url().'public/img/ico-cap.svg'; ?>" alt=""> Winners</span>
                 </li>
                 <li>
                     <strong>50</strong>
-                    <span><img src="images/ico-edit.svg" alt=""> Entry Limit</span>
+                    <span><img src="<?php echo base_url().'public/img/ico-edit.svg'; ?>" alt=""> Entry Limit</span>
                 </li>
             </ul>
         </div>
@@ -33,14 +33,14 @@
         </div>
     </div>
 </div>
+<div class='row padding' style='margin-top:5px'><h3 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' active contests' : count($contests) . ' active contest'; ?></h3></div>
 <section class="innerpage">
     <div class="browse-contest">
         <div class="row padding">
             <div class="browse-contest-content">
-                <h3 class="showing-results">Showing <?php echo count($contests) > 1 ? count($contests). 'open contests' : count($contests) . 'open contest'; ?></h3>
                 <div class="margin-minus">
                     <?php foreach($contests as $contest): ?>
-                        <div class="medium-2 columns end">
+                        <div class="medium-3 small-12 columns end">
                             <div class="submission-box">
                                 <div class="ad-company-info">
                                     <a href="#"><?php echo $contest->company_name; ?></a>
@@ -66,5 +66,9 @@
         </div>
     </div>
 </section>
+   <script>
+ $(document).foundation();
+ </script>
 
+ 
 <?php $this->load->view('templates/footer'); ?>

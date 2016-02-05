@@ -199,3 +199,7 @@
     <script>
  $(document).foundation();
  </script>
+
+ 
+
+<?php $this->load->view('templates/footer'); ?>
