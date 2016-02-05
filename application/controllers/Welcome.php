@@ -32,16 +32,17 @@ class Welcome extends CI_Controller
 	public function contact_us()
 	{
 		$this->load->model('contact');
-		$this->form_validation->set_rules('customer_type', 'Customer Type', 'required');
+		$this->form_validation->set_rules('contact', 'Customer Type', 'required');
 		$this->form_validation->set_rules('email', 'Email Address', 'required');
-		$this->form_validation->set_rules('subject', 'Subject', 'required');
-		$this->form_validation->set_rules('topic', 'Topic', 'required');
-		$this->form_validation->set_rules('message', 'Message', 'required');
+		$this->form_validation->set_rules('details', 'Message', 'required');
 		if($this->form_validation->run() === true)
 		{
 			// Pre process if necessaary
+			$customer = $this->input->post('contact');
+			$email = $this->input->post('email');
+			$message = $this->input->post('details');
 		}
-		if($this->form_validation->run() === true && $this->contact->create($customer, $email, $subject, $topic, $message)))
+		if($this->form_validation->run() === true && $this->contact->create($customer, $email, $message))
 		{
 			$this->data['message'] = 'Your request for contact has been submitted';
 		} else {

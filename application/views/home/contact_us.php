@@ -4,7 +4,7 @@
             <div class="row padding">
                 <div class="medium-6 small-12 div-center">
                     <h2 class="inner-title text-center">Contact Us</h2>
-                    <?php echo form_open("welcome/contact");?>
+                    <?php echo form_open("welcome/contact_us");?>
                     <div class="form-row">
                           <?php echo form_dropdown('contact', array('' => 'Are you a customer or a creator?','company' => 'Customer','user' => 'Creator'), '');;?>
                     </div>
