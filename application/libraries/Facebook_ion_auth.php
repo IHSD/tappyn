@@ -79,7 +79,7 @@ class Facebook_ion_auth {
 				// check if this user is already registered
 				if(!$this->CI->ion_auth_model->identity_check($user->email)){
 					$name = explode(" ", $user->name);
-					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]))
+					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]));
 					$this->CI->ion_auth->login($user->email, $user->id, 1);
 				} else {
 					$login = $this->CI->ion_auth->login($user->email, $user->id, 1);
