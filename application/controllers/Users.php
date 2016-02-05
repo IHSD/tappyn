@@ -49,7 +49,7 @@ class Users extends CI_Controller
             $config['base_url'] = base_url().'users/dashboard';
             $config['total_rows'] = $this->contest->count(array('owner' => $this->ion_auth->user()->row()->id));
             $config['per_page'] = 10;
-            $this->paginatioin->initialize($config);
+            $this->pagination->initialize($config);
 
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id));
             if($contests !== FALSE)
