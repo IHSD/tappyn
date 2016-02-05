@@ -39,8 +39,9 @@ class Contests extends CI_Controller
      */
     public function show($id)
     {
-        // causing infinite loop when viewing contest
-        //redirect("submissions/create/{$id}", "refresh");
+        $contest = $this->contest->get($id);
+        $this->data['contest'] = $contest;
+        $this->load->view('contests/show', $this->data);
     }
     /**
      * Create a new contest, or render the creation form
