@@ -59,7 +59,9 @@ class Facebook_ion_auth {
 			       . "client_id=" . $this->app_id . "&redirect_uri=" . urlencode($this->my_url)
 			       . "&client_secret=" . $this->app_secret . "&code=" . $code;
 
-				$response = file_get_contents($token_url);
+				$c = curl_init($token_url);
+				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+				$response = curl_exec();
 
 				$params = null;
 
