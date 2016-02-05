@@ -62,3 +62,4 @@ $route['tos'] = 'welcome/tos';
 $route['privacy_policy'] = 'welcome/privacy_policy';
 $route['faq'] = 'welcome/faq';
 $route['forgot_password'] = 'auth/forgot_password';
+$route['dashboard'] = 'users/dashboard';

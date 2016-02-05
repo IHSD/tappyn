@@ -12,9 +12,7 @@
 		<link href="<?php echo base_url().'public/css/jcf.css' ?>" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="<?php echo base_url().'public/js/custom-select.js' ?>" type='text/javascript'></script>
-		<script src="<?php echo base_url().'public/js/foundation.js'?>" type='text/javascript'></script>
-		<script src="<?php echo base_url().'public/js/slick.js'?>" type='text/javascript'></script>
-		<script src="<?php echo base_url().'public/js/app.js'?>" type='text/javascript'></script>
+		<script src="<?php echo base_url().'public/js/foundation.min.js'?>" type='text/javascript'></script>
 	</head>
 
 	<header>
