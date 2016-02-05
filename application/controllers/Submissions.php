@@ -174,11 +174,11 @@ class Submissions extends CI_Controller
                     );
                     // Generate fields for the submission form;
                     $this->data['fields'] = $fields;
-                }
+            }
             break;
         }
 
-        $this->load->view('submissions/create', $this->data);
+        $this->load->view("submissions/create", $this->data);
     }
 
     /**

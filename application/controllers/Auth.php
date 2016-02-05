@@ -19,43 +19,29 @@ class Auth extends CI_Controller {
 	// redirect if needed, otherwise display the user list
 	function index()
 	{
-		if (!$this->ion_auth->logged_in())
-		{
-			// redirect them to the login page
-			redirect('auth/login', 'refresh');
-		}
-		elseif (!$this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
-		{
-			// redirect them to the home page because they must be an administrator to view this
-			return show_error('You must be an administrator to view this page.');
-		}
-		else
-		{
-			// set the flash data error message if there is one
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-			//list the users
-			$this->data['users'] = $this->ion_auth->users()->result();
-			foreach ($this->data['users'] as $k => $user)
-			{
-				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-			}
-
-			$this->_render_page('auth/index', $this->data);
-		}
+		redirect('auth/login', 'refresh');
 	}
 
+	function facebook()
+	{
+		$this->load->library('facebook_ion_auth');
+		if($this->facebook_ion_auth->login())
+		{
+			redirect('users/profile', 'refresh');
+		} else {
+			$this->session->set_flashdata('error', 'There was an error logging you in with Facebook');
+			redirect('auth/login');
+		}
+	}
 	// log the user in
 	function login()
 	{
-		error_log("login function called");
 		$this->data['title'] = "Login";
 
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 
-		var_dump($this->form_validation->run());
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in

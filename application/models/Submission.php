@@ -52,4 +52,9 @@ class Submission extends CI_Model
         }
         return FALSE;
     }
+
+    public function create($data)
+    {
+        return $this->db->insert('submissions', $data);
+    }
 }
