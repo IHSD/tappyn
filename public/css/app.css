@@ -1999,3 +1999,26 @@ header nav ul li  a {
   }
 
 }
+
+.alert-container{
+  	z-index : 10000;
+  	position:absolute;
+  	top:25%;
+  	height:auto;
+  	opacity:1;
+  }
+  .message-alert{
+  	background-color:#1775D3;
+  	color:#eee;
+  	border-radius:5px;
+  	height:75px;
+  	text-align: center;
+  }
+  .error-alert{
+  	color:#eee;
+  	background-color:#BF3F3F;
+  	border-radius:5px;
+  	border : 1px solid #D82626;
+  	height:75px;
+  	text-align: center;
+  }

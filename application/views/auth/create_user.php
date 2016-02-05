@@ -1,6 +1,8 @@
+<?php $this->load->view('templates/notification', array(
+    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+)); ?>
 
-<!-- Innerpages Content -->
-<section class="innerpage">
     <!-- Login -->
     <div class="login-wrap">
         <div class="login-page signup">
@@ -8,59 +10,38 @@
                 <div class="medium-6 small-12 div-center">
                     <h2 class="inner-title text-center">Register a new account</h2>
                     <?php echo form_open("auth/create_user");?>
-                      <p class="medium-6 small-12 columns">
-                            <?php echo lang('create_user_fname_label', 'first_name');?> <br />
-                            <?php echo form_input($first_name);?>
-                      </p>
-
-                      <p class="medium-6 small-12 columns">
-                            <?php echo lang('create_user_lname_label', 'last_name');?> <br />
-                            <?php echo form_input($last_name);?>
-                      </p>
-
-                      <?php
-                      if($identity_column!=='email') {
-                          echo '<p class="medium-6 small-12 columns">';
-                          echo lang('create_user_identity_label', 'identity');
-                          echo '<br />';
-                          echo form_error('identity');
-                          echo form_input($identity);
-                          echo '</p>';
-                      }
-                      ?>
-
-
-                      <p class="medium-6 small-12 columns">
-                            <?php echo lang('create_user_password_label', 'password');?> <br />
-                            <?php echo form_input($password);?>
-                      </p>
-
-                      <p class="medium-6 small-12 columns">
-                            <?php echo lang('create_user_password_confirm_label', 'password_confirm');?> <br />
-                            <?php echo form_input($password_confirm);?>
-                      </p>
-
-                      <p class="medium-6 small-12 columns">
-                            <?php echo lang('create_user_email_label', 'email');?> <br />
-                            <?php echo form_input($email);?>
-                      </p>
-
-                      <div class="medium-6 small-12 columns">
-                        <p>
-                          <?php echo form_radio('group_id', '2', TRUE); ?>
-                          <?php echo form_label('I want to write an ad', 'group_id'); ?>
-                        </p>
-                        <p>
-                          <?php echo form_radio('group_id', '3', FALSE); ?>
-                          <?php echo form_label('I want to create a contest', 'group_id'); ?>
-                        </p>
+                      <div class='form-row'><?php echo form_input(array('name' => 'first_name','value' => '','placeholder' => 'First Name', 'type' => 'text'));?>
+                      </div>
+                      <div class='form-row'>
+                           <?php echo form_input(array('name' => 'last_name','value' => '','placeholder' => 'Last Name', 'type' => 'text'));?>
+                      </div>
+                       <div class='form-row'>
+                           <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+                      </div>
+                      <div class='form-row'><?php echo form_input(array('name' => 'password','value' => '','placeholder' => 'Password', 'type' => 'password'));?>
                       </div>
 
-                      <div class='div-center'<p><?php echo form_submit('submit', lang('create_user_submit_btn'), array("class" => 'btn btn-contest'));?></p>
+                      <div class='form-row'><?php echo form_input(array('name' => 'password_confirm','value' => '','placeholder' => 'Password Confirm', 'type' => 'password'));?>
+                     
+                      </div>
+
+                      <div class="form-row">
+                        <div>
+                          <?php echo form_radio('group_id', '2', TRUE); ?>
+                          <?php echo form_label('I want to write an ad', 'group_id'); ?>
+                        </div>
+                        <div>
+                          <?php echo form_radio('group_id', '3', FALSE); ?>
+                          <?php echo form_label('I want to create a contest', 'group_id'); ?>
+                        </div>
+                      </div>
+
+                      <div class='div-center'><?php echo form_submit('submit', lang('create_user_submit_btn'), array("class" => 'btn'));?></div>
 
                       <?php echo form_close();?>
                 </div>
             </div>
         </div>
     </div>
-</section>
+
+<?php $this->load->view('templates/footer'); ?>
