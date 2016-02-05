@@ -2,7 +2,7 @@
 
 <?php if(isset($pagination_links)) echo $pagination_links; ?>
 
-<div class="subpage">
+<!--<div class="subpage">
     <div class="top-sideabar columns large-2 show-for-large">
         <div class="sub-list">
             <ul>
@@ -32,8 +32,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class='row padding' style='margin-top:5px'><h3 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' active contests' : count($contests) . ' active contest'; ?></h3></div>
+</div> -->
+<h2 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' active contests' : count($contests) . ' active contest'; ?></h2>
 <section class="innerpage">
     <div class="browse-contest">
         <div class="row padding">
