@@ -46,9 +46,19 @@ class Contest extends CI_Model
         return false;
     }
 
-    public function submissions()
+    public function submissions($cid)
     {
-
+        $submissions = $this->db->select('*')->from('submissions')->where('contest_id', $cid)->order_by('created_at', 'desc')->get();
+        if(!$submissions)
+        {
+            return FALSE;
+        }
+        $submissions = $submissions->result();
+        foreach($submissions as $submission)
+        {
+            $submission->owner = $this->db->select('first_name, last_name, email')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+        }
+        return $submissions;
     }
 
     public function submissionsCount($contest_id)
