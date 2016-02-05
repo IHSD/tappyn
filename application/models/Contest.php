@@ -61,9 +61,11 @@ class Contest extends CI_Model
         return false;
     }
 
-    public function count($params = null)
+    public function count($params = array())
     {
-        $count = $this->db->select("COUNT(*) as count")->from('contests')->get();
+        $this->db->select("COUNT(*) as count")->from('contests');
+        if(!empty($params)) $this->db->where($params);
+        $count = $this->db->get();
         if($count && $count->num_rows() == 1)
         {
             return $count->row()->count;

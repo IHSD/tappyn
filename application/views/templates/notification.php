@@ -1,6 +1,8 @@
 <?php if(isset($error) || isset($message)): ?>
     <div class='alert-container'> <!-- Container for all alert messages -->
+
         <?php if($error): ?>
+
             <div class='error-alert'>
                 <?php echo $error; ?>
             </div>

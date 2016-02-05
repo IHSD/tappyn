@@ -39,15 +39,8 @@ class Contests extends CI_Controller
      */
     public function show($id)
     {
-        $contest = $this->contest->get($id);
-        if($contest !== FALSE)
-        {
-            $this->data['contest'] = $contest;
-            $this->load->view('contests/show', $this->data);
-        } else {
-            $this->session->set_flashdata('error', 'That contest does not exist');
-            redirect('contests/index');
-        }
+        // causing infinite loop when viewing contest
+        //redirect("submissions/create/{$id}", "refresh");
     }
     /**
      * Create a new contest, or render the creation form
@@ -76,7 +69,7 @@ class Contests extends CI_Controller
                 'submission_limit'      => $this->input->post('submission_limit'),
                 'owner'                 => $this->ion_auth->user()->row()->id,
                 'time_length'           => $this->input->post('time_length'),
-                'stop_time'             => date('Y-m-d H:i:s', strtotime('+'.$this->input->post('time_length'))),
+                'stop_time'             => date('Y-m-d H:i:s', strtotime('+'.$this->input->post('time_length').' days')),
                 'prize'                 => $this->input->post('prize'),
                 'platform'              => $this->input->post('platform'),
                 'objective'             => $this->input->post('objective')
@@ -85,7 +78,7 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
             $this->session->set_flashdata('message', $this->contest->messages());
-            redirect("contests/show/{$cid}");
+            redirect("users/dashboard", "refresh");
         }
         else
         {

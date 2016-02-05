@@ -30,7 +30,7 @@ class Auth extends CI_Controller {
 			$this->session->set_flashdata('message', 'Logged In Successfully');
 			redirect('users/profile', 'refresh');
 		} else {
-			$this->session->set_flashdata('error', 'There was an error logging you in with Facebook');
+			$this->session->set_flashdata('error', $this->ion_auth->errors());
 			redirect('auth/login');
 		}
 	}
