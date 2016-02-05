@@ -28,7 +28,7 @@
 	    </div>
 	    <div class="row">
 	        <div class="medium-12 column">
-	            <span class="copyrights">&copy; RAW2015. All rights reserved.</span>
+	            <span class="copyrights">&copy; Tappyn2015. All rights reserved.</span>
 	        </div>
 	    </div>
 	</footer>
