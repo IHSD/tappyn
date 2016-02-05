@@ -64,7 +64,7 @@
 <?php var_dump($this->session->flashdata('message')); ?> -->
     <!-- Check if we need to displa any messaging at all -->
 <?php if(isset($error) || $this->session->flashdata('error') || isset($message) || $this->session->flashdata('message')): ?>
-    <div class='alert-container'> <!-- Container for all alert messages -->
+    <div class='alert-container medium-6'> <!-- Container for all alert messages -->
         <?php if(isset($error) || $this->session->flashdata('error')): ?>
 
             <!-- Alert for responses that result in error -->

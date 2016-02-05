@@ -1998,4 +1998,8 @@ header nav ul li  a {
   	font-size: 14px;
   }
 
+  .alert-container{
+  	z-index : 10000;
+  }
+
 }
