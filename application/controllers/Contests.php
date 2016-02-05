@@ -39,7 +39,8 @@ class Contests extends CI_Controller
      */
     public function show($id)
     {
-        redirect("submissions/create/{$id}", "refresh");
+        // causing infinite loop when viewing contest
+        //redirect("submissions/create/{$id}", "refresh");
     }
     /**
      * Create a new contest, or render the creation form
@@ -77,7 +78,7 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
             $this->session->set_flashdata('message', $this->contest->messages());
-            redirect("contests/show/{$cid}");
+            redirect("users/dashboard", "refresh");
         }
         else
         {
