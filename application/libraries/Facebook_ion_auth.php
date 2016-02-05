@@ -62,18 +62,22 @@ class Facebook_ion_auth {
 				$c = curl_init($token_url);
 				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 				$response = curl_exec($c);
-
+				curl_close($c);
 				error_log($response);
-				
+
 				$params = null;
 
 				parse_str($response, $params);
-
+				error_log(json_encode($params));
 				$this->CI->session->set_userdata('access_token', $params['access_token']);
 
 				$graph_url = "https://graph.facebook.com/me?access_token=".$params['access_token'];
 
-				$user = json_decode(file_get_contents($graph_url));
+				$c = curl_init($graph_url);
+				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
+				$response = curl_exec($c);
+				curl_close($c);
+				$user = json_decode($response);
 
 				// check if this user is already registered
 				if(!$this->CI->ion_auth_model->identity_check($user->email)){
