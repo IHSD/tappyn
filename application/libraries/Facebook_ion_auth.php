@@ -63,6 +63,8 @@ class Facebook_ion_auth {
 				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
 				$response = curl_exec($c);
 
+				error_log($response);
+				
 				$params = null;
 
 				parse_str($response, $params);
