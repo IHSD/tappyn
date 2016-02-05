@@ -26,11 +26,6 @@
                                     <img src="<?php echo base_url().'public/img/img-facebook.png' ?>">
                                 </a>
                             </div>
-                            <div class="button-box">
-                                <a href="#0">
-                                    <img src="<?php echo base_url().'public/img/img-google.png' ?>">
-                                </a>
-                            </div>
                       </div>
                     </div>
                 </div>
