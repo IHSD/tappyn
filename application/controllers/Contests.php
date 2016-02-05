@@ -38,7 +38,7 @@ class Contests extends CI_Controller
      * @return void
      */
     public function show($id)
-    
+    {
         $contest = $this->contest->get($id);
         if($contest !== FALSE)
         {

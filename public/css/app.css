@@ -2008,7 +2008,11 @@ header nav ul li  a {
   	opacity:1;
   }
   .message-alert{
-  	background-color:#F00;
+  	background-color:#1775D3;
+  	color:#eee;
+  	border-radius:5px;
+  	height:75px;
+  	text-align: center;
   }
   .error-alert{
   	color:#eee;
@@ -2018,10 +2022,3 @@ header nav ul li  a {
   	height:75px;
   	text-align: center;
   }
-.error-alert{
-    opacity:0;
-   -moz-animation-delay: 5s;
-   -webkit-animation-delay: 5s;
-   -o-animation-delay: 5s;
-    animation-delay: 5s;
-}
