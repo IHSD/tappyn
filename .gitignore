@@ -11,6 +11,7 @@ application/logs/*
 application/config/database.php
 application/config/secrets.php
 application/config/config.php
+application/config/facebook_ion_auth.php
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
