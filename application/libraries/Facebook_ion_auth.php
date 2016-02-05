@@ -61,7 +61,7 @@ class Facebook_ion_auth {
 
 				$c = curl_init($token_url);
 				curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-				$response = curl_exec();
+				$response = curl_exec($c);
 
 				$params = null;
 
