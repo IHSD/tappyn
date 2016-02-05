@@ -79,7 +79,17 @@ class Users extends CI_Controller
                 $this->data['pagination_links'] = $this->pagination->create_links();
             }
         } else {
+            $config['base_url'] = base_url().'users/dashboard';
+            $config['total_rows'] = $this->contest->count(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time >' => date('Y-m-d H:i:s')));
+            $config['per_page'] = 10;
+            $this->pagination->initialize($config);
 
+            $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time >' => date('Y-m-d H:i:s')));
+            if($contests !== FALSE)
+            {
+                $this->data['contests'] = $contests;
+                $this->data['pagination_links'] = $this->pagination->create_links();
+            }
         }
         $this->load->view('users/dashboard', $this->data);
     }
