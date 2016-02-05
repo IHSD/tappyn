@@ -38,7 +38,7 @@
                                 </div>
 
                             </div>
-                        </div> <?php if($status == 'all') echo 'is-active'; ?>
+                        </div>
                     </div>
                 <!-- Generate the user dashboard -->
                 <?php elseif($this->ion_auth->in_group(2)): ?>
