@@ -22,7 +22,7 @@ facebook_ion_auth.php   -> Facebook App Credentials for FB login.
 
 database.php            -> Database connection credentials
 
-config.php              -> Server config (base url, logging, etc);
+config.php              -> Server config (base url, logging, etc)
 
 secrets.php             -> Environment variables necessary for 3rd party vendors
                         * As of now this is not being used
