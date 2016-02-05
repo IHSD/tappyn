@@ -1,65 +1,28 @@
-###################
-Tappyn
-###################
+##############
+ Tappyn
+##############
 
-Tappyn is a service that allows companies to create contests looking for
-ad creatives. Users can then submit to those contests, and if they win, they
-receive the prize money
-*******************
-Release Information
-*******************
+This is the project repo for Tappyn, a web application that allows companies to
+create contests paying for ad creative content. Users can then sign up and
+submit ideas, with the company selecting and paying one winner.
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<http://www.codeigniter.com/download>`_ page.
 
-**************************
-Changelog and New Features
-**************************
-
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
-
-*******************
-Server Requirements
-*******************
-
-PHP version 5.4 or newer is recommended.
-
-It should work on 5.2.4 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
-
-************
+**************
 Installation
-************
+**************
+To bootstrap your environment, pull this repository to your desired location.
+Run all .sql files located in application/lib/migrations/*.sql
+In application/config, copy all files with .example suffix to .php, i.e.
+    database.php.example -> database.php
+Then fill out the required fields based on your server environment.
 
-Please see the `installation section <http://www.codeigniter.com/user_guide/installation/index.html>`_
-of the CodeIgniter User Guide.
+facebook_ion_auth.php   -> Facebook App Credentials for FB login.
+                        * You will have to create a new app if you dont have one
+                        * https://developers.facebook.com
 
-*******
-License
-*******
+database.php            -> Database connection credentials
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+config.php              -> Server config (base url, logging, etc)
 
-*********
-Resources
-*********
-
--  `User Guide <http://www.codeigniter.com/docs>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community IRC <http://www.codeigniter.com/irc>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+secrets.php             -> Environment variables necessary for 3rd party vendors
+                        * As of now this is not being used

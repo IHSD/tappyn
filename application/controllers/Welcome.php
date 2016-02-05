@@ -16,13 +16,64 @@ class Welcome extends CI_Controller
 		$this->load->view('home/index', $this->data);
 	}
 
-	public function faq() 			{ $this->load->view('home/faq'); }
+	/**
+	 * FAQ
+	 * @return void
+	 */
+	public function faq()
+	{
+		$this->load->view('home/faq');
+	}
 
-	public function contact_us() 	{ $this->load->view('home/contact_us'); }
+	/**
+	 * Contact Us
+	 * @return void
+	 */
+	public function contact_us()
+	{
+		$this->load->model('contact');
+		$this->form_validation->set_rules('customer_type', 'Customer Type', 'required');
+		$this->form_validation->set_rules('email', 'Email Address', 'required');
+		$this->form_validation->set_rules('subject', 'Subject', 'required');
+		$this->form_validation->set_rules('topic', 'Topic', 'required');
+		$this->form_validation->set_rules('message', 'Message', 'required');
+		if($this->form_validation->run() === true)
+		{
+			// Pre process if necessaary
+		}
+		if($this->form_validation->run() === true && $this->contact->create($customer, $email, $subject, $topic, $message)))
+		{
+			$this->data['message'] = 'Your request for contact has been submitted';
+		} else {
+			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : 'An unknown error occured'));
+		}
+		$this->load->view('home/contact_us', $this->data);
+	}
 
-	public function privacy_policy(){ $this->load->view('home/privacy_policy'); }
+	/**
+	 * Privacy Policy
+	 * @return void
+	 */
+	public function privacy_policy()
+	{
+		$this->load->view('home/privacy_policy');
+	}
 
-	public function tos() 			{ $this->load->view('home/tos'); }
+	/**
+	 * Terms of Service Agreement
+	 * @return void
+	 */
+	public function tos()
+	{
+		$this->load->view('home/tos');
+	}
 
-	public function how_it_works() 	{ $this->load->view('home/how_it_works'); }
+	/**
+	 * How It Works Page
+	 * @return [type] [description]
+	 */
+	public function how_it_works()
+	{
+		$this->load->view('home/how_it_works');
+	}
 }

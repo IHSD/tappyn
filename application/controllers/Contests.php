@@ -38,7 +38,7 @@ class Contests extends CI_Controller
      * @return void
      */
     public function show($id)
-    {
+    
         $contest = $this->contest->get($id);
         if($contest !== FALSE)
         {
@@ -49,7 +49,6 @@ class Contests extends CI_Controller
             redirect('contests/index');
         }
     }
-
     /**
      * Create a new contest, or render the creation form
      * @return void
