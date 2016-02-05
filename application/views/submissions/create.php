@@ -15,3 +15,15 @@
         </div>
     </div>
 </section>
+
+<!-- Here's your block for pulling in dynamic forms.
+Put it wherever in the page you want. The array of fields generated
+are accessible inside those templates using the $fields variable; -->
+<?php switch($contest->platform): ?>
+<?php case 'facebook': $this->load->view('submissions/templates/facebook', array('fields' => $fields)); break; ?>
+<?php case 'google': $this->load->view('submissions/templates/google', array('fields' => $fields)); break; ?>
+<?php case 'trending': $this->load->view('submissions/templates/trending', array('fields' => $fields)); break; ?>
+<?php case 'tagline': $this->load->view('submissions/templates/tagline', array('fields' => $fields)); break; ?>
+<?php case 'general': $this->load->view('submissions/templates/general', array('fields' => $fields)); break; ?>
+<?php endswitch; ?>
+<!-- end of templater -->
