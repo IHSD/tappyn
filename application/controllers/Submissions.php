@@ -9,6 +9,7 @@ class Submissions extends CI_Controller
         $this->load->model('submission');
         $this->load->model('contest');
         $this->load->library('ion_auth');
+        $this->load->library('submission_library');
     }
 
     /**
@@ -69,7 +70,7 @@ class Submissions extends CI_Controller
                 {
                     $data['text'] = $this->input->post('text');
                     $data['headline'] = $this->input->post('headline');
-                    $data['link_explanation'] = $this->input->post('llink_explanation');
+                    $data['link_explanation'] = $this->input->post('link_explanation');
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
@@ -104,11 +105,11 @@ class Submissions extends CI_Controller
             break;
             case 'google':
                 $this->form_validation->set_rules('headline', 'Headline', 'required');
-                $this->form_validation->set_rules('description', "Description", 'required');
+                $this->form_validation->set_rules('text', "text", 'required');
                 if($this->form_validation->run() == true)
                 {
+                    $data['headline'] = $this->input->post('headline');
                     $data['text'] = $this->input->post('text');
-                    $data['description'] = $this->input->post('description');
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
                 {
@@ -189,7 +190,7 @@ class Submissions extends CI_Controller
             }
             break;
         }
-
+        $this->data['error'] = (validation_errors() ? validation_errors() : false);
         // If we did not create a successful submission, redirect back to the submission page with errors
         $this->load->view("submissions/create", $this->data);
     }
