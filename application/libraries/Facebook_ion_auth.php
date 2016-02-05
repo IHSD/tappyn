@@ -76,19 +76,12 @@ class Facebook_ion_auth {
 				$response = curl_exec($c);
 				curl_close($c);
 				$user = json_decode($response);
-				error_log(json_encode($user));
 				// check if this user is already registered
 				if(!$this->CI->ion_auth_model->identity_check($user->email)){
-					error_log('inserting users');
 					$name = explode(" ", $user->name);
-					if($register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1])))
-					{
-						return true;
-					} else {
-						return FALSE;
-					}
+					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]))
+					$this->CI->ion_auth->login($user->email, $user->id, 1);
 				} else {
-					error_log('loging in');
 					$login = $this->CI->ion_auth->login($user->email, $user->id, 1);
 				}
 
