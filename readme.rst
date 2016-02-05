@@ -26,3 +26,6 @@ config.php              -> Server config (base url, logging, etc)
 
 secrets.php             -> Environment variables necessary for 3rd party vendors
                         * As of now this is not being used
+
+***************
+Resources

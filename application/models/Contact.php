@@ -7,14 +7,17 @@ class Contact extends CI_Model
         parent::__construct();
     }
 
-    public function create($customer, $email, $subject, $topic, $message)
+    public function create($customer, $email, $message)
     {
         return $this->db->insert('contacts', array(
             'customer' => $customer,
             'email' => $email,
-            'subject' => $subject,
-            'topic' => $topic,
             'message' => $message
         ));
+    }
+
+    public function errors()
+    {
+        return false;
     }
 }
