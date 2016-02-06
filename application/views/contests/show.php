@@ -8,7 +8,7 @@
 			<div class='row'>
 				<div class='medium-3 small-12 columns'>
 					<h3>
-						<?php echo $contest->title; ?> by <?php echo $contest->owner; ?>
+						<?php echo $contest->title; ?> by <?php echo $contest->company->name; ?>
 					</h3>
 					<div class="tabs-box" style='margin:0'>
 						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
