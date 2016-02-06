@@ -71,7 +71,6 @@ $(document).ready(function() {
     // Set on page load
     // Change when medium is changed
     $('#platform_dropdown').change(function() {
-        alert('dropdown changed');
         console.log($('#platform_dropdown').find(':selected').text());
         if($('#platform_dropdown').find(":selected").text() == 'General')
         {
