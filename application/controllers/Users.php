@@ -8,7 +8,7 @@ class Users extends CI_Controller
         if(!$this->ion_auth->logged_in())
         {
             $this->session->set_flashdata('error', 'You must be logged in to access this area');
-            redirect('contests/index', 'refresh');
+            redirect('login', 'refresh');
         }
         $this->load->view('templates/navbar');
         $this->load->model('user');
@@ -104,6 +104,7 @@ class Users extends CI_Controller
     /**
      * View a users profile
      * @return void
+     * @todo Remove previous image on update of company_logo
      */
     public function profile()
     {
@@ -127,21 +128,32 @@ class Users extends CI_Controller
             }
             else if($this->ion_auth->in_group(3))
             {
-                // Process an image if uploaded
-                $data = array(
-                    'mission' => $this->input->post('mission'),
-                    'extra_info' => $this->input->post('extra_info'),
-                    'company_email' => $this->input->post('company_email'),
-                    'company_url' => $this->input->post('company_url'),
-                    'facebook_url' => $this->input->post('facebook_url'),
-                    'name' => $this->input->post('name')
-                );
-
-                if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                $config['upload_path'] = APPPATH.'uploads/';
+                $config['allowed_types'] = 'git|jpg|jpeg|png';
+                $config['remove_spaces'] = true;
+                $this->load->library('upload', $config);
+                if(!$this->upload->do_upload('logo_url'))
                 {
-                    $this->session->set_flashdata('error', 'There was an error saving your profile');
+                    $this->session->set_flashdata('error', $this->upload->display_errors());
                 } else {
-                    $this->session->set_flashdata('message', 'Profile successfully updated');
+
+                    // Process an image if uploaded
+                    $data = array(
+                        'mission' => $this->input->post('mission'),
+                        'extra_info' => $this->input->post('extra_info'),
+                        'company_email' => $this->input->post('company_email'),
+                        'company_url' => $this->input->post('company_url'),
+                        'facebook_url' => $this->input->post('facebook_url'),
+                        'name' => $this->input->post('name'),
+                        'logo_url' => $this->upload->data()['file_name']
+                    );
+
+                    if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                    {
+                        $this->session->set_flashdata('error', 'There was an error saving your profile');
+                    } else {
+                        $this->session->set_flashdata('message', 'Profile successfully updated');
+                    }
                 }
             }
         }

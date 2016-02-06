@@ -9,7 +9,7 @@
 			'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
 		)); ?>
 		<?php if($this->ion_auth->in_group(3)): ?>
-			<?php echo form_open("users/profile");?>
+			<?php echo form_open_multipart("users/profile");?>
 			<div class='form-row'>
 				<label>Your company's name</label>
 				<?php echo form_input(array('name' => 'name','value' => (is_null($profile->name) ? '' : $profile->name),'placeholder' => 'Company Name', 'type' => 'text'));?>
@@ -28,7 +28,8 @@
 			</div>
 			<div class='form-row'>
 				<label>Your company's logo</label>
-				<?php echo form_upload(array('name' => 'logo_url','value' => '','placeholder' => '', 'type' => 'file'));?>
+				<?php echo form_upload(array('name' => 'logo_url','value' => '','placeholder' => '', 'type' => 'file', 'id' => 'image_upload'));?>
+					<img height='auto' width='300' id="blah" src="<?php echo is_null($profile->logo_url) ? '#' : base_url().'uploads/'.$profile->logo_url ?>" alt="Company Logo" />
 			</div>
 			<div class='form-row'>
 				<label>Your company's website</label>
@@ -47,3 +48,21 @@
 	</div>
 </section>
 <?php $this->load->view('templates/footer'); ?>
+<script>
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#image_upload").change(function(){
+    readURL(this);
+});
+</script>
