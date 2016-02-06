@@ -33,6 +33,12 @@
         </div>
     </div>
 </div> -->
+<div class='medium-6 small-12'>
+    <?php $this->load->view('templates/notification', array(
+'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+)); ?>
+</div>
 <h2 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' Live Contests' : count($contests) . ' Live Contest'; ?></h2>
 <section class="innerpage">
     <div class="browse-contest">
