@@ -16,7 +16,7 @@
         </div>
         <div class="overlay"></div>
     </section>
-    <!-- Contests -->
+    <!-- Contests
     <section class="contests">
         <div class="row">
             <div class="contest-box">
@@ -35,7 +35,7 @@
                <a href="<?php echo base_url().'contests' ?>" class='btn btn-contest'>See Contests</a>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- How it works -->
     <section class="how-it-works">
         <div class="row">

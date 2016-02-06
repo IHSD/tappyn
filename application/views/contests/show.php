@@ -32,7 +32,7 @@
 		            <?php endif ?>
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
-	            	<h3>$50 Reward</h3>
+	            	<h3>$50</h3>
 					<h4>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4>
 				</div>
 			</div>
@@ -68,8 +68,8 @@
 		        			<?php echo $contest->objective ?>
 		        		</div>
 		        	</div>
-		        	<a href='<?php echo $contest->company->company_website; ?>' target='_blank'>Company Website</a>
-		        	<a href='<?php echo $contest->company->company_facebook; ?>' target='_blank'>Company Facebook</a>
+		        	<a href='<?php echo $contest->company->company_url; ?>' target='_blank'>Company Website</a>
+		        	<a href='<?php echo $contest->company->facebook_url; ?>' target='_blank'>Company Facebook</a>
 		        </div>
 		        <div class='medium-4 small-12 columns'>
 				<?php $this->load->view('templates/notification', array(

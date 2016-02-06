@@ -30,7 +30,7 @@
 		            <?php endif ?>
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
-	            	<h3>$50 Reward</h3>
+	            	<h3>$50</h3>
 					<h4>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4>
 				</div>
 			</div>
@@ -43,7 +43,7 @@
 				<div class='row'>
 		        	<?php foreach($submissions as $submission): ?>
 		        		<div class="medium-3 small-12 columns">
-		        			hi
+		        			
 		        		</div>
 		        	<?php endforeach; ?>
 	        	</div>
