@@ -80,11 +80,29 @@ $(document).ready(function() {
             $('#objective_dropdown').append(new_option);
         } else {
             // Remove the brand positioning and add website clicks
-            var new_option = ("<option value='website_clicks'>Website Clicks</option>");
+            var new_option = ("<option value='website_clicks'>Send People To Your Website</option>");
             // Remove the send to website and add brand positioning
             $('#objective_dropdown').find('option[value="brand_positioning"]').remove();
-            $('#objective_dropdown').append(new_option);
+            console.log(optionExists('website_clicks'));
+            if(!optionExists('website_clicks'))
+            {
+                $('#objective_dropdown').append(new_option);
+            }
         }
     });
+
+    function optionExists(option)
+    {
+        var IsExists = false;
+        $('#objective_dropdown option').each(function(){
+            console.log(this);
+            console.log(this.value);
+            if (this.value == option)
+            {
+                IsExists = true;
+            }
+        });
+        return IsExists;
+    }
 })
 </script>
