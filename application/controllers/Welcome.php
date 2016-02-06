@@ -46,7 +46,7 @@ class Welcome extends CI_Controller
 		{
 			$this->data['message'] = 'Your request for contact has been submitted';
 		} else {
-			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : 'An unknown error occured'));
+			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : false));
 		}
 		$this->load->view('home/contact_us', $this->data);
 	}
