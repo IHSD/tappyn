@@ -160,7 +160,7 @@ class Contests extends CI_Controller
         $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
         $this->data['contest'] = $contest;
         $this->data['submissions'] = $submissions;
-        $this->load->view('contests/show', $this->data);
+        $this->load->view('submissions/index', $this->data);
     }
     /**
      * Edit and update a contest
