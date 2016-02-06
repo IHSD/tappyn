@@ -12,8 +12,8 @@
 					</h3>
 					<div class="tabs-box" style='margin:0'>
 						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
-	                        <li class="tabs-title"><a id='brief-tab' aria-selected='true'>Brief</a></li>
-	                        <li class="tabs-title"><a id='info-tab'>Company Info</a></li>
+	                        <li class="tabs-title"><a href="<?php echo base_url().'contests/'.$contest->id ?>" aria-selected='true'>Brief</a></li>
+	                        <li class="tabs-title"><a href="<?php echo base_url().'contests/'.$contest->id.'/submissions' ?>">Submissions</a></li>
 	                    </ul>
 	                </div>
 				</div>
@@ -28,7 +28,7 @@
 		                </div>
 		            </div>
 		            <?php if($contest->submission_count < 50) : ?>
-		                <div class='text-center'><a href="<?php echo base_url().'contests/'.$contest->id.'/submissions' ?>" style='width:100%;cursor:pointer;text-decoration:none;padding:5px 10px;' class='btn tiny'><?php echo $contest->submission_count; ?> of 50 submissions</a></div>
+		                <div class='text-center'><?php echo $contest->submission_count; ?> of 50 submissions</div>
 		            <?php endif ?>
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
@@ -43,9 +43,33 @@
 			<div class='row'>
 		        <div id='brief-content' class='medium-8 small-12 columns'>
 		        	<h3 class='text-center'>Ad Brief</h3>
-		        </div>
-		        <div id='company-content' class='medium-8 small-12 columns hidden_submission'>
-		       		<h3 class='text-center'>About <?php echo $contest->owner; ?></h3>
+		        	<div class='div-center'><img src="<?php echo base_url().'uploads/'.$contest->logo_url; ?>"></div>
+		        	<div class='row' style='margin-bottom:5px;'>
+		        		<div class='medium-3 small-12 columns'>
+		        			Product and Target Market :
+		        		</div>
+		        		<div class='medium-9 small-12 columns'>
+		        			<?php echo $contest->audience ?>	
+		        		</div>
+		        	</div>
+		        	<div class='row' style='margin-bottom:5px;'>
+		        		<div class='medium-3 small-12 columns'>
+		        			Difference :
+		        		</div>
+		        		<div class='medium-9 small-12 columns'>
+		        			<?php echo $contest->difference ?>
+		        		</div>
+		        	</div>
+		        	<div class='row' style='margin-bottom:5px;'>
+		        		<div class='medium-3 small-12 columns'>
+		        			Objective of Ad :
+		        		</div>
+		        		<div class='medium-9 small-12 columns'>
+		        			<?php echo $contest->objective ?>
+		        		</div>
+		        	</div>
+		        	<a href='<?php echo $contest->company_website; ?>' target='_blank'>Company Website</a>
+		        	<a href='<?php echo $contest->company_facebook; ?>' target='_blank'>Company Facebook</a>
 		        </div>
 		        <div class='medium-4 small-12 columns'>
 				<?php $this->load->view('templates/notification', array(
@@ -73,18 +97,3 @@
 </section>
 
 <?php $this->load->view('templates/footer'); ?>
-<script>
-
-$('#brief-tab').click(function(){
-	$('#brief-tab').attr('aria-selected', true);
-	$('#info-tab').attr('aria-selected', false);
-	$('#company-content').addClass('hidden_submission');
-	$('#brief-content').removeClass('hidden_submission');
-});
-$('#info-tab').click(function(){
-	$('#brief-tab').attr('aria-selected', false);
-	$('#info-tab').attr('aria-selected', true);
-	$('#brief-content').addClass('hidden_submission');
-	$('#company-content').removeClass('hidden_submission');
-});
-</script>

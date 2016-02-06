@@ -39,7 +39,7 @@
 'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
 )); ?>
 </div>
-<h2 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' Live Contests' : count($contests) . ' Live Contest'; ?></h2>
+<h2 class="text-center">Live Contests</h2>
 <section class="innerpage">
     <div class="browse-contest">
         <div class="row padding">

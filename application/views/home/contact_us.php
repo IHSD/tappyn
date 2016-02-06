@@ -1,5 +1,6 @@
 
         <!-- Contact Us -->
+        <section class='innerpage'>
         <div class="contact-us">
             <div class="row padding">
                 <div class="medium-6 small-12 div-center">
@@ -24,6 +25,6 @@
                
             </div>
         </div>
-
+        </section>
         
 <?php $this->load->view('templates/footer'); ?>
