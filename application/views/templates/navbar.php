@@ -13,6 +13,10 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="<?php echo base_url().'public/js/custom-select.js' ?>" type='text/javascript'></script>
 		<script src="<?php echo base_url().'public/js/foundation.min.js'?>" type='text/javascript'></script>
+        <script src="<?php echo base_url().'public/js/vendor/facebook.js' ?>" type='text/javascript'></script>
+        <script src="<?php echo base_url().'public/js/vendor/google_analytics.js' ?>" type='text/javascript'></script>
+        <script src="<?php echo base_url().'public/js/vendor/hotjar.js' ?>" type='text/javascript'></script>
+        <script src="<?php echo base_url().'public/js/vendor/lucky_orange.js' ?>" type='text/javascript'></script>
 	</head>
 
 	<header>
