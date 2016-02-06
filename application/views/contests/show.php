@@ -1,7 +1,7 @@
 
 
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
-
+<section class='innerpage'>
 <div class='row'>	
 	<div class='medium-3 small-12 columns'>
 		<div class='contest-box'>
@@ -53,6 +53,6 @@
 		</div>
 	</div>
 </div>
-
+</section>
 
 <?php $this->load->view('templates/footer'); ?>

@@ -1,7 +1,7 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 <!-- User is a company -->
-
+    <?php var_dump($contests); ?>
     <section class="innerpage">
         <!-- Your Work -->
         <div class="your-work">
@@ -77,4 +77,6 @@
                 <?php endif; ?>
             </div>
         </div>
-    </section>
+</section>
+
+<?php $this->load->view('templates/footer'); ?>

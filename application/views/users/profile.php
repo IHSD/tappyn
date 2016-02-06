@@ -1,7 +1,7 @@
 <?php defined("BASEPATH") or exit("No direct script access allowed"); ?>
 
 
-
+<section class='innerpage'>
 <div class="medium-6 medium-offset-3 small-12">
 	<h2 class='text-center'>Profile</h2>
 	
@@ -14,5 +14,6 @@
 	<p class='text-center'><?php echo $this->session->email; ?></p>
 	
 </div>
+</section>
 <?php $this->load->view('templates/footer'); ?>
 
