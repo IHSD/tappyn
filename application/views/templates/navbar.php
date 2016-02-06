@@ -5,6 +5,7 @@
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="google-site-verification" content="4pmD1O3gQ8tvABnuXFko0Vn1L0MozLiFTyduIv6D_Xk" />
         <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
         <link href="<?php echo base_url().'public/css/foundation.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/app.css' ?>" rel="stylesheet">
@@ -33,7 +34,7 @@
 	            <div class="columns small-3 medium-1">
 	                <div class="logo">
 	                    <a href="<?php echo base_url(); ?>">
-	                    	<img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>" width='70'>
+	                    	<img src="<?php echo base_url().'public/img/Tappyn1.png'; ?>" width='70'>
 	                    </a>
 	                </div>
 	            </div>
