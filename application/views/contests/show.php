@@ -43,7 +43,7 @@
 			<div class='row'>
 		        <div id='brief-content' class='medium-8 small-12 columns'>
 		        	<h3 class='text-center'>Ad Brief</h3>
-		        	<div class='div-center'><img src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"></div>
+		        	<div class='div-center'><img style='height:auto;' width='150px' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"></div>
 		        	<div class='row' style='margin-bottom:5px;'>
 		        		<div class='medium-3 small-12 columns'>
 		        			Product and Target Market :
