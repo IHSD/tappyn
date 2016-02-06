@@ -107,13 +107,44 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-        $profile = $this->user->profile($this->ion_auth->user()->row()->id);
-        if($profile !== FALSE)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $this->data['profile'] = $profile;
-        } else {
-            $this->data['profile'] = 'testing';
+            if($this->ion_auth->in_group(2))
+            {
+                $data = array(
+                    'age' => $this->input->post('age_range'),
+                    'gender' => $this->input->post('gender'),
+                    'state' => $this->input->post('state'),
+                    'school' => $this->input->post('school')
+                );
+                
+                if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                {
+                    $this->session->set_flashdata('error', 'There was an error saving your profile');
+                } else {
+                    $this->session->set_flashdata('message', 'Profile successfully updated');
+                }
+            }
+            else if($this->ion_auth->in_group(3))
+            {
+                // Process an image if uploaded
+                $data = array(
+                    'mission' => $this->input->post('mission'),
+                    'extra_info' => $this->input->post('extra_info'),
+                    'company_email' => $this->input->post('company_email'),
+                    'company_url' => $this->input->post('company_url'),
+                    'facebook_url' => $this->input->post('facebook_url')
+                );
+
+                if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                {
+                    $this->session->set_flashdata('error', 'There was an error saving your profile');
+                } else {
+                    $this->session->set_flashdata('message', 'Profile successfully updated');
+                }
+            }
         }
+        $profile = $this->user->profile($this->ion_auth->user()->row()->id);
         $this->load->view('users/profile', $this->data);
     }
 

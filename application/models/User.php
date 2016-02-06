@@ -18,30 +18,20 @@ class User extends CI_Model
         return FALSE;
     }
 
-    public function saveProfile($uid, $logo, $mission, $extra_info, $name)
+    public function saveProfile($uid, $data)
     {
-        $check = $this->db->select('*')->from('profiles')->where('id', $this->ion_auth->user()->row()->id)->limit(1)->get();
+        $check = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
         if($check !== FALSE)
         {
             if($check->num_rows() > 0)
             {
                 // Update
-                return $this->db->where('id', $uid)->update('profiles', array(
-                    'logo_url' => $logo,
-                    'mission' => $mission,
-                    'extra-info' => $extra_info,
-                    'name' => $name
-                ));
+                return $this->db->where('id', $uid)->update('profiles', $data);
             }
             else
             {
-                return $this->db->insert('profiles', array(
-                    'id' => $uid,
-                    'logo_url' => $logo,
-                    'mission' => $mission,
-                    'extra-info' => $extra_info,
-                    'name' => $name
-                ));
+                $data['id'] = $uid;
+                return $this->db->insert('profiles', $data);
             }
         }
         return FALSE;

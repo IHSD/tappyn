@@ -526,4 +526,11 @@ class Ion_auth
 		return $check_all;
 	}
 
+	public function profile()
+	{
+		$this->load->model('user');
+		$id = $this->user()->row()->id;
+		return $this->user->profile($id);
+	}
+
 }

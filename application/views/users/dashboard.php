@@ -1,6 +1,7 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 <!-- User is a company -->
+<?php var_dump($this->ion_auth->profile()); ?>
     <section class="innerpage">
         <!-- Your Work -->
         <div class="your-work">
@@ -10,15 +11,15 @@
                     <h2 class="inner-title">&lt;Company Name&gt;</h2>
                     <div class="tabs-box">
                         <ul class="tabs" data-tabs id="example-tabs">
-                            <li class="tabs-title is-active"><a href="<?php echo base_url().'dashboard'; ?>" aria-selected="true">All</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>">In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>">Completed</a></li>
+                            <li class="tabs-title is-active"><a href="<?php echo base_url().'users/dashboard'; ?>" aria-selected="true">All</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'users/in_progress'; ?>">In Progress</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'users/completed'; ?>">Winning</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus">
                                     <?php foreach($contests as $contest): ?>
-                                        <div class="medium-4 small-12 columns end">
+                                        <div class="medium-3 columns end">
                                             <div class="company-post">
                                                 <div class="ad-company-info">
                                                     <h5><?php echo $contest->platform; ?></h5>
@@ -44,15 +45,15 @@
                     <h2 class="inner-title"><?php echo $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name; ?></h2>
                     <div class="tabs-box">
                         <ul class="tabs" data-tabs id="example-tabs">
-                            <li class="tabs-title"><a href="<?php echo base_url().'dashboard'; ?>" <?php if($status == 'all') echo 'aria-selected=true' ?>>All</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>" <?php if($status == 'active') echo 'aria-selected=true' ?>>In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Completed</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'users/dashboard'; ?>" <?php if($status == 'all') echo 'aria-selected=true' ?>>All</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'users/in_progress'; ?>" <?php if($status == 'active') echo 'aria-selected=true' ?>>In Progress</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'users/completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Winning</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus">
                                     <?php foreach($submissions as $submission): ?>
-                                        <div class="medium-4 small-12 columns end">
+                                        <div class="medium-12 columns end">
                                             <div class="company-post">
                                                 <div class="medium-9 ad-company-info">
                                                     <h5><?php echo $submission->contest->title; ?></h5>
@@ -63,7 +64,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class='medium-3 ad-company-info'>
-                                                    <div class='text-center'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
+                                                    <div class='text-cen'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -76,6 +77,4 @@
                 <?php endif; ?>
             </div>
         </div>
-</section>
-
-<?php $this->load->view('templates/footer'); ?>
+    </section>
