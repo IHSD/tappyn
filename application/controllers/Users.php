@@ -128,26 +128,32 @@ class Users extends CI_Controller
             }
             else if($this->ion_auth->in_group(3))
             {
-                $config['upload_path'] = APPPATH.'uploads/';
-                $config['allowed_types'] = 'git|jpg|jpeg|png';
-                $config['remove_spaces'] = true;
-                $this->load->library('upload', $config);
-                if(!$this->upload->do_upload('logo_url'))
+                $valid = true;
+                $data = array(
+                    'mission' => $this->input->post('mission'),
+                    'extra_info' => $this->input->post('extra_info'),
+                    'company_email' => $this->input->post('company_email'),
+                    'company_url' => $this->input->post('company_url'),
+                    'facebook_url' => $this->input->post('facebook_url'),
+                    'name' => $this->input->post('name'),
+                );
+                if(isset($_FILES['logo_url']))
                 {
-                    $this->session->set_flashdata('error', $this->upload->display_errors());
-                } else {
-
-                    // Process an image if uploaded
-                    $data = array(
-                        'mission' => $this->input->post('mission'),
-                        'extra_info' => $this->input->post('extra_info'),
-                        'company_email' => $this->input->post('company_email'),
-                        'company_url' => $this->input->post('company_url'),
-                        'facebook_url' => $this->input->post('facebook_url'),
-                        'name' => $this->input->post('name'),
-                        'logo_url' => $this->upload->data()['file_name']
-                    );
-
+                    $config['upload_path'] = APPPATH.'uploads/';
+                    $config['allowed_types'] = 'git|jpg|jpeg|png';
+                    $config['remove_spaces'] = true;
+                    $config['encrypt_name'] = true;
+                    $this->load->library('upload', $config);
+                    if(!$this->upload->do_upload('logo_url'))
+                    {
+                        $this->session->set_flashdata('error', $this->upload->display_errors());
+                        $valid = false;
+                    } else {
+                        $data['logo_url'] = $this->upload->data()['file_name'];
+                    }
+                }
+                if($valid)
+                {
                     if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                     {
                         $this->session->set_flashdata('error', 'There was an error saving your profile');

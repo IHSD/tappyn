@@ -28,8 +28,8 @@
 			</div>
 			<div class='form-row'>
 				<label>Your company's logo</label>
-				<?php echo form_upload(array('name' => 'logo_url','value' => '','placeholder' => '', 'type' => 'file', 'id' => 'image_upload'));?>
-					<img height='auto' width='300' id="blah" src="<?php echo is_null($profile->logo_url) ? '#' : base_url().'uploads/'.$profile->logo_url ?>" alt="Company Logo" />
+				<?php echo form_upload(array('name' => 'logo_url', 'type' => 'file', 'id' => 'image_upload'));?>
+					<img height='auto' <?php echo is_null($profile->logo_url) ? 'style="display:none"' : '' ?> width='300' id="blah" src="<?php echo is_null($profile->logo_url) ? '#' : base_url().'uploads/'.$profile->logo_url ?>" alt="Company Logo" />
 			</div>
 			<div class='form-row'>
 				<label>Your company's website</label>
@@ -56,6 +56,7 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#blah').attr('src', e.target.result);
+			$('#blah').show();
         }
 
         reader.readAsDataURL(input.files[0]);
