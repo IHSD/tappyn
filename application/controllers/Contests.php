@@ -37,7 +37,7 @@ class Contests extends CI_Controller
      * @param  integer $id
      * @return void
      */
-    public function show($id)
+    public function show($cid)
     {
         $contest = $this->contest->get($cid);
         $submissions = $this->contest->submissions($cid);
