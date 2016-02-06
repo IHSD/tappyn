@@ -45,7 +45,9 @@ class Users extends CI_Controller
                 $this->data['submissions'] = $submissions;
                 $this->data['pagination_links'] = $this->pagination->create_links();
             }
-        } else {
+        }
+        else
+        {
             $config['base_url'] = base_url().'users/dashboard';
             $config['total_rows'] = $this->contest->count(array('owner' => $this->ion_auth->user()->row()->id));
             $config['per_page'] = 10;

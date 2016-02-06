@@ -40,7 +40,7 @@
                           <div>
                           <?php echo form_radio('age_range', '0', FALSE); ?>
                           <?php echo form_label('18-24', 'age_range'); ?>
-                          <?php echo form_radio('age-range', '1', FALSE); ?>
+                          <?php echo form_radio('age_range', '1', FALSE); ?>
                           <?php echo form_label('25-34', 'age_range'); ?>
                           <?php echo form_radio('age_range', '2', FALSE); ?>
                           <?php echo form_label('35-44', 'age_range'); ?>

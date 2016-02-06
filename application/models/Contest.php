@@ -23,11 +23,16 @@ class Contest extends CI_Model
         return false;
     }
 
-    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20)
+    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20, $offset = false)
     {
         $this->db->select('*')->from('contests');
         if(!empty($params)) $this->db->where($params);
         $this->db->order_by($sort_by, $sort_order);
+        if($offset) {
+            $this->db->limit($limit, $offset);
+        } else {
+            $this->db->limit($limit);
+        }
         $contests = $this->db->get();
         if($contests && $contests->num_rows() > 0)
         {

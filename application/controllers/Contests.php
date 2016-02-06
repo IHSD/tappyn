@@ -23,8 +23,9 @@ class Contests extends CI_Controller
         $config['total_rows'] = $this->contest->count($this->params);
         $config['per_page'] = 10;
         $this->pagination->initialize($config);
-
-        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', 10);
+        $limit = $config['per_page'];
+        $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
+        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
         if($contests !== FALSE)
         {
             $this->data['contests'] = $contests;
@@ -83,7 +84,9 @@ class Contests extends CI_Controller
                 'platform' => $this->input->post('platform'),
                 'location' => $this->input->post('location'),
                 'age' => $this->input->post('age_range'),
-                'gender' => $this->input->post('gender')
+                'gender' => $this->input->post('gender'),
+                'owner' => $this->ion_auth->user()->row()->id,
+                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days'))
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
