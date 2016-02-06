@@ -44,14 +44,30 @@
 	<div id='submitting' class='hidden_submission medium-9 small-12 columns'>
 		<div class='contest-box'>
 			<button id='cancel_it' class='btn'>X</button>
-			   <?php switch($contest->platform):
-	                case 'facebook': $this->load->view('submissions/templates/facebook'); break;
-		            case 'google': $this->load->view('submissions/templates/google'); break; 
-		            case 'trending': $this->load->view('submissions/templates/trending'); break; 
-		            case 'tagline': $this->load->view('submissions/templates/tagline'); break; 
-		            case 'general': $this->load->view('submissions/templates/general'); break; 
-		            case 'twitter': $this->load->view('submissions/templates/twitter'); break;
-	            endswitch; ?>
+			<div class='row'>
+				<div class='medium-6 small-12 columns'>
+				<?php $this->load->view('templates/notification', array(
+				    'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+				    'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+				)); ?>
+	            <?php echo form_open("submissions/create/{$contest->id}");?>
+				   <?php switch($contest->platform):
+		                case 'facebook': $this->load->view('submissions/templates/facebook'); break;
+			            case 'google': $this->load->view('submissions/templates/google'); break; 
+			            case 'trending': $this->load->view('submissions/templates/trending'); break; 
+			            case 'tagline': $this->load->view('submissions/templates/tagline'); break; 
+			            case 'general': $this->load->view('submissions/templates/general'); break; 
+			            case 'twitter': $this->load->view('submissions/templates/twitter'); break;
+		            endswitch; ?>
+		            <div class='div-center'>
+	                	<?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?>
+	              	</div>
+	                <?php echo form_close();?>
+		        </div>
+		        <div class='medium-6 small-12 columns'>
+		        	Img here
+		        </div>
+		   	</div>
 		</div>
 	</div>
 </div>
@@ -61,12 +77,13 @@
 
 <script>
 	$("#submit_it").click(function(){
-		console.log("I heeard a click");
+		$("#submit_it").addClass("hidden_submission");
 		$("#submissions").addClass("hidden_submission");
 		$("#submitting").removeClass('hidden_submission');
 	});
 	$("#cancel_it").click(function(){
 		$("#submissions").removeClass("hidden_submission");
+		$("#submit_it").removeClass("hidden_submission");
 		$("#submitting").addClass('hidden_submission');
 	});
 

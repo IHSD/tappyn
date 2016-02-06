@@ -1,14 +1,11 @@
-<h1>Facebook</h1>
+<h3 class='text-center'>Facebook</h3>
 
-<p>
-    Headline
-    <?php echo form_input('headline'); ?>
-</p>
-<p>
-    Link Explanation
-    <?php echo form_input('link_explanation'); ?>
-</p>
-<p>
-    Text
-    <?php echo form_input('text'); ?>
-</p>
+<div class='form-row'>
+   <?php echo form_input(array('name' => 'headline','value' => '','placeholder' => 'Enter a headline', 'type' => 'text'));?>
+</div>
+<div class='form-row'>
+   <?php echo form_input(array('name' => 'link_explanation','value' => '','placeholder' => 'Enter a link_explanation', 'type' => 'text'));?>
+</div>
+<div class='form-row'>
+   <?php echo form_textarea(array('name' => 'text','value' => '','placeholder' => "Enter some text that best fits this contest's objective", 'type' => 'text'));?>
+</div>
