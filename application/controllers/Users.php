@@ -133,10 +133,11 @@ class Users extends CI_Controller
                     'extra_info' => $this->input->post('extra_info'),
                     'company_email' => $this->input->post('company_email'),
                     'company_url' => $this->input->post('company_url'),
-                    'facebook_url' => $this->input->post('facebook_url')
+                    'facebook_url' => $this->input->post('facebook_url'),
+                    'name' => $this->input->post('name')
                 );
 
-                if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->session->set_flashdata('error', 'There was an error saving your profile');
                 } else {

@@ -26,12 +26,22 @@ class User extends CI_Model
             if($check->num_rows() > 0)
             {
                 // Update
-                return $this->db->where('id', $uid)->update('profiles', $data);
+                if($this->db->where('id', $uid)->update('profiles', $data))
+                {
+                    return TRUE;
+                } else {
+                    die(json_encode($this->db->error()));
+                }
             }
             else
             {
                 $data['id'] = $uid;
-                return $this->db->insert('profiles', $data);
+                if($this->db->insert('profiles', $data))
+                {
+                    return TRUE;
+                } else {
+                    die(json_encode($this->db->error()));
+                }
             }
         }
         return FALSE;

@@ -9,22 +9,22 @@
 			'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
 		)); ?>
 		<?php if($this->ion_auth->in_group(3)): ?>
-			<?php echo form_open("user/profile");?>
+			<?php echo form_open("users/profile");?>
 			<div class='form-row'>
 				<label>Your company's name</label>
-				<?php echo form_input(array('name' => 'company_name','value' => '','placeholder' => 'Company Name', 'type' => 'text'));?>
+				<?php echo form_input(array('name' => 'name','value' => (is_null($profile->name) ? '' : $profile->name),'placeholder' => 'Company Name', 'type' => 'text'));?>
 			</div>
 			<div class='form-row'>
 				<label>Your company's email so we can get ahold of you</label>
-				<?php echo form_input(array('name' => 'company_email','value' => '','placeholder' => 'Company Email', 'type' => 'text'));?>
+				<?php echo form_input(array('name' => 'company_email','value' => (is_null($profile->company_email) ? '' : $profile->company_email),'placeholder' => 'Company Email', 'type' => 'text'));?>
 			</div>
 			<div class='form-row'>
 				<label>Tell us a bit about your company</label>
-				<?php echo form_textarea(array('name' => 'mission','value' => '','placeholder' => 'Company info', 'type' => 'text'));?>
+				<?php echo form_textarea(array('name' => 'mission','value' => (is_null($profile->mission) ? '' : $profile->mission),'placeholder' => 'Company info', 'type' => 'text'));?>
 			</div>
 			<div class='form-row'>
 				<label>How is your company different from the rest?</label>
-				<?php echo form_textarea(array('name' => 'extra_info','value' => '','placeholder' => 'Additional Info', 'type' => 'text'));?>
+				<?php echo form_textarea(array('name' => 'extra_info','value' => (is_null($profile->extra_info) ? '' : $profile->extra_info),'placeholder' => 'Additional Info', 'type' => 'text'));?>
 			</div>
 			<div class='form-row'>
 				<label>Your company's logo</label>
@@ -32,13 +32,13 @@
 			</div>
 			<div class='form-row'>
 				<label>Your company's website</label>
-				<?php echo form_input(array('name' => 'company_url','value' => '','placeholder' => 'Company Website', 'type' => 'text'));?>
-			</div> 
+				<?php echo form_input(array('name' => 'company_url','value' => (is_null($profile->company_url) ? '' : $profile->company_url),'placeholder' => 'Company Website', 'type' => 'text'));?>
+			</div>
 			<div class='form-row'>
 				<label>Your company's Facebook page</label>
-				<?php echo form_input(array('name' => 'facebook_url','value' => '','placeholder' => 'Facebook Page', 'type' => 'text'));?>
-			</div>                     
-			<div class='div-center'><?php echo form_submit('submit', 'Update Your Info', array("class" => 'btn'));?></div> 
+				<?php echo form_input(array('name' => 'facebook_url','value' => (is_null($profile->facebook_url) ? '' : $profile->facebook_url),'placeholder' => 'Facebook Page', 'type' => 'text'));?>
+			</div>
+			<div class='div-center'><?php echo form_submit('submit', 'Update Your Info', array("class" => 'btn'));?></div>
 			<?php echo form_close(); ?>
 		<?php elseif($this->ion_auth->in_group(2)) : ?>
 			<h3>User</h3>
@@ -47,4 +47,3 @@
 	</div>
 </section>
 <?php $this->load->view('templates/footer'); ?>
-
