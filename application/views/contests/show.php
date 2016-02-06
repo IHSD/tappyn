@@ -1,3 +1,5 @@
+
+
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 <?php echo $this->session->flashdata('error') ? $this->session->flashdata('error') : ''; ?>
@@ -19,30 +21,53 @@
             </div>
             <div><h4 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4></div>
             <?php if($contest->submission_count < 50) : ?>
-                <div class='text-center'><a href="<?php echo base_url().'contests/'.$contest->id ?>" style='width:100%;cursor:pointer;text-decoration:none;' class='btn tiny'>Submit Now!</a></div>
+                <div class='text-center'><button id='submit_it' style='width:100%;cursor:pointer;text-decoration:none;' class='btn tiny'>Submit Now!</button></div>
             <?php endif ?>
 		</div>
 	</div>
-	<div class='medium-9 small-12 columns'>
+	<div id='submissions' class='medium-9 small-12 columns'>
 		<div class='contest-box'>	
-			<?php if(isset($contest->submissions) && count($contest->submissions) > 0) : ?>
+			<?php if(isset($submissions) && count($submissions) > 0) : ?>
 				<h3>Other submissions</h3>
-		            <div class="browse-contest-content">
-		            	<?php foreach($contest->submisions as $submission): ?>
-                    		<div class="medium-3 small-12 columns end">
-                    			<div class="submission-box">
-                    				Hi
-                    			</div>
-                    		</div>
-                    	<?php endforeach; ?>		            </div>
-			        
-			    </div>
+            	<?php foreach($submissions as $submission): ?>
+            		<div class="medium-3 small-12 columns end">
+            			<div>
+            				Hi
+            			</div>
+            		</div>
+            	<?php endforeach; ?>
 			<?php else : ?>
 				<h3>This contest has no submissions yet, you could be the first!</h3>
 			<?php endif ?>
+		</div>
+	</div>
+	<div id='submitting' class='hidden_submission medium-9 small-12 columns'>
+		<div class='contest-box'>
+			<button id='cancel_it' class='btn'>X</button>
+			   <?php switch($contest->platform):
+	                case 'facebook': $this->load->view('submissions/templates/facebook'); break;
+		            case 'google': $this->load->view('submissions/templates/google'); break; 
+		            case 'trending': $this->load->view('submissions/templates/trending'); break; 
+		            case 'tagline': $this->load->view('submissions/templates/tagline'); break; 
+		            case 'general': $this->load->view('submissions/templates/general'); break; 
+		            case 'twitter': $this->load->view('submissions/templates/twitter'); break;
+	            endswitch; ?>
 		</div>
 	</div>
 </div>
 
 
 <?php $this->load->view('templates/footer'); ?>
+
+<script>
+	$("#submit_it").click(function(){
+		console.log("I heeard a click");
+		$("#submissions").addClass("hidden_submission");
+		$("#submitting").removeClass('hidden_submission');
+	});
+	$("#cancel_it").click(function(){
+		$("#submissions").removeClass("hidden_submission");
+		$("#submitting").addClass('hidden_submission');
+	});
+
+</script>
