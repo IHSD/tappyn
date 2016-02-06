@@ -1,4 +1,5 @@
         <!-- Login -->
+        <section class='innerpage'>
         <div class="login-wrap">
             <div class="login-page">
                 <div class="row padding">
@@ -34,5 +35,6 @@
                 </div>
             </div>
         </div>
+        </section>
 
 <?php $this->load->view('templates/footer'); ?>

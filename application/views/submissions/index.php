@@ -1,4 +1,5 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
+<section class='innerpage'>
 <div class='row'>
 	<div class='medium-3 small-12 columns'>
 		<div class='contest-box'>
@@ -25,16 +26,19 @@
 		<div class='contest-box'>	
 			<?php if(isset($submissions) && count($submissions) > 0) : ?>
 				<h3>Other submissions</h3>
+				<div class='row'>
 	        	<?php foreach($submissions as $submission): ?>
-	        		<div class="medium-3 small-12 columns end">
-	        			<div>
-	        				Hi
-	        			</div>
+	        		<div class="medium-3 small-12 columns">
+	        			hi
 	        		</div>
 	        	<?php endforeach; ?>
+	        	</div>
 			<?php else : ?>
 				<h3>This contest has no submissions yet, you could be the first!</h3>
 			<?php endif ?>
 		</div>
 	</div>
 </div>
+</section>
+
+<?php $this->load->view('templates/footer'); ?>
