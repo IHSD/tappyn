@@ -7,7 +7,7 @@
             <div class="row padding">
                 <!-- Generate the company dashboard -->
                 <?php if($this->ion_auth->in_group(3)): ?>
-                    <h2 class="inner-title"><?php echo $this->ion_auth->profile("company_name"); ?></h2>
+                    <h2 class="inner-title"><?php echo $this->ion_auth->profile("name"); ?></h2>
                     <div class="tabs-box">
                         <ul class="tabs" data-tabs id="example-tabs">
                             <li class="tabs-title is-active"><a href="<?php echo base_url().'users/dashboard'; ?>" aria-selected="true">All</a></li>
