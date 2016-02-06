@@ -39,9 +39,11 @@ class Contests extends CI_Controller
      */
     public function show($id)
     {
-        $contest = $this->contest->get($id);
+        $contest = $this->contest->get($cid);
+        $submissions = $this->contest->submissions($cid);
         $this->data['contest'] = $contest;
-        $this->load->view('contests/show', $this->data);
+        $this->data['submissions'] = $submissions;
+        $this->load->view('submissions/index', $this->data);
     }
     /**
      * Create a new contest, or render the creation form
@@ -149,15 +151,6 @@ class Contests extends CI_Controller
             );
             $this->load->view('contests/create', $this->data);
         }
-    }
-
-    public function submissions($cid)
-    {
-        $contest = $this->contest->get($cid);
-        $submissions = $this->contest->submissions($cid);
-        $this->data['contest'] = $contest;
-        $this->data['submissions'] = $submissions;
-        $this->load->view('submissions/index', $this->data);
     }
 
     /**
