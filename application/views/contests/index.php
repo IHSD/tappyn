@@ -47,29 +47,28 @@
                 <div class="margin-minus">
                     <?php foreach($contests as $contest): ?>
                         <div class="medium-3 small-12 columns end">
+                            <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;'>
                             <div class="submission-box">
                                 <div class="ad-company-info">
-                                    <h4 class='text-center'><?php echo $contest->company->name; ?></a>
-                                    <br>
-                                    <h4 class='text-center'><?php echo $contest->title; ?></a>
+                                    <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
+                                    <span class='contest-price'>
+                                        $50
+                                    </span>
                                     <div class="company-img">
-
+                                        <?php if($contest->company->logo_url) : ?>
+                                            <img style='height:auto; width:100%' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"> 
+                                        <?php endif; ?>
                                     </div>
-                                    <h4 class='text-center'>$50 Reward</h4>
                                     <div style='width:100%'>
                                         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                                             <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
-                                        <p class="progress-meter-text"><?php echo $contest->submission_count; ?> of 50 submissions</p>
+                                        <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
                                     </div>
                                     <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
-                                    <?php if($contest->submission_count < 50) : ?>
-                                        <div class='text-center'>
-                                            <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>tappyn</a>
-                                        </div>
-                                    <?php endif ?>
                                 </div>
                             </div>
+                            </a>
                         </div>
                     <?php endforeach; ?>
                 </div>

@@ -2028,3 +2028,38 @@ header nav ul li  a {
 .text-right{
 	text-align:right;
 }
+.contest-price{
+	    position: absolute;
+    width: 42px;
+    height: 40px;
+    font-size: 18px;
+    line-height: 45px;
+    text-align: center;
+    right: 20px;
+    background: #2B2B2B;
+    color: #fff;
+    top: 0;
+    z-index: 2;
+}
+.contest-price:before{
+    border-left: 1.5em solid transparent;
+    border-top: 0.8em solid #2B2B2B;
+    content: "";
+    height: 0;
+    z-index: 1;
+    right: 0;
+    position: absolute;
+    bottom: -14px;
+    width: 0;
+}
+.contest-price:after{
+	    border-right: 1.5em solid transparent;
+    border-top: 0.8em solid #2B2B2B;
+    content: "";
+    height: 0;
+    z-index: 1;
+    left: 0;
+    position: absolute;
+    bottom: -14px;
+    width: 0;
+}
