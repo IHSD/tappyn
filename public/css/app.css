@@ -2019,3 +2019,7 @@ header nav ul li  a {
   	width:100%;
   	margin-bottom:10px;
   }
+  .hidden_submission{
+  	display:none;
+  	height:0;
+  }
