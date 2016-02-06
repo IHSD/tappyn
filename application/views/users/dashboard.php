@@ -1,7 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 <!-- User is a company -->
-<?php var_dump($this->ion_auth->profile()); ?>
     <section class="innerpage">
         <!-- Your Work -->
         <div class="your-work">
