@@ -33,14 +33,16 @@
         </div>
     </div>
 </div> -->
-<div class='medium-6 small-12'>
+
+
+<section class="innerpage">
+<div class='medium-6 medium-offset-3 small-12'>
     <?php $this->load->view('templates/notification', array(
 'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
 'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
 )); ?>
 </div>
 <h2 class="text-center">Live Contests</h2>
-<section class="innerpage">
     <div class="browse-contest">
         <div class="row padding">
             <div class="browse-contest-content">
@@ -48,12 +50,14 @@
                     <?php foreach($contests as $contest): ?>
                         <div class="medium-3 small-12 columns end">
                             <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;'>
-                            <div class="submission-box">
+                            <div class="submission-box" style='min-height:290px;max-height:290px;'>
                                 <div class="ad-company-info">
-                                    <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
-                                    <span class='contest-price'>
-                                        $50
-                                    </span>
+                                    <div style='margin-bottom:15px' >
+                                        <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
+                                        <span class='contest-price'>
+                                            $50
+                                        </span>
+                                    </div>
                                     <div class="company-img">
                                         <?php if($contest->company->logo_url) : ?>
                                             <img style='height:auto; width:100%' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"> 

@@ -85,9 +85,21 @@
 			            case 'general': $this->load->view('submissions/templates/general'); break; 
 			            case 'twitter': $this->load->view('submissions/templates/twitter'); break;
 		            endswitch; ?>
-		            <div class='text-right'>
-	                	<?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?>
-	              	</div>
+		            <?php if($this->ion_auth->logged_in()) : ?>
+			            <div class='text-right'>
+		                	<?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?>
+		              	</div>
+		            <?php else : ?>
+		            	 <div class="form-row">
+                              <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+                        </div>
+                        <div class="form-row">
+                            <?php echo form_input(array('name' => 'password', 'value' => '', 'placeholder' => 'Password', 'type' => 'password'));?>
+                        </div>
+                        <div class='text-right'>
+		                	<?php echo form_submit('submit', 'Submit as Guest', array("class" => 'btn'));?>
+		              	</div>
+		            <?php endif; ?>
 	                <?php echo form_close();?>
 		        </div>
 		   	</div>

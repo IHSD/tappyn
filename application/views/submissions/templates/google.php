@@ -1,4 +1,4 @@
-<h3 class='text-center'>Google</h3>
+
 	<div class='form-row'>
        <?php echo form_input(array('name' => 'headline','value' => '','placeholder' => 'Enter a headline', 'type' => 'text'));?>
     </div>
