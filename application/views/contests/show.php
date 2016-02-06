@@ -8,7 +8,7 @@
 			<div class='row'>
 				<div class='medium-3 small-12 columns'>
 					<h3>
-						<?php echo $contest->title; ?> by <?php echo $contest->owner; ?>
+						<?php echo $contest->title; ?> by <?php echo $contest->company->name; ?>
 					</h3>
 					<div class="tabs-box" style='margin:0'>
 						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
@@ -43,7 +43,7 @@
 			<div class='row'>
 		        <div id='brief-content' class='medium-8 small-12 columns'>
 		        	<h3 class='text-center'>Ad Brief</h3>
-		        	<div class='div-center'><img src="<?php echo base_url().'uploads/'.$contest->logo_url; ?>"></div>
+		        	<div class='div-center'><img style='height:auto;' width='150px' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"></div>
 		        	<div class='row' style='margin-bottom:5px;'>
 		        		<div class='medium-3 small-12 columns'>
 		        			Product and Target Market :
@@ -57,7 +57,7 @@
 		        			Difference :
 		        		</div>
 		        		<div class='medium-9 small-12 columns'>
-		        			<?php echo $contest->difference ?>
+		        			<?php echo $contest->different ?>
 		        		</div>
 		        	</div>
 		        	<div class='row' style='margin-bottom:5px;'>
@@ -68,8 +68,8 @@
 		        			<?php echo $contest->objective ?>
 		        		</div>
 		        	</div>
-		        	<a href='<?php echo $contest->company_website; ?>' target='_blank'>Company Website</a>
-		        	<a href='<?php echo $contest->company_facebook; ?>' target='_blank'>Company Facebook</a>
+		        	<a href='<?php echo $contest->company->company_website; ?>' target='_blank'>Company Website</a>
+		        	<a href='<?php echo $contest->company->company_facebook; ?>' target='_blank'>Company Facebook</a>
 		        </div>
 		        <div class='medium-4 small-12 columns'>
 				<?php $this->load->view('templates/notification', array(
