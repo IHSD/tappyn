@@ -49,7 +49,7 @@ class Contests extends CI_Controller
         else {
             $this->data['can_submit'] = true;
         }
-        
+
         if(!$contest)
         {
             $this->session->set_flashdata('error', 'That contest does not exist');
@@ -156,13 +156,13 @@ class Contests extends CI_Controller
             $this->data['platforms'] = array(
                 'facebook' => 'Facebook',
                 'google' => 'Google',
-                'trending' => 'Trending',
-                'tagline' => 'Tagline'
+                'general' => 'General',
+                'twitter' => 'Twitter'
             );
             $this->data['objectives'] = array(
-                'brand_positioning' => 'Brand Positioning',
+                'engagement' => 'Increase Engagement',
+                'website_clicks' => 'Send People to your Website',
                 'app_installs' => 'App Installs',
-                'engagement' => 'Increase Engagement'
             );
             $this->load->view('contests/create', $this->data);
         }

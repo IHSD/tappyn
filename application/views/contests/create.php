@@ -24,12 +24,12 @@
                           <?php echo form_textarea('how_your_different'); ?>
                       </div>
                       <div class='form-row'>
-                          Objective
-                          <?php echo form_dropdown('objective', $objectives); ?>
+                          Medium
+                          <?php echo form_dropdown('platform', $platforms, '', array('id' => 'platform_dropdown')); ?>
                       </div>
                       <div class='form-row'>
-                          Platform
-                          <?php echo form_dropdown('platform', $platforms); ?>
+                          Objective
+                          <?php echo form_dropdown('objective', $objectives, '', array('id' => 'objective_dropdown')); ?>
                       </div>
                       <div class='form-row'>
                           Location
@@ -66,3 +66,26 @@
 </section>
 
 <?php $this->load->view('templates/footer'); ?>
+<script>
+$(document).ready(function() {
+    // Set on page load
+    // Change when medium is changed
+    $('#platform_dropdown').change(function() {
+        alert('dropdown changed');
+        console.log($('#platform_dropdown').find(':selected').text());
+        if($('#platform_dropdown').find(":selected").text() == 'General')
+        {
+            var new_option = ("<option value='brand_positioning'>Brand Positioning</option>");
+            // Remove the send to website and add brand positioning
+            $('#objective_dropdown').find('option[value="website_clicks"]').remove();
+            $('#objective_dropdown').append(new_option);
+        } else {
+            // Remove the brand positioning and add website clicks
+            var new_option = ("<option value='website_clicks'>Website Clicks</option>");
+            // Remove the send to website and add brand positioning
+            $('#objective_dropdown').find('option[value="brand_positioning"]').remove();
+            $('#objective_dropdown').append(new_option);
+        }
+    });
+})
+</script>
