@@ -49,7 +49,7 @@
                         <div class="medium-3 small-12 columns end">
                             <div class="submission-box">
                                 <div class="ad-company-info">
-                                    <h4 class='text-center'><?php echo $contest->company_name; ?></a>
+                                    <h4 class='text-center'><?php echo $contest->company->name; ?></a>
                                     <br>
                                     <h4 class='text-center'><?php echo $contest->title; ?></a>
                                     <div class="company-img">
