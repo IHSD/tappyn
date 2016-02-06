@@ -40,7 +40,7 @@ class Contest extends CI_Model
             foreach($results as $result)
             {
                 $result->submission_count = $this->submissionsCount($result->id);
-                $result->company_name = $this->db->select('*')->from('users')->where('id', $result->owner)->limit(1)->get()->row()->first_name;
+                $result->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $result->owner)->limit(1)->get()->row();
             }
             return $results;
         }
