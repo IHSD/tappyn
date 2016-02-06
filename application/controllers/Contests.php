@@ -9,6 +9,7 @@ class Contests extends CI_Controller
         parent::__construct();
         $this->load->view('templates/navbar');
         $this->load->model('contest');
+        $this->load->library('submission_library');
         $this->data['footer'] = 'templates/footer';
     }
 
@@ -41,6 +42,7 @@ class Contests extends CI_Controller
     {
         $contest = $this->contest->get($cid);
         $submissions = $this->contest->submissions($cid);
+        $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
         $this->data['contest'] = $contest;
         $this->data['submissions'] = $submissions;
         $this->load->view('contests/show', $this->data);
