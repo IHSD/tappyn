@@ -1,7 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 <!-- User is a company -->
-    <?php var_dump($contests); ?>
     <section class="innerpage">
         <!-- Your Work -->
         <div class="your-work">
@@ -11,9 +10,9 @@
                     <h2 class="inner-title">&lt;Company Name&gt;</h2>
                     <div class="tabs-box">
                         <ul class="tabs" data-tabs id="example-tabs">
-                            <li class="tabs-title is-active"><a href="<?php echo base_url().'users/dashboard'; ?>" aria-selected="true">All</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'users/in_progress'; ?>">In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'users/completed'; ?>">Winning</a></li>
+                            <li class="tabs-title is-active"><a href="<?php echo base_url().'dashboard'; ?>" aria-selected="true">All</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>">In Progress</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>">Winning</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
@@ -45,9 +44,9 @@
                     <h2 class="inner-title"><?php echo $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name; ?></h2>
                     <div class="tabs-box">
                         <ul class="tabs" data-tabs id="example-tabs">
-                            <li class="tabs-title"><a href="<?php echo base_url().'users/dashboard'; ?>" <?php if($status == 'all') echo 'aria-selected=true' ?>>All</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'users/in_progress'; ?>" <?php if($status == 'active') echo 'aria-selected=true' ?>>In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'users/completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Winning</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'dashboard'; ?>" <?php if($status == 'all') echo 'aria-selected=true' ?>>All</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>" <?php if($status == 'active') echo 'aria-selected=true' ?>>In Progress</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Winning</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">

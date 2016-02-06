@@ -45,10 +45,11 @@
 	                </div>
 	                <nav>
 	                    <ul>
+	                    	<?php if($this->ion_auth->logged_in()) : ?>
 	                    	<li><a href="<?php echo base_url().'dashboard'; ?>">Dashboard</a></li>
+	                   		<?php endif ?>
 	                        <li><a href="<?php echo base_url().'contests'; ?>">Contests</a></li>
 	                        <li><a href="<?php echo base_url().'contests/create'; ?>">Launch</a></li>
-	                        <li><a href="<?php echo base_url().'how_it_works'; ?>">How it Works</a></li>
 	                        <li><a href="<?php echo base_url().'contact'; ?>">Contact Us</a></li>
 	                        <li><a href="<?php echo base_url().'faq'; ?>">FAQ</a></li>
 	                        <?php if($this->ion_auth->logged_in()) : ?>
