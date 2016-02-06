@@ -41,7 +41,13 @@ class Contests extends CI_Controller
     public function show($cid)
     {
         $contest = $this->contest->get($cid);
-        $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
+        if($this->ion_auth->logged_in())
+        {
+            $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
+        }
+        else {
+            $this->data['can_submit'] = true;
+        }
         $this->data['contest'] = $contest;
         $this->load->view('contests/show', $this->data);
     }
@@ -57,25 +63,27 @@ class Contests extends CI_Controller
             redirect('contests/index', 'refresh');
         }
 
-        $this->form_validation->set_rules('time_length', 'time_length', 'required');
-        $this->form_validation->set_rules('title', 'title', 'required');
-        $this->form_validation->set_rules('submission_limit', 'submission_limit', 'required');
-        $this->form_validation->set_rules('prize', 'prize', 'required');
-        $this->form_validation->set_rules('objective', 'objective', 'required');
-        $this->form_validation->set_rules('platform', 'platform', 'required');
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('audience_description', 'Audience Description', 'required');
+        $this->form_validation->set_rules('how_your_different', 'How Your Different', 'required');
+        $this->form_validation->set_rules('objective', 'Objective', 'required');
+        $this->form_validation->set_rules('platform', 'Format', 'required');
+        $this->form_validation->set_rules('location', 'Location', 'required');
+        $this->form_validation->set_rules('age_range', 'Age Range', 'required');
+        $this->form_validation->set_rules('gender', 'Gender', 'required');
 
         if($this->form_validation->run() == true)
         {
             // Do some preliminary formatting
             $data = array(
-                'title'                 => $this->input->post('title'),
-                'submission_limit'      => $this->input->post('submission_limit'),
-                'owner'                 => $this->ion_auth->user()->row()->id,
-                'time_length'           => $this->input->post('time_length'),
-                'stop_time'             => date('Y-m-d H:i:s', strtotime('+'.$this->input->post('time_length').' days')),
-                'prize'                 => $this->input->post('prize'),
-                'platform'              => $this->input->post('platform'),
-                'objective'             => $this->input->post('objective')
+                'title' => $this->input->post('title'),
+                'audience' => $this->input->post('audience_description'),
+                'different' => $this->input->post('how_your_different'),
+                'objective' => $this->input->post('objective'),
+                'platform' => $this->input->post('platform'),
+                'location' => $this->input->post('location'),
+                'age' => $this->input->post('age_range'),
+                'gender' => $this->input->post('gender')
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
@@ -87,23 +95,53 @@ class Contests extends CI_Controller
         {
             $this->data['error'] = (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : false));
 
-            $this->data['options'] = array(
-                3 => '3 days',
-                7 => '7 days',
-                14 => '2 weeks'
+            $this->data['title'] = array(
+                'name' => 'title',
+                'id' => 'title',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('title')
             );
-            $this->data['limits'] = array(
-                '50' => 50,
-                '100' => 100,
-                '250' => 250,
-                '500' => 500
+            $this->data['audience_description'] = array(
+                'name' => 'audience_description',
+                'id' => 'audience_description',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('audience_description')
             );
-
-            $this->data['prizes'] = array(
-                '100.00' => '100.00',
-                '250.00' => '250.00',
-                '500.00' => '500.00',
-                '1000.00' => '1000.00'
+            $this->data['how_your_different'] = array(
+                'name' => 'how_your_different',
+                'id' => 'how_your_different',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('how_your_different')
+            );
+            $this->data['objective'] = array(
+                'name' => 'objective',
+                'id' => 'objective',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('objective')
+            );
+            $this->data['location'] = array(
+                'name' => 'location',
+                'id' => 'location',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('location')
+            );
+            $this->data['age_range'] = array(
+                'name' => 'age_range',
+                'id' => 'age_range',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('age_range')
+            );
+            $this->data['gender'] = array(
+                'name' => 'gender',
+                'id' => 'gender',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('gender')
+            );
+            $this->data['format'] = array(
+                'name' => 'format',
+                'id' => 'format',
+                'type' => 'text',
+                'value' => $this->form_validation->set_value('format')
             );
 
             $this->data['platforms'] = array(
@@ -112,42 +150,10 @@ class Contests extends CI_Controller
                 'trending' => 'Trending',
                 'tagline' => 'Tagline'
             );
-
-            $this->data['time_length'] = array(
-                'name' => 'time_length',
-                'id' => 'time_length',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('time_length')
-            );
-            $this->data['title'] = array(
-                'name' => 'title',
-                'id' => 'title',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('title')
-            );
-            $this->data['submission_limit'] = array(
-                'name' => 'submission_limit',
-                'id' => 'submission_limit',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('submission_limit')
-            );
-            $this->data['prize'] = array(
-                'name' => 'prize',
-                'id' => 'prize',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('prize')
-            );
-            $this->data['objective'] = array(
-                'name' => 'objective',
-                'id' => 'objective',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('objective')
-            );
-            $this->data['platform'] = array(
-                'name' => 'platform',
-                'id' => 'platform',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('platform')
+            $this->data['objectives'] = array(
+                'brand_positioning' => 'Brand Positioning',
+                'app_installs' => 'App Installs',
+                'engagement' => 'Increase Engagement'
             );
             $this->load->view('contests/create', $this->data);
         }
