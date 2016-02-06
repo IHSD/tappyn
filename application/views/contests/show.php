@@ -10,8 +10,8 @@
 					<h3>
 						<?php echo $contest->title; ?> by <?php echo $contest->owner; ?>
 					</h3>
-					<div class="tabs-box">
-						<ul class="tabs" data-tabs id="top-line-tabs">
+					<div class="tabs-box" style='margin:0'>
+						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
 	                        <li class="tabs-title"><a id='brief-tab' aria-selected='true'>Brief</a></li>
 	                        <li class="tabs-title"><a id='info-tab'>Company Info</a></li>
 	                    </ul>
@@ -26,16 +26,14 @@
 		                <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
 		                    <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
 		                </div>
-		                <p class="progress-meter-text text-center"><?php echo $contest->submission_count; ?> of 50 submissions</p>
 		            </div>
 		            <?php if($contest->submission_count < 50) : ?>
-		                <div class='text-center'><a href="<?php echo base_url().'contests/'.$contest->id.'/submissions' ?>" style='width:100%;cursor:pointer;text-decoration:none;' class='btn tiny'>View submissions</a></div>
+		                <div class='text-center'><a href="<?php echo base_url().'contests/'.$contest->id.'/submissions' ?>" style='width:100%;cursor:pointer;text-decoration:none;padding:5px 10px;' class='btn tiny'><?php echo $contest->submission_count; ?> of 50 submissions</a></div>
 		            <?php endif ?>
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
 	            	<h3>$50 Reward</h3>
 					<h4>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4>
-					<h4><?php echo $contest->platform; ?></h4>
 				</div>
 			</div>
 		</div>
