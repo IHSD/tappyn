@@ -41,10 +41,8 @@ class Contests extends CI_Controller
     public function show($cid)
     {
         $contest = $this->contest->get($cid);
-        $submissions = $this->contest->submissions($cid);
         $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
         $this->data['contest'] = $contest;
-        $this->data['submissions'] = $submissions;
         $this->load->view('contests/show', $this->data);
     }
     /**
@@ -155,6 +153,15 @@ class Contests extends CI_Controller
         }
     }
 
+    public function submissions($cid)
+    {
+        $contest = $this->contest->get($cid);
+        $submissions = $this->contest->submissions($cid);
+        $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
+        $this->data['contest'] = $contest;
+        $this->data['submissions'] = $submissions;
+        $this->load->view('contests/show', $this->data);
+    }
     /**
      * Edit and update a contest
      * @return void

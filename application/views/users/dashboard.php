@@ -55,13 +55,16 @@
                                     <?php foreach($submissions as $submission): ?>
                                         <div class="medium-12 columns end">
                                             <div class="company-post">
-                                                <div class="ad-company-info">
+                                                <div class="medium-9 ad-company-info">
                                                     <h5><?php echo $submission->contest->title; ?></h5>
                                                     <h4>$<?php echo $submission->contest->prize; ?></h4>
                                                     <h5>
                                                         <?php echo (new DateTime() < new DateTime($submission->contest->stop_time)) ? "Ends " : "Ended " ?>
                                                         <?php echo date('Y-m-d H:i:s', strtotime($submission->contest->stop_time)); ?>
                                                     </h5>
+                                                </div>
+                                                <div class='medium-3 ad-company-info'>
+                                                    <div class='text-center'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
                                                 </div>
                                             </div>
                                         </div>
