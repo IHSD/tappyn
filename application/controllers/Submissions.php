@@ -10,6 +10,7 @@ class Submissions extends CI_Controller
         $this->load->model('contest');
         $this->load->library('ion_auth');
         $this->load->library('submission_library');
+        $this->load->model('ion_auth_model');
     }
 
     /**
@@ -44,14 +45,34 @@ class Submissions extends CI_Controller
      */
     public function create($contest_id)
     {
+        $logged_in = $this->ion_auth->logged_in();
         // Verify user is logged in
-        if(!$this->ion_auth->logged_in())
+        if(!$logged_in)
         {
-            $this->session->set_flashdata('error', 'You have to be logged in to create a submission');
-            redirect("contests/show/{$contest_id}");
+            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[users.email]');
+            $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
+            // Attempt the registration
+            if($this->form_validation->run() == true)
+            {
+                $email    = strtolower($this->input->post('email'));
+                $identity = $email;
+                $password = $this->input->post('password');
+            }
+            if($this->form_validation->run() == true &&
+               $this->ion_auth_model->register($identity, $password, $email, null, array(2)) &&
+               $this->ion_auth_model->login($identity, $password, 1))
+            {
+                $logged_in = true;
+            }
+            else
+            {
+                $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->ion_auth_model->errors() ? $this->ion_auth_model->errors() : 'An unknown error occured')));
+            }
         }
 
-        if(!$this->ion_auth->in_group(2))
+
+
+        if($this->ion_auth->in_group(3))
         {
             $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
             redirect("contests/show/{$contest_id}", 'refresh');
@@ -65,13 +86,17 @@ class Submissions extends CI_Controller
             redirect("contests/show/{$contest_id}", 'refresh');
         }
 
+        if($logged_in)
+        {
+            $data = array(
+                'owner' => $this->ion_auth->user()->row()->id,
+                'contest_id' => $contest->id
+            );
+        }
         // Set our static data points for the view / creation
         $this->data['contest'] = $contest;
 
-        $data = array(
-            'owner' => $this->ion_auth->user()->row()->id,
-            'contest_id' => $contest->id
-        );
+
 
         // Generate / validate fields based on the platform type
         switch($contest->platform)
@@ -86,7 +111,7 @@ class Submissions extends CI_Controller
                     $data['headline'] = $this->input->post('headline');
                     $data['link_explanation'] = $this->input->post('link_explanation');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -125,7 +150,7 @@ class Submissions extends CI_Controller
                     $data['headline'] = $this->input->post('headline');
                     $data['text'] = $this->input->post('text');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -155,7 +180,7 @@ class Submissions extends CI_Controller
                 {
                     $data['text'] = $this->input->post('text');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");
@@ -185,7 +210,7 @@ class Submissions extends CI_Controller
                 {
                     $data['text'] = $this->input->post('text');
                 }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)))
+                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     redirect("contests/show/{$contest_id}");

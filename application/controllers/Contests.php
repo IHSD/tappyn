@@ -49,6 +49,7 @@ class Contests extends CI_Controller
         else {
             $this->data['can_submit'] = true;
         }
+        
         if(!$contest)
         {
             $this->session->set_flashdata('error', 'That contest does not exist');
