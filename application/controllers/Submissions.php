@@ -53,7 +53,7 @@ class Submissions extends CI_Controller
 
         if(!$this->ion_auth->in_group(2))
         {
-            $this->session->set_flashdata('error', 'Only creator not allowed to submit to contests');
+            $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
             redirect("contests/show/{$contest_id}", 'refresh');
         }
 
@@ -61,7 +61,7 @@ class Submissions extends CI_Controller
         $contest = $this->contest->get($contest_id);
         if(!$contest)
         {
-            $this->session->set_flashdata('error', 'You must be the owner to view all submissions');
+            $this->session->set_flashdata('error', 'We couldnt find the account you were looking for');
             redirect("contests/show/{$contest_id}", 'refresh');
         }
 
