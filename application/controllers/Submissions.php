@@ -70,8 +70,6 @@ class Submissions extends CI_Controller
             }
         }
 
-
-
         if($this->ion_auth->in_group(3))
         {
             $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
@@ -84,6 +82,23 @@ class Submissions extends CI_Controller
         {
             $this->session->set_flashdata('error', 'We couldnt find the account you were looking for');
             redirect("contests/show/{$contest_id}", 'refresh');
+        }
+
+        if($contest->submission_count >= 50)
+        {
+            $this->session->set_flashdata('error', "We're sorry, but this contest has reached its submission limit");
+            redirect("contests/show/{$contest_id}");
+        }
+
+        if($contest->stop_time < date('Y-m-d H:i:s'))
+        {
+            $this->session->set_flashdata('error', "This contest has ended");
+            redirect("contests/show/{$contest_id}");
+        }
+
+        if(!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id))
+        {
+            $this->session->set_flashdata('error', 'You have already submitted to this contest');
         }
 
         if($logged_in)
@@ -231,7 +246,7 @@ class Submissions extends CI_Controller
         }
         $this->data['error'] = (validation_errors() ? validation_errors() : false);
         // If we did not create a successful submission, redirect back to the submission page with errors
-        $this->load->view("submissions/create", $this->data);
+        $this->load->view("contests/show", $this->data);
     }
 
     /**
