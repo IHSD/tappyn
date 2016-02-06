@@ -117,7 +117,7 @@ class Users extends CI_Controller
                     'state' => $this->input->post('state'),
                     'school' => $this->input->post('school')
                 );
-                
+
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->session->set_flashdata('error', 'There was an error saving your profile');
@@ -145,6 +145,7 @@ class Users extends CI_Controller
             }
         }
         $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+        $this->data['profile'] = $profile;
         $this->load->view('users/profile', $this->data);
     }
 
