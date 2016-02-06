@@ -11,8 +11,7 @@
 )); ?>
 
                     <?php echo form_open("auth/create_user");?>
-                      <div class='form-row'><?php echo form_input(array('name' => 'first_name','value' => '','placeholder' => 'First Name', 'type' => 'text'));?>
-                      </div>
+                      <div class='form-row'><?php echo form_input(array('name' => 'first_name','value' => '','placeholder' => 'First Name', 'type' => 'text'));?></div>
                       <div class='form-row'>
                            <?php echo form_input(array('name' => 'last_name','value' => '','placeholder' => 'Last Name', 'type' => 'text'));?>
                       </div>

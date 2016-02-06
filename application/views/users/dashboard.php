@@ -12,13 +12,13 @@
                         <ul class="tabs" data-tabs id="example-tabs">
                             <li class="tabs-title is-active"><a href="<?php echo base_url().'dashboard'; ?>" aria-selected="true">All</a></li>
                             <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>">In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>">Winning</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>">Completed</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus">
                                     <?php foreach($contests as $contest): ?>
-                                        <div class="medium-3 columns end">
+                                        <div class="medium-4 small-12 columns end">
                                             <div class="company-post">
                                                 <div class="ad-company-info">
                                                     <h5><?php echo $contest->platform; ?></h5>
@@ -46,13 +46,13 @@
                         <ul class="tabs" data-tabs id="example-tabs">
                             <li class="tabs-title"><a href="<?php echo base_url().'dashboard'; ?>" <?php if($status == 'all') echo 'aria-selected=true' ?>>All</a></li>
                             <li class="tabs-title"><a href="<?php echo base_url().'in_progress'; ?>" <?php if($status == 'active') echo 'aria-selected=true' ?>>In Progress</a></li>
-                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Winning</a></li>
+                            <li class="tabs-title"><a href="<?php echo base_url().'completed'; ?>" <?php if($status == 'winning') echo 'aria-selected=true' ?>>Completed</a></li>
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus">
                                     <?php foreach($submissions as $submission): ?>
-                                        <div class="medium-12 columns end">
+                                        <div class="medium-4 small-12 columns end">
                                             <div class="company-post">
                                                 <div class="medium-9 ad-company-info">
                                                     <h5><?php echo $submission->contest->title; ?></h5>
