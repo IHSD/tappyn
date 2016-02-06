@@ -64,8 +64,9 @@
                                     </div>
                                     <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
                                     <?php if($contest->submission_count < 50) : ?>
-                                            <div class='text-center'>
-                                                <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>tappyn</a></div>
+                                        <div class='text-center'>
+                                            <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>tappyn</a>
+                                        </div>
                                     <?php endif ?>
                                 </div>
                             </div>
