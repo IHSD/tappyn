@@ -10,7 +10,7 @@
                 <div class="hero-content">
                     <h3>COMPANIES ARE LOOKING FOR PEOPLE LIKE YOU.</h3>
                     <h1>SEE WHAT PEOPLE AROUND <br> YOU ARE CREATING. </h1>
-                   	<a class='btn btn-banner' href=''>Current Contests</a>
+                   	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">Current Contests</a>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="contest-button">
-               <a href='' class='btn btn-contest'>See Contests</a>
+               <a href="<?php echo base_url().'contests' ?>" class='btn btn-contest'>See Contests</a>
             </div>
         </div>
     </section>

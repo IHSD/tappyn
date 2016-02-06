@@ -33,7 +33,7 @@
         </div>
     </div>
 </div> -->
-<h2 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' active contests' : count($contests) . ' active contest'; ?></h2>
+<h2 class="text-center">Currently <?php echo count($contests) > 1 ? count($contests). ' Live Contests' : count($contests) . ' Live Contest'; ?></h2>
 <section class="innerpage">
     <div class="browse-contest">
         <div class="row padding">
