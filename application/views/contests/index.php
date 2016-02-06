@@ -50,7 +50,7 @@
                     <?php foreach($contests as $contest): ?>
                         <div class="medium-3 small-12 columns end">
                             <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;'>
-                            <div class="submission-box" style='min-height:290px;'>
+                            <div class="submission-box" style='min-height:460px;'>
                                 <div class="ad-company-info">
                                     <div style='margin-bottom:15px' >
                                         <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
