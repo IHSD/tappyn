@@ -53,13 +53,14 @@ class Submissions extends CI_Controller
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[users.email]');
             $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
             $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+            $this->form_validation->set_rules('age', 'Age', 'required');
+            $this->form_validation->set_rules('gender', 'Gender', 'required');
             // Attempt the registration
             if($this->form_validation->run() == true)
             {
                 $email    = strtolower($this->input->post('email'));
                 $identity = $email;
                 $password = bin2hex(openssl_random_pseudo_bytes(5));
-                error_log($password);
             }
             if($this->form_validation->run() == true &&
                $this->ion_auth_model->register($identity, $password, $email, array('first_name' => $this->input->post('first_name'), 'last_name' => $this->input->post('last_name')), array(2)) &&
@@ -76,7 +77,6 @@ class Submissions extends CI_Controller
         }
 
         $this->form_validation->clear();
-        error_log("Passed register / login");
         if($this->ion_auth->in_group(3))
         {
             $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
@@ -118,9 +118,6 @@ class Submissions extends CI_Controller
         }
         // Set our static data points for the view / creation
         $this->data['contest'] = $contest;
-
-
-        error_log("Toggling through submission templates");
         // Generate / validate fields based on the platform type
         switch($contest->platform)
         {
