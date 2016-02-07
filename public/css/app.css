@@ -1514,6 +1514,10 @@ footer {
 	display: block;
 	overflow: hidden;
 }
+.row label {
+    margin-right:0.88889rem;
+    margin-left:0.44444rem;
+}
 .sub-list ul li span img {
 	display: inline-block;
 	height: 27px;
@@ -1548,6 +1552,13 @@ footer {
 	line-height: 36px;
 	margin: 0 0 50px;
 	text-align: center;
+}
+.contest-link-list {
+    list-style-type: none;
+    margin-left: 150px;
+}
+.contest-link-list li {
+    padding-top: 10px;
 }
 .subpage-content h4 {
 	margin: 0;
