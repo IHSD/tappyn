@@ -930,7 +930,7 @@ class Ion_auth_model extends CI_Model
 
 		if(isset($id))
 		{
-			$this->db->insert('profiles', array('id' => $id));
+			$this->db->insert('profiles', array('id' => $id, 'age' => $additional_data['age'], 'gender' => $additional_data['gender']));
 		}
 		// add in groups array if it doesn't exits and stop adding into default group if default group ids are set
 		if( isset($default_group->id) && empty($groups) )

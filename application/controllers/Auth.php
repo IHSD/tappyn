@@ -402,6 +402,19 @@ class Auth extends CI_Controller {
 	// create a new user
 	function create_user()
     {
+		$this->data['genders'] = array(
+            'GENDER' => 'Gender',
+            0 => 'All',
+            1 => "Male",
+            2 => "Female"
+        );
+        $this->data['ages'] = array(
+            'AGES' => 'Age',
+            0 => '18-24',
+            1 => '25-34',
+            2 => '35-44',
+            3 => '45+'
+        );
         $this->data['title'] = "Register";
 
         $tables = $this->config->item('tables','ion_auth');
@@ -411,6 +424,8 @@ class Auth extends CI_Controller {
         // validate form input
         $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+		$this->form_validation->set_rules('age', 'Age', 'required');
+		$this->form_validation->set_rules('gender', 'Gender', 'required');
         if($identity_column!=='email')
         {
             $this->form_validation->set_rules('identity',$this->lang->line('create_user_validation_identity_label'),'required|is_unique['.$tables['users'].'.'.$identity_column.']');
@@ -436,7 +451,9 @@ class Auth extends CI_Controller {
                 'first_name' => $this->input->post('first_name'),
                 'last_name'  => $this->input->post('last_name'),
                 'company'    => $this->input->post('company'),
-                'phone'      => $this->input->post('phone')
+                'phone'      => $this->input->post('phone'),
+				'age'		=> $this->input->post('age'),
+				'gender' 	=> $this->input->post('gender')
             );
         }
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))

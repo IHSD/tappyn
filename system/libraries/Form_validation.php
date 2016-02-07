@@ -249,6 +249,11 @@ class CI_Form_validation {
 		return $this;
 	}
 
+	public function clear()
+	{
+		$this->_field_data = array();
+	}
+
 	// --------------------------------------------------------------------
 
 	/**

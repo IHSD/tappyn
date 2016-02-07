@@ -101,18 +101,18 @@
 	                            <?php echo form_input(array('name' => 'last_name', 'value' => '', 'placeholder' => 'Last Name', 'type' => 'text')); ?>
 							</div>
                         </div>
-		            	 <div class="form-row">
-							  <div class='large-12 columns'>
-                              	<?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
-							  </div>
-                        </div>
-                        <div class='row large-12 columns'>
+						<div class='row large-12 columns'>
                             <div class='large-6 columns'>
                                 <?php echo form_dropdown('age_range', $ages, 'AGES'); ?>
                             </div>
                         	<div class='large-6 columns'>
 	                            <?php echo form_dropdown('gender', $genders, 'GENDER'); ?>
 							</div>
+                        </div>
+		            	 <div class="form-row">
+							  <div class='large-12 columns'>
+                              	<?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+							  </div>
                         </div>
 						<br>
                         <div class='text-right'>

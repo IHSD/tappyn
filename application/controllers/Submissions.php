@@ -11,6 +11,7 @@ class Submissions extends CI_Controller
         $this->load->library('ion_auth');
         $this->load->library('submission_library');
         $this->load->model('ion_auth_model');
+        $this->load->model('user');
     }
 
     /**
@@ -57,13 +58,15 @@ class Submissions extends CI_Controller
             {
                 $email    = strtolower($this->input->post('email'));
                 $identity = $email;
-                $password = $this->input->post('password');
+                $password = bin2hex(openssl_random_pseudo_bytes(5));
+                error_log($password);
             }
             if($this->form_validation->run() == true &&
                $this->ion_auth_model->register($identity, $password, $email, array('first_name' => $this->input->post('first_name'), 'last_name' => $this->input->post('last_name')), array(2)) &&
                $this->ion_auth_model->login($identity, $password, 1))
             {
-                $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age'), 'gender' => $this->input->post('gender')));
+                // $this->notifyUserWithPassword($email, $password);
+                $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age_range'), 'gender' => $this->input->post('gender')));
                 $logged_in = true;
             }
             else
@@ -72,6 +75,8 @@ class Submissions extends CI_Controller
             }
         }
 
+        $this->form_validation->clear();
+        error_log("Passed register / login");
         if($this->ion_auth->in_group(3))
         {
             $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
@@ -115,7 +120,7 @@ class Submissions extends CI_Controller
         $this->data['contest'] = $contest;
 
 
-
+        error_log("Toggling through submission templates");
         // Generate / validate fields based on the platform type
         switch($contest->platform)
         {
@@ -247,7 +252,6 @@ class Submissions extends CI_Controller
             }
             break;
         }
-        $this->data['error'] = (validation_errors() ? validation_errors() : false);
         // If we did not create a successful submission, redirect back to the submission page with errors
         $this->load->view("contests/show", $this->data);
     }

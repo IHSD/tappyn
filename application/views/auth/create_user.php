@@ -11,30 +11,29 @@
 )); ?>
 
                     <?php echo form_open("auth/create_user");?>
-                      <div class='form-row'><?php echo form_input(array('name' => 'first_name','value' => '','placeholder' => 'First Name', 'type' => 'text'));?></div>
-                      <div class='form-row'>
+                      <div class='form-row large-6 small-12 columns'><?php echo form_input(array('name' => 'first_name','value' => '','placeholder' => 'First Name', 'type' => 'text'));?></div>
+                      <div class='form-row large-6 small-12 columns'>
                            <?php echo form_input(array('name' => 'last_name','value' => '','placeholder' => 'Last Name', 'type' => 'text'));?>
                       </div>
-                       <div class='form-row'>
+                       <div class='form-row large-12 columns'>
                            <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
                       </div>
-                      <div class='form-row'><?php echo form_input(array('name' => 'password','value' => '','placeholder' => 'Password', 'type' => 'password'));?>
+                      <div class='form-row large-12 columns'><?php echo form_input(array('name' => 'password','value' => '','placeholder' => 'Password', 'type' => 'password'));?>
                       </div>
 
-                      <div class='form-row'><?php echo form_input(array('name' => 'password_confirm','value' => '','placeholder' => 'Password Confirm', 'type' => 'password'));?>
+                      <div class='form-row large-12 columns'><?php echo form_input(array('name' => 'password_confirm','value' => '','placeholder' => 'Password Confirm', 'type' => 'password'));?>
 
                       </div>
-
-                      <div class="form-row">
-                        <div>
-                          <?php echo form_radio('group_id', '2', TRUE); ?>
-                          <?php echo form_label('I want to write an ad', 'group_id'); ?>
-                        </div>
-                        <div>
-                          <?php echo form_radio('group_id', '3', FALSE); ?>
-                          <?php echo form_label('I want to create a contest', 'group_id'); ?>
-                        </div>
+                      <div class="form-row large-12 columns">
+                          <?php echo form_dropdown('group_id', array('2' => 'I want to write content', '3' => "I want to create contests"));?>
                       </div>
+                      <div class='form-row large-6 columns'>
+                          <?php echo form_dropdown('age', $ages, 'AGES'); ?>
+                      </div>
+                      <div class='form-row large-6 columns'>
+                          <?php echo form_dropdown('gender', $genders, 'GENDER'); ?>
+                      </div>
+
                       <div class='div-center'><?php echo form_submit('submit', 'Register', array("class" => 'btn large-6 small-12 large-offset-3'));?></div>
                       <?php echo form_close();?>
                       <div class='text-center' style='padding-bottom:20px'>or</div>
