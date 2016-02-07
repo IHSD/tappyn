@@ -9,7 +9,7 @@
             <div class="medium-12">
                 <div class="hero-content">
                     <h3>COMPANIES ARE LOOKING FOR PEOPLE LIKE YOU.</h3>
-                    <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY!. </h1>
+                    <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY! </h1>
                    	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">Current Contests</a>
                 </div>
             </div>
