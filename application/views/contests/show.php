@@ -101,7 +101,7 @@
 	                            <?php echo form_input(array('name' => 'last_name', 'value' => '', 'placeholder' => 'Last Name', 'type' => 'text')); ?>
 							</div>
                         </div>
-						<div class='row large-12 columns'>
+						<div class='form-row'>
                             <div class='large-6 columns'>
                                 <?php echo form_dropdown('age_range', $ages, 'AGES'); ?>
                             </div>
