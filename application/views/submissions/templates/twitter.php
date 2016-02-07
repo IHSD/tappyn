@@ -16,7 +16,7 @@
 </div>
 <style>
 .twitter-outer-wrapper {
-    border: 2px solid #0084B4;
+    /*border: 2px solid #0084B4;*/
     padding: 10px;
 }
 .twitter-form-wrapper {
