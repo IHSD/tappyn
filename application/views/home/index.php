@@ -9,7 +9,7 @@
             <div class="medium-12">
                 <div class="hero-content">
                     <h3>COMPANIES ARE LOOKING FOR PEOPLE LIKE YOU.</h3>
-                    <h1>SEE WHAT PEOPLE AROUND <br> YOU ARE CREATING. </h1>
+                    <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY!. </h1>
                    	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">Current Contests</a>
                 </div>
             </div>
@@ -172,11 +172,11 @@
         </div>
     </section>
     <!-- Past Companies -->
-    <section class="past-companies">
+    <!-- <section class="past-companies">
         <Div class="row">
             <h2 class="title">A Few of Our Past Companies</h2>
             <img src="<?php echo base_url().'public/img/img-companies.jpg'?>" width='2000' height='720'>
         </Div>
-    </section>
+    </section> -->
 
 <?php $this->load->view('templates/footer'); ?>
