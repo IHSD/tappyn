@@ -101,6 +101,7 @@ class Submissions extends CI_Controller
         if(!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id))
         {
             $this->session->set_flashdata('error', 'You have already submitted to this contest');
+            redirect("contests/show/{$contest_id}");
         }
 
         if($logged_in)

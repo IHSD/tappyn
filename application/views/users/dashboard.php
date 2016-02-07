@@ -55,7 +55,7 @@
                                             <div class="company-post">
                                                 <div class="medium-9 ad-company-info">
                                                     <h5><?php echo $submission->contest->title; ?></h5>
-                                                    <h4>$<?php echo $submission->contest->prize; ?></h4>
+                                                    <h4>$50.00</h4>
                                                     <h5>
                                                         <?php echo (new DateTime() < new DateTime($submission->contest->stop_time)) ? "Ends " : "Ended " ?>
                                                         <?php echo date('Y-m-d H:i:s', strtotime($submission->contest->stop_time)); ?>
@@ -76,6 +76,5 @@
             </div>
         </div>
     </section>
-    
-<?php $this->load->view('templates/footer'); ?>
 
+<?php $this->load->view('templates/footer'); ?>
