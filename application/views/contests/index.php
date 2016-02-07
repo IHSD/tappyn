@@ -1,40 +1,5 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
-<?php if(isset($pagination_links)) echo $pagination_links; ?>
-
-<!--<div class="subpage">
-    <div class="top-sideabar columns large-2 show-for-large">
-        <div class="sub-list">
-            <ul>
-                <li>
-                    <strong>$500</strong>
-                    <span><img src="<?php echo base_url().'public/img/ico-cup.svg'; ?>" alt=""> Every Week</span>
-                </li>
-                <li>
-                    <strong>75</strong>
-                    <span><img src="<?php echo base_url().'public/img/ico-cap.svg'; ?>" alt=""> Winners</span>
-                </li>
-                <li>
-                    <strong>50</strong>
-                    <span><img src="<?php echo base_url().'public/img/ico-edit.svg'; ?>" alt=""> Entry Limit</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="columns large-10">
-        <div class="margin-minus bg-subpage">
-            <div class="overlay-subpage"></div>
-            <div class="row medium-8 subpage-content">
-                <div class="inner-table">
-                    <h3>If there isn't a t-shirt for it, did it even happen?</h3>
-                    <h4>Devin Roach - Georgia Tech - $50</h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
-
-
 <section class="innerpage">
 <div class='medium-6 medium-offset-3 small-12'>
     <?php $this->load->view('templates/notification', array(
@@ -48,28 +13,31 @@
             <div class="browse-contest-content">
                 <div class="margin-minus">
                     <?php foreach($contests as $contest): ?>
-                        <div class="medium-3 small-12 columns end">
+                        <div class="medium-2 small-6 columns end">
                             <a href="<?php echo base_url().'contests/'.$contest->id ?>" style='cursor:pointer;text-decoration:none;'>
-                            <div class="submission-box" style='min-height:460px;'>
+                            <div class="submission-box">
                                 <div class="ad-company-info">
-                                    <div style='margin-bottom:15px' >
+                                    <div>
                                         <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
                                         <span class='contest-price'>
                                             $50
                                         </span>
                                     </div>
-                                    <div class="company-img">
+                                    <div class="company-img" style='height:100px'>
                                         <?php if($contest->company->logo_url) : ?>
-                                            <img style='height:auto; width:100%' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"> 
+                                            <img src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>">
+                                        <?php else: ?>
+                                            <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <div style='width:100%'>
+                                    <div class='contest-status-container'>
+                                        <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
                                         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                                             <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
                                         <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
                                     </div>
-                                    <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
+
                                 </div>
                             </div>
                             </a>

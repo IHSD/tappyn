@@ -63,6 +63,7 @@ class Contest extends CI_Model
         foreach($submissions as $submission)
         {
             $submission->owner = $this->db->select('first_name, last_name, email')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->vote_count = rand(1,5);
         }
         return $submissions;
     }

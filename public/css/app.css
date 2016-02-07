@@ -107,7 +107,7 @@ header nav ul {
 	padding: 0;
 	text-align: center;
 	margin: 0;
-	list-style: none; 
+	list-style: none;
 }
 header nav ul li.login-li {
 	float:right;
@@ -640,7 +640,7 @@ footer {
  .company-edit .tabs-box {
  	margin: -30px 0 0;
  	position: relative;
- 	z-index: 1;	
+ 	z-index: 1;
  }
  .tabs-box .tabs {
  	margin: 0 0 35px;
@@ -685,6 +685,7 @@ footer {
 	padding: 15px;
 	margin:  10px 0 20px;
 	border-radius: 4px;
+    height: 250px;
  }
  .submission-box .ad-company-info img {
  	margin: 0 12px 0;
@@ -1088,12 +1089,18 @@ footer {
 }
 .company-img img {
 	float: none;
-	width: 100%;
+	max-height:100%;
+    max-width:100%;
 }
 .browse-contest .ad-company-info h4 {
 	margin: 0 0 15px;
 	font-weight: 400;
 	font-size: 18px;
+}
+.contest-status-container {
+    position:absolute;
+    bottom:0;
+    width:85%;
 }
 .browse-contest .ad-company-info h4 a {
 	color: #2b2b2b;
@@ -1779,29 +1786,29 @@ footer {
   transform: translate3d(-100%,0,0);
   width: 100%;
  }
- header nav.open ul li:nth-child(5) { 
+ header nav.open ul li:nth-child(5) {
   -webkit-transition-delay: 0.05s;
   transition-delay: 0.05s;
 }
 
-header nav.open ul li:nth-child(4) { 
+header nav.open ul li:nth-child(4) {
   -webkit-transition-delay: 0.1s;
-  transition-delay: 0.1s; 
+  transition-delay: 0.1s;
 }
 
-header nav.open ul li:nth-child(3) { 
-  -webkit-transition-delay: 0.15s; 
-  transition-delay: 0.15s; 
+header nav.open ul li:nth-child(3) {
+  -webkit-transition-delay: 0.15s;
+  transition-delay: 0.15s;
 }
 
-header nav.open ul li:nth-child(2) { 
+header nav.open ul li:nth-child(2) {
   -webkit-transition-delay: 0.2s;
-  transition-delay: 0.2s; 
+  transition-delay: 0.2s;
 }
 
-header nav.open ul li:first-child { 
-  -webkit-transition-delay: 0.25s; 
-  transition-delay: 0.25s; 
+header nav.open ul li:first-child {
+  -webkit-transition-delay: 0.25s;
+  transition-delay: 0.25s;
 }
 header nav.open ul li {
   visibility: visible;
@@ -1857,16 +1864,16 @@ header nav ul li  a {
 		float: none;
 		margin: 0 0 60px;
 		text-align: center;
-		
+
 	}
 	.share-contest ul li {
 		display: inline-block;
 		float: none;
-		
+
 	}
 	.contest-info2 h3, .contest-info2 h4 {
 		text-align: center;
-		
+
 	}
 	.top-heading .inner-title {
 		text-align: center;
@@ -1948,7 +1955,7 @@ header nav ul li  a {
 	}
 	.company-post {
 		text-align: center;
-		
+
 		padding: 15px 15px 100px;
 	}
 	.package-box {
@@ -1988,7 +1995,7 @@ header nav ul li  a {
     float: none;
     display: block;
     text-align: center;
-    
+
   }
   .footer-nav li, .socials li {
     float: none;

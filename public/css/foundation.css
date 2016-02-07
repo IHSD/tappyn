@@ -1008,7 +1008,7 @@ button {
   line-height: 1; }
 
 .row {
-  max-width: 80rem;
+  max-width: 90rem;
   margin-left: auto;
   margin-right: auto; }
   .row::before, .row::after {
@@ -3134,7 +3134,3 @@ table.hover tr:nth-of-type(even):hover {
   float: right; }
 
 /*# sourceMappingURL=foundation.css.map */
-
-
-
-
