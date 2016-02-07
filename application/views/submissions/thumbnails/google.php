@@ -1,9 +1,10 @@
 
 
-<p>
-   Headline : <?php echo $submission->headline; ?>
+<h3>
+   <strong><?php echo $submission->headline; ?></strong>
 </p>
 
-<p>
-   Text :  <?php echo $submission->text; ?>
-</p>
+
+<h3>
+   <?php echo $submission->text; ?>
+</h3>

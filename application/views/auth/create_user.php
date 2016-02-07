@@ -22,7 +22,7 @@
                       </div>
 
                       <div class='form-row'><?php echo form_input(array('name' => 'password_confirm','value' => '','placeholder' => 'Password Confirm', 'type' => 'password'));?>
-                     
+
                       </div>
 
                       <div class="form-row">
@@ -35,10 +35,14 @@
                           <?php echo form_label('I want to create a contest', 'group_id'); ?>
                         </div>
                       </div>
-
-                      <div class='div-center'><?php echo form_submit('submit', lang('create_user_submit_btn'), array("class" => 'btn'));?></div>
-
+                      <div class='div-center'><?php echo form_submit('submit', 'Register', array("class" => 'btn large-6 small-12 large-offset-3'));?></div>
                       <?php echo form_close();?>
+                      <div class='text-center' style='padding-bottom:20px'>or</div>
+                      <div class="large-6 large-offset-3 small-12 button-box register-on-facebook">
+                         <a href="<?php echo base_url().'auth/facebook'; ?>">
+                             <img src="<?php echo base_url().'public/img/img-facebook.png' ?>">
+                         </a>
+                     </div>
                 </div>
             </div>
         </div>

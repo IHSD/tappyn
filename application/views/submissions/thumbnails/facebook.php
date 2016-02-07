@@ -1,10 +1,10 @@
 
+<h3>
+  <?php echo $submission->headline; ?>
+</h3>
+<h4>
+  <?php echo $submission->link_explanation; ?>
+</h4>
 <p>
-   Headline : <?php echo $submission->headline; ?>
-</p>
-<p>
-   Link Explanation : <?php echo $submission->link_explanation; ?> 
-</p>
-<p>
-   Text :  <?php echo $submission->text; ?>
+   <?php echo $submission->text; ?>
 </p>

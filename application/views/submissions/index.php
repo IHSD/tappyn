@@ -37,27 +37,23 @@
 		</div>
 	</div>
 	<div id='submissions' class='small-12 columns'>
-		<div class='contest-box'>	
 			<?php if(isset($submissions) && count($submissions) > 0) : ?>
-				<h3>Other submissions</h3>
-				<div class='row'>
 		        	<?php foreach($submissions as $submission): ?>
-		        		<div class="medium-3 small-12 columns">
+		        		<div class="medium-3 small-12 columns contest-box" style='float:left'>
 		        			 <?php switch($contest->platform):
 				                case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
-					            case 'google': $this->load->view('submissions/thumbnails/google', array('submission' => $submission)); break; 
-					            case 'trending': $this->load->view('submissions/thumbnails/trending', array('submission' => $submission)); break; 
-					            case 'tagline': $this->load->view('submissions/thumbnails/tagline', array('submission' => $submission)); break; 
-					            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break; 
+					            case 'google': $this->load->view('submissions/thumbnails/google', array('submission' => $submission)); break;
+					            case 'trending': $this->load->view('submissions/thumbnails/trending', array('submission' => $submission)); break;
+					            case 'tagline': $this->load->view('submissions/thumbnails/tagline', array('submission' => $submission)); break;
+					            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
 					            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
-				            endswitch; ?>	
-			        		</div>
+				            endswitch; ?>
+                            <h3 class='submission-owner-title'> - <?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.$submission->owner->last_name : "Anonymous") ?></h3>
+			        	</div>
 		        	<?php endforeach; ?>
-	        	</div>
 			<?php else : ?>
 				<h3>This contest has no submissions yet, you could be the first!</h3>
 			<?php endif ?>
-		</div>
 	</div>
 </div>
 </section>

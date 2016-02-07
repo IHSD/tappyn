@@ -114,7 +114,7 @@
                 </div>
             </div>
             <div class="contest-button">
-                <a href="#0" class="btn btn-contest">Join Now!</a>
+                <a href="<?php echo base_url().'signup'; ?>" class="btn btn-contest">Join Now!</a>
             </div>
         </div>
     </section>
@@ -157,7 +157,7 @@
                         <img src="<?php echo base_url().'public/img/img-creative.png'?>" width='200' height='200'>
                         <h3>Our Creatvies</h3>
                         <p>The minds in our network would make even the A-Team jealous (and we love Mr.T)</p>
-                        <a href="#">WANT TO TAPPYN?</a>
+                        <a href="<?php echo base_url().'contests/index'; ?>">WANT TO TAPPYN?</a>
                     </div>
                 </div>
                 <div class="medium-4 column">
@@ -165,7 +165,7 @@
                         <img src="<?php echo base_url().'public/img/img-contest.png'?>" width='200' height='200'>
                         <h3>Our Companies</h3>
                         <p>More than 75 companies never look at advertising the same way again.</p>
-                        <a href="#">WANT TO TAPPYN?</a>
+                        <a href="<?php echo base_url().'contests/index'; ?>">WANT TO TAPPYN?</a>
                     </div>
                 </div>
             </div>

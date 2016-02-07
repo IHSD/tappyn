@@ -330,6 +330,11 @@ header .btn-login {
 	padding:  50px 0;
 	background:  #F7F7F7;
 }
+.contest-box-header {
+    background-color: black;
+    color: white;
+    width: 100%;
+}
 .contest-box {
 	background: #fff;
 	position: relative;
@@ -337,6 +342,11 @@ header .btn-login {
 	padding:  20px;
 	border: 1px solid #E0E0E0;
 	border-radius: 4px;
+    word-wrap:break-word;
+}
+.submission-owner-title {
+    float: right;
+    color: #FF5E00;
 }
 .contest-box .price {
 	position: absolute;
@@ -858,6 +868,9 @@ footer {
 .tabs-content .company-post .ad-company-info h5 {
 	text-align: left;
 	margin: 0 0 8px;
+}
+.tappyn-text-color {
+    color: #FF5E00 !important;
 }
 .tabs-content .company-post .ad-company-info h5.submission-bg span {
 	background: #f9f9f9;
@@ -1555,10 +1568,21 @@ footer {
 }
 .contest-link-list {
     list-style-type: none;
-    margin-left: 150px;
+    padding-left: 0;
 }
 .contest-link-list li {
     padding-top: 10px;
+}
+.contest-link-list li a {
+    width: 80%;
+}
+.center-content {
+    text-align: center;
+}
+.facebook-form-wrapper {
+    background-color: #cccccc;
+    padding: 10px;
+    border-radius: 5px;
 }
 .subpage-content h4 {
 	margin: 0;

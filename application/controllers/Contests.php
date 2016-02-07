@@ -56,6 +56,19 @@ class Contests extends CI_Controller
             redirect('contests/index', 'refresh');
         }
         $this->data['contest'] = $contest;
+        $this->data['genders'] = array(
+            'GENDER' => 'Gender',
+            0 => 'All',
+            1 => "Male",
+            2 => "Female"
+        );
+        $this->data['ages'] = array(
+            'AGES' => 'Age',
+            0 => '18-24',
+            1 => '25-34',
+            2 => '35-44',
+            3 => '45+'
+        );
         $this->load->view('contests/show', $this->data);
     }
     /**
@@ -172,7 +185,12 @@ class Contests extends CI_Controller
     {
         $contest = $this->contest->get($cid);
         $submissions = $this->contest->submissions($cid);
-        $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
+        if($this->ion_auth->logged_in())
+        {
+            $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
+        } else {
+            $this->data['can_submit'] = true;
+        }
         $this->data['contest'] = $contest;
         $this->data['submissions'] = $submissions;
         $this->load->view('submissions/index', $this->data);

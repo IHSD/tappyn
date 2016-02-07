@@ -1,2 +1,4 @@
 
- <p>Text: <?php echo $submission->text; ?></p>
+<h3>
+   <?php echo $submission->text; ?>
+</h3>

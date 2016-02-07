@@ -8,7 +8,7 @@
 			<div class='row'>
 				<div class='medium-3 small-12 columns'>
 					<h3>
-						<?php echo $contest->title; ?> by <?php echo $contest->company->name; ?>
+						<?php echo $contest->title; ?>
 					</h3>
 					<div class="tabs-box" style='margin:0'>
 						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
@@ -41,44 +41,37 @@
 	<div id='submitting' class='small-12 columns'>
 		<div class='contest-box'>
 			<div class='row'>
-		        <div id='brief-content' class='medium-8 small-12 columns'>
-		        	<h3 class='text-center'>Ad Brief</h3>
-		        	<div class='div-center'>
-                        <?php if(is_null($contest->company->logo_url)): ?>
-                            <img style='height:auto;' width='150px' src="<?php echo base_url().'public/img/contest-default.jpg'; ?>"></div>
-                        <?php else: ?>
-                            <img style='height:auto;' width='150px' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>"></div>
-                        <?php endif; ?>
+				<div class='medium-2 small-12 columns center-content'>
+					<h4><?php echo $contest->company->name; ?></h4>
+					<?php if(is_null($contest->company->logo_url)): ?>
+						<img style='height:auto;' width='150px' src="<?php echo base_url().'public/img/contest-default.jpg'; ?>">
+					<?php else: ?>
+						<img style='height:auto;' width='150px' src="<?php echo base_url().'uploads/'.$contest->company->logo_url; ?>">
+					<?php endif; ?>
+					<ul class='contest-link-list'>
+		        	    <li><a href='<?php echo $contest->company->company_url; ?>' class='btn' target='_blank'>Website</a></li>
+		        	    <li><a href='<?php echo $contest->company->facebook_url; ?>' class='btn' target='_blank'>Facebook Page</a></li>
+                    </ul>
+				</div>
+		        <div id='brief-content' class='medium-6 small-12 columns'>
+		        	<h3 class='text-center'><strong>Ad Brief</strong></h3>
+					<h4 class='text-center'>Platform : <?php echo ucfirst($contest->platform); ?></h4>
 		        	<div class='row' style='margin-bottom:5px;'>
-		        		<div class='medium-3 small-12 columns'>
-		        			Product and Target Market :
-		        		</div>
-		        		<div class='medium-9 small-12 columns'>
+						<h4 class='center-content'>Target Market</h4>
+						<hr>
+		        		<div class='medium-12 small-12 columns' style='text-align:justify'>
 		        			<?php echo $contest->audience ?>
 		        		</div>
 		        	</div>
                     <br>
 		        	<div class='row' style='margin-bottom:5px;'>
-		        		<div class='medium-3 small-12 columns'>
-		        			Difference :
-		        		</div>
-		        		<div class='medium-9 small-12 columns'>
+						<h4 class='center-content'>What Makes Us Different</h4>
+						<hr>
+		        		<div class='medium-12 small-12 columns' style='text-align:justify'>
 		        			<?php echo $contest->different ?>
 		        		</div>
 		        	</div>
                     <br>
-		        	<div class='row' style='margin-bottom:5px;'>
-		        		<div class='medium-3 small-12 columns'>
-		        			Objective of Ad :
-		        		</div>
-		        		<div class='medium-9 small-12 columns'>
-		        			<?php echo $contest->objective ?>
-		        		</div>
-		        	</div>
-                    <ul class='contest-link-list'>
-		        	    <li><a href='<?php echo $contest->company->company_url; ?>' target='_blank'>View Website</a></li>
-		        	    <li><a href='<?php echo $contest->company->facebook_url; ?>' target='_blank'>Visit Facebook Page</a></li>
-                    </ul>
 		        </div>
 		        <div class='medium-4 small-12 columns'>
 				<?php $this->load->view('templates/notification', array(
@@ -95,44 +88,35 @@
 			            case 'twitter': $this->load->view('submissions/templates/twitter', array('contest' => $contest)); break;
 		            endswitch; ?>
 		            <?php if($this->ion_auth->logged_in()) : ?>
-			            <div class='text-right'>
-		                	<?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?>
+			            <div>
+		                	<?php echo form_submit('submit', 'Submit', array("class" => 'btn large-4 large-offset-4 small-12 columns'));?>
 		              	</div>
 		            <?php else : ?>
 						<h4>Account Details</h4>
 						<div class='form-row'>
-                            <?php echo form_input(array('name' => 'first_name', 'value' => '', 'placeholder' => 'First Name', 'type' => 'text')); ?>
-                        </div>
-                        <div class='form-row'>
-                            <?php echo form_input(array('name' => 'last_name', 'value' => '', 'placeholder' => 'Last Name', 'type' => 'text')); ?>
+							<div class='large-6 small-12 columns'>
+	                            <?php echo form_input(array('name' => 'first_name', 'value' => '', 'placeholder' => 'First Name', 'type' => 'text')); ?>
+							</div>
+        					<div class='large-6 small-12 columns'>
+	                            <?php echo form_input(array('name' => 'last_name', 'value' => '', 'placeholder' => 'Last Name', 'type' => 'text')); ?>
+							</div>
                         </div>
 		            	 <div class="form-row">
-                              <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+							  <div class='large-12 columns'>
+                              	<?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Email', 'type' => 'text'));?>
+							  </div>
                         </div>
-                        <div class="form-row">
-                            <?php echo form_input(array('name' => 'password', 'value' => '', 'placeholder' => 'Password', 'type' => 'password'));?>
-                        </div>
-                        <div class='row'>
-                            <div class='large-12 columns'>
-                                <label>Age</label>
-                                <?php echo form_radio('age_range', '0', FALSE); ?>
-                                <?php echo form_label('18-24', 'age_range'); ?>
-                                <?php echo form_radio('age_range', '1', FALSE); ?>
-                                <?php echo form_label('25-34', 'age_range'); ?>
-                                <?php echo form_radio('age_range', '2', FALSE); ?>
-                                <?php echo form_label('35-44', 'age_range'); ?>
+                        <div class='row large-12 columns'>
+                            <div class='large-6 columns'>
+                                <?php echo form_dropdown('age_range', $ages, 'AGES'); ?>
                             </div>
+                        	<div class='large-6 columns'>
+	                            <?php echo form_dropdown('gender', $genders, 'GENDER'); ?>
+							</div>
                         </div>
 						<br>
-                        <div class='row'>
-                            <label>Gender</label>
-                            <?php echo form_radio('gender', '1', FALSE); ?>
-                            <?php echo form_label('Male', 'gender'); ?>
-                            <?php echo form_radio('gender', '2', FALSE); ?>
-                            <?php echo form_label('Female', 'gender'); ?>
-                        </div>
                         <div class='text-right'>
-		                	<?php echo form_submit('submit', 'Continue as Guest', array("class" => 'btn'));?>
+		                	<?php echo form_submit('submit', 'Continue as Guest', array("class" => 'btn large-6 large-offset-3 small-12 columns'));?>
 		              	</div>
 		            <?php endif; ?>
 	                <?php echo form_close();?>
