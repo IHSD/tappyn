@@ -30,13 +30,13 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <div class='contest-status-container'>
+                                   
                                         <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
                                         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                                             <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
                                         <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
-                                    </div>
+                                    
                                 </div>
                                 <?php switch($contest->platform):
                                     case 'facebook': echo "<img src='".base_url()."public/img/facebook-buttoon.png'>"; break;
