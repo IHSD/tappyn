@@ -49,6 +49,8 @@ class Submission extends CI_Model
             foreach($results as $result)
             {
                 $result->contest = $this->parentContest($result->contest_id);
+                $result->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $result->contest->owner)->get()->row();
+
             }
 
             return $results;
@@ -71,6 +73,7 @@ class Submission extends CI_Model
                 foreach($submissions as $submission)
                 {
                     $submission->contest = $this->parentContest($submission->contest_id);
+                    $submission->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $submission->contest->owner)->get()->row();
                 }
 
                 return $submissions;

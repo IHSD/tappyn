@@ -49,22 +49,32 @@
                         </ul>
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
-                                <div class="margin-minus">
+                                <div class="margin-minus small-12 columns">
                                     <?php foreach($submissions as $submission): ?>
-                                        <div class="medium-12 columns end">
-                                            <div class="company-post">
-                                                <div class="medium-9 ad-company-info">
-                                                    <h5><?php echo $submission->contest->title; ?></h5>
-                                                    <h4>$50.00</h4>
+                                        <div class="medium-3 columns end contest-box min-height">
+                                                <div class="medium-12 ad-company-info">
+                                                    <div>
+                                                        <h5 class='text-left'><?php echo $submission->contest->title; ?> by <?php echo $submission->company->name; ?></h5>
+                                                        <span class='contest-price'>
+                                                            $50
+                                                        </span>
+                                                    </div>
                                                     <h5>
                                                         <?php echo (new DateTime() < new DateTime($submission->contest->stop_time)) ? "Ends " : "Ended " ?>
-                                                        <?php echo date('Y-m-d H:i:s', strtotime($submission->contest->stop_time)); ?>
+                                                        <?php echo date('D M d, ha', strtotime($submission->contest->stop_time)); ?>
                                                     </h5>
                                                 </div>
-                                                <div class='medium-3 ad-company-info'>
-                                                    <div class='text-cen'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
+                                                    <?php switch($submission->contest->platform):
+                       				                case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
+                       					            case 'google': $this->load->view('submissions/thumbnails/google', array('submission' => $submission)); break;
+                       					            case 'trending': $this->load->view('submissions/thumbnails/trending', array('submission' => $submission)); break;
+                       					            case 'tagline': $this->load->view('submissions/thumbnails/tagline', array('submission' => $submission)); break;
+                       					            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
+                       					            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
+                       				            endswitch; ?>
+                                                <div class='medium-12 large-12 ad-company-info' style='float:bottom'>
+                                                    <div class='text-center'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
                                                 </div>
-                                            </div>
                                         </div>
                                     <?php endforeach; ?>
                                 </div>
