@@ -16,9 +16,9 @@
        	array('name' => 'text',
        	'value' => '',
        	'placeholder' =>
-       		($contest->objective == 'website_clicks' ? "Describe why people should visit this website!" :
-       		($contest->objective == 'app_installs' ? "Describe why people should install this app!" :
-       		($contest->objective == 'engagement' ? "Create compelling content this business could supply" : "Tell a bit more. Be Clear!"))),
+       		($contest->objective == 'website_clicks' ? "Clear Description of the Headline Here" :
+       		($contest->objective == 'app_installs' ? "Clear Description of the Headline Here" :
+       		($contest->objective == 'engagement' ? "Clear Description of the Headline Here" : "Tell a bit more. Be Clear!"))),
        	'type' => 'text',
        	'id' => 'text',
        	'rows' => "3"));?>
