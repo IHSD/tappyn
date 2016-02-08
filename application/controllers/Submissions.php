@@ -219,7 +219,7 @@ class Submissions extends CI_Controller
 
             break;
             case 'tagline':
-
+                
             break;
             case 'general':
                 $this->form_validation->set_rules('text', 'Text', 'required');
