@@ -9,7 +9,7 @@
        		($contest->objective == 'engagement' ? "Grab people's attention with what makes this business unique" : "Enter a headline"))), 
        		'type' => 'text',
        		'id' => 'headline'));?>
-       	<div class='input-count'><span id='headline_span'>0</span> of 25</div>
+       	<div class='input-count'><span id='headline_span'>0</span> of 25 characters</div>
     </div>
     <div class='form-row'>
        <?php echo form_textarea(
@@ -22,7 +22,7 @@
        	'type' => 'text',
        	'id' => 'text',
        	'rows' => "3"));?>
-       	<div class='input-count'><span id='text_span'>0</span> of 250</div>
+       	<div class='input-count'><span id='text_span'>0</span> of 250 characters</div>
     </div>
 </div>
 

@@ -16,7 +16,7 @@
                     ($contest->objective == 'engagement' ? "Create compelling content this business could supply" :
                     "Create a captivating tweet"))), 'type' => 'text'. 'id' => 'text', 'rows' : '2'));?>
             </div>
-            <div class='input-count'><span id='text_span'>0</span> of 140</div>
+            <div class='input-count'><span id='text_span'>0</span> of 140 characters</div>
             <a href='#' class='twitter-button'></a>
         </div>
     </div>
