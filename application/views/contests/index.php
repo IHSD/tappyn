@@ -37,8 +37,13 @@
                                         </div>
                                         <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
                                     </div>
-                                    <h5 style='text-align:center'><?php echo ucfirst($contest->platform); ?></h5>
                                 </div>
+                                <?php switch($contest->platform):
+                                    case 'facebook': echo "<img src='".base_url()."public/img/facebook-buttoon.png'>"; break;
+                                    case 'google': echo "<img src='".base_url()."public/img/google-buttoon.png'>"; break;
+                                    case 'general': echo "<h5>General</h5>"; break;
+                                    case 'twitter': echo "<img src='".base_url()."public/img/twitter-buttoon.png'>"; break;
+                                endswitch; ?>
                             </div>
                             </a>
                         </div>
