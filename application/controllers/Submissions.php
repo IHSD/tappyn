@@ -46,6 +46,20 @@ class Submissions extends CI_Controller
      */
     public function create($contest_id)
     {
+        $this->data['genders'] = array(
+            'GENDER' => 'Gender',
+            0 => 'All',
+            1 => "Male",
+            2 => "Female"
+        );
+        $this->data['ages'] = array(
+            'AGES' => 'Age',
+            0 => '18-24',
+            1 => '25-34',
+            2 => '35-44',
+            3 => '45+'
+        );
+        
         $logged_in = $this->ion_auth->logged_in();
         // Verify user is logged in
         if(!$logged_in)
