@@ -121,12 +121,10 @@ class Submissions extends CI_Controller
             case 'facebook':
                 $this->form_validation->set_rules('headline', 'Headline', 'required');
                 $this->form_validation->set_rules('text', 'Text', 'required');
-                $this->form_validation->set_rules('link_explanation', 'Link Explanation', '');
                 if($this->form_validation->run() == true)
                 {
                     $data['text'] = $this->input->post('text');
                     $data['headline'] = $this->input->post('headline');
-                    $data['link_explanation'] = $this->input->post('link_explanation');
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
@@ -219,7 +217,7 @@ class Submissions extends CI_Controller
 
             break;
             case 'tagline':
-                
+
             break;
             case 'general':
                 $this->form_validation->set_rules('text', 'Text', 'required');
