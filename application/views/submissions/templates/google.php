@@ -3,10 +3,10 @@
        <?php echo form_input(
        	array('name' => 'headline',
        	'value' => '',
-       	'placeholder' => 
-       		($contest->objective == 'website_clicks' ? "Grab people's attention with what makes this business unique" : 
-       		($contest->objective == 'app_installs' ? "Grab people's attention with what makes this app unique" : 
-       		($contest->objective == 'engagement' ? "Grab people's attention with what makes this business unique" : "Enter a headline"))), 
+       	'placeholder' =>
+       		($contest->objective == 'website_clicks' ? "Highlight what makes this business / product unique" : 
+       		($contest->objective == 'app_installs' ? "Grab people's attention with what makes this app unique" :
+       		($contest->objective == 'engagement' ? "Highlight what makes this business / product unique" : "Enter a headline"))), 
        		'type' => 'text',
        		'id' => 'headline'));?>
        	<div class='input-count'><span id='headline_span'>0</span> of 25 characters</div>
@@ -15,10 +15,10 @@
        <?php echo form_textarea(
        	array('name' => 'text',
        	'value' => '',
-       	'placeholder' => 
-       		($contest->objective == 'website_clicks' ? "Describe why people should visit this website!" : 
-       		($contest->objective == 'app_installs' ? "Describe why people should install this app!" : 
-       		($contest->objective == 'engagement' ? "Create compelling content this business could supply" : "Tell a bit more. Be Clear!"))), 
+       	'placeholder' =>
+       		($contest->objective == 'website_clicks' ? "Describe why people should visit this website!" :
+       		($contest->objective == 'app_installs' ? "Describe why people should install this app!" :
+       		($contest->objective == 'engagement' ? "Create compelling content this business could supply" : "Tell a bit more. Be Clear!"))),
        	'type' => 'text',
        	'id' => 'text',
        	'rows' => "3"));?>
