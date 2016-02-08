@@ -83,6 +83,8 @@ class Users extends CI_Controller
      */
     public function profile()
     {
+        $this->session->set_flashdata('error', 'The profile section is curerntly under construction!');
+        redirect('contests/index', 'refresh');
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if($this->ion_auth->in_group(2))
