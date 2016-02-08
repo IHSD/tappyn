@@ -37,7 +37,7 @@
                                         </div>
                                         <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
                                     </div>
-
+                                    <h5 style='text-align:center'><?php echo ucfirst($contest->platform); ?></h5>
                                 </div>
                             </div>
                             </a>
