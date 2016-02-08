@@ -11,7 +11,7 @@
                     )); ?>
                     <?php echo form_open("welcome/contact_us");?>
                     <div class="form-row">
-                          <?php echo form_dropdown('contact', array('' => 'Are you a customer or a creator?','company' => 'Customer','user' => 'Creator'), '');;?>
+                          <?php echo form_dropdown('contact', array('' => 'Are you a writer or a company?','company' => 'Writer','user' => 'Company'), '');;?>
                     </div>
                     <div class="form-row">
                         <?php echo form_input(array('name' => 'email', 'value' => '', 'placeholder' => 'Please enter your email', 'type' => 'text'));?>
@@ -22,9 +22,9 @@
                     <div class='form-row'><?php echo form_submit('submit', 'Submit', array("class" => 'btn'));?></div>
                     <?php echo form_close();?>
                 </div>
-               
+
             </div>
         </div>
         </section>
-        
+
 <?php $this->load->view('templates/footer'); ?>
