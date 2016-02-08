@@ -49,7 +49,7 @@
 					            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
 				            endswitch; ?>
 							<?php $last_name = $submission->owner->last_name[0]; ?>
-                            <h3 class='submission-owner-title'> - <?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.ucfirst($last_name)); ?></h3>
+                            <h3 class='submission-owner-title'> - <?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.ucfirst($last_name) : 'Anonymous'); ?></h3>
 			        	</div>
 		        	<?php endforeach; ?>
 			<?php else : ?>
