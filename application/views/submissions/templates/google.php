@@ -4,9 +4,9 @@
        	array('name' => 'headline',
        	'value' => '',
        	'placeholder' =>
-       		($contest->objective == 'website_clicks' ? "*Captivating Headling Here" : 
-       		($contest->objective == 'app_installs' ? "*Captivating Headling Here" :
-       		($contest->objective == 'engagement' ? "*Captivating Headling Here" : "Enter a headline"))), 
+       		($contest->objective == 'website_clicks' ? "*Captivating Headline Here" :
+       		($contest->objective == 'app_installs' ? "*Captivating Headline Here" :
+       		($contest->objective == 'engagement' ? "*Captivating Headline Here" : "Enter a headline"))),
        		'type' => 'text',
        		'id' => 'headline'));?>
        	<div class='input-count'><span id='headline_span'>0</span> of 25 characters</div>
