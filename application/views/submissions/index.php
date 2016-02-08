@@ -48,8 +48,8 @@
 					            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
 					            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
 				            endswitch; ?>
-							<?php $last_name = $submission->owner->last_name; ?>
-                            <h3 class='submission-owner-title'> - <?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.ucfirst($last_name[0])) ?></h3>
+							<?php $last_name = $submission->owner->last_name[0]; ?>
+                            <h3 class='submission-owner-title'> - <?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.ucfirst($last_name)); ?></h3>
 			        	</div>
 		        	<?php endforeach; ?>
 			<?php else : ?>
