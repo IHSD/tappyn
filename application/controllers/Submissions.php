@@ -244,6 +244,7 @@ class Submissions extends CI_Controller
             }
             break;
         }
+        $this->session->set_flashdata('error', validation_errors() ? validation_errors() : 'An unknown error occured');
         // If we did not create a successful submission, redirect back to the submission page with errors
         $this->load->view("contests/show", $this->data);
     }

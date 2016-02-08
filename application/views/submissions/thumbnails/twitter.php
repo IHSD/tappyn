@@ -1,4 +1,4 @@
 
 <h3>
-   <?php echo $submission->text; ?>
+   "<?php echo $submission->text; ?>"
 </h3>

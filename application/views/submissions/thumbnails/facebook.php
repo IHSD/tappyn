@@ -6,5 +6,5 @@
   <?php echo $submission->link_explanation; ?>
 </h4>
 <p>
-   <?php echo $submission->text; ?>
+   "<?php echo $submission->text; ?>"
 </p>
