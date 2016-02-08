@@ -18,7 +18,7 @@
                             <div class="submission-box">
                                 <div class="ad-company-info">
                                     <div>
-                                        <h4 class='text-left'><?php echo $contest->company->name; ?></h4>
+                                        <h5 class='text-left'><?php echo $contest->company->name; ?></h5>
                                         <span class='contest-price'>
                                             $50
                                         </span>
@@ -30,13 +30,13 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                   
+
                                         <div><h5 class='text-center'>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h5></div>
                                         <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                                             <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
                                         <p class="progress-meter-text" style='text-decoration:none;'><?php echo $contest->submission_count; ?> of 50 submissions</p>
-                                    
+
                                 </div>
                                 <?php switch($contest->platform):
                                     case 'facebook': echo "<img src='".base_url()."public/img/facebook-buttoon.png'>"; break;
