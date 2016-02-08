@@ -116,7 +116,7 @@
                         </div>
 						<br>
                         <div class='text-right'>
-		                	<?php echo form_submit('submit', 'Continue as Guest', array("class" => 'btn large-6 large-offset-3 small-12 columns'));?>
+		                	<?php echo form_submit('submit', 'Submit as Guest', array("class" => 'btn large-6 large-offset-3 small-12 columns'));?>
 		              	</div>
 		            <?php endif; ?>
 	                <?php echo form_close();?>
