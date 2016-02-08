@@ -24,6 +24,9 @@
        	'rows' => "3"));?>
        	<div class='input-count'><span id='text_span'>0</span> of 250 characters</div>
     </div>
+    <a id='exampler'>See Example</a>
+    <a id='closer' class='hidden_submission'>Close </a>
+    <img class='hidden_submission' id='example' src="<?php echo base_url().'public/img/facebook_example.png' ?>">
 </div>
 
 <script>
@@ -35,4 +38,14 @@ $('#text').keyup(function(){
 	var wordlength = $('#text').val().length;
 	$("#text_span").html(wordlength);
 });
+$('#exampler').click(function(){
+	$("#exampler").addClass('hidden_submission');
+	$("#closer").removeClass('hidden_submission');
+	$("#example").removeClass('hidden_submission');
+})
+$('#closer').click(function(){
+	$("#exampler").removeClass('hidden_submission');
+	$("#closer").addClass('hidden_submission');
+	$("#example").addClass('hidden_submission');
+})
 </script>

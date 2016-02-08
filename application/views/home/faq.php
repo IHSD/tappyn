@@ -141,56 +141,6 @@
 </div>
 </div>
 
-<div class="div-row">
-<div class="column medium-5 end">
- <h3>General Questions</h3>
-         <ul class="accordion" data-accordion role="tablist">
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">How do I change my password?</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      Panel 1. Lorem ipsum dolor
-    </div>
-  </li>
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">How do I change my username?</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      Panel 1. Lorem ipsum dolor
-    </div>
-  </li>
-
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">How do I pick a secure password?</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      Panel 1. Lorem ipsum dolor
-    </div>
-  </li>
-
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">How do I change my payment methods?</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      Panel 1. Lorem ipsum dolor
-    </div>
-  </li>
-
-  <li class="accordion-item">
-    <!-- The tab title needs role="tab", an href, a unique ID, and aria-controls. -->
-    <a href="#panel1d" role="tab" class="accordion-title" id="panel1d-heading" aria-controls="panel1d">How do I change my profile picture?</a>
-    <!-- The content pane needs an ID that matches the above href, role="tabpanel", data-tab-content, and aria-labelledby. -->
-    <div id="panel1d" class="accordion-content" role="tabpanel" data-tab-content aria-labelledby="panel1d-heading">
-      Panel 1. Lorem ipsum dolor
-    </div>
-  </li>
-</ul>
-</div>
-</div>
 
          </div>
 
