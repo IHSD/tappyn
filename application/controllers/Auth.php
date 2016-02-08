@@ -467,7 +467,7 @@ class Auth extends CI_Controller {
             if($this->ion_auth->login($identity, $password))
 			{
 				$this->session->set_flashdata('message', 'Account created successfully!');
-				redirect('users/profile', 'refresh');
+				redirect('contests/index', 'refresh');
 			}
         }
         else
