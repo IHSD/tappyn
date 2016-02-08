@@ -1,4 +1,7 @@
 <div class='facebook-form-wrapper'>
+	<a id='exampler'>See Example</a>
+    <a id='closer' class='hidden_submission'>Close</a>
+    <img class='hidden_submission' id='example' src="<?php echo base_url().'public/img/facebook_example.png' ?>">
     <div class='form-row'>
        <?php echo form_input(
        	array('name' => 'headline',
@@ -24,11 +27,17 @@
        	'rows' => "3"));?>
        	<div class='input-count'><span id='text_span'>0</span> of 250 characters</div>
     </div>
-    <a id='exampler'>See Example</a>
-    <a id='closer' class='hidden_submission'>Close </a>
-    <img class='hidden_submission' id='example' src="<?php echo base_url().'public/img/facebook_example.png' ?>">
 </div>
-
+<style>
+#exampler, #closer{
+	text-decoration: underline;
+	cursor:pointer;
+	padding-bottom:10px;
+}
+#example{
+	margin-bottom:5px;
+}
+</style>
 <script>
 $('#headline').keyup(function(){
 	var wordlength = $('#headline').val().length;
