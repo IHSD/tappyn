@@ -40,6 +40,33 @@
   transition: .25s ease-in-out;
 }
 
+
+/* Mobile Navbar Styling */
+#mobile-navbar {
+    position: fixed;
+    right:0;
+    height: 100%;
+    background: white;
+    width: 25%;
+    z-index: 1000000;
+    color: black;
+}
+
+#mobile-navbar ul {
+    list-style-type:none;
+    padding-top: 25px;
+    text-align:center;
+    padding-left: 0;
+}
+
+#mobile-navbar ul li {
+    height: 65px;
+}
+
+#mobile-navbar ul li a {
+    text-decoration:none;
+}
+
 #nav-icon4 span:nth-child(1) {
   top: 0px;
   -webkit-transform-origin: left center;
