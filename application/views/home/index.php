@@ -10,7 +10,7 @@
                 <div class="hero-content">
                     <h3>COMPANIES ARE LOOKING FOR PEOPLE LIKE YOU.</h3>
                     <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY! </h1>
-                   	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">Current Contests</a>
+                   	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">TAPPYN</a>
                 </div>
             </div>
         </div>
@@ -54,12 +54,12 @@
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-money.svg' ?>">
                     <h3>Win &amp; make money</h3>
-                    <p>Only 50 submissions are allowed, so you're odds of winning are great.</p>
+                    <p>Only 50 submissions are allowed, so your odds of winning are great.</p>
                 </div>
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-contest.svg' ?>">
-                    <h3>Find a new contest</h3>
-                    <p>The more you submit, the greater chance you have of winning.  </p>
+                    <h3>Keep killin' it</h3>
+                    <p>If you like the taste of victory, keep submitting to contests.  </p>
                 </div>
             </div>
         </div>
@@ -96,21 +96,25 @@
                     <img src="<?php echo base_url().'public/img/icon-second.svg' ?>">
                     <h3>90 second<br>
             		submissions</h3>
+            		<p>Each submission is only a few sentences and has easy, simple instructions.</p>
                 </div>
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-submissions.svg' ?>">
                     <h3>Cap of 50<br>
            			on submissions</h3>
+           			<p>We cap all contests ast 50 submissions so you've got a great chance of winning.</p>
                 </div>
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-cash.svg' ?>">
                     <h3>Sizeable, immediate <br>
             		payouts</h3>
+            		<p>$50 becomes $500 pretty quickly. As a winner, you'll be payed within 3 days.</p>
                 </div>
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-school.svg' ?>">
-                    <h3>School specific<br>
+                    <h3>Exclusive<br>
             		contests</h3>
+            		<p>You have exclusive access to contests based on your school, job, or interests.</p>
                 </div>
             </div>
             <div class="contest-button">
