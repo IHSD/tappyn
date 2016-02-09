@@ -44,4 +44,7 @@
 	<?php endif; ?>
 	</footer>
 </div>
+<script>
+    $(document).foundation();
+  </script>
 </html>

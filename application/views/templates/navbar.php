@@ -40,11 +40,12 @@
 	                </div>
 	            </div>
 	            <div class="columns small-9 medium-11">
-	                <div id="nav-icon4">
+	                <div id="nav-icon4" data-toggle='example-dropdown'>
 	                    <span></span>
 	                    <span></span>
 	                    <span></span>
 	                </div>
+
 	                <nav>
 	                    <ul>
 	                    	<?php if($this->ion_auth->logged_in()) : ?>
@@ -71,4 +72,37 @@
 	            </div>
 	        </div>
 	    </div>
+        <div class='mobile-navbar' id='mobile-navbar' style='display:none'>
+            <div  class='navbar-list-wrapper'>
+                <ul class='navbar-lst'>
+                    <li><a href="<?php echo base_url().'contests/index'; ?>">Contests</a></li>
+                    <li><a href="<?php echo base_url().'contact' ?>">Contact Us</a></li>
+                    <?php if($this->ion_auth->logged_in()): ?>
+                    <li><a href="<?php echo base_url().'users/dashboard'; ?>">Dashboard</a></li>
+                    <li><a href="<?php echo base_url().'users/profile'; ?>">Profile</a></li>
+                    <li><a href="<?php echo base_url().'auth/logout' ?>">Log Out</a></li>
+                    <?php else: ?>
+                    <li><a href="<?php echo base_url().'signup' ?>">Sign Up</a></li>
+                    <li><a href="<?php echo base_url().'login' ?>">Log In</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
 	</header>
+
+<script>
+    $(document).ready(function() {
+        $('#nav-icon4').click(function() {
+            $('#mobile-navbar').toggle();
+        });
+
+        $(document).mouseup(function(e) {
+            var container = $('#mobile-navbar');
+            if(!container.is(e.target)
+                && container.has(e.target).length === 0)
+                {
+                    container.hide();
+                }
+        })
+    })
+</script>
