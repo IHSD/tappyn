@@ -700,6 +700,9 @@ footer {
 	border-radius: 4px;
     height: 350px;
  }
+ .min-height {
+     min-height: 350px;
+ }
  .submission-box .ad-company-info img {
  	margin: 0 12px 0;
  }
