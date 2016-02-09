@@ -297,7 +297,7 @@ header .btn-login {
 	margin:  0 0 45px;
 	font-weight: 300;
 	text-align: center;
-	font-size: 28px;
+	font-size: 42px;
 	line-height: 28px;
 	position: relative;
 }
@@ -305,7 +305,7 @@ header .btn-login {
 	content: '';
 	height: 1px;
 	transform: translateX(-50%);
-	background: #4A4A4A;
+	background: #FF7220;
 	width: 68px;
 	position: absolute;
 	left: 50%;
