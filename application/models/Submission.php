@@ -62,7 +62,7 @@ class Submission extends CI_Model
     {
         $this->db->select('*')->from('submissions');
         $this->db->join('contests', 'submissions.contest_id = contests.id');
-        $this->db->where('contests.stop_time >', date('Y-m-d H:i:s'));
+        $this->db->where(array('submissions.owner' => $uid,'contests.stop_time >', date('Y-m-d H:i:s')));
         $this->db->order_by('submissions.created_at', 'desc');
         $submissions = $this->db->get();
         if($submissions)
