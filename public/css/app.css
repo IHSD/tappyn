@@ -295,17 +295,17 @@ header .btn-login {
 }
 .hero-content h3 {
 	color: #fff;
-	font-weight: 300;
+	font-weight: 400;
 	margin:  0 0 43px;
-	font-size: 22px;
+	font-size: 46px;
 	line-height: 22px;
 }
 .hero-content h1 {
 	color: #fff;
 	margin:  0 0 81px;
-	font-size: 48px;
+	font-size: 38px;
 	line-height: 57px;
-	font-weight: 400;
+	font-weight: 300;
 }
 .hero-content .btn-banner {
 	font-size: 18px;
@@ -841,6 +841,7 @@ footer {
 }
 .text-center {
 	text-align: center;
+
     	color: #FF5E00;
     	margin-top: 0px;
 }
