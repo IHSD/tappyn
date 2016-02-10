@@ -16,6 +16,29 @@ class Welcome extends CI_Controller
 		$this->load->view('home/index', $this->data);
 	}
 
+	public function unsubscribe()
+	{
+
+	}
+
+	public function mailing_list()
+	{
+		$this->load->model('contact');
+		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[mailing_list.email]');
+		if($this->form_validation->run() === true)
+		{
+			// Pre process
+			$email = $this->input->post('email');
+		}
+		if($this->form_validation->run() === true && $this->contact->addToMailing($email))
+		{
+			$this->session->set_flashdata('message', 'Youve successfully been added to our mailing list');
+		} else {
+			$this->session->set_flashdata('error', "There was an error adding you to our mailing list");
+		}
+		redirect('contests/index', 'refresh');
+	}
+
 	/**
 	 * FAQ
 	 * @return void
