@@ -375,8 +375,9 @@ header .btn-login {
     word-wrap:break-word;
 }
 .submission-owner-title {
-    float: right;
+    text-align:right;
     color: #FF5E00;
+    margin:0px;
 }
 .contest-box .price {
 	position: absolute;
@@ -480,7 +481,7 @@ header .btn-login {
 .raw-info {
 	padding:  50px 0;
 	overflow: hidden;
-	background: url(bg-orange.png) no-repeat 50% 0 #ff6d00;
+	background: url("bg-orange.png") 50% 0 no-repeat #ff5e00;
 }
 .raw-info h2 {
 	color: #fff;
@@ -840,7 +841,6 @@ footer {
 }
 .text-center {
 	text-align: center;
-	
     	color: #FF5E00;
     	margin-top: 0px;
 }
@@ -1967,9 +1967,7 @@ header nav ul li  a {
   header .column, header .columns  {
     margin: 0;
   }
-  .contest-box h3 {
-    margin-right: 60px;
-  }
+
   .contest-box .contest-info .submissions {
     margin: 0 0 20px 120px;
   }
@@ -2143,4 +2141,10 @@ header nav ul li  a {
 .input-count{
 	font-size : .75em;
 	text-align : right;
+}
+
+.single-submission{
+	border-radius: 5px;
+	background-color:#fff;
+	color : ;
 }

@@ -168,7 +168,7 @@
     </section>
     <!-- Raw Info -->
     <section class="raw-info">
-        <div class="row">
+    <!--    <div class="row">
             <h2>We connect innovative companies with the world’s best creatives.</h2>
             <div class="completions">
                 <div class="column medium-4">
@@ -216,6 +216,18 @@
                         <a href="<?php echo base_url().'contests/index'; ?>">WANT TO TAPPYN?</a>
                     </div>
                 </div>
+            </div>
+        </div> -->
+        <div class='row'>
+            <h2 class='title'>Get personalized contests delivered
+            <br><br>to your inbox weekly.</h2>
+            <div class='medium-8 medium-offset-2 small-12'>
+                <?php echo form_open("auth/mail_list");?>  
+                <div class='form-row large-8 small-12 columns'>
+                   <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Enter your email', 'type' => 'text'));?>
+                </div>
+                <?php echo form_submit('submit', 'Sign Up', array("class" => 'btn large-4 small-12 columns'));?>
+                <?php echo form_close(); ?>          
             </div>
         </div>
     </section>
