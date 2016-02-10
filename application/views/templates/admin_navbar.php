@@ -1,7 +1,7 @@
 
 <html>
     <head>
-      <%= favicon_link_tag 'favicon.ico' %>
+      
         <title>Tappyn</title>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
