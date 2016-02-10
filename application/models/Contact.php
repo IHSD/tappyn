@@ -16,6 +16,14 @@ class Contact extends CI_Model
         ));
     }
 
+    public function addToMailing($email)
+    {
+        $this->db->insert('mailing_list', array(
+            'email' => $email
+        ));
+        return true;
+    }
+
     public function errors()
     {
         return false;
