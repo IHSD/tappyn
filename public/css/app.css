@@ -420,6 +420,12 @@ header .btn-login {
 	line-height:  22px;
 	color: #FF5E00;
 }
+.contest-box h1 {
+	font-size: 2em;
+    	margin: 0.67em 0;
+    	color: #FF5E00;
+    	margin-bottom: -25px;
+}
 .contest-box h3 a {
 	color: #FF5E00;
 	text-decoration: none;
