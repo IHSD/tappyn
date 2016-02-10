@@ -1,7 +1,7 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
-Customer : <?php echo $customer; ?>
+Customer : <?php echo $contact; ?>
 
 Email : <?php echo $email; ?>
 
-Message : <?php echo $message; ?>
+Message : <?php echo $details; ?>
