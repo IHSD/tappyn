@@ -49,6 +49,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		http://codeigniter.com/user_guide/
  */
 
+//-------------------------------------------------------------------------
+if(!function_exists('is_sorted'))
+{
+    function is_sorted($col)
+    {
+        if(isset($_GET['sort_by']) && $_GET['sort_by'] == $col)
+        {
+            if(isset($_GET['sort_dir']) && $_GET['sort_dir'] == 'asc')
+            {
+                return '&#x25B2;';
+            }
+            else
+            {
+                return '&#x25BC;';
+            }
+        }
+        return '';
+    }
+}
+
 // ------------------------------------------------------------------------
 
 if ( ! function_exists('is_php'))

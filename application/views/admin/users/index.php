@@ -2,7 +2,7 @@
 
 <section class='innerpage'>
     <div class='large-10 large-offset-1 columns'>
-        <h3>Users</h3>
+        <h2>Users</h2>
         <div class='medium-6 medium-offset-3 small-12'>
             <?php $this->load->view('templates/notification', array(
         'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
@@ -13,13 +13,14 @@
         <table class='large-12 columns'>
             <tr>
                 <th>Actions</th>
-                <th>Name</th>
-                <th>Sign Up</th>
-                <th>Last Login</th>
-                <th>Email</th>
+                <th class='sort_header' id='first_name'>First Name<?php echo is_sorted('first_name'); ?></th>
+                <th class='sort_header' id='last_name'>Last Name<?php echo is_sorted('last_name'); ?></th>
+                <th class='sort_header' id='created_on'>Sign Up<?php echo is_sorted('created_on'); ?></th>
+                <th class='sort_header' id='last_login'>Last Login<?php echo is_sorted('last_login'); ?></th>
+                <th class='sort_header' id='email'>Email<?php echo is_sorted('email'); ?></th>
                 <th>Groups</th>
-                <th>Age</th>
-                <th>Gender</th>
+                <th class='sort_header' id='age'>Age<?php echo is_sorted('age'); ?></th>
+                <th class='sort_header' id='gender'>Gender<?php echo is_sorted('gender'); ?></th>
             </tr>
             <?php foreach($users as $user): ?>
                 <tr>
@@ -36,7 +37,8 @@
                         </li>
                       </ul>
                     </td>
-                    <td><?php echo $user->first_name.' '.$user->last_name; ?></td>
+                    <td><?php echo $user->first_name; ?></td>
+                    <td><?php echo $user->last_name; ?></td>
                     <td><?php echo date('D M d', $user->created_on); ?></td>
                     <td><?php echo date('D M d', $user->last_login); ?></td>
                     <td><?php echo $user->email; ?></td>
@@ -50,7 +52,46 @@
                 </tr>
             <?php endforeach; ?>
         </table>
+        <?php echo $pagination_links; ?>
     </div>
 </section>
+<script>
+$(document).ready(function(e) {
+    var getVars = getUrlVars();
+    console.log(getVars);
+    $('.sort_header').click(function(f) {
+        getVars.sort_by = $(this).attr('id');
+        if(getVars.sort_dir && getVars.sort_dir == 'desc')
+        {
+            getVars.sort_dir = 'asc';
+        }
+        else
+        {
+            getVars.sort_dir = 'desc';
+        }
 
-<?php $this->load->view('templates/footer');
+        getVars.per_page = 1;
+        document.location.href = "<?php echo base_url().'admin/users/index?'; ?>"+buildQuery(getVars);
+    });
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+        function(m,key,value) {
+          vars[key] = value;
+        });
+        return vars;
+    }
+
+    function buildQuery(vars)
+    {
+        var params = [];
+        for(var d in vars)
+        {
+            params.push(encodeURIComponent(d)+"="+encodeURIComponent(vars[d]));
+        }
+        return params.join('&');
+    }
+})
+</script>
+<?php $this->load->view('templates/footer'); ?>
