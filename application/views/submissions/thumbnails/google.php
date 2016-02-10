@@ -1,10 +1,10 @@
 
 
 <h3>
-   <strong><?php echo $submission->headline; ?></strong>
-</p>
-
-
-<h3>
-   "<?php echo $submission->text; ?>"
+   <?php echo $submission->headline; ?>
 </h3>
+
+
+<p>
+   "<?php echo $submission->text; ?>"
+</p>
