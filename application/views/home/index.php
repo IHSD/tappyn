@@ -16,26 +16,70 @@
         </div>
         <div class="overlay"></div>
     </section>
-    <!-- Contests
     <section class="contests">
         <div class="row">
-            <div class="contest-box">
-                <span class="price">$30</span>
-                <h3><a href="#0">If there isn't a t-shirt for it, did it even happen?</a></h3>
-                <h6 class="duration">Posted 36 Hours Ago - Remaining: 12 Hours</h6>
+            <h2 class="title">Some of Our Past Winners</h2>
+            <div class='medium-10 medium-offset-1 small-12'>
+                <div class="contest-box">
+                    <span class="price">$50</span>
+                    <h3><a href="#0">Take the road less traveled. We'll show you the way.</a> <span style='padding-left:85px;'>- Melanie B.</span></h3>
+                    <div class="contest-content">
+                        <span>Mr. Arlo is the best way to discover, collect and organize travel plans that fit your personality and budget</span>
+                    </div>
+                    <div class="contest-info">
+                        <h5>Emory University</h5>
+                        <h5>Mr. Arlo</h5>
+                        <h5><span class='duration'>7 Days Ago</span>Atlanta, GA</h5>
+                    </div>
+                </div>
+            </div>
+            <div class='medium-10 medium-offset-1 small-12'>
+                <div class="contest-box">
+                    <span class="price">$50</span>
+                    <h3><a href="#0">We believe your morning brew should be as unique as you.</a> <span style='padding-left:85px;'>- Natalie E.</span></h3>
+                    <div class="contest-content">
+                        <span>VegaCoffee brings you coffee from farm to table.</span>
+                    </div>
+                    <div class="contest-info">
+                        <h5>Electrical Engineer</h5>
+                        <h5>VegaCoffee</h5>
+                        <h5><span class='duration'>7 Days Ago</span> Atlanta, GA</h5>
+                    </div>
+                </div>
+            </div>
+            <div class='medium-10 medium-offset-1 small-12'>
+             <div class="contest-box">
+                <span class="price">$50</span>
+                <h3><a href="#0">Surf the web to spend more time suring the waves.</a> <span style='padding-left:85px;'>- Olivia S.</span></h3>
                 <div class="contest-content">
-                    <p>Sed accumsan vulputate viverra. Etiam eu ultrices mauris. Suspendisse consequat et diam ac facilisis. </p>
+                    <span>Find & sell your surf equipment on Surfer's List</span>
                 </div>
                 <div class="contest-info">
-                    <em class="submissions">12 submissions</em>
-                    <h5>University: <span>Emory University</span>  -  Company: <span>BidPress</span>  -  <span>Google</span></h5>
+                    <h5>Brown University</h5>
+                    <h5>Surfer's List</h5>
+                    <h5><span class='duration'>7 Days Ago</span>Providence, RI</h5>
                 </div>
+             </div>
+            </div>
+            <div class='medium-10 medium-offset-1 small-12'>
+             <div class="contest-box">
+                <span class="price">$50</span>
+                <h3><a href="#0">Marketers on demand, to create demand.</a> <span style='padding-left:85px;'>- Phuong N.</span></h3>
+                <div class="contest-content">
+                    <span>Get your marketing done professionally with Minds for Hire.</span>
+                </div>
+                <div class="contest-info">
+                    <h5>Creative Writer</h5>
+                    <h5>Minds for Hire</h5>
+                    <h5><span class='duration'>7 Days Ago</span>Atlanta, GA</h5>
+                </div>
+            </div>
             </div>
             <div class="contest-button">
                <a href="<?php echo base_url().'contests' ?>" class='btn btn-contest'>See Contests</a>
             </div>
         </div>
-    </section> -->
+    </section>
     <!-- How it works -->
     <section class="how-it-works">
         <div class="row">
@@ -79,7 +123,7 @@
             <ul>
               <li>5 Contests</li>
               <li> Worked 12 minutes</li>
-              <li>$190 cash</li>
+              <li>$250 cash</li>
             </ul>
             <h5>Chris Bissel, Georgia Tech Class of 2016</h5>
             </div>

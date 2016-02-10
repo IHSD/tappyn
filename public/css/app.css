@@ -433,37 +433,24 @@ header .btn-login {
 .contest-box h3 a:hover {
 	text-decoration: underline;
 }
-.contest-box .duration {
-	margin: 0 0 15px;
-	padding: 0 0 0 15px;
-	background: url(ico-clock.svg) no-repeat 0 50%;
+.duration {
 	color: #7E7E7E;
 	font-size: 12px;
 	font-weight: 400;
+	float: left;
 }
 .contest-box .contest-content {
-	margin:  0 0 20px;
 	color: #7E7E7E;
 }
-.contest-box .contest-content p {
-	margin:  0 0 15px;
-}
-.contest-box .contest-info .submissions {
-	float: right;
-	font-style: normal;
-	font-size: 14px;
+.contest-box .contest-info{
 	color: #FF5E00;
-	padding:  0 0 0 20px;
-	background: url(ico-sub.svg) no-repeat 0 52%;
+	text-align: right;
+	padding-top:25px;
 }
-.contest-box .contest-info h5 {
-	color: #8899AA;
-	margin:  0;
+.contest-box .contest-info h5, .contest-box .contest-info h3{
+	margin:0;
 }
-.contest-box .contest-info h5 span {
-	color: #FF5E00;
-	font-weight: 400;
-}
+
 .contest-button {
 	text-align: center;
 	overflow: hidden;
@@ -2114,6 +2101,9 @@ header nav ul li  a {
 
 .text-right{
 	text-align:right;
+}
+.text-left{
+	text-align:left;
 }
 .contest-price{
 	    position: absolute;
