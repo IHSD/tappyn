@@ -3,14 +3,14 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<table cellpadding=0 cellspacing=10>
+<table class='large-10 large-offset-1 columns'>
 	<tr>
-		<th><?php echo lang('index_fname_th');?></th>
-		<th><?php echo lang('index_lname_th');?></th>
-		<th><?php echo lang('index_email_th');?></th>
-		<th><?php echo lang('index_groups_th');?></th>
-		<th><?php echo lang('index_status_th');?></th>
-		<th><?php echo lang('index_action_th');?></th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Email</th>
+		<th>Groups</th>
+		<th>Status</th>
+		<th>Actions</th>
 	</tr>
 	<?php foreach ($users as $user):?>
 		<tr>
