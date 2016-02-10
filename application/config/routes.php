@@ -69,3 +69,4 @@ $route['contests/(:num)'] = 'contests/show/$1';
 $route['submissions/(:num)'] = 'submissions/show/$1';
 $route['contests/(:num)/submissions'] = 'contests/submissions/$1';
 $route['uploads/(:any)'] = 'uploads/index/$1';
+$route['admin']['get'] = 'admin/users/index';
