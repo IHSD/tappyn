@@ -30,7 +30,7 @@
 		            <?php endif ?>
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
-	            	<h3>$50</h3>
+	            	<h1>$50</h1>
 					<h4>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4>
 				</div>
 			</div>
