@@ -853,6 +853,9 @@ footer {
 }
 .text-center {
 	text-align: center;
+	font-size: 36px;
+    	color: #FF5E00;
+    	margin-top: 0px;
 }
 .login-buttons {
 	text-align: center;
