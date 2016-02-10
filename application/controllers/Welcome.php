@@ -31,6 +31,7 @@ class Welcome extends CI_Controller
 	 */
 	public function contact_us()
 	{
+		$this->load->library("mailer");
 		$this->load->model('contact');
 		$this->form_validation->set_rules('contact', 'Customer Type', 'required');
 		$this->form_validation->set_rules('email', 'Email Address', 'required');
@@ -45,6 +46,12 @@ class Welcome extends CI_Controller
 		if($this->form_validation->run() == true && $this->contact->create($customer, $email, $message))
 		{
 			$this->data['message'] = 'Your request for contact has been submitted';
+			$this->mailer
+				->to('squad@tappyn.com')
+				->from($email)
+				->subject("New Contact Message Received")
+				->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))
+				->send();
 		} else {
 			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : false));
 		}
