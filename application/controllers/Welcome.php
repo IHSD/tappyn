@@ -50,7 +50,7 @@ class Welcome extends CI_Controller
 				->to('squad@tappyn.com')
 				->from('Contact@tappyn.com')
 				->subject("New Contact Message Received")
-				->setHtml(echo $this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' = $message)))
+				->setHtml($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' = $message)))
 				->send();
 		} else {
 			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : false));
