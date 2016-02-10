@@ -19,7 +19,7 @@ class Users extends CI_Controller
         // Initialize pagination
         $config['base_url'] = base_url().'admin/users/index';
         $config['total_rows'] = $this->user->count();
-        $config['per_page'] = 10;
+        $config['per_page'] = 20;
         $config['use_page_numbers'] = TRUE;
         $config['num_links'] = 3;
         $config['page_query_string'] = TRUE;
