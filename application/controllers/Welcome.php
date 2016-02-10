@@ -48,7 +48,7 @@ class Welcome extends CI_Controller
 			$this->data['message'] = 'Your request for contact has been submitted';
 			$this->mailer
 				->to('squad@tappyn.com')
-				->from('Contact@tappyn.com')
+				->from($email)
 				->subject("New Contact Message Received")
 				->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))
 				->send();
