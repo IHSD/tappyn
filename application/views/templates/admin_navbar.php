@@ -24,7 +24,7 @@
 	            <div class="columns small-3 medium-1">
 	                <div class="logo">
 	                    <a href="<?php echo base_url(); ?>">
-	                    	<img src="<?php echo base_url().'public/img/Tappyn1.png'; ?>" width='70'>
+	                    	<img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>" width='70'>
 	                    </a>
 	                </div>
 	            </div>
