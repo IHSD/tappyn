@@ -12,7 +12,7 @@
     Great news - your Tappyn account has successfully been created!
 </p>
 
-<p>Please take a moment to update your account profile! This enables us to
+<p style='text-align:center'>Please take a moment to update your account profile! This enables us to
     find contests that best suit you!
 </p>
 
