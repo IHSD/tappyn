@@ -811,9 +811,12 @@ footer {
 .ad-company-info .progress-box .progress-meter-text {
 	float: right;
 	font-size: 12px;
-	color: #ff5e00;
+	color: #ff5e00 !important;
     line-height: 12px;
     margin: 2px 0 0;
+}
+.progress-meter-text {
+	color: #ff5e00 !important;	
 }
 .ad-company-info p {
 	text-align: center;
@@ -2106,27 +2109,38 @@ header nav ul li  a {
 	text-align:left;
 }
 .contest-price{
-	    position: absolute;
+	position: absolute;
     width: 42px;
-    height: 40px;
-    font-size: 18px;
-    line-height: 45px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
     text-align: center;
-    right: 20px;
+    right: 0px;
     background: #FF5E00;
     color: #fff;
     top: 0;
-    z-index: 2;
+    z-index: 20;
 }
 .contest-price:before{
     border-left: 1.5em solid transparent;
-    border-top: 0.8em solid #FF5E00;
+    border-top:1.75em solid #FF5E00;
     content: "";
     height: 0;
     z-index: 1;
-    right: 0;
+    top: 0;
     position: absolute;
-    bottom: -14px;
+    left: -20px;
+    width: 0;
+}
+.contest-price:after{
+	border-left: 1.5em solid transparent;
+    border-bottom: 1.75em solid #FF5E00;
+    content: "";
+    height: 0;
+    z-index: 1;
+    bottom: 0;
+    position: absolute;
+    left: -20px;
     width: 0;
 }
 .pagination-container {
@@ -2151,17 +2165,6 @@ header nav ul li  a {
     padding: 5px 8px;
     margin-left: 5px;
 }
-.contest-price:after{
-	    border-right: 1.5em solid transparent;
-    border-top: 0.8em solid #FF5E00;
-    content: "";
-    height: 0;
-    z-index: 1;
-    left: 0;
-    position: absolute;
-    bottom: -14px;
-    width: 0;
-}
 .input-count{
 	font-size : .75em;
 	text-align : right;
@@ -2171,4 +2174,18 @@ header nav ul li  a {
 	border-radius: 5px;
 	background-color:#fff;
 	color : ;
+}
+
+.btn-brief{
+	border:1px solid #FF5E00;
+	background:transparent;
+	color:#FF5E00;
+}
+.btn-brief:hover{
+	color:#fff;
+}
+.img-example{
+	border-top:1px solid #fff;
+	padding-top:15px;
+	padding-bottom:15px;
 }
