@@ -32,7 +32,7 @@
                                         <?php endif; ?>
                                     </div>
                                     <div style='text-align:center;text-overflow:ellipsis;color:#333;max-height:150px;'>
-                                        <p><?php echo $contest->audience ?></p>
+                                        <p><?php echo $contest->difference ?></p>
                                     </div>
                                     <?php switch($contest->platform):
                                         case 'facebook': echo "<img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'> <h5>Facebook</h5>"; break;
