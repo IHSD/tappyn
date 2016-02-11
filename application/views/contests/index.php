@@ -31,7 +31,7 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <div style='text-align:center;text-overflow:ellipsis;'>
+                                    <div style='text-align:center;text-overflow:ellipsis;color:#333;max-height:150px;'>
                                         <p><?php echo $contest->audience ?></p>
                                     </div>
                                     <?php switch($contest->platform):
