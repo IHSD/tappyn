@@ -19,7 +19,7 @@
                             <div class="submission-box">
                                 <div class="ad-company-info">
                                     <div>
-                                        <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' ><?php echo $contest->company->name; ?>Company Name</h5>
+                                        <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' ><?php echo $contest->company->name; ?></h5>
                                         <span class='contest-price'>
                                             $50
                                         </span>
@@ -31,7 +31,7 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <div style='text-align:center;'>
+                                    <div style='text-align:center;text-overflow:ellipsis;'>
                                         <p><?php echo $contest->audience ?></p>
                                     </div>
                                     <?php switch($contest->platform):
