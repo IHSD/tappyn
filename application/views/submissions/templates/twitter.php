@@ -1,26 +1,15 @@
-<div class='twitter-outer-wrapper'>
-    <div class='twitter-header center-content'>
-        <img height='auto' width='60%' src="<?php echo base_url().'public/img/twitter-header.png' ?>">
-    </div>
-    <div class='twitter-form-wrapper'>
-        <div class='twitter-logo'>
-            <img height='35' width='35' src="<?php echo base_url().'public/img/twitter.png'; ?>">
-        </div>
-        <div class='twitter-input-wrapper'>
-            <div class='form-row'>
-               <?php echo form_textarea(
-               array('name' => 'text','value' => '',
-               'placeholder' => 
-                    ($contest->objective == 'app_installs' ? "Use wit & humor to capture what makes this app unique" : 
-                    ($contest->objective == 'website_clicks' ? "Use wit & humor to capture what makes this business unique" : 
-                    ($contest->objective == 'engagement' ? "Create compelling content this business could supply" :
-                    "Create a captivating tweet"))), 'type' => 'text'. 'id' => 'text', 'rows' : '2'));?>
-            </div>
-            <div class='input-count'><span id='text_span'>0</span> of 140 characters</div>
-            <a href='#' class='twitter-button'></a>
-        </div>
-    </div>
+
+<div class='form-row'>
+   <?php echo form_textarea(
+   array('name' => 'text','value' => '',
+   'placeholder' => 
+        ($contest->objective == 'app_installs' ? "Use wit & humor to capture what makes this app unique" : 
+        ($contest->objective == 'website_clicks' ? "Use wit & humor to capture what makes this business unique" : 
+        ($contest->objective == 'engagement' ? "Create compelling content this business could supply" :
+        "Create a captivating tweet"))), 'type' => 'text'. 'id' => 'text', 'rows' : '2'));?>
 </div>
+<div class='input-count'><span id='text_span'>0</span> of 140 characters</div>
+
 <style>
 .twitter-outer-wrapper {
     /*border: 2px solid #0084B4;*/

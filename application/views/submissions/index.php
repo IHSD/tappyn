@@ -1,23 +1,25 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
+<?php function plur($count, $text){ return $count.(( $count == 1 ) ? ( " $text" ) : ( " ${text}s" ));} ?>
+
 <section class='innerpage'>
 <div class='row'>
 	<div class='small-12 columns'>
 		<div class='contest-box' style='background-color:transparent;border:none;border-bottom:2px solid  #FF5E00;padding:0px;'>
 			<div class='row'>
-				<div class='medium-3 small-12 columns'>
+				<div class='medium-3 small-12 columns' style='padding-top:10px;'>
 					<h3>
-						<?php echo $contest->title; ?> by <?php echo $contest->company->name; ?>
+						<?php echo $contest->title; ?>
 					</h3>
 					<div class="tabs-box" style='margin:0'>
 						<ul class="tabs" style='margin:0;' data-tabs id="top-line-tabs">
-	                        <li class="tabs-title"><a href="<?php echo base_url().'contests/'.$contest->id ?>" >Brief</a></li>
+	                        <li class="tabs-title"><a href="<?php echo base_url().'contests/'.$contest->id ?>">Brief</a></li>
 	                        <li class="tabs-title"><a href="<?php echo base_url().'contests/'.$contest->id.'/submissions' ?>" aria-selected='true'>Submissions</a></li>
 	                    </ul>
 	                </div>
 				</div>
-				<div class='medium-3 small-12 columns'>
+				<div class='medium-3 small-12 columns' style='padding-top:10px;'>
 					<h3>Sharing</h3>
-					<h4>Coming soon!</h4>
+					<h4 style='margin:0px;'>Coming soon!</h4>
 				</div>
 				<div class='medium-3 small-12 columns' style='padding-top:30px;'>
 					<div style='width:100%'>
@@ -31,7 +33,16 @@
 		        </div>
 	            <div class='medium-3 small-12 columns text-right'>
 	            	<h1>$50</h1>
-					<h4>Ends <?php echo date('D, M d', strtotime($contest->stop_time));?></h4>
+					<h4 style='margin:0px;margin-top:20px;'>
+						<?php  $stop = new DateTime($contest->stop_time, new DateTimeZone('America/New_York')); $now = new DateTime('now', new DateTimeZone('America/New_York')); $difference = $stop->diff($now);?>
+                    	Ends in
+                        <?php
+                            if($difference->d > 0) echo plur($difference->d, 'day');
+                            elseif($difference->h > 0) echo plur($difference->h, 'hour');
+                            else echo plur($difference->i, 'minute');                                        
+                        ?>
+					</h4>
+					<h4  style='margin:0px;'><?php echo ucfirst($contest->platform); ?></h4>
 				</div>
 			</div>
 		</div>

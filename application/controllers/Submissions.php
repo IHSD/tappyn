@@ -53,7 +53,6 @@ class Submissions extends CI_Controller
             2 => "Female"
         );
         $this->data['ages'] = array(
-            'AGES' => 'Age',
             0 => '18-24',
             1 => '25-34',
             2 => '35-44',

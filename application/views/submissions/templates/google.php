@@ -1,4 +1,4 @@
-<div class='facebook-form-wrapper'>
+
     <div class='form-row'>
        <?php echo form_input(
        	array('name' => 'headline',
@@ -24,7 +24,7 @@
        	'rows' => "3"));?>
        	<div class='input-count'><span id='text_span'>0</span> of 250 characters</div>
     </div>
-</div>
+
 
 <script>
 $('#headline').keyup(function(){
