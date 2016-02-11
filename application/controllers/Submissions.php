@@ -66,21 +66,42 @@ class Submissions extends CI_Controller
         if(!$logged_in)
         {
             $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[users.email]');
-            $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
-            $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+            $this->form_validation->set_rules('name', $this->lang->line('create_user_validation_fname_label'), 'required');
+            $this->form_validation->set_rules('age', "Age Range", 'required');
+
             // Attempt the registration
             if($this->form_validation->run() == true)
             {
                 $email    = strtolower($this->input->post('email'));
                 $identity = $email;
                 $password = bin2hex(openssl_random_pseudo_bytes(5));
+                // Parse the name for saving the user
+                if(strpos($this->input->post('name'), ' ') !== FALSE)
+                {
+                        $parts = explode(' ',$this->input->post('name'));
+                        $first_name = $parts[0];
+                        unset($parts[0]);
+                        $last_name = implode(' ',$parts);
+                }
+                else
+                {
+                    $first_name = $this->input->post('name');
+                    $last_name = '';
+                }
             }
             if($this->form_validation->run() == true &&
-               $this->ion_auth_model->register($identity, $password, $email, array('first_name' => $this->input->post('first_name'), 'last_name' => $this->input->post('last_name')), array(2)) &&
+               $this->ion_auth_model->register($identity, $password, $email, array('first_name' => $first_name, 'last_name' => $last_name), array(2)) &&
                $this->ion_auth_model->login($identity, $password, 1))
             {
                 // $this->notifyUserWithPassword($email, $password);
-                $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age_range'), 'gender' => $this->input->post('gender')));
+                $this->mailer
+                    ->to($email)
+                    ->from("Registration@tappyn.com")
+                    ->subject('Account Successfully Created')
+                    ->html($this->load->view('auth/email/inline_registration', array('email' => $email, 'password' => $password), TRUE))
+                    ->send();
+                    
+                $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age')));
                 $logged_in = true;
             }
             else

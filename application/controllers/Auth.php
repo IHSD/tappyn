@@ -467,6 +467,12 @@ class Auth extends CI_Controller {
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
         {
             // check to see if we are creating the user
+			$this->mailer
+				->to($email)
+				->from("Registration@tappyn.com")
+				->subject('Account Successfully Created')
+				->html($this->load->view('auth/email/registration', array(), true))
+				->send();
             // redirect them back to the admin page
             if($this->ion_auth->login($identity, $password))
 			{
