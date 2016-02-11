@@ -145,6 +145,11 @@ class Users extends CI_Controller
         $this->load->view('users/profile', $this->data);
     }
 
+    public function payment()
+    {
+        
+    }
+
     public function update()
     {
 
