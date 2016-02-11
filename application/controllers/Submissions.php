@@ -133,7 +133,7 @@ class Submissions extends CI_Controller
         $email_data = array(
             'headline' => $this->input->post('headline'),
             'text' => $this->input->post('text'),
-            'email' => ($this->ion_auth()->user() ? $this->ion_auth()->user()->row()->email : false),
+            'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
             'contest' => $contest->name,
             'company' => $contest->company->name
         );
