@@ -18,7 +18,13 @@ class Welcome extends CI_Controller
 
 	public function unsubscribe()
 	{
-
+		if($this->db->where('email', $this->input->get('email'))->delete('mailing_list'))
+		{
+			$this->session->set_flashdata('message', 'You have successfully been removed form our mailing list');
+		} else {
+			$this->session->set_flashdata('error', 'There was an error removing you from our mailing list');
+		}
+		redirect('contests/index', 'refresh');
 	}
 
 	public function mailing_list()

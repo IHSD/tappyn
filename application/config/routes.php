@@ -71,3 +71,4 @@ $route['contests/(:num)/submissions'] = 'contests/submissions/$1';
 $route['uploads/(:any)'] = 'uploads/index/$1';
 $route['admin']['get'] = 'admin/users/index';
 $route['mailing_list']['post'] = 'welcome/mailing_list';
+$route['unsubscribe']['get'] = 'welcome/unsubscribe';
