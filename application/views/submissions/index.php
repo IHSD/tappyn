@@ -52,7 +52,7 @@
 			<?php if(isset($submissions) && count($submissions) > 0) : ?>
 		        	<?php foreach($submissions as $submission): ?>
 		        		<div class='medium-4 small-12 columns'>
-			        		<div class="contest-box" style='min-height:225px; max-height:225px;'>
+			        		<div class="contest-box" style='min-height:300px; max-height:300px;'>
 			        			<div class='row'>
 			                     <?php switch($contest->platform):
 					                case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
