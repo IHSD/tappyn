@@ -12,6 +12,7 @@ class Submissions extends CI_Controller
         $this->load->library('submission_library');
         $this->load->model('ion_auth_model');
         $this->load->model('user');
+        $this->load->library('mailer');
     }
 
     /**
@@ -59,7 +60,7 @@ class Submissions extends CI_Controller
             2 => '35-44',
             3 => '45+'
         );
-        
+
         $logged_in = $this->ion_auth->logged_in();
         // Verify user is logged in
         if(!$logged_in)
@@ -129,6 +130,13 @@ class Submissions extends CI_Controller
         }
         // Set our static data points for the view / creation
         $this->data['contest'] = $contest;
+        $email_data = array(
+            'headline' => $this->input->post('headline'),
+            'text' => $this->input->post('text'),
+            'email' => ($this->ion_auth->user() ? $this->ion_auth()->user()->row()->email : false),
+            'contest' => $contest->name,
+            'company' => $contest->company->name
+        );
         // Generate / validate fields based on the platform type
         switch($contest->platform)
         {
@@ -143,6 +151,12 @@ class Submissions extends CI_Controller
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    $this->mailer
+                        ->to($this->ion_auth->user()->row()->email)
+                        ->from('squad@tappyn.com')
+                        ->subject('Your submission has successfully been created')
+                        ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                        ->send();
                     redirect("contests/show/{$contest_id}");
                 }
                 else
@@ -182,6 +196,12 @@ class Submissions extends CI_Controller
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    $this->mailer
+                        ->to($this->ion_auth->user()->row()->email)
+                        ->from('squad@tappyn.com')
+                        ->subject('Your submission has successfully been created')
+                        ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                        ->send();
                     redirect("contests/show/{$contest_id}");
                 }
                 else
@@ -212,6 +232,12 @@ class Submissions extends CI_Controller
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    $this->mailer
+                        ->to($this->ion_auth->user()->row()->email)
+                        ->from('squad@tappyn.com')
+                        ->subject('Your submission has successfully been created')
+                        ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                        ->send();
                     redirect("contests/show/{$contest_id}");
                 }
                 else
@@ -242,6 +268,12 @@ class Submissions extends CI_Controller
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
                     $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
+                    $this->mailer
+                        ->to($this->ion_auth->user()->row()->email)
+                        ->from('squad@tappyn.com')
+                        ->subject('Your submission has successfully been created')
+                        ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                        ->send();
                     redirect("contests/show/{$contest_id}");
                 }
                 else
