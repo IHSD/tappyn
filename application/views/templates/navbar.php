@@ -20,7 +20,7 @@
         <script src="<?php echo base_url().'public/js/vendor/hotjar.js' ?>" type='text/javascript'></script>
         <script src="<?php echo base_url().'public/js/vendor/lucky_orange.js' ?>" type='text/javascript'></script>
         <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js" type='text/javascript'></script>
-        <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+        <%= favicon_link_tag 'favicon.ico' %>
 	</head>
 
 	<header>
