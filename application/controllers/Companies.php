@@ -90,13 +90,4 @@ class Companies extends CI_Controller
             redirect('companies/accounts', 'refresh');
         }
     }
-
-    public function addCard()
-    {
-        // user has submitted the form for adding a
-        if($this->input->post('stripeToken'))
-        {
-
-        }
-    }
 }
