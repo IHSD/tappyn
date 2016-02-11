@@ -31,9 +31,7 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                    <div style='text-align:center;text-overflow:ellipsis;'>
-                                        <p><?php echo $contest->audience ?></p>
-                                    </div>
+                                   
                                     <?php switch($contest->platform):
                                         case 'facebook': echo "<img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'> <h5>Facebook</h5>"; break;
                                         case 'google': echo "<img src='".base_url()."public/img/OrangeGoogleIcon.png' width='20px' height='20px'> <h5>Google</h5>"; break;
