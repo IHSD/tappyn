@@ -52,7 +52,7 @@
                                                 <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                             </div>
                                         </div>
-                                        <div style='width:10%;float:right;margin-right:15px;'><p class="progress-meter-text" style='margin:0px;'><?php echo $contest->submission_count; ?>/50</p></div>
+                                        <div style='width:10%;float:right;margin-right:20px;'><p class="progress-meter-text" style='margin:0px;'><?php echo $contest->submission_count; ?>/50</p></div>
                                     </div>
                                 </div>
                             </div>
