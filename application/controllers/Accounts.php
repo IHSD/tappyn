@@ -23,6 +23,8 @@ class Accounts extends CI_Controller
         {
             $this->account = $this->stripe_account_library->get($this->stripe_account_id);
         }
+
+        $this->load->view('templates/navbar');
     }
 
     function accept_terms()
