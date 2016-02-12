@@ -31,7 +31,11 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-
+                                    <div style='height:100px;width: 100%;overflow: hidden;'>
+                                        <div class='contest-audience'>
+                                            <?php if(isset($contest->audience)) echo $contest->audience; ?>
+                                        </div>
+                                    </div>
                                     <?php switch($contest->platform):
                                         case 'facebook': echo "<img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'> <h5>Facebook</h5>"; break;
                                         case 'google': echo "<img src='".base_url()."public/img/OrangeGoogleIcon.png' width='20px' height='20px'> <h5>Google</h5>"; break;
@@ -47,12 +51,11 @@
                                         ?>
                                     </h5></div>
                                     <div style='width:100%'>
-                                        <div style='width:75%;float:left;'>
-                                            <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
-                                                <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
-                                            </div>
+                                        <div style='margin-bottom:0px;' class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                            <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
-                                        <div style='width:10%;float:right;margin-right:20px;'><p class="progress-meter-text" style='margin:0px;'><?php echo $contest->submission_count; ?>/50</p></div>
+                                        
+                                        <p class="progress-meter-text" style='margin:0px;'><?php echo $contest->submission_count; ?>/50</p>
                                     </div>
                                 </div>
                             </div>

@@ -66,7 +66,7 @@
 			                    <div class="contest-info">
 			                        <?php if(isset($submission->owner->school) && $submission->owner->school) echo "<h5> ".$submission->owner->school." </h5>"; ?>
 			                        <h5>
-			                        	<span class='duration'>
+			                        	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
 			                        		<?php echo date('D, M d', strtotime($submission->created_at)); ?>
 			                        	</span>
 			                        	<?php if(isset($submission->owner->location) && $submission->owner->location) echo $submission->owner->location; ?>

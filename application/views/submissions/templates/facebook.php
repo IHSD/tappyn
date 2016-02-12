@@ -3,9 +3,9 @@
        	array('name' => 'headline',
        	'value' => '',
        	'placeholder' =>
-       		($contest->objective == 'website_clicks' ? "*Captivating Headline Here" :
-       		($contest->objective == 'app_installs' ? "*Captivating Headline Here" :
-       		($contest->objective == 'engagement' ? "*Captivating Headline Here" : "Enter a headline"))),
+       		($contest->objective == 'website_clicks' ? "*Creative header capturing what makes this business unique" :
+       		($contest->objective == 'app_installs' ? "*Creative header capturing what makes this business unique" :
+       		($contest->objective == 'engagement' ? "*Creative header capturing what makes this business unique" : "*Creative header capturing what makes this business unique"))),
        		'type' => 'text',
        		'id' => 'headline'));?>
        	<div class='input-count'><span id='headline_span'>0</span> of 25 characters</div>
@@ -15,9 +15,9 @@
        	array('name' => 'text',
        	'value' => '',
        	'placeholder' =>
-       		($contest->objective == 'website_clicks' ? "Clear Description of Headline Here" :
-       		($contest->objective == 'app_installs' ? "Clear Description of Headline Here" :
-       		($contest->objective == 'engagement' ? "Clear Description of Headline Here" : "Tell a bit more. Be Clear!"))),
+       		($contest->objective == 'website_clicks' ? "*Tell what the product will do for the customer in a clear, specific way" :
+       		($contest->objective == 'app_installs' ? "*Tell what the product will do for the customer in a clear, specific way" :
+       		($contest->objective == 'engagement' ? "*Tell what the product will do for the customer in a clear, specific way" : "*Tell what the product will do for the customer in a clear, specific way"))),
        	'type' => 'text',
        	'id' => 'text',
        	'rows' => "3"));?>

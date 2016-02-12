@@ -51,7 +51,7 @@
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus small-12 columns">
                                     <?php foreach($submissions as $submission): ?>
-                                        <div class="medium-3 columns end contest-box min-height">
+                                        <div class="medium-4 columns end contest-box min-height">
                                                 <div class="medium-12 ad-company-info">
                                                     <div>
                                                         <h5 class='text-left'><?php echo $submission->contest->title; ?> by <?php echo $submission->company->name; ?></h5>

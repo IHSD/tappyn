@@ -11,6 +11,7 @@
 		<link href="<?php echo base_url().'public/css/app.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/slick.css' ?>" rel="stylesheet">
 		<link href="<?php echo base_url().'public/css/jcf.css' ?>" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo base_url().'public/css/foundation-icons.css' ?>" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script src="<?php echo base_url().'public/js/custom-select.js' ?>" type='text/javascript'></script>
 		<script src="<?php echo base_url().'public/js/foundation.min.js'?>" type='text/javascript'></script>
