@@ -1,7 +1,7 @@
 
 <html>
     <head>
-      
+
         <title>Tappyn</title>
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		<script src="<?php echo base_url().'public/js/custom-select.js' ?>" type='text/javascript'></script>
 		<script src="<?php echo base_url().'public/js/foundation.min.js'?>" type='text/javascript'></script>
+    <%= favicon_link_tag 'favicon.ico' %>
 	</head>
 
 	<header>
