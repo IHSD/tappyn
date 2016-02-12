@@ -36,16 +36,25 @@ class Stripe_transfer_library
                 'description' => "Payout for contest {$contest_id}"
             ));
         } catch(Exception $e) {
-            die($e->getMessage());
+            $this->errors = $e->getMessage();
+            return false;
         }
-        var_dump($transfer);
-        die();
+        // Save our transfer to the database....
+        $this->stripe_transfer->save($transfer);
+        return $transfer;
     }
 
-    public function retrieve()
+    public function retrieve($tid)
     {
-        return \Stripe\Balance::retrieve();
+        try {
+            $transfer = \Stripe\Balance::retrieve($tid);
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return false;
+        }
+        return $transfer;
     }
+
     public function balance($token)
     {
         try {

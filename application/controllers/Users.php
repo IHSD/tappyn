@@ -85,8 +85,6 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-        $this->session->set_flashdata('error', 'The profile section is curerntly under construction!');
-        redirect('contests/index', 'refresh');
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if($this->ion_auth->in_group(2))
@@ -151,6 +149,45 @@ class Users extends CI_Controller
     {
         $this->data['account'] = NULL;
 
+        // check if they have submitted any required information
+        if($this->input->post('submit'))
+        {
+            $data = array();
+            foreach($this->input->post() as $key => $value)
+            {
+                switch($key)
+                {
+                    case 'first_name':
+                        $data['legal_entity.first_name'] = $value;
+                        break;
+                    case 'last_name':
+                        $data['legal_entity.last_name'] = $value;
+                        break;
+                    case 'dob_day':
+                        $data['legal_entity.dob.day'] = $value;
+                        break;
+                    case 'dob_month':
+                        $data['legal_entity.dob.month'] = $value;
+                        break;
+                    case 'dob_year':
+                        $data['legal_entity.dob.year'] = $value;
+                        break;
+                    case 'tos_acceptance':
+                        $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
+                        $data['tos_acceptance.date'] =
+                    case 'country':
+                        $data['country'] = $value;
+
+                }
+            }
+            if($this->stripe_account_library->update($this->stripe_account_id, $data))
+            {
+                $this->session->set_flashdata('message', "Account information successfully updated");
+            } else {
+                $this->session->set_flashdata('error', $this->stripe_account_library->errors());
+            }
+        }
+
         if($this->stripe_account_id)
         {
             if($account = $this->stripe_account_library->get($this->stripe_account_id))
@@ -159,6 +196,16 @@ class Users extends CI_Controller
             } else {
                 $this->data['error'] = $this->stripe_account_library->errors();
             }
+        }
+
+        $this->data['fields'] = array();
+        foreach($this->data['account']->verification->fields_needed as $field)
+        {
+            $this->data['fields'][$field] = array(
+                'name' => $field,
+                'value' => ($this->input->post($field) ? $this->input->post($field) : ''),
+                'placeholder' => $field
+            );
         }
         $this->load->view('users/accounts', $this->data);
     }
