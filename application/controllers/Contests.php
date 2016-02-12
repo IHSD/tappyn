@@ -20,9 +20,13 @@ class Contests extends CI_Controller
      */
     public function index()
     {
+        $this->params = array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s')
+        );
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
-        $config['per_page'] = 10;
+        $config['per_page'] = 20;
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
