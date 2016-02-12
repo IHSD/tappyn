@@ -126,7 +126,7 @@ class Accounts extends CI_Controller
             {
                 if($source->id === $this->input->post('source_id'))
                 {
-                    if($this->stripe_account_library->removeSource($aid, $sid))
+                    if($this->stripe_account_library->removeSource($this->stripe_account_id, $source->id))
                     {
                         $this->session->set_flashdata('message', 'Payment method successfully removed');
                     } else {

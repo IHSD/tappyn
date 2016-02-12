@@ -41,6 +41,10 @@
 )); ?>
 <?php if(!empty($account->external_accounts->data)): ?>
     <?php foreach($account->external_accounts->data as $source): ?>
+        <?php echo form_open('accounts/remove_method'); ?>
+        <?php echo form_input(array('name' => 'source_id', 'type' => 'hidden', 'value' => $source->id)); ?>
+        <?php echo form_submit('remove', "Remove Method"); ?>
+        <?php echo form_close(); ?>
         <?php echo json_encode($source); ?>
     <?php endforeach; ?>
 <?php endif; ?>
