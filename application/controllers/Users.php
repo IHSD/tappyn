@@ -174,7 +174,8 @@ class Users extends CI_Controller
                         break;
                     case 'tos_acceptance':
                         $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
-                        $data['tos_acceptance.date'] =
+                        $data['tos_acceptance.date'] = date('Y-m-d H:i:s');
+                        break;
                     case 'country':
                         $data['country'] = $value;
 
