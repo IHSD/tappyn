@@ -58,6 +58,12 @@ class Stripe_account_library
 
     public function get()
     {
-        return \Stripe\Account::retrieve('acct_17dQHYCDeYXQJ6QQ');
+        try {
+            $account = \Stripe\Account::retrieve('acct_17dQHYCDeYXQJ6QQ');
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return false;
+        }
+        return $account;
     }
 }

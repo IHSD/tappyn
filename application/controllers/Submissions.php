@@ -148,16 +148,18 @@ class Submissions extends CI_Controller
                 'owner' => $this->ion_auth->user()->row()->id,
                 'contest_id' => $contest->id
             );
+
+            $email_data = array(
+                'headline' => $this->input->post('headline'),
+                'text' => $this->input->post('text'),
+                'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
+                'contest' => $contest->title,
+                'company' => $contest->company->name
+            );
         }
         // Set our static data points for the view / creation
         $this->data['contest'] = $contest;
-        $email_data = array(
-            'headline' => $this->input->post('headline'),
-            'text' => $this->input->post('text'),
-            'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
-            'contest' => $contest->name,
-            'company' => $contest->company->name
-        );
+
         // Generate / validate fields based on the platform type
         switch($contest->platform)
         {

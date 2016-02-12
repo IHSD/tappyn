@@ -221,6 +221,15 @@ class User extends CI_Model
         return $this;
     }
 
+    public function account($uid)
+    {
+        $account = $this->db->select('*')->from('stripe_accounts')->where('user_id', $uid)->limit(1)->get();
+        if($account && $account->num_rows() == 1)
+        {
+            return $account->row()->account_id;
+        }
+        return false;
+    }
     /**
      * Get count of users
      * @param array $where
