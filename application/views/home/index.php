@@ -8,8 +8,8 @@
         <div class="row">
             <div class="medium-12">
                 <div class="hero-content">
-                    <h3>COMPANIES ARE LOOKING FOR CREATIVE PEOPLE LIKE YOU.</h3>
-                    <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY! </h1>
+                    <h1>COMPANIES ARE LOOKING FOR CREATIVE PEOPLE LIKE YOU.</h1>
+                    <h2>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY! </h2>
                    	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">TAPPYN</a>
                 </div>
             </div>
@@ -18,11 +18,11 @@
     </section>
     <section class="contests">
         <div class="row">
-            <h2 class="title">Some of Our Past Winners</h2>
+            <h2 class="title">Past Winners</h2>
             <div class='medium-10 medium-offset-1 small-12'>
                 <div class="contest-box">
-                    <span class="price">$50</span>
-                    <h3><a href="#0">Take the road less traveled. We'll show you the way.</a> <span style='padding-left:85px;'>- Melanie B.</span></h3>
+                    <span class="price" style='right:5px;'>$50</span>
+                    <h3 style='width:90%'><a href="#0">Take the road less traveled. We'll show you the way.</a> <span style='padding-left:85px;'>- Melanie B.</span></h3>
                     <div class="contest-content">
                         <span>Mr. Arlo is the best way to discover, collect and organize travel plans that fit your personality and budget</span>
                     </div>
@@ -35,8 +35,8 @@
             </div>
             <div class='medium-10 medium-offset-1 small-12'>
                 <div class="contest-box">
-                    <span class="price">$50</span>
-                    <h3><a href="#0">We believe your morning brew should be as unique as you.</a> <span style='padding-left:85px;'>- Natalie E.</span></h3>
+                    <span class="price" style='right:5px;'>$50</span>
+                    <h3 style='width:90%'><a href="#0">We believe your morning brew should be as unique as you.</a> <span style='padding-left:85px;'>- Natalie E.</span></h3>
                     <div class="contest-content">
                         <span>VegaCoffee brings you coffee from farm to table.</span>
                     </div>
@@ -49,8 +49,8 @@
             </div>
             <div class='medium-10 medium-offset-1 small-12'>
              <div class="contest-box">
-                <span class="price">$50</span>
-                <h3><a href="#0">Surf the web to spend more time suring the waves.</a> <span style='padding-left:85px;'>- Olivia S.</span></h3>
+                <span class="price" style='right:5px;'>$50</span>
+                <h3 style='width:90%'><a href="#0">Surf the web to spend more time suring the waves.</a> <span style='padding-left:85px;'>- Olivia S.</span></h3>
                 <div class="contest-content">
                     <span>Find & sell your surf equipment on Surfer's List</span>
                 </div>
@@ -63,8 +63,8 @@
             </div>
             <div class='medium-10 medium-offset-1 small-12'>
              <div class="contest-box">
-                <span class="price">$50</span>
-                <h3><a href="#0">Marketers on demand, to create demand.</a> <span style='padding-left:85px;'>- Phuong N.</span></h3>
+                <span class="price" style='right:5px;'>$50</span>
+                <h3 style='width:90%'><a href="#0">Marketers on demand, to create demand.</a> <span style='padding-left:85px;'>- Phuong N.</span></h3>
                 <div class="contest-content">
                     <span>Get your marketing done professionally with Minds for Hire.</span>
                 </div>

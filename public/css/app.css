@@ -293,19 +293,15 @@ header .btn-login {
 	display: table-cell;
 	text-align: center;
 }
-.hero-content h3 {
+.hero-content h2 {
 	color: #fff;
-	font-weight: 400;
-	margin:  0 0 43px;
-	font-size: 46px;
-	line-height: 22px;
+	font-weight: 300;
+	font-size:37;
 }
 .hero-content h1 {
-	color: #fff;
-	margin:  0 0 81px;
-	font-size: 38px;
-	line-height: 57px;
-	font-weight: 300;
+	font-weight: 500;
+	font-size: 43;
+	color:#fff;
 }
 .hero-content .btn-banner {
 	font-size: 18px;
@@ -2036,7 +2032,9 @@ header nav ul li  a {
 	}
 	.hero-content h1 {
 		font-size: 34px;
-		line-height: 44px;
+	}
+	.hero-content h2 {
+		font-size:29px;
 	}
 	.signup-link {
 		width: 100%;
