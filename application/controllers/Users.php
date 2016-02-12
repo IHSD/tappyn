@@ -14,11 +14,13 @@ class Users extends CI_Controller
         $this->load->model('user');
         $this->load->model('submission');
         $this->load->model('contest');
+        $this->load->library('stripe/stripe_account_library');
+        $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);
     }
 
     public function index()
     {
-
+        redirect('contests/index', 'refresh');
     }
 
     /**
@@ -145,23 +147,19 @@ class Users extends CI_Controller
         $this->load->view('users/profile', $this->data);
     }
 
-    public function payment()
+    public function account()
     {
-        
-    }
+        $this->data['account'] = NULL;
 
-    public function update()
-    {
-
-    }
-
-    public function info()
-    {
-
-    }
-
-    public function submissions()
-    {
-
+        if($this->stripe_account_id)
+        {
+            if($account = $this->stripe_account_library->get($this->stripe_account_id))
+            {
+                $this->data['account'] = $account;
+            } else {
+                $this->data['error'] = $this->stripe_account_library->errors();
+            }
+        }
+        $this->load->view('users/accounts', $this->data);
     }
 }
