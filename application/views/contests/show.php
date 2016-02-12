@@ -40,7 +40,7 @@
                         <?php
                             if($difference->d > 0) echo plur($difference->d, 'day');
                             elseif($difference->h > 0) echo plur($difference->h, 'hour');
-                            else echo plur($difference->i, 'minute');                                        
+                            else echo plur($difference->i, 'minute');
                         ?>
 					</h4>
 					<h4 style='margin:0px;'><?php echo ucfirst($contest->platform); ?></h4>
@@ -84,7 +84,7 @@
 			        <div style='padding-bottom:20px;padding-top:20px;'>
 			            <a href='<?php echo $contest->company->company_url; ?>' class='btn btn-brief'  target='_blank'>Website</a>
 		        	    <a href='<?php echo $contest->company->facebook_url; ?>' class='btn btn-brief'  target='_blank'>Facebook</a>
-                   	</div>				
+                   	</div>
 			    </div>
 		        <div class='medium-4 small-12 columns'>
 				<?php $this->load->view('templates/notification', array(
@@ -105,9 +105,9 @@
 							<h4 style='text-align:left;margin:0;'>Age</h4>
 							<?php foreach($ages as $key => $age) : ?>
 								<div style='float:left;'>
-								<?php 
+								<?php
 									echo "<label style='color:#333'>".$age;
-                            		echo form_radio('age', $age); 
+                            		echo form_radio('age', $age);
                             		echo "</label>";
                             	?>
                             	</div>
@@ -144,6 +144,14 @@
 		</div>
 	</div>
 </div>
+<script>
+fbq('track', 'ViewContent');
+</script>
+<?php if($this->session->flashdata('track') == 1): ?>
+<script>
+fbq('track', 'Lead');
+</script>
+<?php endif; ?>
 </section>
 
 <?php $this->load->view('templates/footer'); ?>

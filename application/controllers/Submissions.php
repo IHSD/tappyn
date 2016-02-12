@@ -93,13 +93,14 @@ class Submissions extends CI_Controller
                $this->ion_auth_model->login($identity, $password, 1))
             {
                 // $this->notifyUserWithPassword($email, $password);
+                $this->session->set_flashdata('track', 1);
                 $this->mailer
                     ->to($email)
                     ->from("Registration@tappyn.com")
                     ->subject('Account Successfully Created')
                     ->html($this->load->view('auth/email/inline_registration', array('email' => $email, 'password' => $password), TRUE))
                     ->send();
-                    
+
                 $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age')));
                 $logged_in = true;
             }

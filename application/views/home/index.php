@@ -8,7 +8,7 @@
         <div class="row">
             <div class="medium-12">
                 <div class="hero-content">
-                    <h3>COMPANIES ARE LOOKING FOR PEOPLE LIKE YOU.</h3>
+                    <h3>COMPANIES ARE LOOKING FOR CREATIVE PEOPLE LIKE YOU.</h3>
                     <h1>JOIN OUR COMMUNITY <br> AND START EARNING MONEY TODAY! </h1>
                    	<a class='btn btn-banner' href="<?php echo base_url().'contests' ?>">TAPPYN</a>
                 </div>
@@ -222,7 +222,7 @@
             <h2 class='title'>Get personalized contests delivered
             <br><br>to your inbox weekly.</h2>
             <div class='medium-8 medium-offset-2 small-12'>
-                <?php echo form_open("mailing_list");?>  
+                <?php echo form_open("mailing_list");?>
                 <div class='form-row large-8 small-12 columns'>
                    <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Enter your email', 'type' => 'text'));?>
                 </div>

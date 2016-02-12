@@ -31,7 +31,7 @@
                                             <img src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
                                         <?php endif; ?>
                                     </div>
-                                   
+
                                     <?php switch($contest->platform):
                                         case 'facebook': echo "<img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'> <h5>Facebook</h5>"; break;
                                         case 'google': echo "<img src='".base_url()."public/img/OrangeGoogleIcon.png' width='20px' height='20px'> <h5>Google</h5>"; break;
@@ -43,7 +43,7 @@
                                         <?php
                                             if($difference->d > 0) echo plur($difference->d, 'day');
                                             elseif($difference->h > 0) echo plur($difference->h, 'hour');
-                                            else echo plur($difference->i, 'minute');                                        
+                                            else echo plur($difference->i, 'minute');
                                         ?>
                                     </h5></div>
                                     <div style='width:100%'>
@@ -68,5 +68,9 @@
  $(document).foundation();
  </script>
 
-
+<?php if($this->session->flashdata('track') == 1): ?>
+    <script>
+    fbq('track', 'Lead');
+    </script>
+<?php endif; ?>
 <?php $this->load->view('templates/footer'); ?>
