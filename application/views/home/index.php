@@ -146,7 +146,7 @@
                     <img src="<?php echo base_url().'public/img/icon-submissions.svg' ?>">
                     <h3>Cap of 50<br>
            			on submissions</h3>
-           			<p>We cap all contests ast 50 submissions so you've got a great chance of winning.</p>
+           			<p>We cap all contests at 50 submissions so you've got a great chance of winning.</p>
                 </div>
                 <div class="medium-3 column">
                     <img src="<?php echo base_url().'public/img/icon-cash.svg' ?>">

@@ -33,17 +33,21 @@
                                     </div>
                                     <div style='height:100px;width: 100%;overflow: hidden;'>
                                         <div class='contest-audience'>
-                                            <?php if(isset($contest->audience)) echo $contest->audience; ?>
+                                            <?php if(isset($contest->audience)) echo preg_replace('/([^?!.]*.).*/', '\\1', $contest->audience); ?>
                                         </div>
                                     </div>
+                                    <div style='margin-top:5px;'>
                                     <?php switch($contest->platform):
-                                        case 'facebook': echo "<img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'> <h5>Facebook</h5>"; break;
-                                        case 'google': echo "<img src='".base_url()."public/img/OrangeGoogleIcon.png' width='20px' height='20px'> <h5>Google</h5>"; break;
+                                        case 'facebook': echo "<h5><img src='".base_url()."public/img/OrangeFacebookIcon.png' width='20px' height='20px'>Facebook</h5>"; break;
+                                        case 'google': echo "<h5><img src='".base_url()."public/img/OrangeGoogleIcon.png' width='20px' height='20px'>Google</h5>"; break;
                                         case 'general': echo "<h5>General</h5>"; break;
-                                        case 'twitter': echo "<img src='".base_url()."public/img/OrangeTwitterIcon.png' width='20px' height='20px'> <h5>Twitter</h5>"; break;
+                                        case 'twitter': echo "<h5><img src='".base_url()."public/img/OrangeTwitterIcon.png' width='20px' height='20px'>Twitter</h5>"; break;
                                     endswitch; ?>
+                                    </div>
                                     <?php  $stop = new DateTime($contest->stop_time, new DateTimeZone('America/New_York')); $now = new DateTime('now', new DateTimeZone('America/New_York')); $difference = $stop->diff($now);?>
-                                    <div><h5 class='text-center'>Ends in
+                                    <div style='margin-top:5px;'><h5 class='text-center'> 
+                                        <img src="<?php echo base_url().'public/img/icon-second.svg' ?>" height='20px' width='20px;'>
+                                        Ends in
                                         <?php
                                             if($difference->d > 0) echo plur($difference->d, 'day');
                                             elseif($difference->h > 0) echo plur($difference->h, 'hour');
@@ -51,7 +55,7 @@
                                         ?>
                                     </h5></div>
                                     <div style='width:100%'>
-                                        <div style='margin-bottom:0px;' class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
+                                        <div style='margin-top:5px;margin-bottom:0px;' class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
                                             <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
                                         </div>
                                         

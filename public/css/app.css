@@ -716,7 +716,7 @@ footer {
 	padding: 15px;
 	margin:  10px 0 20px;
 	border-radius: 4px;
-    height: 350px;
+    height: 375px;
  }
  .min-height {
      min-height: 350px;
@@ -1051,13 +1051,13 @@ footer {
 .form-row label span {
 	color: #FF5E00;
 }
-.form-row input[type="text"], .form-row input[type="password"], .form-row input[type="email"], .form-row textarea  {
+.form-row input[type="text"], .form-row input[type="password"], .form-row input[type="email"], .form-row textarea, .form-row select  {
 	width: 100%;
 	border: 1px solid #DCDCDC;
 	color: #333;
 	border-radius: 4px;
 	padding:  8px 10px;
-	font-size: 11px;
+	font-size: 11px !important;
 }
 .form-row input[type="text"]:focus, .form-row textarea:focus  {
 	border: 1px solid #FF5E00;
@@ -1071,7 +1071,9 @@ footer {
 	border: none;
 	float: right;
 	padding: 12px 60px;
+	border: 1px solid #FF5E00;
 }
+
 /** Privacy Policy **/
 .privacy-policy .inner-title {
 	margin: 0 0 40px;
@@ -1109,6 +1111,10 @@ footer {
 }
 .contest-sorting .select-area {
 	line-height:  37px;
+}
+.select-area{
+	font-size:11px;
+	color:#333;
 }
 .showing-results {
 	margin: 0 0 40px;
@@ -2181,9 +2187,6 @@ header nav ul li  a {
 }
 .contest-audience{
 	text-overflow: ellipsis;
-	display:-webkit-box;
-	-webkit-line-clamp: 5;
-	-webkit-box-orient:vertical;
 	color:#333;
 	font-size:12px;
 	text-align:center;

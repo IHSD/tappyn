@@ -43,7 +43,9 @@
 			<?php echo form_close(); ?>
 		<?php elseif($this->ion_auth->in_group(2)) : ?>
 			<h3>User</h3>
+			<?php echo form_open("users/profile");?>
 
+			<?php echo form_close(); ?>
 		<?php endif; ?>
 	</div>
 </section>
