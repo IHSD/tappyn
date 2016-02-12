@@ -11,6 +11,7 @@ class Contests extends CI_Controller
         $this->load->model('contest');
         $this->load->library('submission_library');
         $this->data['footer'] = 'templates/footer';
+        $this->load->library('mailer');
     }
 
     /**
@@ -194,6 +195,87 @@ class Contests extends CI_Controller
         $this->data['submissions'] = $submissions;
         $this->load->view('submissions/index', $this->data);
     }
+
+    /**
+     * Set a submission as the winner of the contest
+     * @param  integer $cid Contest ID
+     * @param  integer $sid Submission ID
+     * @return void
+     */
+    public function select_winner($cid)
+    {
+        $this->load->library('payouts');
+        $this->load->model('user');
+        $sid = $this->input->post('submission');
+
+        // Check that submission exists
+        if(!$submission = $this->submission->get($sid))
+        {
+            $this->session->set_flashdata('error', 'That submission does not exist');
+            redirect("contests/show/{$cid}", "refresh");
+        }
+        // Check that contest exists
+        else if(!$contest = $this->contest->get($cid))
+        {
+            $this->session->set_flashdata('error', "We couldn't find contest with id {$cid}");
+            redirect("contests/index", 'refresh');
+        }
+        // Current user must own contest
+        else if(!$this->ion_auth->in_group(1) || $this->ion_auth->user()->row()->id !== $contest->owner)
+        {
+            $this->session->set_flashdata('error', "You must own the contest to select a winner");
+            redirect("contests/show/{$cid}", 'refresh');
+        }
+        // Check that the contest has ended
+        else if($contest->stop_time > date('Y-m-d H:i:s'))
+        {
+            $this->session->set_flashdata('error', "The contest must be over in order to select a winner");
+            redirect("contests/show/{$cid}", 'refresh');
+        }
+        // Attempt to create the payouts
+        else if($pid = $this->payouts->create($cid, $sid))
+        {
+            // =================================================================
+            // ANY ERRORS THAT OCCUR AFTER THIS POINT SHOULD NOT bE REPORTED TO
+            // THE CONTEST OWNER. THEY HAVE SUCESSFULLY CREATED THE SUBMISSION
+            // AND THEIR RESULT SHOULD REFLECT THAT
+            // =================================================================
+
+            // So now we check if the winning user has transfers enabled
+            // $user_account = $this->user->account($submission_owner);
+            //
+            // if(($account_details = $this->stripe_account_library->get($user_account)) &&
+            //     $account_details->transfers_enabled)
+            // {
+            //     // They have transfers enabled, so we create the transfer immediately
+            //     if(!$this->stripe_transfer_library->create($user_account, $cid, 5000))
+            //     {
+            //         error_log("Error creating transfer for account {$user_account}");
+            //     } else {
+            //         $this->payouts->update($pid, array('pending' => 0));
+            //     }
+            // }
+
+            // Send the email congratulating the user
+            $this->mailer
+                ->to($this->ion_auth->user($submission->owner)->row()->email)
+                ->from("squad@tappyn.com")
+                ->subject("Congratulations, you're submission won!")
+                ->html($this->load->view('emails/submission_chosen', array(), TRUE))
+                ->send();
+
+            // Send the email to the winning user
+            $this->session->set_flashdata('message', "Submission {$sid} has been chosen as a winner");
+            redirect("contests/show/{$cid}", "refresh");
+        }
+        // Something happened, so lets just route tham back to the contest page with an error
+        else
+        {
+            $this->session->set_flashdata('error', ($this->payout->errors() ? $this->payout_errors() : "An unknown error occured"));
+            redirect("contests/show/{$cid}", 'refresh');
+        }
+    }
+
     /**
      * Edit and update a contest
      * @return void

@@ -152,6 +152,7 @@ class Users extends CI_Controller
         // check if they have submitted any required information
         if($this->input->post('submit'))
         {
+            echo "Submitting form";
             $data = array();
             foreach($this->input->post() as $key => $value)
             {
@@ -181,11 +182,12 @@ class Users extends CI_Controller
                         break;
                 }
             }
-            if($this->stripe_account_library->update($this->stripe_account_id, $data))
+            if($account = $this->stripe_account_library->create($this->ion_auth->user()->row()->email, $data))
             {
+                $this->stripe_account_id = $account->id;
                 $this->session->set_flashdata('message', "Account information successfully updated");
             } else {
-                $this->session->set_flashdata('error', $this->stripe_account_library->errors());
+                $this->session->set_flashdata('error', ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : 'An unknown error occured'));
             }
         }
 
@@ -197,16 +199,6 @@ class Users extends CI_Controller
             } else {
                 $this->data['error'] = $this->stripe_account_library->errors();
             }
-        }
-
-        $this->data['fields'] = array();
-        foreach($this->data['account']->verification->fields_needed as $field)
-        {
-            $this->data['fields'][$field] = array(
-                'name' => $field,
-                'value' => ($this->input->post($field) ? $this->input->post($field) : ''),
-                'placeholder' => $field
-            );
         }
         $this->load->view('users/accounts', $this->data);
     }

@@ -31,29 +31,60 @@ class Stripe_account_library
      * @param  string $email User Email
      * @return object $account
      */
-    public function create($email)
+    public function create($email, $data)
     {
+        $account_data = array(
+            "managed" => true,
+            "email" => $email,
+        );
+        foreach($data as $key => $value)
+        {
+            switch($key) {
+                case 'legal_entity.first_name':
+                    $account_data['legal_entity']['first_name'] = $value;
+                    break;
+                case 'legal_entity.last_name':
+                    $account_data['legal_entity']['last_name'] = $value;
+                    break;
+                case 'legal_entity.dob.month':
+                    $account_data['legal_entity']['dob']['month'] = $value;
+                    break;
+                case 'legal_entity.dob.day':
+                    $account_data['legal_entity']['dob']['day'] = $value;
+                    break;
+                case 'legal_entity.dob.year':
+                    $account_data['legal_entity']['dob']['year'] = $value;
+                    break;
+                case 'legal_entity.type':
+                    $account_data['legal_entity']['type'] = 'individual';
+                    break;
+                case 'tos_acceptance.ip':
+                    $account_data['tos_acceptance']['ip'] = $value;
+                    break;
+                case 'tos_acceptance.date':
+                    $account_data['tos_acceptance']['date'] = $value;
+                    break;
+                default:
+                    $account_data[$key] = $value;
+            }
+        }
         try{
-            $account = \Stripe\Account::create(array(
-                "managed" => true,
-                "country" => "US",
-                "email" => $email
-            ));
+            $account = \Stripe\Account::create($account_data);
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
             return false;
         }
-        return $this->db->insert('stripe_accounts', array(
+        $this->db->insert('stripe_accounts', array(
             'account_id' => $account->id,
             'user_id' => $this->ion_auth->user()->row()->id,
             'publishable_key' => $account->keys->publishable,
             'secret_key' => $account->keys->secret
         ));
+        return $account;
     }
 
     public function update($id, $data)
     {
-        echo json_encode($data);
         try {
             $account = \Stripe\Account::retrieve($id);
             foreach($data as $key => $value)
@@ -78,7 +109,6 @@ class Stripe_account_library
                         $account->$key = $value;
                     }
             }
-            echo json_encode($account);
             $account->save();
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
