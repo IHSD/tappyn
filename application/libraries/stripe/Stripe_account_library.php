@@ -117,6 +117,31 @@ class Stripe_account_library
         return true;
     }
 
+    public function addSource($aid, $token)
+    {
+        try {
+            $account = \Stripe\Account::retrieve($aid);
+            $account->external_accounts->create(array("external_account" => $token));
+            $account->save();
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    public function removeSource($aid, $sid)
+    {
+        try {
+            $account = \Stripe\Account::retrieve($aid);
+            $account->external_accounts->retrieve($sid)->delete();
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return false;
+        }
+        return TRUE;
+    }
+    
     public function get($aid)
     {
         try {

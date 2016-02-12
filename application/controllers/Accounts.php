@@ -57,7 +57,8 @@ class Accounts extends CI_Controller
                 'legal_entity.dob.month' => $this->input->post('dob_month'),
                 'tos_acceptance.ip' => $_SERVER['REMOTE_ADDR'],
                 'tos_acceptance.date' => time(),
-                'country' => $this->input->post('country')
+                'country' => $this->input->post('country'),
+                'currency' => 'USD'
             );
         }
         // If the form pass validation, and we can create / upadte based on presence
@@ -91,33 +92,26 @@ class Accounts extends CI_Controller
             // and that the only required field is the external account
             // else send back to details
             $fields = $this->account->verification->fields_needed;
-            unset($fields['external_account']);
+            $key = array_search('external_account', $fields);
+            unset($fields[$key]);
             if(!empty($fields))
             {
                 $this->session->set_flashdata('error', 'You still have some account details to fill out! ('.implode(',', $fields).')');
+                redirect('accounts/details', 'refresh');
             }
         }
-        if(($this->input->post('stripeToken')))
-        {
-            $this->form_validation->set_rules('account_type', 'Account Type', 'required');
-            if($this->form_validation->run() === TRUE)
-            {
-                // Preprocess
 
-            }
-            if($this->form_validation->run() === TRUE &&
-                ($this->input->post('account_type') == 'card' ?
-                    $this->stripe_account_library->addCard($this->stripe_account_id, $this->input->post('stripeToken')) :
-                    $this->stripe_account_library->addAccount($this->stripe_account_id, $this->input->post('stripeToken'))))
+        if($this->input->post('stripeToken'))
+        {
+            if($this->stripe_account_library->addSource($this->stripe_account_id, $this->input->post('stripeToken'), $this->input->post('currency')))
             {
-                $this->session->set_flashdata("message", "Account successfully updated");
+                $this->data['message'] = "Account successfully updated";
             }
         }
-        $this->data['error'] = (validation_errors() ? validation_errors() : ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : false));
+        $this->data['error'] = ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : false);
         $this->data['account'] = $this->stripe_account_library->get($this->stripe_account_id);
         $this->load->view('users/accounts/payment_methods', $this->data);
         // They have either set all of their data, or only need to create a new payment method
-
     }
 
     /**
@@ -126,7 +120,24 @@ class Accounts extends CI_Controller
      */
     public function remove_method()
     {
-
+        if($this->input->post('source_id'))
+        {
+            foreach($this->account->external_accounts->data as $source)
+            {
+                if($source->id === $this->input->post('source_id'))
+                {
+                    if($this->stripe_account_library->removeSource($aid, $sid))
+                    {
+                        $this->session->set_flashdata('message', 'Payment method successfully removed');
+                    } else {
+                        $this->session->set_flashdata('error', $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured");
+                    }
+                }
+            }
+        } else {
+            $this->session->set_flashdata('error', "You did not provide a payment method to remove");
+        }
+        redirect('accounts/payment_methods', 'refresh');
     }
 
     /**
