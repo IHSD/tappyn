@@ -71,10 +71,19 @@
 	                        <li><a href="<?php echo base_url().'contact'; ?>">Contact Us</a></li>
 	                        <li><a href="<?php echo base_url().'faq'; ?>">FAQ</a></li>
 	                        <?php if($this->ion_auth->logged_in()) : ?>
-                                <li><a href="<?php echo base_url().'accounts/details'; ?>">Payment</a></li>
-	                            <li><a href="<?php echo base_url().'profile'; ?>">Profile</a></li>
-	                            <li><a href="<?php echo base_url().'logout'; ?>">Log out</a></li>
-
+                            <li style='float:right;'><a style='padding:0px;' href='#'>
+                                <ul class='dropdown menu' data-dropdown-menu>
+                                    <li>
+                                        <a href='#'><?php echo ucfirst($this->ion_auth->user()->row()->first_name)." ".ucfirst($this->ion_auth->user()->row()->last_name[0]); ?></a>
+                                        <ul class='menu vertical'>
+                                            <li><a href="<?php echo base_url().'accounts/payment_methods'; ?>">Payment</a></li>
+            	                            <li><a href="<?php echo base_url().'profile'; ?>">Profile</a></li>
+            	                            <li><a href="<?php echo base_url().'logout'; ?>">Log out</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                </a>
+                            </li>
 	                        <?php else : ?>
 	                          	<li class="login-li">
 	                                <div class="login-box">
