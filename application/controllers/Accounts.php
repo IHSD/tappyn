@@ -81,9 +81,9 @@ class Accounts extends CI_Controller
      */
     public function payment_methods()
     {
-        if(!$this->account)
+        if(!$this->stripe_account_id)
         {
-            $this->session->set_flashdata('error', 'You need to set your account details first');
+            $this->session->set_flashdata('message', 'First, were going to need some personal information');
             redirect('accounts/details', 'refresh');
         }
         if(!$this->account->transfers_enabled)
