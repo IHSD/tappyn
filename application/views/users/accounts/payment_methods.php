@@ -45,7 +45,6 @@
         <?php echo form_input(array('name' => 'source_id', 'type' => 'hidden', 'value' => $source->id)); ?>
         <?php echo form_submit('remove', "Remove Method"); ?>
         <?php echo form_close(); ?>
-        <?php echo json_encode($source); ?>
     <?php endforeach; ?>
 <?php endif; ?>
 <?php echo form_dropdown('account_type', array(
