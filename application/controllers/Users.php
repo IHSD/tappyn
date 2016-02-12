@@ -174,11 +174,11 @@ class Users extends CI_Controller
                         break;
                     case 'tos_acceptance':
                         $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
-                        $data['tos_acceptance.date'] = date('Y-m-d H:i:s');
+                        $data['tos_acceptance.date'] = time();
                         break;
                     case 'country':
                         $data['country'] = $value;
-
+                        break;
                 }
             }
             if($this->stripe_account_library->update($this->stripe_account_id, $data))
