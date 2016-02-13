@@ -74,12 +74,12 @@
 			                    </div>
 			                    <!-- Generate a select as winner button if campaign is over and user owns contest -->
 								<?php if($this->ion_auth->logged_in() && ($contest->owner == $this->ion_auth->user()->row()->id || $this->ion_auth->in_group(1))): ?>
-									<?php form_open("contests/select_winner/".$contest->id); ?>
+									<?php echo form_open("contests/select_winner/".$contest->id); ?>
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
 									<div class='form-row'>
-										<button class='button' <?php if($difference->i > 1) echo "disabled='true'"; ?> type='submit'>Choose Winner</button>
+										<button class='btn' <?php if($difference->i > 1) echo "disabled='true'"; ?> type='submit'>Choose Winner</button>
 									</div>
-									<?php form_close(); ?>
+									<?php echo form_close(); ?>
 								<?php endif; ?>
 			                </div>
 			            </div>
