@@ -5,6 +5,10 @@
         <!-- Your Work -->
         <div class="your-work">
             <div class="row padding">
+                <?php $this->load->view('templates/notification', array(
+                'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+                'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+                )); ?>
                 <!-- Generate the company dashboard -->
                 <?php if($this->ion_auth->in_group(3)): ?>
                     <h2 class="inner-title"><?php echo $this->ion_auth->profile("name"); ?></h2>
@@ -71,13 +75,13 @@
                                         <span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
                                             <?php echo date('D, M d', strtotime($submission->created_at)); ?>
                                         </span>
-                                    
+
                                     </h5>
                                 </div>
                                 <!-- Generate a select as winner button if campaign is over and user owns contest -->
                                 <?php if(isset($submission->payout) && !$submission->payout->claimed) : ?>
                                     <?php echo form_open("payouts/claim/".$submission->payout->id); ?>
-                                    
+
                                     <div class='form-row'>
                                         <?php echo form_submit('submit', 'Claim', array('class' => 'btn')); ?>
                                     </div>
