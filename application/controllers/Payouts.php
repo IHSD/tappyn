@@ -15,7 +15,12 @@ class Payouts extends CI_Controller
             redirect('auth/login', 'refresh');
         }
     }
-    
+
+    public function debug()
+    {
+        echo json_encode($this->stripe_transfer_library->retrieve('tr_17e9FKLjuuo5mRdrCZ7lMGen'));
+    }
+
     public function index()
     {
         $this->data['payouts'] = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
@@ -27,6 +32,7 @@ class Payouts extends CI_Controller
         $payout = $this->payout->get($pid);
         if($payout)
         {
+            $payout->transfer = $this->stripe_transfer_library->retrieve($payout->transfer_id);
             $this->data['payout'] = $payout;
             $this->load->view('payouts/show', $this->data);
         } else {

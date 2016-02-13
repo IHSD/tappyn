@@ -84,7 +84,11 @@ class Users extends CI_Controller
                 $this->data['submissions'] = $submissions;
             }
         } else {
-
+            $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time <' => date('Y-m-d H:i:s')));
+            if($contests !== FALSE)
+            {
+                $this->data['contests'] = $contests;
+            }
         }
         $this->load->view('users/dashboard', $this->data);
     }
