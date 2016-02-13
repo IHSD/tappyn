@@ -71,13 +71,13 @@ class Payouts extends CI_Controller
         if(!$account)
         {
             $this->session->set_flashdata('error', "You need to set up your account first");
-            redirect('account/details', 'refresh');
+            redirect('accounts/details', 'refresh');
         }
         // check that transfers are enabled
         if(!$account->transfers_enabled)
         {
             $this->session->set_flashdata('error', "You still need to setup some of your account details");
-            redirect('account/payment_methods', 'refresh');
+            redirect('accounts/payment_methods', 'refresh');
         }
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
