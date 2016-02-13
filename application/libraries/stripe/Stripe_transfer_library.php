@@ -47,7 +47,7 @@ class Stripe_transfer_library
     public function retrieve($tid)
     {
         try {
-            $transfer = \Stripe\Balance::retrieve($tid);
+            $transfer = \Stripe\Transfer::retrieve($tid);
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
             return false;
