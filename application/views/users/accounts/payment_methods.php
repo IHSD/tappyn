@@ -3,7 +3,7 @@
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
   // This identifies your website in the createToken call below
-  Stripe.setPublishableKey('pk_test_vJpWdu1dw3v38i3MPtZdTIan');
+  Stripe.setPublishableKey("<?php echo $publishable_key; ?>");
   jQuery(function($) {
       $('#payment-form').submit(function(event) {
         var $form = $(this);

@@ -24,6 +24,10 @@ class Accounts extends CI_Controller
             $this->account = $this->stripe_account_library->get($this->stripe_account_id);
         }
 
+        $this->config->load('secrets');
+        $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
+        \Stripe\Stripe::setApiKey($this->api_key);
+
         $this->load->view('templates/navbar');
     }
 
