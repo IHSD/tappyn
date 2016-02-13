@@ -17,6 +17,6 @@ class Payments extends CI_Controller
     }
     public function test()
     {
-        $this->load->view('admin/test');
+        $this->load->view('admin/test', $this->data);
     }
 }
