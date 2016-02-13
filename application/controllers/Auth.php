@@ -431,8 +431,8 @@ class Auth extends CI_Controller {
 		{
 			die("Invalid request");
 		}
-        $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
-        $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
+        // $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
+        // $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 		$this->form_validation->set_rules('age', 'Age', 'required');
 		$this->form_validation->set_rules('gender', 'Gender', 'required');
         if($identity_column!=='email')
@@ -455,10 +455,10 @@ class Auth extends CI_Controller {
             $email    = strtolower($this->input->post('email'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $this->input->post('password');
-
+			$name_chunks = explode(' ', $this->input->post('name'));
             $additional_data = array(
-                'first_name' => $this->input->post('first_name'),
-                'last_name'  => $this->input->post('last_name'),
+                'first_name' => $name_chunks[0],
+                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
                 'company'    => $this->input->post('company'),
                 'phone'      => $this->input->post('phone'),
 				'age'		=> $this->input->post('age'),
