@@ -38,6 +38,7 @@ class Stripe_transfer_library
             ));
         } catch(Exception $e) {
             error_log("Error occured");
+            var_dump($e);
             $this->errors = $e->getMessage();
             return false;
         }
