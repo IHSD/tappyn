@@ -22,8 +22,8 @@ class Payout
      */
     public function create($cid, $sid)
     {
-        $contest = $this->db->select('*')->from('contests')->where('id', $cid)->limit(1)->row();
-        $submission = $this->db->select('*')->from('submissions')->where('id', $sid)->limit(1)->row();
+        $contest = $this->db->select('*')->from('contests')->where('id', $cid)->limit(1)->get()->row();
+        $submission = $this->db->select('*')->from('submissions')->where('id', $sid)->limit(1)->get()->row();
         $insert_data = array(
             'created_at' => time(),
             'contest_id' => $cid,
@@ -35,6 +35,17 @@ class Payout
         return $this->db->insert('payouts', $insert_data);
     }
 
+    public function exists($params)
+    {
+        $this->db->select('*')->from('payouts');
+        if(!empty($params)) $this->db->where($params);
+        $payout = $this->db->get();
+        if($payout && $payout->num_rows() > 0)
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
     public function get($pid)
     {
         $payout = $this->db->select('*')->from('payouts')->where('id', $pid)->get();

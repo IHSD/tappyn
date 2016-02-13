@@ -10,5 +10,13 @@ class Payments extends CI_Controller
             $this->session->set_flashdata('error', 'You dont have permission to access this area');
             redirect('contests/index', 'refresh');
         }
+        $this->load->view('templates/navbar');
+        $this->config->load('secrets');
+        $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
+
+    }
+    public function test()
+    {
+        $this->load->view('admin/test', $this->data);
     }
 }

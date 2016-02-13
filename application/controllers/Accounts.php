@@ -22,6 +22,7 @@ class Accounts extends CI_Controller
         if($this->stripe_account_id)
         {
             $this->account = $this->stripe_account_library->get($this->stripe_account_id);
+            $this->data['account'] = $this->account;
         }
 
         $this->config->load('secrets');
@@ -76,6 +77,7 @@ class Accounts extends CI_Controller
             $this->session->set_flashdata('message', "Account details successfully updated");
             redirect('accounts/payment_methods', 'refresh');
         }
+        $this->data['account'] = $this->account;
         $this->data['error'] = (validation_errors() ? validation_errors() : ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : false));
         $this->load->view('users/accounts/details', $this->data);
     }

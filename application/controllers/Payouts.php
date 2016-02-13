@@ -73,20 +73,16 @@ class Payouts extends CI_Controller
             $this->session->set_flashdata('error', "You need to set up your account first");
             redirect('account/details', 'refresh');
         }
-        // check that transfers adre enable
+        // check that transfers are enabled
         if(!$account->transfers_enabled)
         {
+            $this->session->set_flashdata('error', "You still need to setup some of your account details");
             redirect('account/payment_methods', 'refresh');
         }
         // OK, now we can process the requested transfer
-        $this->form_validation->set_rules('source_id', "Destination Account", 'required');
-        if($this->form_validation->run() === TRUE)
+        if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
-            // Preporcess
-            $source_id = $this->input->post('source_id');
-        }
-        if($this->form_validation->run() === TRUE && ($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id)))
-        {
+            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 0));
             $this->session->set_flashdata('message', "Transfer {$transfer->id} successfully created for {$transfer->amount}");
             redirect("payouts/show/{$payout->id}", 'refresh');
         } else {
