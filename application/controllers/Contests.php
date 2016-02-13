@@ -9,6 +9,7 @@ class Contests extends CI_Controller
         parent::__construct();
         $this->load->view('templates/navbar');
         $this->load->model('contest');
+        $this->load->model('submission');
         $this->load->library('submission_library');
         $this->data['footer'] = 'templates/footer';
         $this->load->library('mailer');
