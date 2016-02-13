@@ -48,6 +48,7 @@ class Payouts extends CI_Controller
     public function claim($id)
     {
         // Check that the payout exists
+        error_log("Validating payout");
         $payout = $this->payout->get($id);
         if(!$payout)
         {
@@ -55,11 +56,13 @@ class Payouts extends CI_Controller
             redirect('payouts/index', 'refresh');
         }
         // And that it hasnt been claimed
+        error_log("Checking if ppayout was claimed");
         if($payout->claimed == 1)
         {
             $this->session->set_flashdata('error', "This payout has been claimed already");
             redirect("payouts/show/{$id}", 'refresh');
         }
+        error_log("Checking if user has account");
         // Chekc that have set up their accounts alread'
         $stripe_account = $this->db->select('*')->where('user_id', $this->ion_auth->user()->row()->id)->limit(1)->get('stripe_accounts');
         if(!$stripe_account || $stripe_account->num_rows() == 0)
@@ -67,18 +70,21 @@ class Payouts extends CI_Controller
             $this->session->set_flashdata('error', "You need to set up your account first");
             redirect('accounts/details', 'refresh');
         }
+        error_log("Checking if account does indded exist");
         $account = $this->stripe_account_library->get($stripe_account->row()->account_id);
         if(!$account)
         {
             $this->session->set_flashdata('error', "You need to set up your account first");
             redirect('accounts/details', 'refresh');
         }
+        error_log("Checking that transfers are enabled");
         // check that transfers are enabled
         if(!$account->transfers_enabled)
         {
             $this->session->set_flashdata('error', "You still need to setup some of your account details");
             redirect('accounts/payment_methods', 'refresh');
         }
+        error_log("Attempting to create transfer");
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
