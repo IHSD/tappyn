@@ -3,7 +3,6 @@
 class Stripe_transfer_library
 {
     protected $api_key;
-    protected $errors = false;
     public function __construct()
     {
         $this->config->load('secrets');
