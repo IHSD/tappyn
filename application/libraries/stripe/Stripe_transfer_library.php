@@ -3,7 +3,7 @@
 class Stripe_transfer_library
 {
     protected $api_key;
-
+    protected $errors = false;
     public function __construct()
     {
         $this->config->load('secrets');
@@ -69,5 +69,10 @@ class Stripe_transfer_library
         }
         var_dump($charge);
         return TRUE;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }
