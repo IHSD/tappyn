@@ -76,7 +76,9 @@
 								<?php if($this->ion_auth->logged_in() && $contest->owner == $this->ion_auth->user()->row()->id): ?>
 									<?php form_open("contests/select_winner/".$contest->id); ?>
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
-									<div class='form-row'><?php echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));  ?></div>
+									<div class='form-row'>
+										<?php echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));  ?>
+									</div>
 									<?php form_close(); ?>
 								<?php endif; ?>
 			                </div>
