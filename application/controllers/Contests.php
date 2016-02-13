@@ -246,12 +246,12 @@ class Contests extends CI_Controller
             // =================================================================
 
             // So now we check if the winning user has transfers enabled
-            // $user_account = $this->user->account($submission_owner);
-            //
+            //  $user_account = $this->user->account($submission_owner);
+            // //
             // if(($account_details = $this->stripe_account_library->get($user_account)) &&
             //     $account_details->transfers_enabled)
             // {
-            //     // They have transfers enabled, so we create the transfer immediately
+            // // They have transfers enabled, so we create the transfer immediately
             //     if(!$this->stripe_transfer_library->create($user_account, $cid, 5000))
             //     {
             //         error_log("Error creating transfer for account {$user_account}");
@@ -259,6 +259,7 @@ class Contests extends CI_Controller
             //         $this->payouts->update($pid, array('pending' => 0));
             //     }
             // }
+
 
             // Send the email congratulating the user
             $this->mailer

@@ -32,6 +32,11 @@ class Accounts extends CI_Controller
         if(isset($_POST['stripe_tos'])) return true;
         $this->form_validation->set_message('stripe_tos', "To continue, you must accept Stripe's Terms of Service");
     }
+
+    public function debug()
+    {
+        echo json_encode($this->account);
+    }
     /**
      * Endpoint for setting user level account details
      * @return void
@@ -57,8 +62,7 @@ class Accounts extends CI_Controller
                 'legal_entity.dob.month' => $this->input->post('dob_month'),
                 'tos_acceptance.ip' => $_SERVER['REMOTE_ADDR'],
                 'tos_acceptance.date' => time(),
-                'country' => $this->input->post('country'),
-                'currency' => 'USD'
+                'country' => $this->input->post('country')
             );
         }
         // If the form pass validation, and we can create / upadte based on presence

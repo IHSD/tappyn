@@ -78,7 +78,8 @@ class Stripe_account_library
             'account_id' => $account->id,
             'user_id' => $this->ion_auth->user()->row()->id,
             'publishable_key' => $account->keys->publishable,
-            'secret_key' => $account->keys->secret
+            'secret_key' => $account->keys->secret,
+            'transfers_enabled' => false
         ));
         return $account;
     }
@@ -114,6 +115,7 @@ class Stripe_account_library
             $this->errors = $e->getMessage();
             return false;
         }
+        $this->stripe_account->save($account);
         return true;
     }
 
@@ -141,7 +143,7 @@ class Stripe_account_library
         }
         return TRUE;
     }
-    
+
     public function get($aid)
     {
         try {
@@ -151,6 +153,39 @@ class Stripe_account_library
             return false;
         }
         return $account;
+    }
+
+    public function updateTransferStatus($account)
+    {
+        $account_data = $this->db->select('*')->from('stripe_accounts')->where('account_id', $account->id)->limit(1)->get();
+        if($account_data && $account_data->num_rows () == 1)
+        {
+            echo "1";
+            $account_data = $account_data->row();
+            // Check if our stripe account has been updated as enabled
+            if($account_data->transfers_enabled == FALSE && $account->transfers_enabled == TRUE)
+            {
+                echo "2";
+                // We trigger the update, and transfer all pending payouts to our newly enabled account
+                $payouts = $this->db->select('*')->from('payouts')->where(array('user_id' => $account_data->user_id, 'pending' => 0))->get();
+                echo "Payouts to process => ".$payouts->num_rows();
+                if(!$payouts || $payouts->num_rows() == 0) return FALSE;
+                echo "3";
+                $payouts = $payouts->result();
+                foreach($payouts as $payout)
+                {
+                    echo "transfering payout to account";
+                    $this->load->library('stripe/stripe_transfer_library');
+                    if($transfer = $this->stripe_transfer_library->create($account_data->account_id, $payout->contest_id, $payout->amount))
+                    {
+                        // Update that our payout has been claimed
+                        $this->db->where('id', $payout->id)->update('payouts', array('account_id' => $account_data->account_id, 'transfer_id' => $transfer->id, 'pending' => 0, 'claimed' => 1));
+                    } else {
+                        echo $this->stripe_transfer_library->errors();
+                    }
+                }
+            }
+        }
     }
 
     public function errors()
