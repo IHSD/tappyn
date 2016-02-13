@@ -82,6 +82,7 @@ class Payouts extends CI_Controller
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
+            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 0));
             $this->session->set_flashdata('message', "Transfer {$transfer->id} successfully created for {$transfer->amount}");
             redirect("payouts/show/{$payout->id}", 'refresh');
         } else {

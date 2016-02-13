@@ -11,4 +11,8 @@ class Payments extends CI_Controller
             redirect('contests/index', 'refresh');
         }
     }
+    public function test()
+    {
+        $this->load->view('admin/test');
+    }
 }
