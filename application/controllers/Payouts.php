@@ -93,7 +93,7 @@ class Payouts extends CI_Controller
             redirect("payouts/show/{$payout->id}", 'refresh');
         } else {
             $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_account_library->errors() : false)));
-            redirect("payouts/show/{$payout->id}", 'refresh');
+            redirect("users/completed", 'refresh');
         }
     }
 }
