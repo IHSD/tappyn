@@ -24,7 +24,7 @@
 				<div class='medium-3 small-12 columns' style='padding-top:30px;'>
 					<div style='width:100%'>
 		                <div class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
-		                    <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
+		                    <span class="progress-meter" style="width:<?php echo $contest->submission_count * 2; ?>%"></span>
 		                </div>
 		            </div>
 		            <?php if($contest->submission_count < 50) : ?>
