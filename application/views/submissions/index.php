@@ -77,7 +77,7 @@
 									<?php form_open("contests/select_winner/".$contest->id); ?>
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
 									<div class='form-row'>
-										<?php echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));  ?>
+										<button class='button' <?php if($difference->i > 1) echo "disabled='true'"; ?> type='submit'>Choose Winner</button>
 									</div>
 									<?php form_close(); ?>
 								<?php endif; ?>
