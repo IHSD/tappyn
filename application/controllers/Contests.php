@@ -240,6 +240,12 @@ class Contests extends CI_Controller
                 redirect("contests/show/{$cid}", 'refresh');
             }
         }
+        $payout = $this->payout->exists(array('contest_id' => $cid));
+        if($payout)
+        {
+            $this->session->set_flashdata('error', "A submission has already been chosen as the winner");
+            redirect("contests/show/{$cid}", 'refresh');
+        }
         // Attempt to create the payouts
         if($pid = $this->payout->create($cid, $sid))
         {
