@@ -75,7 +75,18 @@ class Users extends CI_Controller
 
     public function completed()
     {
+        $this->data['status'] = 'winning';
+        if($this->ion_auth->in_group(2))
+        {
+            $submissions = $this->submission->getWinning($this->ion_auth->user()->row()->id);
+            if($submissions !== FALSE)
+            {
+                $this->data['submissions'] = $submissions;
+            }
+        } else {
 
+        }
+        $this->load->view('users/dashboard', $this->data);
     }
 
     /**

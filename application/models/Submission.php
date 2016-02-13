@@ -49,6 +49,7 @@ class Submission extends CI_Model
             foreach($results as $result)
             {
                 $result->contest = $this->parentContest($result->contest_id);
+                $result->payout = $this->db->select('*')->from('payouts')->where('submission_id', $result->id)->get()->row();
                 $result->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $result->contest->owner)->get()->row();
 
             }
@@ -62,7 +63,7 @@ class Submission extends CI_Model
     {
         $this->db->select('*')->from('submissions');
         $this->db->join('contests', 'submissions.contest_id = contests.id');
-        $this->db->where(array('submissions.owner' => $uid,'contests.stop_time >', date('Y-m-d H:i:s')));
+        $this->db->where(array('submissions.owner' => $uid,'contests.stop_time >' => date('Y-m-d H:i:s')));
         $this->db->order_by('submissions.created_at', 'desc');
         $submissions = $this->db->get();
         if($submissions)
@@ -74,6 +75,7 @@ class Submission extends CI_Model
                 {
                     $submission->contest = $this->parentContest($submission->contest_id);
                     $submission->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $submission->contest->owner)->get()->row();
+                    $submission->payout = $this->db->select('*')->from('payouts')->where('submission_id', $submission->id)->get()->row();
                 }
 
                 return $submissions;
@@ -82,6 +84,22 @@ class Submission extends CI_Model
             }
         }
         return FALSE;
+    }
+
+    public function getWinning($id)
+    {
+        $results = array();
+        $payouts = $this->db->select('*')->from('payouts')->where('user_id', $id)->get();
+        if(!$payouts || $payouts->num_rows() == 0) return $results;
+        foreach($payouts->result() as $payout)
+        {
+            $submission = $this->submission->get($payout->submission_id);
+            $submission->contest = $this->parentContest($submission->contest_id);
+            $submission->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $submission->contest->owner)->get()->row();
+            $submission->payout = $this->db->select('*')->from('payouts')->where('submission_id', $submission->id)->get()->row();
+            $results[] = $submission;
+        }
+        return $results;
     }
 
     public function count($params)
