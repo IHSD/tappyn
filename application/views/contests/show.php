@@ -135,7 +135,7 @@
 		            	<?php switch($contest->platform):
 				        case 'facebook': echo "<img src='".base_url()."public/img/fb_submish.png'>"; break;
 				        case 'google': echo "<img src='".base_url()."public/img/google_submish.png'>"; break;
-				        case 'twitter': echo "<img src='".base_url()."public/img/twitter_submish.png'>"; break;
+				        case 'twitter': echo "<img src='".base_url()."public/img/Twitter_submish.png'>"; break;
 				        endswitch; ?>
 				    </div>
 		        </div>

@@ -50,33 +50,42 @@
                         <div class="tabs-content" data-tabs-content="example-tabs">
                             <div class="tabs-panel is-active" id="panel1">
                                 <div class="margin-minus small-12 columns">
-                                    <?php foreach($submissions as $submission): ?>
-                                        <div class="medium-4 columns end contest-box min-height">
-                                                <div class="medium-12 ad-company-info">
-                                                    <div>
-                                                        <h5 class='text-left'><?php echo $submission->contest->title; ?> by <?php echo $submission->company->name; ?></h5>
-                                                        <span class='contest-price'>
-                                                            $50
-                                                        </span>
-                                                    </div>
-                                                    <h5>
-                                                        <?php echo (new DateTime() < new DateTime($submission->contest->stop_time)) ? "Ends " : "Ended " ?>
-                                                        <?php echo date('D M d, ha', strtotime($submission->contest->stop_time)); ?>
-                                                    </h5>
-                                                </div>
-                                                    <?php switch($submission->contest->platform):
-                       				                case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
-                       					            case 'google': $this->load->view('submissions/thumbnails/google', array('submission' => $submission)); break;
-                       					            case 'trending': $this->load->view('submissions/thumbnails/trending', array('submission' => $submission)); break;
-                       					            case 'tagline': $this->load->view('submissions/thumbnails/tagline', array('submission' => $submission)); break;
-                       					            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
-                       					            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
-                       				            endswitch; ?>
-                                                <div class='medium-12 large-12 ad-company-info' style='float:bottom'>
-                                                    <div class='text-center'><a href="<?php echo base_url().'contests/'.$submission->contest_id ?>" style='cursor:pointer;text-decoration:none;' class='btn tiny'>View Contest</a></div>
-                                                </div>
-                                        </div>
-                                    <?php endforeach; ?>
+                                   <?php foreach($submissions as $submission): ?>
+                        <div class='medium-4 small-12 columns'>
+                            <div class="contest-box" style='min-height:350px; max-height:350px;'>
+                                <div class='row'>
+                                 <?php switch($submission->contest->platform):
+                                    case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
+                                    case 'google': $this->load->view('submissions/thumbnails/google', array('submission' => $submission)); break;
+                                    case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
+                                    case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
+                                endswitch; ?>
+                                </div>
+                                <?php if(isset($submission->payout)) : ?>
+                                <span class='contest-price'>
+                                           Win
+                                </span>
+                            <?php endif; ?>
+                                <div class="contest-info">
+                                    <h5>
+                                        <span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+                                            <?php echo date('D, M d', strtotime($submission->created_at)); ?>
+                                        </span>
+                                    
+                                    </h5>
+                                </div>
+                                <!-- Generate a select as winner button if campaign is over and user owns contest -->
+                                <?php if(isset($submission->payout) && !$submission->payout->claimed) : ?>
+                                    <?php echo form_open("payouts/claim/".$submission->payout->id); ?>
+                                    
+                                    <div class='form-row'>
+                                        <?php echo form_submit('submit', 'Claim', array('class' => 'btn')); ?>
+                                    </div>
+                                    <?php echo form_close(); ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
                                 </div>
 
                             </div>
