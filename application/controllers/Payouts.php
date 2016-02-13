@@ -86,7 +86,7 @@ class Payouts extends CI_Controller
             $this->session->set_flashdata('message', "Transfer {$transfer->id} successfully created for {$transfer->amount}");
             redirect("payouts/show/{$payout->id}", 'refresh');
         } else {
-            $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_account_library->errors() : 'An unknown error occured')));
+            $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : 'An unknown error occured')));
             redirect("users/completed", 'refresh');
         }
     }
