@@ -42,9 +42,9 @@
 			<div class='div-center'><?php echo form_submit('submit', 'Update Your Info', array("class" => 'btn'));?></div>
 			<?php echo form_close(); ?>
 		<?php elseif($this->ion_auth->in_group(2)) : ?>
-			<h3>User</h3>
+			<h3 class='text-center'>User - Editing Your Info Coming Soon!</h3>
 			<?php echo form_open("users/profile");?>
-
+			
 			<?php echo form_close(); ?>
 		<?php endif; ?>
 	</div>
