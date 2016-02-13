@@ -6,36 +6,11 @@
         ($contest->objective == 'app_installs' ? "Use wit & humor to capture what makes this app unique" : 
         ($contest->objective == 'website_clicks' ? "Use wit & humor to capture what makes this business unique" : 
         ($contest->objective == 'engagement' ? "Create compelling content this business could supply" :
-        "Create a captivating tweet"))), 'type' => 'text'. 'id' => 'text', 'rows' : '2'));?>
+        "Create a captivating tweet"))), 'type' => 'text', 'id' => 'text', 'rows' : '2'));?>
 </div>
 <div class='input-count'><span id='text_span'>0</span> of 140 characters</div>
 
-<style>
-.twitter-outer-wrapper {
-    /*border: 2px solid #0084B4;*/
-    padding: 10px;
-}
-.twitter-form-wrapper {
-    background-color: #E5F2F7;
-    border: 1px solid #BFE0EC;
-    color: #0084B4;
-    border-radius: 5px;
-    padding: 10px;
-}
-.twitter-input-wrapper {
 
-}
-.twitter-logo {
-    float:left;
-}
-.twitter-header {
-    margin-top:5px;
-    margin-bottom: 10px;
-}
-.just-now {
-    font-size:0.7em
-}
-</style>
 <script>
 
 $('#text').keyup(function(){

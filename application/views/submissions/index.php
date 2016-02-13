@@ -72,6 +72,13 @@
 			                        	<?php if(isset($submission->owner->location) && $submission->owner->location) echo $submission->owner->location; ?>
 			                       	</h5>
 			                    </div>
+			                    <!-- Generate a select as winner button if campaign is over and user owns contest -->
+								<?php if($this->ion_auth->logged_in() && $contest->owner == $this->ion_auth->user()->row()->id): ?>
+									<?php form_open("contests/select_winner/".$contest->id); ?>
+									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
+									<div class='form-row'><?php echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));  ?></div>
+									<?php form_close(); ?>
+								<?php endif; ?>
 			                </div>
 			            </div>
 		        	<?php endforeach; ?>
