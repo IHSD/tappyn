@@ -52,7 +52,7 @@
 			<?php if(isset($submissions) && count($submissions) > 0) : ?>
 		        	<?php foreach($submissions as $submission): ?>
 		        		<div class='medium-4 small-12 columns'>
-			        		<div class="contest-box" style='min-height:300px; max-height:300px;'>
+			        		<div class="contest-box" style='min-height:350px; max-height:350px;'>
 			        			<div class='row'>
 			                     <?php switch($contest->platform):
 					                case 'facebook': $this->load->view('submissions/thumbnails/facebook', array('submission' => $submission)); break;
@@ -78,7 +78,7 @@
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
 									<div class='form-row'>
 										<?php 
-											if((int)$difference->i > 1) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
+											if($submission->contest->stop_time > date("Y-m-d H:i:s")) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
 											else echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));
 										?>
 									</div>
