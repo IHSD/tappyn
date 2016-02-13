@@ -11,6 +11,9 @@ class Payments extends CI_Controller
             redirect('contests/index', 'refresh');
         }
         $this->load->view('templates/navbar');
+        $this->config->load('secrets');
+        $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
+
     }
     public function test()
     {
