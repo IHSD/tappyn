@@ -27,7 +27,6 @@ class Stripe_transfer_library
 
     public function create($account_id, $contest_id, $amount, $payout_id)
     {
-        error_log("Creating transfer");
         try {
             $transfer = \Stripe\Transfer::create(array(
                 'amount' => $amount,
@@ -36,8 +35,6 @@ class Stripe_transfer_library
                 'description' => "Payout for contest {$contest_id}"
             ));
         } catch(Exception $e) {
-            error_log("Error occured");
-            var_dump($e);
             error_log($e->getMessage());
             $this->errors = $e->getMessage();
             return false;
