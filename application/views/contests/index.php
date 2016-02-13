@@ -55,8 +55,8 @@
                                         ?>
                                     </h5></div>
                                     <div style='width:100%'>
-                                        <div style='margin-top:5px;margin-bottom:0px;' class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="100">
-                                            <span class="progress-meter" style="width:<?php echo $contest->submission_count; ?>%"></span>
+                                        <div style='margin-top:5px;margin-bottom:0px;' class="progress" role="progressbar" tabindex="0" aria-valuenow="20" aria-valuemin="0" aria-valuetext="25 percent" aria-valuemax="50">
+                                            <span class="progress-meter" style="width:<?php echo $contest->submission_count * 2; ?>%"></span>
                                         </div>
                                         
                                         <p class="progress-meter-text" style='margin:0px;'><?php echo $contest->submission_count; ?>/50</p>
