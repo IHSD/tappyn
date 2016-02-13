@@ -225,20 +225,23 @@ class Contests extends CI_Controller
             $this->session->set_flashdata('error', "We couldn't find contest with id {$cid}");
             redirect("contests/index", 'refresh');
         }
-        // Current user must own contest
-        else if(!$this->ion_auth->in_group(1) || $this->ion_auth->user()->row()->id !== $contest->owner)
-        {
-            $this->session->set_flashdata('error', "You must own the contest to select a winner");
-            redirect("contests/show/{$cid}", 'refresh');
-        }
         // Check that the contest has ended
         else if($contest->stop_time > date('Y-m-d H:i:s'))
         {
             $this->session->set_flashdata('error', "The contest must be over in order to select a winner");
             redirect("contests/show/{$cid}", 'refresh');
         }
+        // Check that we are admin or the ccontest owner
+        if(!$this->ion_auth->user()->row()->id !== $contest->owner)
+        {
+            if(!$this->ion_auth->is_admin())
+            {
+                $this->session->set_flashdata('error', "You must own the contest to select a winner");
+                redirect("contests/show/{$cid}", 'refresh');
+            }
+        }
         // Attempt to create the payouts
-        else if($pid = $this->payout->create($cid, $sid))
+        if($pid = $this->payout->create($cid, $sid))
         {
             // Send the email congratulating the user
             $this->mailer
