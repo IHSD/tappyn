@@ -78,7 +78,7 @@
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
 									<div class='form-row'>
 										<?php 
-											if($difference->i > 1) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
+											if((int)$difference->i > 1) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
 											else echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));
 										?>
 									</div>
