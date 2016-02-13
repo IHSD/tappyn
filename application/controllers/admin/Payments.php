@@ -10,6 +10,7 @@ class Payments extends CI_Controller
             $this->session->set_flashdata('error', 'You dont have permission to access this area');
             redirect('contests/index', 'refresh');
         }
+        $this->load->view('templates/navbar');
     }
     public function test()
     {
