@@ -26,7 +26,7 @@ class Stripe_transfer_library
         return call_user_func_array( array($this->stripe_account, $method), $arguments);
     }
 
-    public function create($account_id, $contest_id, $amount)
+    public function create($account_id, $contest_id, $amount, $payout_id)
     {
         try {
             $transfer = \Stripe\Transfer::create(array(
@@ -40,7 +40,7 @@ class Stripe_transfer_library
             return false;
         }
         // Save our transfer to the database....
-        $this->stripe_transfer->save($transfer);
+        $this->stripe_transfer->save($transfer, $payout_id);
         return $transfer;
     }
 

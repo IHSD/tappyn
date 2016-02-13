@@ -27,16 +27,15 @@ class Accounts extends CI_Controller
         $this->load->view('templates/navbar');
     }
 
-    function accept_terms()
-    {
-        if(isset($_POST['stripe_tos'])) return true;
-        $this->form_validation->set_message('stripe_tos', "To continue, you must accept Stripe's Terms of Service");
-    }
-
+    /**
+     * Debug current account
+     * @return void
+     */
     public function debug()
     {
         echo json_encode($this->account);
     }
+
     /**
      * Endpoint for setting user level account details
      * @return void
@@ -49,7 +48,6 @@ class Accounts extends CI_Controller
         $this->form_validation->set_rules('dob_month', 'DOB - Month', 'required');
         $this->form_validation->set_rules('dob_year', 'DOB - Year', 'required');
         $this->form_validation->set_rules('country', 'Country', 'required');
-        $this->form_validation->set_rules('stripe_tos', "Terms of Service", 'callback_accept_terms');
         if($this->form_validation->run() === TRUE)
         {
             // Preproces

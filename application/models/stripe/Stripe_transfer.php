@@ -12,14 +12,15 @@ class Stripe_transfer extends CI_Model
      * @param  object $transfer Stripe Transfer Object
      * @return booleantps
      */
-    public function save($transfer)
+    public function save($transfer, $payout_id)
     {
         return $this->db->insert('stripe_transfers', array(
             'transfer_id' => $transfer->id,
             'destination' => $transfer->destination,
             'description' => "Payout for contest",
             'amount'      => $transfer->amount,
-            'created_at'  => $transfer->created
+            'created_at'  => $transfer->created,
+            'payout_id'   => $payout_id
         ));
     }
 }

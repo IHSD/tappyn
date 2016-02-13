@@ -208,7 +208,7 @@ class Contests extends CI_Controller
      */
     public function select_winner($cid)
     {
-        $this->load->library('payouts');
+        $this->load->library('payout');
         $this->load->model('user');
         $sid = $this->input->post('submission');
 
@@ -237,30 +237,8 @@ class Contests extends CI_Controller
             redirect("contests/show/{$cid}", 'refresh');
         }
         // Attempt to create the payouts
-        else if($pid = $this->payouts->create($cid, $sid))
+        else if($pid = $this->payout->create($cid, $sid))
         {
-            // =================================================================
-            // ANY ERRORS THAT OCCUR AFTER THIS POINT SHOULD NOT bE REPORTED TO
-            // THE CONTEST OWNER. THEY HAVE SUCESSFULLY CREATED THE SUBMISSION
-            // AND THEIR RESULT SHOULD REFLECT THAT
-            // =================================================================
-
-            // So now we check if the winning user has transfers enabled
-            //  $user_account = $this->user->account($submission_owner);
-            // //
-            // if(($account_details = $this->stripe_account_library->get($user_account)) &&
-            //     $account_details->transfers_enabled)
-            // {
-            // // They have transfers enabled, so we create the transfer immediately
-            //     if(!$this->stripe_transfer_library->create($user_account, $cid, 5000))
-            //     {
-            //         error_log("Error creating transfer for account {$user_account}");
-            //     } else {
-            //         $this->payouts->update($pid, array('pending' => 0));
-            //     }
-            // }
-
-
             // Send the email congratulating the user
             $this->mailer
                 ->to($this->ion_auth->user($submission->owner)->row()->email)
@@ -269,7 +247,7 @@ class Contests extends CI_Controller
                 ->html($this->load->view('emails/submission_chosen', array(), TRUE))
                 ->send();
 
-            // Send the email to the winning user
+            // Tell the contest they have successfully selected a winner!
             $this->session->set_flashdata('message', "Submission {$sid} has been chosen as a winner");
             redirect("contests/show/{$cid}", "refresh");
         }

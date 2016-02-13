@@ -15,6 +15,7 @@ class Payouts extends CI_Controller
             redirect('auth/login', 'refresh');
         }
     }
+    
     public function index()
     {
         $this->data['payouts'] = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
@@ -45,13 +46,13 @@ class Payouts extends CI_Controller
         if(!$payout)
         {
             $this->session->set_flashdata('error', "That payout does not exist");
-            redirect('payments/index', 'refresh');
+            redirect('payouts/index', 'refresh');
         }
         // And that it hasnt been claimed
         if($payout->claimed == 1)
         {
             $this->session->set_flashdata('error', "This payout has been claimed already");
-            redirect("payments/show/{$id}", 'refresh');
+            redirect("payouts/show/{$id}", 'refresh');
         }
         // Chekc that have set up their accounts alread'
         $stripe_account = $this->db->select('*')->where('user_id', $this->ion_auth->user()->row()->id)->limit(1)->get('stripe_accounts');
@@ -78,7 +79,7 @@ class Payouts extends CI_Controller
             // Preporcess
             $source_id = $this->input->post('source_id');
         }
-        if($this->form_validation->run() === TRUE && ($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount)))
+        if($this->form_validation->run() === TRUE && ($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id)))
         {
             $this->session->set_flashdata('message', "Transfer {$transfer->id} successfully created for {$transfer->amount}");
             redirect("payouts/show/{$payout->id}", 'refresh');
