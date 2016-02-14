@@ -15,6 +15,7 @@ class Payments extends CI_Controller
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
 
     }
+    
     public function test()
     {
         $this->load->view('admin/test', $this->data);
