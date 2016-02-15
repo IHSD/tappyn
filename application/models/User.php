@@ -27,7 +27,7 @@ class User extends CI_Model
      * @param  mixed $where
      * @return self
      */
-    public function where($where)
+    public function where($where, $value = NULL)
     {
         if(!is_array($where))
         {
@@ -35,7 +35,6 @@ class User extends CI_Model
         }
 
         array_push($this->where, $where);
-
         return $this;
     }
 
@@ -49,8 +48,9 @@ class User extends CI_Model
         if(!is_array($select))
         {
             $this->select = $select;
+        } else {
+            $this->select = implode(',',$select);
         }
-        $this->select = implode(',',$select);
         return $this;
     }
 
@@ -190,7 +190,10 @@ class User extends CI_Model
         $this->db->join('profiles', $this->table.'.id = profiles.id', 'left');
         if(!empty($this->where))
         {
-            $this->db->where($where);
+            foreach($this->where as $where)
+            {
+                $this->db->where($where);
+            }
             $this->where = array();
         }
 
@@ -213,11 +216,10 @@ class User extends CI_Model
         }
 
         $this->db->order_by($this->order_by, $this->order_dir);
-        $this->order_by = 'id';
+        $this->order_by = 'users.id';
         $this->order_dir = 'desc';
 
         $this->response = $this->db->get();
-        error_log($this->db->last_query());
         return $this;
     }
 

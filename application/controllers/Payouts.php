@@ -15,7 +15,7 @@ class Payouts extends CI_Controller
             redirect('auth/login', 'refresh');
         }
     }
-
+    
     public function debug()
     {
         echo json_encode($this->stripe_transfer_library->retrieve('tr_17e9FKLjuuo5mRdrCZ7lMGen'));
