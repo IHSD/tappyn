@@ -39,7 +39,7 @@
                         <?php
                             if($difference->d > 0) echo plur($difference->d, 'day');
                             elseif($difference->h > 0) echo plur($difference->h, 'hour');
-                            else echo plur($difference->i, 'minute');                                        
+                            else echo plur($difference->i, 'minute');
                         ?>
 					</h4>
 					<h4  style='margin:0px;'><?php echo ucfirst($contest->platform); ?></h4>
@@ -62,8 +62,15 @@
 						            case 'general': $this->load->view('submissions/thumbnails/general', array('submission' => $submission)); break;
 						            case 'twitter': $this->load->view('submissions/thumbnails/twitter', array('submission' => $submission)); break;
 					            endswitch; ?>
+								<?php $last_name = $submission->owner->last_name[0]; ?>
+									<div class='medium-4 small-12 columns'>
+										<h3 class='submission-owner-title'>
+											<?php echo (!is_null($submission->owner->first_name) ? $submission->owner->first_name.' '.ucfirst($last_name) : 'Anonymous'); ?>
+										</h3>
+									</div>
 					            </div>
 			                    <div class="contest-info">
+
 			                        <?php if(isset($submission->owner->school) && $submission->owner->school) echo "<h5> ".$submission->owner->school." </h5>"; ?>
 			                        <h5>
 			                        	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
@@ -77,8 +84,8 @@
 									<?php echo form_open("contests/select_winner/".$contest->id); ?>
 									<?php echo form_input(array('name' => 'submission', 'value' => $submission->id, 'type' => 'hidden')); ?>
 									<div class='form-row'>
-										<?php 
-											if($submission->contest->stop_time > date("Y-m-d H:i:s")) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
+										<?php
+											if($contest->stop_time > date("Y-m-d H:i:s")) echo form_submit('submit', 'Choose Winner', array('class' => 'btn', 'disabled' => 'disabled'));
 											else echo form_submit('submit', 'Choose Winner', array('class' => 'btn'));
 										?>
 									</div>
