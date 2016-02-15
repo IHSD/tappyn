@@ -76,7 +76,7 @@
                                     <li>
                                         <a href='#'><?php echo ucfirst($this->ion_auth->user()->row()->first_name)." ".ucfirst($this->ion_auth->user()->row()->last_name[0]); ?></a>
                                         <ul class='menu vertical'>
-                                            <!--<li><a href="<?php echo base_url().'accounts/payment_methods'; ?>">Payment</a></li> -->
+                                            <li><a href="<?php echo base_url().'accounts/payment_methods'; ?>">Payment</a></li>
             	                            <li><a href="<?php echo base_url().'profile'; ?>">Profile</a></li>
             	                            <li><a href="<?php echo base_url().'logout'; ?>">Log out</a></li>
                                         </ul>
