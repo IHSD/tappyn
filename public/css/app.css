@@ -1,3 +1,12 @@
+.container-fluid{
+	padding:0px;
+}
+.row{
+	margin:0;
+}
+body{
+	font-family: 'Lato', sans-serif;
+}
 #nav-icon4 {
   width: 31px;
   height: 31px;
@@ -117,7 +126,8 @@ input[type='text']:focus {
 	border: 1px solid #ff5e00 !important;
 }
 header {
-	padding: 20px 0;
+	height:75px;
+	padding: 10px 0;
 	background: #fff;
 }
 .header-row {
@@ -130,14 +140,21 @@ header .logo a {
 	display: block;
 }
 header nav {
-	margin: 7px 0 0;
 	width: 100%;
 }
 header nav ul {
-	padding: 0;
-	text-align: center;
-	margin: 0;
+	padding-top:15px;
 	list-style: none;
+}
+header nav ul li a{
+	text-decoration: none !important;
+	color:#333;
+}
+
+header nav ul li a:hover{
+	color:#ff5e00;
+	padding-bottom:10px;
+	border-bottom:1px solid #ff5e00;
 }
 header nav ul li.login-li {
 	float:right;
@@ -151,16 +168,6 @@ header nav ul li {
 }
 header nav ul li .btn:hover {
 	color: #fff;
-}
-header nav ul li a {
-	padding:  0 0 5px;
-	display: inline-block;
-	font-weight: 400;
-	color: #575757;
-	transition-property: all;
-	transition-duration: .5s;
-	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
-	text-decoration: none;
 }
 header nav ul li a.username {
 	background: #ff5e00;
@@ -187,10 +194,7 @@ header .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow a {
 header .menu > li:not(.menu-text) > a {
 	line-height: 30px;
 }
-header nav ul li a:hover, header nav ul li a.active {
-	color: #FF5E00;
-	border-bottom: 1px solid #FF5E00;
-}
+
 header nav ul.dropdown li {
 	padding: 0;
 }
@@ -279,19 +283,17 @@ header .btn-login {
 	z-index: 1;
 	background: rgba(0, 0, 0, 0.75);
 }
-.hero-banner .row {
-	position: relative;
-	z-index: 2;
-	height: 100%;
-}
-.hero-banner .medium-12 {
-	height: 100%;
+
+.hero-banner{
 	display: table;
 }
 .hero-content {
 	vertical-align: middle;
 	display: table-cell;
 	text-align: center;
+	z-index:2;
+	position:relative;
+	top:150;
 }
 .hero-content h2 {
 	color: #fff;
@@ -305,15 +307,13 @@ header .btn-login {
 }
 .hero-content .btn-banner {
 	font-size: 18px;
-	width: 300px;
-	height: 50px;
-	padding:  0;
 	line-height: 50px;
 }
 /** How it works **/
 .how-it-works {
 	text-align: center;
 	padding:  68px 0;
+	background-color:#fff;
 }
 .title {
 	padding:  0 0 32px;
@@ -354,7 +354,6 @@ header .btn-login {
 /** Contests **/
 .contests {
 	padding:  50px 0;
-	background:  #F7F7F7;
 }
 .contest-box-header {
     background-color: black;
@@ -451,6 +450,7 @@ header .btn-login {
 .contest-button {
 	text-align: center;
 	overflow: hidden;
+	margin-bottom:10px;
 }
 .contest-button .btn-contest {
 	font-size: 18px;
@@ -464,6 +464,7 @@ header .btn-login {
 .love-raw {
 	text-align: center;
 	padding:  50px 0;
+	background-color:#fff;
 }
 .love-raw h3 {
 	color: #8899AA;
@@ -652,7 +653,6 @@ footer {
  	background: #F9F9F9;
  }
  .innerpage {
- 	padding:  40px 0;
  	min-height:100%;
  	background-color: #EBEEF0;
  }
