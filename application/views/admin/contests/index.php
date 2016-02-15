@@ -29,7 +29,7 @@
                             <li>
                               <a href="#">Actions</a>
                               <ul class="menu">
-                                  <li><a href="<?php echo base_url().'admin/contests/show/'.$contest->id; ?>">View</a></li>
+                                  <li><a href="<?php echo base_url().'contests/show/'.$contest->id; ?>">View</a></li>
                                   <li><a href="<?php echo base_url().'admin/contests/edit/'.$contest->id; ?>">Edit</a></li>
                                   <li><a href="<?php echo base_url().'admin/users/show/'.$contest->owner; ?>">View Owner</a></li>
                                 <!-- ... -->
