@@ -5,6 +5,10 @@ class Payouts extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->ion_auth->is_admin())
+        {
+            $this->load->view('templates/admin_navbar');
+        }
         $this->load->view('templates/navbar');
         $this->load->library('payout');
         $this->load->library('stripe/stripe_account_library');
@@ -14,8 +18,9 @@ class Payouts extends CI_Controller
             $this->session->set_flashdata('error', 'You must be logged in to access this area');
             redirect('auth/login', 'refresh');
         }
+
     }
-    
+
     public function debug()
     {
         echo json_encode($this->stripe_transfer_library->retrieve('tr_17e9FKLjuuo5mRdrCZ7lMGen'));

@@ -10,7 +10,10 @@ class Accounts extends CI_Controller
             $this->session->set_flashdata('error', 'You have to be logged in to access this area');
             redirect('contests/index', 'refresh');
         }
-
+        if($this->ion_auth->is_admin())
+        {
+            $this->load->view('templates/admin_navbar');
+        }
         if(!$this->ion_auth->in_group(2))
         {
             $this->session->set_flashdata('error', 'Only content creators can access the accounts panel');

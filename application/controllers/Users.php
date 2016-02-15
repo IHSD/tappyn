@@ -10,6 +10,10 @@ class Users extends CI_Controller
             $this->session->set_flashdata('error', 'You must be logged in to access this area');
             redirect('login', 'refresh');
         }
+        if($this->ion_auth->is_admin())
+        {
+            $this->load->view('templates/admin_navbar');
+        }
         $this->load->view('templates/navbar');
         $this->load->model('user');
         $this->load->model('submission');
