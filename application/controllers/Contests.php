@@ -7,6 +7,10 @@ class Contests extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if($this->ion_auth->is_admin())
+        {
+            $this->load->view('templates/admin_navbar');
+        }
         $this->load->view('templates/navbar');
         $this->load->model('contest');
         $this->load->model('submission');
