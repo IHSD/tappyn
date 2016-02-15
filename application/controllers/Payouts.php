@@ -23,8 +23,12 @@ class Payouts extends CI_Controller
 
     public function index()
     {
-        $this->data['payouts'] = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
-        $this->load->view('payouts/index', $this->data);
+        $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+        $this->responder->data(
+            array(
+                'payouts' => $payouts
+            )
+        )->respond();
     }
 
     public function show($pid)
@@ -33,11 +37,13 @@ class Payouts extends CI_Controller
         if($payout)
         {
             $payout->transfer = $this->stripe_transfer_library->retrieve($payout->transfer_id);
-            $this->data['payout'] = $payout;
-            $this->load->view('payouts/show', $this->data);
+            $this->templater->data(array(
+                'payout' => $payout
+            ))->respond();
         } else {
-            $this->session->set_flashdata('error', "That payout does not exist");
-            $this->load->view('payouts/index', 'refresh');
+            $this->responder->error(
+                "We couldnt find the payout you were looking for"
+            )->code(404)->respond();
         }
     }
 

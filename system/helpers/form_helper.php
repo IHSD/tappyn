@@ -851,6 +851,18 @@ if ( ! function_exists('form_error'))
 	}
 }
 
+if( ! function_exists('ajax_error'))
+{
+	function ajax_error()
+	{
+		if (FALSE === ($OBJ =& _get_validation_object()))
+		{
+			return '';
+		}
+
+		return $OBJ->error_array();
+	}
+}
 // ------------------------------------------------------------------------
 
 if ( ! function_exists('validation_errors'))

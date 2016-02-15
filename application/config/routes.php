@@ -52,23 +52,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome/index';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+/**
+ * Authentication
+ */
 $route['signup'] = 'auth/create_user';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
+$route['forgot_password'] = 'auth/forgot_password';
+/**
+ * Base Routes
+ */
 $route['profile'] = 'users/profile';
 $route['how_it_works'] = 'welcome/how_it_works';
 $route['contact'] = 'welcome/contact_us';
 $route['tos'] = 'welcome/tos';
 $route['privacy_policy'] = 'welcome/privacy_policy';
 $route['faq'] = 'welcome/faq';
-$route['forgot_password'] = 'auth/forgot_password';
+$route['mailing_list']['post'] = 'welcome/mailing_list';
+$route['unsubscribe']['get'] = 'welcome/unsubscribe';
 $route['dashboard'] = 'users/dashboard';
 $route['in_progress'] = 'users/in_progress';
 $route['completed'] = 'users/completed';
+$route['uploads/(:any)'] = 'uploads/index/$1';
+
+/**
+ * Contests
+ */
 $route['contests/(:num)'] = 'contests/show/$1';
 $route['submissions/(:num)'] = 'submissions/show/$1';
 $route['contests/(:num)/submissions'] = 'contests/submissions/$1';
-$route['uploads/(:any)'] = 'uploads/index/$1';
+
+/**
+ * Submissions
+ */
+$route['contests/(:num)/submissions'] = 'submissions/index/$1';
+
+
+/**
+ * Admin
+ */
 $route['admin']['get'] = 'admin/users/index';
-$route['mailing_list']['post'] = 'welcome/mailing_list';
-$route['unsubscribe']['get'] = 'welcome/unsubscribe';
