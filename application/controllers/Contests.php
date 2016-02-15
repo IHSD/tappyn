@@ -235,6 +235,13 @@ class Contests extends CI_Controller
             $this->session->set_flashdata('error', "The contest must be over in order to select a winner");
             redirect("contests/show/{$cid}", 'refresh');
         }
+        $company_name = $this->db->select('name')->from('profiles')->where("id", $contest->owner)->get();
+        if($company_name)
+        {
+            $company_name = $company_name->row()->name;
+        } else {
+            $company_name = '';
+        }
         // Check that we are admin or the ccontest owner
         if(!$this->ion_auth->user()->row()->id !== $contest->owner)
         {
@@ -259,7 +266,7 @@ class Contests extends CI_Controller
                 ->to($this->ion_auth->user($submission->owner)->row()->email)
                 ->from("squad@tappyn.com")
                 ->subject("Congratulations, you're submission won!")
-                ->html($this->load->view('emails/submission_chosen', array(), TRUE))
+                ->html($this->load->view('emails/submission_chosen', array('company_name' => $company_name), TRUE))
                 ->send();
 
             // Tell the contest they have successfully selected a winner!

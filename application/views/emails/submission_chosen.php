@@ -21,7 +21,7 @@
     Congratulations!
 </p>
 <p style='text-align:center'>
-    You were selected as a winner for last weeks contest run by *company name*
+    You were selected as a winner for last weeks contest run by <?php echo $company_name; ?>
 </p>
 <p style='text-align:center'>
     Send us your paypal e-mail so we can transfer you your winnings.
