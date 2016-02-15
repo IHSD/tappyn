@@ -46,6 +46,8 @@ class Contests extends CI_Controller
 
     /**
      * Fetch a single contest
+     *
+     * Also, we log the impression so we can track views
      * @param  integer $id
      * @return void
      */
@@ -78,8 +80,10 @@ class Contests extends CI_Controller
             2 => '35-44',
             3 => '45+'
         );
+        $this->contest->log_impression($cid);
         $this->load->view('contests/show', $this->data);
     }
+
     /**
      * Create a new contest, or render the creation form
      * @return void

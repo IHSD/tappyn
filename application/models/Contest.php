@@ -117,6 +117,14 @@ class Contest extends CI_Model
         return $this->response->result();
     }
 
+    public function log_impression($cid)
+    {
+        $this->db->insert('impressions', array(
+            'contest_id' => $cid,
+            'ip_address' => $_SERVER['REMOTE_ADDR'],
+            'user_agent' => $_SERVER['HTTP_USER_AGENT']
+        ));
+    }
     public function get($id)
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
