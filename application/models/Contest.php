@@ -18,7 +18,7 @@ class Contest extends CI_Model
         {
             $contest = $contest->row();
             $contest->submission_count = $this->submissionsCount($contest->id);
-            $contest->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $contest->owner)->limit(1)->get()->row();
+            $contest->company = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->limit(1)->get()->row();
             return $contest;
         }
         return false;
@@ -41,7 +41,7 @@ class Contest extends CI_Model
             foreach($results as $result)
             {
                 $result->submission_count = $this->submissionsCount($result->id);
-                $result->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $result->owner)->limit(1)->get()->row();
+                $result->company = $this->db->select('*')->from('profiles')->where('id', $result->owner)->limit(1)->get()->row();
             }
             return $results;
         }

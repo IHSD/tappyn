@@ -7,20 +7,16 @@ class Users extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->session->set_flashdata('error', 'You must be logged in to access this area');
-            redirect('login', 'refresh');
+            $this->responder->fail(
+                "You must be logged in to access this area"
+            )->code(401)->respond();
+            return;
         }
-        $this->load->view('templates/navbar');
         $this->load->model('user');
         $this->load->model('submission');
         $this->load->model('contest');
         $this->load->library('stripe/stripe_account_library');
         $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);
-    }
-
-    public function index()
-    {
-        redirect('contests/index', 'refresh');
     }
 
     /**
@@ -39,7 +35,15 @@ class Users extends CI_Controller
             $submissions = $this->submission->getByUser($this->ion_auth->user()->row()->id , array());
             if($submissions !== FALSE)
             {
-                $this->data['submissions'] = $submissions;
+                $this->responder->data(
+                    array(
+                        'submissions' => $submissions
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         }
         else
@@ -47,10 +51,17 @@ class Users extends CI_Controller
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id));
             if($contests !== FALSE)
             {
-                $this->data['contests'] = $contests;
+                $this->responder->data(
+                    array(
+                        'contests' => $contests
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         }
-        $this->load->view('users/dashboard', $this->data);
     }
 
     public function in_progress()
@@ -61,16 +72,31 @@ class Users extends CI_Controller
             $submissions = $this->submission->getActive($this->ion_auth->user()->row()->id , array());
             if($submissions !== FALSE)
             {
-                $this->data['submissions'] = $submissions;
+                $this->responder->data(
+                    array(
+                        'submissions' => $submissions
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         } else {
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time >' => date('Y-m-d H:i:s')));
             if($contests !== FALSE)
             {
-                $this->data['contests'] = $contests;
+                $this->responder->data(
+                    array(
+                        'contests' => $contests
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         }
-        $this->load->view('users/dashboard', $this->data);
     }
 
     public function completed()
@@ -81,16 +107,31 @@ class Users extends CI_Controller
             $submissions = $this->submission->getWinning($this->ion_auth->user()->row()->id);
             if($submissions !== FALSE)
             {
-                $this->data['submissions'] = $submissions;
+                $this->responder->data(
+                    array(
+                        'submissions' => $submissions
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         } else {
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time <' => date('Y-m-d H:i:s')));
             if($contests !== FALSE)
             {
-                $this->data['contests'] = $contests;
+                $this->responder->data(
+                    array(
+                        'contests' => $contests
+                    )
+                )->respond();
+            } else {
+                $this->responder->fail(
+                    'There was an error fetching your dashboard'
+                )->code(400)->respond();
             }
         }
-        $this->load->view('users/dashboard', $this->data);
     }
 
     /**
@@ -167,7 +208,6 @@ class Users extends CI_Controller
         // check if they have submitted any required information
         if($this->input->post('submit'))
         {
-            echo "Submitting form";
             $data = array();
             foreach($this->input->post() as $key => $value)
             {

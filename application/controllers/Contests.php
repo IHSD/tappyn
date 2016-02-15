@@ -7,11 +7,9 @@ class Contests extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->view('templates/navbar');
         $this->load->model('contest');
         $this->load->model('submission');
         $this->load->library('submission_library');
-        $this->data['footer'] = 'templates/footer';
         $this->load->library('mailer');
     }
 
@@ -34,10 +32,10 @@ class Contests extends CI_Controller
         $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
         if($contests !== FALSE)
         {
-            $this->data['contests'] = $contests;
-            $this->data['pagination_links'] = $this->pagination->create_links();
+            $this->responder->data($contests)->respond();
+        } else {
+            $this->responder->fail("An unknown error occured")->code(400)->respond();
         }
-        $this->load->view('contests/index', $this->data);
     }
 
     /**
@@ -48,33 +46,17 @@ class Contests extends CI_Controller
     public function show($cid)
     {
         $contest = $this->contest->get($cid);
-        if($this->ion_auth->logged_in())
-        {
-            $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
-        }
-        else {
-            $this->data['can_submit'] = true;
-        }
 
         if(!$contest)
         {
-            $this->session->set_flashdata('error', 'That contest does not exist');
-            redirect('contests/index', 'refresh');
+            $this->responder->fail(
+                "That contest does not exist"
+            )->code(404)->respond();
+        } else {
+            $this->responder->data(array(
+                'contest' => $contest
+            ))->respond();
         }
-        $this->data['contest'] = $contest;
-        $this->data['genders'] = array(
-            'GENDER' => 'Gender',
-            0 => 'All',
-            1 => "Male",
-            2 => "Female"
-        );
-        $this->data['ages'] = array(
-            0 => '18-24',
-            1 => '25-34',
-            2 => '35-44',
-            3 => '45+'
-        );
-        $this->load->view('contests/show', $this->data);
     }
     /**
      * Create a new contest, or render the creation form
@@ -84,8 +66,8 @@ class Contests extends CI_Controller
     {
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->session->set_flashdata('error', 'You must be logged in as a company to launch a contest');
-            redirect('contests/index', 'refresh');
+            $this->responder->code(403)->respond();
+            return;
         }
 
         $this->form_validation->set_rules('title', 'Title', 'required');
@@ -115,74 +97,13 @@ class Contests extends CI_Controller
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
-            $this->session->set_flashdata('message', $this->contest->messages());
-            redirect("users/dashboard", "refresh");
+            $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
         }
         else
         {
-            $this->data['error'] = (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : false));
-
-            $this->data['title'] = array(
-                'name' => 'title',
-                'id' => 'title',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('title')
-            );
-            $this->data['audience_description'] = array(
-                'name' => 'audience_description',
-                'id' => 'audience_description',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('audience_description')
-            );
-            $this->data['how_your_different'] = array(
-                'name' => 'how_your_different',
-                'id' => 'how_your_different',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('how_your_different')
-            );
-            $this->data['objective'] = array(
-                'name' => 'objective',
-                'id' => 'objective',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('objective')
-            );
-            $this->data['location'] = array(
-                'name' => 'location',
-                'id' => 'location',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('location')
-            );
-            $this->data['age_range'] = array(
-                'name' => 'age_range',
-                'id' => 'age_range',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('age_range')
-            );
-            $this->data['gender'] = array(
-                'name' => 'gender',
-                'id' => 'gender',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('gender')
-            );
-            $this->data['format'] = array(
-                'name' => 'format',
-                'id' => 'format',
-                'type' => 'text',
-                'value' => $this->form_validation->set_value('format')
-            );
-
-            $this->data['platforms'] = array(
-                'facebook' => 'Facebook',
-                'google' => 'Google',
-                'general' => 'General',
-                'twitter' => 'Twitter'
-            );
-            $this->data['objectives'] = array(
-                'engagement' => 'Increase Engagement',
-                'website_clicks' => 'Send People to your Website',
-                'app_installs' => 'App Installs',
-            );
-            $this->load->view('contests/create', $this->data);
+            $this->responder->fail(
+                (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : 'An unknown error occured'))
+            )->code(400)->respond();
         }
     }
 
@@ -190,15 +111,10 @@ class Contests extends CI_Controller
     {
         $contest = $this->contest->get($cid);
         $submissions = $this->contest->submissions($cid);
-        if($this->ion_auth->logged_in())
-        {
-            $this->data['can_submit'] = $this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $cid);
-        } else {
-            $this->data['can_submit'] = true;
-        }
-        $this->data['contest'] = $contest;
-        $this->data['submissions'] = $submissions;
-        $this->load->view('submissions/index', $this->data);
+        $this->responder->data(array(
+            'contest' => $contest,
+            'submissions' => $submissions
+        ))->respond();
     }
 
     /**
@@ -268,14 +184,5 @@ class Contests extends CI_Controller
             $this->session->set_flashdata('error', ($this->payout->errors() ? $this->payout_errors() : "An unknown error occured"));
             redirect("contests/show/{$cid}", 'refresh');
         }
-    }
-
-    /**
-     * Edit and update a contest
-     * @return void
-     */
-    public function edit()
-    {
-
     }
 }

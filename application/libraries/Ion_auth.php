@@ -125,6 +125,29 @@ class Ion_auth
 		return get_instance()->$var;
 	}
 
+	/**
+	 * Fetch user data for client side JS Framework
+	 * @return [type] [description]
+	 */
+	public function ajax_user()
+	{
+		$user_data = $this->user()->row();
+		$results = array(
+			'email' => $user_data->email,
+			'first_name' => $user_data->first_name,
+			'last_name' => $user_data->last_name,
+			'is_admin' => $this->is_admin()
+		);
+		if($this->in_group(2))
+		{
+			$results['type'] = 'member';
+		}
+		else if($this->in_group(3))
+		{
+			$results['type'] = 'company';
+		}
+		return $results;
+	}
 
 	/**
 	 * forgotten password feature

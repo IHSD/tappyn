@@ -5,7 +5,6 @@ class Submissions extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->view('templates/navbar');
         $this->load->model('submission');
         $this->load->model('contest');
         $this->load->library('ion_auth');
@@ -22,13 +21,10 @@ class Submissions extends CI_Controller
      */
     public function index($contest_id)
     {
-        if(!$this->ion_auth->logged_in())
-        {
-            $this->session->set_flashdata('error', 'You must be logged in to view submissions');
-            redirect('auth/login', 'refresh');
-        }
         $submissions = $this->contest->submissions($contest_id);
-        $this->load->view('submissions/index', array('submissions' => $submissions));
+        $this->responder->data(array(
+            'submissions' => $submissions
+        ))->respond();
     }
 
     public function show($sid)
@@ -47,19 +43,6 @@ class Submissions extends CI_Controller
      */
     public function create($contest_id)
     {
-        $this->data['genders'] = array(
-            'GENDER' => 'Gender',
-            0 => 'All',
-            1 => "Male",
-            2 => "Female"
-        );
-        $this->data['ages'] = array(
-            0 => '18-24',
-            1 => '25-34',
-            2 => '35-44',
-            3 => '45+'
-        );
-
         $logged_in = $this->ion_auth->logged_in();
         // Verify user is logged in
         if(!$logged_in)
@@ -92,57 +75,65 @@ class Submissions extends CI_Controller
                $this->ion_auth_model->register($identity, $password, $email, array('first_name' => $first_name, 'last_name' => $last_name), array(2)) &&
                $this->ion_auth_model->login($identity, $password, 1))
             {
-                // $this->notifyUserWithPassword($email, $password);
-                $this->session->set_flashdata('track', 1);
+
                 $this->mailer
                     ->to($email)
                     ->from("Registration@tappyn.com")
                     ->subject('Account Successfully Created')
                     ->html($this->load->view('auth/email/inline_registration', array('email' => $email, 'password' => $password), TRUE))
                     ->send();
-
                 $this->user->saveProfile($this->ion_auth->user()->row()->id, array('age' => $this->input->post('age')));
                 $logged_in = true;
             }
             else
             {
-                $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->ion_auth_model->errors() ? $this->ion_auth_model->errors() : 'An unknown error occured')));
+                $this->responder->fail(
+                    (validation_errors() ? validation_errors() : ($this->ion_auth_model->errors() ? $this->ion_auth_model->errors() : 'An unknown error occured'))
+                )->code(400)->respond();
+                return;
             }
         }
 
         $this->form_validation->clear();
         if($this->ion_auth->in_group(3))
         {
-            $this->session->set_flashdata('error', 'Only creators are allowed to submit to contests');
-            redirect("contests/show/{$contest_id}", 'refresh');
+            $this->responder->fail(
+                "Only creators are allowed to submit to contests"
+            )->code(403)->respond();
         }
 
         // Get the contest, and then dynamically change form validation rules, based on the type of the contest
         $contest = $this->contest->get($contest_id);
         if(!$contest)
         {
-            $this->session->set_flashdata('error', 'We couldnt find the account you were looking for');
-            redirect("contests/show/{$contest_id}", 'refresh');
+            $this->responder->fail(
+                "We couldnt find the contest you were looking for"
+            )->code(404)->respond();
+            return;
         }
 
         if($contest->submission_count >= 50)
         {
-            $this->session->set_flashdata('error', "We're sorry, but this contest has reached its submission limit");
-            redirect("contests/show/{$contest_id}");
+            $this->responder->fail(
+                "We're sorry, but this contest has reached its submission limit"
+            )->code(400)->respond();
+            return;
         }
 
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
-            $this->session->set_flashdata('error', "This contest has ended");
-            redirect("contests/show/{$contest_id}");
+            $this->responder->fail(
+                "We're sorry, but this contest has already ended"
+            )->code(400)->respond();
         }
 
         if($logged_in)
         {
             if(!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id))
             {
-                $this->session->set_flashdata('error', 'You have already submitted to this contest');
-                redirect("contests/show/{$contest_id}");
+                $this->responder->fail(
+                    "You have already submitted to this contest"
+                )->code(400)->respond();
             }
             $data = array(
                 'owner' => $this->ion_auth->user()->row()->id,
@@ -157,8 +148,6 @@ class Submissions extends CI_Controller
                 'company' => $contest->company->name
             );
         }
-        // Set our static data points for the view / creation
-        $this->data['contest'] = $contest;
 
         // Generate / validate fields based on the platform type
         switch($contest->platform)
@@ -173,39 +162,17 @@ class Submissions extends CI_Controller
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
-                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     $this->mailer
                         ->to($this->ion_auth->user()->row()->email)
                         ->from('squad@tappyn.com')
                         ->subject('Your submission has successfully been created')
                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
                         ->send();
-                    redirect("contests/show/{$contest_id}");
-                }
-                else
-                {
-                    $fields = array();
-                    $fields['Headline'] = array(
-                        'name' => 'headline',
-                        'id' => 'headline',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('headline')
-                    );
-                    $fields['Text'] = array(
-                        'name' => 'text',
-                        'id' => 'text',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('text')
-                    );
-                    $fields['Link Explanation'] = array(
-                        'name' => 'link_explanation',
-                        'id' => 'link_explanation',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('link_explanation')
-                    );
 
-                    // Generate fields for the submission form;
-                    $this->data['fields'] = $fields;
+                    $this->responder->message(
+                        "You submission has successfully been created"
+                    )->respond();
+                    return;
                 }
             break;
             case 'google':
@@ -218,32 +185,16 @@ class Submissions extends CI_Controller
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
-                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     $this->mailer
                         ->to($this->ion_auth->user()->row()->email)
                         ->from('squad@tappyn.com')
                         ->subject('Your submission has successfully been created')
                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
                         ->send();
-                    redirect("contests/show/{$contest_id}");
-                }
-                else
-                {
-                    $fields = array();
-                    $fields['Headline'] = array(
-                        'name' => 'headline',
-                        'id' => 'headline',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('headline')
-                    );
-                    $fields['Description'] = array(
-                        'name' => 'description',
-                        'id' => 'description',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('description')
-                    );
-                    // Generate fields for the submission form;
-                    $this->data['fields'] = $fields;
+                    $this->responder->message(
+                        "You submission has successfully been created"
+                    )->respond();
+                    return;
                 }
             break;
             case 'twitter':
@@ -254,26 +205,16 @@ class Submissions extends CI_Controller
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
-                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     $this->mailer
                         ->to($this->ion_auth->user()->row()->email)
                         ->from('squad@tappyn.com')
                         ->subject('Your submission has successfully been created')
                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
                         ->send();
-                    redirect("contests/show/{$contest_id}");
-                }
-                else
-                {
-                    $fields = array();
-                    $fields['Text'] = array(
-                        'name' => 'text',
-                        'id' => 'text',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('text')
-                    );
-                    // Generate fields for the submission form;
-                    $this->data['fields'] = $fields;
+                    $this->responder->message(
+                        "You submission has successfully been created"
+                    )->respond();
+                    return;
                 }
             break;
             case 'trending':
@@ -290,32 +231,23 @@ class Submissions extends CI_Controller
                 }
                 if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in)
                 {
-                    $this->session->set_flashdata('message', 'Your ad has successfully been submitted');
                     $this->mailer
                         ->to($this->ion_auth->user()->row()->email)
                         ->from('squad@tappyn.com')
                         ->subject('Your submission has successfully been created')
                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
                         ->send();
-                    redirect("contests/show/{$contest_id}");
+                    $this->responder->message(
+                        "You submission has successfully been created"
+                    )->respond();
+                    return;
                 }
-                else
-                {
-                    $fields = array();
-                    $fields['Text'] = array(
-                        'name' => 'text',
-                        'id' => 'text',
-                        'type' => 'text',
-                        'value' => $this->form_validation->set_value('text')
-                    );
-                    // Generate fields for the submission form;
-                    $this->data['fields'] = $fields;
-            }
+
             break;
         }
-        $this->session->set_flashdata('error', validation_errors() ? validation_errors() : 'An unknown error occured');
-        // If we did not create a successful submission, redirect back to the submission page with errors
-        $this->load->view("contests/show", $this->data);
+        $this->responder->fail(
+            (validation_errors() ? validation_errors() : 'An unknown error occured')
+        )->code(400)->respond();
     }
 
     /**

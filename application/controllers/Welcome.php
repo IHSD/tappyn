@@ -10,12 +10,6 @@ class Welcome extends CI_Controller
 		$this->load->model('contest');
 	}
 
-	public function index()
-	{
-		$this->data['contests'] = $this->contest->fetchAll(array(), 'start_time', 'desc', 10);
-		$this->load->view('home/index', $this->data);
-	}
-
 	public function unsubscribe()
 	{
 		if($this->db->where('email', $this->input->get('email'))->delete('mailing_list'))
@@ -38,23 +32,18 @@ class Welcome extends CI_Controller
 		}
 		if($this->form_validation->run() === true && $this->contact->addToMailing($email))
 		{
-			$this->session->set_flashdata('message', 'Youve successfully been added to our mailing list');
+			$this->responder->message(
+				"You have successfully been added to our mailing list"
+			)->respond();
 		} else {
+			$this->responder->fail(
+				"There was an error adding you to our mailing list"
+			)->code(400)->respond();
 			$this->session->set_flashdata('error', "There was an error adding you to our mailing list");
 		}
-		redirect('contests/index', 'refresh');
 	}
 
-	/**
-	 * FAQ
-	 * @return void
-	 */
-	public function faq()
-	{
-		$this->load->view('home/faq');
-	}
-
-	/**
+	/**have su
 	 * Contact Us
 	 * @return void
 	 */
@@ -74,43 +63,19 @@ class Welcome extends CI_Controller
 		}
 		if($this->form_validation->run() == true && $this->contact->create($customer, $email, $message))
 		{
-			$this->data['message'] = 'Your request for contact has been submitted';
 			$this->mailer
 				->to('squad@tappyn.com')
 				->from($email)
 				->subject("New Contact Message Received")
 				->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))
-				->send();
+				->send();	redirect('contests/index', 'refresh');
+			$this->responder->message(
+				"Thank you for your message. We will contact you as soon as we can!"
+			)->respond();
 		} else {
-			$this->data['error'] = (validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : false));
+			$this->responder->error(
+				"There was an error submitting your contact request. Please try again later"
+			)->code(400)->respond();
 		}
-		$this->load->view('home/contact_us', $this->data);
-	}
-
-	/**
-	 * Privacy Policy
-	 * @return void
-	 */
-	public function privacy_policy()
-	{
-		$this->load->view('home/privacy_policy');
-	}
-
-	/**
-	 * Terms of Service Agreement
-	 * @return void
-	 */
-	public function tos()
-	{
-		$this->load->view('home/tos');
-	}
-
-	/**
-	 * How It Works Page
-	 * @return [type] [description]
-	 */
-	public function how_it_works()
-	{
-		$this->load->view('home/how_it_works');
 	}
 }
