@@ -32,21 +32,22 @@ tappyn.factory("AppFact", function($http){
 		var object = {'identity' : email, 'password' : pass}; 
 		return $http({
 			method : 'POST',
-			url : 'index.php/auth/login',
+			url : 'index.php/login',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			}
+			},
+			'data' : object
 		});
 	}
 	return fact;
 })
 console.log("contestusals");
+tappyn.controller('homeController', function(){
+	
+})
 tappyn.controller('loginController', function(){
 	
 });
 tappyn.factory('loginFactory', function($http){
 	
 });
-tappyn.controller('homeController', function(){
-	
-})

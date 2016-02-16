@@ -35,7 +35,8 @@ tappyn.factory("AppFact", function($http){
 			url : 'index.php/login',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			}
+			},
+			'data' : object
 		});
 	}
 	return fact;
