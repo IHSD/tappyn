@@ -217,7 +217,6 @@ class User extends CI_Model
         $this->order_dir = 'desc';
 
         $this->response = $this->db->get();
-        error_log($this->db->last_query());
         return $this;
     }
 
