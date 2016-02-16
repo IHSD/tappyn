@@ -232,6 +232,7 @@ class User extends CI_Model
         }
         return false;
     }
+
     /**
      * Get count of users
      * @param array $where
@@ -244,6 +245,6 @@ class User extends CI_Model
         if(!empty($where)) $this->db->where($where);
         if(!empty($like)) $this->db->like($like);
 
-        return $this->db->get()->row()->count;
+        return (int) $this->db->get()->row()->count;
     }
 }

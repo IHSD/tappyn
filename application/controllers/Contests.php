@@ -107,9 +107,11 @@ class Contests extends CI_Controller
 
         if($this->form_validation->run() == true)
         {
+            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
             // Do some preliminary formatting
             $data = array(
                 'title' => $this->input->post('title'),
+                'start_time' => $start_time,
                 'audience' => $this->input->post('audience_description'),
                 'different' => $this->input->post('how_your_different'),
                 'objective' => $this->input->post('objective'),
@@ -118,7 +120,7 @@ class Contests extends CI_Controller
                 'age' => $this->input->post('age_range'),
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
-                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days'))
+                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days', strtotime($start_time))),
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
