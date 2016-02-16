@@ -38,15 +38,13 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		echo json_encode($this->input->post());
-		var_dump($this->form_validation->run());
+
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
 			// check for "remember me"
 			$remember = (bool) $this->input->post('remember');
 
-			var_dump($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), FALSE));
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
 				$this->responder->message("Login successful")->data($this->ion_auth->ajax_user())->respond();
