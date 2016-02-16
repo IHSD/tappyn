@@ -12,7 +12,6 @@ class Auth extends CI_Controller {
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 		$this->lang->load('auth');
-		$this->load->view('templates/navbar');
 	}
 
 	// redirect if needed, otherwise display the user list
@@ -59,9 +58,7 @@ class Auth extends CI_Controller {
 		{
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
-			$this->data['error'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->responder->fail(validation_errors() ? validation_errors() : 'An unknown error occured')->code(400)->respond();
-			$this->_render_page('auth/login', $this->data);
+			$this->responder->fail(validation_errors() ? validation_errors() : ($this->ion_auth->errors_array() ? $this->ion_auth->errors_array() : 'An unknown error occured'))->code(400)->respond();
 		}
 	}
 
