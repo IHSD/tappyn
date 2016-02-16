@@ -38,7 +38,7 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-
+		echo json_encode($this->input->post());
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
@@ -51,14 +51,14 @@ class Auth extends CI_Controller {
 			}
 			else
 			{
-				$this->responder->fail($this->ion_auth->errors_array())->respond();
+				$this->responder->fail($this->ion_auth->errors())->respond();
 			}
 		}
 		else
 		{
 			// the user is not logging in so display the login page
 			// set the flash data error message if there is one
-			$this->responder->fail(validation_errors() ? validation_errors() : ($this->ion_auth->errors_array() ? $this->ion_auth->errors_array() : 'An unknown error occured'))->code(400)->respond();
+			$this->responder->fail(validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : 'An unknown error occured'))->code(400)->respond();
 		}
 	}
 
