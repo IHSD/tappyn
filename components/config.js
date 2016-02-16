@@ -18,8 +18,12 @@ tappyn.config(function($routeProvider) {
 
 });
 
-tappyn.controller("ApplicationController", function(AppFact){
-
+tappyn.controller("ApplicationController", function($scope, AppFact){
+	$scope.log_in = function(email, pass){
+		AppFact.logging_in(email, pass).success(function(response){
+			console.log("yo you clicked log in bud");
+		})
+	}
 });
 
 tappyn.factory("AppFact", function($http){

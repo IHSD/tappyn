@@ -18,8 +18,12 @@ tappyn.config(function($routeProvider) {
 
 });
 
-tappyn.controller("ApplicationController", function(AppFact){
-
+tappyn.controller("ApplicationController", function($scope, AppFact){
+	$scope.log_in = function(email, pass){
+		AppFact.logging_in(email, pass).success(function(response){
+			console.log("yo you clicked log in bud");
+		})
+	}
 });
 
 tappyn.factory("AppFact", function($http){
@@ -28,7 +32,7 @@ tappyn.factory("AppFact", function($http){
 		var object = {'identity' : email, 'password' : pass}; 
 		return $http({
 			method : 'POST',
-			url : 'index.php/login',
+			url : 'index.php/auth/login',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -37,12 +41,12 @@ tappyn.factory("AppFact", function($http){
 	return fact;
 })
 console.log("contestusals");
-tappyn.controller('homeController', function(){
-	
-})
 tappyn.controller('loginController', function(){
 	
 });
 tappyn.factory('loginFactory', function($http){
 	
 });
+tappyn.controller('homeController', function(){
+	
+})
