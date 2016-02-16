@@ -38,7 +38,7 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		var_dump($this->input->post());
+		
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
