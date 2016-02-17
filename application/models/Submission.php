@@ -1,6 +1,6 @@
 <?php defined("BASEPATH") or exit("No direct script access allowed");
 
-class Submission extends CI_Model
+class Submission extends MY_Model
 {
     protected $metafields = array(
         'submissions.id',
@@ -107,7 +107,7 @@ class Submission extends CI_Model
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where($params)->get();
         if($count && $count->num_rows() > 0)
         {
-            return $count->row()->count;
+            return (int) $count->row()->count;
         }
         return FALSE;
     }

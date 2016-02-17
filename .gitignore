@@ -20,7 +20,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/vendor/*
 vendor/*
 uploads/
-
+Dockerfile
 # IDE Files
 #-------------------------
 /nbproject/
@@ -32,3 +32,6 @@ uploads/
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+
+
+# Test

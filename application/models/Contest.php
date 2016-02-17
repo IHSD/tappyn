@@ -1,120 +1,18 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Contest extends CI_Model
+class Contest extends MY_Model
 {
     protected $errors = false;
     protected $messages = false;
-    protected $where = array();
-    protected $table = 'contests';
-    protected $select = '*';
-    protected $order_by = 'contests.id';
-    protected $order_dir = 'desc';
-    protected $limit = NULL;
-    protected $offset = NULL;
-    protected $group_by = array();
+
 
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
-    }
-
-    public function select($sel)
-    {
-        if(!is_array($sel))
-        {
-            $this->select = $sel;
-        } else {
-            $this->select = implode(',', $sel);
-        }
-        return $this;
-    }
-
-    public function where($key, $value = FALSE)
-    {
-        if(is_array($key))
-        {
-            foreach($key as $k => $v)
-            {
-                $this->where($k, $v);
-            }
-        }
-        $this->where[$k] = $v;
-        return $this;
-    }
-
-    public function limit($limit)
-    {
-        $this->limit = $limit;
-        return $this;
-    }
-
-    public function offset($offset)
-    {
-        $this->offset = $offset;
-        return $this;
-    }
-
-    public function group_by($group)
-    {
-        $this->group_by = $group;
-        return $this;
-    }
-
-    public function order_by($col, $order = 'desc')
-    {
-        $this->order_by = $col;
-        $this->order_dir = $order;
-        return $this;
-    }
-
-    public function fetch()
-    {
-        $this->db->select($this->select);
-        $this->db->from($this->table);
-        if(!empty($this->where))
-        {
-            foreach($this->where as $where)
-            {
-                $this->db->where($where);
-            }
-            $this->where = array();
-        }
-
-        if(!empty($this->like))
-        {
-            $this->db->like($this->like);
-            $this->like = array();
-        }
-
-        if(!is_null($this->limit) && !is_null($this->offset))
-        {
-            $this->db->limit($this->limit, $this->offset);
-            $this->limit = NULL;
-            $this->offset = NULL;
-        }
-        else if(!is_null($this->limit))
-        {
-            $this->db->limit($this->limit);
-            $this->imit = NULL;
-        }
-
-        $this->db->order_by($this->order_by, $this->order_dir);
-        $this->order_by = 'id';
+        $this->table = 'contests';
+        $this->order_by = 'contests.id';
         $this->order_dir = 'desc';
-
-        $this->response = $this->db->get();
-        return $this;
-    }
-
-    public function row()
-    {
-        return $this->response->row();
-    }
-
-    public function result()
-    {
-        return $this->response->result();
     }
 
     public function log_impression($cid)
@@ -199,7 +97,7 @@ class Contest extends CI_Model
         $count = $this->db->get();
         if($count && $count->num_rows() == 1)
         {
-            return $count->row()->count;
+            return (int) $count->row()->count;
         }
         return false;
     }
