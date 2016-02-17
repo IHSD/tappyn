@@ -27,14 +27,6 @@ class Submissions extends CI_Controller
         ))->respond();
     }
 
-    public function show($sid)
-    {
-        $submissions = $this->contest->submissions($sid);
-        $this->responder->data(array(
-            'submissions' => $submissions
-        ))->respond();
-    }
-
     /**
      * Create a new submission
      *
@@ -169,16 +161,4 @@ class Submissions extends CI_Controller
             )->code(400)->respond();
         }
     }
-
-    /**
-     * Edit a submission
-     * @return void
-     */
-    public function edit() {}
-
-    /**
-     * Remove a submission
-     * @return void
-     */
-    public function delete() {}
 }

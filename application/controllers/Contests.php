@@ -107,16 +107,6 @@ class Contests extends CI_Controller
         }
     }
 
-    public function submissions($cid)
-    {
-        $contest = $this->contest->get($cid);
-        $submissions = $this->contest->submissions($cid);
-        $this->responder->data(array(
-            'contest' => $contest,
-            'submissions' => $submissions
-        ))->respond();
-    }
-
     /**
      * Set a submission as the winner of the contest
      * @param  integer $cid Contest ID
