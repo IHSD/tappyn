@@ -14,6 +14,9 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/login/view.html',
 		controller : 'loginController'
 	})
+	.when('/register', {
+		templateUrl : 'components/register/view.html'
+	})
 	.when('/dashboard', {
 		templateUrl : 'components/dashboard/view.html',
 		controller : 'dashController'
@@ -39,6 +42,28 @@ tappyn.config(function($routeProvider) {
 	})
 	.otherwise({redirectTo : '/home'})
 
+});
+
+tappyn.filter('untilFilter', function() {
+	return function(date){
+		date = moment(date).fromNow();
+		return date;
+	};
+});
+
+tappyn.filter('legibleDate', function() {
+	return function(date){
+		date = moment(date).format("lll");
+		return date;
+	};
+});
+
+tappyn.filter('capitalize', function() {
+  return function(input) {
+    if (input!=null)
+    input = input.toLowerCase();
+    return input.substring(0,1).toUpperCase()+input.substring(1);
+  }
 });
 
 tappyn.controller("ApplicationController", function($scope, $location, AppFact){
@@ -80,6 +105,9 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller('contactController', function(){
+	
+})
 tappyn.controller('contestController', function($scope, $routeParams, contestFactory){
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -99,9 +127,6 @@ tappyn.factory('contestFactory', function($http){
 	}
 
 	return fact;
-})
-tappyn.controller('contactController', function(){
-	
 })
 tappyn.controller('contestsController', function($scope, contestsFactory){
 	contestsFactory.grabContests().success(function(response){
@@ -126,20 +151,28 @@ tappyn.factory('contestsFactory', function($http){
 tappyn.controller('dashController', function(){
 	
 })
+tappyn.controller('homeController', function(){
+	
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	return fact;
+});
 tappyn.controller('loginController', function(){
 	
 });
 tappyn.factory('loginFactory', function($http){
 	
 });
-tappyn.controller('homeController', function(){
-	
-})
-tappyn.controller("submissionsController", function($scope, $routeParams, submissionsFactory){
-	
+tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
+	contestFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+	});
+
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.submissions = response.data.submissions;
-	})
+	});
 
 });
 tappyn.factory("submissionsFactory", function($http){

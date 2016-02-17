@@ -14,6 +14,9 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/login/view.html',
 		controller : 'loginController'
 	})
+	.when('/register', {
+		templateUrl : 'components/register/view.html'
+	})
 	.when('/dashboard', {
 		templateUrl : 'components/dashboard/view.html',
 		controller : 'dashController'
@@ -39,6 +42,28 @@ tappyn.config(function($routeProvider) {
 	})
 	.otherwise({redirectTo : '/home'})
 
+});
+
+tappyn.filter('untilFilter', function() {
+	return function(date){
+		date = moment(date).fromNow();
+		return date;
+	};
+});
+
+tappyn.filter('legibleDate', function() {
+	return function(date){
+		date = moment(date).format("lll");
+		return date;
+	};
+});
+
+tappyn.filter('capitalize', function() {
+  return function(input) {
+    if (input!=null)
+    input = input.toLowerCase();
+    return input.substring(0,1).toUpperCase()+input.substring(1);
+  }
 });
 
 tappyn.controller("ApplicationController", function($scope, $location, AppFact){
