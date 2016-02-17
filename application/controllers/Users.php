@@ -7,9 +7,9 @@ class Users extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(
-                "You must be logged in to access this area"
-            )->code(401)->respond();
+            $this->responder->fail(array(
+                'error' => "You must be logged in to access this area"
+            ))->code(401)->respond();
             return;
         }
         $this->load->model('user');
@@ -41,9 +41,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         }
         else
@@ -57,9 +57,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         }
     }
@@ -78,9 +78,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         } else {
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time >' => date('Y-m-d H:i:s')));
@@ -92,9 +92,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         }
     }
@@ -113,9 +113,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         } else {
             $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time <' => date('Y-m-d H:i:s')));
@@ -127,9 +127,9 @@ class Users extends CI_Controller
                     )
                 )->respond();
             } else {
-                $this->responder->fail(
-                    'There was an error fetching your dashboard'
-                )->code(400)->respond();
+                $this->responder->fail(array(
+                    'error' => 'There was an error fetching your dashboard'
+                ))->code(400)->respond();
             }
         }
     }
@@ -154,9 +154,23 @@ class Users extends CI_Controller
 
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
-                    $this->session->set_flashdata('error', 'There was an error saving your profile');
+                    $this->responder
+                        ->fail(array(
+                            'error' => "There was an error updating your profile"
+                        ))
+                        ->code(500)
+                        ->respond();
+                    return;
                 } else {
-                    $this->session->set_flashdata('message', 'Profile successfully updated');
+                    $this->responder
+                        ->message(
+                            'Profile was successfully updated'
+                        )
+                        ->data(array(
+                            'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+                        ))
+                        ->respond();
+                    return;
                 }
             }
             else if($this->ion_auth->in_group(3))
@@ -179,8 +193,11 @@ class Users extends CI_Controller
                     $this->load->library('upload', $config);
                     if(!$this->upload->do_upload('logo_url'))
                     {
-                        $this->session->set_flashdata('error', $this->upload->display_errors());
-                        $valid = false;
+                        $this->responder
+                            ->fail($this->upload->display_errors() ? $this->upload->display_errors() : array('error' => "There was an error uploading your image"))
+                            ->code(500)
+                            ->respond();
+                        return;
                     } else {
                         $data['logo_url'] = $this->upload->data()['file_name'];
                     }
@@ -189,72 +206,29 @@ class Users extends CI_Controller
                 {
                     if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                     {
-                        $this->session->set_flashdata('error', 'There was an error saving your profile');
+                        $this->responder
+                            ->fail(array('error' => "There was an error updating your profile"))
+                            ->code(500)
+                            ->respond();
                     } else {
-                        $this->session->set_flashdata('message', 'Profile successfully updated');
+                        $this->responder
+                            ->message(
+                                'Profile was successfully updated'
+                            )
+                            ->data(array(
+                                'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+                            ))
+                            ->respond();
+                        return;
                     }
                 }
             }
+        } else {
+            $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+            $this->responder->data(array(
+                'profile' => $profile
+            ))->respond();
+            return;
         }
-        $profile = $this->user->profile($this->ion_auth->user()->row()->id);
-        $this->data['profile'] = $profile;
-        $this->load->view('users/profile', $this->data);
-    }
-
-    public function account()
-    {
-        $this->data['account'] = NULL;
-
-        // check if they have submitted any required information
-        if($this->input->post('submit'))
-        {
-            $data = array();
-            foreach($this->input->post() as $key => $value)
-            {
-                switch($key)
-                {
-                    case 'first_name':
-                        $data['legal_entity.first_name'] = $value;
-                        break;
-                    case 'last_name':
-                        $data['legal_entity.last_name'] = $value;
-                        break;
-                    case 'dob_day':
-                        $data['legal_entity.dob.day'] = $value;
-                        break;
-                    case 'dob_month':
-                        $data['legal_entity.dob.month'] = $value;
-                        break;
-                    case 'dob_year':
-                        $data['legal_entity.dob.year'] = $value;
-                        break;
-                    case 'tos_acceptance':
-                        $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
-                        $data['tos_acceptance.date'] = time();
-                        break;
-                    case 'country':
-                        $data['country'] = $value;
-                        break;
-                }
-            }
-            if($account = $this->stripe_account_library->create($this->ion_auth->user()->row()->email, $data))
-            {
-                $this->stripe_account_id = $account->id;
-                $this->session->set_flashdata('message', "Account information successfully updated");
-            } else {
-                $this->session->set_flashdata('error', ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : 'An unknown error occured'));
-            }
-        }
-
-        if($this->stripe_account_id)
-        {
-            if($account = $this->stripe_account_library->get($this->stripe_account_id))
-            {
-                $this->data['account'] = $account;
-            } else {
-                $this->data['error'] = $this->stripe_account_library->errors();
-            }
-        }
-        $this->load->view('users/accounts', $this->data);
     }
 }

@@ -66,7 +66,7 @@ class Contests extends CI_Controller
     {
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->responder->code(403)->respond();
+            $this->responder->fail(array('error' => "You need to be logged in as a company to create contests"))->code(403)->respond();
             return;
         }
 
@@ -103,7 +103,7 @@ class Contests extends CI_Controller
         {
             $this->responder->fail(
                 (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : 'An unknown error occured'))
-            )->code(400)->respond();
+            )->code(500)->respond();
         }
     }
 
@@ -173,7 +173,6 @@ class Contests extends CI_Controller
         if($pid = $this->payout->create($cid, $sid))
         {
             // Send the email congratulating the user
-            error_log("Sending email to ".$this->ion_auth->user($submission->owner)->row()->email);
             $this->mailer
                 ->to($this->ion_auth->user($submission->owner)->row()->email)
                 ->from("squad@tappyn.com")
