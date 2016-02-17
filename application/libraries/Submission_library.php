@@ -4,7 +4,7 @@ class Submission_library
 {
     public function __construct()
     {
-        
+
     }
 
     public function __get($var)
@@ -19,7 +19,7 @@ class Submission_library
      */
     public function create($data)
     {
-        if(!$this->userCanSubmit($data['uid'], $data['contest_id']))
+        if(!$this->userCanSubmit($data['owner'], $data['contest_id']))
         {
             $this->error = 'You have already put in a submission for that contest';
             return false;
