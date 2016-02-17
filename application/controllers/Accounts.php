@@ -7,14 +7,18 @@ class Accounts extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->session->set_flashdata('error', 'You have to be logged in to access this area');
-            redirect('contests/index', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You have to be logged in to access this area"
+            ))->code(401)->respond();
+            return;
         }
 
         if(!$this->ion_auth->in_group(2))
         {
-            $this->session->set_flashdata('error', 'Only content creators can access the accounts panel');
-            redirect('contests/index', 'refresh');
+            $this->responder->fail(array(
+                'error' => "Only content creators can access the accounts panel"
+            ))->code(403)->respond();
+            return;
         }
         $this->load->model('user');
         $this->load->library('stripe/stripe_account_library');
@@ -24,11 +28,7 @@ class Accounts extends CI_Controller
             $this->account = $this->stripe_account_library->get($this->stripe_account_id);
             $this->data['account'] = $this->account;
         }
-
         $this->config->load('secrets');
-        $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
-
-        $this->load->view('templates/navbar');
     }
 
     /**
@@ -46,40 +46,55 @@ class Accounts extends CI_Controller
      */
     public function details()
     {
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('dob_day', 'DOB - Day', 'required');
-        $this->form_validation->set_rules('dob_month', 'DOB - Month', 'required');
-        $this->form_validation->set_rules('dob_year', 'DOB - Year', 'required');
-        $this->form_validation->set_rules('country', 'Country', 'required');
-        if($this->form_validation->run() === TRUE)
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            // Preproces
-            $data = array(
-                'legal_entity.type' => 'individual',
-                'legal_entity.first_name' => $this->input->post('first_name'),
-                'legal_entity.last_name' => $this->input->post('last_name'),
-                'legal_entity.dob.day' => $this->input->post('dob_day'),
-                'legal_entity.dob.year' => $this->input->post('dob_year'),
-                'legal_entity.dob.month' => $this->input->post('dob_month'),
-                'tos_acceptance.ip' => $_SERVER['REMOTE_ADDR'],
-                'tos_acceptance.date' => time(),
-                'country' => $this->input->post('country')
-            );
+            $this->form_validation->set_rules('first_name', 'First Name', 'required');
+            $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+            $this->form_validation->set_rules('dob_day', 'DOB - Day', 'required');
+            $this->form_validation->set_rules('dob_month', 'DOB - Month', 'required');
+            $this->form_validation->set_rules('dob_year', 'DOB - Year', 'required');
+            $this->form_validation->set_rules('country', 'Country', 'required');
+            if($this->form_validation->run() === TRUE)
+            {
+                // Preproces
+                $data = array();
+                if($this->input->post('first_name')) $data['legal_entity.first_name'] = $this->input->post('first_name');
+                if($this->input->post('last_name'))  $data['legal_entity.last_name'] = $this->input->post('last_name');
+                if($this->input->post('dob_day'))    $data['legal_entity.dob.day'] = $this->input->post('dob_day');
+                if($this->input->post('dob_year'))   $data['legal_entity.dob.year'] = $this->input->post('dob_year');
+                if($this->input->post('dob_month'))  $data['legal_entity.dob.month'] = $this->input->post('dob_month');
+                if($this->input->post('country'))    $data['country'] = $this->input->post('country');
+                if($this->input->post('stripe_tos')) {
+                    $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
+                    $data['tos_acceptance.date'] = time();
+                }
+            }
+            // If the form pass validation, and we can create / upadte based on presence
+            if($this->form_validation->run() === TRUE &&
+                ($this->stripe_account_id ?
+                    $this->stripe_account_library->update($this->stripe_account_id, $data) :
+                    $this->stripe_account_library->create($this->ion_auth->user()->row()->email, $data)))
+            {
+                // We have successfully created our account, so return the new account details
+                $this->responder
+                    ->message(
+                        'Account details successfully updated'
+                    )
+                    ->data(array(
+                        'account' => $this->stripe_account_library->get($this->stripe_account_id)
+                    ))
+                    ->respond();
+            } else {
+                // We tried to run the form, but encountered an errors
+                $this->responder->fail(
+                    validation_errors() ? validation_errors() : ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured")
+                )->code(500)->respond();
+            }
+        } else {
+            $this->responder->data(array(
+                'account' => $this->account
+            ))->respond();
         }
-        // If the form pass validation, and we can create / upadte based on presence
-        if($this->form_validation->run() === TRUE &&
-            ($this->stripe_account_id ?
-                $this->stripe_account_library->update($this->stripe_account_id, $data) :
-                $this->stripe_account_library->create($this->ion_auth->user()->row()->email, $data)))
-        {
-            // We have successfully created our account
-            $this->session->set_flashdata('message', "Account details successfully updated");
-            redirect('accounts/payment_methods', 'refresh');
-        }
-        $this->data['account'] = $this->account;
-        $this->data['error'] = (validation_errors() ? validation_errors() : ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : false));
-        $this->load->view('users/accounts/details', $this->data);
     }
 
     /**
@@ -90,8 +105,10 @@ class Accounts extends CI_Controller
     {
         if(!$this->stripe_account_id)
         {
-            $this->session->set_flashdata('message', 'First, were going to need some personal information');
-            redirect('accounts/details', 'refresh');
+            $this->responder->fail(
+                'error' => "You have not set up any account details yet"
+            )->code(500)->respond();
+            return;
         }
         if(!$this->account->transfers_enabled)
         {
@@ -103,8 +120,10 @@ class Accounts extends CI_Controller
             unset($fields[$key]);
             if(!empty($fields))
             {
-                $this->session->set_flashdata('error', 'You still have some account details to fill out! ('.implode(',', $fields).')');
-                redirect('accounts/details', 'refresh');
+                $this->responder->fail(
+                    'error' => "You haven't finished filling out your account details"
+                )->code(500)->respond();
+                return;
             }
         }
 
@@ -112,13 +131,26 @@ class Accounts extends CI_Controller
         {
             if($this->stripe_account_library->addSource($this->stripe_account_id, $this->input->post('stripeToken'), $this->input->post('currency')))
             {
+                $this->responder
+                    ->message(
+                        'Account successfully updated'
+                    )
+                    ->data(
+                        array('account' => $this->stripe_account_library->get($this->stripe_account_id))
+                    )
+                    ->respond();
                 $this->data['message'] = "Account successfully updated";
+            } else {
+                $this->responder->fail(
+                    $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
+                )->code(500)->respond();
+                return;
             }
+        } else {
+            $this->responder->data(array(
+                'account' => $this->stripe_account_library->get($this->stripe_account_id)
+            ))->respond();
         }
-        $this->data['error'] = ($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : false);
-        $this->data['account'] = $this->stripe_account_library->get($this->stripe_account_id);
-        $this->load->view('users/accounts/payment_methods', $this->data);
-        // They have either set all of their data, or only need to create a new payment method
     }
 
     /**
@@ -135,30 +167,20 @@ class Accounts extends CI_Controller
                 {
                     if($this->stripe_account_library->removeSource($this->stripe_account_id, $source->id))
                     {
-                        $this->session->set_flashdata('message', 'Payment method successfully removed');
+                        $this->responder->message(
+                            'Payment method successfully removed'
+                        )->respond();
                     } else {
-                        $this->session->set_flashdata('error', $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured");
+                        $this->responder->fail(array(
+                            $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
+                        ))->code(500)->respond();
                     }
                 }
             }
         } else {
-            $this->session->set_flashdata('error', "You did not provide a payment method to remove");
+            $this->responder->fail(array(
+                'source_id' => "You must provide a ayment source you want to remove"
+            ))->code(400)->respond();
         }
-        redirect('accounts/payment_methods', 'refresh');
-    }
-
-    /**
-     * Set default payment method
-     * @return void
-     */
-    public function default_method()
-    {
-
-    }
-
-    public function payouts()
-    {
-        $payouts = $this->db->select('*')->from('payouts')->where('user_id', $this->ion_auth->user()->row()->id)->get()->result();
-        $this->load->view('users/accounts/payouts', array('payouts' => $payouts));
     }
 }
