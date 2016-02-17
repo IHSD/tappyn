@@ -41,8 +41,8 @@ class Payouts extends CI_Controller
                 'payout' => $payout
             ))->respond();
         } else {
-            $this->responder->error(
-                "We couldnt find the payout you were looking for"
+            $this->responder->fail(array(
+                'error' => "We couldnt find the payout you were looking for"
             )->code(404)->respond();
         }
     }
@@ -57,43 +57,56 @@ class Payouts extends CI_Controller
         $payout = $this->payout->get($id);
         if(!$payout)
         {
-            $this->session->set_flashdata('error', "That payout does not exist");
-            redirect('payouts/index', 'refresh');
+            $this->responder->fail(array(
+                'error' => "That payout does not exist"
+            ))->code(404)->respond();
+            return;
         }
         // And that it hasnt been claimed
         if($payout->claimed == 1)
         {
-            $this->session->set_flashdata('error', "This payout has been claimed already");
-            redirect("payouts/show/{$id}", 'refresh');
+            $this->responder->fail(array(
+                'error' => "That payout has already been claimed"
+            ))->code(500)->respond();
+            return;
         }
         // Chekc that have set up their accounts alread'
         $stripe_account = $this->db->select('*')->where('user_id', $this->ion_auth->user()->row()->id)->limit(1)->get('stripe_accounts');
         if(!$stripe_account || $stripe_account->num_rows() == 0)
         {
-            $this->session->set_flashdata('error', "You need to set up your account first");
-            redirect('accounts/details', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You need to set up your account first"
+            ))->code(500)->respond();
+            return;
         }
         $account = $this->stripe_account_library->get($stripe_account->row()->account_id);
         if(!$account)
         {
-            $this->session->set_flashdata('error', "You need to set up your account first");
-            redirect('accounts/details', 'refresh');
+            $this->responder->fail(array(
+                'error' = "You need to set up your account first"
+            ))->code(500)->respond();
+            return;
         }
         // check that transfers are enabled
         if(!$account->transfers_enabled)
         {
-            $this->session->set_flashdata('error', "You still need to setup some of your account details");
-            redirect('accounts/payment_methods', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You still nedd to set up some account details"
+            ))->code(500)->respond();
+            return;
         }
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
             $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 0));
-            $this->session->set_flashdata('message', "Transfer {$transfer->id} successfully created for {$transfer->amount}");
-            redirect("payouts/show/{$payout->id}", 'refresh');
+            $this->responder
+                ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}")
+                ->data(array('payout' => $this->payout->get($id)))
+                ->respond();
         } else {
-            $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : 'An unknown error occured')));
-            redirect("users/completed", 'refresh');
+            $this->responder->fail(
+                validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'An unknown error occured'))
+            )->code(500)->respond();
         }
     }
 }

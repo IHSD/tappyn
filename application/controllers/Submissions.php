@@ -155,7 +155,7 @@ class Submissions extends CI_Controller
                 ->send();
             $this->responder->message(
                 "You're submission has succesfully been created"
-            );
+            )->respond();
         } else {
             $this->responder->fail(
                 (validation_errors() ? validation_errors() : 'An unknown error occured')
