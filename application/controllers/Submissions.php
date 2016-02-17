@@ -23,7 +23,8 @@ class Submissions extends CI_Controller
     {
         $submissions = $this->contest->submissions($contest_id);
         $this->responder->data(array(
-            'submissions' => $submissions
+            'submissions' => $submissions,
+            'contest' => $this->contest->get($contest_id)
         ))->respond();
     }
 
