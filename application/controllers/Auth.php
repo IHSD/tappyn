@@ -416,6 +416,7 @@ class Auth extends CI_Controller {
 		   $this->responder->fail(array(
 			   'error' => "Request was missing necessary fields"
 		   ))->code(400)->respond();
+		   return;
 	   }
         if ($this->form_validation->run() == true)
         {
