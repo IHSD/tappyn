@@ -122,7 +122,7 @@ body{
   top: 13px;
   left: 6px;
 }
-input[type='text']:focus {
+input[type='text']:focus, textarea:focus {
 	border: 1px solid #ff5e00 !important;
 }
 header {
@@ -169,53 +169,7 @@ header nav ul li {
 header nav ul li .btn:hover {
 	color: #fff;
 }
-header nav ul li a.username {
-	background: #ff5e00;
-	height: 30px;
-	width: 30px;
-	text-align: center;
-	line-height: 30px;
-	font-size: 12px;
-	color: #fff;
-	border-radius: 100%;
-	padding: 0;
-}
 
-header nav ul li a.username:hover {
-	color: #fff;
-}
-header .dropdown.menu .submenu.first-sub {
-	left: auto !important;
-	right: 0 !important;
-}
-header .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow a {
-	padding: 0;
-}
-header .menu > li:not(.menu-text) > a {
-	line-height: 30px;
-}
-
-header nav ul.dropdown li {
-	padding: 0;
-}
-header nav ul.submenu {
-	border-radius: 4px;
-}
-header nav ul.submenu:after {
-	content: '';
-  position: absolute;
-  bottom: 100%;
-  left: 93%;
-  margin-left: -8px;
-  width: 0; height: 0;
-  border-bottom: 8px solid #cacaca;
-  border-right: 8px solid transparent;
-  border-left: 8px solid transparent;
-}
-header .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow > a::after {
-	top: 11px;
-	right: -15px;
-}
 .btn-oj {
 	background: #FF5E00;
 	color: #fff;

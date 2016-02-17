@@ -60,9 +60,10 @@ tappyn.filter('legibleDate', function() {
 
 tappyn.filter('capitalize', function() {
   return function(input) {
-    if (input!=null)
-    input = input.toLowerCase();
-    return input.substring(0,1).toUpperCase()+input.substring(1);
+    if (input!=null){
+    	input = input.toLowerCase();
+    	return input.substring(0,1).toUpperCase()+input.substring(1);
+    }
   }
 });
 
@@ -132,23 +133,6 @@ tappyn.factory('contestsFactory', function($http){
 
 	return fact;
 })
-tappyn.controller('dashController', function(){
-	
-})
-tappyn.controller('loginController', function(){
-	
-});
-tappyn.factory('loginFactory', function($http){
-	
-});
-tappyn.controller('homeController', function(){
-	
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	return fact;
-});
 tappyn.controller('contestController', function($scope, $routeParams, contestFactory){
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -169,12 +153,26 @@ tappyn.factory('contestFactory', function($http){
 
 	return fact;
 })
-tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
-	contestFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-	});
+tappyn.controller('dashController', function(){
+	
+})
+tappyn.controller('homeController', function(){
+	
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
 
+	return fact;
+});
+tappyn.controller('loginController', function(){
+	
+});
+tappyn.factory('loginFactory', function($http){
+	
+});
+tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
 	});
 
