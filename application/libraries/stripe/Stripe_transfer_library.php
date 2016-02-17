@@ -66,12 +66,22 @@ class Stripe_transfer_library
                 'description' => "Test transacetion"
             ));
         } catch(Exception $e) {
-            die($e->getMessage());
+            $this->errors = $e->getMessage();
+            return false;
         }
-        var_dump($charge);
-        return TRUE;
+        return $charge;
     }
 
+    public function index()
+    {
+        try {
+            $transfers = \Stripe\Transfer::all();
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return false;
+        }
+        return $transfers;
+    }
     public function errors()
     {
         return $this->errors;

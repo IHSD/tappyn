@@ -1,7 +1,11 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Stripe_transfer extends CI_Model
+class Stripe_transfer extends MY_Model
 {
+    protected $table = 'stripe_transfers';
+    protected $order_by = 'stripe_transfers.created_at';
+    protected $order_dir = 'desc';
+    
     public function __construct()
     {
         parent::__construct();

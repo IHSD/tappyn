@@ -70,20 +70,17 @@ class Contests extends CI_Controller
             return;
         }
 
-        $this->form_validation->set_rules('title', 'Title', 'required');
         $this->form_validation->set_rules('audience_description', 'Audience Description', 'required');
         $this->form_validation->set_rules('how_your_different', 'How Your Different', 'required');
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('location', 'Location', 'required');
-        $this->form_validation->set_rules('age_range', 'Age Range', 'required');
-        $this->form_validation->set_rules('gender', 'Gender', 'required');
+        $this->form_validation->set_rules('summary', 'Summary', 'required');
 
         if($this->form_validation->run() == true)
         {
             // Do some preliminary formatting
             $data = array(
-                'title' => $this->input->post('title'),
                 'audience' => $this->input->post('audience_description'),
                 'different' => $this->input->post('how_your_different'),
                 'objective' => $this->input->post('objective'),
@@ -92,6 +89,8 @@ class Contests extends CI_Controller
                 'age' => $this->input->post('age_range'),
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
+                'start_time' => time(),
+                // For now, we just set the stop time to 7 days from now
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days'))
             );
         }

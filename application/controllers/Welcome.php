@@ -36,9 +36,9 @@ class Welcome extends CI_Controller
 				"You have successfully been added to our mailing list"
 			)->respond();
 		} else {
-			$this->responder->fail(
-				"There was an error adding you to our mailing list"
-			)->code(400)->respond();
+			$this->responder->fail(array(
+				'error' => "There was an error adding you to our mailing list"
+			))->code(400)->respond();
 			$this->session->set_flashdata('error', "There was an error adding you to our mailing list");
 		}
 	}
@@ -68,14 +68,14 @@ class Welcome extends CI_Controller
 				->from($email)
 				->subject("New Contact Message Received")
 				->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))
-				->send();	redirect('contests/index', 'refresh');
+				->send();
 			$this->responder->message(
 				"Thank you for your message. We will contact you as soon as we can!"
 			)->respond();
 		} else {
-			$this->responder->error(
-				"There was an error submitting your contact request. Please try again later"
-			)->code(400)->respond();
+			$this->responder->fail(array(
+				'error' => "There was an error submitting your contact request. Please try again later"
+			))->code(400)->respond();
 		}
 	}
 }
