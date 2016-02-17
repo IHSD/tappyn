@@ -119,38 +119,55 @@ class Contests extends CI_Controller
         $this->load->model('user');
         $sid = $this->input->post('submission');
 
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail(array(
+                'error' => "You must be logged in to perform this action"
+            ))->code(401)->respond();
+            return;
+        }
         // Check that submission exists
         if(!$submission = $this->submission->get($sid))
         {
-            $this->session->set_flashdata('error', 'That submission does not exist');
-            redirect("contests/show/{$cid}", "refresh");
+            $this->responder->fail(array(
+                'error' => "That submission does not exist"
+            ))->code(404)->respond();
+            return;
         }
         // Check that contest exists
         else if(!$contest = $this->contest->get($cid))
         {
-            $this->session->set_flashdata('error', "We couldn't find contest with id {$cid}");
-            redirect("contests/index", 'refresh');
+            $this->responder->fail(array(
+                'error' => "We couldn't find contest with id {$cid}"
+            ))->code(404)->respond();
+            return;
         }
         // Check that the contest has ended
         else if($contest->stop_time > date('Y-m-d H:i:s'))
         {
-            $this->session->set_flashdata('error', "The contest must be over in order to select a winner");
-            redirect("contests/show/{$cid}", 'refresh');
+            $this->responder->fail(array(
+                "error" => "This contest has not finished yet"
+            ))->code(500)->respond();
+            return;
         }
         // Check that we are admin or the ccontest owner
         if(!$this->ion_auth->user()->row()->id !== $contest->owner)
         {
             if(!$this->ion_auth->is_admin())
             {
-                $this->session->set_flashdata('error', "You must own the contest to select a winner");
-                redirect("contests/show/{$cid}", 'refresh');
+                $this->responder->fail(array(
+                    'error' => 'You must own the contest to select a winner'
+                ))->code(403)->respond();
+                return;
             }
         }
         $payout = $this->payout->exists(array('contest_id' => $cid));
         if($payout)
         {
-            $this->session->set_flashdata('error', "A submission has already been chosen as the winner");
-            redirect("contests/show/{$cid}", 'refresh');
+            $this->responder->fail(array(
+                'error' => "A submission has already been chosen as the winner"
+            ))->code(500)->respond();
+            return;
         }
         // Attempt to create the payouts
         if($pid = $this->payout->create($cid, $sid))
@@ -165,14 +182,16 @@ class Contests extends CI_Controller
                 ->send();
 
             // Tell the contest they have successfully selected a winner!
-            $this->session->set_flashdata('message', "Submission {$sid} has been chosen as a winner");
-            redirect("contests/show/{$cid}", "refresh");
+            $this->responder->message(
+                "A winner has been chosen"
+            )->respond();
         }
         // Something happened, so lets just route tham back to the contest page with an error
         else
         {
-            $this->session->set_flashdata('error', ($this->payout->errors() ? $this->payout_errors() : "An unknown error occured"));
-            redirect("contests/show/{$cid}", 'refresh');
+            $this->responder->fail(
+                $this->payout->errors() ? $this->payout->errors() : array('error' => "An unknown error occured")
+            )->code(500)->respond();
         }
     }
 }
