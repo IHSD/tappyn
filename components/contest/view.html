@@ -61,7 +61,7 @@
 		    </div>
 	        <div class='col-sm-4 col-xs-12'>
 				<div class='facebook-form-wrapper'>
-            		<form class='form' ng-submit='create_submission(submit, contest.id)'>
+            		<form class='form' ng-submit='submit_to(contest.id, submit)'>
              			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here</h4>	
          				<div ng-if='!user'>
 							<div class='form-group'>
@@ -86,7 +86,7 @@
 	                           	</label>
 	                        </div>
 	                    </div>
-	                        <div ng-if='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
+	                        <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
 					        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
 					        	<div class='input-count'>{{submit.headline.length}} of 25 characters</div>
 					        </div>

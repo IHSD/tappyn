@@ -110,7 +110,47 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller('contestController', function($scope, $routeParams, $location, contestFactory){
+	contestFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+	});
+
+	$scope.submit_to = function(id, submission){
+		contestFactory.submitTo(id, submission).success(function(response){
+			if(response.success) $location.path("/submissions/"+id);
+		})
+	}
+});
+tappyn.factory('contestFactory', function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.submitTo = function(id, submission){
+		return $http({
+			method : 'POST',
+			url : 'index.php/submissions/create/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param(submission)
+		});	
+	}
+
+	return fact;
+})
 tappyn.controller('contactController', function(){
+	
+})
+tappyn.controller('dashController', function(){
 	
 })
 tappyn.controller('contestsController', function($scope, contestsFactory){
@@ -132,29 +172,6 @@ tappyn.factory('contestsFactory', function($http){
 	}
 
 	return fact;
-})
-tappyn.controller('contestController', function($scope, $routeParams, contestFactory){
-	contestFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-	});
-});
-tappyn.factory('contestFactory', function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
-tappyn.controller('dashController', function(){
-	
 })
 tappyn.controller('homeController', function(){
 	

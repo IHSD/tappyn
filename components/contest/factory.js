@@ -11,5 +11,16 @@ tappyn.factory('contestFactory', function($http){
 		});
 	}
 
+	fact.submitTo = function(id, submission){
+		return $http({
+			method : 'POST',
+			url : 'index.php/submissions/create/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param(submission)
+		});	
+	}
+
 	return fact;
 })
