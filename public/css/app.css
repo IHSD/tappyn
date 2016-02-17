@@ -234,6 +234,13 @@ header .dropdown.menu .is-dropdown-submenu-parent.is-down-arrow > a::after {
     line-height: 1.5;
     border-radius: 8px;
 }
+.content-padding{
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.progress-bar-warning {
+    background-color: #ff5e00;
+}
 header .btn-login {
 	font-size: 14px;
 	line-height: 14px;
