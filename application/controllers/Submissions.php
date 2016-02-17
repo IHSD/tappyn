@@ -97,7 +97,7 @@ class Submissions extends CI_Controller
             'contest' => $contest->title,
             'company' => $contest->company->name
         );
-
+        $success = false;
         // Generate / validate fields based on the platform type
         switch($contest->platform)
         {
