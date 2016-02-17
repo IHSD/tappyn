@@ -173,7 +173,6 @@ class Contests extends CI_Controller
         if($pid = $this->payout->create($cid, $sid))
         {
             // Send the email congratulating the user
-            error_log("Sending email to ".$this->ion_auth->user($submission->owner)->row()->email);
             $this->mailer
                 ->to($this->ion_auth->user($submission->owner)->row()->email)
                 ->from("squad@tappyn.com")
