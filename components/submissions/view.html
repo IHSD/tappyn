@@ -1,0 +1,53 @@
+
+<div class='row'>
+	<div class='col-xs-12' style='background-color:transparent;border:none;border-bottom:2px solid  #FF5E00;padding:0px;margin-bottom:15px;'>
+			<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
+				<h3>{{contest.title}}</h3>
+				<div>
+                	<a class='btn btn-default btn-sm' href="#/contest/{{contest.id}}">Brief</a>
+                	<a class='btn btn-oj btn-sm' href="#/submissions/{{contest.id}}">Submissions</a>
+                </div>
+			</div>
+			<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
+				<h3>Sharing</h3>
+				<h4 style='margin:0px;'>Coming soon!</h4>
+			</div>
+			<div class='col-sm-3 col-xs-12'  style='padding-top:30px;'>
+				<div style='width:100%'>
+                	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
+	                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+	            </div>
+	        </div>
+            <div class='col-sm-3 col-xs-12 text-right'>
+            	<h1>$50</h1>
+				<h4 style='margin:0px;margin-top:20px;'>
+                	Ends in {{contest.stop_time | untilFilter}}
+				</h4>
+				<h4 style='margin:0px;'>{{contest.platform}}</h4>
+			</div>
+	
+	</div>
+</div>
+<div class='row content-padding'>
+	<div class='col-sm-4 col-xs-12' ng-repeat='submission in submissions'>
+		<div class="contest-box" style='min-height:350px; max-height:350px;'>
+			<div class='col-sm-8 col-xs-12'>
+					<h3>{{submission.headline}}</h3>
+					<div class="contest-content">
+					    <span>{{submission.text}}</span>
+					</div>
+			</div>
+            <div class="contest-info">
+                <h5>{{submission.owner.school}}</h5>
+                <h5>
+                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+                		{{submission.created_at | legibleDate}}
+                	</span>
+                	{{submission.owner.location}}
+               	</h5>
+            </div>
+        <!-- Generate a select as winner button if campaign is over and user owns contest -->
+		<button ng-disabled='' ng-if='contest.owner == user.id' ng-click='choose_winner(submission.id)' class='btn btn-oj btn-lg'>Choose Winner</button>
+    </div>
+	<h3 class='text-center' ng-if='submissions.length == 0'>This contest has no submissions yet, you could be the first!</h3>
+</div>

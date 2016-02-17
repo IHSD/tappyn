@@ -1,0 +1,3 @@
+tappyn.controller('dashController', function(){
+	
+})
