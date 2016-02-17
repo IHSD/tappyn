@@ -38,7 +38,21 @@ class Auth extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		
+		if(!$this->input->post('identity'))
+		{
+			$this->responder->fail(array(
+				"identity" => "The Identity field is required",
+			))->code(400)->respond();
+			return;
+		}
+
+		if(!$this->input->post('password'))
+		{
+			$this->responder->fail(array(
+				"password" => "The Password field is required",
+			))->code(400)->respond();
+			return;
+		}
 		if ($this->form_validation->run() == true)
 		{
 			// check to see if the user is logging in
