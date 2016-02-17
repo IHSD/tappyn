@@ -67,6 +67,9 @@ tappyn.filter('capitalize', function() {
 });
 
 tappyn.controller("ApplicationController", function($scope, $location, AppFact){
+	if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+
+
 	$scope.check_code = function(code){
 		if(code == 401) $location.path('/login');
 		else if(code == 403) $location.path('/dashboard');
@@ -80,6 +83,7 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 				}
 				else alert(response.message);	 
