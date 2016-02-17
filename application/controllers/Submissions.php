@@ -29,10 +29,10 @@ class Submissions extends CI_Controller
 
     public function show($sid)
     {
-        $submission = $this->submission->get($sid);
-        $submission->contest = $this->contest->get($submission->contest_id);
-        $this->data['submission'] = $submission;
-        $this->load->view('submissions/show', $this->data);
+        $submissions = $this->contest->submissions($sid);
+        $this->responder->data(array(
+            'submissions' => $submissions
+        ))->respond();
     }
 
     /**
