@@ -1,3 +1,4 @@
-tappyn.controller('dashController', function(){
+tappyn.controller('dashController', function($scope, dashFactory){
+	$scope.type = 'all';
 	
 })

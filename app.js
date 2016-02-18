@@ -187,15 +187,9 @@ tappyn.factory('contestsFactory', function($http){
 
 	return fact;
 })
-tappyn.controller('dashController', function(){
-	
+tappyn.controller('dashController', function($scope){
+	$scope.type = 'all';
 })
-tappyn.controller('loginController', function(){
-	
-});
-tappyn.factory('loginFactory', function($http){
-	
-});
 tappyn.controller('homeController', function(){
 	
 })
@@ -203,6 +197,12 @@ tappyn.factory('homeFactory', function($http){
 	var fact = {};
 
 	return fact;
+});
+tappyn.controller('loginController', function(){
+	
+});
+tappyn.factory('loginFactory', function($http){
+	
 });
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){

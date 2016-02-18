@@ -1,1 +1,24 @@
-<div class='col-sm-10 col-sm-offset-1'><h3>Such Dash</h3></div>
+<div class='row content-padding'>
+	<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
+		<div class='btn-group' ng-if='user.type == "member"'>
+			<button ng-click='grab_submissions("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
+			<button ng-click='grab_submissions("in_progress")'  class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
+			<button ng-click='grab_submissions("completed")'  class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
+			<button ng-click='grab_submissions("winning")'  class='btn' ng-class='{"btn-oj" : type == "winning", "btn-default" : type != "winning"}'>Won</button>
+		</div>
+		<div class='btn-group' ng-if='user.type == "company"'>
+			<button ng-click='grab_contests("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
+			<button ng-click='grab_contests("all")' class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
+			<button ng-click='grab_contests("all")' class='btn' ng-class='{"btn-oj" : type == "need_winner", "btn-default" : type != "need_winner"}'>Need Winner</button>
+			<button ng-click='grab_contests("all")' class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
+		</div>
+	</div>
+	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
+		<div ng-if='user.type == "member"' class='col-xs-12 col-sm-3' ng-repeat='submish in objects'>
+
+		</div>
+		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in objects'>
+
+		</div>	
+	</div>
+</div>
