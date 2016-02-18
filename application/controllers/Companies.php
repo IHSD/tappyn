@@ -148,7 +148,7 @@ class Companies extends CI_Controller
             // Update our contest as having been paid for,
             // and let the company know they are all set
             $this->contest->update($id, array('paid' => 1));
-            
+
         } else {
             $this->responder->fail(array(
                 ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured")))

@@ -400,7 +400,7 @@ class Auth extends CI_Controller {
         }
         else
         {
-            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
+            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
         }
         $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
         $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
@@ -420,7 +420,7 @@ class Auth extends CI_Controller {
 	   }
         if ($this->form_validation->run() == true)
         {
-            $email    = strtolower($this->input->post('email'));
+            $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $this->input->post('password');
 			$name_chunks = explode(' ', $this->input->post('name'));
