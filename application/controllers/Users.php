@@ -36,7 +36,7 @@ class Users extends CI_Controller
         }
         $this->data['status'] = 'all';
 
-        if($this->input->post('type') === 'winning')
+        if($this->input->get('type') === 'winning')
         {
             // Get all winnign submissions from payout table
             $payout_ids = array();
@@ -51,13 +51,13 @@ class Users extends CI_Controller
             // then find submissions whose id exist in payout table
             $this->submission->where_in('id', $payout_ids);
         }
-        else if($this->input->post('type') === 'completed')
+        else if($this->input->get('type') === 'completed')
         {
             // Join contests and find ones where contest is still active
             $this->submission->join('contests', "submissions.contest_id = contests.id", 'left');
             $this->submission->where('contests.stop_time <', date('Y-m-d H:i:s'));
         }
-        else if($this->input->post('type') === 'in_progress')
+        else if($this->input->get('type') === 'in_progress')
         {
             $this->submission->join('contests', 'submissions.contest_id = contests.id', 'left');
             $this->submission->where(array(
