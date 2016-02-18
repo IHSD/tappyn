@@ -1,6 +1,6 @@
 <?php defined("BASEPATH") or exit("No direct script access allowed");
 
-class Submission extends CI_Model
+class Submission extends MY_Model
 {
     protected $metafields = array(
         'submissions.id',
