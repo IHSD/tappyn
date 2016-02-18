@@ -2,6 +2,8 @@
 
 class Submission extends MY_Model
 {
+    protected $table = 'submissions';
+
     protected $metafields = array(
         'submissions.id',
         'submissions.created_at',
