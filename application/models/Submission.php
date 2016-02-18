@@ -102,6 +102,25 @@ class Submission extends CI_Model
         return $results;
     }
 
+    /**
+     * Return the result of data, and fetch extra mysqli_get_metadata
+     * @return array
+     */
+    public function result()
+    {
+        $results = $this->response->result();
+        foreach($results as $result)
+        {
+            $result->contest = $this->parentContest($result->contest_id);
+            $payout = $this->db->select('*')->from('payouts')->where('submission_id', $result->id)->get();
+            if($payout)
+            {
+                $result->payout = $payout->row();
+            }
+        }
+        return $results;
+    }
+
     public function count($params)
     {
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where($params)->get();

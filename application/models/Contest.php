@@ -1,6 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Contest extends CI_Model
+class Contest extends MY_Model
 {
     protected $errors = false;
     protected $messages = false;

@@ -3,6 +3,7 @@
 class MY_Model extends CI_Model
 {
   protected $where = array();
+  protected $where_in = array();
   protected $table;
   protected $select = '*';
   protected $order_by = NULL;
@@ -11,6 +12,8 @@ class MY_Model extends CI_Model
   protected $offset = NULL;
   protected $group_by = array();
   protected $joins = array();
+  protected $where_not_in = array();
+
   public function __construct()
   {
     parent::__construct();
@@ -27,6 +30,17 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  public function where_in($col, $vals = NULL)
+  {
+      $this->where_in[$col] = $vals;
+      return $this;
+  }
+
+  public function where_not_in($col, $vals)
+  {
+      $this->where_not_in[$col] = $vals;
+      return $this;
+  }
   /**
    * Set Select Section of DB Query
    * @param  mixed $select
@@ -135,11 +149,30 @@ class MY_Model extends CI_Model
           $this->where = array();
       }
 
+      if(!empty($this->where_in))
+      {
+          foreach($this->where_in as $key => $val)
+          {
+              $this->db->where_in($key, $val);
+          }
+          $this->where_in = array();
+      }
+
+      if(!empty($this->where_not_in))
+      {
+          foreach($this->where_not_in as $key => $val)
+          {
+              $this->db->where_not_in($key, $val);
+          }
+          $this->where_not_in = array();
+      }
+
       if(!empty($this->like))
       {
           $this->db->like($this->like);
           $this->like = array();
       }
+
 
       if(!is_null($this->limit) && !is_null($this->offset))
       {
@@ -165,7 +198,7 @@ class MY_Model extends CI_Model
    * Hit DB with a manual query
    * @param  string $query
    * @param  array $args  Bound parameters for the Query
-   * @return self        
+   * @return self
    */
   public function query($query, $args)
   {

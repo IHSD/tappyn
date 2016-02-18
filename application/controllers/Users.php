@@ -14,6 +14,7 @@ class Users extends CI_Controller
         }
         $this->load->model('user');
         $this->load->model('submission');
+        $this->load->library('payout');
         $this->load->model('contest');
         $this->load->library('stripe/stripe_account_library');
         $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);
@@ -28,109 +29,56 @@ class Users extends CI_Controller
      */
     public function dashboard()
     {
+        // If company, redirect to companies controller
+        if($this->ion_auth->in_group(3))
+        {
+            redirect("companies/dashboard", 'refresh');
+        }
         $this->data['status'] = 'all';
-        if($this->ion_auth->in_group(2))
-        {
-            // generate the user dashboard of submissions
-            $submissions = $this->submission->getByUser($this->ion_auth->user()->row()->id , array());
-            if($submissions !== FALSE)
-            {
-                $this->responder->data(
-                    array(
-                        'submissions' => $submissions
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
-            }
-        }
-        else
-        {
-            $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id));
-            if($contests !== FALSE)
-            {
-                $this->responder->data(
-                    array(
-                        'contests' => $contests
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
-            }
-        }
-    }
 
-    public function in_progress()
-    {
-        $this->data['status'] = 'active';
-        if($this->ion_auth->in_group(2))
+        if($this->input->post('type') === 'winning')
         {
-            $submissions = $this->submission->getActive($this->ion_auth->user()->row()->id , array());
-            if($submissions !== FALSE)
+            // Get all winnign submissions from payout table
+            $payout_ids = array();
+            $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+            if($payouts)
             {
-                $this->responder->data(
-                    array(
-                        'submissions' => $submissions
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
+                foreach($payouts as $payout)
+                {
+                    $payout_ids[] = $payout->submission_id;
+                }
             }
-        } else {
-            $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time >' => date('Y-m-d H:i:s')));
-            if($contests !== FALSE)
-            {
-                $this->responder->data(
-                    array(
-                        'contests' => $contests
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
-            }
+            // then find submissions whose id exist in payout table
+            $this->submission->where_in('id', $payout_ids);
         }
-    }
-
-    public function completed()
-    {
-        $this->data['status'] = 'winning';
-        if($this->ion_auth->in_group(2))
+        else if($this->input->post('type') === 'completed')
         {
-            $submissions = $this->submission->getWinning($this->ion_auth->user()->row()->id);
-            if($submissions !== FALSE)
-            {
-                $this->responder->data(
-                    array(
-                        'submissions' => $submissions
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
-            }
+            // Join contests and find ones where contest is still active
+            $this->submission->join('contests', "submissions.contest_id = contests.id", 'left');
+            $this->submission->where('contests.stop_time <', date('Y-m-d H:i:s'));
+        }
+        else if($this->input->post('type') === 'in_progress')
+        {
+            $this->submission->join('contests', 'submissions.contest_id = contests.id', 'left');
+            $this->submission->where(array(
+                'contests.stop_time >' => date('Y-m-d H:i:s'),
+                'contests.start_time <' => date('Y-m-d H:i:s')
+            ));
+        }
+        // Make sure we only grab ones belonging to the user
+        $this->submission->where('submissions.owner', $this->ion_auth->user()->row()->id);
+        $submissions = $this->submission->fetch();
+        if($submissions !== FALSE)
+        {
+            $this->responder->data(
+                array(
+                    'submissions' => $submissions
+                )
+            )->respond();
         } else {
-            $contests = $this->contest->fetchAll(array('owner' => $this->ion_auth->user()->row()->id, 'stop_time <' => date('Y-m-d H:i:s')));
-            if($contests !== FALSE)
-            {
-                $this->responder->data(
-                    array(
-                        'contests' => $contests
-                    )
-                )->respond();
-            } else {
-                $this->responder->fail(array(
-                    'error' => 'There was an error fetching your dashboard'
-                ))->code(400)->respond();
-            }
+            $this->responder->fail(array(
+                'error' => 'There was an error fetching your dashboard'
+            ))->code(500)->respond();
         }
     }
 
@@ -141,6 +89,10 @@ class Users extends CI_Controller
      */
     public function profile()
     {
+        if(!$this->ion_auth->in_group(2))
+        {
+            redirect("companies/dashboard", 'refresh');
+        }
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             if($this->ion_auth->in_group(2))
