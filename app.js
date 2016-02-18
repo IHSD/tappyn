@@ -187,8 +187,35 @@ tappyn.factory('contestsFactory', function($http){
 
 	return fact;
 })
-tappyn.controller('dashController', function($scope){
+tappyn.controller('dashController', function($scope, dashFactory){
+	//on page load grab all
 	$scope.type = 'all';
+	dashFactory.grabDash($scope.type).success(function(response){
+		if(response.success) $scope.dash = response.data;
+	});
+
+	$scope.grab_dash = function(type){
+		$scope.type = type;
+
+		dashFactory.grabDash(type).success(function(response){
+			if(response.success) $scope.dash = response.data;
+		});
+	}
+})
+tappyn.factory('dashFactory', function($http){
+	var fact = {};
+
+	fact.grabDash = function(type){
+		return $http({
+			method : 'GET',
+			url : 'index.php/dashboard',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({type : type})
+		});
+	}
+	return fact;
 })
 tappyn.controller('homeController', function(){
 	
