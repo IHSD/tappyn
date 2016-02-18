@@ -126,7 +126,7 @@ class Submission extends MY_Model
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where($params)->get();
         if($count && $count->num_rows() > 0)
         {
-            return $count->row()->count;
+            return (int) $count->row()->count;
         }
         return FALSE;
     }

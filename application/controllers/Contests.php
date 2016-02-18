@@ -40,6 +40,8 @@ class Contests extends CI_Controller
 
     /**
      * Fetch a single contest
+     *
+     * Also, we log the impression so we can track views
      * @param  integer $id
      * @return void
      */
@@ -57,7 +59,26 @@ class Contests extends CI_Controller
                 'contest' => $contest
             ))->respond();
         }
+<<<<<<< HEAD
+=======
+        $this->data['contest'] = $contest;
+        $this->data['genders'] = array(
+            'GENDER' => 'Gender',
+            0 => 'All',
+            1 => "Male",
+            2 => "Female"
+        );
+        $this->data['ages'] = array(
+            0 => '18-24',
+            1 => '25-34',
+            2 => '35-44',
+            3 => '45+'
+        );
+        $this->contest->log_impression($cid);
+        $this->load->view('contests/show', $this->data);
+>>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
     }
+
     /**
      * Create a new contest, or render the creation form
      * @return void
@@ -79,8 +100,14 @@ class Contests extends CI_Controller
 
         if($this->form_validation->run() == true)
         {
+            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
             // Do some preliminary formatting
             $data = array(
+<<<<<<< HEAD
+=======
+                'title' => $this->input->post('title'),
+                'start_time' => $start_time,
+>>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
                 'audience' => $this->input->post('audience_description'),
                 'different' => $this->input->post('how_your_different'),
                 'objective' => $this->input->post('objective'),
@@ -89,9 +116,13 @@ class Contests extends CI_Controller
                 'age' => $this->input->post('age_range'),
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
+<<<<<<< HEAD
                 'start_time' => time(),
                 // For now, we just set the stop time to 7 days from now
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days'))
+=======
+                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days', strtotime($start_time))),
+>>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
@@ -149,6 +180,13 @@ class Contests extends CI_Controller
             ))->code(500)->respond();
             return;
         }
+        $company_name = $this->db->select('name')->from('profiles')->where("id", $contest->owner)->get();
+        if($company_name)
+        {
+            $company_name = $company_name->row()->name;
+        } else {
+            $company_name = '';
+        }
         // Check that we are admin or the ccontest owner
         if(!$this->ion_auth->user()->row()->id !== $contest->owner)
         {
@@ -176,7 +214,7 @@ class Contests extends CI_Controller
                 ->to($this->ion_auth->user($submission->owner)->row()->email)
                 ->from("squad@tappyn.com")
                 ->subject("Congratulations, you're submission won!")
-                ->html($this->load->view('emails/submission_chosen', array(), TRUE))
+                ->html($this->load->view('emails/submission_chosen', array('company_name' => $company_name), TRUE))
                 ->send();
 
             // Tell the contest they have successfully selected a winner!

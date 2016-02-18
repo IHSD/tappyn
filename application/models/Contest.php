@@ -5,12 +5,24 @@ class Contest extends MY_Model
     protected $errors = false;
     protected $messages = false;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
+        $this->table = 'contests';
+        $this->order_by = 'contests.id';
+        $this->order_dir = 'desc';
     }
 
+    public function log_impression($cid)
+    {
+        $this->db->insert('impressions', array(
+            'contest_id' => $cid,
+            'ip_address' => $_SERVER['REMOTE_ADDR'],
+            'user_agent' => $_SERVER['HTTP_USER_AGENT']
+        ));
+    }
     public function get($id)
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
@@ -85,7 +97,7 @@ class Contest extends MY_Model
         $count = $this->db->get();
         if($count && $count->num_rows() == 1)
         {
-            return $count->row()->count;
+            return (int) $count->row()->count;
         }
         return false;
     }

@@ -12,7 +12,10 @@ class Accounts extends CI_Controller
             ))->code(401)->respond();
             return;
         }
-
+        if($this->ion_auth->is_admin())
+        {
+            $this->load->view('templates/admin_navbar');
+        }
         if(!$this->ion_auth->in_group(2))
         {
             $this->responder->fail(array(

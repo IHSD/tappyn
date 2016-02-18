@@ -5,12 +5,13 @@ class Users extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->view('templates/admin_navbar');
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(1))
         {
             $this->session->set_flashdata('error', 'You must be an administrator to access this area');
             redirect("auth/login");
         }
+        $this->load->view('templates/admin_navbar');
+        $this->load->view('templates/navbar');
         $this->load->model('user');
     }
 
