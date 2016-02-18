@@ -34,11 +34,10 @@ tappyn.config(function($routeProvider) {
 		controller : 'submissionsController'
 	})
 	.when('/contact_us', {
-		templateUrl : 'components/contact_us/view.html',
-		controller : 'contactController'
+		templateUrl : 'components/contact_us/view.html'
 	})
 	.when('/faq', {
-		templateUrl : 'components/faq/view.html',
+		templateUrl : 'components/faq/view.html'
 	})
 	.otherwise({redirectTo : '/home'})
 
