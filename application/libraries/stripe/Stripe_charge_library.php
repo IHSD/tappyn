@@ -22,14 +22,16 @@ class stripe_charge_library
         return call_user_func_array( array($this->stripe_charge, $method), $arguments);
     }
 
-    public function create($contest_id, $token = NULL, $customer_id = NULL, $source_id = NULL, $amount = 9999)
+    public function create($contest_id, $token = NULL, $customer_id = NULL, $source_id = NULL, $amount = 9999, $metadata = array())
     {
         $data = array(
             'amount' => $amount,
             'currency' => 'usd',
-            'description' => "Charge for contest {$contest_id}"
+            'description' => "Charge for contest {$contest_id}",
+            'metadata' => $metadata
         );
-        if(!is_null($token))
+
+        if(is_null($token))
         {
             if(is_null($customer_id) && is_null($source_id))
             {

@@ -20,6 +20,55 @@ class Companies extends CI_Controller
         $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
     }
 
+    public function dashboard()
+    {
+        if($this->ion_auth->in_group(2))
+        {
+            redirect("users/dashboard", 'refresh');
+        }
+
+        $this->data['status'] = 'all';
+
+        if($this->input->post('type') === 'completed')
+        {
+            $this->contest->where('stop_time <',date('Y-m-d H:i:s'));
+        }
+        else if($this->input->post('type') === 'in_progress')
+        {
+            $this->contest->where(array(
+                'start_time <' => date('Y-m-d H:i:s'),
+                'stop_time >' => date('Y-m-d H:i:s')
+            ));
+        }
+        // Make sure we only grab ones belonging to the user
+        $this->contest->where('contests.owner', $this->ion_auth->user()->row()->id);
+        $contests = $this->contest->fetch();
+        if($contests !== FALSE)
+        {
+            // Check the input type
+            if($this->input->post('type') === 'need_winner')
+            {
+                foreach($contests as $key => $contest)
+                {
+                    if($this->payout->exists(array('contest_id' => $contest->id)))
+                    {
+                        unset($contests[$key])
+                    }
+                }
+            }
+
+            $this->responder->data(
+                array(
+                    'contests' => $contests
+                )
+            )->respond();
+        } else {
+            $this->responder->fail(array(
+                'error' => 'There was an error fetching your dashboard'
+            ))->code(500)->respond();
+        }
+    }
+
     public function accounts()
     {
 
@@ -110,20 +159,18 @@ class Companies extends CI_Controller
                 if($this->stripe_customer_id)
                 {
                     // The company is already a customer, so we're gonna go ahead and add the payment method
-                    $customer = $this->stripe_customer_library->update();
+                    // Then discover the id of the new source to use
+                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));
                 } else {
                     // We're going to create a new customer on behalf of your company
-                    $customer = $this->stripe_customer_library->create(
-                            $this->ion_auth->user()->row()->id,
-                            $this->input->post('stripeToken'),
-                            $this->ion_auth->user()->row()->email
-                    );
-                    if(!$customer)
+                    if(!$source = $this->stripe_customer_library->addPaymentSource($this->stripe_customer_id, $this->input->post('stripeToken')) ||
+                       !$this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $source)))
                     {
                         $this->responder->fail(array(
-                            'error' => $this->stripe_customer_library->errors()
+                            'error' => ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : "An unknown error occured")
                         ))->code(500)->respond();
                     }
+                    $source_id = NULL;
                 }
                 // Now we charge the customer
                 /*
