@@ -72,7 +72,7 @@ class Users extends CI_Controller
         {
             $this->responder->data(
                 array(
-                    'submissions' => $submissions->result();
+                    'submissions' => $submissions->result()
                 )
             )->respond();
         } else {
