@@ -40,6 +40,13 @@ class Accounts extends CI_Controller
         echo json_encode($this->account);
     }
 
+    public function index()
+    {
+        $this->responder->data(array(
+            'account' => $this->account
+        ))->respond();
+    }
+
     /**
      * Endpoint for setting user level account details
      * @return void
@@ -105,9 +112,9 @@ class Accounts extends CI_Controller
     {
         if(!$this->stripe_account_id)
         {
-            $this->responder->fail(
+            $this->responder->fail(array(
                 'error' => "You have not set up any account details yet"
-            )->code(500)->respond();
+            ))->code(500)->respond();
             return;
         }
         if(!$this->account->transfers_enabled)
@@ -120,9 +127,9 @@ class Accounts extends CI_Controller
             unset($fields[$key]);
             if(!empty($fields))
             {
-                $this->responder->fail(
+                $this->responder->fail(array(
                     'error' => "You haven't finished filling out your account details"
-                )->code(500)->respond();
+                ))->code(500)->respond();
                 return;
             }
         }

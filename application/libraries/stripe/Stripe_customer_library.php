@@ -26,10 +26,11 @@ class Stripe_customer_library
         return call_user_func_array( array($this->stripe_customer, $method), $arguments);
     }
 
-    public function create($uid, $token)
+    public function create($uid, $token, $email = NULL)
     {
         try {
             $customer = \Stripe\Customer::create(array(
+                "email" => $email,
                 "description" => "Customer for {$uid}",
                 "source" => $token
             ));
