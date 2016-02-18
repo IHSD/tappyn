@@ -70,17 +70,14 @@ tappyn.filter('capitalize', function() {
 tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 	if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
 
-
 	$scope.check_code = function(code){
 		if(code == 401) $location.path('/login');
 		else if(code == 403) $location.path('/dashboard');
 		else if(code == 404) $location.path('/not_found')
 	}
 
-
-
 	$scope.log_in = function(email, pass){
-		AppFact.logging_in(email, pass).success(function(response){
+		AppFact.loggingIn(email, pass).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.user = response.data;
@@ -93,11 +90,23 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 			else $scope.check_code(response.http_status_code);
 		})
 	}
+
+	$scope.log_out = function(){
+		$scope.user = null;
+		sessionStorage.removeItem('user');
+		$location.path("/login");
+	}
+
+	$scope.sign_up = function(registrant){
+		AppFact.signUp(registrant).success(function(response){
+			if(response.success) $location.path('/dashboard');
+		});
+	}
 });
 
 tappyn.factory("AppFact", function($http){
 	var fact = {};
-	fact.logging_in = function(email, pass){
+	fact.loggingIn = function(email, pass){
 		var object = {'identity' : email, 'password' : pass}; 
 		return $http({
 			method : 'POST',
@@ -106,6 +115,14 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			'data' : $.param(object)
+		});
+	}
+	fact.signUp = function(registrant){
+		return $http({
+			method : 'POST',
+			url : 'index.php/signup',
+			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
+			'data' : $.param(registrant)
 		});
 	}
 	return fact;

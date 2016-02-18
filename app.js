@@ -93,6 +93,12 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 			else $scope.check_code(response.http_status_code);
 		})
 	}
+
+	$scope.log_out = function(){
+		$scope.user = null;
+		sessionStorage.removeItem('user');
+		$location.path("/login");
+	}
 });
 
 tappyn.factory("AppFact", function($http){
@@ -150,9 +156,6 @@ tappyn.factory('contestFactory', function($http){
 tappyn.controller('contactController', function(){
 	
 })
-tappyn.controller('dashController', function(){
-	
-})
 tappyn.controller('contestsController', function($scope, contestsFactory){
 	contestsFactory.grabContests().success(function(response){
 		$scope.contests = response.data;
@@ -172,6 +175,9 @@ tappyn.factory('contestsFactory', function($http){
 	}
 
 	return fact;
+})
+tappyn.controller('dashController', function(){
+	
 })
 tappyn.controller('homeController', function(){
 	
