@@ -380,6 +380,12 @@ class Auth extends CI_Controller {
 	// create a new user
 	function create_user()
     {
+		// Check if they are registering as a guest, which limits the required fields for registration
+		$as_guest = false;
+		if($this->input->post('as_guest'))
+		{
+			$as_guest = $this->input->post('as_guest');
+		}
         $tables = $this->config->item('tables','ion_auth');
         $identity_column = $this->config->item('identity','ion_auth');
         $this->data['identity_column'] = $identity_column;
@@ -391,55 +397,46 @@ class Auth extends CI_Controller {
 		}
         // $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
         // $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
-		$this->form_validation->set_rules('age', 'Age', 'required');
-		$this->form_validation->set_rules('gender', 'Gender', 'required');
-        if($identity_column!=='email')
-        {
-            $this->form_validation->set_rules('identity',$this->lang->line('create_user_validation_identity_label'),'required|is_unique['.$tables['users'].'.'.$identity_column.']');
-            $this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'required|valid_email');
-        }
-        else
-        {
-            $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
-        }
-        $this->form_validation->set_rules('phone', $this->lang->line('create_user_validation_phone_label'), 'trim');
-        $this->form_validation->set_rules('company', $this->lang->line('create_user_validation_company_label'), 'trim');
-        $this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-        $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+        if(!$as_guest)
+		{
+			$this->form_validation->set_rules('age', 'Age', 'required');
+			$this->form_validation->set_rules('gender', 'Gender', 'required');
+			$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+	        $this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+		}
+
+        $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
 		$this->form_validation->set_rules('group_id', 'Group', 'required');
 
-		if(!$this->input->post('identity') ||
-		   !$this->input->post('password') ||
-		   !$this->input->post('age') ||
-		   !$this->input->post('gender'))
-	   {
-		   $this->responder->fail(array(
-			   'error' => "Request was missing necessary fields"
-		   ))->code(400)->respond();
-		   return;
-	   }
+		if(!$this->input->post('identity'))
+	    {
+		    $this->responder->fail(array(
+			    'error' => "Request was missing necessary fields"
+		    ))->code(400)->respond();
+	    	return;
+	   	}
+
         if ($this->form_validation->run() == true)
         {
             $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
-            $password = $this->input->post('password');
+            $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
 			$name_chunks = explode(' ', $this->input->post('name'));
             $additional_data = array(
                 'first_name' => $name_chunks[0],
                 'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
-                'company'    => $this->input->post('company'),
-                'phone'      => $this->input->post('phone'),
-				'age'		=> $this->input->post('age'),
-				'gender' 	=> $this->input->post('gender')
+				'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
+				'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL)
             );
         }
+
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
         {
 			$this->mailer
 				->to($email)
 				->from("Registration@tappyn.com")
 				->subject('Account Successfully Created')
-				->html($this->load->view('auth/email/registration', array(), true))
+				->html(($as_guest ? ($this->load->view('auth/email/inline_registration', array('password' => $password), TRUE)) : ($this->load->view('auth/email/registration', array(), true))))
 				->send();
             if($this->ion_auth->login($identity, $password))
 			{
