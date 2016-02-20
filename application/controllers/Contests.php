@@ -59,24 +59,6 @@ class Contests extends CI_Controller
                 'contest' => $contest
             ))->respond();
         }
-<<<<<<< HEAD
-=======
-        $this->data['contest'] = $contest;
-        $this->data['genders'] = array(
-            'GENDER' => 'Gender',
-            0 => 'All',
-            1 => "Male",
-            2 => "Female"
-        );
-        $this->data['ages'] = array(
-            0 => '18-24',
-            1 => '25-34',
-            2 => '35-44',
-            3 => '45+'
-        );
-        $this->contest->log_impression($cid);
-        $this->load->view('contests/show', $this->data);
->>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
     }
 
     /**
@@ -103,11 +85,8 @@ class Contests extends CI_Controller
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
             // Do some preliminary formatting
             $data = array(
-<<<<<<< HEAD
-=======
                 'title' => $this->input->post('title'),
                 'start_time' => $start_time,
->>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
                 'audience' => $this->input->post('audience_description'),
                 'different' => $this->input->post('how_your_different'),
                 'objective' => $this->input->post('objective'),
@@ -116,13 +95,8 @@ class Contests extends CI_Controller
                 'age' => $this->input->post('age_range'),
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
-<<<<<<< HEAD
                 'start_time' => time(),
-                // For now, we just set the stop time to 7 days from now
-                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days'))
-=======
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days', strtotime($start_time))),
->>>>>>> 7be3fbdd5bf97f7730804731a54b86d1b71cd7b5
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
