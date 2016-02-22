@@ -17,7 +17,7 @@ tappyn.factory("submissionsFactory", function($http){
 			url : 'index.php/contests/select_winner/'+contest,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			}
+			},
 			data : $.param({submission : id})
 		});
 	}
