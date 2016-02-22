@@ -67,4 +67,15 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 
 		Stripe.card.createToken($form, stripeResponseHandler);
 	}
+
+	$scope.remove_method = function(means){
+		paymentFactory.removeMethod(means.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
 });

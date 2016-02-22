@@ -50,9 +50,14 @@
 		    </form>
 		</div>
 		<div ng-show='showing == "methods"'>
-		    <form class='form' id="payment-form" ng-submit='process_addition(this)'>
+			<div ng-show='account.external_accounts.data.length == 1'>
+				<h3>
+					Current account : Card ending in {{account.external_accounts.data[0].last4}} <button class='btn btn-sm btn-oj' ng-click='remove_method(account.external_accounts.data[0])'>X</button>
+				</h3>
+			</div>
+		    <form ng-show='account.external_accounts.data.length == 0' class='form' id="payment-form" ng-submit='process_addition(this)'>
 				<span class="payment-errors"></span>
-			     <div class='col-xs-12'>
+			     <!--<div class='col-xs-12'>
 			     	<div class='form-group'>
 				      	<label>Account Type</label>
 			      		<select class='form-control'>
@@ -61,10 +66,10 @@
 				          	<option value='bank_account'>Bank Account</option>
 				        </select>
 				    </div>
-				</div>
+				</div> -->
 				<div class='col-xs-12'>
 				    <div class="form-group">
-				    	<label>Card Number</label>
+				    	<label>Debit Card Number</label>
 				      	<input class='form-control' type="text" size="20" data-stripe="number"/>				    
 				    </div>
 				</div>
