@@ -48,7 +48,7 @@
                	</h5>
             </div>
         <!-- Generate a select as winner button if campaign is over and user owns contest -->
-		<button ng-disabled='' ng-if='contest.owner == user.id' ng-click='choose_winner(submission.id)' class='btn btn-oj btn-lg'>Choose Winner</button>
+		<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj btn-lg'>Choose Winner</button>
     </div>
 	<h3 class='text-center' ng-if='submissions.length == 0'>This contest has no submissions yet, you could be the first!</h3>
 </div>
