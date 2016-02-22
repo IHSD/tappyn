@@ -417,6 +417,18 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller('profileController', function($scope){
+	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
+		
+	}
+
+	return fact;
+})
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
@@ -565,7 +577,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.setDefault = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/remove_method',
+			url : 'index.php/accounts/default_method',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -822,18 +834,6 @@ tappyn.service('paymentModel', function(){
     'ZM' : 'Zambia',
     'ZW' : 'Zimbabwe'
 	};
-})
-tappyn.controller('profileController', function($scope){
-	
-});
-tappyn.factory('profileFactory', function($http){
-	var fact = {};
-
-	fact.grabProfile = function(){
-		
-	}
-
-	return fact;
 })
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){

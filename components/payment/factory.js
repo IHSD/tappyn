@@ -47,7 +47,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.setDefault = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/remove_method',
+			url : 'index.php/accounts/default_method',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
