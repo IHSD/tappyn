@@ -14,11 +14,43 @@
 		</div>
 	</div>
 	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
-		<div ng-if='user.type == "member"' class='col-xs-12 col-sm-3' ng-repeat='submish in dash'>
-
+		<div ng-if='user.type == "member"' class='col-xs-12 col-sm-3' ng-repeat='submish in dash.submissions'>
+			<div class='contest-box'>
+				<h3>{{submish.headline}}</h3>
+				<div class="contest-content">
+				    <span>{{submish.text}}</span>
+				</div>
+				<a class='btn btn-oj' href='#/contest/{{submish.contest_id}}'>View Contest</a>
+			</div>
 		</div>
-		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in dash'>
-
+		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in dash.contests'>
+			<div class='contest-box'>
+				<div>
+	                <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.title}}</h5>
+	                <span class='contest-price'>
+	                    $50
+	                </span>
+	            </div>
+	            <div class="company-img" style='margin-top:10px;height:100px'>
+	                <img ng-if='contest.company.logo_url' src="uploads/{{contest.company.logo_url}}">
+	                <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
+	            </div>
+	            <div style='height:100px;width: 100%;overflow: hidden;'>
+	                <div class='contest-audience'>
+	                  
+	                </div>
+	            </div>
+                <h5 ng-if="contest.platform == 'facebook'"><img src='public/img/OrangeFacebookIcon.png' width='20px' height='20px'>Facebook</h5>
+                <h5 ng-if="contest.platform == 'google'"><img src='public/img/OrangeGoogleIcon.png' width='20px' height='20px'>Google</h5>
+                <h5 ng-if="contest.platform == 'general'">General</h5>
+                <h5 ng-if="contest.platform == 'twitter'"><img src='public/img/OrangeTwitterIcon.png' width='20px' height='20px'>Twitter</h5>
+	            <h5 class='text-center'><img src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
+	            <div style='width:100%'>
+	                <uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
+	                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+	            </div>
+	            <a class='btn btn-oj' href='#/contest/{{contest.id}}'>View Contest</a>
+			</div>
 		</div>	
 	</div>
 </div>

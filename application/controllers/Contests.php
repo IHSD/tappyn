@@ -59,7 +59,12 @@ class Contests extends CI_Controller
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
+<<<<<<< HEAD
             $this->contest->log_impression($cid);
+=======
+            $contest->views = $this->contest->views($cid);
+            $this->contest->log_impressiosn($cid
+>>>>>>> 1534a65267a20d691bdb891e0e43755c97a79dd2
         }
     }
 
@@ -98,7 +103,6 @@ class Contests extends CI_Controller
                 'owner'             => $this->ion_auth->user()->row()->id,
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days'))
-
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))

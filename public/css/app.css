@@ -768,12 +768,6 @@ footer {
 .login-page .inner-title {
 	margin: 0 0 57px;
 }
-.text-center {
-	text-align: center;
-
-    	color: #FF5E00;
-    	margin-top: 0px;
-}
 .login-buttons {
 	text-align: center;
 }
@@ -1482,10 +1476,6 @@ footer {
 	display: block;
 	overflow: hidden;
 }
-.row label {
-    margin-right:0.88889rem;
-    margin-left:0.44444rem;
-}
 .sub-list ul li span img {
 	display: inline-block;
 	height: 27px;
@@ -2130,4 +2120,9 @@ nav .dropdown-menu{
 .dropdown-menu li a:hover{
 	border:none;
 	background-color:#eee;
+}
+
+.launch-page-hover:hover{
+	cursor:pointer;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }

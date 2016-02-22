@@ -21,6 +21,14 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/dashboard/view.html',
 		controller : 'dashController'
 	})
+	.when('/launch', {
+		templateUrl : 'components/launch/view.html',
+		controller : 'launchController'
+	})
+	.when('/profile', {
+		templateUrl : 'components/profile/view.html',
+		controller : 'profileController'
+	})
 	.when('/contests', {
 		templateUrl : 'components/contests/view.html',
 		controller : 'contestsController'
@@ -74,6 +82,17 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 		else if(code == 403) $location.path('/dashboard');
 		else if(code == 404) $location.path('/not_found')
 	}
+	/** example response
+			if(response.http_status_code == 200){
+				if(response.success){
+					
+				}
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+	
+	**/
 
 	$scope.log_in = function(email, pass){
 		AppFact.loggingIn(email, pass).success(function(response){
@@ -101,6 +120,17 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 			if(response.success) $location.path('/dashboard');
 		});
 	}
+
+	$scope.contact = function(issue){
+		AppFact.contactUs(issue).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) alert("We got that message");
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
 });
 
 tappyn.factory("AppFact", function($http){
@@ -123,6 +153,14 @@ tappyn.factory("AppFact", function($http){
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(registrant)
 		});
+	}
+	fact.contactUs = function(issue){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contact',
+			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
+			'data' : $.param(issue)
+		});	
 	}
 	return fact;
 })

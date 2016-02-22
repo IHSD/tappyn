@@ -63,7 +63,7 @@
 				<div class='facebook-form-wrapper'>
             		<form class='form' ng-submit='submit_to(contest.id, submit)'>
              			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here</h4>	
-         				<div ng-if='!user'>
+         				<div ng-show='!user'>
 							<div class='form-group'>
 								<input class='form-control' ng-model='submit.name' placeholder='Name' type='text'>
 	                        </div>

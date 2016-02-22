@@ -214,18 +214,20 @@
                 </div>
             </div>
         </div> -->
-        <!--<div class='row'>
+        <div class='col-sm-8 col-sm-offset-2 col-xs-12'>
             <h2 class='title'>Get personalized contests delivered
             <br><br>to your inbox weekly.</h2>
-            <div class='medium-8 medium-offset-2 small-12'>
-                <?php echo form_open("mailing_list");?>
-                <div class='form-row large-8 small-12 columns'>
-                   <?php echo form_input(array('name' => 'email','value' => '','placeholder' => 'Enter your email', 'type' => 'text'));?>
+            <form class='form' ng-submit="mailing_list(email)">
+                <div class='col-sm-8'>
+                    <div class='form-group'>
+                        <input class='form-control input-lg' ng-model='email' placeholder='Enter your email' type='text'>
+                    </div>
                 </div>
-                <?php echo form_submit('submit', 'Sign Up', array("class" => 'btn large-4 small-12 columns'));?>
-                <?php echo form_close(); ?>
-            </div>
-        </div> -->
+                <div class='col-sm-4'>
+                    <button type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+                </div>
+            </form>
+        </div>
     </section>
     <!-- Past Companies -->
     <!-- <section class="past-companies">
