@@ -21,7 +21,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.set_alert(response.message, "default");	
-					$scope.account = response.data;
+					$scope.account = response.data.account;
 					$scope.showing = 'methods';
 				}
 				else $scope.set_alert(response.message, "default");	 
@@ -39,18 +39,22 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
       var $form = $('#payment-form');
 
       if (response.error) {
-        // Show the errors on the form
-        $form.find('.payment-errors').text(response.error.message);
+        $scope.set_alert(response.error.message, "error");
         $form.find('button').prop('disabled', false);
       } else {
         // response contains id and card, which contains additional card details
         var token = response.id;
         console.log(token);
-        return;
-        // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-        // and submit
-        $form.get(0).submit();
+       	paymentFactory.addPayment(token).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.set_alert(res.message, "default");	
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
       }
     };
 	$scope.process_addition = function(ele){
