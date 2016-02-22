@@ -50,12 +50,10 @@
 		    </form>
 		</div>
 		<div ng-show='showing == "methods"'>
-			<div ng-show='account.external_accounts.data.length == 1'>
-				<h3>
-					Current account : Card ending in {{account.external_accounts.data[0].last4}} <button class='btn btn-sm btn-oj' ng-click='remove_method(account.external_accounts.data[0])'>X</button>
-				</h3>
+			<div class='col-xs-12' ng-show='account.external_accounts.data.length == 1'>
+				<h3 class='text-center'>Current account : Card ending in {{account.external_accounts.data[0].last4}}</h3>
 			</div>
-		    <form ng-show='account.external_accounts.data.length == 0' class='form' id="payment-form" ng-submit='process_addition(this)'>
+		    <form class='form' id="payment-form" ng-submit='process_addition(this)'>
 				<span class="payment-errors"></span>
 			     <!--<div class='col-xs-12'>
 			     	<div class='form-group'>
@@ -119,7 +117,12 @@
 			  	</div>
 				<input type='hidden' data-stripe='currency' value='usd'/>
 
-				<div class='colxs-12 text-center'><button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Add Payment Method</button></div>
+				<div class='colxs-12 text-center'>
+					<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>
+						<span ng-show='account.external_accounts.data.length == 0'>Add Payment Method</span>
+						<span ng-show='account.external_accounts.data.length == 1'>Change Payment Method</span>
+					</button>
+				</div>
 			</form>
 		</div>
 	</div>

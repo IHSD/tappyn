@@ -33,15 +33,5 @@ tappyn.factory("paymentFactory", function($http){
 		})	
 	}
 
-	fact.removeMethod = function(id){
-		return $http({
-			method : 'POST',
-			url : 'index.php/accounts/remove_method',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({source_id : id})
-		})	
-	}
 	return fact;	
 })
