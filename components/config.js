@@ -47,6 +47,12 @@ tappyn.config(function($routeProvider) {
 	.when('/faq', {
 		templateUrl : 'components/faq/view.html'
 	})
+	.when('/privacy', {
+		templateUrl : 'components/privacy_policy/view.html'
+	})
+	.when('/terms', {
+		templateUrl : 'components/terms_of_service/view.html'
+	})
 	.otherwise({redirectTo : '/home'})
 
 });
@@ -74,22 +80,41 @@ tappyn.filter('capitalize', function() {
   }
 });
 
-tappyn.controller("ApplicationController", function($scope, $location, AppFact){
+tappyn.controller("ApplicationController", function($scope, $location, $timeout, AppFact){
 	if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
 
 	$scope.check_code = function(code){
-		if(code == 401) $location.path('/login');
-		else if(code == 403) $location.path('/dashboard');
+		if(code == 401){
+			$scope.set_alert("You must be logged in", "default");
+			$location.path('/login');
+		}
+		else if(code == 403){
+			$scope.set_alert("Unauthorized access", "error")
+			$location.path('/dashboard');
+		}
 		else if(code == 404) $location.path('/not_found')
 	}
+	$scope.alert = {show : false, message : '', type : ''}; //default our alert to a blank nonshowing object
+	$scope.set_alert = function(msg, type){
+		$scope.alert = {show : true, message : msg, type : type};
+		$timeout(function() {
+		  	$scope.alert = {show : false, message : '', type : ''};
+		}, 5000);
+	}
+
+	$scope.close_alert = function(){
+		$scope.alert = {show : false, message : '', type : ''};
+	}
+
+	$scope.set_alert("testing", "error");
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success){
 					
 				}
-				else alert(response.message);	 
+				else $scope.set_alert(response.message, "default");	 
 			}
-			else if(response.http_status_code == 500) alert(response.error);
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 	
 	**/
@@ -110,9 +135,11 @@ tappyn.controller("ApplicationController", function($scope, $location, AppFact){
 	}
 
 	$scope.log_out = function(){
-		$scope.user = null;
-		sessionStorage.removeItem('user');
-		$location.path("/login");
+		AppFact.loggingOut().success(function(response){
+			$scope.user = null;
+			sessionStorage.removeItem('user');
+			$location.path("/login");
+		});
 	}
 
 	$scope.sign_up = function(registrant){
@@ -144,6 +171,15 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			'data' : $.param(object)
+		});
+	}
+	fact.loggingOut = function(){
+		return $http({
+			method : 'POST',
+			url : 'index.php/logout',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
 		});
 	}
 	fact.signUp = function(registrant){

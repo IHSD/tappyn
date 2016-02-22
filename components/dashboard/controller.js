@@ -3,7 +3,7 @@ tappyn.controller('dashController', function($scope, dashFactory){
 	$scope.type = 'all';
 	dashFactory.grabDash($scope.type).success(function(response){
 		if(response.http_status_code == 200){
-			if(response.success) if(response.success) $scope.dash = response.data;
+			if(response.success) $scope.dash = response.data;
 			else alert(response.message);	 
 		}
 		else if(response.http_status_code == 500) alert(response.error);
