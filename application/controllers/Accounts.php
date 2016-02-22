@@ -17,13 +17,6 @@ class Accounts extends CI_Controller
         {
             $this->load->view('templates/admin_navbar');
         }
-        if(!$this->ion_auth->in_group(2))
-        {
-            $this->responder->fail(array(
-                'error' => "Only content creators can access the accounts panel"
-            ))->code(403)->respond();
-            exit();
-        }
         $this->load->model('user');
         $this->load->library('stripe/stripe_account_library');
         $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);

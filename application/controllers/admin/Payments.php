@@ -10,6 +10,7 @@ class Payments extends CI_Controller
             $this->session->set_flashdata('error', 'You dont have permission to access this area');
             redirect('contests/index', 'refresh');
         }
+        $this->load->view('templates/admin_navbar');
         $this->load->view('templates/navbar');
         $this->config->load('secrets');
         $this->load->model('payout_model');
@@ -21,14 +22,14 @@ class Payments extends CI_Controller
     {
         // Initialize pagination
         $where = array();
-        if(isset($this->input->get('claimed'))) $where['claimed'] = $this->input->get('claimed');
-        if(isset($this->input->get('created_before'))) $where['created_at <'] = $this->input->get('created_before');
-        if(isset($this->input->get('created_after'))) $where['created_after >'] = $this->input->get('created_after');
-        if(isset($this->input->get('submission_id'))) $where['submission_id'] = $this->input->get('submission_id');
-        if(isset($this->input->get('user_id'))) $where['user_id'] = $this->input->get('user_id');
-        if(isset($this->input->get('account_id'))) $where['account_id'] = $this->input->get('account_id');
-        if(isset($htis->input->get('transfer_id'))) $where['transfer_id'] = $this->input->get('transfer_id');
-        if(isset($this->input->get('account_type'))) $where['account_type'] = $this->input->get('account_type');
+        if($this->input->get('claimed')) $where['claimed'] = $this->input->get('claimed');
+        if($this->input->get('created_before')) $where['created_at <'] = $this->input->get('created_before');
+        if($this->input->get('created_after')) $where['created_after >'] = $this->input->get('created_after');
+        if($this->input->get('submission_id')) $where['submission_id'] = $this->input->get('submission_id');
+        if($this->input->get('user_id')) $where['user_id'] = $this->input->get('user_id');
+        if($this->input->get('account_id')) $where['account_id'] = $this->input->get('account_id');
+        if($this->input->get('transfer_id')) $where['transfer_id'] = $this->input->get('transfer_id');
+        if($this->input->get('account_type')) $where['account_type'] = $this->input->get('account_type');
         $config['base_url'] = base_url().'admin/payments/index';
         $config['total_rows'] = $this->payout_model->count($where);
         $config['per_page'] = 20;
@@ -59,7 +60,19 @@ class Payments extends CI_Controller
         {
 
         }
-        $this->load->view('admin/payouts/index', $this->data);
+        $this->load->view('admin/payments/index', $this->data);
+    }
+
+    public function show($pid)
+    {
+        $this->load->model('contest');
+        $this->load->model('submission');
+        $payout = $this->payout_model->where('id', $pid)->fetch()->row();
+        $payout->user = $this->ion_auth->user($payout->user_id)->row();
+        $payout->contest = $this->contest->where('id', $payout->contest_id)->fetch()->row();
+        $payout->submission = $this->submission->where('id', $payout->submission_id)->fetch()->row();
+        $this->data['payout'] = $payout;
+        $this->load->view('admin/payments/show', $this->data);
     }
 
     public function update()
