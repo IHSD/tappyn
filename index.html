@@ -27,6 +27,10 @@
 		    <div ng-include src="'templates/navbar.html'"></div>
 		    <section class='innerpage' ng-view></section>
 		    <div ng-include src="'templates/footer.html'"></div>
+		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
+		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></h2>
+		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></p>	
+		    </div>
 		</div>
     	<script src="app.js"></script>
 		    
