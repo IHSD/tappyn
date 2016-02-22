@@ -141,11 +141,17 @@ class Stripe_account_library
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_POST, 1);
-        $res = json_decode(curl_exec($c));
-        error_log($res);
-        if(isset($res->error))
+        $res =  curl_exec($c);
+        $response = json_decode($res);
+        if(is_null($response))
         {
-            $this->errors = $res->error->message;
+            $this->errors = "An unknown error occured";
+            return false;
+        }
+        error_log($res);
+        if(isset($response->error))
+        {
+            $this->errors = $response->error->message;
             return FALSE;
         }
         return TRUE;
@@ -160,11 +166,17 @@ class Stripe_account_library
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_CUSTOMREQUEST, "DELETE");
-        $res = json_decode(curl_exec($c));
-        error_log($res);
-        if(isset($res->error))
+        $res =  curl_exec($c);
+        $response = json_decode($res);
+        if(is_null($response))
         {
-            $this->errors = $res->error->message;
+            $this->errors = "An unknown error occured";
+            return false;
+        }
+        error_log($res);
+        if(isset($response->error))
+        {
+            $this->errors = $response->error->message;
             return FALSE;
         }
         return TRUE;
