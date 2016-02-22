@@ -9,6 +9,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 					$scope.showing = 'details';
 				}
 				else $scope.showing = 'methods';
+				$scope.account = response.data.account;
 			}
 			else $scope.set_alert(response.message, "default");	 
 		}
