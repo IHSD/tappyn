@@ -164,6 +164,8 @@ class Companies extends CI_Controller
             return;
         }
 
+        echo "Loading libraries";
+
         $this->load->library('stripe/stripe_charge_library');
         $this->load->library('stripe/stripe_customer_library');
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
@@ -205,6 +207,7 @@ class Companies extends CI_Controller
             return;
         }
 
+        echo "Charge created";
         // Check if charge was succesful and handle accordingly
         if($charge)
         {
