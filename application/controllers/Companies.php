@@ -52,7 +52,7 @@ class Companies extends CI_Controller
                 {
                     if($this->payout->exists(array('contest_id' => $contest->id)))
                     {
-                        unset($contests[$key])
+                        unset($contests[$key]);
                     }
                 }
             }
