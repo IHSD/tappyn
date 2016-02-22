@@ -21,7 +21,7 @@
 				    <span>{{submish.text}}</span>
 				</div>
 				<a class='btn btn-oj' href='#/contest/{{submish.contest_id}}'>View Contest</a>
-				<button ng-if='subish.payout.claimed == 0' class='btn btn-oj' ng-click='claim_winnings(contest.id)'>Claim</button>
+				<button ng-if='subish.payout.claimed == 0' class='btn btn-oj' ng-click='claim_winnings(submish.payout.id)'>Claim</button>
 			</div>
 		</div>
 		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in dash.contests'>
