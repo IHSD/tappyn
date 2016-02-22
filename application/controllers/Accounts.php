@@ -149,4 +149,16 @@ class Accounts extends CI_Controller
             ))->code(400)->respond();
         }
     }
+
+    public function default()
+    {
+        if($this->input->post('source_id'))
+        {
+
+        } else {
+            $this->responder->fail(array(
+                'You must provide a payment method to use as your default'
+            ))->code(400)->respond();
+        }
+    }
 }

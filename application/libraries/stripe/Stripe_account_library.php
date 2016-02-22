@@ -123,7 +123,7 @@ class Stripe_account_library
     {
         try {
             $account = \Stripe\Account::retrieve($aid);
-            $account->external_accounts->create(array("external_account" => $token));
+            $account->external_accounts = $token;
             $account->save();
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
