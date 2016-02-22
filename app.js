@@ -363,7 +363,6 @@ tappyn.factory('homeFactory', function($http){
 	return fact;
 });
 tappyn.controller('launchController', function($scope, $location, launchFactory){
-	$scope.countries = launchModel.countries;
 	$scope.steps = {
 		'platform'		 : {step : 'platform', next : 'objective', previous : 'none', fill : 25},
 		'objective'      : {step : 'objective', next : 'detail', previous : 'platform', fill : 50},
@@ -416,18 +415,6 @@ tappyn.factory('launchFactory', function($http){
 			data : $.param(contest)
 		});	
 	}
-	return fact;
-})
-tappyn.controller('profileController', function($scope){
-	
-});
-tappyn.factory('profileFactory', function($http){
-	var fact = {};
-
-	fact.grabProfile = function(){
-		
-	}
-
 	return fact;
 })
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
@@ -500,6 +487,34 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 
 		Stripe.card.createToken($form, stripeResponseHandler);
 	}
+
+	$scope.remove_method = function(means){
+		paymentFactory.removeMethod(means).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.account = response.data.account;
+					$scope.set_alert(response.message, "default");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.set_default = function(means){
+		paymentFactory.setDefault(means).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.account = response.data.account;
+					$scope.set_alert(response.message, "default");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
 });
 tappyn.factory("paymentFactory", function($http){
 	var fact = {};
@@ -536,6 +551,27 @@ tappyn.factory("paymentFactory", function($http){
 		})	
 	}
 
+	fact.removeMethod = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/accounts/remove_method',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({source_id : id})
+		})	
+	}
+
+	fact.setDefault = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/accounts/remove_method',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({source_id : id})
+		})	
+	}
 	return fact;	
 })
 tappyn.service('paymentModel', function(){
@@ -786,6 +822,18 @@ tappyn.service('paymentModel', function(){
     'ZM' : 'Zambia',
     'ZW' : 'Zimbabwe'
 	};
+})
+tappyn.controller('profileController', function($scope){
+	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
+		
+	}
+
+	return fact;
 })
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
