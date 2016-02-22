@@ -185,19 +185,19 @@ class Companies extends CI_Controller
                     // Create the customer
                     $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripeToken'), $this->ion_auth->user()->row()->email);
                     // Charge the customer_id
-                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 9999);
+                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 199);
                 }
             }
             // The user does not want to save the method, so we just charge the card
             else
             {
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 9999);
+                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 199);
             }
         }
         // Check if we have a customer, and chosen source
         else if($this->input->post('source_id') && $this->stripe_customer_id)
         {
-            $charge = $this->stripe_transfer_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 9999);
+            $charge = $this->stripe_transfer_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 199);
         }
         // Tell them we cant process their request
         else
