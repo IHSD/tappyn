@@ -12,7 +12,6 @@ class Users extends CI_Controller
             ))->code(401)->respond();
             exit();
         }
-        echo "<br><br>I SHOULD NOT PRINT OUT<br><br>";
         $this->load->model('user');
         $this->load->model('submission');
         $this->load->library('payout');

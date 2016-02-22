@@ -34,15 +34,6 @@ class Accounts extends CI_Controller
         $this->config->load('secrets');
     }
 
-    /**
-     * Debug current account
-     * @return void
-     */
-    public function debug()
-    {
-        echo json_encode($this->account);
-    }
-
     public function index()
     {
         $this->responder->data(array(
