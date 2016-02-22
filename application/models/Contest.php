@@ -47,14 +47,6 @@ class Contest extends MY_Model
         return false;
     }
 
-    public function log_impression($cid)
-    {
-        $this->db->insert('impressions', array(
-            'contest_id' => $cid,
-            'ip_address' => $_SERVER['REMOTE_ADDR'],
-            'user_agent' => $_SERVER['HTTP_USER_AGENT']
-        ));
-    }
     public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20, $offset = false)
     {
         $this->db->select('*')->from('contests');
