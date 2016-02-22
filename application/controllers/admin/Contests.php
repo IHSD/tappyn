@@ -48,8 +48,9 @@ class Contests extends CI_Controller
             $contests = $this->contest->result();
             foreach($contests as $contest)
             {
-                $company = $this->user->where('users.id', $contest->owner)->fetch();
-                $contest->company = $company->row();
+                $this->user->where('users.id', $contest->owner)->fetch();
+                $this->user->join('profiles', 'users.id = profiles.id', 'left');
+                $contest->company = $this->user->fetch()->row();
                 $contest->submission_count = $this->contest->submissionsCount($contest->id);
             }
             $this->data['contests'] = $contests;
