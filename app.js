@@ -84,7 +84,17 @@ tappyn.filter('capitalize', function() {
 });
 
 tappyn.controller("ApplicationController", function($scope, $location, $timeout, AppFact){
-	if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+	
+
+	AppFact.isLoggedIn().success(function(response){
+		if(response.http_status_code == 200){
+			if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+			else{
+				$scope.user = response.data;
+				sessionStorage.setItem("user", JSON.stringify(response.data));
+			}
+		}
+	})
 
 	$scope.check_code = function(code){
 		if(code == 401){
@@ -135,7 +145,6 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 			else $scope.check_code(response.http_status_code);
 		})
 	}
-
 	$scope.log_out = function(){
 		AppFact.loggingOut().success(function(response){
 			$scope.user = null;
@@ -207,6 +216,13 @@ tappyn.factory("AppFact", function($http){
 			url : 'index.php/contact',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(issue)
+		});	
+	}
+	fact.isLoggedIn = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/is_logged_in',
+			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}
 	return fact;
@@ -372,6 +388,36 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller('homeController', function($scope, $location, homeFactory){
+	
+
+	$scope.mailing_list = function(email){
+		homeFactory.mailingList(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) window.location.reload();
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	fact.mailingList = function(email){
+		return $http({
+			method : 'GET',
+			url : 'index.php/mailing_list',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({"email" : email})
+		});
+	}
+
+	return fact;
+});
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
@@ -761,33 +807,3 @@ tappyn.factory("submissionsFactory", function($http){
 
 	return fact; 
 })
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
-
-	$scope.mailing_list = function(email){
-		homeFactory.mailingList(email).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) window.location.reload();
-				else alert(response.message);	 
-			}
-			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	fact.mailingList = function(email){
-		return $http({
-			method : 'GET',
-			url : 'index.php/mailing_list',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
-		});
-	}
-
-	return fact;
-});
