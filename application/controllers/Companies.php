@@ -9,10 +9,11 @@ class Companies extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->session->set_flashdata('error', 'You must be a company to access this area');
-            redirect('contests/index', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You must be logged in as a company to access this area"
+            ))->code(401)->respond();
+            exit();
         }
-        $this->load->view('templates/navbar');
         $this->load->model('company');
         $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
@@ -160,6 +161,7 @@ class Companies extends CI_Controller
             $this->responder->fail(array(
                 'error' => "You must supply a contest"
             ))->code(400)->respond();
+            return;
         }
 
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
@@ -216,6 +218,7 @@ class Companies extends CI_Controller
             $this->responder->fail(array(
                 ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured")))
             ))->code(500)->respond();
+            return;
         }
     }
 
