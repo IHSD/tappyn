@@ -88,7 +88,7 @@ class Payouts extends CI_Controller
         if(!$account)
         {
             $this->responder->fail(array(
-                'error' = "You need to set up your account first"
+                'error' => "You need to set up your account first"
             ))->code(500)->respond();
             return;
         }
