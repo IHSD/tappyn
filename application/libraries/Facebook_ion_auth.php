@@ -81,6 +81,11 @@ class Facebook_ion_auth {
 					error_log("registering a user now");
 					$name = explode(" ", $user->name);
 					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]));
+					error_log(var_dump($register));
+					if(!$register)
+					{
+						error_log(json_encode($this->CI->ion_auth->errors()));
+					}
 					$this->CI->ion_auth->login($user->email, $user->id, 1);
 				} else {
 					error_log("Logging the user in");
