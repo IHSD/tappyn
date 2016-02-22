@@ -84,7 +84,17 @@ tappyn.filter('capitalize', function() {
 });
 
 tappyn.controller("ApplicationController", function($scope, $location, $timeout, AppFact){
-	if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+	
+
+	AppFact.isLoggedIn().success(function(response){
+		if(response.http_status_code == 200){
+			if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+			else{
+				$scope.user = response.data;
+				sessionStorage.setItem("user", JSON.stringify(response.data));
+			}
+		}
+	})
 
 	$scope.check_code = function(code){
 		if(code == 401){
@@ -135,7 +145,6 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 			else $scope.check_code(response.http_status_code);
 		})
 	}
-
 	$scope.log_out = function(){
 		AppFact.loggingOut().success(function(response){
 			$scope.user = null;
@@ -207,6 +216,13 @@ tappyn.factory("AppFact", function($http){
 			url : 'index.php/contact',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(issue)
+		});	
+	}
+	fact.isLoggedIn = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/auth/is_logged_in',
+			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}
 	return fact;
