@@ -131,11 +131,11 @@ class Stripe_account_library
         }
         return TRUE;
     }
-    
+
     public function setAsDefault($aid, $sid)
     {
         $c = curl_init();
-        curl_setopt($c, CURLOPT_HTTPHEADER, "Authorization: Bearer {$this->api_key}}");
+        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}?default_for_currency=true";
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
@@ -153,7 +153,7 @@ class Stripe_account_library
     public function removeSource($aid, $sid)
     {
         $c = curl_init();
-        curl_setopt($c, CURLOPT_HTTPHEADER, "Authorization: Bearer {$this->api_key}}");
+        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}";
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
