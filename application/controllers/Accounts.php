@@ -2,6 +2,7 @@
 
 class Accounts extends CI_Controller
 {
+    protected $account = FALSE;
     public function __construct()
     {
         parent::__construct();
