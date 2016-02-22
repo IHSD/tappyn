@@ -126,22 +126,17 @@ class Accounts extends CI_Controller
     {
         if($this->input->post('source_id'))
         {
-            foreach($this->account->external_accounts->data as $source)
+
+            if($this->stripe_account_library->removeSource($this->stripe_account_id, $this->input->post('source_id')))
             {
-                if($source->id === $this->input->post('source_id'))
-                {
-                    if($this->stripe_account_library->removeSource($this->stripe_account_id, $source->id))
-                    {
-                        $this->responder->message(
-                            'Payment method successfully removed'
-                        )->respond();
-                    } else {
-                        $this->responder->fail(array(
-                            $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
-                        ))->code(500)->respond();
-                        return;
-                    }
-                }
+                $this->responder->message(
+                    'Payment method successfully removed'
+                )->respond();
+            } else {
+                $this->responder->fail(array(
+                    $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
+                ))->code(500)->respond();
+                return;
             }
         } else {
             $this->responder->fail(array(
@@ -154,7 +149,7 @@ class Accounts extends CI_Controller
     {
         if($this->input->post('source_id'))
         {
-            $this->stripe_account_library->update();
+            $this->stripe_account_library->setAsDefault($this->stripe_account_id, $this->input->post('source_id'));
         } else {
             $this->responder->fail(array(
                 'You must provide a payment method to use as your default'
