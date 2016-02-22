@@ -116,7 +116,7 @@ class MY_Model extends CI_Model
 
   public function join($table, $statement, $type)
   {
-      $this->join[] = array(
+      $this->joins[] = array(
           'table' => $table,
           'statement' => $statement,
           'type' => $type
@@ -132,14 +132,14 @@ class MY_Model extends CI_Model
   {
       $this->db->select($this->select);
       $this->db->from($this->table);
-      if(!empty($this->join))
+      if(!empty($this->joins))
       {
-          foreach($this->join as $join)
+          foreach($this->joins as $join)
           {
               $this->db->join($join['table'], $join['statement'], $join['type']);
           }
       }
-      $this->join = array();
+      $this->joins = array();
       if(!empty($this->where))
       {
           foreach($this->where as $where)

@@ -152,6 +152,7 @@ class Companies extends CI_Controller
      *
      * // $contest_id, $token = NULL, $customer_id = NULL, $source_id = NULL, $amount = 9999
      * @param  [type] $contest_id [description]
+     * @todo Still need to test selected payment method
      * @return [type]             [description]
      */
     public function payment($contest_id = FALSE)
@@ -177,7 +178,8 @@ class Companies extends CI_Controller
                 // Update the customer with the new payment method, and get the source id
                 if($this->stripe_customer_id)
                 {
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));
+                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));4
+                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 199);
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
                 else
@@ -194,6 +196,7 @@ class Companies extends CI_Controller
                 $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 199);
             }
         }
+
         // Check if we have a customer, and chosen source
         else if($this->input->post('source_id') && $this->stripe_customer_id)
         {
@@ -222,7 +225,7 @@ class Companies extends CI_Controller
         else
         {
             $this->responder->fail(array(
-                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured")))
+                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured with payment")))
             ))->code(500)->respond();
             return;
         }
