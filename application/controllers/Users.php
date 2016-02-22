@@ -10,8 +10,9 @@ class Users extends CI_Controller
             $this->responder->fail(array(
                 'error' => "You must be logged in to access this area"
             ))->code(401)->respond();
-            return;
+            exit();
         }
+        echo "<br><br>I SHOULD NOT PRINT OUT<br><br>";
         $this->load->model('user');
         $this->load->model('submission');
         $this->load->library('payout');

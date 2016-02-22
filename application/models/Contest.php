@@ -23,6 +23,17 @@ class Contest extends MY_Model
             'user_agent' => $_SERVER['HTTP_USER_AGENT']
         ));
     }
+
+    public function views($cid)
+    {
+        $views = $this->db->select("COUNT(*) as count")->from('impressions')->where('contest_id', $cid)->get();
+        if($views !== FALSE)
+        {
+            return $views->row()->count;
+        }
+        return FALSE;
+    }
+    
     public function get($id)
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
