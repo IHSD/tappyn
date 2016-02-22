@@ -147,7 +147,11 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 	$scope.sign_up = function(registrant){
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $location.path('/dashboard');
+				if(response.success){
+					$scope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$location.path('/dashboard');
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");

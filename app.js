@@ -147,7 +147,11 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 	$scope.sign_up = function(registrant){
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $location.path('/dashboard');
+				if(response.success){
+					$scope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$location.path('/dashboard');
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -312,7 +316,7 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('launchController', function($scope, $location, launchFactory, launchModel){
+tappyn.controller('launchController', function($scope, $location, launchFactory){
 	$scope.countries = launchModel.countries;
 	$scope.steps = {
 		'platform'		 : {step : 'platform', next : 'objective', previous : 'none', fill : 25},
@@ -421,7 +425,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.set_alert(response.message, "default");	
-					$scope.account = response.data;
+					$scope.account = response.data.account;
 					$scope.showing = 'methods';
 				}
 				else $scope.set_alert(response.message, "default");	 
@@ -439,34 +443,33 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
       var $form = $('#payment-form');
 
       if (response.error) {
-        // Show the errors on the form
-        $form.find('.payment-errors').text(response.error.message);
+        $scope.set_alert(response.error.message, "error");
         $form.find('button').prop('disabled', false);
       } else {
         // response contains id and card, which contains additional card details
         var token = response.id;
         console.log(token);
-        return;
-        // Insert the token into the form so it gets submitted to the server
-        $form.append($('<input type="hidden" name="stripeToken" />').val(token));
-        // and submit
-        $form.get(0).submit();
+       	paymentFactory.addPayment(token).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.set_alert(res.message, "default");	
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
       }
     };
-	$scope.process_addition = function(ele){
+	$scope.process_addition = function(){
 		// This identifies your website in the createToken call below
 		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $(ele);
+		var $form = $('#payment-form');
 
         // Disable the submit button to prevent repeated clicks
         $form.find('button').prop('disabled', true);
 
 		Stripe.card.createToken($form, stripeResponseHandler);
-
-        // Prevent the form from submitting with the default action
-        return false;
-
-
 	}
 });
 tappyn.factory("paymentFactory", function($http){
@@ -490,6 +493,17 @@ tappyn.factory("paymentFactory", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param(details)
+		})	
+	}
+
+	fact.addPayment = function(token){
+		return $http({
+			method : 'POST',
+			url : 'index.php/accounts/payment_methods',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({stripeToken : token})
 		})	
 	}
 	return fact;	

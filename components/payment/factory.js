@@ -21,5 +21,16 @@ tappyn.factory("paymentFactory", function($http){
 			data : $.param(details)
 		})	
 	}
+
+	fact.addPayment = function(token){
+		return $http({
+			method : 'POST',
+			url : 'index.php/accounts/payment_methods',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({stripeToken : token})
+		})	
+	}
 	return fact;	
 })

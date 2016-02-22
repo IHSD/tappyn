@@ -1,4 +1,4 @@
-tappyn.controller('launchController', function($scope, $location, launchFactory, launchModel){
+tappyn.controller('launchController', function($scope, $location, launchFactory){
 	$scope.countries = launchModel.countries;
 	$scope.steps = {
 		'platform'		 : {step : 'platform', next : 'objective', previous : 'none', fill : 25},
