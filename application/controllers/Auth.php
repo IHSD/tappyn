@@ -20,6 +20,18 @@ class Auth extends CI_Controller {
 		redirect('auth/login', 'refresh');
 	}
 
+	function is_logged_in()
+	{
+		if($this->ion_auth->logged_in())
+		{
+			$this->responder->data(
+				$this->ion_auth->ajax_user()
+			)->respond();
+		} else {
+			$this->responder->fail(array())->code(401)->respond();
+		}
+	}
+
 	function facebook()
 	{
 		$this->load->library('facebook_ion_auth');
