@@ -15,6 +15,7 @@ class Companies extends CI_Controller
             exit();
         }
         $this->load->model('company');
+        $this->load->model('contest');
         $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
