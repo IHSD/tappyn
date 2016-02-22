@@ -52,10 +52,10 @@
 		<div ng-show='showing == "methods"'>
 			<div class='col-xs-12' ng-show='account.external_accounts.data.length > 0'>
 				<h3 class='text-center' ng-repeat='account in account.external_accounts.data'>
-					<span ng-if='default_for_currency'>Current account : </span>
-					<button ng-if='!default_for_currency' ng-click='set_default(account.id)' style='margin-right:2px;'>Set as Default</button>
+					<span ng-if='account.default_for_currency'>Current account : </span>
+					<button ng-if='!account.default_for_currency' ng-click='set_default(account.id)' style='margin-right:2px;'>Set as Default</button>
 					Card ending in {{account.last4}}
-					<button ng-if='!default_for_currency' style='margin-leftt:2px;' class='btn btn-sm btn-oj' ng-click='remove_method(account.id)'>X</button>
+					<button ng-if='!account.default_for_currency' style='margin-leftt:2px;' class='btn btn-sm btn-oj' ng-click='remove_method(account.id)'>X</button>
 				</h3>
 			</div>
 		    <form class='form' id="payment-form" ng-submit='process_addition(this)'>
