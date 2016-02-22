@@ -137,6 +137,7 @@ class Stripe_account_library
         $c = curl_init();
         curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}?default_for_currency=true";
+        error_log($url);
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_POST, 1);
@@ -155,6 +156,7 @@ class Stripe_account_library
         $c = curl_init();
         curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}";
+        error_log($url);
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_CUSTOMREQUEST, "DELETE");
