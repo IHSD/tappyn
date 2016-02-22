@@ -33,7 +33,7 @@ class Facebook_ion_auth {
 
     	// null at first
 		$code = $this->CI->input->get('code');
-
+		error_log($code);
 		// if is not set go make a facebook connection
 		if(!$code) {
 
@@ -53,7 +53,7 @@ class Facebook_ion_auth {
 	   		// check if session state is equal to the returned state
 
 			if($this->CI->session->userdata('state') && ($this->CI->session->userdata('state') === $this->CI->input->get('state'))) {
-
+				error_log("facebook something");
 
 				$token_url = "https://graph.facebook.com/oauth/access_token?"
 			       . "client_id=" . $this->app_id . "&redirect_uri=" . urlencode($this->my_url)
@@ -78,10 +78,17 @@ class Facebook_ion_auth {
 				$user = json_decode($response);
 				// check if this user is already registered
 				if(!$this->CI->ion_auth_model->identity_check($user->email)){
+					error_log("registering a user now");
 					$name = explode(" ", $user->name);
 					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]));
+					error_log(var_dump($register));
+					if(!$register)
+					{
+						error_log(json_encode($this->CI->ion_auth->errors()));
+					}
 					$this->CI->ion_auth->login($user->email, $user->id, 1);
 				} else {
+					error_log("Logging the user in");
 					$login = $this->CI->ion_auth->login($user->email, $user->id, 1);
 				}
 

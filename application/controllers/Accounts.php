@@ -13,10 +13,6 @@ class Accounts extends CI_Controller
             ))->code(401)->respond();
             exit();
         }
-        if($this->ion_auth->is_admin())
-        {
-            $this->load->view('templates/admin_navbar');
-        }
         $this->load->model('user');
         $this->load->library('stripe/stripe_account_library');
         $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);
