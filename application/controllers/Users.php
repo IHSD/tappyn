@@ -48,6 +48,10 @@ class Users extends CI_Controller
                     $payout_ids[] = $payout->submission_id;
                 }
             }
+            if(empty($payout_ids))
+            {
+                $this->responder->data(array())->respond();
+            }
             // then find submissions whose id exist in payout table
             $this->submission->where_in('id', $payout_ids);
         }
@@ -103,7 +107,7 @@ class Users extends CI_Controller
                     'state' => $this->input->post('state'),
                     'school' => $this->input->post('school')
                 );
-                
+
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder
