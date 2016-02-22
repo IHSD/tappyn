@@ -1,0 +1,121 @@
+<div class='row content-padding'>	
+	<div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+		<h3 class='text-center'>Payment</h3>
+		<div ng-show='user.type == "member"' class='col-xs-12 col-sm-6 col-sm-offset-3 text-center'>
+			<button class='btn' ng-class='{"btn-oj" : showing == "details", "btn-default" : showing != "details"}' ng-click='toggle_view("details")'>Details</button>
+			<button class='btn' ng-class='{"btn-oj" : showing == "methods", "btn-default" : showing != "methods"}' ng-click='toggle_view("methods")' ng-disabled='!account'>Methods</button>	
+		</div>
+		<div ng-show='showing == "details"'>
+			<form class='form' ng-submit='verify_identity(detail)'>
+				<div class='col-xs-12 col-sm-6'>
+					<div class='form-group'>
+						<label>First Name</label>
+						<input class='form-control' ng-model='detail.first_name' placeholder='First Name' type='text'>
+					</div>
+				</div>
+		        <div class='col-xs-12 col-sm-6'>
+		        	<div class='form-group'>
+		        		<label>Last Name</label>
+		        		<input class='form-control' ng-model='detail.last_name' placeholder='Last Name' type='text'>
+		        	</div>
+		        </div>
+		        <div class='col-xs-12 col-sm-4'>
+		        	<div class='form-group'>
+		        		<label>Birth Year</label>
+		        		<input class='form-control' ng-model='detail.dob_year' placeholder='DOB Year' type='text'>
+		        	</div>
+		        </div>
+		        <div class='col-xs-12 col-sm-4'>
+		        	<div class='form-group'>
+		        		<label>Birth Month</label>
+		        		<input class='form-control' ng-model='detail.dob_month' placeholder='DOB Month' type='text'>
+		        	</div>
+		        </div>
+		        <div class='col-xs-12 col-sm-4'>
+		        	<div class='form-group'>
+		        		<label>Birth Day</label>
+		        		<input class='form-control' ng-model='detail.dob_day' placeholder='DOB Day' type='text'>
+		        	</div>
+		        </div>
+		        <div class='col-xs-12'>
+		        	<div class='form-group'>
+		        		<label>Country</label>
+		        		<select class='form-control' ng-model='detail.country'>
+		        			<option value=''>Choose your country</option>
+		        			<option ng-repeat='(key, value) in countries' value='{{key}}'>{{value}}</option>
+		        		</select>
+		        	</div>
+		        </div>	
+		        <div class='col-xs-12 text-center'><button class='btn btn-oj' type='submit'>Verify Identity</button></div>	       		
+		    </form>
+		</div>
+		<div ng-show='showing == "methods"'>
+		    <form class='form' action="" method="POST" id="payment-form" ng-submit='process_addition(this)'>
+				<span class="payment-errors"></span>
+			     <div class='col-xs-12'>
+			     	<div class='form-group'>
+				      	<label>Account Type</label>
+			      		<select class='form-control'>
+				          	<option value=''></option>
+				          	<option value='card'>Debit Card</option>
+				          	<option value='bank_account'>Bank Account</option>
+				        </select>
+				    </div>
+				</div>
+				<div class='col-xs-12'>
+				    <div class="form-group">
+				    	<label>Card Number</label>
+				      	<input class='form-control' type="text" size="20" data-stripe="number"/>				    
+				    </div>
+				</div>
+			    <div class='col-xs-12 col-sm-4'> 
+				  <div class="form-group">
+					    <label>CVC</label>
+					    <input class='form-control' type="text" size="4" data-stripe="cvc"/>					   
+				  </div>
+			    </div>
+			  	<div class='col-xs-12 col-sm-4'>
+			      <div class="form-group">
+			       		<label>Month Exp</label>
+			  	      	<select class='form-control' data-stripe="exp-month">
+				            <option value='01'>January</option>
+				            <option value='02'>February</option>
+				            <option value='03'>March</option>
+				            <option value='04'>April</option>
+				            <option value='05'>May</option>
+				            <option value='06'>June</option>
+				            <option value='07'>July</option>
+				            <option value='08'>August</option>
+				            <option value='09'>September</option>
+				            <option value='10'>October</option>             
+				            <option value='11'>November</option>
+				            <option value='12'>December</option>  	
+			          </select>
+			      </div>
+			    </div>
+			    <div class='col-xs-12 col-sm-4'>
+			    	<div class='form-group'>
+			        	<label>Year Exp</label>
+			  	    	<select class='form-control' data-stripe="exp-year">
+			             <option value='2016'>2016</option>
+			             <option value='2017'>2017</option>
+			             <option value='2018'>2018</option>
+			             <option value='2019'>2019</option>
+			             <option value='2020'>2020</option>
+			             <option value='2021'>2021</option>
+			             <option value='2022'>2022</option>
+			             <option value='2023'>2023</option>
+			             <option value='2024'>2024</option>
+			             <option value='2025'>2025</option>             
+			             <option value='2026'>2026</option>
+			             <option value='2027'>2027</option>
+			        	</select>
+			  	  	</div>
+			  	</div>
+				<input type='hidden' data-stripe='currency' value='usd'/>
+
+				<div class='colxs-12 text-center'><button class='btn btn-oj' type='submit'>Add Payment Method</button></div>
+			</form>
+		</div>
+	</div>
+</div>

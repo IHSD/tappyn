@@ -129,9 +129,9 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 				}
-				else alert(response.message);	 
+				else $scope.set_alert(response.message, "default");	 
 			}
-			else if(response.http_status_code == 500) alert(response.error);
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 		})
 	}
@@ -146,17 +146,22 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 
 	$scope.sign_up = function(registrant){
 		AppFact.signUp(registrant).success(function(response){
-			if(response.success) $location.path('/dashboard');
+			if(response.http_status_code == 200){
+				if(response.success) $location.path('/dashboard');
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
 		});
 	}
 
 	$scope.contact = function(issue){
 		AppFact.contactUs(issue).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) alert("We got that message");
-				else alert(response.message);	 
+				if(response.success) $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");	 
 			}
-			else if(response.http_status_code == 500) alert(response.error);
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 		})
 	}
