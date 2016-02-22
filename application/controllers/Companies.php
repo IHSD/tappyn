@@ -216,6 +216,7 @@ class Companies extends CI_Controller
         if($charge)
         {
             $this->contest->update($id, array('paid' => 1));
+    
             $this->responder->message(
                 "Your payment was successfully processed!"
             )->respond();

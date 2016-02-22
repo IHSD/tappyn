@@ -53,6 +53,7 @@ class stripe_charge_library
             $this->errors = $e->getMessage();
             return false;
         }
+        $this->stripe_charge->save($charge, $this->ion_auth->user()->row()->id, $contest_id);
         return $charge;
 
     }

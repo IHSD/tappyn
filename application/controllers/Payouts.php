@@ -5,25 +5,17 @@ class Payouts extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if($this->ion_auth->is_admin())
-        {
-            $this->load->view('templates/admin_navbar');
-        }
-        $this->load->view('templates/navbar');
         $this->load->library('payout');
         $this->load->library('stripe/stripe_account_library');
         $this->load->library('stripe/stripe_transfer_library');
         if(!$this->ion_auth->logged_in())
         {
-            $this->session->set_flashdata('error', 'You must be logged in to access this area');
-            redirect('auth/login', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You must be logged in to access this area"
+            ))->coe(401)->respond();
+            exit();
         }
 
-    }
-
-    public function debug()
-    {
-        echo json_encode($this->stripe_transfer_library->retrieve('tr_17e9FKLjuuo5mRdrCZ7lMGen'));
     }
 
     public function index()
@@ -105,7 +97,7 @@ class Payouts extends CI_Controller
         {
             $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 1));
             $this->responder
-                ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}")
+                ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}. Please allow 3-5 business days for funds to be available")
                 ->data(array('payout' => $this->payout->get($id)))
                 ->respond();
         } else {

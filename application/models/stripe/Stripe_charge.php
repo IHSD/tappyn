@@ -13,6 +13,20 @@ class Stripe_charge extends CI_Model
         return get_instance()->$var;
     }
 
+    public function save($charge, $uid, $contest_id)
+    {
+        return $this->db->insert('stripe_charges', array(
+            'charge_id' => $charge->id,
+            'contest_id' => $contest_id,
+            'amount' => $charge->amount,
+            'captured' => 1,
+            'created' => $charge->time,
+            'currency' => $charge->currency,
+            'description' => $charge->description,
+            'source' => $charge->source,
+            'status' => $charge->status
+        ));
+    }
     public function create($customer_id, $amount, $description)
     {
         try{
