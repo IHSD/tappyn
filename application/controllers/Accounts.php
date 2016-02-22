@@ -150,11 +150,11 @@ class Accounts extends CI_Controller
         }
     }
 
-    public function default()
+    public function default_method()
     {
         if($this->input->post('source_id'))
         {
-
+            $this->stripe_account_library->update()
         } else {
             $this->responder->fail(array(
                 'You must provide a payment method to use as your default'
