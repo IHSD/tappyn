@@ -128,6 +128,11 @@ class Contest extends MY_Model
         return FALSE;
     }
 
+    public function update($id, $data)
+    {
+        return $this->db->where('id', $id)->update('contests', $data);
+    }
+
     public function errors()
     {
         return $this->errors;
