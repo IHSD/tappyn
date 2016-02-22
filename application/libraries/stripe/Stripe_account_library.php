@@ -140,7 +140,7 @@ class Stripe_account_library
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_POST, 1);
-        $res = curl_exec($c);
+        $res = json_decode(curl_exec($c));
         error_log($res);
         if(isset($res->error))
         {
@@ -158,7 +158,7 @@ class Stripe_account_library
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_CUSTOMREQUEST, "DELETE");
-        $res = curl_exec($c);
+        $res = json_decode(curl_exec($c));
         error_log($res);
         if(isset($res->error))
         {
