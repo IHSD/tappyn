@@ -135,12 +135,12 @@ class Stripe_account_library
     public function setAsDefault($aid, $sid)
     {
         $c = curl_init();
-        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}}"));
+        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}?default_for_currency=true";
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_POST, 1);
-        $res = curl_exec($c);
+        $res = json_decode(curl_exec($c));
         error_log($res);
         if(isset($res->error))
         {
@@ -153,12 +153,12 @@ class Stripe_account_library
     public function removeSource($aid, $sid)
     {
         $c = curl_init();
-        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}}"));
+        curl_setopt($c, CURLOPT_HTTPHEADER, array("Authorization: Bearer {$this->api_key}"));
         $url = "https://api.stripe.com/v1/accounts/{$aid}/external_accounts/{$sid}";
         curl_setopt($c, CURLOPT_URL, $url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($c, CULROPT_CUSTOMREQUEST, "DELETE");
-        $res = curl_exec($c);
+        $res = json_decode(curl_exec($c));
         error_log($res);
         if(isset($res->error))
         {
