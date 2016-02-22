@@ -28,7 +28,7 @@ class Auth extends CI_Controller {
 				$this->ion_auth->ajax_user()
 			)->message($this->session->flashdata('message'))->respond();
 		} else {
-			$this->responder->fail($this->ion_auth->errors())->code(401)->respond();
+			$this->responder->fail($this->session->flashdata('error'))->code(401)->respond();
 		}
 	}
 
