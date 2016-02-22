@@ -51,6 +51,7 @@ class Users extends CI_Controller
             if(empty($payout_ids))
             {
                 $this->responder->data(array())->respond();
+                return;
             }
             // then find submissions whose id exist in payout table
             $this->submission->where_in('id', $payout_ids);
