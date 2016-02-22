@@ -192,17 +192,18 @@ class Contests extends CI_Controller
                 ->html($this->load->view('emails/submission_chosen', array('company_name' => $company_name), TRUE))
                 ->send();
 
-            // Tell the contest they have successfully selected a winner!
+            // Tell the company they have successfully selected a winner!
             $this->responder->message(
-                "A winner has been chosen"
+                "A winner has been chosen!"
             )->respond();
+            return;
         }
-        // Something happened, so lets just route tham back to the contest page with an error
         else
         {
             $this->responder->fail(
                 $this->payout->errors() ? $this->payout->errors() : array('error' => "An unknown error occured")
             )->code(500)->respond();
+            return;
         }
     }
 }

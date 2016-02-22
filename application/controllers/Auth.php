@@ -26,10 +26,10 @@ class Auth extends CI_Controller {
 		if($this->facebook_ion_auth->login())
 		{
 			$this->session->set_flashdata('message', 'Logged In Successfully');
-			redirect('/#/login', 'refresh');
+			redirect('/', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', $this->ion_auth->errors());
-			redirect('/#/login');
+			redirect('/', 'refresh');
 		}
 	}
 	// log the user in
