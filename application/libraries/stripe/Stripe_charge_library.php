@@ -5,7 +5,7 @@ class stripe_charge_library
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('stripe/stripe_transfer_library';)
+        $this->load->model('stripe/stripe_transfer_library');
     }
 
     public function __get($var)
