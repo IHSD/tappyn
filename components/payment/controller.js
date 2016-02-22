@@ -9,6 +9,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 					$scope.showing = 'details';
 				}
 				else $scope.showing = 'methods';
+				$scope.account = response.data.account;
 			}
 			else $scope.set_alert(response.message, "default");	 
 		}
@@ -40,11 +41,10 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 
       if (response.error) {
         $scope.set_alert(response.error.message, "error");
-        $form.find('button').prop('disabled', false);
+        $scope.form_disabled = false;
       } else {
         // response contains id and card, which contains additional card details
         var token = response.id;
-        console.log(token);
        	paymentFactory.addPayment(token).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
@@ -63,7 +63,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 		var $form = $('#payment-form');
 
         // Disable the submit button to prevent repeated clicks
-        $form.find('button').prop('disabled', true);
+       $scope.form_disabled = true;
 
 		Stripe.card.createToken($form, stripeResponseHandler);
 	}
