@@ -8,9 +8,7 @@ class Accounts extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(array(
-                'error' => "You have to be logged in to access this area"
-            ))->code(401)->respond();
+            $this->responder->fail("You have to be logged in to access this area")->code(401)->respond();
             exit();
         }
         $this->load->model('user');
@@ -140,9 +138,8 @@ class Accounts extends CI_Controller
                 return;
             }
         } else {
-            $this->responder->fail(array(
-                'source_id' => "You must provide a ayment source you want to remove"
-            ))->code(400)->respond();
+            $this->responder->fail("You must provide a ayment source you want to remove"
+            )->code(400)->respond();
         }
     }
 

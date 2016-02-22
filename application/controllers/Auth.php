@@ -46,6 +46,7 @@ class Auth extends CI_Controller {
 			redirect('/', 'refresh');
 		}
 	}
+
 	// log the user in
 	function login()
 	{
@@ -86,8 +87,6 @@ class Auth extends CI_Controller {
 		}
 		else
 		{
-			// the user is not logging in so display the login page
-			// set the flash data error message if there is one
 			$this->responder->fail(validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : 'Some random error was encountered'))->code(400)->respond();
 		}
 	}
