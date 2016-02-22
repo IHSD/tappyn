@@ -72,7 +72,7 @@ class User extends MY_Model
         $this->db->join('profiles', $this->table.'.id = profiles.id', 'left');
         if(!empty($this->where))
         {
-            $this->db->where($where);
+            $this->db->where($this->where);
             $this->where = array();
         }
 
