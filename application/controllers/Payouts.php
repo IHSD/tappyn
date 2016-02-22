@@ -48,7 +48,7 @@ class Payouts extends CI_Controller
         } else {
             $this->responder->fail(array(
                 'error' => "We couldnt find the payout you were looking for"
-            )->code(404)->respond();
+            ))->code(404)->respond();
         }
     }
 
