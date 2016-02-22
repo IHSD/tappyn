@@ -1,3 +1,0 @@
-tappyn.controller('loginController', function(){
-	
-});

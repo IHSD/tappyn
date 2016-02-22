@@ -10,13 +10,6 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/home/view.html',
 		controller : 'homeController'
 	})
-	.when('/login', {
-		templateUrl : 'components/login/view.html',
-		controller : 'loginController'
-	})
-	.when('/register', {
-		templateUrl : 'components/register/view.html'
-	})
 	.when('/dashboard', {
 		templateUrl : 'components/dashboard/view.html',
 		controller : 'dashController'
@@ -41,8 +34,18 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/submissions/view.html',
 		controller : 'submissionsController'
 	})
+	.when('/payment', {
+		templateUrl : 'components/payment/view.html',
+		controller : 'paymentController'
+	})
 	.when('/contact_us', {
 		templateUrl : 'components/contact_us/view.html'
+	})
+	.when('/login', {
+		templateUrl : 'components/login/view.html'
+	})
+	.when('/register', {
+		templateUrl : 'components/register/view.html'
 	})
 	.when('/faq', {
 		templateUrl : 'components/faq/view.html'
@@ -86,7 +89,7 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 	$scope.check_code = function(code){
 		if(code == 401){
 			$scope.set_alert("You must be logged in", "default");
-			$location.path('/login');
+			$scope.log_out(); //incase we have some JS objects still set
 		}
 		else if(code == 403){
 			$scope.set_alert("Unauthorized access", "error")
@@ -106,7 +109,6 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 		$scope.alert = {show : false, message : '', type : ''};
 	}
 
-	$scope.set_alert("testing", "error");
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success){
