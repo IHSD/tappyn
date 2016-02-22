@@ -15,7 +15,6 @@ class Payouts extends CI_Controller
             ))->coe(401)->respond();
             exit();
         }
-
     }
 
     public function index()
@@ -95,7 +94,7 @@ class Payouts extends CI_Controller
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
-            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 1));
+            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 1, 'transfer_id' => $transfer->id, 'account_id' => $account->id));
             $this->responder
                 ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}. Please allow 3-5 business days for funds to be available")
                 ->data(array('payout' => $this->payout->get($id)))
