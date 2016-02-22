@@ -131,7 +131,8 @@ class Accounts extends CI_Controller
             {
                 $this->responder->message(
                     'Payment method successfully removed'
-                )->respond();
+                )->data(array('account' => $this->stripe_account_library->get($this->stripe_account_id)))->respond();
+                return;
             } else {
                 $this->responder->fail(array(
                     $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
@@ -149,7 +150,11 @@ class Accounts extends CI_Controller
     {
         if($this->input->post('source_id'))
         {
-            $this->stripe_account_library->setAsDefault($this->stripe_account_id, $this->input->post('source_id'));
+            if($this->stripe_account_library->setAsDefault($this->stripe_account_id, $this->input->post('source_id')))
+            {
+                $this->responder->data(array('account_id' => $this->stripe_account_library->get($this->stripe_account_id)))->message("Account successfully updated")->respond();
+                return;
+            }
         } else {
             $this->responder->fail(array(
                 'You must provide a payment method to use as your default'
