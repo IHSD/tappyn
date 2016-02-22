@@ -11,7 +11,7 @@ class Accounts extends CI_Controller
             $this->responder->fail(array(
                 'error' => "You have to be logged in to access this area"
             ))->code(401)->respond();
-            return;
+            exit();
         }
         if($this->ion_auth->is_admin())
         {
@@ -22,7 +22,7 @@ class Accounts extends CI_Controller
             $this->responder->fail(array(
                 'error' => "Only content creators can access the accounts panel"
             ))->code(403)->respond();
-            return;
+            exit();
         }
         $this->load->model('user');
         $this->load->library('stripe/stripe_account_library');
@@ -105,30 +105,6 @@ class Accounts extends CI_Controller
      */
     public function payment_methods()
     {
-        if(!$this->stripe_account_id)
-        {
-            $this->responder->fail(array(
-                'error' => "You have not set up any account details yet"
-            ))->code(500)->respond();
-            return;
-        }
-        if(!$this->account->transfers_enabled)
-        {
-            // Check that verification fields is not empty,
-            // and that the only required field is the external account
-            // else send back to details
-            $fields = $this->account->verification->fields_needed;
-            $key = array_search('external_account', $fields);
-            unset($fields[$key]);
-            if(!empty($fields))
-            {
-                $this->responder->fail(array(
-                    'error' => "You haven't finished filling out your account details"
-                ))->code(500)->respond();
-                return;
-            }
-        }
-
         if($this->input->post('stripeToken'))
         {
             if($this->stripe_account_library->addSource($this->stripe_account_id, $this->input->post('stripeToken'), $this->input->post('currency')))
@@ -149,9 +125,7 @@ class Accounts extends CI_Controller
                 return;
             }
         } else {
-            $this->responder->data(array(
-                'account' => $this->stripe_account_library->get($this->stripe_account_id)
-            ))->respond();
+            $this->responder->fail('You must provide a new payment method')->respond();
         }
     }
 
@@ -176,6 +150,7 @@ class Accounts extends CI_Controller
                         $this->responder->fail(array(
                             $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
                         ))->code(500)->respond();
+                        return;
                     }
                 }
             }
