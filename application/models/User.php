@@ -65,42 +65,42 @@ class User extends MY_Model
         }
         return FALSE;
     }
-    public function fetch()
-    {
-        $this->db->select($this->select);
-        $this->db->from($this->table);
-        $this->db->join('profiles', $this->table.'.id = profiles.id', 'left');
-        if(!empty($this->where))
-        {
-            $this->db->where($this->where);
-            $this->where = array();
-        }
-
-        if(!empty($this->like))
-        {
-            $this->db->like($this->like);
-            $this->like = array();
-        }
-
-        if(!is_null($this->limit) && !is_null($this->offset))
-        {
-            $this->db->limit($this->limit, $this->offset);
-            $this->limit = NULL;
-            $this->offset = NULL;
-        }
-        else if(!is_null($this->limit))
-        {
-            $this->db->limit($this->limit);
-            $this->imit = NULL;
-        }
-
-        $this->db->order_by($this->order_by, $this->order_dir);
-        $this->order_by = 'id';
-        $this->order_dir = 'desc';
-
-        $this->response = $this->db->get();
-        return $this;
-    }
+    // public function fetch()
+    // {
+    //     $this->db->select($this->select);
+    //     $this->db->from($this->table);
+    //     $this->db->join('profiles', $this->table.'.id = profiles.id', 'left');
+    //     if(!empty($this->where))
+    //     {
+    //         $this->db->where($where);
+    //         $this->where = array();
+    //     }
+    //
+    //     if(!empty($this->like))
+    //     {
+    //         $this->db->like($this->like);
+    //         $this->like = array();
+    //     }
+    //
+    //     if(!is_null($this->limit) && !is_null($this->offset))
+    //     {
+    //         $this->db->limit($this->limit, $this->offset);
+    //         $this->limit = NULL;
+    //         $this->offset = NULL;
+    //     }
+    //     else if(!is_null($this->limit))
+    //     {
+    //         $this->db->limit($this->limit);
+    //         $this->imit = NULL;
+    //     }
+    //
+    //     $this->db->order_by($this->order_by, $this->order_dir);
+    //     $this->order_by = 'id';
+    //     $this->order_dir = 'desc';
+    //
+    //     $this->response = $this->db->get();
+    //     return $this;
+    // }
     public function account($uid)
     {
         $account = $this->db->select('*')->from('stripe_accounts')->where('user_id', $uid)->limit(1)->get();
