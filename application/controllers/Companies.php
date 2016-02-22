@@ -164,6 +164,8 @@ class Companies extends CI_Controller
             return;
         }
 
+        $this->load->library('stripe/stripe_charge_library');
+        $this->load->library('stripe/stripe_customer_library');
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
         if($this->input->post('stripeToken'))
         {

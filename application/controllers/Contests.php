@@ -59,12 +59,7 @@ class Contests extends CI_Controller
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
-<<<<<<< HEAD
             $this->contest->log_impression($cid);
-=======
-            $contest->views = $this->contest->views($cid);
-            $this->contest->log_impressiosn($cid
->>>>>>> 1534a65267a20d691bdb891e0e43755c97a79dd2
         }
     }
 

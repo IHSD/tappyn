@@ -33,7 +33,7 @@ class Contest extends MY_Model
         }
         return FALSE;
     }
-    
+
     public function get($id)
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
@@ -45,16 +45,6 @@ class Contest extends MY_Model
             return $contest;
         }
         return false;
-    }
-
-    public function views($cid)
-    {
-        $views = $this->db->select("COUNT(*) as count")->from('impressions')->where('contest_id', $cid)->get();
-        if($views !== FALSE)
-        {
-            return $views->row()->count;
-        }
-        return FALSE;
     }
 
     public function log_impression($cid)
