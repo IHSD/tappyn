@@ -202,26 +202,6 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
-tappyn.controller('contestsController', function($scope, contestsFactory){
-	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data;
-	});
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
 tappyn.controller('contestController', function($scope, $routeParams, $location, contestFactory){
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -273,6 +253,26 @@ tappyn.factory('contestFactory', function($http){
 
 	return fact;
 })
+tappyn.controller('contestsController', function($scope, contestsFactory){
+	contestsFactory.grabContests().success(function(response){
+		$scope.contests = response.data;
+	});
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('dashController', function($scope, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
@@ -307,6 +307,36 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller('homeController', function($scope, $location, homeFactory){
+	
+
+	$scope.mailing_list = function(email){
+		homeFactory.mailingList(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) window.location.reload();
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	fact.mailingList = function(email){
+		return $http({
+			method : 'GET',
+			url : 'index.php/mailing_list',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({"email" : email})
+		});
+	}
+
+	return fact;
+});
 tappyn.controller('launchController', function($scope, $location, launchFactory, launchModel){
 	$scope.countries = launchModel.countries;
 	$scope.steps = {
@@ -363,7 +393,41 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
-tappyn.service('launchModel', function(){
+tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
+	$scope.countries = paymentModel.countries;
+	$scope.showing = "methods";
+	paymentFactory.grabDetails().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success){
+				if($scope.user.type == "member" && response.data.account == false) $scope.showing = 'details';
+				else $scope.showing = 'methods';
+			}
+			else $scope.set_alert(response.message, "default");	 
+		}
+		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+		else $scope.check_code(response.http_status_code);
+	})
+
+	$scope.toggle_view = function(view){
+		$scope.showing = view;
+	}
+});
+tappyn.factory("paymentFactory", function($http){
+	var fact = {};
+
+	fact.grabDetails = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/accounts/details',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
+	}
+
+	return fact;	
+})
+tappyn.service('paymentModel', function(){
 	this.countries = {
     'AF' : 'Afghanistan',
     'AX' : 'Aland Islands',
@@ -612,77 +676,6 @@ tappyn.service('launchModel', function(){
     'ZW' : 'Zimbabwe'
 	};
 })
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
-
-	$scope.mailing_list = function(email){
-		homeFactory.mailingList(email).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) window.location.reload();
-				else alert(response.message);	 
-			}
-			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	fact.mailingList = function(email){
-		return $http({
-			method : 'GET',
-			url : 'index.php/mailing_list',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
-		});
-	}
-
-	return fact;
-});
-tappyn.controller("paymentController", function($scope, $location, paymentFactory){
-	paymentFactory.grabDetails().success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success){
-				console.log(response.data);
-			}
-			else $scope.set_alert(response.message, "default");	 
-		}
-		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-		else $scope.check_code(response.http_status_code);
-	})
-
-
-});
-tappyn.factory("paymentFactory", function($http){
-	var fact = {};
-
-	fact.grabDetails = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/accounts/details',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})	
-	}
-
-	return fact;	
-})
-tappyn.controller('profileController', function($scope){
-	
-});
-tappyn.factory('profileFactory', function($http){
-	var fact = {};
-
-	fact.grabProfile = function(){
-		
-	}
-
-	return fact;
-})
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -704,4 +697,16 @@ tappyn.factory("submissionsFactory", function($http){
 	}
 
 	return fact; 
+})
+tappyn.controller('profileController', function($scope){
+	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
+		
+	}
+
+	return fact;
 })
