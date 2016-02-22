@@ -48,7 +48,7 @@ class Payouts extends CI_Controller
         } else {
             $this->responder->fail(array(
                 'error' => "We couldnt find the payout you were looking for"
-            )->code(404)->respond();
+            ))->code(404)->respond();
         }
     }
 
@@ -88,7 +88,7 @@ class Payouts extends CI_Controller
         if(!$account)
         {
             $this->responder->fail(array(
-                'error' = "You need to set up your account first"
+                'error' => "You need to set up your account first"
             ))->code(500)->respond();
             return;
         }
@@ -96,14 +96,14 @@ class Payouts extends CI_Controller
         if(!$account->transfers_enabled)
         {
             $this->responder->fail(array(
-                'error' => "You still nedd to set up some account details"
+                'error' => "You still need to set up some account details"
             ))->code(500)->respond();
             return;
         }
         // OK, now we can process the requested transfer
         if($transfer = $this->stripe_transfer_library->create($account->id, $payout->contest_id, $payout->amount, $payout->id))
         {
-            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 0));
+            $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 1));
             $this->responder
                 ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}")
                 ->data(array('payout' => $this->payout->get($id)))

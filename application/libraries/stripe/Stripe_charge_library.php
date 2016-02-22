@@ -2,10 +2,13 @@
 
 class stripe_charge_library
 {
+    protected $errors = FALSE;
     public function __construct()
     {
-        parent::__construct();
-        $this->load->model('stripe/stripe_transfer_library';)
+        $this->config->load('secrets');
+        $this->api_key = $this->config->item('stripe_api_key');
+        \Stripe\Stripe::setApiKey($this->api_key);
+        $this->load->library('stripe/stripe_transfer_library');
     }
 
     public function __get($var)
@@ -17,7 +20,7 @@ class stripe_charge_library
     {
         if(!method_exists($this->stripe_charge, $method))
         {
-            throw new Exception("Call to undefined method Stripe_account::{$method}()");
+            throw new Exception("Call to undefined method Stripe_charge::{$method}()");
         }
         return call_user_func_array( array($this->stripe_charge, $method), $arguments);
     }
@@ -52,6 +55,11 @@ class stripe_charge_library
         }
         return $charge;
 
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 
     public function retrieve($charge_id)

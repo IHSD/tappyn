@@ -9,15 +9,13 @@ class Companies extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->session->set_flashdata('error', 'You must be a company to access this area');
-            redirect('contests/index', 'refresh');
+            $this->responder->fail(array(
+                'error' => "You must be logged in as a company to access this area"
+            ))->code(401)->respond();
+            exit();
         }
-        if($this->ion_auth->is_admin())
-        {
-            $this->load->view('templates/admin_navbar');
-        }
-        $this->load->view('templates/navbar');
         $this->load->model('company');
+        $this->load->model('contest');
         $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
@@ -56,7 +54,7 @@ class Companies extends CI_Controller
                 {
                     if($this->payout->exists(array('contest_id' => $contest->id)))
                     {
-                        unset($contests[$key])
+                        unset($contests[$key]);
                     }
                 }
             }
@@ -73,9 +71,13 @@ class Companies extends CI_Controller
         }
     }
 
-    public function accounts()
+    public function profile()
     {
 
+    }
+
+    public function accounts()
+    {
         // Check if we have to process a form in any way
         if($this->input->post('stripeToken') && $this->stripe_customer_id)
         {
@@ -104,8 +106,15 @@ class Companies extends CI_Controller
         if($this->stripe_customer_id)
         {
             $this->data['customer'] = $this->stripe_customer_library->fetch($this->stripe_customer_id);
+            $this->responder->data(array(
+                'customer' => $this->data['customer']
+            ))->respond();
+        } else {
+            $this->responder->fail(array(
+                'error' => "You dont have any account details yet"
+            ))->code(400)->respond();
+            return;
         }
-        $this->load->view('companies/accounts.php', $this->data);
     }
 
     public function removeCard()
@@ -143,70 +152,83 @@ class Companies extends CI_Controller
      *
      * // $contest_id, $token = NULL, $customer_id = NULL, $source_id = NULL, $amount = 9999
      * @param  [type] $contest_id [description]
+     * @todo Still need to test selected payment method
      * @return [type]             [description]
      */
     public function payment($contest_id = FALSE)
     {
-        $charge = FALSE:;
+        $charge = FALSE;
         if(!$contest_id)
         {
             $this->responder->fail(array(
                 'error' => "You must supply a contest"
             ))->code(400)->respond();
+            return;
         }
 
+        echo "Loading libraries";
+
+        $this->load->library('stripe/stripe_charge_library');
+        $this->load->library('stripe/stripe_customer_library');
+        // If payment details were supplied, we're either going to charge the card, or create / update a customer
         if($this->input->post('stripeToken'))
         {
-            // Has the user entered new credit card details
             if($this->input->post('save_method'))
             {
+                // Update the customer with the new payment method, and get the source id
                 if($this->stripe_customer_id)
                 {
-                    // The company is already a customer, so we're gonna go ahead and add the payment method
-                    // Then discover the id of the new source to use
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));
-                } else {
-                    // We're going to create a new customer on behalf of your company
-                    if(!$source = $this->stripe_customer_library->addPaymentSource($this->stripe_customer_id, $this->input->post('stripeToken')) ||
-                       !$this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $source)))
-                    {
-                        $this->responder->fail(array(
-                            'error' => ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : "An unknown error occured")
-                        ))->code(500)->respond();
-                    }
-                    $source_id = NULL;
+                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));4
+                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 199);
                 }
-                // Now we charge the customer
-                /*
-                    FIGURE OUT THE SOURCE ID DEBACLE
-                 */
-                $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 9999)
-            } else {
-                // We don't want to save our payment method, so just straight charge it
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 9999)
+                // We need to create a customer, save the payment method, and charge them accordingly
+                else
+                {
+                    // Create the customer
+                    $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripeToken'), $this->ion_auth->user()->row()->email);
+                    // Charge the customer_id
+                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 199);
+                }
             }
-        } else if($this->input->post('source_id') && $this->stripe_customer_id) {
-            // Company is already a customer, and wants to used a saved payment source
-            $charge = $this->stripe_transfer_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 9999);
-        } else {
-            $this->responder->fail(array(
-                'error' => 'We were unable to process your request'
-            ))->code(500)->respond();
+            // The user does not want to save the method, so we just charge the card
+            else
+            {
+                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 199);
+            }
         }
 
+        // Check if we have a customer, and chosen source
+        else if($this->input->post('source_id') && $this->stripe_customer_id)
+        {
+            $charge = $this->stripe_transfer_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 199);
+        }
+        // Tell them we cant process their request
+        else
+        {
+            $this->responder->fail(array(
+                'error' => "We were unable to process your request"
+            ))->code(400)->respond();
+            return;
+        }
+
+        echo "Charge created";
+        // Check if charge was succesful and handle accordingly
         if($charge)
         {
-            // Update our contest as having been paid for,
-            // and let the company know they are all set
             $this->contest->update($id, array('paid' => 1));
-
-        } else {
-            $this->responder->fail(array(
-                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured")))
-            ))->code(500)->respond();
+            $this->responder->message(
+                "Your payment was successfully processed!"
+            )->respond();
+            return;
         }
-
-
+        // An error occured, so respond as such
+        else
+        {
+            $this->responder->fail(array(
+                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured with payment")))
+            ))->code(500)->respond();
+            return;
+        }
     }
 
     public function setAsDefault()

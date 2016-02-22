@@ -55,9 +55,11 @@ class Contests extends CI_Controller
                 "That contest does not exist"
             )->code(404)->respond();
         } else {
+            $contest->views = $this->contest->views($cid);
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
+            $this->contest->log_impression($cid);
         }
     }
 
@@ -85,18 +87,17 @@ class Contests extends CI_Controller
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
             // Do some preliminary formatting
             $data = array(
-                'title' => $this->input->post('title'),
-                'start_time' => $start_time,
-                'audience' => $this->input->post('audience_description'),
-                'different' => $this->input->post('how_your_different'),
-                'objective' => $this->input->post('objective'),
-                'platform' => $this->input->post('platform'),
-                'location' => $this->input->post('location'),
-                'age' => $this->input->post('age_range'),
-                'gender' => $this->input->post('gender'),
-                'owner' => $this->ion_auth->user()->row()->id,
-                'start_time' => time(),
-                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days', strtotime($start_time))),
+                'audience'          => $this->input->post('audience_description'),
+                'short_description' => $this->input->post('short_description'),
+                'different'         => $this->input->post('how_your_different'),
+                'objective'         => $this->input->post('objective'),
+                'platform'          => $this->input->post('platform'),
+                'location'          => $this->input->post('location'),
+                'age'               => $this->input->post('age_range'),
+                'gender'            => $this->input->post('gender'),
+                'owner'             => $this->ion_auth->user()->row()->id,
+                'start_time'        => $start_time,
+                'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days'))
             );
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))

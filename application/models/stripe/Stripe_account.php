@@ -2,6 +2,7 @@
 
 class Stripe_account extends CI_Model
 {
+    protected $errors;
     public function __construct()
     {
         parent::__construct();
@@ -11,5 +12,10 @@ class Stripe_account extends CI_Model
     public function __get($var)
     {
         return get_instance()->$var;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }

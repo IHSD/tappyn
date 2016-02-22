@@ -103,7 +103,7 @@ class Users extends CI_Controller
                     'state' => $this->input->post('state'),
                     'school' => $this->input->post('school')
                 );
-
+                
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder
