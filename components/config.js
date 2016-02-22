@@ -221,7 +221,7 @@ tappyn.factory("AppFact", function($http){
 	fact.isLoggedIn = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/is_logged_in',
+			url : 'index.php/auth/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}

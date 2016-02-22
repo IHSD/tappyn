@@ -221,7 +221,7 @@ tappyn.factory("AppFact", function($http){
 	fact.isLoggedIn = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/is_logged_in',
+			url : 'index.php/auth/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}
@@ -298,6 +298,36 @@ tappyn.factory('contestsFactory', function($http){
 
 	return fact;
 })
+tappyn.controller('homeController', function($scope, $location, homeFactory){
+	
+
+	$scope.mailing_list = function(email){
+		homeFactory.mailingList(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) window.location.reload();
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	fact.mailingList = function(email){
+		return $http({
+			method : 'GET',
+			url : 'index.php/mailing_list',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({"email" : email})
+		});
+	}
+
+	return fact;
+});
 tappyn.controller('dashController', function($scope, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
@@ -388,36 +418,6 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
-
-	$scope.mailing_list = function(email){
-		homeFactory.mailingList(email).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) window.location.reload();
-				else alert(response.message);	 
-			}
-			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	fact.mailingList = function(email){
-		return $http({
-			method : 'GET',
-			url : 'index.php/mailing_list',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
-		});
-	}
-
-	return fact;
-});
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
