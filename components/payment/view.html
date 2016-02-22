@@ -50,9 +50,12 @@
 		    </form>
 		</div>
 		<div ng-show='showing == "methods"'>
+			<div class='col-xs-12' ng-show='account.external_accounts.data.length == 1'>
+				<h3 class='text-center'>Current account : Card ending in {{account.external_accounts.data[0].last4}}</h3>
+			</div>
 		    <form class='form' id="payment-form" ng-submit='process_addition(this)'>
 				<span class="payment-errors"></span>
-			     <div class='col-xs-12'>
+			     <!--<div class='col-xs-12'>
 			     	<div class='form-group'>
 				      	<label>Account Type</label>
 			      		<select class='form-control'>
@@ -61,10 +64,10 @@
 				          	<option value='bank_account'>Bank Account</option>
 				        </select>
 				    </div>
-				</div>
+				</div> -->
 				<div class='col-xs-12'>
 				    <div class="form-group">
-				    	<label>Card Number</label>
+				    	<label>Debit Card Number</label>
 				      	<input class='form-control' type="text" size="20" data-stripe="number"/>				    
 				    </div>
 				</div>
@@ -114,7 +117,12 @@
 			  	</div>
 				<input type='hidden' data-stripe='currency' value='usd'/>
 
-				<div class='colxs-12 text-center'><button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Add Payment Method</button></div>
+				<div class='colxs-12 text-center'>
+					<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>
+						<span ng-show='account.external_accounts.data.length == 0'>Add Payment Method</span>
+						<span ng-show='account.external_accounts.data.length == 1'>Change Payment Method</span>
+					</button>
+				</div>
 			</form>
 		</div>
 	</div>

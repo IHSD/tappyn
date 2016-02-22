@@ -48,6 +48,7 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
        	paymentFactory.addPayment(token).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
+					$scope.account = res.data.account;
 					$scope.set_alert(res.message, "default");	
 				}
 				else $scope.set_alert(res.message, "default");	 

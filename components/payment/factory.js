@@ -32,5 +32,6 @@ tappyn.factory("paymentFactory", function($http){
 			data : $.param({stripeToken : token})
 		})	
 	}
+
 	return fact;	
 })
