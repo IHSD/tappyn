@@ -26,9 +26,9 @@ class Auth extends CI_Controller {
 		{
 			$this->responder->data(
 				$this->ion_auth->ajax_user()
-			)->respond();
+			)->message($this->session->flashdata('message'))->respond();
 		} else {
-			$this->responder->fail(array())->code(401)->respond();
+			$this->responder->fail($this->facebook_ion_auth->errors())->code(401)->respond();
 		}
 	}
 
@@ -37,10 +37,12 @@ class Auth extends CI_Controller {
 		$this->load->library('facebook_ion_auth');
 		if($this->facebook_ion_auth->login())
 		{
+			error_log("Successful login");
 			$this->session->set_flashdata('message', 'Logged In Successfully');
 			redirect('/', 'refresh');
 		} else {
-			$this->session->set_flashdata('error', $this->ion_auth->errors());
+			error_log(json_encode($this->facebook_ion_auth->errors()));
+			$this->session->set_flashdata('error', $this->facebook_ion_auth->errors());
 			redirect('/', 'refresh');
 		}
 	}
