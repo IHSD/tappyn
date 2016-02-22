@@ -57,19 +57,14 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
        	});
       }
     };
-	$scope.process_addition = function(ele){
+	$scope.process_addition = function(){
 		// This identifies your website in the createToken call below
 		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $(ele);
+		var $form = $('#payment-form');
 
         // Disable the submit button to prevent repeated clicks
         $form.find('button').prop('disabled', true);
 
 		Stripe.card.createToken($form, stripeResponseHandler);
-
-        // Prevent the form from submitting with the default action
-        return false;
-
-
 	}
 });

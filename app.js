@@ -316,36 +316,6 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
-
-	$scope.mailing_list = function(email){
-		homeFactory.mailingList(email).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) window.location.reload();
-				else alert(response.message);	 
-			}
-			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	fact.mailingList = function(email){
-		return $http({
-			method : 'GET',
-			url : 'index.php/mailing_list',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
-		});
-	}
-
-	return fact;
-});
 tappyn.controller('launchController', function($scope, $location, launchFactory){
 	$scope.countries = launchModel.countries;
 	$scope.steps = {
@@ -402,6 +372,36 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller('homeController', function($scope, $location, homeFactory){
+	
+
+	$scope.mailing_list = function(email){
+		homeFactory.mailingList(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) window.location.reload();
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	fact.mailingList = function(email){
+		return $http({
+			method : 'GET',
+			url : 'index.php/mailing_list',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({"email" : email})
+		});
+	}
+
+	return fact;
+});
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
@@ -461,20 +461,15 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
        	});
       }
     };
-	$scope.process_addition = function(ele){
+	$scope.process_addition = function(){
 		// This identifies your website in the createToken call below
 		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $(ele);
+		var $form = $('#payment-form');
 
         // Disable the submit button to prevent repeated clicks
         $form.find('button').prop('disabled', true);
 
 		Stripe.card.createToken($form, stripeResponseHandler);
-
-        // Prevent the form from submitting with the default action
-        return false;
-
-
 	}
 });
 tappyn.factory("paymentFactory", function($http){
