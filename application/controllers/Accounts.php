@@ -151,6 +151,9 @@ class Accounts extends CI_Controller
             {
                 $this->responder->data(array('account_id' => $this->stripe_account_library->get($this->stripe_account_id)))->message("Account successfully updated")->respond();
                 return;
+            } else {
+                $this->responder->fail($this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured")->code(500)->respond();
+                return;
             }
         } else {
             $this->responder->fail(array(
