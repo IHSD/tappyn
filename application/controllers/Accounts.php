@@ -8,9 +8,7 @@ class Accounts extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(array(
-                'error' => "You have to be logged in to access this area"
-            ))->code(401)->respond();
+            $this->responder->fail("You have to be logged in to access this area")->code(401)->respond();
             exit();
         }
         $this->load->model('user');
@@ -126,26 +124,37 @@ class Accounts extends CI_Controller
     {
         if($this->input->post('source_id'))
         {
-            foreach($this->account->external_accounts->data as $source)
+
+            if($this->stripe_account_library->removeSource($this->stripe_account_id, $this->input->post('source_id')))
             {
-                if($source->id === $this->input->post('source_id'))
-                {
-                    if($this->stripe_account_library->removeSource($this->stripe_account_id, $source->id))
-                    {
-                        $this->responder->message(
-                            'Payment method successfully removed'
-                        )->respond();
-                    } else {
-                        $this->responder->fail(array(
-                            $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
-                        ))->code(500)->respond();
-                        return;
-                    }
-                }
+                $this->responder->message(
+                    'Payment method successfully removed'
+                )->data(array('account' => $this->stripe_account_library->get($this->stripe_account_id)))->respond();
+                return;
+            } else {
+                $this->responder->fail(array(
+                    $this->stripe_account_library->errors() ? $this->stripe_account_library->errors() : "An unknown error occured"
+                ))->code(500)->respond();
+                return;
+            }
+        } else {
+            $this->responder->fail("You must provide a ayment source you want to remove"
+            )->code(400)->respond();
+        }
+    }
+
+    public function default_method()
+    {
+        if($this->input->post('source_id'))
+        {
+            if($this->stripe_account_library->setAsDefault($this->stripe_account_id, $this->input->post('source_id')))
+            {
+                $this->responder->data(array('account_id' => $this->stripe_account_library->get($this->stripe_account_id)))->message("Account successfully updated")->respond();
+                return;
             }
         } else {
             $this->responder->fail(array(
-                'source_id' => "You must provide a ayment source you want to remove"
+                'You must provide a payment method to use as your default'
             ))->code(400)->respond();
         }
     }
