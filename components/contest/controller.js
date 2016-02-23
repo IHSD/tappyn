@@ -9,7 +9,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 		if(!submission.text || submission.text.length < 1) $scope.set_alert("Text is required", "error");
 		else if(($scope.contest.platform == "google" || $scope.contest.platform == "facebook") && (!submission.headline || submission.headline.length < 1)) $scope.set_alert("Headline is required", "error");
 		else{
-			$scope.fb_pass = {contest : id, headline : submission.headline, text : submission.text};
+			$scope.fb_pass =  encodeURIComponent(JSON.stringify({contest : id, headline : submission.headline, text : submission.text}));
 			if($scope.user){
 				contestFactory.submitTo(id, submission).success(function(response){
 					if(response.http_status_code == 200){
