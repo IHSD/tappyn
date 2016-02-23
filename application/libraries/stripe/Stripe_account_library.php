@@ -132,6 +132,13 @@ class Stripe_account_library
         return TRUE;
     }
 
+    /**
+     * Set A Default Payment Source
+     * @todo   Convert to Stripe SDK
+     * @param  string $aid Account ID
+     * @param  string $sid Source ID
+     * @return mixed
+     */
     public function setAsDefault($aid, $sid)
     {
         $c = curl_init();
@@ -157,6 +164,13 @@ class Stripe_account_library
         return TRUE;
     }
 
+    /**
+     * Remove a payment source
+     * @todo   Convert to Stripe SDK
+     * @param  string $aid Account ID
+     * @param  string $sid Source ID
+     * @return mixed
+     */
     public function removeSource($aid, $sid)
     {
         $c = curl_init();
