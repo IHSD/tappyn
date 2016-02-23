@@ -61,7 +61,7 @@ class Submissions extends CI_Controller
         else {
             $this->responder->fail(
                 ($this->submission_library->errors() ? $this->submission_library->errors() : 'An unknown error occured')
-            )->code(400)->respond();
+            )->code(500)->respond();
         }
     }
 }

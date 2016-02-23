@@ -115,7 +115,7 @@ class Users extends CI_Controller
         foreach($submissions as $submission)
         {
             $submission->contest = $this->contest->get($submission->contest_id);
-            $submission->payout = $this->payout->fetch(array('submission_id', $submission->id));
+            $submission->payout = $this->submission->payout($submission->id);
         }
 
         $this->data['submissions'] = $submissions;
