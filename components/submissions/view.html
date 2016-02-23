@@ -16,7 +16,7 @@
 				<div class='col-sm-3 col-xs-12'  style='padding-top:30px;'>
 					<div style='width:100%'>
 	                	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
-		                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+		                <p class="progress-meter-text text-center" style='margin:0px;'>{{50 - (contest.submission_count | number)}} of 50 entries remaining</p>
 		            </div>
 		        </div>
 	           <div class='col-sm-1 col-xs-6 text-right'>

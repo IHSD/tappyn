@@ -15,7 +15,7 @@
 					<img src='public/img/TappynFB6.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>	
 				</div>
 				<div ng-show='!by_email' style='margin-top:10px;'>
-			        <a href="index.php/auth/facebook?submission={{fb_pass}}">
+			        <a id='fb-login' href="index.php/auth/facebook?submission={{fb_pass}}">
 			            <img height='30px' style='border-radius: 5px;' src="public/img/img-facebook.png">
 			        </a>
 		    	</div>
@@ -58,7 +58,7 @@
 		            </div>
 		        </div>            
 	            
-				<button type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+				<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
 			</form>
 	    	<a style='cursor:pointer;' ng-show='!by_email' ng-click='by_email = true'>Sign up via email</a>
 	    	<a style='cursor:pointer;' ng-show='by_email' ng-click='by_email = false'>Sign up via Facebook</a>
@@ -165,5 +165,12 @@
 	
 
 <script>
-fbq('track', 'ViewContent');
+	fbq('track', 'ViewContent');
+
+	$("#sign-up").click(function(){
+		fbq('track', 'Lead');
+	});
+	$("#fb-login").click(function(){
+		fbq('track', 'Lead');
+	});
 </script>
