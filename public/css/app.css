@@ -2180,11 +2180,8 @@ nav .dropdown-menu{
 .modal_actions{
     z-index:100000000 !important;
     position:fixed;
-    top:10%;
-    right: 5%;
+    top:5%;
     height:70%; 
-    min-width:25%;
-    max-width: 25%;
     opacity: 1;
 }
 .modal_actions.ng-hide-add.ng-hide-add-active,
@@ -2196,3 +2193,9 @@ nav .dropdown-menu{
         position:absolute;
         top:0;
     }
+
+.content-panel{
+	background-color: #fff;
+	border-radius:3px;
+	padding:10px 5px 10px 5px;
+}

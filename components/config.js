@@ -83,8 +83,8 @@ tappyn.filter('capitalize', function() {
   }
 });
 
-tappyn.controller("ApplicationController", function($scope, $location, $timeout, AppFact){
-	
+tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
+	$rootScope.modal_up = false;		
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
