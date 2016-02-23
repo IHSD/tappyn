@@ -39,6 +39,7 @@ class Stripe_account_library
         );
         foreach($data as $key => $value)
         {
+            error_log($key);
             switch($key) {
                 case 'legal_entity.first_name':
                     $account_data['legal_entity']['first_name'] = $value;
