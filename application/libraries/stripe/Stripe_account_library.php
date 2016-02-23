@@ -41,7 +41,9 @@ class Stripe_account_library
                 "date" => time(),
                 "user_agent" => $_SERVER['HTTP_USER_AGENT']
             ),
-            'type' => "individual"
+            "legal_entity" => array(
+                'type' => 'individual'
+            )
         );
         foreach($data as $key => $value)
         {
