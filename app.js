@@ -88,9 +88,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
-			if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
 			else{
-				$scope.user = response.data;
+				$rootScope.user = response.data;
 				sessionStorage.setItem("user", JSON.stringify(response.data));
 			}
 		}
@@ -135,7 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingIn(email, pass).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 				}
@@ -147,7 +147,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 	}
 	$scope.log_out = function(){
 		AppFact.loggingOut().success(function(response){
-			$scope.user = null;
+			$rootScope.user = null;
 			sessionStorage.removeItem('user');
 			$location.path("/login");
 		});
@@ -157,7 +157,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 					fbq('track', 'Lead');
@@ -228,26 +228,6 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
-tappyn.controller('contestsController', function($scope, contestsFactory){
-	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data;
-	});
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
 tappyn.controller('contestController', function($scope, $rootScope, $routeParams, $location, contestFactory, AppFact){
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -285,7 +265,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$scope.submit_to($scope.contest.id, $scope.submit);
 				}
@@ -323,6 +303,26 @@ tappyn.factory('contestFactory', function($http){
 			},
 			'data' : $.param(submission)
 		});	
+	}
+
+	return fact;
+})
+tappyn.controller('contestsController', function($scope, contestsFactory){
+	contestsFactory.grabContests().success(function(response){
+		$scope.contests = response.data;
+	});
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
 	}
 
 	return fact;
@@ -464,18 +464,6 @@ tappyn.factory('launchFactory', function($http){
 			data : $.param(contest)
 		});	
 	}
-	return fact;
-})
-tappyn.controller('profileController', function($scope){
-	
-});
-tappyn.factory('profileFactory', function($http){
-	var fact = {};
-
-	fact.grabProfile = function(){
-		
-	}
-
 	return fact;
 })
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
@@ -893,6 +881,18 @@ tappyn.service('paymentModel', function(){
     'ZM' : 'Zambia',
     'ZW' : 'Zimbabwe'
 	};
+})
+tappyn.controller('profileController', function($scope){
+	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
+		
+	}
+
+	return fact;
 })
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){

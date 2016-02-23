@@ -88,9 +88,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
-			if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
 			else{
-				$scope.user = response.data;
+				$rootScope.user = response.data;
 				sessionStorage.setItem("user", JSON.stringify(response.data));
 			}
 		}
@@ -135,7 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingIn(email, pass).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 				}
@@ -147,7 +147,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 	}
 	$scope.log_out = function(){
 		AppFact.loggingOut().success(function(response){
-			$scope.user = null;
+			$rootScope.user = null;
 			sessionStorage.removeItem('user');
 			$location.path("/login");
 		});
@@ -157,7 +157,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 					fbq('track', 'Lead');

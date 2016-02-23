@@ -35,7 +35,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$scope.submit_to($scope.contest.id, $scope.submit);
 				}
