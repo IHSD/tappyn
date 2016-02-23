@@ -227,6 +227,57 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller('contestController', function($scope, $routeParams, $location, contestFactory){
+	contestFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+	});
+
+	$scope.submit_to = function(id, submission){
+		if($scope.user){
+			contestFactory.submitTo(id, submission).success(function(response){
+				if(response.success) $location.path("/submissions/"+id);
+			})
+		}
+		else{
+			submission.as_guest = true;
+			$scope.sign_up(submission).success(function(response){
+				if(response.success){
+					$scope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					contestFactory.submitTo(id, submission).success(function(response){
+						if(response.success) $location.path("/submissions/"+id);
+					})
+				}
+			})
+		}
+	}
+});
+tappyn.factory('contestFactory', function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.submitTo = function(id, submission){
+		return $http({
+			method : 'POST',
+			url : 'index.php/submissions/create/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param(submission)
+		});	
+	}
+
+	return fact;
+})
 tappyn.controller('contestsController', function($scope, contestsFactory){
 	contestsFactory.grabContests().success(function(response){
 		$scope.contests = response.data;
@@ -300,57 +351,6 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
-	return fact;
-})
-tappyn.controller('contestController', function($scope, $routeParams, $location, contestFactory){
-	contestFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-	});
-
-	$scope.submit_to = function(id, submission){
-		if($scope.user){
-			contestFactory.submitTo(id, submission).success(function(response){
-				if(response.success) $location.path("/submissions/"+id);
-			})
-		}
-		else{
-			submission.as_guest = true;
-			$scope.sign_up(submission).success(function(response){
-				if(response.success){
-					$scope.user = response.data;
-					sessionStorage.setItem("user", JSON.stringify(response.data));
-					contestFactory.submitTo(id, submission).success(function(response){
-						if(response.success) $location.path("/submissions/"+id);
-					})
-				}
-			})
-		}
-	}
-});
-tappyn.factory('contestFactory', function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.submitTo = function(id, submission){
-		return $http({
-			method : 'POST',
-			url : 'index.php/submissions/create/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param(submission)
-		});	
-	}
-
 	return fact;
 })
 tappyn.controller('homeController', function($scope, $location, homeFactory){
@@ -448,13 +448,14 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 					$scope.detail = {first_name : $scope.user.first_name, last_name : $scope.user.last_name};
 					$scope.showing = 'details';
 				}
-				else if($scope.user.type == "member" && response.data.account == true){
-					$scope.detail = {first_name : response.data.account.legal_entity.first_name, 
-						last_name : response.data.account.legal_entity.last_name, 
-						dob_year : response.data.account.legal_entity.dob.year, 
-						dob_month : response.data.account.legal_entity.dob.month, 
-						dob_day : response.data.account.legal_entity.dob.day, 
-						country : response.data.account.address.country};
+				else if($scope.user.type == "member" && response.data.account){
+					var account = response.data.account;
+					$scope.detail = {first_name : account.legal_entity.first_name, 
+						last_name : account.legal_entity.last_name, 
+						dob_year : account.legal_entity.dob.year, 
+						dob_month : account.legal_entity.dob.month, 
+						dob_day : account.legal_entity.dob.day, 
+						country : account.legal_entity.address.country};
 					$scope.showing = 'methods';
 				}
 				else $scope.showing = 'methods';
