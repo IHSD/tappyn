@@ -36,6 +36,14 @@ class Stripe_account_library
         $account_data = array(
             "managed" => true,
             "email" => $email,
+            "tos_acceptance" => array(
+                "ip" => $_SERVER['REMOTE_ADDR'],
+                "date" => time(),
+                "user_agent" => $_SERVER['HTTP_USER_AGENT']
+            ),
+            "legal_entity" => array(
+                'type' => 'individual'
+            )
         );
         foreach($data as $key => $value)
         {
@@ -55,15 +63,6 @@ class Stripe_account_library
                     break;
                 case 'legal_entity.dob.year':
                     $account_data['legal_entity']['dob']['year'] = $value;
-                    break;
-                case 'legal_entity.type':
-                    $account_data['legal_entity']['type'] = 'individual';
-                    break;
-                case 'tos_acceptance.ip':
-                    $account_data['tos_acceptance']['ip'] = $value;
-                    break;
-                case 'tos_acceptance.date':
-                    $account_data['tos_acceptance']['date'] = $value;
                     break;
                 default:
                     $account_data[$key] = $value;
@@ -124,7 +123,7 @@ class Stripe_account_library
     {
         try {
             $account = \Stripe\Account::retrieve($aid);
-            $account->external_accounts = $token;
+            $account->external_accounts->create(array("external_account" => $token));
             $account->save();
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
