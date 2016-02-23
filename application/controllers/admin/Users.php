@@ -93,7 +93,7 @@ class Users extends CI_Controller
         $config['per_page'] = 20;
         $where = array();
         if($this->input->get('user')) $where['owner'] = $this->input->get('user');
-        $config['base_url'] = base_url().'admin/submissions/index';
+        $config['base_url'] = base_url().'admin/users/submissions/'.$uid;
         $config['total_rows'] = $this->submission->count($where);
         $this->pagination->initialize($config);
 
