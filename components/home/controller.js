@@ -1,6 +1,7 @@
 tappyn.controller('homeController', function($scope, $location, homeFactory){
 	
-
+	fbq('track', 'ViewContent');
+	
 	$scope.mailing_list = function(email){
 		homeFactory.mailingList(email).success(function(response){
 			if(response.http_status_code == 200){
