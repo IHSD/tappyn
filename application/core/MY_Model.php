@@ -206,6 +206,11 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  public function num_rows()
+  {
+      return $this->response->num_rows();
+  }
+
   /**
    * Return first row of resultset
    * @return object

@@ -1,5 +1,5 @@
 
-        <div class='admin-navbar'>
+        <!-- <div class='admin-navbar'>
 	    <div class="row">
 	        <div class="column medium-12">
 	            <div class="columns small-3 medium-4">
@@ -24,47 +24,7 @@
 	            </div>
 	        </div>
 	    </div>
-        </div>
-
-<style>
-.admin-navbar {
-    background-color: black;
-    color: white;
-    height: 45px;
-    line-height: 45px;
-
-}
-.admin-nav {
-
-}
-
-.admin-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.admin-nav ul li {
-    padding: 0;
-    float: left;
-}
-
-.admin-nav ul li :hover {
-    background-color: white;
-}
-
-.admin-nav ul li .active {
-    background-color: white !important;
-}
-.admin-nav ul li a {
-    text-decoration:none;
-    padding-left: 10px;
-    padding-right: 10px;
-    display:block;
-    background-color: #dddddd;
-}
-</style>
-
+        </div> -->
 <?php
 function is_active($key)
 {

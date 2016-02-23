@@ -57,14 +57,14 @@ class Auth extends CI_Controller {
 				if($this->submission_library->create(
 					$this->session->flashdata('contest'),
 					$this->session->flashdata('headline'),
-					$this->session->flashdata('text'))
+					$this->session->flashdata('text')))
 				{
 					$this->session->set_flashdata('message', "Submission successfully created");
 					redirect('/#/dashboard', 'refresh');
 				}
 				else
 				{
-					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"))
+					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"));
 					redirect("/#/contest/".$this->session->flashdata('contest'), 'refresh');
 				}
 			}

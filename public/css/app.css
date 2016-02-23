@@ -741,7 +741,7 @@ footer {
     margin: 2px 0 0;
 }
 .progress-meter-text {
-	color: #ff5e00 !important;	
+	color: #ff5e00 !important;
 }
 .ad-company-info p {
 	text-align: center;
@@ -2182,7 +2182,7 @@ nav .dropdown-menu{
     position:fixed;
     top:10%;
     right: 5%;
-    height:70%; 
+    height:70%;
     min-width:25%;
     max-width: 25%;
     opacity: 1;
