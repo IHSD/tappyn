@@ -54,12 +54,6 @@ class Submissions extends CI_Controller
 
         if($this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
         {
-            $this->mailer
-                ->to($this->ion_auth->user()->row()->email)
-                ->from('squad@tappyn.com')
-                ->subject('Your submission has successfully been created')
-                ->html($this->load->view('emails/submission_success', $email_data, TRUE))
-                ->send();
             $this->responder->message(
                 "You're submission has succesfully been created"
             )->respond();
