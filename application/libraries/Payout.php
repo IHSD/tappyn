@@ -30,7 +30,8 @@ class Payout
             'submission_id' => $sid,
             'claimed' => 0,
             'pending' => 1,
-            'user_id' => $submission->owner
+            'user_id' => $submission->owner,
+            'amount' => 5000
         );
         return $this->db->insert('payouts', $insert_data);
     }
