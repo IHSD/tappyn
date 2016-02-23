@@ -71,7 +71,7 @@ class Contests extends CI_Controller
     {
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->responder->fail(array('error' => "You need to be logged in as a company to create contests"))->code(403)->respond();
+            $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
             return;
         }
 
@@ -126,33 +126,25 @@ class Contests extends CI_Controller
 
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(array(
-                'error' => "You must be logged in to perform this action"
-            ))->code(401)->respond();
+            $this->responder->fail("You must be logged in to perform this action")->code(401)->respond();
             return;
         }
         // Check that submission exists
         if(!$submission = $this->submission->get($sid))
         {
-            $this->responder->fail(array(
-                'error' => "That submission does not exist"
-            ))->code(404)->respond();
+            $this->responder->fail("That submission does not exist")->code(500)->respond();
             return;
         }
         // Check that contest exists
         else if(!$contest = $this->contest->get($cid))
         {
-            $this->responder->fail(array(
-                'error' => "We couldn't find contest with id {$cid}"
-            ))->code(404)->respond();
+            $this->responder->fail("We couldn't find contest with id {$cid}")->code(500)->respond();
             return;
         }
         // Check that the contest has ended
         else if($contest->stop_time > date('Y-m-d H:i:s'))
         {
-            $this->responder->fail(array(
-                "error" => "This contest has not finished yet"
-            ))->code(500)->respond();
+            $this->responder->fail("This contest has not finished yet")->code(500)->respond();
             return;
         }
         $company_name = $this->db->select('name')->from('profiles')->where("id", $contest->owner)->get();
@@ -167,18 +159,14 @@ class Contests extends CI_Controller
         {
             if(!$this->ion_auth->is_admin())
             {
-                $this->responder->fail(array(
-                    'error' => 'You must own the contest to select a winner'
-                ))->code(403)->respond();
+                $this->responder->fail('You must own the contest to select a winner')->code(403)->respond();
                 return;
             }
         }
         $payout = $this->payout->exists(array('contest_id' => $cid));
         if($payout)
         {
-            $this->responder->fail(array(
-                'error' => "A submission has already been chosen as the winner"
-            ))->code(500)->respond();
+            $this->responder->fail("A submission has already been chosen as the winner")->code(500)->respond();
             return;
         }
         // Attempt to create the payouts
@@ -201,7 +189,7 @@ class Contests extends CI_Controller
         else
         {
             $this->responder->fail(
-                $this->payout->errors() ? $this->payout->errors() : array('error' => "An unknown error occured")
+                $this->payout->errors() ? $this->payout->errors() : "An unknown error occured"
             )->code(500)->respond();
             return;
         }

@@ -10,9 +10,7 @@ class Payouts extends CI_Controller
         $this->load->library('stripe/stripe_transfer_library');
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(array(
-                'error' => "You must be logged in to access this area"
-            ))->coe(401)->respond();
+            $this->responder->fail("You must be logged in to access this area")->code(401)->respond();
             exit();
         }
     }
@@ -37,9 +35,7 @@ class Payouts extends CI_Controller
                 'payout' => $payout
             ))->respond();
         } else {
-            $this->responder->fail(array(
-                'error' => "We couldnt find the payout you were looking for"
-            ))->code(404)->respond();
+            $this->responder->fail("We couldnt find the payout you were looking for")->code(500)->respond();
         }
     }
 
@@ -53,7 +49,7 @@ class Payouts extends CI_Controller
         $payout = $this->payout->get($id);
         if(!$payout)
         {
-            $this->responder->fail("That payout does not exist")->code(404)->respond();
+            $this->responder->fail("That payout does not exist")->code(500)->respond();
             return;
         }
         // And that it hasnt been claimed

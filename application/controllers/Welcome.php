@@ -35,10 +35,7 @@ class Welcome extends CI_Controller
 				"You have successfully been added to our mailing list"
 			)->respond();
 		} else {
-			$this->responder->fail(array(
-				'error' => "There was an error adding you to our mailing list"
-			))->code(400)->respond();
-			$this->session->set_flashdata('error', "There was an error adding you to our mailing list");
+			$this->responder->fail("There was an error adding you to our mailing list")->code(500)->respond();
 		}
 	}
 
@@ -72,9 +69,7 @@ class Welcome extends CI_Controller
 				"Thank you for your message. We will contact you as soon as we can!"
 			)->respond();
 		} else {
-			$this->responder->fail(array(
-				'error' => "There was an error submitting your contact request. Please try again later"
-			))->code(400)->respond();
+			$this->responder->fail("There was an error submitting your contact request. Please try again later")->code(500)->respond();
 		}
 	}
 }

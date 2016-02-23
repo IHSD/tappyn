@@ -52,100 +52,7 @@ class Submissions extends CI_Controller
             return;
         }
 
-        // Get the contest, and then dynamically change form validation rules, based on the type of the contest
-        $contest = $this->contest->get($contest_id);
-        if(!$contest)
-        {
-            $this->responder->fail(
-                "We couldnt find the contest you were looking for"
-            )->code(404)->respond();
-            return;
-        }
-
-        if($contest->submission_count >= 50)
-        {
-            $this->responder->fail(
-                "We're sorry, but this contest has reached its submission limit"
-            )->code(400)->respond();
-            return;
-        }
-
-        if($contest->stop_time < date('Y-m-d H:i:s'))
-        {
-            $this->responder->fail(
-                "We're sorry, but this contest has already ended"
-            )->code(400)->respond();
-            return;
-        }
-        if(!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id))
-        {
-            $this->responder->fail(
-                "You have already submitted to this contest"
-            )->code(400)->respond();
-            return;
-        }
-
-        $data = array(
-            'owner' => $this->ion_auth->user()->row()->id,
-            'contest_id' => $contest->id
-        );
-
-        $email_data = array(
-            'headline' => $this->input->post('headline'),
-            'text' => $this->input->post('text'),
-            'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
-            'contest' => $contest->title,
-            'company' => $contest->company->name
-        );
-        $success = false;
-        // Generate / validate fields based on the platform type
-        switch($contest->platform)
-        {
-            case 'facebook':
-                $this->form_validation->set_rules('headline', 'Headline', 'required');
-                $this->form_validation->set_rules('text', 'Text', 'required');
-                if($this->form_validation->run() == true)
-                {
-                    $data['text'] = $this->input->post('text');
-                    $data['headline'] = $this->input->post('headline');
-                }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data))) $success = true;
-            break;
-            case 'google':
-                $this->form_validation->set_rules('headline', 'Headline', 'required');
-                $this->form_validation->set_rules('text', "text", 'required');
-                if($this->form_validation->run() == true)
-                {
-                    $data['headline'] = $this->input->post('headline');
-                    $data['text'] = $this->input->post('text');
-                }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data))) $success = true;
-            break;
-            case 'twitter':
-                $this->form_validation->set_rules('text', 'Text', 'required');
-                if($this->form_validation->run() == true)
-                {
-                    $data['text'] = $this->input->post('text');
-                }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in) $success = true;
-            break;
-            case 'trending':
-
-            break;
-            case 'tagline':
-
-            break;
-            case 'general':
-                $this->form_validation->set_rules('text', 'Text', 'required');
-                if($this->form_validation->run() == true)
-                {
-                    $data['text'] = $this->input->post('text');
-                }
-                if($this->form_validation->run() == true && ($sid = $this->submission_library->create($data)) && $logged_in) $success = true;
-
-            break;
-        }
-        if($success)
+        if($this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
         {
             $this->mailer
                 ->to($this->ion_auth->user()->row()->email)
@@ -156,9 +63,10 @@ class Submissions extends CI_Controller
             $this->responder->message(
                 "You're submission has succesfully been created"
             )->respond();
-        } else {
+        }
+        else {
             $this->responder->fail(
-                (validation_errors() ? validation_errors() : 'An unknown error occured')
+                ($this->submission_library->errors() ? $this->submission_library->errors() : 'An unknown error occured')
             )->code(400)->respond();
         }
     }
