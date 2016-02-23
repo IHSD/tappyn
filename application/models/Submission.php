@@ -147,4 +147,14 @@ class Submission extends MY_Model
     {
         return $this->db->insert('submissions', $data);
     }
+
+    public function payout($sid)
+    {
+        $payout = $this->db->select('*')->from('payouts')->where('submission_id', $sid)->get();
+        if($payout)
+        {
+            return $payout->row();
+        }
+        return FALSE;
+    }
 }

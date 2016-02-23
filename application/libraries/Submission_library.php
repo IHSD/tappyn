@@ -79,7 +79,18 @@ class Submission_library
             $this->error = 'You have already put in a submission for that contest';
             return false;
         }
-        return $this->submission->create($data);
+
+        if($this->submission->create($data))
+        {
+            $this->mailer
+                ->to($this->ion_auth->user()->row()->email)
+                ->from('squad@tappyn.com')
+                ->subject('Your submission has successfully been created')
+                ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                ->send();
+                return TRUE;
+        }
+        return FALSE;
     }
 
     /**
