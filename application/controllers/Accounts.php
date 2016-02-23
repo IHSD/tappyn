@@ -53,10 +53,9 @@ class Accounts extends CI_Controller
                 if($this->input->post('dob_year'))   $data['legal_entity.dob.year'] = $this->input->post('dob_year');
                 if($this->input->post('dob_month'))  $data['legal_entity.dob.month'] = $this->input->post('dob_month');
                 if($this->input->post('country'))    $data['country'] = $this->input->post('country');
-                if($this->input->post('stripe_tos')) {
-                    $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
-                    $data['tos_acceptance.date'] = time();
-                }
+                $data['legal_entity.type'] = 'individual';
+                $data['tos_acceptance.ip'] = $_SERVER['REMOTE_ADDR'];
+                $data['tos_acceptance.date'] = time();
             }
             // If the form pass validation, and we can create / upadte based on presence
             if($this->form_validation->run() === TRUE &&
