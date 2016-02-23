@@ -83,14 +83,14 @@ tappyn.filter('capitalize', function() {
   }
 });
 
-tappyn.controller("ApplicationController", function($scope, $location, $timeout, AppFact){
-	
+tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
+	$rootScope.modal_up = false;		
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
-			if(sessionStorage.getItem("user")) $scope.user = JSON.parse(sessionStorage.getItem("user"));
+			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
 			else{
-				$scope.user = response.data;
+				$rootScope.user = response.data;
 				sessionStorage.setItem("user", JSON.stringify(response.data));
 			}
 		}
@@ -135,7 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 		AppFact.loggingIn(email, pass).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 				}
@@ -147,7 +147,7 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 	}
 	$scope.log_out = function(){
 		AppFact.loggingOut().success(function(response){
-			$scope.user = null;
+			$rootScope.user = null;
 			sessionStorage.removeItem('user');
 			$location.path("/login");
 		});
@@ -157,7 +157,7 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.user = response.data;
+					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
 					fbq('track', 'Lead');

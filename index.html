@@ -24,8 +24,8 @@
 	</head>
 	<body ng-app='tappyn' ng-controller='ApplicationController'>
 	    <div id="fb-root"></div>
-	    <div class='darken' ng-show="modal_up"></div>
 	    <div class='container-fluid'>
+	    	<div class='darken' ng-show="modal_up"></div>
 		    <div ng-include src="'templates/navbar.html'"></div>
 		    <section class='innerpage' ng-view></section>
 		    <div ng-include src="'templates/footer.html'"></div>
