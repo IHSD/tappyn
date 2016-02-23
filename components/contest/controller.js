@@ -4,6 +4,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 	});
 
 	$scope.guest_signup = false; 
+	$scope.submit = {headline : '', text: ''};
 	$scope.submit_to = function(id, submission){
 		if(!submission.text || submission.text.length < 1) $scope.set_alert("Text is required", "error");
 		else if(($scope.contest.platform == "google" || $scope.contest.platform == "facebook") && (!submission.headline || submission.headline.length < 1)) $scope.set_alert("Headline is required", "error");
