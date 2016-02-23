@@ -1,35 +1,40 @@
-
-
 <div class='row'>
-	<div class='col-xs-12' style='background-color:transparent;border:none;border-bottom:2px solid  #FF5E00;padding:0px;margin-bottom:15px;'>
-			<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
-				<h3>{{contest.title}}</h3>
-				<div>
-                	<a class='btn btn-default btn-sm' href="#/contest/{{contest.id}}">Brief</a>
-                	<a class='btn btn-oj btn-sm' href="#/submissions/{{contest.id}}">Submissions</a>
-                </div>
+	<div class='col-xs-12' style='padding-top:10px'>
+		<div class='panel'>
+			<div class='panel-body'>		
+				<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
+					<h3>{{contest.title}}</h3>
+					<div>
+	                	<a class='btn btn-default btn-sm' href="#/contest/{{contest.id}}">Brief</a>
+	                	<a class='btn btn-oj btn-sm' href="#/submissions/{{contest.id}}">Submissions</a>
+	                </div>
+				</div>
+				<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
+					<h3>Sharing</h3>
+					<h4 style='margin:0px;'>Coming soon!</h4>
+				</div>
+				<div class='col-sm-3 col-xs-12'  style='padding-top:30px;'>
+					<div style='width:100%'>
+	                	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
+		                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+		            </div>
+		        </div>
+	           <div class='col-sm-1 col-xs-6 text-right'>
+		        	<h1 style='color:#ff6c00'>$50</h1>
+		        </div>
+		        <div class='col-sm-2 col-xs-6 text-right'>
+					<h4 style='margin:0px;margin-top:20px;'>
+		            	Ends in {{contest.stop_time | untilFilter}}
+					</h4>
+					<h4>{{contest.views}} Views</h4>
+					<h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
+				</div>	
 			</div>
-			<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
-				<h3>Sharing</h3>
-				<h4 style='margin:0px;'>Coming soon!</h4>
-			</div>
-			<div class='col-sm-3 col-xs-12'  style='padding-top:30px;'>
-				<div style='width:100%'>
-                	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
-	                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
-	            </div>
-	        </div>
-            <div class='col-sm-3 col-xs-12 text-right'>
-            	<h1>$50</h1>
-				<h4 style='margin:0px;margin-top:20px;'>
-                	Ends in {{contest.stop_time | untilFilter}}
-				</h4>
-				<h4 style='margin:0px;'>{{contest.platform}}</h4>
-			</div>
-	
+		</div>
 	</div>
 </div>
-<div class='row content-padding'>
+<div class='col-xs-12'> <hr style='border: 2px #ff6c00 solid'> </div>
+<div class='row' style='padding-bottom:10px;'>
 	<div class='col-sm-4 col-xs-12' ng-repeat='submission in submissions'>
 		<div class="contest-box" style='min-height:350px; max-height:350px;'>
 			<div class='col-sm-8 col-xs-12'>

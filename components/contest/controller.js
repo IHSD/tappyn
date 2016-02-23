@@ -31,9 +31,14 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 	}
 
 	$scope.sign_up_guest = function(registrant){
+		registrant.group_id = 2;
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.submit_to($scope.contest.id, $scope.submission);
+				if(response.success){
+					$scope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$scope.submit_to($scope.contest.id, $scope.submit);
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
