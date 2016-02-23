@@ -7,6 +7,7 @@ class Submission_library
     public function __construct()
     {
         $this->load->model('submission');
+        $this->load->model('contest');
     }
 
     public function __get($var)

@@ -151,7 +151,7 @@ class Submission extends MY_Model
     public function payout($sid)
     {
         $payout = $this->db->select('*')->from('payouts')->where('submission_id', $sid)->get();
-        if($payout)
+        if($payout && $payout->num_rows() > 0)
         {
             return $payout->row();
         }

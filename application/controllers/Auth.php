@@ -37,12 +37,12 @@ class Auth extends CI_Controller {
 		$this->load->library('facebook_ion_auth');
 		if($this->input->get('submission'))
 		{
-			$submission_data = json_decode(urldecode($this->input->get('submission'))));
+			$submission_data = json_decode(urldecode($this->input->get('submission')));
 			if(is_null($submission_data)) die("Invalid data provided in submission object");
 			$this->session->set_flashdata('contest', $submission_data->contest);
 			$this->session->set_flashdata('text', $submission_data->text);
 			$this->session->set_flashdata('headline', $submission_data->headline);
-			$this->session->set_flashdata('submitting_as_guest');
+			$this->session->set_flashdata('submitting_as_guest', 'true');
 		}
 		if($this->facebook_ion_auth->login())
 		{
