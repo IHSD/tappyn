@@ -9,9 +9,7 @@ class Companies extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->responder->fail(array(
-                'error' => "You must be logged in as a company to access this area"
-            ))->code(401)->respond();
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
             exit();
         }
         $this->load->model('company');
@@ -65,9 +63,7 @@ class Companies extends CI_Controller
                 )
             )->respond();
         } else {
-            $this->responder->fail(array(
-                'error' => 'There was an error fetching your dashboard'
-            ))->code(500)->respond();
+            $this->responder->fail('There was an error fetching your dashboard')->code(500)->respond();
         }
     }
 
@@ -110,9 +106,7 @@ class Companies extends CI_Controller
                 'customer' => $this->data['customer']
             ))->respond();
         } else {
-            $this->responder->fail(array(
-                'error' => "You dont have any account details yet"
-            ))->code(400)->respond();
+            $this->responder->fail("You dont have any account details yet")->code(500)->respond();
             return;
         }
     }
@@ -160,13 +154,9 @@ class Companies extends CI_Controller
         $charge = FALSE;
         if(!$contest_id)
         {
-            $this->responder->fail(array(
-                'error' => "You must supply a contest"
-            ))->code(400)->respond();
+            $this->responder->fail("You must supply a contest")->code(500)->respond();
             return;
         }
-
-        echo "Loading libraries";
 
         $this->load->library('stripe/stripe_charge_library');
         $this->load->library('stripe/stripe_customer_library');
@@ -205,13 +195,10 @@ class Companies extends CI_Controller
         // Tell them we cant process their request
         else
         {
-            $this->responder->fail(array(
-                'error' => "We were unable to process your request"
-            ))->code(400)->respond();
+            $this->responder->fail("We were unable to process your request")->code(400)->respond();
             return;
         }
 
-        echo "Charge created";
         // Check if charge was succesful and handle accordingly
         if($charge)
         {
@@ -226,7 +213,7 @@ class Companies extends CI_Controller
         else
         {
             $this->responder->fail(array(
-                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : array('error' => "An unknown error occured with payment")))
+                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : "An unknown error occured with payment"))
             ))->code(500)->respond();
             return;
         }

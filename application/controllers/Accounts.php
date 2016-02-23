@@ -136,7 +136,7 @@ class Accounts extends CI_Controller
             }
         } else {
             $this->responder->fail("You must provide a ayment source you want to remove"
-            )->code(400)->respond();
+            )->code(500)->respond();
         }
     }
 
@@ -155,7 +155,7 @@ class Accounts extends CI_Controller
         } else {
             $this->responder->fail(array(
                 'You must provide a payment method to use as your default'
-            ))->code(400)->respond();
+            ))->code(500)->respond();
         }
     }
 }

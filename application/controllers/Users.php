@@ -7,9 +7,7 @@ class Users extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail(array(
-                'error' => "You must be logged in to access this area"
-            ))->code(401)->respond();
+            $this->responder->fail("You must be logged in to access this area")->code(401)->respond();
             exit();
         }
         $this->load->model('user');
@@ -81,9 +79,7 @@ class Users extends CI_Controller
                 )
             )->respond();
         } else {
-            $this->responder->fail(array(
-                'error' => 'There was an error fetching your dashboard'
-            ))->code(500)->respond();
+            $this->responder->fail('There was an error fetching your dashboard')->code(500)->respond();
         }
     }
 
@@ -112,9 +108,7 @@ class Users extends CI_Controller
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder
-                        ->fail(array(
-                            'error' => "There was an error updating your profile"
-                        ))
+                        ->fail("There was an error updating your profile")
                         ->code(500)
                         ->respond();
                     return;
@@ -151,7 +145,7 @@ class Users extends CI_Controller
                     if(!$this->upload->do_upload('logo_url'))
                     {
                         $this->responder
-                            ->fail($this->upload->display_errors() ? $this->upload->display_errors() : array('error' => "There was an error uploading your image"))
+                            ->fail($this->upload->display_errors() ? $this->upload->display_errors() : "There was an error uploading your image")
                             ->code(500)
                             ->respond();
                         return;
@@ -164,7 +158,7 @@ class Users extends CI_Controller
                     if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                     {
                         $this->responder
-                            ->fail(array('error' => "There was an error updating your profile"))
+                            ->fail("There was an error updating your profile")
                             ->code(500)
                             ->respond();
                     } else {
