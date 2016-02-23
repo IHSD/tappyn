@@ -45,12 +45,50 @@ class Users extends CI_Controller
         foreach ($this->data['users'] as $k => $user)
         {
             $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+            $this->data['users'][$k]->profile = $this->user->profile($user->id);
         }
         $this->load->view('admin/users/index', $this->data);
     }
 
     public function show($uid)
     {
+        $user = $this->ion_auth->user($uid)->row();
+        $user->profile = $this->user->profile($uid);
+        $this->data['user'] = $user;
+        $this->load->view('admin/users/show', $this->data);
+    }
 
+    public function search()
+    {
+        if(is_numeric($this->input->post('user')))
+        {
+            // Search by ID
+            $type = "UID";
+            $where = array('id' => $this->input->post('user'));
+        }
+        else
+        {
+            $type = "Email";
+            $where = array('email' => $this->input->post('user'));
+        }
+        $user = $this->user->where($where)->fetch();
+        if($user && $user->num_rows() > 0)
+        {
+            redirect('admin/users/show/'.$user->row()->id, 'refresh');
+        }
+        else {
+            $this->session->set_flashdata('error', "We could not find user with {$type} of {$this->input->post('user')}");
+            redirect("admin/users/index", 'refresh');
+        }
+    }
+
+    public function transfers()
+    {
+        $this->load->library('stripe/stripe_transfer_library');
+    }
+
+    public function account($uid)
+    {
+        $this->load->library('stripe/stripe_account_library');
     }
 }
