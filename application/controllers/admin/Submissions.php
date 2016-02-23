@@ -43,11 +43,11 @@ class Submissions extends CI_Controller
         foreach($submissions as $submission)
         {
             $submission->contest = $this->contest->get($submission->contest_id);
-            $submission->payout = $this->payout->fetch(array('id' => $submission->payout_id));
+            $submission->payout = $this->payout->fetch(array('submission_id', $submission->id));
         }
 
         $this->data['submissions'] = $submissions;
-        $this->load->view('admin/submissions/index', $this->data);
+        $this->load->view('admin/users/submissions', $this->data);
     }
 
     public function show()

@@ -12,6 +12,9 @@ class Users extends CI_Controller
         $this->load->view('templates/admin_navbar');
         $this->load->view('templates/navbar');
         $this->load->model('user');
+        $this->load->model('submission');
+        $this->load->library('payout');
+        $this->load->model('contest');
     }
 
     public function index()
@@ -80,6 +83,43 @@ class Users extends CI_Controller
             $this->session->set_flashdata('error', "We could not find user with {$type} of {$this->input->post('user')}");
             redirect("admin/users/index", 'refresh');
         }
+    }
+
+    public function submissions($uid)
+    {
+        $user = $this->ion_auth->user($uid)->row();
+        $user->profile = $this->user->profile($uid);
+        $this->data['user'] = $user;
+        $config['per_page'] = 20;
+        $where = array();
+        if($this->input->get('user')) $where['owner'] = $this->input->get('user');
+        $config['base_url'] = base_url().'admin/submissions/index';
+        $config['total_rows'] = $this->submission->count($where);
+        $this->pagination->initialize($config);
+
+        $offset = $this->input->get('per_page') ? (($this->input->get('per_page') * $config['per_page']) - $config['per_page']) : 0;
+        $this->submission->limit($config['per_page']);
+        $this->submission->offset($offset);
+
+        if($this->input->get('sort_by') && $this->input->get("sort_dir"))
+        {
+            $this->submission->order_by($this->input->get('sort_by'), $this->input->get('sort_dir'));
+        } else if($this->input->get('sort_by'))
+        {
+            $this->submission->order_by($this->input->get('sort_by'));
+        }
+        // Parse query string for possible query params
+        $this->data['pagination_links'] = $this->pagination->create_links();
+        $submissions = $this->submission->fetch()->result();
+
+        foreach($submissions as $submission)
+        {
+            $submission->contest = $this->contest->get($submission->contest_id);
+            $submission->payout = $this->payout->fetch(array('submission_id', $submission->id));
+        }
+
+        $this->data['submissions'] = $submissions;
+        $this->load->view('admin/users/submissions', $this->data);
     }
 
     public function transfers()
