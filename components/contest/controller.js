@@ -3,8 +3,6 @@ tappyn.controller('contestController', function($scope, $routeParams, $location,
 		$scope.contest = response.data.contest;
 	});
 
-	fbq('track', 'ViewContent');
-
 	$scope.submit_to = function(id, submission){
 		if($scope.user){
 			contestFactory.submitTo(id, submission).success(function(response){
