@@ -160,6 +160,7 @@ tappyn.controller("ApplicationController", function($scope, $location, $timeout,
 					$scope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$location.path('/dashboard');
+					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
