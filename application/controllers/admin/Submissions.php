@@ -57,7 +57,24 @@ class Submissions extends CI_Controller
 
     public function edit()
     {
+        $this->form_validation->set_rules('submission_id', 'Submission ID', 'required');
+        $this->form_validation->set_rules('headline', 'Headline', 'required');
+        $this->form_validation->set_rules('text', 'Text', 'required');
+        if($this->form_validation->run() == true)
+        {
 
+        }
+        if($this->form_validation->run() === true &&
+            $this->submission->update($this->input->post('submission_id'), array(
+                'headline' => $this->input->post('headline'),
+                'text' => $this->input->post("text")
+            )))
+        {
+            $this->session->set_flashdata('message', "Submission successfully updated");
+        } else {
+            $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->submission->errors() ? $this->submission->errors() : "An unknown error occured")));
+        }
+        redirect("admin/users/submissions/{$this->input->post('user_id')}", 'refresh');
     }
 
     public function delete()
