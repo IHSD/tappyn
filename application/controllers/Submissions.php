@@ -22,16 +22,17 @@ class Submissions extends CI_Controller
     public function index($contest_id)
     {
         $submissions = $this->contest->submissions($contest_id);
+        $contest = $this->contest->get($contest_id);
+        $contest->views = $this->contest->views($contest_id);
         $this->responder->data(array(
             'submissions' => $submissions,
-            'contest' => $this->contest->get($contest_id)
+            'contest' => $contest
         ))->respond();
     }
 
     /**
      * Create a new submission
      *
-     * @todo The long switch statement is butt fugly. Lets go back and reimplement once working
      * @return void
      */
     public function create($contest_id)

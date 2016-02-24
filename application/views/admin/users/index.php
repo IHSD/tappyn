@@ -43,8 +43,7 @@
                                         <span class="caret"></span>
                                       </button>
                                       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                        <li><a href="#">View</a></li>
-                                        <li><a href="#">Edit</a></li>
+                                        <li><a href="<?php echo base_url().'admin/users/show/'.$user->id; ?>">View</a></li>
                                         <li role="separator" class="divider"></li>
                                         <li><a href="#">Deactivate</a></li>
                                       </ul>
