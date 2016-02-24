@@ -33,7 +33,6 @@ class Submissions extends CI_Controller
     /**
      * Create a new submission
      *
-     * @todo The long switch statement is butt fugly. Lets go back and reimplement once working
      * @return void
      */
     public function create($contest_id)
