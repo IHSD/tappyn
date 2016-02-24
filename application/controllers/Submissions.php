@@ -27,6 +27,13 @@ class Submissions extends CI_Controller
         {
             $submission->votes = $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
         }
+        /** Sort oour submissions on upvotes **/
+        usort($submissions, function($a, $b)
+            {
+                return strcmp($b->votes, $a->votes);
+            }
+        );
+
         $contest = $this->contest->get($contest_id);
         $contest->views = $this->contest->views($contest_id);
         $this->responder->data(array(
@@ -63,6 +70,7 @@ class Submissions extends CI_Controller
             $this->responder->message(
                 "You're submission has succesfully been created"
             )->respond();
+            $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
         }
         else {
             $this->responder->fail(

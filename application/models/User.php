@@ -86,6 +86,14 @@ class User extends MY_Model
         return FALSE;
     }
 
+    public function attribute_points($id, $amount)
+    {
+        $points = (int)$amount;
+        return $this->db->where('id', $id)->update($this->table, array(
+            'points' => "points + {$amount}"
+        ));
+    }
+
     /**
      * Get count of users
      * @param array $where

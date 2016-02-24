@@ -189,6 +189,9 @@ class Contests extends CI_Controller
             $this->responder->message(
                 "A winner has been chosen!"
             )->respond();
+            $this->user->attribute_points($submission->owner, $this->config->item('points_per_winning_submission'));
+            $this->load->library('vote');
+            $this->vote->dole_out_points($submission->id);
             return;
         }
         else

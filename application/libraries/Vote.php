@@ -81,6 +81,21 @@ class Vote {
         return 10000;
     }
 
+    public function dole_out_points($sid)
+    {
+        $users = $this->db->select('*')->from('votes')->where('submission_id', $sid)->get();
+        if(!$users)
+        {
+            error_log("Exception at ".__FILE__."::"__LINE__."");
+            return;
+        }
+        foreach($users->result() as $user)
+        {
+            $this->user->attribute_points($user->id, $this->config->item('points_per_upvote_winning'));
+        }
+        return;
+    }
+
     public function errors()
     {
         return $this->errors;
