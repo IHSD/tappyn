@@ -8,9 +8,9 @@
                         <ul class="nav nav-tabs">
                           <li role="presentation"><a href="<?php echo base_url().'admin/users/show/'.$user->id; ?>">Profile</a></li>
                           <?php if($this->ion_auth->in_group(2, $user->id)): ?>
-                              <li role="presentation" class="active"><a href="<?php echo base_url().'admin/submissions?user='.$user->id; ?>">Submissions</a></li>
+                              <li role="presentation" class="active"><a href="<?php echo base_url().'admin/users/submissions/'.$user->id; ?>">Submissions</a></li>
                               <li role="presentation"><a href="<?php echo base_url().'admin/users/payouts/'.$user->id; ?>">Payouts</a></li>
-                              <li role="presentation"><a href="<?php echo base_url().'admin/users/payouts/'.$user->id; ?>">Account Details</a></li>
+                              <li role="presentation"><a href="<?php echo base_url().'admin/users/account/'.$user->id; ?>">Account Details</a></li>
                           <?php else: ?>
                               <li role="presentation"><a href="<?php echo base_url().'admin/companies/contests/'.$user->id; ?>">Contests</a></li>
                               <li role="presentation"><a href="<?php echo base_url().'admin/companies/payment_methods/'.$user->id; ?>">Payment Methods</a></li>

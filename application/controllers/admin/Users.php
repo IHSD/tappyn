@@ -130,5 +130,19 @@ class Users extends CI_Controller
     public function account($uid)
     {
         $this->load->library('stripe/stripe_account_library');
+        $user = $this->ion_auth->user($uid)->row();
+        $user->profile = $this->user->profile($uid);
+        $this->data['user'] = $user;
+        $stripe_account_id = $this->user->account($uid);
+        if($stripe_account_id)
+        {
+            $account = $this->stripe_account_library->get($stripe_account_id);
+            $this->data['account'] = $account;
+        } else {
+            $this->data['account'] = FALSE;
+            $this->session->set_flashdata('error', "This user has not started setting up their account yet");
+        }
+
+        $this->load->view('admin/users/account', $this->data);
     }
 }
