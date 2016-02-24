@@ -1,6 +1,44 @@
-<h4>Profile</h4>
-
-
+<div class='row content-padding'>
+	<div class='col-xs-12 col-sm-6 col-sm-offset-3'>
+		<form class='form' ng-show='user.type == "company"' ng-submit=''>
+			<div class='form-group'>
+				<label>Your company's name</label>
+				<input class='form-control' ng-model='name' placeholder='Company Name' type='text'>
+			</div>
+			<div class='form-group'>
+				<label>Your company's email so we can get ahold of you</label>
+				<input class='form-control' ng-model='company_email' placeholder='Company Email' type='text'>
+			</div>
+			<div class='form-group'>
+				<label>Tell us a bit about your company</label>
+				<textarea ng-model='mission' placeholder='Company info' type='text'></textarea>
+			</div>
+			<div class='form-group'>
+				<label>How is your company different from the rest?</label>
+				<textarea ng-model='extra_info' placeholder='Additional Info' type='text'></textarea>
+			</div>
+			<div class='form-group'>
+				<label>Your company's logo</label>
+				<?php echo form_upload(array('name' => 'logo_url', 'type' => 'file', 'id' => 'image_upload'));?>
+					<img height='auto' <?php echo is_null($profile->logo_url) ? 'style="display:none"' : '' ?> width='300' id="blah" src="<?php echo is_null($profile->logo_url) ? '#' : base_url().'uploads/'.$profile->logo_url ?>" alt="Company Logo" />
+			</div>
+			<div class='form-group'>
+				<label>Your company's website</label>
+				<input class='form-control' ng-model='company_url' placeholder='Company Website' type='text'>
+			</div>
+			<div class='form-group'>
+				<label>Your company's Facebook page</label>
+				<input class='form-control' ng-model='facebook_url' placeholder='Facebook Page' type='text'>
+			</div>
+			<div class='text-center'><button class='btn btn-oj btn-lg' type='submit'>Update Your Info</button></div>
+		</form>
+		<form class='form' ng-show='user.type == "member"' ng-submit=''>
+			<input type='file' ng-file-select='select_file($files)'> 
+			<img ng-if='test_file' src='{{test_file'}}>
+			<div class='text-center'><button class='btn btn-oj btn-lg' type='submit'>Update Your Info</button></div>	
+		</form>
+	</div>
+</div>
 
 <script>
 fbq('track', 'PageView');

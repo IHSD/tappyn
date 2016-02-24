@@ -1,7 +1,8 @@
 var tappyn = angular.module('tappyn', [
 	'ngRoute',
 	'ui.bootstrap',
-	'ngAnimate'
+	'ngAnimate',
+	'angularFileUpload'
 ]);
 
 tappyn.config(function($routeProvider) {
@@ -95,6 +96,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 			}
 		}
 	})
+
+	$scope.amazon_connect = function(bucket){
+		AppFact.aws_key(bucket).success(function(response){
+			if(response.success) $rootScope.key = response.data.access_token;
+		});
+	}
 
 	$scope.check_code = function(code){
 		if(code == 401){
@@ -225,6 +232,15 @@ tappyn.factory("AppFact", function($http){
 			url : 'index.php/auth/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
+	}
+
+	fact.aws_key = function(bucket){
+        return $http({
+            method:'POST',
+            url:'index.php/amazon/connect',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
+            data : $.param({bucket : bucket})
+        })
 	}
 	return fact;
 })
