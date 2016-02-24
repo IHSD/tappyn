@@ -33,6 +33,7 @@
                             <th>Groups</th>
                             <th class='sort_header' id='age'>Age<?php echo is_sorted('age'); ?></th>
                             <th class='sort_header' id='gender'>Gender<?php echo is_sorted('gender'); ?></th>
+                            <th class='sort_header' id='submissions'>Submissions</th>
                         </tr>
                         <?php foreach($users as $user): ?>
                             <tr>
@@ -61,6 +62,7 @@
                                 </td>
                                 <td><?php echo $user->profile->age; ?></td>
                                 <td><?php echo $user->profile->gender; ?></td>
+                                <td><?php echo $user->submission_count; ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </table>

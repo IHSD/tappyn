@@ -1,58 +1,73 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
+        <div class='row'>
+            <div class='col-sm-10 col-sm-offset-1 content'>
+                <h2>Contests</h2>
+                <span style='float:right'>
 
-<section class='innerpage'>
-    <div class='row'>
-        <div class='large-12 columns'>
-            <h2>Users</h2>
-            <div class='medium-6 medium-offset-3 small-12'>
-                <?php $this->load->view('templates/notification', array(
-            'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
-            'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
-            )); ?>
-            </div>
-
-            <table class='large-12 columns'>
-                <tr>
-                    <th>Actions</th>
-                    <th id='company'>Company</th>
-                    <th class='sort_header' id='title'>Title<?php echo is_sorted('title'); ?></th>
-                    <th class='sort_header' id='created_at'>Created At<?php echo is_sorted('created_at'); ?></th>
-                    <th class='sort_header' id='start_time'>Start Time<?php echo is_sorted('start_time'); ?></th>
-                    <th class='sort_header' id='stop_time'>Stop Time<?php echo is_sorted('stop_time'); ?></th>
-                    <th class='sort_header' id='prize'>Prize<?php echo is_sorted('prize'); ?></th>
-                    <th>Submissions</th>
-                </tr>
-                <?php foreach($contests as $contest): ?>
-                    <tr>
-                        <td>
-                            <ul class="dropdown menu" data-dropdown-menu>
-                            <li>
-                              <a href="#">Actions</a>
-                              <ul class="menu">
-                                  <li><a href="<?php echo base_url().'#/contest/'.$contest->id; ?>" target="_blank">View</a></li>
-                                  <li><a href="<?php echo base_url().'admin/contests/edit/'.$contest->id; ?>">Edit</a></li>
-                                  <li><a href="<?php echo base_url().'admin/users/show/'.$contest->owner; ?>">View Owner</a></li>
-                                <!-- ... -->
-                              </ul>
-                            </li>
-                          </ul>
-                        </td>
-                        <td><?php echo $contest->company->name; ?></td>
-                        <td><?php echo $contest->title; ?></td>
-                        <td><?php echo date('D M d', strtotime($contest->created_at)); ?></td>
-                        <td><?php echo date('D M d', strtotime($contest->start_time)); ?></td>
-                        <td><?php echo date('D M d', strtotime($contest->stop_time)); ?></td>
-                        <td><?php echo $contest->prize; ?></td>
-                        <td><?php echo $contest->submission_count; ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-            <div class='pagination-container'>
-                <?php echo $pagination_links; ?>
+                </span>
+                <hr>
+                <div class='col-sm-6 col-sm-offset-3'>
+                    <?php $this->load->view('templates/notification', array(
+                'error' => ($this->session->flashdata('error') ? $this->session->flashdata('error') : (isset($error) ? $error : false )),
+                'message' => ($this->session->flashdata('message') ? $this->session->flashdata('message') : (isset($message) ? $message : false ))
+                )); ?>
+                </div>
+                <div class='col-sm-12'>
+                    <!-- <div class='col-sm-3'>
+                        <form class='form-horizontal' action="<?php echo base_url().'admin/contests/search'; ?>" method="POST">
+                            <label>Search by Email or UID</label>
+                            <input type='text' name='user' class='form-control'>
+                        </form>
+                    </div> -->
+                    <div class='paging-container' style='float:right'>
+                        <?php echo $pagination_links; ?>
+                    </div>
+                    <!-- <?php echo json_encode($contests); ?> -->
+                    <table class='table table-condensed table-bordered table-hover table-striped'>
+                        <tr>
+                            <th></th>
+                            <th>ID</th>
+                            <th>Owner</th>
+                            <th>Title</th>
+                            <th>Start Time</th>
+                            <th>Stop Time</th>
+                            <th>Objective</th>
+                            <th>Platform</th>
+                        </tr>
+                        <?php if(!empty($contests)): ?>
+                            <?php foreach($contests as $contest): ?>
+                                <tr>
+                                    <td>
+                                        <div class="dropdown">
+                                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                            Actions
+                                            <span class="caret"></span>
+                                          </button>
+                                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                            <li><a href="<?php echo base_url().'admin/contests/show/'.$contest->id; ?>">View</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Deactivate</a></li>
+                                          </ul>
+                                        </div>
+                                    </td>
+                                    <td><?php echo $contest->id; ?></td>
+                                    <td><?php echo $contest->company->name; ?></td>
+                                    <td><?php echo $contest->title; ?></td>
+                                    <td><?php echo date('D M d', strtotime($contest->start_time)); ?></td>
+                                    <td><?php echo date('D M d', strtotime($contest->stop_time)); ?></td>
+                                    <td><?php echo ucfirst($contest->objective); ?></td>
+                                    <td><?php echo ucfirst($contest->platform); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <div class='alert alert-warning col-sm-6 col-sm-offset-3'>
+                                There are no contests to show
+                            </div>
+                        <?php endif; ?>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-</section>
 <script>
 $(document).ready(function(e) {
     var getVars = getUrlVars();

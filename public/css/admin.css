@@ -12,5 +12,9 @@ body {
     padding-bottom: 15px;
 }
 .inner-content {
-    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.a-label {
+    font-size: 0.7em;
 }

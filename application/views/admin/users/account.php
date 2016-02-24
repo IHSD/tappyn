@@ -31,18 +31,45 @@
                     )); ?>
                     </div>
                     <div class='col-sm-12'>
-                        <table class='table table-condensed table-bordered table-hover table-striped'>
-                            <tr>
-                                <th>Actions</th>
-                                <th>Created At</th>
-                                <th>Headline</th>
-                                <th style='max-width:300px;word-wrap:break-word;text-overflow:ellipsis;'>Text</th>
-                                <th>Contest Onwer</th>
-                                <th>Contest Title</th>
-                                <th>Contest Ends</th>
-                                <th>Payout</th>
-                            </tr>
-                        </table>
+                        <?php if($account): ?>
+                            <?php if($account->transfers_enabled == FALSE): ?>
+                            <div class='row'>
+                                <div class='alert alert-warning text-center col-sm-8 col-sm-offset-2'>
+                                    Account setup started, but transfers not enabled yet :: <?php echo json_encode($account->verification->fields_needed); ?>
+                                </div>
+                            </div>
+                            <?php endif; ?>
+                            <h4>Account <?php echo $account->id; ?></h4>
+                            <?php echo json_encode($account); ?>
+                            <div class='col-sm-4'>
+                                <table class='table table-bordered table-condensed'>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td><?php echo $account->country; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Default Currency</td>
+                                        <td><?php echo $account->default_currency; ?></td>
+                                    </tr>
+                                    <?php foreach($account->legal_entity as $key => $value): ?>
+                                        <?php var_dump($key); ?>
+                                        <?php if(is_array($value) || is_object($value)): ?>
+                                            <?php foreach($value as $k => $v): ?>
+                                                <tr>
+                                                    <td><?php echo $key.$k ?></td>
+                                                    <td><?php echo $v ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td><?php echo $key; ?></td>
+                                                <td><?php echo $value; ?></td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </table>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>

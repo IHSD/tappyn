@@ -63,7 +63,17 @@ class Contests extends CI_Controller
 
     public function show($cid)
     {
+        $contest = $this->contest->get($cid);
+        $contest->submissions = $this->contest->submissions($cid);
+        $this->data['contest'] = $contest;
+        $this->load->view('admin/contests/show', $this->data);
+    }
 
+    public function submissons($cid)
+    {
+        $contest = $this->contest->get($cid);
+        $contest->submissions = $this->contest->submissions($cid);
+        $this->data['contest'] = $contest;
     }
 
     public function edit()
