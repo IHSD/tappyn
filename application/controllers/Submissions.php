@@ -22,9 +22,11 @@ class Submissions extends CI_Controller
     public function index($contest_id)
     {
         $submissions = $this->contest->submissions($contest_id);
+        $contest = $this->contest->get($contest_id);
+        $contest->views = $this->contest->views($contest_id);
         $this->responder->data(array(
             'submissions' => $submissions,
-            'contest' => $this->contest->get($contest_id)
+            'contest' => $contest
         ))->respond();
     }
 
