@@ -96,6 +96,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		}
 	})
 
+	$scope.amazon_connect = function(bucket){
+		AppFact.aws_key(bucket).success(function(response){
+			if(response.success) return response.data.access_token;
+		});
+	}
+
 	$scope.check_code = function(code){
 		if(code == 401){
 			$scope.set_alert("You must be logged in", "default");
@@ -225,6 +231,15 @@ tappyn.factory("AppFact", function($http){
 			url : 'index.php/auth/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
+	}
+
+	fact.aws_key = function(bucket){
+        return $http({
+            method:'POST',
+            url:'index.php/amazon/connect',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
+            data : $.param({bucket : bucket})
+        })
 	}
 	return fact;
 })
