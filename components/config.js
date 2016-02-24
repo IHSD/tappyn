@@ -1,7 +1,8 @@
 var tappyn = angular.module('tappyn', [
 	'ngRoute',
 	'ui.bootstrap',
-	'ngAnimate'
+	'ngAnimate',
+	'angularFileUpload'
 ]);
 
 tappyn.config(function($routeProvider) {
@@ -98,7 +99,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
-			if(response.success) return response.data.access_token;
+			if(response.success) $rootScope.key = response.data.access_token;
 		});
 	}
 

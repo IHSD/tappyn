@@ -1,7 +1,8 @@
 var tappyn = angular.module('tappyn', [
 	'ngRoute',
 	'ui.bootstrap',
-	'ngAnimate'
+	'ngAnimate',
+	'angularFileUpload'
 ]);
 
 tappyn.config(function($routeProvider) {
@@ -98,7 +99,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
-			if(response.success) return response.data.access_token;
+			if(response.success) $rootScope.key = response.data.access_token;
 		});
 	}
 
@@ -897,8 +898,29 @@ tappyn.service('paymentModel', function(){
     'ZW' : 'Zimbabwe'
 	};
 })
-tappyn.controller('profileController', function($scope){
-	
+tappyn.controller('profileController', function($scope, $rootScope, $upload){
+	$scope.amazon_connect('tappyn');
+	 $scope.select_file = function($files){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var new_name = Date.now();
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	$scope.test_file = url+new_name;
+	    });
+	}	
 });
 tappyn.factory('profileFactory', function($http){
 	var fact = {};
