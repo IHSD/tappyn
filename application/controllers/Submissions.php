@@ -12,6 +12,7 @@ class Submissions extends CI_Controller
         $this->load->model('ion_auth_model');
         $this->load->model('user');
         $this->load->library('mailer');
+        $this->load->library('vote');
     }
 
     /**
@@ -22,6 +23,10 @@ class Submissions extends CI_Controller
     public function index($contest_id)
     {
         $submissions = $this->contest->submissions($contest_id);
+        foreach($submissions as $submission)
+        {
+            $submission->votes = $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+        }
         $contest = $this->contest->get($contest_id);
         $contest->views = $this->contest->views($contest_id);
         $this->responder->data(array(

@@ -99,6 +99,11 @@ class Contests extends CI_Controller
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days'))
             );
+            $images = array();
+            if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
+            if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
+            if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
+            if(!empty($images)) $data['additional_images'] = json_encode($images);
         }
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
