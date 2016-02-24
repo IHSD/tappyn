@@ -24,10 +24,8 @@
                 <h5 ng-if="contest.platform == 'general'">General</h5>
                 <h5 ng-if="contest.platform == 'twitter'"><img src='public/img/OrangeTwitterIcon.png' width='20px' height='20px'>Twitter</h5>
 	            <h5 class='text-center'><img src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
-	            <div style='width:100%'>
-	                <uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
-	                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
-	            </div>
+                <uib-progressbar value='contest.submission_count' max='50' type="warning" style='margin-bottom:0;'></uib-progressbar>                
+                <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
 	        </div>
 	    </div>
 	    </a>

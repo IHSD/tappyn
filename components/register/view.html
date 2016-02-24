@@ -2,7 +2,7 @@
 	<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
 		<h3 class='text-center'>Sign Up</h3>
 		<div>
-	        <a href="index.php/auth/facebook">
+	        <a id='fb-login' href="index.php/auth/facebook">
 	            <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
 	        </a>
     	</div>
@@ -53,12 +53,19 @@
 	            </div>
 	        </div>            
             
-			<button type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+			<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
 		</form>
 	</div>
 </div>
 
 
 <script>
-fbq('track', 'PageView');
+    fbq('track', 'PageView');
+
+	$("#sign-up").click(function(){
+		fbq('track', 'Lead');
+	});
+	$("#fb-login").click(function(){
+		fbq('track', 'Lead');
+	});
 </script>
