@@ -75,11 +75,10 @@ class Contests extends CI_Controller
             return;
         }
 
-        $this->form_validation->set_rules('audience_description', 'Audience Description', 'required');
-        $this->form_validation->set_rules('how_your_different', 'How Your Different', 'required');
+        $this->form_validation->set_rules('audience', 'Audience Description', 'required');
+        $this->form_validation->set_rules('different', 'How Your Different', 'required');
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
-        $this->form_validation->set_rules('location', 'Location', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
 
         if($this->form_validation->run() == true)

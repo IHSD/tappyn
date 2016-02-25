@@ -6,13 +6,12 @@
                 <div class='col-sm-12'>
                     <div class='col-sm-10'>
                        <ul class="nav nav-tabs">
-                          <li role="presentation" class="nav-tab active"><a href="#">Contest</a></li>
-                          <li role="presentation" class="nav-tab" id='submission-nav-tab'><a href="#">Submissions</a></li>
-                          <li role="presentation" class="nav-tab"><a href="#">Winner</a></li>
+                          <li role="presentation" class="nav-tab active" id='contest'><a href="#">Contest</a></li>
+                          <li role="presentation" class="nav-tab" id='submission'><a href="#">Submissions</a></li>
+                          <li role="presentation" class="nav-tab" id='winner'><a href="#">Winner</a></li>
                     </div>
                 </div>
                 <div class='inner-content'>
-                    <?php echo json_encode($contest); ?>
                     <div id='contest_container'>
                         <div class='row'>
                             <div class='col-sm-8 text-center'>
@@ -144,8 +143,17 @@
         </div>
 <script>
 $(document).ready(function(){
-    $('.nav-tab a').click(function(){
-
+    $('.nav-tab').click(function()
+    {
+        var id = $(this).attr('id');
+        if(id == 'submission')
+        {
+            $('#submissions_container').show();
+            $('#contest_container').hide();
+        } else {
+            $('#contest_container').show();
+            $('#submissions_container').hide();
+        }
     })
 })
 </script>
