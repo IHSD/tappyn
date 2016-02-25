@@ -321,6 +321,26 @@ tappyn.factory('contestFactory', function($http){
 
 	return fact;
 })
+tappyn.controller('contestsController', function($scope, contestsFactory){
+	contestsFactory.grabContests().success(function(response){
+		$scope.contests = response.data;
+	});
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('dashController', function($scope, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
@@ -376,26 +396,6 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('contestsController', function($scope, contestsFactory){
-	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data;
-	});
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
 tappyn.controller('homeController', function($scope, $location, homeFactory){
 	
 	$scope.mailing_list = function(email){
@@ -438,8 +438,12 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 
 	$scope.set_step = function(step){
 		$scope.current = $scope.steps[step];
-		if(step == "payment") if(!$scope.payments) $scope.grab_payments();
-		else if(step == 'detail') if(!$scope.profile) $scope.grab_profile();
+		if(step == "payment"){
+			if(!$scope.payments) $scope.grab_payments();
+		}
+		else if(step == 'detail'){
+			if(!$scope.profile) $scope.grab_profile();
+		}
 	}
 
 	$scope.select_objective = function(objective){
@@ -455,7 +459,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	}
 
 	$scope.grab_profile = function(){
-		launchFactory.grabDetails.success(function(response){
+		launchFactory.grabProfile().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.profile = response.data;
 				else $scope.set_alert(response.message, "default");	 
@@ -466,7 +470,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	}
 
 	$scope.grab_payments = function(){
-		launchFactory.grabDetails.success(function(response){
+		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data;
 				else $scope.set_alert(response.message, "default");	 
@@ -542,14 +546,14 @@ tappyn.factory('launchFactory', function($http){
 	fact.submission = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contest/create',
+			url : 'index.php/contests/create',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param(contest)
 		});	
 	}
-	
+
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',

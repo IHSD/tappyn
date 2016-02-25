@@ -4,14 +4,14 @@ tappyn.factory('launchFactory', function($http){
 	fact.submission = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contest/create',
+			url : 'index.php/contests/create',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param(contest)
 		});	
 	}
-	
+
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',

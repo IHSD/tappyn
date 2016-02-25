@@ -11,8 +11,12 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 
 	$scope.set_step = function(step){
 		$scope.current = $scope.steps[step];
-		if(step == "payment") if(!$scope.payments) $scope.grab_payments();
-		else if(step == 'detail') if(!$scope.profile) $scope.grab_profile();
+		if(step == "payment"){
+			if(!$scope.payments) $scope.grab_payments();
+		}
+		else if(step == 'detail'){
+			if(!$scope.profile) $scope.grab_profile();
+		}
 	}
 
 	$scope.select_objective = function(objective){
@@ -28,7 +32,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	}
 
 	$scope.grab_profile = function(){
-		launchFactory.grabDetails.success(function(response){
+		launchFactory.grabProfile().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.profile = response.data;
 				else $scope.set_alert(response.message, "default");	 
@@ -39,7 +43,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	}
 
 	$scope.grab_payments = function(){
-		launchFactory.grabDetails.success(function(response){
+		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data;
 				else $scope.set_alert(response.message, "default");	 
