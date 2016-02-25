@@ -445,13 +445,21 @@ class Auth extends CI_Controller {
             $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
-			$name_chunks = explode(' ', $this->input->post('name'));
-            $additional_data = array(
-                'first_name' => $name_chunks[0],
-                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
-				'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
-				'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL),
-            );
+			if($this->input->post('group_id') !== 2)
+			{
+				$name_chunks = explode(' ', $this->input->post('name'));
+	            $additional_data = array(
+	                'first_name' => $name_chunks[0],
+	                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
+					'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
+					'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL),
+	            );
+			} else {
+				$additional_data = array(
+					'first_name' => $this->input->post('name'),
+					'last_name' => ''
+				);
+			}
         }
 
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
@@ -462,9 +470,12 @@ class Auth extends CI_Controller {
 				->subject('Account Successfully Created')
 				->html($this->load->view('auth/email/registration', array(), true))
 				->send();
+			$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url')), 'company_url' => $this->input->post('company_url'));
             if($this->ion_auth->login($identity, $password))
 			{
 				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+			} else {
+				$this->responder->fail("An unknown error occured")->code(500)->respond();
 			}
         }
         else
