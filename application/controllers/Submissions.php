@@ -78,4 +78,25 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
         }
     }
+
+    public function leaderboard()
+    {
+        $leaderboard_size = $this->config->item('leaderboard_limit');
+        // Get the top 5 submissions
+        $check = $this->vote->select('COUNT(*) as count, submission_id')->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+        if(!$check)
+        {
+            $this->responder->fail("An unexpected error occured")->code(500)->respond();
+            return;
+        }
+        $submissions = array();
+        foreach($check->result() as $sub)
+        {
+            $submission = $this->submission->get($sub->submission_id);
+            $submissions[] = $submission;
+        }
+        $this->responder->data(array(
+            'submissions' => $submissions
+        ))->respond();
+    }
 }

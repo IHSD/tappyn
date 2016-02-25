@@ -4,8 +4,8 @@
  * Number of times a user can submit to a contest
  * Set to FALSE to disable
  */
-$config['upvotes_per_contest'] = '3';
-
+$config['upvotes_per_contest'] = 3;
+$config['leaderboard_limit'] = 5;
 /*====================================
   Configuration for Points system
 ====================================*/

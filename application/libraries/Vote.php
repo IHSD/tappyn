@@ -86,7 +86,7 @@ class Vote {
         $users = $this->db->select('*')->from('votes')->where('submission_id', $sid)->get();
         if(!$users)
         {
-            error_log("Exception at ".__FILE__."::"__LINE__."");
+            error_log("Exception at ".__FILE__."::".__LINE__."");
             return;
         }
         foreach($users->result() as $user)
