@@ -1,18 +1,111 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
         <div class='row'>
             <div class='col-sm-10 col-sm-offset-1 content'>
-                <h2><?php echo $contest->title; ?></h2>
+                <h2><?php echo $contest->title; ?> <span class='a-label'>(<?php echo date('D M d', strtotime($contest->start_time)). ' -> ' .date('D M d', strtotime($contest->stop_time)); ?>)</span></h2>
                 <hr>
                 <div class='col-sm-12'>
                     <div class='col-sm-10'>
                        <ul class="nav nav-tabs">
-                          <li role="presentation" class="nav-tab active"><a href="<?php echo base_url().'admin/contests/show/'.$contest->id; ?>">Contest</a></li>
+                          <li role="presentation" class="nav-tab active"><a href="#">Contest</a></li>
                           <li role="presentation" class="nav-tab" id='submission-nav-tab'><a href="#">Submissions</a></li>
                           <li role="presentation" class="nav-tab"><a href="#">Winner</a></li>
                     </div>
                 </div>
                 <div class='inner-content'>
-                    <div id='submissions_container'>
+                    <?php echo json_encode($contest); ?>
+                    <div id='contest_container'>
+                        <div class='row'>
+                            <div class='col-sm-8 text-center'>
+                                <h4>Brief</h4>
+                                <hr>
+                                <div class='row'>
+                                    <div class='col-sm-4'>
+                                        Platform
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <?php echo $contest->platform; ?>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-sm-4'>
+                                        Objective
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <?php echo $contest->objective; ?>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-sm-4'>
+                                        Summary
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <?php echo $contest->summary; ?>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-sm-4'>
+                                        Different
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <?php echo $contest->different; ?>
+                                    </div>
+                                </div>
+                                <div class='row'>
+                                    <div class='col-sm-4'>
+                                        Audience
+                                    </div>
+                                    <div class='col-sm-8'>
+                                        <?php echo $contest->audience; ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='col-sm-4'>
+                                <h4>Details</h4>
+                                <hr>
+                                <table class='table table-condensed table-bordered'>
+                                    <tr>
+                                        <td>Owner</td>
+                                        <td><?php echo $contest->company->name; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Created At</td>
+                                        <td><?php echo date('D M d, H:i', strtotime($contest->created_at)); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Paid</td>
+                                        <td>
+                                            <?php if($contest->paid == 0): ?>
+                                                <span style='color:red'><strong>Payment Due</strong></span>
+                                            <?php else: ?>
+                                                paid
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Submissions</td>
+                                        <td><?php echo count($contest->submissions); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id='submissions_container' style='display:none'>
                         <table class='table table-condensed table-bordered table-hover table-striped'>
                             <tr>
                                 <th>Actions</th>
@@ -46,16 +139,13 @@
                             <?php endif; ?>
                         </table>
                     </div>
-                    <div id='contest-container'>
-
-                    </div>
                 </div>
             </div>
         </div>
 <script>
 $(document).ready(function(){
     $('.nav-tab a').click(function(){
-        alert('nav clicked');
+
     })
 })
 </script>

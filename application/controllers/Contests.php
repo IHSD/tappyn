@@ -87,13 +87,12 @@ class Contests extends CI_Controller
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
             // Do some preliminary formatting
             $data = array(
-                'audience'          => $this->input->post('audience_description'),
-                'short_description' => $this->input->post('short_description'),
-                'different'         => $this->input->post('how_your_different'),
+                'audience'          => $this->input->post('audience'),
+                'summary'           => $this->input->post('summary'),
+                'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),
                 'platform'          => $this->input->post('platform'),
-                'location'          => $this->input->post('location'),
-                'age'               => $this->input->post('age_range'),
+                'age'               => $this->input->post('age'),
                 'gender'            => $this->input->post('gender'),
                 'owner'             => $this->ion_auth->user()->row()->id,
                 'start_time'        => $start_time,

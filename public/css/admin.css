@@ -18,3 +18,9 @@ body {
 .a-label {
     font-size: 0.7em;
 }
+.sort_header {
+    cursor:pointer;
+}
+.payout-table-row {
+    border-bottom: 1px solid #ebeef0;
+}

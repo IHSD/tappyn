@@ -24,4 +24,9 @@ class Payout_model extends MY_Model
         }
         return FALSE;
     }
+
+    public function update($pid, $data)
+    {
+        return $this->db->where('id', $pid)->update('payouts', $data);
+    }
 }

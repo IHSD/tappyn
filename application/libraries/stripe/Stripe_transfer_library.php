@@ -25,6 +25,11 @@ class Stripe_transfer_library
         return call_user_func_array( array($this->stripe_account, $method), $arguments);
     }
 
+    public function setApiKey($api_key)
+    {
+        \Stripe\Stripe::setApiKey($api_key);
+    }
+
     public function create($account_id, $contest_id, $amount, $payout_id)
     {
         try {
