@@ -2188,6 +2188,9 @@ nav .dropdown-menu{
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
+.package-highlight{
+	border:1px solid #ff6c00;
+}
  .wrapper{
         position:absolute;
         top:0;
@@ -2197,4 +2200,29 @@ nav .dropdown-menu{
 	background-color: #fff;
 	border-radius:3px;
 	padding:10px 5px 10px 5px;
+}
+
+.package-selection{
+	opacity: 1;
+}
+.package-selection.ng-hide{
+	opacity: 0;
+}
+.package-selection.ng-hide-add.ng-hide-add-active,
+.package-selection.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition:all linear 0.5;
+       transition:all linear 0.5s;
+}
+
+
+.ad-location{
+	opacity:1;
+}
+.ad-location.ng-hide{
+	opacity: 0;
+}
+.ad-location.ng-hide-add.ng-hide-add-active,
+.ad-location.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition:all linear 0.5;
+       transition:all linear 0.5s;
 }

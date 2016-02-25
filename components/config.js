@@ -128,9 +128,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	/** example response
 			if(response.http_status_code == 200){
-				if(response.success){
-					
-				}
+				if(response.success) $scope.set_alert(response.message, "default");	
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");

@@ -1,40 +1,55 @@
 <div class='row content-padding'>
 	<div class='col-xs-12 col-sm-6 col-sm-offset-3'>
-		<form class='form' ng-show='user.type == "company"' ng-submit=''>
+		<form class='form' ng-show='user.type == "company"' ng-submit='update_profile(profile)'>
 			<div class='form-group'>
 				<label>Your company's name</label>
-				<input class='form-control' ng-model='name' placeholder='Company Name' type='text'>
+				<input class='form-control' ng-model='profile.company_name' placeholder='Company Name' type='text'>
 			</div>
 			<div class='form-group'>
 				<label>Your company's email so we can get ahold of you</label>
-				<input class='form-control' ng-model='company_email' placeholder='Company Email' type='text'>
+				<input class='form-control' ng-model='profile.company_email' placeholder='Company Email' type='text'>
 			</div>
 			<div class='form-group'>
-				<label>Tell us a bit about your company</label>
-				<textarea ng-model='mission' placeholder='Company info' type='text'></textarea>
+				<label>Explain your company / product in 180 characters or less</label>
+				<textarea class='form-control' ng-model='profile.summary' placeholder='Company summary' type='text'></textarea>
+				<p>{{profile.summary.length}} of 180 characters</p>
+			</div>
+			<div class='form-group'>
+				<label>Tell us a more about your company</label>
+				<textarea class='form-control' ng-model='profile.mission' placeholder='Company description' type='text'></textarea>
 			</div>
 			<div class='form-group'>
 				<label>How is your company different from the rest?</label>
-				<textarea ng-model='extra_info' placeholder='Additional Info' type='text'></textarea>
+				<textarea class='form-control' ng-model='profile.different' placeholder='Additional Info' type='text'></textarea>
 			</div>
 			<div class='form-group'>
 				<label>Your company's logo</label>
-				<?php echo form_upload(array('name' => 'logo_url', 'type' => 'file', 'id' => 'image_upload'));?>
-					<img height='auto' <?php echo is_null($profile->logo_url) ? 'style="display:none"' : '' ?> width='300' id="blah" src="<?php echo is_null($profile->logo_url) ? '#' : base_url().'uploads/'.$profile->logo_url ?>" alt="Company Logo" />
+				<input type='file' ng-file-select='select_file($files)'> 
+				<img class='img-responsive' ng-if='profile.logo_url' src='{{profile.logo_url}}'>
 			</div>
 			<div class='form-group'>
 				<label>Your company's website</label>
-				<input class='form-control' ng-model='company_url' placeholder='Company Website' type='text'>
+				<input class='form-control' ng-model='profile.company_url' placeholder='Company Website' type='text'>
 			</div>
 			<div class='form-group'>
 				<label>Your company's Facebook page</label>
-				<input class='form-control' ng-model='facebook_url' placeholder='Facebook Page' type='text'>
+				<input class='form-control' ng-model='profile.facebook_url' placeholder='Facebook Page' type='text'>
+			</div>
+			<div class='form-group'>
+				<label>Your company's Facebook page</label>
+				<input class='form-control' ng-model='profile.twitter_handle' placeholder='Your Twitter Handle' type='text'>
 			</div>
 			<div class='text-center'><button class='btn btn-oj btn-lg' type='submit'>Update Your Info</button></div>
 		</form>
-		<form class='form' ng-show='user.type == "member"' ng-submit=''>
-			<input type='file' ng-file-select='select_file($files)'> 
-			<img ng-if='test_file' src='{{test_file'}}>
+		<form class='form' ng-show='user.type == "member"' ng-submit='update_profile(profile)'>
+			<div class='form-group'>
+				<label>First Name</label>
+				<input class='form-control' ng-model='profile.first_name' placeholder='First Name' type='text'>
+			</div>
+			<div class='form-group'>
+				<label>Last Name</label>
+				<input class='form-control' ng-model='profile.last_name' placeholder='Last Name' type='text'>
+			</div>
 			<div class='text-center'><button class='btn btn-oj btn-lg' type='submit'>Update Your Info</button></div>	
 		</form>
 	</div>

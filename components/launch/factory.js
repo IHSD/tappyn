@@ -11,5 +11,25 @@ tappyn.factory('launchFactory', function($http){
 			data : $.param(contest)
 		});	
 	}
+	
+	fact.grabProfile = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabDetails = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/accounts/details',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
+	}
 	return fact;
 })

@@ -1,12 +1,8 @@
 <div class='row content-padding' style='background-color:#fff'>
 	<div class='col-sm-10 col-sm-offset-1 col-xs-12 text-center'>	
-		<div ng-show='current.step == "platform"'>
-			<h2>Select a package.</h2>
+		<div ng-show='current.step == "package"'>
+			<h2>Assemble your package</h2>
 			<h4>Different packages lead to different kinds of submissions.</h4>
-		</div>
-		<div ng-show='current.step == "objective"'>
-			<h2>What's your objective?</h2>
-			<h4>Objectives correspond to different kinds of submissions</h4>
 		</div>
 		<div ng-show='current.step == "detail"'>
 			<h2>Tell us about your business & audience</h2>	
@@ -15,6 +11,10 @@
 		<div ng-show='current.step == "payment"'>
 			<h2>Almost there</h2>
 			<h4>Fill in your details, pay, and we'll launch your contest in our marketplace.</h4>
+		</div>
+		<div ng-show='current.step == "done"'>
+			<h2>All Finished</h2>
+			<h4>Fill in your details, pay, and we'll launch your contest in our marketplace.</h4>
 		</div>	
 		<uib-progressbar value='current.fill' max='100' type="warning"></uib-progressbar> 
 	</div>
@@ -22,330 +22,297 @@
 
 <div class='row content-padding'>
 	<div class='col-sm-10 col-sm-offset-1 col-xs-12'>	
-		<div ng-show='current.step == "platform"' style='color:#ff6c00'>
+		<div ng-show='current.step == "package"' style='color:#ff6c00'>
 			<div class='col-xs-12'>	
 				<div class='col-xs-12 col-sm-3'>
-					<div class='contest-box launch-page-hover' ng-click='select_platform("facebook")'>
-						<h4 class='text-left'>Facebook
-							<span class='contest-price'>
-			                    $99
-			                </span>
-						</h4>
+					<div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='contest-box launch-page-hover' ng-click='select_platform("facebook")'>
+						<h4 class='text-left'>Facebook</h4>
 						<div style='height:150px;border-top:1px solid #ff6c00;'>
-
+							This is a facebook description
 						</div>
-						<div style='height:100px;border-top:3px solid #ff6c00;'>
-
-						<span ng-if='contest.platform == "facebook"'>Selected</span>
-						</div>					
 					</div>
 				</div>
 				<div class='col-xs-12 col-sm-3'>
-					<div class='contest-box launch-page-hover' ng-click='select_platform("google")'>
-						<h4 class='text-left'>Google
-							<span class='contest-price'>
-			                    $99
-			                </span>
-						</h4>
+					<div ng-class='{"package-highlight" : contest.platform == "google"}' class='contest-box launch-page-hover' ng-click='select_platform("google")'>
+						<h4 class='text-left'>Google</h4>
 						<div style='height:150px;border-top:1px solid #ff6c00;'>
-
+							This is a google description
 						</div>
-						<div style='height:100px;border-top:3px solid #ff6c00;'>
-
-						<span ng-if='contest.platform == "google"'>Selected</span>
-						</div>					
 					</div>
 				</div>
 				<div class='col-xs-12 col-sm-3'>
-					<div class='contest-box launch-page-hover' ng-click='select_platform("twitter")'>
-						<h4 class='text-left'>Twitter
-							<span class='contest-price'>
-			                    $99
-			                </span>
-						</h4>
+					<div  ng-class='{"package-highlight" : contest.platform == "twitter"}'  class='contest-box launch-page-hover' ng-click='select_platform("twitter")'>
+						<h4 class='text-left'>Twitter</h4>
 						<div style='height:150px;border-top:1px solid #ff6c00;'>
-
+							This is a twitter description
 						</div>
-						<div style='height:100px;border-top:3px solid #ff6c00;'>
-
-						<span ng-if='contest.platform == "twitter"'>Selected</span>
-						</div>					
 					</div>
 				</div>
 				<div class='col-xs-12 col-sm-3'>
-					<div class='contest-box launch-page-hover' ng-click='select_platform("general")'>
-						<h4 class='text-left'>General
-							<span class='contest-price'>
-			                    $99
-			                </span>
-						</h4>
+					<div ng-class='{"package-highlight" : contest.platform == "general"}' class='contest-box launch-page-hover' ng-click='select_platform("general")'>
+						<h4 class='text-left'>General</h4>
 						<div style='height:150px;border-top:1px solid #ff6c00;'>
-
+							This is a general description
+						</div>	
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 package-selection' ng-show='contest.platform'>
+				<div class='col-xs-12 col-sm-4'>
+					<div ng-class='{"package-highlight" : contest.objective == "website_clicks"}' class='contest-box launch-page-hover' ng-click='select_objective("website_clicks")'>
+						<h4>Send People to Website</h4>
+					</div>
+				</div>
+				<div class='col-xs-12 col-sm-4'>
+					<div ng-class='{"package-highlight" : contest.objective == "app_installs"}' class='contest-box launch-page-hover' ng-click='select_objective("app_installs")'>
+						<h4>Get App Installs</h4>
+					</div>
+				</div>
+				<div class='col-xs-12 col-sm-4'>
+					<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
+						<h4>Increase Engagement</h4>
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 package-selection' ng-show='contest.objective'>
+				<div class='ad-location' ng-show='contest.platform == "facebook"'>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "newsfeed"}' class='contest-box launch-page-hover' ng-click='select_display("newsfeed")'>
+							<h4>Newsfeed</h4>
 						</div>
-						<div style='height:100px;border-top:3px solid #ff6c00;'>
-
-						<span ng-if='contest.platform == "general"'>Selected</span>
-						</div>					
+					</div>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "right_column"}' class='contest-box launch-page-hover' ng-click='select_display("right_column")'>
+							<h4>Right Column</h4>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "mobile"}' class='contest-box launch-page-hover' ng-click='select_display("mobile")'>
+							<h4>Mobile</h4>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class='col-xs-12'>
-			<div ng-show='contest.platform == "facebook"'>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("newsfeed")'>
-						<h4>Newsfeed</h4>
-						<span ng-if='contest.display == "newsfeed"'>Selected</span>
+				<div class='ad-location' ng-show='contest.platform == "google"'>
+					<div class='col-xs-12 col-sm-4 col-sm-offset-2'>
+						<div ng-class='{"package-highlight" : contest.display == "search"}' class='contest-box launch-page-hover' ng-click='select_display("search")'>
+							<h4>Search</h4>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "display"}' class='contest-box launch-page-hover' ng-click='select_display("display")'>
+							<h4>Display</h4>
+						</div>
 					</div>
 				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("right_column")'>
-						<h4>Right Column</h4>
-						<span ng-if='contest.display == "right_column"'>Selected</span>
+				<div class='ad-location' ng-show='contest.platform == "twitter"'>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "tweet"}' class='contest-box launch-page-hover' ng-click='select_display("tweet")'>
+							<h4 class='text-center'>Tweet</h4>
+						</div>
 					</div>
 				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("mobile")'>
-						<h4>Mobile</h4>
-						<span ng-if='contest.display == "mobile"'>Selected</span>
+				<div class='ad-location' ng-show='contest.platform == "general"'>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "tagline"}' class='contest-box launch-page-hover' ng-click='select_display("tagline")'>
+							<h4>Tagline</h4>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div ng-show='contest.platform == "google"'>
-				<div class='col-xs-12 col-sm-4 col-sm-offset-2'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("search")'>
-						<h4>Search</h4>
-						<span ng-if='contest.display == "search"'>Selected</span>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "headline"}' class='contest-box launch-page-hover' ng-click='select_display("headline")'>
+							<h4>Headline</h4>
+						</div>
 					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("display")'>
-						<h4>Display</h4>
-						<span ng-if='contest.display == "display"'>Selected</span>
+					<div class='col-xs-12 col-sm-4'>
+						<div ng-class='{"package-highlight" : contest.display == "copies"}' class='contest-box launch-page-hover' ng-click='select_display("copies")'>
+							<h4>Copies</h4>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div ng-show='contest.platform == "twitter"'>
-				<h4 class='text-center'>A Tweet's a Tweet!</h4>
-			</div>
-			<div ng-show='contest.platform == "general"'>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("tagline")'>
-						<h4>Tagline</h4>
-						<span ng-if='contest.display == "tagline"'>Selected</span>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("headline")'>
-						<h4>Headline</h4>
-						<span ng-if='contest.display == "headline"'>Selected</span>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='contest-box launch-page-hover' ng-click='select_display("copies")'>
-						<h4>Copies</h4>
-						<span ng-if='contest.display == "copies"'>Selected</span>
-					</div>
-				</div>
-			</div>
-			</div>
-		</div>
-		<div ng-show='current.step == "objective"'>
-			<div class='col-xs-12 col-sm-4'>
-				<div class='contest-box launch-page-hover' ng-click='select_objective("website_clicks")'>
-					<h4>Send People to Website</h4>
-					<span ng-if='contest.objective == "website_clicks"'>Selected</span>
-				</div>
-			</div>
-			<div class='col-xs-12 col-sm-4'>
-				<div class='contest-box launch-page-hover' ng-click='select_objective("app_installs")'>
-					<h4>Get App Installs</h4>
-					<span ng-if='contest.objective == "app_installs"'>Selected</span>
-				</div>
-			</div>
-			<div class='col-xs-12 col-sm-4'>
-				<div class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
-					<h4>Increase Engagement</h4>
-					<span ng-if='contest.objective == "engagement"'>Selected</span>
 				</div>
 			</div>
 		</div>
 		<div ng-show='current.step == "detail"'>
-			<div class='col-sm-3 col-xs-12'>
-				<h3 class='pull-left'>Business</h3>	
-			</div>
-			<div class='col-sm-9 col-xs-12'>
-				<form class='form-horizontal'>
-					<div class='form-group'>
-						<label class='col-xs-3'>Company Name :</label>
-						<div class='col-xs-9'>
-							<input class='form-control' ng-model='contest.company_name' placeholder="Enter your company's name here">
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Company Email :</label>
-						<div class='col-xs-9'>
-							<input class='form-control' ng-model='contest.company_email' placeholder="Enter your company's email here">
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Company URL :</label>
-						<div class='col-xs-9'>
-							<input class='form-control' ng-model='contest.company_website' placeholder="Enter your company's website here">
-						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Company Logo :</label>
-						<div class='col-xs-9'>
-							<input ng-model='contest.company_logo' type='file'>
-						</div>
-					</div>
+			<div class='col-sm-8 col-xs-12' style='padding-left:5px; padding-right:5px'>
+				<div class='contest-box'>
+					<div class='row'>
+					<h3 class='text-center'>Your Business</h3>	
+					<form class='form'>
 						<div class='form-group'>
-						<label class='col-xs-3'>Pictures of product or service :</label>
-						<div class='col-xs-9'>
-							<input class='pull-left' ng-model='contest.asset1' type='file'>
-							<input class='pull-left' ng-model='contest.asset2' type='file'>
-							<input class='pull-left' ng-model='contest.asset3' type='file'>
+							<label>Company Name</label>
+							<input class='form-control' ng-model='contest.company_name' placeholder="Enter your company's name">
 						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Summary of product or service :</label>
-						<div class='col-xs-9'>
+						<div class='form-group'>
+							<label>Company Email</label>
+							<input class='form-control' ng-model='contest.company_email' placeholder="Enter your company's email">
+						</div>
+						<div class='form-group'>
+							<label>Company URL</label>
+							<input class='form-control' ng-model='contest.company_website' placeholder="Enter your company's website">
+						</div>
+						<div class='form-group'>
+							<div class='row'>
+								<div class='col-xs-12 col-sm-6'>
+									<label>Company Logo</label>
+									<input ng-file-select='select_file($files, "logo")' type='file'>
+								</div>
+								<div class='col-xs-12 col-sm-6'>
+									<img class='img-responsive' ng-if='contest.logo_url' src='{{contest.logo_url}}'>
+								</div>
+							</div>
+						</div>
+						<div class='form-group'>
+							<div class='row'>
+								<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
+								<div class='col-sm-4 col-xs-12'>
+									<input ng-file-select='select_file($files, "pic1")' type='file'>
+									<img class='img-responsive' ng-if='contest.additional_image_1' src='{{contest.additional_image_1}}'>
+								</div>
+								<div class='col-sm-4 col-xs-12'>
+									<input ng-file-select='select_file($files, "pic2")' type='file'>
+									<img class='img-responsive' ng-if='contest.additional_image_2' src='{{contest.additional_image_2}}'>
+								</div>
+								<div class='col-sm-4 col-xs-12'>
+									<input ng-file-select='select_file($files, "pic3")' type='file'>
+									<img class='img-responsive' ng-if='contest.additional_image_3' src='{{contest.additional_image_3}}'>
+								</div>
+							</div>
+						</div>
+						<div class='form-group'>
+							<label>Summary of product or service</label>
+							<select class='form-control' ng-model='contest.industry'>
+								<option value=''></option>
+							</select>
+						</div>
+						<div class='form-group'>
+							<label>Summary of product or service</label>
 							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
 						</div>
-					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
+						<div class='form-group'>
 							<label class='control-label'>Describe in more detail what your product or service does and who it's for.</label>
-							<textarea class='form-control' ng-model='contest.audience' placeholder='i.e., We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.'></textarea>
+							<textarea class='form-control' rows='4' ng-model='contest.audience' placeholder='i.e., We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.'></textarea>
 						</div>
-					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
+						<div class='form-group'>
 							<label class='control-label'>Describe what makes you different (and better) than your competition.</label>
-							<textarea class='form-control' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
+							<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
 						</div>
+					</form>
 					</div>
-				</form>
+				</div>
 			</div>
-			<div class='col-xs-12 col-sm-3'>
-				<h3 class='text-left'>Audience</h3>
-			</div>
-			<div class='col-xs-12 col-sm-9'>
-				<form class='form-horizontal'>
-					<div class='form-group'>
-						<label class='col-xs-3'>Location :</label>
-						<div class='col-xs-9'>
+			<div class='col-sm-4 col-xs-12' style='padding-left:5px; padding-right:5px'>
+				<div class='contest-box'>
+					<h3 class='text-center'>Your Audience</h3>
+					<form class='form'>
+						<div class='form-group'>
+							<label>Location :</label>
 							<input class='form-control' ng-model='contest.location' placeholder='Start typing here...'>
 						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Age :</label>
-						<div class='col-xs-9' ng-init='contest.age = "18-24"'>
+						<div class='form-group' ng-init='contest.age = "18-24"'>
+							<label>Age :</label>
 							<label><input type='radio' ng-model='contest.age' value='18-24'>18-24</label>
 							<label><input type='radio' ng-model='contest.age' value='25-34'>25-34</label>
 							<label><input type='radio' ng-model='contest.age' value='35-44'>35-44</label>
 							<label><input type='radio' ng-model='contest.age' value='45+'>45+</label>
 						</div>
-					</div>
-					<div class='form-group'>
-						<label class='col-xs-3'>Gender :</label>
-						<div class='col-xs-9' ng-init='contest.gender = "all"'>
+						<div class='form-group' ng-init='contest.gender = "all"'>
+							<label>Gender :</label>								
 							<label><input type='radio' ng-model='contest.gender' value='all'>All</label>
 							<label><input type='radio' ng-model='contest.gender' value='men'>Men</label>
-							<label><input type='radio' ng-model='contest.gender' value='women'>Women</label>
+							<label><input type='radio' ng-model='contest.gender' value='women'>Women</label>								
 						</div>
-					</div>
-					<div class='form-group'>
-						<div class='col-xs-12'>
+						<div class='form-group'>
 							<label class='control-label'>Any additional information :</label>
 							<textarea class='form-control' ng-model='contest.additional' placeholder="Enter any additional information you'd like to provide here..."></textarea>
 						</div>
-					</div>
-				</form>
+					</form>
+				</div>
 			</div>
 		</div>
 		<div ng-show='current.step == "payment"'>
-			<div class='col-xs-12 col-sm-3'>
-				<h3 class='text-left'>Payment</h3>
-			</div>
-			<div class='col-xs-12 col-sm-9'>
-				<div class='form-group'>
-					<label>Saved Methods</label>
-					<select class='form-control'>
-						<option value=''>Choose a saved payment method</option>
-					</select>
+			<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
+				<div class='contest-box'>
+					<h3 class='text-center'>Payment</h3>
+					<div class='input-group'ng-show='!adding_payment'>
+						<select class='form-control'>
+							<option value=''>Choose a saved payment method</option>
+						</select>
+						<div class='input-group-btn'>
+							<button class='btn btn-oj' ng-click='adding_payment = true'>Add a new payment method</button>
+						</div>
+					</div>
+					<form ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
+						<button ng-show='payment_methods.length > 0' ng-click='adding_payment = false' class='btn btn-oj pull-right'>Use a saved method</button>
+						<span class="payment-errors"></span>
+						<div class='col-xs-12'>
+						    <div class="form-group">
+						    	<label>Card Number</label>
+						      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>				    
+						    </div>
+						</div>
+					    <div class='col-xs-12 col-sm-4'> 
+						  <div class="form-group">
+							    <label>CVC</label>
+							    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>					   
+						  </div>
+					    </div>
+					  	<div class='col-xs-12 col-sm-4'>
+					      <div class="form-group">
+					       		<label>Month Exp</label>
+					  	      	<select class='form-control' data-stripe="exp-month">
+						            <option value='01'>01</option>
+						            <option value='02'>02</option>
+						            <option value='03'>03</option>
+						            <option value='04'>04</option>
+						            <option value='05'>05</option>
+						            <option value='06'>06</option>
+						            <option value='07'>07</option>
+						            <option value='08'>08</option>
+						            <option value='09'>09</option>
+						            <option value='10'>10</option>             
+						            <option value='11'>11</option>
+						            <option value='12'>12</option>  	
+					          </select>
+					      </div>
+					    </div>
+					    <div class='col-xs-12 col-sm-4'>
+					    	<div class='form-group'>
+					        	<label>Year Exp</label>
+					  	    	<select class='form-control' data-stripe="exp-year">
+					             <option value='2016'>2016</option>
+					             <option value='2017'>2017</option>
+					             <option value='2018'>2018</option>
+					             <option value='2019'>2019</option>
+					             <option value='2020'>2020</option>
+					             <option value='2021'>2021</option>
+					             <option value='2022'>2022</option>
+					             <option value='2023'>2023</option>
+					             <option value='2024'>2024</option>
+					             <option value='2025'>2025</option>             
+					             <option value='2026'>2026</option>
+					             <option value='2027'>2027</option>
+					        	</select>
+					  	  	</div>
+					  	</div>
+	    				<input type='hidden' data-stripe='currency' value='usd'/>
+	    				<button class='btn btn-oj' type='submit'>Add payment</button>
+					</form>
 				</div>
-				<button class='btn btn-oj pull-right' ng-click=''>Add a new payment method</button>
-				<form ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
-					<span class="payment-errors"></span>
-				     <div class='col-xs-12'>
-				     	<div class='form-group'>
-					      	<label>Account Type</label>
-				      		<select ng-model='contest.payment.account_type' class='form-control'>
-					          	<option value=''></option>
-					          	<option value='card'>Debit Card</option>
-					          	<option value='bank_account'>Bank Account</option>
-					        </select>
-					    </div>
-					</div>
-					<div class='col-xs-12'>
-					    <div class="form-group">
-					    	<label>Card Number</label>
-					      	<input class='form-control' type="text" size="20" data-stripe="number"/>				    
-					    </div>
-					</div>
-				    <div class='col-xs-12 col-sm-4'> 
-					  <div class="form-group">
-						    <label>CVC</label>
-						    <input class='form-control' type="text" size="4" data-stripe="cvc"/>					   
-					  </div>
-				    </div>
-				  	<div class='col-xs-12 col-sm-4'>
-				      <div class="form-group">
-				       		<label>Month Exp</label>
-				  	      	<select class='form-control' data-stripe="exp-month">
-					            <option value='01'>January</option>
-					            <option value='02'>February</option>
-					            <option value='03'>March</option>
-					            <option value='04'>April</option>
-					            <option value='05'>May</option>
-					            <option value='06'>June</option>
-					            <option value='07'>July</option>
-					            <option value='08'>August</option>
-					            <option value='09'>September</option>
-					            <option value='10'>October</option>             
-					            <option value='11'>November</option>
-					            <option value='12'>December</option>  	
-				          </select>
-				      </div>
-				    </div>
-				    <div class='col-xs-12 col-sm-4'>
-				    	<div class='form-group'>
-				        	<label>Year Exp</label>
-				  	    	<select class='form-control' data-stripe="exp-year">
-				             <option value='2016'>2016</option>
-				             <option value='2017'>2017</option>
-				             <option value='2018'>2018</option>
-				             <option value='2019'>2019</option>
-				             <option value='2020'>2020</option>
-				             <option value='2021'>2021</option>
-				             <option value='2022'>2022</option>
-				             <option value='2023'>2023</option>
-				             <option value='2024'>2024</option>
-				             <option value='2025'>2025</option>             
-				             <option value='2026'>2026</option>
-				             <option value='2027'>2027</option>
-				        	</select>
-				  	  	</div>
-				  	</div>
-    				<input type='hidden' data-stripe='currency' value='usd'/>
-				</form>
 			</div>
 		</div>
 		<div class='col-xs-12'>
-			<button ng-show='current.previous != "none"' class='btn btn-oj btn-lg pull-left' ng-click='set_step(current.previous)'>Previous</button>	
-			<button ng-show='current.next != "none"' class='btn btn-oj btn-lg pull-right' ng-click='set_step(current.next)'>Next</button>
-			<button ng-show='current.step == "payment"' class='btn btn-oj btn-lg pull-right' ng-click='submit_contest(contest)'>Create</button>	
+			<div ng-show='current.step == "package"'>	
+				<button class='btn btn-oj btn-lg pull-right' ng-click='to_detail(contest)'>Fill in Details</button>
+			</div>
+			<div ng-show='current.step == "detail"'>
+				<button class='btn btn-oj btn-lg pull-left' ng-click='set_step("package")'>Change Package</button>	
+				<button class='btn btn-oj btn-lg pull-right' ng-click='submit_contest(contest)'>Create Contest</button>	
+			</div>
+			<div ng-show='current.step == "payment"'>
+				<button class='btn btn-oj btn-lg pull-left' ng-click='set_step("details")'>Edit Contest</button>	
+				<button class='btn btn-oj btn-lg pull-right' ng-click='choose_payment(payment)'>Next</button>
+			</div>
+			<div ng-show='current.step == "done"'>
+				<div class='text-center'><a class='btn btn-lg btn-oj' href='#/contests'>See your contest now!</a></div>
+			</div>	
 		</div>
 	</div>
 </div>
