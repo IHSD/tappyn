@@ -84,4 +84,34 @@ class Payments extends CI_Controller
     {
         $this->load->view('admin/test', $this->data);
     }
+
+    public function paid_out()
+    {
+        $user_id = $this->input->post('user_id');
+        $email = $this->input->post('email');
+        $payout_id = $this->input->post('payout_id');
+        $transaction_id = $this->input->post('transaction_id');
+        if(!$email ||
+           !$transaction_id ||
+           !$user_id ||
+           !$payout_id)
+        {
+            $this->session->set_flashdata('error', "You didnt provide all required fields");
+        } else {
+            $data = array(
+                'account_type' => 'paypal',
+                'transfer_id' => $transaction_id,
+                'account_id' => $email,
+                'claimed' => 1,
+                'pending' => 0,
+            );
+            if($this->payout_model->update($payout_id, $data))
+            {
+                $this->session->set_flashdata('message', "Payout successfully updated");
+            } else {
+                $this->session->set_flasshdata('error', "There was an error updating the payout");
+            }
+        }
+        redirect("admin/users/payouts/{$user_id}", "refresh");
+    }
 }

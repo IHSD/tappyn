@@ -76,6 +76,15 @@ class User extends MY_Model
         return false;
     }
 
+    public function accountDetails($aid)
+    {
+        $account = $this->db->select('*')->from('stripe_accounts')->where('account_id', $aid)->get();
+        if($account && $account->num_rows() > 0)
+        {
+            return $account->row();
+        }
+        return FALSE;
+    }
     public function submissonCount($uid)
     {
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where(array('owner' => $uid))->get();

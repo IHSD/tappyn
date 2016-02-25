@@ -40,6 +40,7 @@
                         <table class='table table-condensed table-bordered table-hover table-striped'>
                             <tr>
                                 <th>Actions</th>
+                                <th>ID</th>
                                 <th>Created At</th>
                                 <th>Headline</th>
                                 <th style='max-width:300px;word-wrap:break-word;text-overflow:ellipsis;'>Text</th>
@@ -66,6 +67,7 @@
                                               </ul>
                                             </div>
                                         </td>
+                                        <td><?php echo $submission->id; ?></td>
                                         <td><?php echo date('D M d', strtotime($submission->created_at)); ?></td>
                                         <td style='max-width:300px;word-wrap:break-word;text-overflow:ellipsis;' class='submission_headline'><?php echo $submission->headline; ?></td>
                                         <td style='max-width:300px;word-wrap:break-word;text-overflow:ellipsis;' class='submission_text'><?php echo $submission->text; ?></td>
@@ -74,7 +76,7 @@
                                         <td><?php echo date('D M d',strtotime($submission->contest->stop_time)); ?></td>
                                         <td>
                                             <?php if($submission->payout): ?>
-
+                                                <?php echo $submission->payout->claimed == 0 ? "Pending" : "Claimed"; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

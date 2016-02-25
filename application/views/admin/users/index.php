@@ -31,9 +31,9 @@
                             <th class='sort_header' id='last_login'>Last Login<?php echo is_sorted('last_login'); ?></th>
                             <th class='sort_header' id='email'>Email<?php echo is_sorted('email'); ?></th>
                             <th>Groups</th>
-                            <th class='sort_header' id='age'>Age<?php echo is_sorted('age'); ?></th>
-                            <th class='sort_header' id='gender'>Gender<?php echo is_sorted('gender'); ?></th>
-                            <th class='sort_header' id='submissions'>Submissions</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Submissions</th>
                         </tr>
                         <?php foreach($users as $user): ?>
                             <tr>
