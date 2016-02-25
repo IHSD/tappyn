@@ -103,7 +103,7 @@ class Auth extends CI_Controller {
 			}
 			else
 			{
-				$this->responder->fail($this->ion_auth->errors())->respond();
+				$this->responder->fail($this->ion_auth->errors())->code(500)->respond();
 				return;
 			}
 		}

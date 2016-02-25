@@ -47,6 +47,7 @@ class Users extends CI_Controller
         $this->data['users'] = $this->user->fetch()->result();
         foreach ($this->data['users'] as $k => $user)
         {
+            $this->data['users'][$k]->submission_count = $this->submission->count(array('owner' => $user->id));
             $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
             $this->data['users'][$k]->profile = $this->user->profile($user->id);
         }
@@ -127,11 +128,21 @@ class Users extends CI_Controller
         $this->load->library('stripe/stripe_transfer_library');
     }
 
-    public function account($uid)
+    public function payouts($uid)
     {
         $this->load->library('stripe/stripe_account_library');
         $user = $this->ion_auth->user($uid)->row();
         $user->profile = $this->user->profile($uid);
+        $this->data['user'] = $user;
+        $payouts = $this->payout->fetch(array('user_id' => $user->id));
+        $this->data['payouts'] = $payouts;
+        $this->load->view('admin/users/payouts', $this->data);
+    }
+
+    public function account($uid)
+    {
+        $this->load->library('stripe/stripe_account_library');
+        $user = $this->ion_auth->user($uid)->row();
         $this->data['user'] = $user;
         $stripe_account_id = $this->user->account($uid);
         if($stripe_account_id)

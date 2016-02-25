@@ -92,87 +92,35 @@ class Users extends CI_Controller
     {
         if(!$this->ion_auth->in_group(2))
         {
-            redirect("companies/dashboard", 'refresh');
+            redirect("companies/profile");
         }
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if($this->ion_auth->in_group(2))
-            {
-                $data = array(
-                    'age' => $this->input->post('age_range'),
-                    'gender' => $this->input->post('gender'),
-                    'state' => $this->input->post('state'),
-                    'school' => $this->input->post('school')
-                );
 
-                if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
-                {
-                    $this->responder
-                        ->fail("There was an error updating your profile")
-                        ->code(500)
-                        ->respond();
-                    return;
-                } else {
-                    $this->responder
-                        ->message(
-                            'Profile was successfully updated'
-                        )
-                        ->data(array(
-                            'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
-                        ))
-                        ->respond();
-                    return;
-                }
-            }
-            else if($this->ion_auth->in_group(3))
+            $data = array(
+                'age' => $this->input->post('age_range'),
+                'gender' => $this->input->post('gender'),
+                'state' => $this->input->post('state'),
+                'school' => $this->input->post('school')
+            );
+
+            if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
             {
-                $valid = true;
-                $data = array(
-                    'mission' => $this->input->post('mission'),
-                    'extra_info' => $this->input->post('extra_info'),
-                    'company_email' => $this->input->post('company_email'),
-                    'company_url' => $this->input->post('company_url'),
-                    'facebook_url' => $this->input->post('facebook_url'),
-                    'name' => $this->input->post('name'),
-                );
-                if(isset($_FILES['logo_url']))
-                {
-                    $config['upload_path'] = APPPATH.'uploads/';
-                    $config['allowed_types'] = 'git|jpg|jpeg|png';
-                    $config['remove_spaces'] = true;
-                    $config['encrypt_name'] = true;
-                    $this->load->library('upload', $config);
-                    if(!$this->upload->do_upload('logo_url'))
-                    {
-                        $this->responder
-                            ->fail($this->upload->display_errors() ? $this->upload->display_errors() : "There was an error uploading your image")
-                            ->code(500)
-                            ->respond();
-                        return;
-                    } else {
-                        $data['logo_url'] = $this->upload->data()['file_name'];
-                    }
-                }
-                if($valid)
-                {
-                    if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
-                    {
-                        $this->responder
-                            ->fail("There was an error updating your profile")
-                            ->code(500)
-                            ->respond();
-                    } else {
-                        $this->responder
-                            ->message(
-                                'Profile was successfully updated'
-                            )
-                            ->data(array(
-                                'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
-                            ))
-                            ->respond();
-                        return;
-                    }
-                }
+                $this->responder
+                    ->fail("There was an error updating your profile")
+                    ->code(500)
+                    ->respond();
+                return;
+            } else {
+                $this->responder
+                    ->message(
+                        'Profile was successfully updated'
+                    )
+                    ->data(array(
+                        'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+                    ))
+                    ->respond();
+                return;
             }
         } else {
             $profile = $this->user->profile($this->ion_auth->user()->row()->id);

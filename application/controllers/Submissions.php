@@ -12,6 +12,7 @@ class Submissions extends CI_Controller
         $this->load->model('ion_auth_model');
         $this->load->model('user');
         $this->load->library('mailer');
+        $this->load->library('vote');
     }
 
     /**
@@ -22,6 +23,17 @@ class Submissions extends CI_Controller
     public function index($contest_id)
     {
         $submissions = $this->contest->submissions($contest_id);
+        foreach($submissions as $submission)
+        {
+            $submission->votes = $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+        }
+        /** Sort oour submissions on upvotes **/
+        usort($submissions, function($a, $b)
+            {
+                return strcmp($b->votes, $a->votes);
+            }
+        );
+
         $contest = $this->contest->get($contest_id);
         $contest->views = $this->contest->views($contest_id);
         $this->responder->data(array(
@@ -58,11 +70,33 @@ class Submissions extends CI_Controller
             $this->responder->message(
                 "You're submission has succesfully been created"
             )->respond();
+            $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
         }
         else {
             $this->responder->fail(
                 ($this->submission_library->errors() ? $this->submission_library->errors() : 'An unknown error occured')
             )->code(500)->respond();
         }
+    }
+
+    public function leaderboard()
+    {
+        $leaderboard_size = $this->config->item('leaderboard_limit');
+        // Get the top 5 submissions
+        $check = $this->vote->select('COUNT(*) as count, submission_id')->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+        if(!$check)
+        {
+            $this->responder->fail("An unexpected error occured")->code(500)->respond();
+            return;
+        }
+        $submissions = array();
+        foreach($check->result() as $sub)
+        {
+            $submission = $this->submission->get($sub->submission_id);
+            $submissions[] = $submission;
+        }
+        $this->responder->data(array(
+            'submissions' => $submissions
+        ))->respond();
     }
 }

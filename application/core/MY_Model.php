@@ -173,6 +173,14 @@ class MY_Model extends CI_Model
           $this->like = array();
       }
 
+      if(!empty($this->group_by))
+      {
+          foreach($this->group_by as $col)
+          {
+              $this->db->group_by($col);
+          }
+          $this->group_by = array();
+      }
 
       if(!is_null($this->limit) && !is_null($this->offset))
       {
@@ -194,6 +202,11 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  public function group_by($col)
+  {
+      $this->group_by[] = $col;
+      return $this;
+  }
   /**
    * Hit DB with a manual query
    * @param  string $query

@@ -13,6 +13,7 @@ class Companies extends CI_Controller
             exit();
         }
         $this->load->model('company');
+        $this->load->model('user');
         $this->load->model('contest');
         $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
@@ -69,7 +70,30 @@ class Companies extends CI_Controller
 
     public function profile()
     {
-
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            $data = array(
+                'logo_url' => $this->input->post('logo_url'),
+                'mission' => $this->input->post('mission'),
+                'extra_info' => $this->input->post('extra_info'),
+                'name' => $this->input->post('name'),
+                'company_email' => $this->input->post('company_email'),
+                'company_url' => $this->input->post('facebook_url'),
+                'twitter_handle' => $this->input->post('twitter_handle'),
+                'different' => $this->input->post('different'),
+                'summary' => $this->input->post('summary')
+            );
+            if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+            {
+                $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
+            } else {
+                $this->responder->fail("There was an error updating your profile")->code(500)->respond();
+            }
+        } else {
+            $this->responder->data(array(
+                'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+            ))->respond();
+        }
     }
 
     public function accounts()
@@ -168,7 +192,7 @@ class Companies extends CI_Controller
                 // Update the customer with the new payment method, and get the source id
                 if($this->stripe_customer_id)
                 {
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));4
+                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));
                     $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 9999);
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
