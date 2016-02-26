@@ -193,10 +193,12 @@ class MY_Model extends CI_Model
           $this->db->limit($this->limit);
           $this->imit = NULL;
       }
-
-      $this->db->order_by($this->order_by, $this->order_dir);
-      $this->order_by = 'users.id';
-      $this->order_dir = 'desc';
+      if(!is_null($this->order_by) && !is_null($this->order_dir))
+      {
+          $this->db->order_by($this->order_by, $this->order_dir);
+          $this->order_by = NULL;
+          $this->order_dir = NULL;
+      }
 
       $this->response = $this->db->get();
       return $this;

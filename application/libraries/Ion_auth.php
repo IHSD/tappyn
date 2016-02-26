@@ -246,13 +246,12 @@ class Ion_auth
 			{
 				$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_forgot_password_complete', 'ion_auth'), $data, true);
 
-				$this->email->clear();
-				$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
-				$this->email->to($profile->email);
-				$this->email->subject($this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_new_password_subject'));
-				$this->email->message($message);
-
-				if ($this->email->send())
+				$this->mailer
+						->to($data['identity'])
+						->from('support@tappyn.com')
+						->subject("Password successfully changed")
+						->html($message);
+				if ($this->mailer->send())
 				{
 					$this->set_message('password_change_successful');
 					$this->ion_auth_model->trigger_events(array('post_password_change', 'password_change_successful'));
@@ -374,13 +373,12 @@ class Ion_auth
 			{
 				$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
 
-				$this->email->clear();
-				$this->email->from($this->config->item('admin_email', 'ion_auth'), $this->config->item('site_title', 'ion_auth'));
-				$this->email->to($email);
-				$this->email->subject($this->config->item('site_title', 'ion_auth') . ' - ' . $this->lang->line('email_activation_subject'));
-				$this->email->message($message);
-
-				if ($this->email->send() == TRUE)
+				$this->mailer
+						->to($data['identity'])
+						->from('Registration@tappyn.com')
+						->subject("Account successfully created")
+						->html($message);
+				if ($this->mailer->send() == TRUE)
 				{
 					$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
 					$this->set_message('activation_email_successful');
