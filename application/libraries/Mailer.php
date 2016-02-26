@@ -54,5 +54,6 @@ class Mailer
             ->setSubject($this->subject)
             ->setHtml($this->html);
         $this->handler->send($this->email);
+        return TRUE;
     }
 }
