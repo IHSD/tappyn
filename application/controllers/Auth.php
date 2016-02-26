@@ -34,6 +34,7 @@ class Auth extends CI_Controller {
 
 	function facebook()
 	{
+		$this->ion_auth->logout();
 		$this->load->library('facebook_ion_auth');
 		if($this->input->get('submission'))
 		{
@@ -76,6 +77,7 @@ class Auth extends CI_Controller {
 	// log the user in
 	function login()
 	{
+		$this->ion_auth->logout();
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -411,6 +413,7 @@ class Auth extends CI_Controller {
 	// create a new user
 	function create_user()
     {
+		$this->ion_auth->logout();
 		// Check if they are registering as a guest, which limits the required fields for registration
 		$as_guest = false;
 
