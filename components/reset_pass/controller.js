@@ -3,8 +3,8 @@ tappyn.controller("resetController", function($scope, $routeParams, $location, r
 		if(response.http_status_code == 200){
 			if(response.success){
 				$scope.set_alert("Verified, please change your password", "default");
-				$scope.code = response.data.csrf;
-				$scope.pass = {user_id : response.data.user_id, new : '', new_confirm : ''}
+				$scope.code = $routeParams.code;
+				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
 			}
 			else{
 				$scope.set_alert("Unauthorized", "error");
