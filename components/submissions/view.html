@@ -49,7 +49,8 @@
                 	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
                 		{{submission.created_at | legibleDate}}
                 	</span>
-                	<img style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
+                	<img ng-show='!submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+                	<img ng-show='submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
                	</h5>
             </div>
         <!-- Generate a select as winner button if campaign is over and user owns contest -->
