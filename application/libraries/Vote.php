@@ -70,6 +70,16 @@ class Vote {
         return FALSE;
     }
 
+    public function mayUserVote($sid, $uid)
+    {
+        $check = $this->db->select('*')->from('votes')->where(array('user_id' => $uid, 'submission_id' => $sid))->limit(1)->get();
+        if(!$check || $check->num_rows() == 1)
+        {
+            return FALSE;
+        }
+        return TRUE;
+    }
+
     public function userVotesPerContest($uid, $cid)
     {
         $this->db->select('COUNT(*) as count')->from('votes')->where(array('contest_id' => $cid, 'user_id' => $uid));
