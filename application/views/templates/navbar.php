@@ -48,8 +48,8 @@
                             </ul>
 	                    </li> -->
 
-                        <li ng-if='!user' class='pull-right'><a href="<?php echo base_url().'#/login' ?>">LOGIN</a></li>
-                        <li ng-if='!user' class='pull-right'><a href="<?php echo base_url().'#/register' ?>">SIGN UP</a></li>
+                        <li class='pull-right'><a href="#"><?php echo $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name; ?></a></li>
+                        <li class='pull-right'><a href="<?php echo base_url().'#/register' ?>">LOGOUT</a></li>
 
 	                </ul>
 	            </nav>

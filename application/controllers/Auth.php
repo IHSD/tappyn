@@ -37,7 +37,7 @@ class Auth extends CI_Controller {
 	 */
 	function facebook()
 	{
-		$this->ion_auth->logout();
+		//$this->ion_auth->logout();
 		$this->load->library('facebook_ion_auth');
 		if($this->input->get('submission'))
 		{
@@ -83,7 +83,7 @@ class Auth extends CI_Controller {
 	 */
 	function login()
 	{
-		$this->ion_auth->logout();
+		//$this->ion_auth->logout();
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -285,7 +285,8 @@ class Auth extends CI_Controller {
 			if ($this->form_validation->run() == false)
 			{
 				$this->responder->data(array(
-					'csrf' => $this->_get_csrf_nonce()
+					'csrf' => $this->_get_csrf_nonce(),
+					'user_id' => $user->id
 				))->respond();
 				return;
 			}
@@ -386,7 +387,7 @@ class Auth extends CI_Controller {
 	 */
 	function create_user()
     {
-		$this->ion_auth->logout();
+		//$this->ion_auth->logout();
 		// Check if they are registering as a guest, which limits the required fields for registration
 		$as_guest = false;
 
