@@ -482,8 +482,8 @@ class Auth extends CI_Controller {
 		var_dump($this->session->flashdata('csrfkey'));
 		var_dump($this->session->flashdata('csrfvalue'));
 		var_dump($this->input->post());
-		if ($this->input->post($this->session->flashdata('csrfkey')) !== FALSE &&
-			$this->input->post($this->session->flashdata('csrfkey')) == $this->session->flashdata('csrfvalue'))
+		if ($this->input->post('csrf')[$this->session->flashdata('csrfkey')] !== FALSE &&
+			$this->input->post('csrf')[$this->session->flashdata('csrfkey')] == $this->session->flashdata('csrfvalue'))
 		{
 			return TRUE;
 		}
