@@ -108,16 +108,19 @@ class Submission extends MY_Model
      * Return the result of data, and fetch extra mysqli_get_metadata
      * @return array
      */
-    public function result()
+    public function result($extra = true)
     {
         $results = $this->response->result();
-        foreach($results as $result)
+        if($extra)
         {
-            $result->contest = $this->parentContest($result->contest_id);
-            $payout = $this->db->select('*')->from('payouts')->where('submission_id', $result->id)->get();
-            if($payout)
+            foreach($results as $result)
             {
-                $result->payout = $payout->row();
+                $result->contest = $this->parentContest($result->contest_id);
+                $payout = $this->db->select('*')->from('payouts')->where('submission_id', $result->id)->get();
+                if($payout)
+                {
+                    $result->payout = $payout->row();
+                }
             }
         }
         return $results;

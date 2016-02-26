@@ -26,6 +26,17 @@ class Stripe_customer_library
         return call_user_func_array( array($this->stripe_customer, $method), $arguments);
     }
 
+    public function charges($args = NULL)
+    {
+        try {
+            $charges = \Stripe\Charge::all($args);
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return FALSE;
+        }
+        return $charges;
+    }
+
     public function create($uid, $token, $email = NULL)
     {
         try {

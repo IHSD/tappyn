@@ -48,6 +48,10 @@ class Responder
             $results['data'] = $this->data;
             $results['message'] = $this->message;
         } else {
+            if(is_array($this->error) && !empty($this->error))
+            {
+                $this->error = json_encode($this->error[0]);
+            }
             $results['error'] = $this->error;
         }
         echo json_encode($results);

@@ -1,28 +1,8 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
         <div class='row'>
             <div class='col-sm-10 col-sm-offset-1 content'>
-                <h2><?php echo $user->email; ?></h2>
+                <h2>Submissions</h2>
                 <hr>
-                <div class='col-sm-12'>
-                    <div class='col-sm-10'>
-                        <ul class="nav nav-tabs">
-                          <li role="presentation"><a href="<?php echo base_url().'admin/users/show/'.$user->id; ?>">Profile</a></li>
-                          <?php if($this->ion_auth->in_group(2, $user->id)): ?>
-                              <li role="presentation" class="active"><a href="<?php echo base_url().'admin/users/submissions/'.$user->id; ?>">Submissions</a></li>
-                              <li role="presentation"><a href="<?php echo base_url().'admin/users/payouts/'.$user->id; ?>">Payouts</a></li>
-                              <li role="presentation"><a href="<?php echo base_url().'admin/users/account/'.$user->id; ?>">Account Details</a></li>
-                          <?php else: ?>
-                              <li role="presentation"><a href="<?php echo base_url().'admin/companies/contests/'.$user->id; ?>">Contests</a></li>
-                              <li role="presentation"><a href="<?php echo base_url().'admin/companies/payment_methods/'.$user->id; ?>">Payment Methods</a></li>
-                          <?php endif; ?>
-                        </ul>
-                    </div>
-                    <div class='col-sm-2'>
-                        <span style='float-right'>
-                            <button class='btn btn-danger'>Deactivate</button>
-                        </span>
-                    </div>
-                </div>
                 <div class='inner-content'>
                     <div class='col-sm-6 col-sm-offset-3'>
                         <?php $this->load->view('templates/notification', array(

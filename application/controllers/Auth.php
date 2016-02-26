@@ -14,12 +14,11 @@ class Auth extends CI_Controller {
 		$this->lang->load('auth');
 	}
 
-	// redirect if needed, otherwise display the user list
-	function index()
-	{
-		redirect('auth/login', 'refresh');
-	}
-
+	/**
+	 * Check if a user is logged in
+	 * If they are return their ajax_user() data
+	 * @return mixed
+	 */
 	function is_logged_in()
 	{
 		if($this->ion_auth->logged_in())
@@ -32,8 +31,13 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	/**
+	 * Facebook login endpoint
+	 * @return void
+	 */
 	function facebook()
 	{
+		$this->ion_auth->logout();
 		$this->load->library('facebook_ion_auth');
 		if($this->input->get('submission'))
 		{
@@ -73,9 +77,13 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	// log the user in
+	/**
+	 * Login
+	 * @return void
+	 */
 	function login()
 	{
+		$this->ion_auth->logout();
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
@@ -113,7 +121,10 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	// log the user out
+	/**
+	 * Logout
+	 * @return void
+	 */
 	function logout()
 	{
 		// log the user out
@@ -121,7 +132,10 @@ class Auth extends CI_Controller {
 		$this->responder->message('Logout successful')->respond();
 	}
 
-	// change password
+	/**
+	 * Change a users password
+	 * @return void
+	 */
 	function change_password()
 	{
 		$this->form_validation->set_rules('old', $this->lang->line('change_password_validation_old_password_label'), 'required');
@@ -174,7 +188,10 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	// forgot password
+	/**
+	 * Request to reset a password
+	 * @return void
+	 */
 	function forgot_password()
 	{
 		// setting validation rules by checking wheather identity is username or email
@@ -204,9 +221,8 @@ class Auth extends CI_Controller {
 				$this->data['identity_label'] = $this->lang->line('forgot_password_email_identity_label');
 			}
 
-			// set any errors and display the form
-			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-			$this->_render_page('auth/forgot_password', $this->data);
+			$this->responder->fail((validation_errors() ? validation_errors() : $this->session->flashdata('error')))->code(500)->respond();
+			return;
 		}
 		else
 		{
@@ -215,42 +231,46 @@ class Auth extends CI_Controller {
 
 			if(empty($identity)) {
 
-	            		if($this->config->item('identity', 'ion_auth') != 'email')
-		            	{
-		            		$this->ion_auth->set_error('forgot_password_identity_not_found');
-		            	}
-		            	else
-		            	{
-		            	   $this->ion_auth->set_error('forgot_password_email_not_found');
-		            	}
+        		if($this->config->item('identity', 'ion_auth') != 'email')
+            	{
+            		$this->ion_auth->set_error('forgot_password_identity_not_found');
+            	}
+            	else
+            	{
+            	   $this->ion_auth->set_error('forgot_password_email_not_found');
+            	}
 
-		                $this->session->set_flashdata('message', $this->ion_auth->errors());
-                		redirect("auth/forgot_password", 'refresh');
-            		}
+				$this->responder->fail(($this->ion_auth->errors() ? $this->ion_auth->errors() : "An unknown error occured"))->code(500)->respond();
+				return;
+    		}
 
 			// run the forgotten password method to email an activation code to the user
 			$forgotten = $this->ion_auth->forgotten_password($identity->{$this->config->item('identity', 'ion_auth')});
 
 			if ($forgotten)
 			{
-				// if there were no errors
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect("auth/login", 'refresh'); //we should display a confirmation page here instead of the login page
+				$this->responder->message("Password successfully reset. An email has been sent with instructions")->respond();
+				return;
 			}
 			else
 			{
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
-				redirect("auth/forgot_password", 'refresh');
+				$this->responder->fail(($this->ion_auth->errors() ? $this->ion_auth->errors() : "An unknown error occured"))->code(500)->respond();
+				return;
 			}
 		}
 	}
 
-	// reset password - final step for forgotten password
+	/**
+	 * Resetting a password
+	 * @param string $code Generated Forgotten password code
+	 * @return void
+	 */
 	public function reset_password($code = NULL)
 	{
 		if (!$code)
 		{
-			show_404();
+			$this->responder->fail("Necessary fields were missing")->code(500)->respond();
+			return;
 		}
 
 		$user = $this->ion_auth->forgotten_password_check($code);
@@ -264,35 +284,10 @@ class Auth extends CI_Controller {
 
 			if ($this->form_validation->run() == false)
 			{
-				// display the form
-
-				// set the flash data error message if there is one
-				$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-				$this->data['min_password_length'] = $this->config->item('min_password_length', 'ion_auth');
-				$this->data['new_password'] = array(
-					'name' => 'new',
-					'id'   => 'new',
-					'type' => 'password',
-					'pattern' => '^.{'.$this->data['min_password_length'].'}.*$',
-				);
-				$this->data['new_password_confirm'] = array(
-					'name'    => 'new_confirm',
-					'id'      => 'new_confirm',
-					'type'    => 'password',
-					'pattern' => '^.{'.$this->data['min_password_length'].'}.*$',
-				);
-				$this->data['user_id'] = array(
-					'name'  => 'user_id',
-					'id'    => 'user_id',
-					'type'  => 'hidden',
-					'value' => $user->id,
-				);
-				$this->data['csrf'] = $this->_get_csrf_nonce();
-				$this->data['code'] = $code;
-
-				// render
-				$this->_render_page('auth/reset_password', $this->data);
+				$this->responder->data(array(
+					'csrf' => $this->_get_csrf_nonce()
+				))->respond();
+				return;
 			}
 			else
 			{
@@ -303,7 +298,8 @@ class Auth extends CI_Controller {
 					// something fishy might be up
 					$this->ion_auth->clear_forgotten_password_code($code);
 
-					show_error($this->lang->line('error_csrf'));
+					$this->responder->fail("Invalid Request")->code(500)->respond();
+					return;
 
 				}
 				else
@@ -316,13 +312,12 @@ class Auth extends CI_Controller {
 					if ($change)
 					{
 						// if the password was successfully changed
-						$this->session->set_flashdata('message', $this->ion_auth->messages());
-						redirect("auth/login", 'refresh');
+						$this->responder->message("Password successfully updated")->respond();
+						return;
 					}
 					else
 					{
-						$this->session->set_flashdata('message', $this->ion_auth->errors());
-						redirect('auth/reset_password/' . $code, 'refresh');
+						$this->responder->fail(($this->ion_auth->errors() ? $this->ion_auth->errors() : "An unknown error occured"))->code(500)->respond();
 					}
 				}
 			}
@@ -330,39 +325,16 @@ class Auth extends CI_Controller {
 		else
 		{
 			// if the code is invalid then send them back to the forgot password page
-			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			$this->responder->fail(($this->ion_auth->errors() ? $this->ion_auth->errors() : "An unknown error occured"))->code(500)->respond();
+			return;
 		}
 	}
 
-
-	// activate the user
-	function activate($id, $code=false)
-	{
-		if ($code !== false)
-		{
-			$activation = $this->ion_auth->activate($id, $code);
-		}
-		else if ($this->ion_auth->is_admin())
-		{
-			$activation = $this->ion_auth->activate($id);
-		}
-
-		if ($activation)
-		{
-			// redirect them to the auth page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
-		}
-		else
-		{
-			// redirect them to the forgot password page
-			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
-		}
-	}
-
-	// deactivate the user
+	/**
+	 * Deactivate a user
+	 * @param  integer $id
+	 * @return void
+	 */
 	function deactivate($id = NULL)
 	{
 		if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
@@ -408,9 +380,13 @@ class Auth extends CI_Controller {
 		}
 	}
 
-	// create a new user
+	/**
+	 * Create a user
+	 * @return void
+	 */
 	function create_user()
     {
+		$this->ion_auth->logout();
 		// Check if they are registering as a guest, which limits the required fields for registration
 		$as_guest = false;
 
@@ -445,13 +421,21 @@ class Auth extends CI_Controller {
             $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
-			$name_chunks = explode(' ', $this->input->post('name'));
-            $additional_data = array(
-                'first_name' => $name_chunks[0],
-                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
-				'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
-				'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL),
-            );
+			if($this->input->post('group_id') !== 2)
+			{
+				$name_chunks = explode(' ', $this->input->post('name'));
+	            $additional_data = array(
+	                'first_name' => $name_chunks[0],
+	                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
+					'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
+					'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL),
+	            );
+			} else {
+				$additional_data = array(
+					'first_name' => $this->input->post('name'),
+					'last_name' => ''
+				);
+			}
         }
 
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
@@ -462,9 +446,12 @@ class Auth extends CI_Controller {
 				->subject('Account Successfully Created')
 				->html($this->load->view('auth/email/registration', array(), true))
 				->send();
+			$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
             if($this->ion_auth->login($identity, $password))
 			{
 				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+			} else {
+				$this->responder->fail("An unknown error occured")->code(500)->respond();
 			}
         }
         else
@@ -497,11 +484,6 @@ class Auth extends CI_Controller {
 		{
 			return FALSE;
 		}
-	}
-
-	function debug()
-	{
-		echo json_encode($this->session->userdata());
 	}
 
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
