@@ -3,7 +3,7 @@ tappyn.factory('homeFactory', function($http){
 
 	fact.mailingList = function(email){
 		return $http({
-			method : 'GET',
+			method : 'POST',
 			url : 'index.php/mailing_list',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
