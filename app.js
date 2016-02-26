@@ -57,6 +57,13 @@ tappyn.config(function($routeProvider) {
 	.when('/terms', {
 		templateUrl : 'components/terms_of_service/view.html'
 	})
+	.when('/forgot_pass', {
+		templateUrl : 'components/forgot_pass/view.html'
+	})
+	.when('/reset_pass/:code', {
+		templateUrl : 'components/reset_pass/view.html',
+		controller  : 'resetController'
+	})
 	.otherwise({redirectTo : '/home'})
 
 });
@@ -128,9 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	/** example response
 			if(response.http_status_code == 200){
-				if(response.success){
-					
-				}
+				if(response.success) $scope.set_alert(response.message, "default");	
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -427,19 +432,33 @@ tappyn.factory('homeFactory', function($http){
 
 	return fact;
 });
-tappyn.controller('launchController', function($scope, $location, launchFactory){
+tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory){
 	$scope.steps = {
-		'platform'		 : {step : 'platform', next : 'objective', previous : 'none', fill : 25},
-		'objective'      : {step : 'objective', next : 'detail', previous : 'platform', fill : 50},
-		'detail' 		 : {step : 'detail', next : 'payment', previous : 'objective', fill : 75},
-		'payment'		 : {step : 'payment', next : 'none', previous : 'detail', fill : 100}
+		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 0},
+		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 33},
+		'payment'		 : {step : 'payment',  next : 'none',    previous : 'detail',  fill : 66},
+		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
-	$scope.current = $scope.steps['platform'];
+	$scope.current = $scope.steps['package'];
 
 	$scope.contest = {};
+	$scope.company = {};
+
+	$scope.registering = false;
+
+	$scope.close_register = function(){
+		$rootScope.modal_up = false;
+		$scope.registering = false;
+	}
 
 	$scope.set_step = function(step){
 		$scope.current = $scope.steps[step];
+		if(step == "payment"){
+			if(!$scope.payments && $rootScope.user) $scope.grab_payments();
+		}
+		else if(step == 'detail'){
+			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
+		}
 	}
 
 	$scope.select_objective = function(objective){
@@ -454,17 +473,91 @@ tappyn.controller('launchController', function($scope, $location, launchFactory)
 		$scope.contest.display = display;
 	}
 
-	$scope.submit = function(contest){
-		launchFactory.submission(contest).success(function(response){
+	$scope.grab_profile = function(){
+		launchFactory.grabProfile().success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success){
-					alert("Made it");
-				}
-				else alert(response.message);	 
+				if(response.success) $scope.profile = response.data;
+				else $scope.set_alert(response.message, "default");	 
 			}
-			else if(response.http_status_code == 500) alert(response.error);
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
-		});	
+		})
+	}
+
+	$scope.grab_payments = function(){
+		launchFactory.grabDetails().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.payments = response.data;
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.to_detail = function(contest){
+		if(!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
+		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
+		else $scope.set_step("detail");
+	}
+
+	$scope.submit_contest = function(contest){
+		if(!$rootScope.user){
+			$rootScope.modal_up = true;
+			$scope.registering = true;
+		}
+		else{
+			if(!contest.company_name || contest.company_name == '') $scope.set_alert("Your company name is required", "error");
+			else if(!contest.company_email || contest.company_email == '')  $scope.set_alert("Your company email is required", "error");
+			else if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
+			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
+			else{	
+				launchFactory.submission(contest).success(function(response){
+					if(response.http_status_code == 200){
+						if(response.success){
+							$scope.set_alert(response.message, "default");
+							$scope.set_step('payment');
+						}
+						else $scope.set_alert(response.message, "default");	 
+					}
+					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+					else $scope.check_code(response.http_status_code);
+				});	
+			}
+		}
+	}
+
+	$scope.choose_payment = function(){
+
+	}
+
+	$scope.amazon_connect('tappyn');
+	$scope.select_file = function($files, type){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var new_name = Date.now();
+	    var rando = Math.random() * (10000 - 1) + 1;
+	    new_name = new_name.toString() + rando.toString();
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	if(type == "logo") $scope.company.logo_url = url+new_name;
+	       	else if(type == "pic1") $scope.contest.additional_image_1 = url+new_name;
+	       	else if(type == 'pic2') $scope.contest.additional_image_2 = url+new_name;
+	       	else if(type == 'pic3') $scope.contest.additional_image_3 = url+new_name;
+	    });
 	}
 });
 tappyn.factory('launchFactory', function($http){
@@ -473,12 +566,32 @@ tappyn.factory('launchFactory', function($http){
 	fact.submission = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contest/create',
+			url : 'index.php/contests/create',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param(contest)
 		});	
+	}
+
+	fact.grabProfile = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabDetails = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/accounts/details',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
 	}
 	return fact;
 })
@@ -651,256 +764,14 @@ tappyn.factory("paymentFactory", function($http){
 })
 tappyn.service('paymentModel', function(){
 	this.countries = {
-    'AF' : 'Afghanistan',
-    'AX' : 'Aland Islands',
-    'AL' : 'Albania',
-    'DZ' : 'Algeria',
-    'AS' : 'American Samoa',
-    'AD' : 'Andorra',
-    'AO' : 'Angola',
-    'AI' : 'Anguilla',
-    'AQ' : 'Antarctica',
-    'AG' : 'Antigua And Barbuda',
-    'AR' : 'Argentina',
-    'AM' : 'Armenia',
-    'AW' : 'Aruba',
-    'AU' : 'Australia',
-    'AT' : 'Austria',
-    'AZ' : 'Azerbaijan',
-    'BS' : 'Bahamas',
-    'BH' : 'Bahrain',
-    'BD' : 'Bangladesh',
-    'BB' : 'Barbados',
-    'BY' : 'Belarus',
-    'BE' : 'Belgium',
-    'BZ' : 'Belize',
-    'BJ' : 'Benin',
-    'BM' : 'Bermuda',
-    'BT' : 'Bhutan',
-    'BO' : 'Bolivia',
-    'BA' : 'Bosnia And Herzegovina',
-    'BW' : 'Botswana',
-    'BV' : 'Bouvet Island',
-    'BR' : 'Brazil',
-    'IO' : 'British Indian Ocean Territory',
-    'BN' : 'Brunei Darussalam',
-    'BG' : 'Bulgaria',
-    'BF' : 'Burkina Faso',
-    'BI' : 'Burundi',
-    'KH' : 'Cambodia',
-    'CM' : 'Cameroon',
-    'CA' : 'Canada',
-    'CV' : 'Cape Verde',
-    'KY' : 'Cayman Islands',
-    'CF' : 'Central African Republic',
-    'TD' : 'Chad',
-    'CL' : 'Chile',
-    'CN' : 'China',
-    'CX' : 'Christmas Island',
-    'CC' : 'Cocos (Keeling) Islands',
-    'CO' : 'Colombia',
-    'KM' : 'Comoros',
-    'CG' : 'Congo',
-    'CD' : 'Congo, Democratic Republic',
-    'CK' : 'Cook Islands',
-    'CR' : 'Costa Rica',
-    'CI' : 'Cote D\'Ivoire',
-    'HR' : 'Croatia',
-    'CU' : 'Cuba',
-    'CY' : 'Cyprus',
-    'CZ' : 'Czech Republic',
-    'DK' : 'Denmark',
-    'DJ' : 'Djibouti',
-    'DM' : 'Dominica',
-    'DO' : 'Dominican Republic',
-    'EC' : 'Ecuador',
-    'EG' : 'Egypt',
-    'SV' : 'El Salvador',
-    'GQ' : 'Equatorial Guinea',
-    'ER' : 'Eritrea',
-    'EE' : 'Estonia',
-    'ET' : 'Ethiopia',
-    'FK' : 'Falkland Islands (Malvinas)',
-    'FO' : 'Faroe Islands',
-    'FJ' : 'Fiji',
-    'FI' : 'Finland',
-    'FR' : 'France',
-    'GF' : 'French Guiana',
-    'PF' : 'French Polynesia',
-    'TF' : 'French Southern Territories',
-    'GA' : 'Gabon',
-    'GM' : 'Gambia',
-    'GE' : 'Georgia',
-    'DE' : 'Germany',
-    'GH' : 'Ghana',
-    'GI' : 'Gibraltar',
-    'GR' : 'Greece',
-    'GL' : 'Greenland',
-    'GD' : 'Grenada',
-    'GP' : 'Guadeloupe',
-    'GU' : 'Guam',
-    'GT' : 'Guatemala',
-    'GG' : 'Guernsey',
-    'GN' : 'Guinea',
-    'GW' : 'Guinea-Bissau',
-    'GY' : 'Guyana',
-    'HT' : 'Haiti',
-    'HM' : 'Heard Island & Mcdonald Islands',
-    'VA' : 'Holy See (Vatican City State)',
-    'HN' : 'Honduras',
-    'HK' : 'Hong Kong',
-    'HU' : 'Hungary',
-    'IS' : 'Iceland',
-    'IN' : 'India',
-    'ID' : 'Indonesia',
-    'IR' : 'Iran, Islamic Republic Of',
-    'IQ' : 'Iraq',
-    'IE' : 'Ireland',
-    'IM' : 'Isle Of Man',
-    'IL' : 'Israel',
-    'IT' : 'Italy',
-    'JM' : 'Jamaica',
-    'JP' : 'Japan',
-    'JE' : 'Jersey',
-    'JO' : 'Jordan',
-    'KZ' : 'Kazakhstan',
-    'KE' : 'Kenya',
-    'KI' : 'Kiribati',
-    'KR' : 'Korea',
-    'KW' : 'Kuwait',
-    'KG' : 'Kyrgyzstan',
-    'LA' : 'Lao People\'s Democratic Republic',
-    'LV' : 'Latvia',
-    'LB' : 'Lebanon',
-    'LS' : 'Lesotho',
-    'LR' : 'Liberia',
-    'LY' : 'Libyan Arab Jamahiriya',
-    'LI' : 'Liechtenstein',
-    'LT' : 'Lithuania',
-    'LU' : 'Luxembourg',
-    'MO' : 'Macao',
-    'MK' : 'Macedonia',
-    'MG' : 'Madagascar',
-    'MW' : 'Malawi',
-    'MY' : 'Malaysia',
-    'MV' : 'Maldives',
-    'ML' : 'Mali',
-    'MT' : 'Malta',
-    'MH' : 'Marshall Islands',
-    'MQ' : 'Martinique',
-    'MR' : 'Mauritania',
-    'MU' : 'Mauritius',
-    'YT' : 'Mayotte',
-    'MX' : 'Mexico',
-    'FM' : 'Micronesia, Federated States Of',
-    'MD' : 'Moldova',
-    'MC' : 'Monaco',
-    'MN' : 'Mongolia',
-    'ME' : 'Montenegro',
-    'MS' : 'Montserrat',
-    'MA' : 'Morocco',
-    'MZ' : 'Mozambique',
-    'MM' : 'Myanmar',
-    'NA' : 'Namibia',
-    'NR' : 'Nauru',
-    'NP' : 'Nepal',
-    'NL' : 'Netherlands',
-    'AN' : 'Netherlands Antilles',
-    'NC' : 'New Caledonia',
-    'NZ' : 'New Zealand',
-    'NI' : 'Nicaragua',
-    'NE' : 'Niger',
-    'NG' : 'Nigeria',
-    'NU' : 'Niue',
-    'NF' : 'Norfolk Island',
-    'MP' : 'Northern Mariana Islands',
-    'NO' : 'Norway',
-    'OM' : 'Oman',
-    'PK' : 'Pakistan',
-    'PW' : 'Palau',
-    'PS' : 'Palestinian Territory, Occupied',
-    'PA' : 'Panama',
-    'PG' : 'Papua New Guinea',
-    'PY' : 'Paraguay',
-    'PE' : 'Peru',
-    'PH' : 'Philippines',
-    'PN' : 'Pitcairn',
-    'PL' : 'Poland',
-    'PT' : 'Portugal',
-    'PR' : 'Puerto Rico',
-    'QA' : 'Qatar',
-    'RE' : 'Reunion',
-    'RO' : 'Romania',
-    'RU' : 'Russian Federation',
-    'RW' : 'Rwanda',
-    'BL' : 'Saint Barthelemy',
-    'SH' : 'Saint Helena',
-    'KN' : 'Saint Kitts And Nevis',
-    'LC' : 'Saint Lucia',
-    'MF' : 'Saint Martin',
-    'PM' : 'Saint Pierre And Miquelon',
-    'VC' : 'Saint Vincent And Grenadines',
-    'WS' : 'Samoa',
-    'SM' : 'San Marino',
-    'ST' : 'Sao Tome And Principe',
-    'SA' : 'Saudi Arabia',
-    'SN' : 'Senegal',
-    'RS' : 'Serbia',
-    'SC' : 'Seychelles',
-    'SL' : 'Sierra Leone',
-    'SG' : 'Singapore',
-    'SK' : 'Slovakia',
-    'SI' : 'Slovenia',
-    'SB' : 'Solomon Islands',
-    'SO' : 'Somalia',
-    'ZA' : 'South Africa',
-    'GS' : 'South Georgia And Sandwich Isl.',
-    'ES' : 'Spain',
-    'LK' : 'Sri Lanka',
-    'SD' : 'Sudan',
-    'SR' : 'Suriname',
-    'SJ' : 'Svalbard And Jan Mayen',
-    'SZ' : 'Swaziland',
-    'SE' : 'Sweden',
-    'CH' : 'Switzerland',
-    'SY' : 'Syrian Arab Republic',
-    'TW' : 'Taiwan',
-    'TJ' : 'Tajikistan',
-    'TZ' : 'Tanzania',
-    'TH' : 'Thailand',
-    'TL' : 'Timor-Leste',
-    'TG' : 'Togo',
-    'TK' : 'Tokelau',
-    'TO' : 'Tonga',
-    'TT' : 'Trinidad And Tobago',
-    'TN' : 'Tunisia',
-    'TR' : 'Turkey',
-    'TM' : 'Turkmenistan',
-    'TC' : 'Turks And Caicos Islands',
-    'TV' : 'Tuvalu',
-    'UG' : 'Uganda',
-    'UA' : 'Ukraine',
-    'AE' : 'United Arab Emirates',
-    'GB' : 'United Kingdom',
-    'US' : 'United States',
-    'UM' : 'United States Outlying Islands',
-    'UY' : 'Uruguay',
-    'UZ' : 'Uzbekistan',
-    'VU' : 'Vanuatu',
-    'VE' : 'Venezuela',
-    'VN' : 'Viet Nam',
-    'VG' : 'Virgin Islands, British',
-    'VI' : 'Virgin Islands, U.S.',
-    'WF' : 'Wallis And Futuna',
-    'EH' : 'Western Sahara',
-    'YE' : 'Yemen',
-    'ZM' : 'Zambia',
-    'ZW' : 'Zimbabwe'
+        'CA' : 'Canada',
+        'GB' : 'United Kingdom',
+        'US' : 'United States'
 	};
 })
-tappyn.controller('profileController', function($scope, $rootScope, $upload){
+tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory){
 	$scope.amazon_connect('tappyn');
-	 $scope.select_file = function($files){
+	$scope.select_file = function($files){
 	    var file = $files[0];
 	    var url = 'https://tappyn.s3.amazonaws.com/';
 	    var new_name = Date.now();
@@ -918,17 +789,53 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload){
 	        },
 	        file: file,
 	    }).success(function (){
-	       	$scope.test_file = url+new_name;
+	       	$scope.profile.logo_url = url+new_name;
 	    });
+	}
+	//grab that funky fresh profile on load
+	profileFactory.grabProfile().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success) $scope.profile = response.data;	
+			else $scope.set_alert(response.message, "default");	 
+		}
+		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+		else $scope.check_code(response.http_status_code);
+	})
+
+	$scope.update_profile = function(profile){
+		profileFactory.updateProfile(profile).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
 	}	
 });
 tappyn.factory('profileFactory', function($http){
 	var fact = {};
 
 	fact.grabProfile = function(){
-		
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
 	}
 
+	fact.updateProfile = function(profile){
+		return $http({
+			method : 'POST',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(profile)
+		});
+	}
 	return fact;
 })
 tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
@@ -974,4 +881,59 @@ tappyn.factory("submissionsFactory", function($http){
 	}
 
 	return fact; 
+})
+tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
+	resetFactory.checkCode($routeParams.code).success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success)  $scope.set_alert("Verified, please change your password", "default");
+			else{
+				$scope.set_alert("Unauthorized", "error");
+				$location.path('/login');
+			}
+		}
+		else{
+			$scope.set_alert("Unauthorized", "error");
+			$location.path('/login');
+		}
+	});
+
+	$scope.change_pass = function(pass){
+		resetFactory.changePass(pass).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$location.path('/login')
+				}	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory("resetFactory", function($http){
+	var fact = {};
+
+	fact.checkCode = function(code){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/reset_password/?code='+code,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	fact.changePass = function(pass){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/change_password/',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(pass)
+		})
+	}
+
+	return fact;
 })

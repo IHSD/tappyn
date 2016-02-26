@@ -57,6 +57,13 @@ tappyn.config(function($routeProvider) {
 	.when('/terms', {
 		templateUrl : 'components/terms_of_service/view.html'
 	})
+	.when('/forgot_pass', {
+		templateUrl : 'components/forgot_pass/view.html'
+	})
+	.when('/reset_pass/:code', {
+		templateUrl : 'components/reset_pass/view.html',
+		controller  : 'resetController'
+	})
 	.otherwise({redirectTo : '/home'})
 
 });
@@ -128,9 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	/** example response
 			if(response.http_status_code == 200){
-				if(response.success){
-					
-				}
+				if(response.success) $scope.set_alert(response.message, "default");	
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");

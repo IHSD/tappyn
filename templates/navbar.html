@@ -18,10 +18,9 @@
 	                <ul>
 	                	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
 	                    <li><a href="#/contests">Contests</a></li>
-	                    <!--<li><a href="#/launch">Launch</a></li> -->
+	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">Launch</a></li>
 	                    <li><a href="#/contact_us">Contact Us</a></li>
 	                    <li><a href="#/faq">FAQ</a></li>
-	    				
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
                             <ul uib-dropdown-menu role="menu">
@@ -30,7 +29,7 @@
 	                            <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
                             </ul>
 	                    </li>
-	                    
+	                    <li ng-if='user.is_admin'><a href='/admin'>Admin</a></li>
                         <li ng-if='!user' class='pull-right'><a href="#/login">LOGIN</a></li>
                         <li ng-if='!user' class='pull-right'><a href="#/register">SIGN UP</a></li>
                           
