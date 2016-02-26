@@ -60,8 +60,8 @@
                                         <?php echo $group->name; ?>
                                     <?php endforeach; ?>
                                 </td>
-                                <td><?php echo $user->profile->age; ?></td>
-                                <td><?php echo $user->profile->gender; ?></td>
+                                <td><?php echo isset($user->profile) ? $user->profile->age : ''; ?></td>
+                                <td><?php echo isset($user->profile) ? $user->profile->gender : ''; ?></td>
                                 <td><?php echo $user->submission_count; ?></td>
                             </tr>
                         <?php endforeach; ?>

@@ -29,11 +29,12 @@ class Users extends CI_Controller
         $config['reuse_query_string'] = TRUE;
         $this->pagination->initialize($config);
 
+        // $this->user->join('users_groups', 'users.id = users_groups.user_id', 'left');
+        // $this->user->where('users_groups.group_id', )
         // Set our limit and offset
         $offset = $this->input->get('per_page') ? (($this->input->get('per_page') * $config['per_page']) - $config['per_page']) : 0;
         $this->user->limit($config['per_page']);
         $this->user->offset($offset);
-
         // Set ordering
         if($this->input->get('sort_by') && $this->input->get("sort_dir"))
         {

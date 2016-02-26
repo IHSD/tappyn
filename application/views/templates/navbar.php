@@ -11,9 +11,11 @@
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js" type='text/javascript'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-	</head>
+        <script src="<?php echo base_url().'public/fusion_charts/js/fusioncharts.js' ?>"></script>
+        <script src="<?php echo base_url().'public/fusion_charts/js/fusioncharts.charts.js' ?>"></script>
+
+    </head>
     <header>
 	        <div class="col-sm-3">
 	            <div class="logo">
@@ -31,8 +33,10 @@
 
 	            <nav>
 	                <ul>
-	                	<li><a href="<?php echo base_url().'#/dashboard' ?>">Dashboard</a></li>
-	                    <li><a href="<?php echo base_url().'#/contests' ?>">Contests</a></li>
+	                	<li><a href="<?php echo base_url().'admin/users' ?>">Users</a></li>
+	                    <li><a href="<?php echo base_url().'admin/contests' ?>">Contests</a></li>
+                        <li><a href="<?php echo base_url().'admin/submissions' ?>">Submissions</a></li>
+                        <li><a href="<?php echo base_url().'admin/payments' ?>">Payouts</a></li>
 	                    <!--<li><a href="#/launch">Launch</a></li> -->
 	                    <li><a href="<?php echo base_url().'#/contact_us' ?>">Contact Us</a></li>
 	                    <li><a href="<?php echo base_url().'#/faq' ?>">FAQ</a></li>

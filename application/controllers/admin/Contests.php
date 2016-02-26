@@ -14,6 +14,8 @@ class Contests extends CI_Controller
         $this->load->view('templates/navbar');
         $this->load->model('contest');
         $this->load->model('user');
+        $this->load->model('submission');
+        $this->load->library('vote');
     }
 
     public function index()
@@ -65,6 +67,10 @@ class Contests extends CI_Controller
     {
         $contest = $this->contest->get($cid);
         $contest->submissions = $this->contest->submissions($cid);
+        foreach($contest->submissions as $sub)
+        {
+            $sub->votes = $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $sub->id))->fetch()->row()->count;
+        }
         $this->data['contest'] = $contest;
         $this->load->view('admin/contests/show', $this->data);
     }
@@ -73,6 +79,10 @@ class Contests extends CI_Controller
     {
         $contest = $this->contest->get($cid);
         $contest->submissions = $this->contest->submissions($cid);
+        foreach($contest->submissions as $sub)
+        {
+            $sub->votes = $this->submission->votes($sub->id);
+        }
         $this->data['contest'] = $contest;
     }
 
@@ -81,9 +91,31 @@ class Contests extends CI_Controller
 
     }
 
-    public function update()
+    public function update($contest_id)
     {
+        $this->form_validation->set_rules('platform', 'Platform', 'required');
+        $this->form_validation->set_rules('objective', 'Objective', 'required');
+        $this->form_validation->set_rules('audience', 'Audience', 'required');
+        $this->form_validation->set_rules('different', "Different", 'required');
+        $this->form_validation->set_rules('summary', 'Sumarry', 'required');
+        if($this->form_validation->run() === TRUE)
+        {
+            $data = array(
+                'audience' => $this->input->post('audience'),
+                'different' => $this->input->post('different'),
+                'objective' => $this->input->post('objective'),
+                'platform' => $this->input->post('platform'),
+                'summary' => $this->input->post('summary')
+            );
+        }
 
+        if($this->form_validation->run() === TRUE && $this->contest->update($contest_id, $data))
+        {
+            $this->session->set_flashdata('message', 'Contest succesfully updated');
+        } else {
+            $this->session->set_flashdata('error', (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : "An unknown error occured")));
+        }
+        redirect("admin/contests/show/{$contest_id}", 'refresh');
     }
 
     public function delete()

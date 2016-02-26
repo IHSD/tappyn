@@ -56,13 +56,15 @@
                         </form>
                         <?php else: ?>
                         <form class='form-horizontal'>
-
+                            <h4>Editing a companys profile</h4>
                         </form>
                         <?php endif; ?>
                     </div>
                     <div class='col-sm-4'>
+                        <?php if($this->ion_auth->in_group($user->id)): ?>
                         <h4>Age : <?php echo $user->profile->age; ?></h4>
                         <h4>Gender : <?php echo $user->profile->gender; ?></h4>
+                    <?php endif; ?>
                     </div>
                 </div>
             </div>

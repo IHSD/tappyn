@@ -92,4 +92,4 @@ $route['contests/(:num)/submissions'] = 'submissions/index/$1';
 /**
  * Admin
  */
-$route['admin']['get'] = 'admin/users/index';
+$route['admin']['get'] = 'admin/home/index';
