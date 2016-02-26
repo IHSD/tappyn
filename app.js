@@ -191,6 +191,18 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 			else $scope.check_code(response.http_status_code);
 		})
 	}
+
+	$scope.forgot_pass = function(email){
+		AppFact.forgotPass(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
 });
 
 tappyn.factory("AppFact", function($http){
@@ -238,7 +250,14 @@ tappyn.factory("AppFact", function($http){
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}
-
+	fact.forgotPass = function(email){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/forgot_password',
+			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
+			data : $.param({identity : email})
+		});	
+	}
 	fact.aws_key = function(bucket){
         return $http({
             method:'POST',
@@ -421,7 +440,7 @@ tappyn.factory('homeFactory', function($http){
 
 	fact.mailingList = function(email){
 		return $http({
-			method : 'GET',
+			method : 'POST',
 			url : 'index.php/mailing_list',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
