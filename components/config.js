@@ -57,6 +57,13 @@ tappyn.config(function($routeProvider) {
 	.when('/terms', {
 		templateUrl : 'components/terms_of_service/view.html'
 	})
+	.when('/forgot_pass', {
+		templateUrl : 'components/forgot_pass/view.html'
+	})
+	.when('/reset_pass/:code', {
+		templateUrl : 'components/reset_pass/view.html',
+		controller  : 'resetController'
+	})
 	.otherwise({redirectTo : '/home'})
 
 });
