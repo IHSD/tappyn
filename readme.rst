@@ -28,5 +28,5 @@ secrets.php             -> Environment variables necessary for 3rd party vendors
                         * As of now this is not being used
 
 ***************
-Resources
+Resource
 *************
