@@ -20,10 +20,10 @@ class Stripe_charge extends CI_Model
             'contest_id' => $contest_id,
             'amount' => $charge->amount,
             'captured' => 1,
-            'created' => $charge->time,
+            'created' => $charge->created,
             'currency' => $charge->currency,
             'description' => $charge->description,
-            'source' => $charge->source,
+            'source' => $charge->source->id,
             'status' => $charge->status
         ));
     }

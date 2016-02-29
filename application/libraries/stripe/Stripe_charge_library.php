@@ -9,6 +9,7 @@ class stripe_charge_library
         $this->api_key = $this->config->item('stripe_api_key');
         \Stripe\Stripe::setApiKey($this->api_key);
         $this->load->library('stripe/stripe_transfer_library');
+        $this->load->model('stripe/stripe_charge');
     }
 
     public function __get($var)
