@@ -142,6 +142,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
       var $form = $('#payment-form');
 
       if(response.error){
+   		console.log("We in this bitch");
         $scope.set_alert(response.error.message, "error");
         $scope.form_disabled = false;
       } 
@@ -153,6 +154,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
 					$scope.set_step("done");
+					$scope.form_disabled = false;
 				}
 				else $scope.set_alert(res.message, "default");	 
 			}
