@@ -109,7 +109,7 @@ class Companies extends CI_Controller
                 $this->data['error'] = ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : "An unknown error occured");
             }
         }
-        else if($this->input->post('stripeToken'))
+        else if($this->input->post('stripeToken') && $this->input->post('remember_me'))
         {
             // We're going to create a new customer altogether
             if($customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripeToken')))
@@ -120,6 +120,7 @@ class Companies extends CI_Controller
                 $this->data['error'] = $this->stripe_customer_library->errors();
             }
         }
+
         $this->data['customer'] = NULL;
 
         // After any proccessing, we fetch the updated customer to then show the user
@@ -226,7 +227,7 @@ class Companies extends CI_Controller
         // Check if charge was succesful and handle accordingly
         if($charge)
         {
-            $this->contest->update($id, array('paid' => 1));
+            $this->contest->update($contest_id, array('paid' => 1));
 
             $this->responder->message(
                 "Your payment was successfully processed!"

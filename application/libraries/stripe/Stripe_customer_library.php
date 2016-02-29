@@ -2,7 +2,7 @@
 
 class Stripe_customer_library
 {
-    protected $error;
+    protected $errors;
     protected $api_key;
     public function __construct()
     {
