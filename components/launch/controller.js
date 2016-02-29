@@ -54,7 +54,10 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	$scope.grab_payments = function(){
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.payments = response.data;
+				if(response.success){
+					if(response.data.account == false) $scope.adding_payment = true;
+					else $scope.payments = response.data.account.external_accounts.data;
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -127,23 +130,10 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 		});
 	}
 
-	$scope.new_payment = function(){
-		// This identifies your website in the createToken call below
-		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $('#payment-form');
-
-        // Disable the submit button to prevent repeated clicks
-        $scope.form_disabled = true;
-
-		Stripe.card.createToken($form, stripeResponseHandler);
-	}
-
-	function stripeResponseHandler(status, response) {
-      var $form = $('#payment-form');
-
+	var stripeResponseHandler = function(status, response) {
       if(response.error){
-   		console.log("We in this bitch   "+response.error);
-        $scope.set_alert(response.error.message, "error");
+      	var erroring = (response.error.message).toString();
+   		alert(response.error.message);
         $scope.form_disabled = false;
       } 
       else{
@@ -164,6 +154,17 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
       }
     }
 
+
+	$scope.new_payment = function(){
+		// This identifies your website in the createToken call below
+		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+		var $form = $('#payment-form');
+
+        // Disable the submit button to prevent repeated clicks
+        $scope.form_disabled = true;
+
+		Stripe.card.createToken($form, stripeResponseHandler);
+	}
 
 	$scope.amazon_connect('tappyn');
 	$scope.select_file = function($files, type){
