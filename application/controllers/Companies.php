@@ -194,21 +194,21 @@ class Companies extends CI_Controller
         $this->load->library('stripe/stripe_charge_library');
         $this->load->library('stripe/stripe_customer_library');
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
-        if($this->input->post('stripeToken'))
+        if($this->input->post('stripe_token'))
         {
             if($this->input->post('save_method'))
             {
                 // Update the customer with the new payment method, and get the source id
                 if($this->stripe_customer_id)
                 {
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripeToken')));
+                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
                     $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 100);
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
                 else
                 {
                     // Create the customer
-                    $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripeToken'), $this->ion_auth->user()->row()->email);
+                    $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripe_token'), $this->ion_auth->user()->row()->email);
                     // Charge the customer_id
                     $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 100);
                 }
@@ -216,7 +216,7 @@ class Companies extends CI_Controller
             // The user does not want to save the method, so we just charge the card
             else
             {
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripeToken'), NULL, NULL, 100);
+                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), NULL, NULL, 100);
             }
         }
 
@@ -228,7 +228,7 @@ class Companies extends CI_Controller
         // Tell them we cant process their request
         else
         {
-            $this->responder->fail("We were unable to process your request")->code(400)->respond();
+            $this->responder->fail("We were unable to process your request")->code(500)->respond();
             return;
         }
 
