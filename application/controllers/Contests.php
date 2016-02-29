@@ -103,7 +103,7 @@ class Contests extends CI_Controller
             if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
             if(!empty($images)) $data['additional_images'] = json_encode($images);
         }
-        if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
+        if($this->form_validation->run() == true) && ($cid = $this->contest->create($data)))
         {
             $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
         }
@@ -199,5 +199,15 @@ class Contests extends CI_Controller
             )->code(500)->respond();
             return;
         }
+    }
+
+    /**
+     * [update description]
+     * @param  integer $cid ID of the contest to update
+     * @return void
+     */
+    public function update($cid = NULL)
+    {
+        
     }
 }
