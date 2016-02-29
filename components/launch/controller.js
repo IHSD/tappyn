@@ -1,4 +1,4 @@
-tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory){
+tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory, AppFact){
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 0},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 33},
@@ -9,6 +9,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 
 	$scope.contest = {};
 	$scope.company = {};
+	$scope.save_method = false;
 
 	$scope.registering = false;
 
@@ -73,9 +74,8 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 			$scope.registering = true;
 		}
 		else{
-			if(!contest.company_name || contest.company_name == '') $scope.set_alert("Your company name is required", "error");
-			else if(!contest.company_email || contest.company_email == '')  $scope.set_alert("Your company email is required", "error");
-			else if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
 			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
 			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{	
@@ -83,6 +83,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 					if(response.http_status_code == 200){
 						if(response.success){
 							$scope.set_alert(response.message, "default");
+							$scope.contest.id = response.data.id;
 							$scope.set_step('payment');
 						}
 						else $scope.set_alert(response.message, "default");	 
@@ -94,9 +95,73 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 		}
 	}
 
-	$scope.choose_payment = function(){
-
+	$scope.create_company = function(registrant){
+		registrant.group_id = 3;
+		AppFact.signUp(registrant).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$rootScope.modal_up = false;
+					$scope.registering = false;
+					$scope.submit_contest($scope.contest);
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
 	}
+
+	$scope.old_payment = function(id){
+		launchFactory.payContest($scope.contest.id, {source_id : id}).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.set_step("done");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.new_payment = function(){
+		// This identifies your website in the createToken call below
+		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+		var $form = $('#payment-form');
+
+        // Disable the submit button to prevent repeated clicks
+        $scope.form_disabled = true;
+
+		Stripe.card.createToken($form, stripeResponseHandler);
+	}
+
+	function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+
+      if(response.error){
+        $scope.set_alert(response.error.message, "error");
+        $scope.form_disabled = false;
+      } 
+      else{
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method}).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.set_alert(res.message, "default");	
+					$scope.set_step("done");
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
+      }
+    }
+
 
 	$scope.amazon_connect('tappyn');
 	$scope.select_file = function($files, type){

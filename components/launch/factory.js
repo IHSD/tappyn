@@ -12,6 +12,17 @@ tappyn.factory('launchFactory', function($http){
 		});	
 	}
 
+	fact.update = function(contest){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contests/update/'+contest.id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(contest)
+		});	
+	}
+
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',
@@ -29,6 +40,17 @@ tappyn.factory('launchFactory', function($http){
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
+		})	
+	}
+
+	fact.payContest = function(id, obj){
+		return $http({
+			method : 'POST',
+			url : 'index.php/companies/payment/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(obj) 
 		})	
 	}
 	return fact;
