@@ -91,6 +91,15 @@ tappyn.filter('capitalize', function() {
   }
 });
 
+tappyn.filter('firstChar', function() {
+  return function(input) {
+    if (input!=null){
+    	input = input.toLowerCase();
+    	return input.substring(0,1).toUpperCase();
+    }
+  }
+});
+
 tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 

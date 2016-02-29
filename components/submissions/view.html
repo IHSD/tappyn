@@ -1,3 +1,71 @@
+<div class='wrapper'>
+	<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3' ng-show='as_guest'>
+		<div class='col-xs-12 text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
+			<div class='col-xs-12'><h3 style='margin-top:5px;' class='pull-right'><span style='cursor:pointer' ng-click='close_guest()'>X</span></h3></div>
+			<img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:5px;'>
+			<div ng-show='!by_email'>	
+				<h3 style='margin-top:5px;'>Sign In to Upvote</h3>
+				<h4>How can we credit you for upvoting if we don't know who you are? Please sign in to upvote along with these other community members</h4>
+				<div class='community_images'>
+					<img src='public/img/community1.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+					<img src='public/img/TappynFB2.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+					<img src='public/img/TappynFB5.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+					<img src='public/img/TappynFB4.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+					<img src='public/img/TappynFB3.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+					<img src='public/img/TappynFB6.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>	
+				</div>
+				<div ng-show='!by_email' style='margin-top:10px;'>
+			        <a id='fb-login' href="index.php/auth/facebook?vote=1&cid={{contest.id}}&sid={{pass_id}}">
+			            <img height='30px' style='border-radius: 5px;' src="public/img/img-facebook.png">
+			        </a>
+		    	</div>
+		    	<h5>We will never post on your Facebook without your permission</h5>
+		    </div>
+	    	<form ng-show='by_email' class='form' ng-submit='sign_up_guest(registrar)'>
+	            <div class='col-xs-12'>
+		            <div class='form-group'>
+		              <input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
+		            </div>
+	            </div>
+	            <div class='col-xs-6'>
+	              <div class='form-group'>
+	                  <select ng-model='registrar.age' class='form-control'>
+	                  		<option value=''>Age</option>
+	                  		<option value='18-24'>18-24</option>
+	                  		<option value='25-34'>25-34</option>
+	                  		<option value='35-44'>35-44</option>
+	                  		<option value='45+'>45+</option>
+	                  </select>
+	              </div>
+	            </div>
+	            <div class='col-xs-6'>
+	              <div class='form-group'>
+	                  <select class='form-control' ng-model='registrar.gender'>
+	                  		<option value=''>Gender</option>
+	                  		<option value='male'>Male</option>
+	                  		<option value='female'>Female</option>
+	                  </select>
+	              </div>
+	            </div>
+	            <div class='col-xs-12'>
+		            <div class='form-group'>
+		                 <input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
+		            </div>
+		        </div>           
+	            <div class='col-xs-12'>
+		            <div class='form-group'>
+		            	<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+		            </div>
+		        </div>            
+	            
+				<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+			</form>
+	    	<a style='cursor:pointer;' ng-show='!by_email' ng-click='by_email = true'>Sign up via email</a>
+	    	<a style='cursor:pointer;' ng-show='by_email' ng-click='by_email = false'>Sign up via Facebook</a>
+		</div>
+	</div>
+</div>
+
 <div class='row'>
 	<div class='col-xs-12' style='padding-top:10px'>
 		<div class='panel'>
@@ -37,20 +105,23 @@
 <div class='row' style='padding-bottom:10px;'>
 	<div class='col-sm-4 col-xs-12' ng-repeat='submission in submissions'>
 		<div class="contest-box" style='min-height:350px; max-height:350px;'>
-			<div class='col-sm-8 col-xs-12'>
+			<div class='col-xs-12'>
 					<h3>{{submission.headline}}</h3>
 					<div class="contest-content">
 					    <span>{{submission.text}}</span>
 					</div>
+					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 			</div>
             <div class="contest-info">
-                <h5>{{submission.owner.name}}</h5>
                 <h5>
                 	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
                 		{{submission.created_at | legibleDate}}
                 	</span>
-                	<img ng-show='!submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-                	<img ng-show='submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
+                	<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;border-top:1px #ff6c00 solid;border-left:1px #ff6c00 solid;border-radius:2px;'>
+                		<h4 style='padding-left:5px;' class='text-left'>{{submission.votes | number}}</h4>
+	                	<img ng-if='!submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+	                	<img ng-click='upvote(submission)' ng-if='submission.user_may_vote' style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
+	                </div>
                	</h5>
             </div>
         <!-- Generate a select as winner button if campaign is over and user owns contest -->

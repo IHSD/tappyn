@@ -91,6 +91,15 @@ tappyn.filter('capitalize', function() {
   }
 });
 
+tappyn.filter('firstChar', function() {
+  return function(input) {
+    if (input!=null){
+    	input = input.toLowerCase();
+    	return input.substring(0,1).toUpperCase();
+    }
+  }
+});
+
 tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 
@@ -268,6 +277,26 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller('contestsController', function($scope, contestsFactory){
+	contestsFactory.grabContests().success(function(response){
+		$scope.contests = response.data;
+	});
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('contestController', function($scope, $rootScope, $routeParams, $location, contestFactory, AppFact){
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -343,26 +372,6 @@ tappyn.factory('contestFactory', function($http){
 			},
 			'data' : $.param(submission)
 		});	
-	}
-
-	return fact;
-})
-tappyn.controller('contestsController', function($scope, contestsFactory){
-	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data;
-	});
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
 	}
 
 	return fact;
@@ -451,7 +460,7 @@ tappyn.factory('homeFactory', function($http){
 
 	return fact;
 });
-tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory){
+tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory, AppFact){
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 0},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 33},
@@ -462,6 +471,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 
 	$scope.contest = {};
 	$scope.company = {};
+	$scope.save_method = false;
 
 	$scope.registering = false;
 
@@ -526,9 +536,8 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 			$scope.registering = true;
 		}
 		else{
-			if(!contest.company_name || contest.company_name == '') $scope.set_alert("Your company name is required", "error");
-			else if(!contest.company_email || contest.company_email == '')  $scope.set_alert("Your company email is required", "error");
-			else if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
 			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
 			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{	
@@ -536,6 +545,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 					if(response.http_status_code == 200){
 						if(response.success){
 							$scope.set_alert(response.message, "default");
+							$scope.contest.id = response.data.id;
 							$scope.set_step('payment');
 						}
 						else $scope.set_alert(response.message, "default");	 
@@ -547,9 +557,73 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 		}
 	}
 
-	$scope.choose_payment = function(){
-
+	$scope.create_company = function(registrant){
+		registrant.group_id = 3;
+		AppFact.signUp(registrant).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$rootScope.modal_up = false;
+					$scope.registering = false;
+					$scope.submit_contest($scope.contest);
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
 	}
+
+	$scope.old_payment = function(id){
+		launchFactory.payContest($scope.contest.id, {source_id : id}).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.set_step("done");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.new_payment = function(){
+		// This identifies your website in the createToken call below
+		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+		var $form = $('#payment-form');
+
+        // Disable the submit button to prevent repeated clicks
+        $scope.form_disabled = true;
+
+		Stripe.card.createToken($form, stripeResponseHandler);
+	}
+
+	function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+
+      if(response.error){
+        $scope.set_alert(response.error.message, "error");
+        $scope.form_disabled = false;
+      } 
+      else{
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method}).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.set_alert(res.message, "default");	
+					$scope.set_step("done");
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
+      }
+    }
+
 
 	$scope.amazon_connect('tappyn');
 	$scope.select_file = function($files, type){
@@ -593,6 +667,17 @@ tappyn.factory('launchFactory', function($http){
 		});	
 	}
 
+	fact.update = function(contest){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contests/update/'+contest.id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(contest)
+		});	
+	}
+
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',
@@ -610,6 +695,17 @@ tappyn.factory('launchFactory', function($http){
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
+		})	
+	}
+
+	fact.payContest = function(id, obj){
+		return $http({
+			method : 'POST',
+			url : 'index.php/companies/payment/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(obj) 
 		})	
 	}
 	return fact;
@@ -857,50 +953,6 @@ tappyn.factory('profileFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller("submissionsController", function($scope, $routeParams, contestFactory, submissionsFactory){
-	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.submissions = response.data.submissions;
-	});
-
-
-	$scope.choose_winner = function(id){
-		submissionsFactory.chooseWinner($scope.contest.id, id).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-});
-tappyn.factory("submissionsFactory", function($http){
-	var fact = {};
-
-	fact.grabSubmissions = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/submissions/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.chooseWinner = function(contest, id){
-		return $http({
-			method : 'POST',
-			url : 'index.php/contests/select_winner/'+contest,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({submission : id})
-		});
-	}
-
-	return fact; 
-})
 tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
 	resetFactory.checkCode($routeParams.code).success(function(response){
 		if(response.http_status_code == 200){
@@ -959,4 +1011,83 @@ tappyn.factory("resetFactory", function($http){
 	}
 
 	return fact;
+})
+tappyn.controller("submissionsController", function($scope, $rootScope, $routeParams, contestFactory, submissionsFactory){
+	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.submissions = response.data.submissions;
+	});
+
+
+	$scope.choose_winner = function(id){
+		submissionsFactory.chooseWinner($scope.contest.id, id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.close_guest = function(){
+		$scope.as_guest = false;
+        $rootScope.modal_up = false;
+	}
+
+	$scope.upvote = function(submission){
+		if(!$rootScope.user){
+			$scope.pass_id = submission.id;
+			$scope.as_guest = true;
+			$rootScope.modal_up = true;
+		}
+		else {	
+			submissionsFactory.upvote($scope.contest.id,submission.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");
+					}	
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			})
+		}
+	}
+});
+tappyn.factory("submissionsFactory", function($http){
+	var fact = {};
+
+	fact.grabSubmissions = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/submissions/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.chooseWinner = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contests/select_winner/'+contest,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({submission : id})
+		});
+	}
+
+	fact.upvote = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/votes/create',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({contest_id : contest, submission_id : id})
+		});
+	}
+	return fact; 
 })
