@@ -95,6 +95,7 @@ class Contests extends CI_Controller
                 'age'               => $this->input->post('age'),
                 'gender'            => $this->input->post('gender'),
                 'owner'             => $this->ion_auth->user()->row()->id,
+                'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days'))
             );
