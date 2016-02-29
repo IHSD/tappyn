@@ -183,6 +183,14 @@ class Companies extends CI_Controller
             return;
         }
 
+        // Check that the contest has not aleady been paid for
+        $check = $this->db->select('*')->from('stripe_charges')->where('contest_id', $contest_id)->get();
+        if($check && $check->num_rows() > 0)
+        {
+            $this->responder->fail("That contest has already been paid for")->code(500)->respond();
+            return;
+        }
+
         $this->load->library('stripe/stripe_charge_library');
         $this->load->library('stripe/stripe_customer_library');
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
@@ -215,7 +223,7 @@ class Companies extends CI_Controller
         // Check if we have a customer, and chosen source
         else if($this->input->post('source_id') && $this->stripe_customer_id)
         {
-            $charge = $this->stripe_transfer_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 9999);
+            $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 9999);
         }
         // Tell them we cant process their request
         else
@@ -234,6 +242,7 @@ class Companies extends CI_Controller
             )->respond();
             return;
         }
+
         // An error occured, so respond as such
         else
         {
