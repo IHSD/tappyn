@@ -42,6 +42,7 @@ class Contest extends MY_Model
             $contest = $contest->row();
             $contest->submission_count = $this->submissionsCount($contest->id);
             $contest->company = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->limit(1)->get()->row();
+            $contest->needs_winner = $this->needsWinner($contest->id);
             return $contest;
         }
         return false;
@@ -127,6 +128,16 @@ class Contest extends MY_Model
         return FALSE;
     }
 
+    public function needsWinner($cid)
+    {
+        $check = $this->db->select('*')->from('payouts')->where('contest_id', $cid)->limit(1)->get();
+        if($check && $check->num_rows() == 0)
+        {
+            return TRUE;
+        }
+        return FALSE;
+
+    }
     public function update($id, $data)
     {
         return $this->db->where('id', $id)->update('contests', $data);

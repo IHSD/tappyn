@@ -10,7 +10,7 @@ class Home extends CI_Controller
           // redirect('/', 'refresh');
         }
         if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-        	$this->load->view('templates/navbar');
+        	//$this->load->view('templates/navbar');
         }
         $this->load->model('submission');
         $this->load->model('contest');
@@ -34,5 +34,30 @@ class Home extends CI_Controller
     public function index()
     {
         $this->load->view('admin/index.php');
+    }
+
+    public function email()
+    {
+        $path = 'emails/';
+        $template = $this->input->get('template');
+        if($this->input->get('auth'))
+        {
+            $path = 'auth/email/';
+        }
+        $args = array(
+            'text' => lorem(),
+            'headline' => substr(lorem(), 0, 45),
+            'email' => 'rob@ihsdigital.com',
+            'contest' => 'Some random contest',
+            'company' => 'Nike',
+            'cid'     => 1,
+            'contests' => array(
+                array(
+                    'company' => uniqid(),
+                    'description' => substr(lorem(), 0, 45)
+                )
+            )
+        );
+        $this->load->view($path.$template.'.php', $args);
     }
 }
