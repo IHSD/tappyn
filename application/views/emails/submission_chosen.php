@@ -4,7 +4,7 @@
     <img align='center' height='75' src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
 </p>
 
-<h3 style='text-align:center'>Congratulations!</h3>
+<h2 style='text-align:center'>BOOM. WHAM. LIFT OFF.</h2>
 
 <p style='text-align:center'>Your submission for <?php echo $contest->title.' by '.$company->name; ?> won $50!</p>
 

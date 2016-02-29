@@ -4,23 +4,28 @@
     <img align='center' height='75' src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
 </p>
 
-<h3 style='text-align:center'>Boom. You're registered.</h3>
-
-<h3 style='text-align:center'>You just Tapped In.</h3>
-
-<p style='text-align:center'>
-    Great news - your Tappyn account has successfully been created!
+<h2 style='text-align:center;margin:auto;width:600px'>You are now an esteemed member of Tappyn. Welcome.</h2>
+<br>
+<p style='text-align:justify;margin:auto;width:600px'>
+    Big day. Some preparatory cheat curls are definitely in order. You are now a member of the soon-to-be-world-famous Tappyn mailing list. This is a once in a lifetime opportunity.
 </p>
-
-<p style='text-align:center'>Please take a moment to update your account profile! This enables us to
-    find contests that best suit you!
+<br>
+<p style='text-align:justify;margin:auto;width:600px'>
+    We keep it simple. We send you e-mails confirming your submissions and when a contest is launched we think you'll like. For example, if you love Tequila, we're not e-mailing you about a Burnett's contest. If you love working out, we'll leave you off the BK list.
 </p>
-
-<p style='text-align:center'>
-    In order to collect your winnings and keep up with the contests,<br>
-    login to your account here: <br>
-<p style='text-align:center'>
-    <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'#/dashboard'; ?>">
-        Dashboard
-    </a>
-<p>
+<br>
+<p style='text-align:justify;margin:auto;width:600px'>
+    Here at Tappyn, it's all about genius and reward. We took your most fervent passions and let you get creative with them. Who knows when that moment of genius will strike? Maybe it's amidst a FIFA 2006 game. Maybe it's at 2:33am next to a Chai Latte. No matter the circumstance, we're here for you when it does.
+</p>
+<br>
+<h4 style='text-align:center;margin:auto;width:600px;'>
+    PRO TIP:
+</h4>
+<br>
+<p style='text-align:center;margin:auto;width:600px;'>
+    f you think some your friends are creative or maybe you've been looking for an excuse to talk to the guy with the Warby Parker glasses in your marketing class, share this link so they can too sign up and join the mailing list. We give away money, discounts, and most importantly, recognition to the Tappyn mailing list, so get after it!
+</p>
+<br>
+<p style='text-align:center;margin:auto;width:600px;'>
+    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+</p>
