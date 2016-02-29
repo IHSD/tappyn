@@ -21,7 +21,8 @@ class Contests extends CI_Controller
     {
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s')
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1
         );
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);

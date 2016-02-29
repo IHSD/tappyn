@@ -4,6 +4,15 @@
  * Number of times a user can submit to a contest
  * Set to FALSE to disable
  */
+$config['achievements'] = array(
+    'new_user' => 0,
+    'bronze' => 200,
+    'silver' => 500,
+    'gold' => 1000,
+    'platinum' => 2000,
+    'double_platinum' => 3500,
+    'triple_platinum' => 5000
+);
 $config['upvotes_per_contest'] = 3;
 $config['leaderboard_limit'] = 5;
 /*====================================
