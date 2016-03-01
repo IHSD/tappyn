@@ -83,8 +83,10 @@ class Auth extends CI_Controller {
 									   $this->session->userdata('contest_id'),
 									   $this->ion_auth->user()->row()->id))
 				{
+					error_log("Vote created");
 					$this->session->set_flashdata('message', "Vote succesful!");
 				} else {
+					error_log("Error creating vote");
 					$this->session->set_flashdata('error', ($this->vote->errors() ? $this->vote->errors() : "An unknown error occured"));
 				}
 				redirect("/#/submissions/".$this->session->flashdata('contest_id'), 'refresh');
