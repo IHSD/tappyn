@@ -86,7 +86,7 @@ class Contest extends MY_Model
         $submissions = $submissions->result();
         foreach($submissions as $submission)
         {
-            $submission->owner = $this->db->select('first_name, last_name, email')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
         }
         return $submissions;
     }
