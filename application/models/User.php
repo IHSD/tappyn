@@ -98,9 +98,11 @@ class User extends MY_Model
     public function attribute_points($id, $amount)
     {
         $points = (int)$amount;
-        return $this->db->where('id', $id)->update($this->table, array(
+        $check = $this->db->where('id', $id)->update($this->table, array(
             'points' => "points + {$amount}"
         ));
+        error_log($this->db->last_query());
+        return $check
     }
 
     /**
