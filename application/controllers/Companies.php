@@ -16,6 +16,7 @@ class Companies extends CI_Controller
         $this->load->model('user');
         $this->load->model('contest');
         $this->config->load('secrets');
+        $this->load->library('payout');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
         $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
