@@ -24,6 +24,7 @@ class Contests extends CI_Controller
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
+        if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
         $config['per_page'] = 20;
