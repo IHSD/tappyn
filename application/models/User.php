@@ -117,4 +117,9 @@ class User extends MY_Model
 
         return (int) $this->db->get()->row()->count;
     }
+
+    public function errors()
+    {
+        return $this->errors;
+    }
 }
