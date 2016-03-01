@@ -16,6 +16,7 @@ class Companies extends CI_Controller
         $this->load->model('user');
         $this->load->model('contest');
         $this->config->load('secrets');
+        $this->load->library('payout');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
         $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
@@ -25,29 +26,31 @@ class Companies extends CI_Controller
     {
         if($this->ion_auth->in_group(2))
         {
-            redirect("users/dashboard", 'refresh');
+            redirect("users/dashboard");
         }
 
         $this->data['status'] = 'all';
 
-        if($this->input->post('type') === 'completed')
+        if($this->input->get('type') === 'completed' || $this->input->get('type') === 'need_winner')
         {
             $this->contest->where('stop_time <',date('Y-m-d H:i:s'));
         }
-        else if($this->input->post('type') === 'in_progress')
+        else if($this->input->get('type') === 'in_progress')
         {
             $this->contest->where(array(
                 'start_time <' => date('Y-m-d H:i:s'),
                 'stop_time >' => date('Y-m-d H:i:s')
             ));
         }
+
         // Make sure we only grab ones belonging to the user
         $this->contest->where('contests.owner', $this->ion_auth->user()->row()->id);
         $contests = $this->contest->fetch();
         if($contests !== FALSE)
         {
+            $contests = $this->contest->result();
             // Check the input type
-            if($this->input->post('type') === 'need_winner')
+            if($this->input->get('type') === 'need_winner')
             {
                 foreach($contests as $key => $contest)
                 {
@@ -57,7 +60,10 @@ class Companies extends CI_Controller
                     }
                 }
             }
-
+            foreach($contests as $contest)
+            {
+                $contest->submission_count = $this->contest->submissionsCount($contest->id);
+            }
             $this->responder->data(
                 array(
                     'contests' => $contests

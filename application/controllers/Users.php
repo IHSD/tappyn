@@ -31,7 +31,7 @@ class Users extends CI_Controller
         // If company, redirect to companies controller
         if($this->ion_auth->in_group(3))
         {
-            redirect("companies/dashboard", 'refresh');
+            redirect("companies/dashboard?type={$this->input->get('type')}");
         }
         $this->data['status'] = 'all';
 
@@ -77,6 +77,7 @@ class Users extends CI_Controller
             $submissions = $submissions->result();
             foreach($submissions as $submission)
             {
+
                 $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             }
             $this->responder->data(
@@ -96,37 +97,55 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-        if(!$this->ion_auth->in_group(2))
-        {
-            redirect("companies/profile");
-        }
+
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-
-            $data = array(
-                'age' => $this->input->post('age_range'),
-                'gender' => $this->input->post('gender'),
-                'state' => $this->input->post('state'),
-                'school' => $this->input->post('school')
-            );
-
-            if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+            if($this->ion_auth->in_group(2))
             {
-                $this->responder
-                    ->fail("There was an error updating your profile")
-                    ->code(500)
-                    ->respond();
-                return;
+                $data = array(
+                    'age' => $this->input->post('age_range'),
+                    'gender' => $this->input->post('gender'),
+                    'state' => $this->input->post('state'),
+                    'school' => $this->input->post('school')
+                );
+
+                if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                {
+                    $this->responder
+                        ->fail("There was an error updating your profile")
+                        ->code(500)
+                        ->respond();
+                    return;
+                } else {
+                    $this->responder
+                        ->message(
+                            'Profile was successfully updated'
+                        )
+                        ->data(array(
+                            'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+                        ))
+                        ->respond();
+                    return;
+                }
             } else {
-                $this->responder
-                    ->message(
-                        'Profile was successfully updated'
-                    )
-                    ->data(array(
-                        'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
-                    ))
-                    ->respond();
-                return;
+                $data = array(
+                    'logo_url' => $this->input->post('logo_url'),
+                    'mission' => $this->input->post('mission'),
+                    'extra_info' => $this->input->post('extra_info'),
+                    'name' => $this->input->post('name'),
+                    'company_email' => $this->input->post('company_email'),
+                    'company_url' => $this->input->post('company_url'),
+                    'twitter_handle' => $this->input->post('twitter_handle'),
+                    'facebook_url' => $this->input->post('facebook_url'),
+                    'different' => $this->input->post('different'),
+                    'summary' => $this->input->post('summary')
+                );
+                if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
+                {
+                    $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
+                } else {
+                    $this->responder->fail(($this->user->errors() ? $this->user->errors() : "There was an error updating your profile"))->code(500)->respond();
+                }
             }
         } else {
             $profile = $this->user->profile($this->ion_auth->user()->row()->id);

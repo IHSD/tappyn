@@ -49,7 +49,8 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
-                    $this->errors = "An unexpected error occured";
+                    error_log($this->db->error()['message']);
+                    $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
             else
@@ -59,7 +60,8 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
-                    $this->errors = "An unexpected error occured";
+                    error_log($this->db->error()['message']);
+                    $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
         }
@@ -116,5 +118,10 @@ class User extends MY_Model
         if(!empty($like)) $this->db->like($like);
 
         return (int) $this->db->get()->row()->count;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }

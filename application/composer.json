@@ -3,7 +3,8 @@
         "paypal/rest-api-sdk-php" : "0.16.1",
         "stripe/stripe-php": "^3.7",
         "sendgrid/sendgrid": "~4.0",
-        "robmorgan/phinx": "^0.5.1"
+        "robmorgan/phinx": "^0.5.1",
+        "ua-parser/uap-php": "^3.4"
     },
     "require-dev": {
         "kenjis/ci-phpunit-test": "^0.11.0"
