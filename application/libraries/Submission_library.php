@@ -83,13 +83,13 @@ class Submission_library
 
         if($this->submission->create($data))
         {
-            $this->mailer
-                ->to($this->ion_auth->user()->row()->email)
-                ->from('squad@tappyn.com')
-                ->subject('Your submission has successfully been created')
-                ->html($this->load->view('emails/submission_success', $email_data, TRUE))
-                ->send();
-                return TRUE;
+            return TRUE;
+            // $this->mailer
+            //     ->to($this->ion_auth->user()->row()->email)
+            //     ->from('squad@tappyn.com')
+            //     ->subject('Your submission has successfully been created')
+            //     ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+            //     ->send();
         }
         return FALSE;
     }
