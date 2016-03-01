@@ -23,9 +23,10 @@ class Companies extends CI_Controller
 
     public function dashboard()
     {
+        error_log("Company dashbaord requiest");
         if($this->ion_auth->in_group(2))
         {
-            redirect("users/dashboard", 'refresh');
+            redirect("users/dashboard");
         }
 
         $this->data['status'] = 'all';
@@ -46,6 +47,7 @@ class Companies extends CI_Controller
         $contests = $this->contest->fetch();
         if($contests !== FALSE)
         {
+            $contests = $this->contest->result();
             // Check the input type
             if($this->input->post('type') === 'need_winner')
             {
