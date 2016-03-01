@@ -39,7 +39,7 @@ class Vote {
         if($this->config->item('upvotes_per_contest') !== FALSE)
         {
             $count = $this->userVotesPerContest($uid, $cid);
-            if($count > $this->config->item('upvotes_per_contest')) {
+            if($count >= $this->config->item('upvotes_per_contest')) {
                 $this->errors = "You have already voted the max of {$this->config->item('upvotes_per_contest')} times in this contest";
                 return FALSE;
             }

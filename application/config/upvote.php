@@ -13,7 +13,7 @@ $config['achievements'] = array(
     'double_platinum' => 3500,
     'triple_platinum' => 5000
 );
-$config['upvotes_per_contest'] = 3;
+$config['upvotes_per_contest'] = 5;
 $config['leaderboard_limit'] = 25;
 /*====================================
   Configuration for Points system

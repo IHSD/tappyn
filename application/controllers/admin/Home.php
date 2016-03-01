@@ -10,7 +10,7 @@ class Home extends CI_Controller
           // redirect('/', 'refresh');
         }
         if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-        	//$this->load->view('templates/navbar');
+        	$this->load->view('templates/navbar');
         }
         $this->load->model('submission');
         $this->load->model('contest');
