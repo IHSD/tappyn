@@ -75,7 +75,7 @@ class Auth extends CI_Controller {
 					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"));
 					redirect("/#/contest/".$this->session->flashdata('contest'), 'refresh');
 				}
-			} else if($this->session->flashdata('voting_as_guest'))
+			} else if($this->session->userdata('voting_as_guest'))
 			{
 				error_log("Attempting to vote");
 				$this->load->library('vote');
