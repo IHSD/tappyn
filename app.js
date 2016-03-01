@@ -121,7 +121,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	$scope.update_points = function(points){
 		$rootScope.user.points = $rootScope.user.points + points;
-		sessionStorage.setItem("user", JSON.stringify($rootScope.user.points));
+		sessionStorage.setItem("user", JSON.stringify($rootScope.user));
 	}
 
 	$scope.check_code = function(code){
@@ -437,6 +437,35 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller('homeController', function($scope, $location, homeFactory){
+	
+	$scope.mailing_list = function(email){
+		homeFactory.mailingList(email).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) window.location.reload();
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory('homeFactory', function($http){
+	var fact = {};
+
+	fact.mailingList = function(email){
+		return $http({
+			method : 'POST',
+			url : 'index.php/mailing_list',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param({"email" : email})
+		});
+	}
+
+	return fact;
+});
 tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory, AppFact){
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 0},
@@ -690,35 +719,6 @@ tappyn.factory('launchFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
-	$scope.mailing_list = function(email){
-		homeFactory.mailingList(email).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) window.location.reload();
-				else alert(response.message);	 
-			}
-			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory('homeFactory', function($http){
-	var fact = {};
-
-	fact.mailingList = function(email){
-		return $http({
-			method : 'POST',
-			url : 'index.php/mailing_list',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
-		});
-	}
-
-	return fact;
-});
 tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
