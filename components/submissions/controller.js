@@ -50,7 +50,7 @@ tappyn.controller("submissionsController", function($scope, $rootScope, $routePa
 				if(response.http_status_code == 200){
 					if(response.success){
 						$scope.set_alert(response.message, "default");
-						$rootScope.user.points++;
+						$scope.update_points(1);
 						submission.user_may_vote = false;
 						submission.votes++;
 					}	

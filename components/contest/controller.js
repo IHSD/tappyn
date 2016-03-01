@@ -16,6 +16,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $routeParams
 						if(response.success){
 							$scope.close_guest();
 							$location.path("/submissions/"+id);
+							$scope.update_points(2);
 						}
 						else $scope.set_alert(response.message, "default");	 
 					}

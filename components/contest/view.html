@@ -107,7 +107,7 @@
 			<div class='panel-body'>
 				<div class='text-center' style='margin-bottom:5px;'>
 					<img ng-if='!contest.company.logo_url' style='height:auto;' width='150px' src="public/img/contest-default.jpg">
-					<img ng-if='contest.company.logo_url' style='height:auto;' width='150px' src="uploads/{{contest.company.logo_url}}">
+					<img ng-if='contest.company.logo_url' style='height:auto;' width='150px' src="{{contest.company.logo_url}}">
 				</div>
 		        <div style='width:100%'>
 					<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Target Market</h4></div>
