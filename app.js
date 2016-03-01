@@ -102,6 +102,8 @@ tappyn.filter('firstChar', function() {
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
+	$scope.signing_in = false;
+	$scope.registration = false;
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
@@ -147,6 +149,29 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		$scope.alert = {show : false, message : '', type : ''};
 	}
 
+	$scope.open_login = function(){
+		$scope.signing_in = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_login = function(){
+		$scope.signing_in = false;
+		$rootScope.modal_up = false;
+	}
+
+	$scope.open_register = function(){
+		$scope.registration = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_register = function(){
+		$scope.registration = false;
+		$rootScope.modal_up = false;
+	}
+	$scope.login_to_register = function(){
+		$scope.signing_in = false;
+		$scope.registration = true;
+	}
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
@@ -163,7 +188,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.signing_in = false;
+					$rootScope.modal_up = false;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -175,7 +201,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
-			$location.path("/login");
+			$location.path("/home");
 		});
 	}
 
@@ -185,7 +211,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.registration = false;
+					$rootScope.modal_up = false;
 					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 
@@ -962,65 +989,6 @@ tappyn.factory('profileFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
-	resetFactory.checkCode($routeParams.code).success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success){
-				$scope.set_alert("Verified, please change your password", "default");
-				$scope.code = $routeParams.code;
-				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
-			}
-			else{
-				$scope.set_alert("Unauthorized", "error");
-				$location.path('/login');
-			}
-		}
-		else{
-			$scope.set_alert("Unauthorized", "error");
-			$location.path('/login');
-		}
-	});
-
-	$scope.change_pass = function(pass){
-		resetFactory.changePass(pass, $scope.code).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");
-					$location.path('/login')
-				}	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory("resetFactory", function($http){
-	var fact = {};
-
-	fact.checkCode = function(code){
-		return $http({
-			method : 'GET',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	fact.changePass = function(pass, code){
-		return $http({
-			method : 'POST',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(pass)
-		})
-	}
-
-	return fact;
-})
 tappyn.controller("submissionsController", function($scope, $rootScope, $routeParams, contestFactory, submissionsFactory, AppFact){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -1120,4 +1088,63 @@ tappyn.factory("submissionsFactory", function($http){
 		});
 	}
 	return fact; 
+})
+tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
+	resetFactory.checkCode($routeParams.code).success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success){
+				$scope.set_alert("Verified, please change your password", "default");
+				$scope.code = $routeParams.code;
+				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
+			}
+			else{
+				$scope.set_alert("Unauthorized", "error");
+				$location.path('/login');
+			}
+		}
+		else{
+			$scope.set_alert("Unauthorized", "error");
+			$location.path('/login');
+		}
+	});
+
+	$scope.change_pass = function(pass){
+		resetFactory.changePass(pass, $scope.code).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$location.path('/login')
+				}	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory("resetFactory", function($http){
+	var fact = {};
+
+	fact.checkCode = function(code){
+		return $http({
+			method : 'GET',
+			url : 'index.php/auth/reset_password/'+code,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	fact.changePass = function(pass, code){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/reset_password/'+code,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(pass)
+		})
+	}
+
+	return fact;
 })

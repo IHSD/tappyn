@@ -102,6 +102,8 @@ tappyn.filter('firstChar', function() {
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
+	$scope.signing_in = false;
+	$scope.registration = false;
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
@@ -121,7 +123,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	$scope.update_points = function(points){
 		$rootScope.user.points = $rootScope.user.points + points;
-		sessionStorage.setItem("user", JSON.stringify($rootScope.user.points));
+		sessionStorage.setItem("user", JSON.stringify($rootScope.user));
 	}
 
 	$scope.check_code = function(code){
@@ -147,6 +149,29 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		$scope.alert = {show : false, message : '', type : ''};
 	}
 
+	$scope.open_login = function(){
+		$scope.signing_in = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_login = function(){
+		$scope.signing_in = false;
+		$rootScope.modal_up = false;
+	}
+
+	$scope.open_register = function(){
+		$scope.registration = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_register = function(){
+		$scope.registration = false;
+		$rootScope.modal_up = false;
+	}
+	$scope.login_to_register = function(){
+		$scope.signing_in = false;
+		$scope.registration = true;
+	}
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
@@ -163,7 +188,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.signing_in = false;
+					$rootScope.modal_up = false;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -175,7 +201,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
-			$location.path("/login");
+			$location.path("/home");
 		});
 	}
 
@@ -185,7 +211,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.registration = false;
+					$rootScope.modal_up = false;
 					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 
