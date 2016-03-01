@@ -5,6 +5,7 @@ class Contact extends MY_Model
     protected $table = 'contacts';
     protected $order_by;
     protected $order_dir;
+    protected $errors = FALSE;
     public function __construct()
     {
         parent::__construct();
@@ -23,15 +24,21 @@ class Contact extends MY_Model
 
     public function addToMailing($email)
     {
-        $this->db->insert('mailing_list', array(
+        if($this->db->insert('mailing_list', array(
             'email' => $email
-        ));
-        return true;
+        )))
+        {
+            return true;
+        } else {
+            $this->errors = "An unexpected error occured :: {$this->db->error()['code']}";
+            error_log($this->db->error()['message']);
+            return FALSE;
+        }
     }
 
     public function errors()
     {
-        return false;
+        return $this->errors;
     }
 
     public function count($where = array(), $like = array())
