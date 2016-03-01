@@ -36,7 +36,6 @@ class Contests extends CI_Controller
         {
             $this->responder->data($contests)->respond();
         } else {
-
             $this->responder->fail("An unknown error occured")->code(500)->respond();
         }
     }
