@@ -30,6 +30,10 @@
 	    <div class='container-fluid'>
 	    	<div class='darken' ng-show="modal_up"></div>
 		    <div ng-include src="'templates/navbar.html'"></div>
+		    <div class='wrapper'>
+		    	<div ng-show='' ng-include src="'templates/signin.html'"></div>
+		    	<div ng-include src="'templates/register.html'"></div>
+		    </div>
 		    <section class='innerpage' ng-view></section>
 		    <div ng-include src="'templates/footer.html'"></div>
 		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>

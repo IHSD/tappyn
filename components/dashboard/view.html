@@ -1,12 +1,15 @@
 <div class='row content-padding'>
-	<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
-		<div class='btn-group' ng-if='user.type == "member"'>
-			<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
-			<button ng-click='grab_dash("in_progress")'  class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
-			<button ng-click='grab_dash("completed")'  class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
-			<button ng-click='grab_dash("winning")'  class='btn' ng-class='{"btn-oj" : type == "winning", "btn-default" : type != "winning"}'>Won</button>
+	<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-center'>
+		<div  ng-if='user.type == "member"'>
+			<h4 class='text-left'>Your Work</h4>
+			<div class='btn-group btn-group-sm'>
+				<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
+				<button ng-click='grab_dash("in_progress")'  class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
+				<button ng-click='grab_dash("completed")'  class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
+				<button ng-click='grab_dash("winning")'  class='btn' ng-class='{"btn-oj" : type == "winning", "btn-default" : type != "winning"}'>Won</button>
+			</div>
 		</div>
-		<div class='btn-group' ng-if='user.type == "company"'>
+		<div class='btn-group btn-group-sm' ng-if='user.type == "company"'>
 			<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
 			<button ng-click='grab_dash("in_progress")' class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
 			<button ng-click='grab_dash("need_winner")' class='btn' ng-class='{"btn-oj" : type == "need_winner", "btn-default" : type != "need_winner"}'>Need Winner</button>
@@ -14,25 +17,25 @@
 		</div>
 	</div>
 	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
-		<div ng-if='user.type == "member"' class='col-sm-4 col-xs-12' ng-repeat='submission in dash.submissions'>
-			<div class="contest-box" style='min-height:350px; max-height:350px;' ng-class='{"border-submish" : submish.payout}'>
-				<div class='col-xs-12'>
-						<h3>{{submission.headline}}</h3>
-						<div class="contest-content">
-						    <span>{{submission.text}}</span>
-						</div>
+		<div ng-if='user.type == "member"' class='col-sm-6 col-md-4 col-xs-12' ng-repeat='submission in dash.submissions'>
+			<div class="contest-box" style='min-height:250px; max-height:250px;' ng-class='{"border-submish" : submish.payout}'>
+				<h4>{{submission.headline}}</h4>
+				<div class="contest-content">
+				    <span>{{submission.text}}</span>
 				</div>
 	            <div class="contest-info">
 	                <h5>
 	                	<span class='duration' style='position: absolute;left: 3px;bottom: 2px;'>
+	                		<a class='text-left' style='color:#ff5e00' href='#/contest/{{submish.contest_id}}'>View Contest</a>
+	                		<br>
 	                		{{submission.created_at | legibleDate}}
 	                	</span>
 	                	<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;border-top:1px #ff6c00 solid;border-left:1px #ff6c00 solid;border-radius:2px;'>
-	                		<h4 class='text-center'>{{submission.votes | number}}</h4>
-		                </div>
+                			<h3 style='padding-left:5px;margin-top:10px' class='text-left'>{{submission.votes | number}}</h3>
+		                	<img style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+	               		</div>
 	               	</h5>
 	            </div>
-	            <a class='btn btn-oj' href='#/contest/{{submish.contest_id}}'>View Contest</a>
 		        <button ng-if='submish.payout' ng-disabled='submish.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submish.payout.id)'>
 						<span ng-show='submish.payout.claimed == "0"'>Claim</span>
 						<span ng-show='submish.payout.claimed != "0"'>Claimed</span>
