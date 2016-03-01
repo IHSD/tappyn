@@ -65,6 +65,7 @@ class Auth extends CI_Controller {
 					$this->session->flashdata('headline'),
 					$this->session->flashdata('text')))
 				{
+					$this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
 					$this->session->set_flashdata('message', "Submission successfully created");
 					redirect('/#/dashboard', 'refresh');
 				}
