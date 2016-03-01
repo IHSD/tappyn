@@ -1,0 +1,96 @@
+<div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4'>
+	<div class='col-xs-12 text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
+		<div class='col-xs-12'><h3 style='margin-top:5px;' class='pull-right'><span style='cursor:pointer' ng-click='close_register()'>X</span></h3></div>
+		<img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:5px;'>
+		<form class='form' ng-submit='sign_up(registrar)'>
+            <div ng-show='registration.type == "default"' class='col-xs-12 text-center' style='padding-bottom:10px;'>
+            	<label class='col-xs-12'>Who are you?</label>
+	            <div class="btn-group hidden-xs" data-toggle="buttons">
+	            	<label class='btn btn-lg' ng-class='{"btn-oj" : registrar.group_id == "2", "btn-default" : registrar.group_id != "2"}'>
+	            		<input type='radio' value='2' ng-model='registrar.group_id'>I'm a writer
+	            	</label>
+	            	<label class='btn btn-lg' ng-class='{"btn-oj" : registrar.group_id == "3", "btn-default" : registrar.group_id != "3"}'>
+	            		<input type='radio' value='3' ng-model='registrar.group_id'>I'm a company
+	            	</label>
+	            </div>
+	            <div class="btn-group visible-xs" data-toggle="buttons">
+	            	<label class='btn' ng-class='{"btn-oj" : registrar.group_id == "2", "btn-default" : registrar.group_id != "2"}'>
+	            		<input type='radio' value='2' ng-model='registrar.group_id'>I'm a writer
+	            	</label>
+	            	<label class='btn' ng-class='{"btn-oj" : registrar.group_id == "3", "btn-default" : registrar.group_id != "3"}'>
+	            		<input type='radio' value='3' ng-model='registrar.group_id'>I'm a company
+	            	</label>
+	            </div>
+	        </div>
+	        <div ng-show='registrar.group_id == "2" || registration.type == "contest" || registration.type == "upvote"'>
+		        <div class='col-xs-12'>
+			        <a ng-if='registration.type == "default"' href="index.php/auth/facebook">
+		                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
+		            </a>
+		             <a ng-if='registration.type == "contest"' href="index.php/auth/facebook?submission={{registration.object}}">
+		                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
+		            </a>
+					<a ng-if='registration.type == "upvote"' href="index.php/auth/facebook?vote=1&cid={{registration.object.contest}}&sid={{registration.object.submission}}">
+		                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
+		            </a>
+		    	</div>
+		    	<div class='col-xs-12'><h4 class='text-center'>or</h4></div>
+	            <div class='col-xs-12'>
+		            <div class='form-group'>
+		              	<input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
+		            </div>
+	            </div>
+	            <div class='col-xs-6'>
+	              <div class='form-group'>
+	                  <select ng-model='registrar.age' class='form-control'>
+	                  		<option value=''>Age</option>
+	                  		<option value='18-24'>18-24</option>
+	                  		<option value='25-34'>25-34</option>
+	                  		<option value='35-44'>35-44</option>
+	                  		<option value='45+'>45+</option>
+	                  </select>
+	              </div>
+	            </div>
+	            <div class='col-xs-6'>
+	              <div class='form-group'>
+	                  <select class='form-control' ng-model='registrar.gender'>
+	                  		<option value=''>Gender</option>
+	                  		<option value='male'>Male</option>
+	                  		<option value='female'>Female</option>
+	                  </select>
+	              </div>
+
+	            </div>
+	             <div class='col-xs-12'>
+		            <div class='form-group'>
+		                 <input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
+		            </div>
+		        </div>   
+		        <div class='col-xs-12'>
+		            <div class='form-group'>
+		            	<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+		            </div>
+		        </div>  
+		         <div class='col-xs-12'><button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button> </div>
+	        </div>
+	        <div ng-show='registrar.group_id == "3" || registration.type == "company"'>
+	        	<div class='col-xs-12'>
+		            <div class='form-group'>
+		              	<input class='form-control' ng-model='registrar.name' placeholder='Company Name' type='text'>
+		            </div>
+	            </div>
+	        	<div class='col-xs-12'>
+		            <div class='form-group'>
+		                 <input class='form-control' ng-model='registrar.identity' placeholder='Company Email' type='email'>
+		            </div>
+		        </div>  
+		        <div class='col-xs-12'>
+		            <div class='form-group'>
+		            	<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+		            </div>
+		        </div>   
+		        <div class='col-xs-12'><button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button> </div>
+	        </div>            
+		</form>
+	</div>
+</div>
