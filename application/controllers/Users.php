@@ -73,7 +73,8 @@ class Users extends CI_Controller
         $submissions = $this->submission->fetch();
         if($submissions !== FALSE)
         {
-            foreach($submissions->result() as $submission)
+            $submissions = $submission->result();
+            foreach($submissions as $submission)
             {
                 $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             }
