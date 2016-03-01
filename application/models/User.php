@@ -49,6 +49,7 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
+                    error_log($this->db->error()['message']);
                     $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
@@ -59,6 +60,7 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
+                    error_log($this->db->error()['message']);
                     $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
