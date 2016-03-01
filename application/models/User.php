@@ -98,11 +98,9 @@ class User extends MY_Model
     public function attribute_points($id, $amount)
     {
         $points = (int)$amount;
-        $check = $this->db->where('id', $id)->update($this->table, array(
-            'points' => "points + {$amount}"
-        ));
-        error_log($this->db->last_query());
-        return $check
+        $current_points = (int)$this->ion_auth->user()->row()->points;
+        $check = $this->db->where('id', $id)->update('users', array('points' => ($points + $current_points)));
+        return $check;
     }
 
     /**
