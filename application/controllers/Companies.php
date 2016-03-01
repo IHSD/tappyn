@@ -30,17 +30,18 @@ class Companies extends CI_Controller
 
         $this->data['status'] = 'all';
 
-        if($this->input->post('type') === 'completed')
+        if($this->input->get('type') === 'completed')
         {
             $this->contest->where('stop_time <',date('Y-m-d H:i:s'));
         }
-        else if($this->input->post('type') === 'in_progress')
+        else if($this->input->get('type') === 'in_progress')
         {
             $this->contest->where(array(
                 'start_time <' => date('Y-m-d H:i:s'),
                 'stop_time >' => date('Y-m-d H:i:s')
             ));
         }
+
         // Make sure we only grab ones belonging to the user
         $this->contest->where('contests.owner', $this->ion_auth->user()->row()->id);
         $contests = $this->contest->fetch();
@@ -48,7 +49,7 @@ class Companies extends CI_Controller
         {
             $contests = $this->contest->result();
             // Check the input type
-            if($this->input->post('type') === 'need_winner')
+            if($this->input->get('type') === 'need_winner')
             {
                 foreach($contests as $key => $contest)
                 {
