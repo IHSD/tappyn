@@ -119,6 +119,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		});
 	}
 
+	$scope.update_points = function(points){
+		$rootScope.user.points = $rootScope.user.points + points;
+		sessionStorage.setItem("user", JSON.stringify($rootScope.user.points));
+	}
+
 	$scope.check_code = function(code){
 		if(code == 401){
 			$scope.set_alert("You must be logged in", "default");
