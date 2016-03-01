@@ -15,7 +15,7 @@
 	</div>
 	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
 		<div ng-if='user.type == "member"' class='col-sm-4 col-xs-12' ng-repeat='submission in dash.submissions'>
-			<div class="contest-box" style='min-height:350px; max-height:350px;'>
+			<div class="contest-box" style='min-height:350px; max-height:350px;' ng-class='{"border-submish" : submish.payout}'>
 				<div class='col-xs-12'>
 						<h3>{{submission.headline}}</h3>
 						<div class="contest-content">
@@ -24,11 +24,11 @@
 				</div>
 	            <div class="contest-info">
 	                <h5>
-	                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+	                	<span class='duration' style='position: absolute;left: 3px;bottom: 2px;'>
 	                		{{submission.created_at | legibleDate}}
 	                	</span>
 	                	<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;border-top:1px #ff6c00 solid;border-left:1px #ff6c00 solid;border-radius:2px;'>
-	                		<h4 style='padding-left:5px;' class='text-left'>{{submission.votes | number}}</h4>
+	                		<h4 class='text-center'>{{submission.votes | number}}</h4>
 		                </div>
 	               	</h5>
 	            </div>

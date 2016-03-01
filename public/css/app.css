@@ -129,6 +129,7 @@ header {
 	height:75px;
 	padding: 10px 0;
 	background: #fff;
+	border-bottom:1px solid #333;
 }
 .header-row {
 	overflow: hidden;
@@ -2225,4 +2226,12 @@ nav .dropdown-menu{
 .ad-location.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
+}
+.contests-heading h2, .contests-heading h4{
+	font-weight: 200;
+	color: #FF5E00;
+}
+
+.border-submish{
+	border:1px solid #ff5e00;
 }
