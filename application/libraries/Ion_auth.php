@@ -137,7 +137,7 @@ class Ion_auth
 			'first_name' => $user_data->first_name,
 			'last_name' => $user_data->last_name,
 			'is_admin' => $this->is_admin(),
-			'points' => $user_data->points
+			'points' => (int)$user_data->points
 		);
 		if($this->in_group(2))
 		{
