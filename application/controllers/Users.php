@@ -27,6 +27,7 @@ class Users extends CI_Controller
      */
     public function dashboard()
     {
+        $this->load->library('vote');
         // If company, redirect to companies controller
         if($this->ion_auth->in_group(3))
         {
