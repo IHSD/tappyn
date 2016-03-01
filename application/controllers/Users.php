@@ -31,7 +31,7 @@ class Users extends CI_Controller
         // If company, redirect to companies controller
         if($this->ion_auth->in_group(3))
         {
-            redirect("companies/dashboard");
+            redirect("companies/dashboard?type={$this->input->get('type')}");
         }
         $this->data['status'] = 'all';
 
