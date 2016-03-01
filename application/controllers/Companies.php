@@ -23,7 +23,6 @@ class Companies extends CI_Controller
 
     public function dashboard()
     {
-        error_log("Company dashbaord requiest");
         if($this->ion_auth->in_group(2))
         {
             redirect("users/dashboard");
