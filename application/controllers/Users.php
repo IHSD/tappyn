@@ -27,6 +27,7 @@ class Users extends CI_Controller
      */
     public function dashboard()
     {
+        $this->load->library('vote');
         // If company, redirect to companies controller
         if($this->ion_auth->in_group(3))
         {
@@ -73,7 +74,7 @@ class Users extends CI_Controller
         $submissions = $this->submission->fetch();
         if($submissions !== FALSE)
         {
-            $submissions = $submission->result();
+            $submissions = $submissions->result();
             foreach($submissions as $submission)
             {
                 $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
