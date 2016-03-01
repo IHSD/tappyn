@@ -1,11 +1,11 @@
 <div class='row content-padding'>
 	<h3 class='text-center'>Live Contests</h3>
-	<div class="col-sm-2 col-xs-12" ng-repeat='contest in contests'>
+	<div class="col-md-2 col-sm-4 col-xs-12" ng-repeat='contest in contests'>
 	    <a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
 	    <div class="submission-box">
 	        <div class="ad-company-info">
 	            <div>
-	                <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.company.name}}</h5>
+	                <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.company_name}}</h5>
 	                <span class='contest-price'>
 	                    $50
 	                </span>
