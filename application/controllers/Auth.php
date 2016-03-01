@@ -48,6 +48,7 @@ class Auth extends CI_Controller {
 			$this->session->set_flashdata('headline', $submission_data->headline);
 			$this->session->set_flashdata('submitting_as_guest', 'true');
 		} else if($this->input->get('vote')) {
+			error_log("Setting voting as guest toggle to true");
 			$this->session->set_userdata('voting_as_guest', 'true');
 			$this->session->set_userdata('contest_id', $this->input->get('cid'));
 			$this->session->set_userdata('submission_id', $this->input->get('sid'));
