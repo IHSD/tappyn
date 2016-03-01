@@ -35,7 +35,7 @@ class Welcome extends CI_Controller
 				"You have successfully been added to our mailing list"
 			)->respond();
 		} else {
-			$this->responder->fail(($this->contact->errors() ? $this->contact->errors() : "There was an error adding you to our mailing list"))->code(500)->respond();
+			$this->responder->fail((validation_errors() ? validation_errors() : ($this->contact->errors() ? $this->contact->errors() : "There was an error adding you to our mailing list")))->code(500)->respond();
 		}
 	}
 
