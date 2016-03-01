@@ -77,19 +77,19 @@ class Auth extends CI_Controller {
 				}
 			} else if($this->session->userdata('voting_as_guest'))
 			{
-				error_log("Attempting to vote");
 				$this->load->library('vote');
 				if($this->vote->upvote($this->session->userdata('submission_id'),
 									   $this->session->userdata('contest_id'),
 									   $this->ion_auth->user()->row()->id))
 				{
 					$this->session->set_flashdata('message', "Vote succesful!");
+					redirect("#/submissions/".$this->session->userdata('contest_id'));
 				} else {
 					$this->session->set_flashdata('error', ($this->vote->errors() ? $this->vote->errors() : "An unknown error occured"));
 				}
-				redirect("/#/submissions/".$this->session->flashdata('contest_id'), 'refresh');
+				redirect("#/submissions/".$this->session->userdata('contest_id'), 'refresh');
 			}
-			redirect('/#/dashboard', 'refresh');
+			redirect('#/dashboard', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', $this->facebook_ion_auth->errors());
 			redirect('/', 'refresh');
