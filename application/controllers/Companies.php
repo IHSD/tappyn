@@ -59,7 +59,10 @@ class Companies extends CI_Controller
                     }
                 }
             }
-
+            foreach($contests as $contest)
+            {
+                $contest->submission_count = $this->contest->submissionsCount($contest->id);
+            }
             $this->responder->data(
                 array(
                     'contests' => $contests
