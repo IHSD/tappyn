@@ -144,7 +144,7 @@ class Users extends CI_Controller
                 {
                     $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
                 } else {
-                    $this->responder->fail("There was an error updating your profile")->code(500)->respond();
+                    $this->responder->fail(($this->user->errors() ? $this->user->errors() : "There was an error updating your profile"))->code(500)->respond();
                 }
             }
         } else {

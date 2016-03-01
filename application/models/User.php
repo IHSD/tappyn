@@ -49,7 +49,7 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
-                    $this->errors = "An unexpected error occured";
+                    $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
             else
@@ -59,7 +59,7 @@ class User extends MY_Model
                 {
                     return TRUE;
                 } else {
-                    $this->errors = "An unexpected error occured";
+                    $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
         }
