@@ -473,8 +473,8 @@ class Auth extends CI_Controller {
         else
         {
     		$this->responder->fail(
-				(ajax_error() ? ajax_error() : (validation_errors() ? validation_errors() : ($this->ion_auth->errors_array() ? $this->ion_auth->errors_array() : "An unknown error occured")))
-			)->code(400)->respond();
+				(validation_errors() ? validation_errors() : ($this->ion_auth->errors_array() ? $this->ion_auth->errors_array() : "An unknown error occured"))
+			)->code(500)->respond();
         }
     }
 
