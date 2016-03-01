@@ -31,7 +31,7 @@ class Companies extends CI_Controller
 
         $this->data['status'] = 'all';
 
-        if($this->input->get('type') === 'completed')
+        if($this->input->get('type') === 'completed' || $this->input->get('type') === 'need_winner')
         {
             $this->contest->where('stop_time <',date('Y-m-d H:i:s'));
         }
