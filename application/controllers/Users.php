@@ -136,7 +136,7 @@ class Users extends CI_Controller
                     'company_email' => $this->input->post('company_email'),
                     'company_url' => $this->input->post('company_url'),
                     'twitter_handle' => $this->input->post('twitter_handle'),
-                    'facebook_url' => $this->input->post('facebook_url')
+                    'facebook_url' => $this->input->post('facebook_url'),
                     'different' => $this->input->post('different'),
                     'summary' => $this->input->post('summary')
                 );
