@@ -36,7 +36,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/accounts/details',
+			url : 'index.php/companies/accounts',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

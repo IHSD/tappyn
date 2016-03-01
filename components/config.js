@@ -91,6 +91,19 @@ tappyn.filter('capitalize', function() {
   }
 });
 
+tappyn.filter('capUnderscore', function() {
+  return function(input) {
+    if (input!=null){
+    	input = input.split('_');
+    	new_stringers = '';
+    	for(var i = 0; i < input.length; i++){
+    		new_stringers = new_stringers + ' ' +input[i].substring(0,1).toUpperCase()+input[i].substring(1)
+    	}
+    	return new_stringers;
+    }
+  }
+});
+
 tappyn.filter('firstChar', function() {
   return function(input) {
     if (input!=null){
@@ -102,6 +115,8 @@ tappyn.filter('firstChar', function() {
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
+	$scope.signing_in = {show : false, type : '', object : ''};
+	$scope.registration = {show : false, type : '', object : ''};
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
@@ -121,7 +136,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 
 	$scope.update_points = function(points){
 		$rootScope.user.points = $rootScope.user.points + points;
-		sessionStorage.setItem("user", JSON.stringify($rootScope.user.points));
+		sessionStorage.setItem("user", JSON.stringify($rootScope.user));
 	}
 
 	$scope.check_code = function(code){
@@ -147,6 +162,30 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		$scope.alert = {show : false, message : '', type : ''};
 	}
 
+	$scope.open_login = function(type, obj){
+		$scope.signing_in = {show : true, type : type, object : obj};
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_login = function(){
+		$scope.signing_in = {show : false, type : '', object : ''};
+		$rootScope.modal_up = false;
+	}
+
+	$scope.open_register = function(type, obj){
+		$scope.registration = {show : true, type : type, object : obj};
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_register = function(){
+		$scope.registration = {show : false, type : '', object : ''};
+		$rootScope.modal_up = false;
+	}
+	$scope.login_to_register = function(){
+		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
+		$scope.signing_in = {show :false, type : '', object : ''};
+	}
+
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
@@ -163,7 +202,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.signing_in = {show : false, type : '', object : ''};
+					$rootScope.modal_up = false;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -175,17 +215,21 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
-			$location.path("/login");
+			$location.path("/home");
 		});
 	}
 
 	$scope.sign_up = function(registrant){
+		if($scope.registration.type == "contest" || $scope.registration == "upvote") registrant.group_id = 2;
+		else if($scope.registration.type == "company") registrant.group_id = 3;
+
 		AppFact.signUp(registrant).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$location.path('/dashboard');
+					$scope.registration = {show : false, type : '', object : ''};
+					$rootScope.modal_up = false;
 					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 

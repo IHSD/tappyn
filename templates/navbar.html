@@ -25,8 +25,8 @@
                             </ul>
 	                    </li>
 	                    <li ng-if='user.is_admin'><a href='/admin'>Admin</a></li>
-                        <li ng-if='!user' class='pull-right'><a href="#/login">LOGIN</a></li>
-                        <li ng-if='!user' class='pull-right'><a href="#/register">SIGN UP</a></li>                          
+                        <li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>LOGIN</a></li>
+                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "")'>SIGN UP</a></li>                          
 	                </ul>
 	            </nav>
 	            <nav class='visible-xs'>
