@@ -28,10 +28,11 @@ class Users extends CI_Controller
     public function dashboard()
     {
         $this->load->library('vote');
+        error_log("User dashboard request");
         // If company, redirect to companies controller
         if($this->ion_auth->in_group(3))
         {
-            redirect("companies/dashboard", 'refresh');
+            redirect("companies/dashboard");
         }
         $this->data['status'] = 'all';
 
@@ -96,7 +97,6 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-        error_log("User dashboard request");
         if(!$this->ion_auth->in_group(2))
         {
             redirect("companies/profile");
