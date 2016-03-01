@@ -125,6 +125,7 @@ class Contest extends MY_Model
             $this->messages = 'Contest successfully created';
             return $this->db->insert_id();
         }
+        $this->errors = $this->db->error()['message'];
         return FALSE;
     }
 
