@@ -52,6 +52,11 @@ class Votes extends CI_Controller {
                 "Upvote successful"
             )->respond();
             $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_upvote'));
+            $this->analytics->track(array(
+                'event_name' => "upvote_create",
+                'object_type' => "upvote",
+                'object_id' => NULL
+            ));
         }
         else
         {

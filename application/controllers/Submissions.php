@@ -66,12 +66,17 @@ class Submissions extends CI_Controller
             return;
         }
 
-        if($this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
+        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
         {
             $this->responder->message(
                 "You're submission has succesfully been created"
             )->respond();
             $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
+            $this->analytics->track(array(
+                'event_name' => "submission_create",
+                'object_type' => "submission",
+                'object_id' => $sid
+            ));
         }
         else {
             $this->responder->fail(

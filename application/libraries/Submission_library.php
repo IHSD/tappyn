@@ -74,7 +74,7 @@ class Submission_library
             return false;
         }
 
-        if($this->submission->create($data))
+        if($id = $this->submission->create($data))
         {
             $email_data = array(
                 'headline' => $this->input->post('headline'),
@@ -89,7 +89,7 @@ class Submission_library
                          ->subject("Your submission was created!")
                          ->html($this->load->view('emails/submission_success', $email_data, TRUE))
                          ->send();
-            return TRUE;
+            return $id;
         }
         return FALSE;
     }

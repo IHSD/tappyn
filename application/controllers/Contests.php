@@ -114,6 +114,11 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
             $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
+            $this->analytics->track(array(
+                'event_name' => "contest_creation",
+                'object_type' => "contest",
+                'object_id' => $cid
+            ));
         }
         else
         {
@@ -199,6 +204,11 @@ class Contests extends CI_Controller
                 ->subject("Congratulations, you're submission won!")
                 ->html($this->load->view('emails/submission_chosen', array('company' => $company_name, 'eid' => $eid), TRUE))
                 ->send();
+                $this->analytics->track(array(
+                    'event_name' => "winner_selected",
+                    'object_type' => "contest",
+                    'object_id' => $cid
+                ));
             return;
         }
         else

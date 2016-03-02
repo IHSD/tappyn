@@ -148,7 +148,11 @@ class Submission extends MY_Model
 
     public function create($data)
     {
-        return $this->db->insert('submissions', $data);
+        if($this->db->insert('submissions', $data))
+        {
+            return $this->db->insert_id();
+        }
+        return FALSE;
     }
 
     public function update($id, $data)
