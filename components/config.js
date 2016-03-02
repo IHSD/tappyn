@@ -119,6 +119,19 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.registration = {show : false, type : '', object : ''};
 	$scope.step = 1;
 
+	$scope.industries = {
+			'pets' : 'Pets',
+			'food_beverage' : 'Food & Beverage',
+			'finance_business' : 'Finance & Business',
+			'health_wellness' : 'Health & Wellness',
+			'travel' : 'Travel',
+			'social_network' : 'Social Network',
+			'home_garden' : 'Home & Garden',
+			'education' : 'Education',
+			'art_entertainment' : 'Art & Entertainment',
+			'fashion_beauty' : 'Fashion & Beauty'
+	}
+
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
 			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
