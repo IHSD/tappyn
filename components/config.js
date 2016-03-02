@@ -113,10 +113,24 @@ tappyn.filter('firstChar', function() {
   }
 });
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $location, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $route, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
+	$scope.step = 1;
+
+	$scope.industries = {
+			'pets' : 'Pets',
+			'food_beverage' : 'Food & Beverage',
+			'finance_business' : 'Finance & Business',
+			'health_wellness' : 'Health & Wellness',
+			'travel' : 'Travel',
+			'social_network' : 'Social Network',
+			'home_garden' : 'Home & Garden',
+			'education' : 'Education',
+			'art_entertainment' : 'Art & Entertainment',
+			'fashion_beauty' : 'Fashion & Beauty'
+	}
 
 	AppFact.isLoggedIn().success(function(response){
 		if(response.http_status_code == 200){
@@ -143,6 +157,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		if(code == 401){
 			$scope.set_alert("You must be logged in", "default");
 			$scope.log_out(); //incase we have some JS objects still set
+			$scope.open_login("must", '');
 		}
 		else if(code == 403){
 			$scope.set_alert("Unauthorized access", "error")
@@ -185,6 +200,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
 		$scope.signing_in = {show :false, type : '', object : ''};
 	}
+	$scope.register_to_login = function(){
+		$scope.signing_in = {show : true, type : $scope.registration.type, object : $scope.registration.object};
+		$scope.registration = {show :false, type : '', object : ''};
+	}
 
 	/** example response
 			if(response.http_status_code == 200){
@@ -202,6 +221,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
+					if($scope.signing_in.type == 'must') $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 				}
@@ -215,7 +235,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
-			$location.path("/home");
 		});
 	}
 
@@ -230,6 +249,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $locatio
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$scope.registration = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
+					$scope.step = 1;
 					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 

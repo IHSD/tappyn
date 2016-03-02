@@ -1,0 +1,67 @@
+<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3'>
+	<div class='col-xs-12 text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
+		<div class='close_circle' ng-click='close_register()'>X</div>
+		<img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:5px;'>
+		<div ng-show='!by_email'>	
+			<h3 style='margin-top:5px;'>Sign In to Upvote</h3>
+			<h4>How can we credit you for upvoting if we don't know who you are? Please sign in to upvote along with these other community members</h4>
+			<div class='community_images'>
+				<img src='public/img/community1.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+				<img src='public/img/TappynFB2.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+				<img src='public/img/TappynFB5.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+				<img src='public/img/TappynFB4.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+				<img src='public/img/TappynFB3.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>
+				<img src='public/img/TappynFB6.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>	
+			</div>
+			<div ng-show='!by_email' style='margin-top:10px;'>
+		       <a ng-if='registration.type == "upvote"' href="index.php/auth/facebook?vote=1&cid={{registration.object.contest}}&sid={{registration.object.submission}}">
+	                <img height='30px' style='border-radius: 5px;' src="public/img/img-facebook.png">
+	            </a>
+	    	</div>
+	    	<h5>We will never post on your Facebook without your permission</h5>
+	    </div>
+    	<form ng-show='by_email' class='form' ng-submit='sign_up(registrar)'>
+            <div class='col-xs-12'>
+	            <div class='form-group'>
+	              <input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
+	            </div>
+            </div>
+            <div class='col-xs-6'>
+              <div class='form-group'>
+                  <select ng-model='registrar.age' class='form-control'>
+                  		<option value=''>Age</option>
+                  		<option value='18-24'>18-24</option>
+                  		<option value='25-34'>25-34</option>
+                  		<option value='35-44'>35-44</option>
+                  		<option value='45+'>45+</option>
+                  </select>
+              </div>
+            </div>
+            <div class='col-xs-6'>
+              <div class='form-group'>
+                  <select class='form-control' ng-model='registrar.gender'>
+                  		<option value=''>Gender</option>
+                  		<option value='male'>Male</option>
+                  		<option value='female'>Female</option>
+                  </select>
+              </div>
+            </div>
+            <div class='col-xs-12'>
+	            <div class='form-group'>
+	                 <input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
+	            </div>
+	        </div>           
+            <div class='col-xs-12'>
+	            <div class='form-group'>
+	            	<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+	            </div>
+	        </div>            
+			<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+		</form>
+		<div class='modal_link'>
+	    	<a class='pull-left' ng-click='register_to_login()'>Have an account?</a>
+	    	<a class='pull-right' ng-show='!by_email' ng-click='by_email = true'>Sign up via email</a>
+	    	<a class='pull-right' ng-show='by_email'  ng-click='by_email = false'>Sign up via Facebook</a>
+	   	</div>
+	</div>
+</div>
