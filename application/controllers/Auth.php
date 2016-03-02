@@ -48,9 +48,9 @@ class Auth extends CI_Controller {
 			$this->session->set_flashdata('headline', $submission_data->headline);
 			$this->session->set_flashdata('submitting_as_guest', 'true');
 		} else if($this->input->get('vote')) {
-			$this->session->set_flashdata('voting_as_guest', 'true');
-			$this->session->set_flashdata('contest_id', $this->input->get('cid'));
-			$this->session->set_flashdata('submission_id', $this->input->get('sid'));
+			$this->session->set_userdata('voting_as_guest', 'true');
+			$this->session->set_userdata('contest_id', $this->input->get('cid'));
+			$this->session->set_userdata('submission_id', $this->input->get('sid'));
 		}
 		if($this->facebook_ion_auth->login())
 		{
@@ -67,27 +67,28 @@ class Auth extends CI_Controller {
 				{
 					$this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
 					$this->session->set_flashdata('message', "Submission successfully created");
-					redirect('/#/dashboard', 'refresh');
+					redirect('#/contests', 'refresh');
 				}
 				else
 				{
 					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"));
 					redirect("/#/contest/".$this->session->flashdata('contest'), 'refresh');
 				}
-			} else if($this->session->flashdata('voting_as_guest'))
+			} else if($this->session->userdata('voting_as_guest'))
 			{
 				$this->load->library('vote');
-				if($this->vote->create($this->session->flashdata('submission_id'),
-									   $this->session->flashdata('contest_id'),
+				if($this->vote->upvote($this->session->userdata('submission_id'),
+									   $this->session->userdata('contest_id'),
 									   $this->ion_auth->user()->row()->id))
 				{
 					$this->session->set_flashdata('message', "Vote succesful!");
+					redirect("#/submissions/".$this->session->userdata('contest_id'));
 				} else {
 					$this->session->set_flashdata('error', ($this->vote->errors() ? $this->vote->errors() : "An unknown error occured"));
 				}
-				redirect("/#/contest/".$this->session->flashdata('contest_id'), 'refresh');
+				redirect("#/submissions/".$this->session->userdata('contest_id'), 'refresh');
 			}
-			redirect('/#/dashboard', 'refresh');
+			redirect('#/dashboard', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', $this->facebook_ion_auth->errors());
 			redirect('/', 'refresh');
@@ -467,6 +468,11 @@ class Auth extends CI_Controller {
             if($this->ion_auth->login($identity, $password))
 			{
 				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+				$this->analytics->track(array(
+		            'event_name' => 'registration',
+		            'object_type' => 'user',
+		            'object_id'  => $id
+		        ));
 			} else {
 				$this->responder->fail("An unknown error occured")->code(500)->respond();
 			}

@@ -33,7 +33,6 @@ class Facebook_ion_auth {
 
     	// null at first
 		$code = $this->CI->input->get('code');
-		error_log($code);
 		// if is not set go make a facebook connection
 		if(!$code) {
 
@@ -53,7 +52,6 @@ class Facebook_ion_auth {
 	   		// check if session state is equal to the returned state
 
 			if($this->CI->session->userdata('state') && ($this->CI->session->userdata('state') === $this->CI->input->get('state'))) {
-				error_log("facebook something");
 
 				$token_url = "https://graph.facebook.com/oauth/access_token?"
 			       . "client_id=" . $this->app_id . "&redirect_uri=" . urlencode($this->my_url)
