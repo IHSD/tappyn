@@ -1,4 +1,4 @@
-tappyn.controller("paymentController", function($scope, $location, paymentFactory, paymentModel){
+tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
 	paymentFactory.grabDetails().success(function(response){
@@ -59,7 +59,9 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.account = res.data.account;
-					$scope.set_alert(res.message, "default");	
+					$scope.set_alert(res.message, "default");
+					$rootScope.modal_up = false;
+					$scope.add_method = false;
 				}
 				else $scope.set_alert(res.message, "default");	 
 			}
@@ -91,6 +93,16 @@ tappyn.controller("paymentController", function($scope, $location, paymentFactor
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 		});
+	}
+
+	$scope.open_add = function(){
+		$rootScope.modal_up = true;
+		$scope.add_method = true;
+	}
+
+	$scope.close_add = function(){
+		$rootScope.modal_up = false;
+		$scope.add_method = false;
 	}
 
 	$scope.set_default = function(means){

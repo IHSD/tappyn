@@ -21,7 +21,7 @@
 	            	</label>
 	            </div>
 	        </div>
-	        <div ng-show='registrar.group_id == "2"' ng-hide='registration.type == "company"'>
+	        <div ng-hide='registrar.group_id != "2" || registration.type == "company"'>
 		        <div class='col-xs-12'>
 			        <a href="index.php/auth/facebook">
 		                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">

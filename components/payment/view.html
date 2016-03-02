@@ -1,3 +1,70 @@
+<div class='wrapper'>
+	<div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4' ng-show='add_method'>
+		<div class='col-xs-12' style='background-color:#fff;border-radius:3px;padding:10px;'>
+		<h3 class='text-center'>Add Payout</h3>
+		<div class='close_circle' ng-click='close_add()'>X</div>
+		<form class='form' id="payment-form" ng-submit='process_addition(this)'S>
+			<span class="payment-errors"></span>
+			<div class='col-xs-12'>
+			    <div class="form-group">
+			    	<label>Debit Card Number</label>
+			      	<input class='form-control' type="text" size="20" placeholder='Debit Card Number' data-stripe="number"/>
+			    </div>
+			</div>
+		    <div class='col-xs-12 col-sm-4'>
+			  <div class="form-group">
+				    <label>CVC</label>
+				    <input class='form-control' type="text" size="4" placeholder='CVC' data-stripe="cvc"/>
+			  </div>
+		    </div>
+		  	<div class='col-xs-12 col-sm-4'>
+		      <div class="form-group">
+		       		<label>Month Exp</label>
+		  	      	<select class='form-control' data-stripe="exp-month">
+			            <option value='01'>01</option>
+			            <option value='02'>02</option>
+			            <option value='03'>03</option>
+			            <option value='04'>04</option>
+			            <option value='05'>05</option>
+			            <option value='06'>06</option>
+			            <option value='07'>07</option>
+			            <option value='08'>08</option>
+			            <option value='09'>09</option>
+			            <option value='10'>10</option>
+			            <option value='11'>11</option>
+			            <option value='12'>12</option>
+		          </select>
+		      </div>
+		    </div>
+		    <div class='col-xs-12 col-sm-4'>
+		    	<div class='form-group'>
+		        	<label>Year Exp</label>
+		  	    	<select class='form-control' data-stripe="exp-year">
+		             <option value='2016'>2016</option>
+		             <option value='2017'>2017</option>
+		             <option value='2018'>2018</option>
+		             <option value='2019'>2019</option>
+		             <option value='2020'>2020</option>
+		             <option value='2021'>2021</option>
+		             <option value='2022'>2022</option>
+		             <option value='2023'>2023</option>
+		             <option value='2024'>2024</option>
+		             <option value='2025'>2025</option>
+		             <option value='2026'>2026</option>
+		             <option value='2027'>2027</option>
+		        	</select>
+		  	  	</div>
+		  	</div>
+			<input type='hidden' data-stripe='currency' value='usd'/>
+
+			<div class='col-xs-12 text-center'>
+				<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Submit</button>
+			</div>
+		</form>
+		</div>
+	</div>
+</div>
+
 <div class='row content-padding'>
 	<div class='col-xs-12 col-sm-6 col-sm-offset-3'>
 		<div class='panel'>
@@ -8,10 +75,6 @@
 			  <li role="presentation"  style='cursor:pointer' ng-class="{'active' : showing == 'methods'}"><a ng-click="toggle_view('methods')">Payout Methods</a></li>
 			  <li role="presentation" style='cursor:pointer' ><a>History</a></li>
 			</ul>
-			<!-- <div ng-show='user.type == "member"' class='col-xs-12 col-sm-6 col-sm-offset-3 text-center'>
-				<button class='btn' ng-class='{"btn-oj" : showing == "details", "btn-default" : showing != "details"}' ng-click='toggle_view("details")'>Details</button>
-				<button class='btn' ng-class='{"btn-oj" : showing == "methods", "btn-default" : showing != "methods"}' ng-click='toggle_view("methods")' ng-disabled='!account'>Methods</button>
-			</div> -->
 			<div ng-show='showing == "details"'>
 				<form class='form' ng-submit='verify_identity(detail)'>
 					<div class='col-xs-12'>
@@ -220,73 +283,15 @@
 						</div>
 					</div>
 				</div>
-				<div class='alert alert-warning col-sm-12' ng-show='account.external_accounts.data.length == 0'>
+				<div class='alert alert-warning col-sm-12' style='margin-top:10px;' ng-show='account.external_accounts.data.length == 0'>
 					You don't have any payout methods yet
 				</div>
 				<div class='col-xs-12 text-center'>
-					<button class='btn btn-oj' ng-click='add_method=true'>
+					<button class='btn btn-oj' ng-click='open_add()'>
 						Add Payout Method
 					</button><br>
 					<span class='tos_label' style='font-size:0.7em;'>Tappyn will never charge you.<br>But we do want to send you money!</span>
 				</div>
-			    <form class='col-lg-8 col-xs-12 col-lg-offset-2 form' id="payment-form" ng-submit='process_addition(this)' ng-show='add_method'>
-					<span class="payment-errors"></span>
-					<div class='col-xs-12'>
-					    <div class="form-group">
-					    	<label>Debit Card Number</label>
-					      	<input class='form-control' type="text" size="20" placeholder='Debit Card Number' data-stripe="number"/>
-					    </div>
-					</div>
-				    <div class='col-xs-12 col-sm-4'>
-					  <div class="form-group">
-						    <label>CVC</label>
-						    <input class='form-control' type="text" size="4" placeholder='CVC' data-stripe="cvc"/>
-					  </div>
-				    </div>
-				  	<div class='col-xs-12 col-sm-4'>
-				      <div class="form-group">
-				       		<label>Month Exp</label>
-				  	      	<select class='form-control' data-stripe="exp-month">
-					            <option value='01'>01</option>
-					            <option value='02'>02</option>
-					            <option value='03'>03</option>
-					            <option value='04'>04</option>
-					            <option value='05'>05</option>
-					            <option value='06'>06</option>
-					            <option value='07'>07</option>
-					            <option value='08'>08</option>
-					            <option value='09'>09</option>
-					            <option value='10'>10</option>
-					            <option value='11'>11</option>
-					            <option value='12'>12</option>
-				          </select>
-				      </div>
-				    </div>
-				    <div class='col-xs-12 col-sm-4'>
-				    	<div class='form-group'>
-				        	<label>Year Exp</label>
-				  	    	<select class='form-control' data-stripe="exp-year">
-				             <option value='2016'>2016</option>
-				             <option value='2017'>2017</option>
-				             <option value='2018'>2018</option>
-				             <option value='2019'>2019</option>
-				             <option value='2020'>2020</option>
-				             <option value='2021'>2021</option>
-				             <option value='2022'>2022</option>
-				             <option value='2023'>2023</option>
-				             <option value='2024'>2024</option>
-				             <option value='2025'>2025</option>
-				             <option value='2026'>2026</option>
-				             <option value='2027'>2027</option>
-				        	</select>
-				  	  	</div>
-				  	</div>
-					<input type='hidden' data-stripe='currency' value='usd'/>
-
-					<div class='col-xs-12 text-center'>
-						<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Submit</button>
-					</div>
-				</form>
 			</div>
 				<br>
 				<div class='col-xs-12 text-center' style='margin-top:10px;'>
