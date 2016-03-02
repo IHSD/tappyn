@@ -63,6 +63,11 @@ class Contests extends CI_Controller
             ))->respond();
             $this->contest->log_impression($cid);
         }
+        $this->analytics->track(array(
+            'event_name' => 'view_contest',
+            'object_type' => 'contest',
+            'object_id'  => $cid
+        ));
     }
 
     /**
@@ -109,6 +114,11 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
         {
             $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
+            $this->analytics->track(array(
+                'event_name' => "contest_creation",
+                'object_type' => "contest",
+                'object_id' => $cid
+            ));
         }
         else
         {
@@ -179,12 +189,6 @@ class Contests extends CI_Controller
         if($pid = $this->payout->create($cid, $sid))
         {
             // Send the email congratulating the user
-            // $this->mailer
-            //     ->to($this->ion_auth->user($submission->owner)->row()->email)
-            //     ->from("squad@tappyn.com")
-            //     ->subject("Congratulations, you're submission won!")
-            //     ->html($this->load->view('emails/submission_chosen', array('company_name' => $company_name), TRUE))
-            //     ->send();
 
             // Tell the company they have successfully selected a winner!
             $this->responder->message(
@@ -193,6 +197,18 @@ class Contests extends CI_Controller
             $this->user->attribute_points($submission->owner, $this->config->item('points_per_winning_submission'));
             $this->load->library('vote');
             $this->vote->dole_out_points($submission->id);
+            $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_chosen');
+            $this->mailer
+                ->to($this->ion_auth->user($submission->owner)->row()->email)
+                ->from("squad@tappyn.com")
+                ->subject("Congratulations, you're submission won!")
+                ->html($this->load->view('emails/submission_chosen', array('company' => $company_name, 'eid' => $eid), TRUE))
+                ->send();
+                $this->analytics->track(array(
+                    'event_name' => "winner_selected",
+                    'object_type' => "contest",
+                    'object_id' => $cid
+                ));
             return;
         }
         else

@@ -182,7 +182,7 @@ class Auth extends CI_Controller {
 		{
 			$this->responder->fail(
 				(validation_errors() ? validation_errors() : "An unknown error occured")
-			)->code(400)->respond();
+			)->code(500)->respond();
 			return;
 		}
 		else

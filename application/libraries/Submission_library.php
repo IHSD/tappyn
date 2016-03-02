@@ -66,13 +66,6 @@ class Submission_library
             'text' => $text
         );
 
-        $email_data = array(
-            'headline' => $this->input->post('headline'),
-            'text' => $this->input->post('text'),
-            'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
-            'contest' => $contest->title,
-            'company' => $contest->company->name
-        );
         $success = false;
         // Generate / validate fields based on the platform type
         if(!$this->userCanSubmit($data['owner'], $data['contest_id']))
@@ -81,15 +74,22 @@ class Submission_library
             return false;
         }
 
-        if($this->submission->create($data))
+        if($id = $this->submission->create($data))
         {
-            return TRUE;
-            // $this->mailer
-            //     ->to($this->ion_auth->user()->row()->email)
-            //     ->from('squad@tappyn.com')
-            //     ->subject('Your submission has successfully been created')
-            //     ->html($this->load->view('emails/submission_success', $email_data, TRUE))
-            //     ->send();
+            $email_data = array(
+                'headline' => $this->input->post('headline'),
+                'text' => $this->input->post('text'),
+                'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
+                'contest' => $contest->title,
+                'company' => $contest->company->name,
+                'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
+            );
+            $this->mailer->to($this->ion_auth->user()->row()->email)
+                         ->from('squad@tappyn.com')
+                         ->subject("Your submission was created!")
+                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
+                         ->send();
+            return $id;
         }
         return FALSE;
     }

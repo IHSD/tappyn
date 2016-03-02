@@ -47,7 +47,6 @@ class Stripe_account_library
         );
         foreach($data as $key => $value)
         {
-            error_log($key);
             switch($key) {
                 case 'legal_entity.first_name':
                     $account_data['legal_entity']['first_name'] = $value;
@@ -64,10 +63,26 @@ class Stripe_account_library
                 case 'legal_entity.dob.year':
                     $account_data['legal_entity']['dob']['year'] = $value;
                     break;
+                case 'legal_entity.address.line1':
+                    $account_data['legal_entity']['address']['line1'] = $value;
+                    break;
+                case 'legal_entity.address.line2':
+                    $account_data['legal_entity']['address']['line2'] = $value;
+                    break;
+                case 'legal_entity.address.state':
+                    $account_data['legal_entity']['address']['state'] = $value;
+                    break;
+                case 'legal_entity.address.postal_code':
+                    $account_data['legal_entity']['address']['postal_code'] = $value;
+                    break;
+                case 'legal_entity.address.city':
+                    $account_data['legal_entity']['address']['city'] = $value;
+                    break;
                 default:
                     $account_data[$key] = $value;
             }
         }
+        error_log(json_encode($account_data));
         try{
             $account = \Stripe\Account::create($account_data);
         } catch(Exception $e) {

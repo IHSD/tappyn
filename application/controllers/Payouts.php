@@ -89,6 +89,11 @@ class Payouts extends CI_Controller
                 ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}. Please allow 3-5 business days for funds to be available")
                 ->data(array('payout' => $this->payout->get($id)))
                 ->respond();
+                $this->analytics->track(array(
+                    'event_name' => "payout_claimed",
+                    'object_type' => "payout",
+                    'object_id' => $payout->id
+                ));
         } else {
             $this->responder->fail(
                 validation_errors() ? validation_errors() : ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'An unknown error occured'))
