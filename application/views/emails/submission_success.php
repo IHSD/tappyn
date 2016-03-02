@@ -15,6 +15,7 @@ if(!isset($contest) ||
    !isset($company) ||
    !isset($text))
    {
+       error_log("Creating email with missing data!");
        throw new Exception("Tried creating email with missing data");
    }
 ?>
@@ -28,20 +29,11 @@ if(!isset($contest) ||
 
 <h3 style='text-align:center'>You just Tapped In</h3>
 
-<p style='text-align:center;margin:auto;width:600px'>
-    Great news - your submission to Tappyn has been confirmed. Yup - it's go time.
-</p>
-<p style='text-align:center;margin:auto;width:600px'>
-    For new users, prepare yourself for a Joseph Campbell style Hero's Journey.
-</p>
+<p style='text-align:center;margin:auto;width:600px'>Great news - your submission to Tappyn has been confirmed. Yup - it's go time.</p><br>
+<p style='text-align:center;margin:auto;width:600px'>For new users, prepare yourself for a Joseph Campbell style Hero's Journey.</p><br>
+<p style='text-align:center;margin:auto;width:600px'>For seasoned users, let's ride once again into Dylan Thomas's 'that good night'.</p><br>
+<p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the info you submitted to us:</p><br>
 
-<p style='text-align:center;margin:auto;width:600px'>
-    For seasoned users, let's ride once again into Dylan Thomas's 'that good night'.
-</p>
-
-<p style='text-align:center;margin:auto;width:600px'>
-    For your records, here is a copy of the info you submitted to us:
-</p>
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
 <h4 style='text-align:center'><?php echo $contest. ' by ' . $company; ?></h4>
 
@@ -65,11 +57,21 @@ if(!isset($contest) ||
 </table>
 <br>
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
-<p style='text-align:center'>
-    To keep up with your contests, your upvotes, and of course, the <strong>$$$</strong> in your account: <br>
-</p>
+<p style='text-align:center'>To keep up with your contests, your upvotes, and of course, the <strong>$$$</strong> in your account: <br></p>
 <p style='text-align:center'>
     <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'#/dashboard'; ?>">
         Visit Your Dashboard
     </a>
 <p>
+
+<!-- Begin footer -->
+<p style='margin:auto;width:600px;'>
+    Hit reply with feedback or questions,
+</p>
+<br>
+<p style='margin:auto;width:600px;'>
+    Alek
+    <br>
+    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+</p>
+<!-- End footer -->

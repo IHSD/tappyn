@@ -2,11 +2,12 @@
 
 /**
  *
- * @param array   $contests Arroy of interesting contests
+ * @param object   $contest Created contest
+ * @param string  $company Name of the company
  * @param integer $eid ID of the email for tracking purposes
  */
 
-if(!isset($contests) || empty($contests))
+if(!isset($contest) || empty($contest) || !isset($company))
 {
     throw new Exception("Invalid contests object array supplied for email");
 }

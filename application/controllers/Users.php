@@ -103,11 +103,17 @@ class Users extends CI_Controller
             if($this->ion_auth->in_group(2))
             {
                 $data = array(
-                    'age' => $this->input->post('age_range'),
+                    'age' => $this->input->post('age'),
                     'gender' => $this->input->post('gender'),
                     'state' => $this->input->post('state'),
-                    'school' => $this->input->post('school')
                 );
+                if($this->input->post('first_name') || $this->input->post('last_name'))
+                {
+                    $userdata = array();
+                    if($this->input->post('first_name')) $userdata['first_name'] = $this->input->post('first_name');
+                    if($this->input->post('last_name')) $userdata['last_name'] = $this->input->post('last_name');
+                    $this->ion_auth->update($this->ion_auth->user()->row()->id, $userdata);
+                }
 
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {

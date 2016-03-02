@@ -8,6 +8,7 @@ class Mailer
     protected $subject;
     protected $html;
     protected $callback;
+    protected $eid;
 
     public function __construct()
     {
@@ -20,6 +21,11 @@ class Mailer
     public function __get($var)
     {
         return get_instance()->$var;
+    }
+
+    public function event($event)
+    {
+        
     }
 
     public function to($to)
@@ -44,6 +50,12 @@ class Mailer
     {
         $this->html = $html;
         return $this;
+    }
+
+    public function id($to, $event)
+    {
+        $this->db->insert('emails', array('to' =>$to, 'event' => $event, 'created' => time()));
+        return $this->db->insert_id();
     }
 
     public function send()

@@ -43,17 +43,27 @@ class Accounts extends CI_Controller
             $this->form_validation->set_rules('dob_month', 'DOB - Month', 'required');
             $this->form_validation->set_rules('dob_year', 'DOB - Year', 'required');
             $this->form_validation->set_rules('country', 'Country', 'required');
+            $this->form_validation->set_rules('address_line1', 'Address Line 1', 'required');
+            $this->form_validation->set_rules('address_line2', 'Address Line 2', 'required');
+            $this->form_validation->set_rules('state', 'State', 'required');
+            $this->form_validation->set_rules('postal_code', 'Postal Code', 'required');
+
             if($this->form_validation->run() === TRUE)
             {
                 // Preproces
                 $data = array();
-                if($this->input->post('first_name')) $data['legal_entity.first_name'] = $this->input->post('first_name');
-                if($this->input->post('last_name'))  $data['legal_entity.last_name'] = $this->input->post('last_name');
-                if($this->input->post('dob_day'))    $data['legal_entity.dob.day'] = $this->input->post('dob_day');
-                if($this->input->post('dob_year'))   $data['legal_entity.dob.year'] = $this->input->post('dob_year');
-                if($this->input->post('dob_month'))  $data['legal_entity.dob.month'] = $this->input->post('dob_month');
-
-                if($this->input->post('country') && is_null($this->account->country))    $data['country'] = $this->input->post('country');
+                if($this->input->post('first_name'))    $data['legal_entity.first_name'] = $this->input->post('first_name');
+                if($this->input->post('last_name'))     $data['legal_entity.last_name'] = $this->input->post('last_name');
+                if($this->input->post('dob_day'))       $data['legal_entity.dob.day'] = $this->input->post('dob_day');
+                if($this->input->post('dob_year'))      $data['legal_entity.dob.year'] = $this->input->post('dob_year');
+                if($this->input->post('dob_month'))     $data['legal_entity.dob.month'] = $this->input->post('dob_month');
+                if($this->input->post('address_line1')) $data['legal_entity.addreess.line1'] = $this->input->post('address_line1');
+                if($this->input->post('address_line2')) $data['legal_entity.addreess.line2'] = $this->input->post('address_line2');
+                if($this->input->post('city'))          $data['legal_entity.address.city'] = $this->input->post('city');
+                if($this->input->post('state'))         $data['legal_entity.addreess.state'] = $this->input->post('state');
+                if($this->input->post('postal_code'))   $data['legal_entity,addreess.postal_code'] = $this->input->post('postal_code');
+                if($this->input->post('country') &&
+                   is_null($this->account->country))    $data['country'] = $this->input->post('country');
             }
             // If the form pass validation, and we can create / upadte based on presence
             if($this->form_validation->run() === TRUE &&
