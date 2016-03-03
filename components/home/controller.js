@@ -1,5 +1,9 @@
 tappyn.controller('homeController', function($scope, $location, homeFactory){
-	
+	homeFactory.grabCool().success(function(response){
+		$scope.contests = response.data.contests;
+	})
+
+
 	$scope.mailing_list = function(email){
 		homeFactory.mailingList(email).success(function(response){
 			if(response.http_status_code == 200){

@@ -80,86 +80,94 @@
     <!-- How it works -->
     <section class="how-it-works">
         <div class="row">
-            <h2 style='color:#ff5c00;text-align:center;'>Tappyn to your genius.</h2>
+            <h2 style='color:#ff5c00;font-size:30;text-align:center;'>Tappyn to your genius.</h2>
             <div class="features-box">
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/works1.png">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img width='250px' height='175px;' src="public/img/works1.png">
                     <h3>Create</h3>
                     <p>Chime in with your thoughts and opinions. Each submission only takes 90 seconds and contests are capped at 50 submissions.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/works2.png">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img width='250px' height='175px;' src="public/img/works2.png">
                     <h3>Share</h3>
-                    <p>Write an ad based on the type of contest. It only takes 90 seconds.</p>
+                    <p>Send the best cubmissions to your friends who can increase your chances of winning, by upvoting your entry.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/works3.png">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img width='250px' height='175px;' src="public/img/works3.png">
                     <h3>Vote</h3>
-                    <p>Only 50 submissions are allowed, so your odds of winning are great.</p>
+                    <p>Upvote what's good. Ignore what's not. The community decides which submissions are hot.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/works4.png">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img width='250px' height='175px;' src="public/img/works4.png">
                     <h3>Win</h3>
-                    <p>If you like the taste of victory, keep submitting to contests.  </p>
+                    <p>At the end of the contest, the hosting company will select their favorite entry. We then immediately transfer $50 cash to the victor. Not a bad ROI for two sentences.</p>
                 </div>
             </div>
         </div>
     </section>
     <!-- Testimonials -->
     <section class="testimonials">
-      <div class="row">
-        <div class="col-sm-4 hidden-xs">
-          <div class="testimonial-img div-center medium-10">
-            <img class='img-responsive' src="public/img/img-testi.jpg">
-          </div>
-        </div>
-        <div class="col-sm-8 col-xs-12">
-          <div class="testi-content">
-            <div class="testi-cell">
-            <h4>"Because of you I'm now going into marketing as a career.<br>Yesterday I saw my ad on my own Facebook feed!"</h4>
-            <ul>
-              <li>5 Contests</li>
-              <li> Worked 12 minutes</li>
-              <li>$250 cash</li>
-            </ul>
-            <h5>Chris Bissel, Georgia Tech Class of 2016</h5>
+        <div class="row">
+            <div class='col-sm-10 col-sm-offset-1 col-xs-12'>
+                <h2>Coolest Live Contests</h2>
+                <div class="col-lg-3 col-sm-4 col-xs-12" ng-repeat='contest in contests'>
+                    <a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
+                        <div class="submission-box">
+                            <div class="ad-company-info">
+                                <div>
+                                    <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.company_name}}</h5>
+                                    <span class='contest-price'>
+                                        $50
+                                    </span>
+                                </div>
+                                <div class="company-img text-center" style='margin-top:10px;height:100px'>
+                                    <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
+                                    <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
+                                </div>
+                                <div style='height:100px;width: 100%;overflow: hidden;'>
+                                    <div class='contest-audience'>
+                                        <span ng-if='contest.summary'>{{contest.summary}}</span>
+                                    </div>
+                                </div>
+                                <div style='height:100px;'>
+                                    <h5 class='text-left' style='paddin-left:5px;'><img class='pull-left' src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
+                                    <h5 class='text-left' style='paddin-left:5px;'><img class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
+                                    <uib-progressbar value='contest.submission_count' max='50' type="warning" style='margin-bottom:0;'></uib-progressbar>                
+                                    <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class='text-center'><a href='#/contests' class='btn btn-white btn-lg'>See Contests</a></div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
     <!-- Love Raw -->
     <section class="love-raw">
         <div class="row">
-            <h2 class="title">Why you’ll love tappyn</h2>
+            <h2 class="title">Why you’ll love Tappyn</h2>
             <div class="features-box">
-                <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <img src="public/img/icon-second.svg">
-                    <h3>90 second<br>
-            		submissions</h3>
-            		<p>Each submission is only a few sentences and has easy, simple instructions.</p>
+                    <h3>90 second submissions</h3>
+            		<p>Each submission is only two sentences and has easy, simple instructions.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/icon-submissions.svg">
-                    <h3>Cap of 50<br>
-           			on submissions</h3>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img src="public/img/bottom2.png">
+                    <h3>50 Submission Limit</h3>
            			<p>We cap all contests at 50 submissions so you've got a great chance of winning.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
+                <div class="col-xs-12 col-sm-6 col-md-3">
                     <img src="public/img/icon-cash.svg">
-                    <h3>Sizeable, immediate <br>
-            		payouts</h3>
-            		<p>$50 becomes $500 pretty quickly. As a winner, you'll be payed within 3 days.</p>
+                    <h3>Sizeable, immediate, payouts</h3>
+            		<p>$50 becomes $500 pretty quickly. We also make sure to pay the winner within 3 days of a contest closing.</p>
                 </div>
-                <div class="col-xs-12 col-sm-3">
-                    <img src="public/img/icon-school.svg">
-                    <h3>Exclusive<br>
-            		contests</h3>
-            		<p>You have exclusive access to contests based on your school, job, or interests.</p>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <img src="public/img/bottom4.png">
+                    <h3>Exclusive contests</h3>
+            		<p>You have access to exclusive contests based on your school, job, or interests.</p>
                 </div>
-            </div>
-            <div class="contest-button">
-                <a  ng-click='open_login("default", "")' class="btn btn-oj btn-lg">Join Now!</a>
             </div>
         </div>
     </section>
@@ -175,9 +183,10 @@
                     </div>
                 </div>
                 <div class='col-sm-4'>
-                    <button type='submit' class='col-xs-12 btn btn-oj btn-lg'>Sign Up</button>
+                    <button type='submit' class='col-xs-12 btn btn-oj btn-lg'>Tappyn</button>
                 </div>
             </form>
+            <div class='col-xs-12'><h2 class='text-center'>No Spam. Ever.</h2></div>
         </div>
     </section>
 

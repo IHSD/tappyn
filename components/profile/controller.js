@@ -24,7 +24,7 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 	//grab that funky fresh profile on load
 	profileFactory.grabProfile().success(function(response){
 		if(response.http_status_code == 200){
-			if(response.success) $scope.profile = response.data;	
+			if(response.success) $scope.profile = response.data.profile;	
 			else $scope.set_alert(response.message, "default");	 
 		}
 		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -33,6 +33,17 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 
 	$scope.update_profile = function(profile){
 		profileFactory.updateProfile(profile).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.change_pass = function(pass){
+		profileFactory.updatePass(pass).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
 				else $scope.set_alert(response.message, "default");	 

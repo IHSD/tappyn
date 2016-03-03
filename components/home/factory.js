@@ -12,5 +12,15 @@ tappyn.factory('homeFactory', function($http){
 		});
 	}
 
+	fact.grabCool = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/leaderboard',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
 	return fact;
 });

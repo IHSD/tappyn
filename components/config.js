@@ -31,10 +31,6 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contest/view.html',
 		controller : 'contestController'
 	})
-	.when('/submissions/:id', {
-		templateUrl : 'components/submissions/view.html',
-		controller : 'submissionsController'
-	})
 	.when('/payment', {
 		templateUrl : 'components/payment/view.html',
 		controller : 'paymentController'
@@ -42,11 +38,8 @@ tappyn.config(function($routeProvider) {
 	.when('/contact_us', {
 		templateUrl : 'components/contact_us/view.html'
 	})
-	.when('/login', {
-		templateUrl : 'components/login/view.html'
-	})
-	.when('/register', {
-		templateUrl : 'components/register/view.html'
+	.when('/companies', {
+		templateUrl : 'components/company/view.html'
 	})
 	.when('/faq', {
 		templateUrl : 'components/faq/view.html'
@@ -157,8 +150,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.check_code = function(code){
 		if(code == 401){
 			$scope.set_alert("You must be logged in", "default");
-			$scope.log_out(); //incase we have some JS objects still set
 			$scope.open_login("must", '');
+			$scope.log_out(); //incase we have some JS objects still set
 		}
 		else if(code == 403){
 			$scope.set_alert("Unauthorized access", "error")
@@ -236,6 +229,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
+			if(!$scope.signing_in.show && ($location.url() == "/dashboard" || $location.url() == "/profile" || $location.url() == "/payment")) $location.path("/home");
 		});
 	}
 
