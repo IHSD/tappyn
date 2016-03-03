@@ -1,10 +1,10 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
 /**
- *
- * @param object   $contest Created contest
- * @param string  $company Name of the company
- * @param integer $eid ID of the email for tracking purposes
+ * @param string $company Name of the company
+ * @param object $contest Object containing contest metadata
+ * @param object $charge Object containing payment metadata
+ * @param integer $eid  ID of the email for tracking purposes
 */
 ?>
 
@@ -25,51 +25,59 @@
 
 <!-- COMPANY RECEIPT -->
 
-<h4 style='text-align:center;margin:auto;width:600px;'>
-    <?php echo $contest; ?>
-</h4>
+<p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p><br>
 
-<!-- END COMPANY RECEIPT -->
 <h4 style='text-align:center;margin:auto;width:600px'>
     Contest details
 </h4>
-<table>
-    <tr>
-        <td>Contest ID</td>
-        <td><?php echo $cid; ?></td>
-    </tr>
+<br>
+<table style='text-align:left;margin:auto;width:600px'>
     <tr>
         <td>Platform</td>
-        <td><?php echo $platform; ?></td>
+        <td><?php echo ucfirst($contest->platform); ?></td>
     </tr>
     <tr>
         <td>Objective</td>
-        <td><?php echo $objective; ?></td>
+        <td><?php echo ucfirst($contest->objective); ?></td>
+    </tr>
+    <tr>
+        <td>Display Type</td>
+        <td><?php echo ucfirst($contest->display_type); ?></td>
     </tr>
     <tr>
         <td>Start Time</td>
-        <td><?php echo $start_time; ?></td>
+        <td><?php echo $contest->start_time; ?></td>
     </tr>
     <tr>
         <td>Stop Time</td>
-        <td><?php echo $stop_time; ?></td>
+        <td><?php echo $contest->stop_time; ?></td>
     </tr>
 </table>
-
+<br><hr style='text-align:center;margin:auto;width:600px;'><br>
 <h4 style='text-align:center;margin:auto;width:600px'>
     Payment details
 </h4>
-<table>
+<br>
+<table style='text-align:left;margin:auto;width:600px'>
     <tr>
         <td>Amount</td>
         <td>$99.99</td>
     </tr>
     <tr>
         <td>Source</td>
-        <td><?php echo $payment_method; ?></td>
+        <td><?php echo $charge->source->brand; ?></td>
+    </tr>
+    <tr>
+        <td>Last 4</td>
+        <td><?php echo $charge->source->last4; ?></td>
+    </tr>
+    <tr>
+        <td>Exp</td>
+        <td><?php echo $charge->source->exp_month.' / '.$charge->source->exp_year; ?></td>
     </tr>
 </table>
 <br>
+<p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p><br>
 <p style='margin:auto;width:600px;'>
     We'll let you know when submissions start rolling in!
 </p>

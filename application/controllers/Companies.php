@@ -189,6 +189,11 @@ class Companies extends CI_Controller
             return;
         }
 
+        if(!$contest = $this->contest->get($contest_id))
+        {
+            $this->responder->fail("That contest doesnt exist silly")->code(500)->respond();
+            return;
+        }
         // Check that the contest has not aleady been paid for
         $check = $this->db->select('*')->from('stripe_charges')->where('contest_id', $contest_id)->get();
         if($check && $check->num_rows() > 0)
@@ -246,6 +251,17 @@ class Companies extends CI_Controller
             $this->responder->message(
                 "Your payment was successfully processed!"
             )->respond();
+            $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'contest_create');
+            $this->mailer->to($this->ion_auth->user()->row()->email)
+                         ->from('squad@tappyn.com')
+                         ->subject("Receipt for your launched contest")
+                         ->html($this->load->view('emails/contest_payment', array(
+                             'company' => $this->ion_auth->profile('company_name'),
+                             'contest' => $contest,
+                             'eid' => $eid,
+                             'charge' => $charge
+                         ))
+                         ->send();
             return;
         }
 
