@@ -1,6 +1,8 @@
 <div class='wrapper'>
-	<div ng-show='tips' class='modal_tips col-xs-12 col-sm-3 col-sm-offset-9' style='background-color: rgba(0, 0, 0, 0.6);border-radius:3px;padding:10px;color:#fff;'>
-		<h2>I am tip</h2>
+	<div ng-show='tips' class='modal_tips col-xs-12 col-sm-3 col-sm-offset-9' style='background:#333;border-radius:3px;padding:10px;color:#fff;'>
+	 	<h3>Tip One</h3>
+	 	<h3>Tip Two</h3>
+	 	<h3>Tip Three</h3>
 	</div>
 </div>
 
@@ -48,24 +50,26 @@
 					<img ng-if='!contest.company.logo_url' style='height:auto;' width='150px' src="public/img/contest-default.jpg">
 					<img ng-if='contest.company.logo_url' style='height:auto;' width='150px' src="{{contest.company.logo_url}}">
 				</div>
-		        <div style='width:100%'>
-					<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Target Market</h4></div>
-		    		<div class='col-sm-9 col-xs-12'>
-		    			{{contest.audience}}
-		    		</div>
-		    	</div>
-				<div style='width:100%'>	        	
-					<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>What Makes Us Different</h4></div>
-		    		<div class='col-sm-9 col-xs-12'>
-		    			{{contest.different}}
-		    		</div>
-		    	</div>
-		    	<div style='width:100%'>
-					<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Objective</h4></div>
-		    		<div class='col-sm-9 col-xs-12'>
-		    			{{contest.objective}}
-		    		</div>
-		        </div>
+				<div class='row'>
+			        <div class='col-xs-12' style='margin-top:15px'>
+						<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Target Market</h4></div>
+			    		<div class='col-sm-9 col-xs-12'>
+			    			{{contest.audience}}
+			    		</div>
+			    	</div>
+					<div class='col-xs-12' style='margin-top:15px'>	        	
+						<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>What Makes Us Different</h4></div>
+			    		<div class='col-sm-9 col-xs-12'>
+			    			{{contest.different}}
+			    		</div>
+			    	</div>
+			    	<div class='col-xs-12' style='margin-top:15px'>
+						<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Objective</h4></div>
+			    		<div class='col-sm-9 col-xs-12'>
+			    			{{contest.objective}}
+			    		</div>
+			        </div>
+			    </div>
 		        <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
 		            <a href='{{contest.company.company_url}}' class='btn btn-oj'  target='_blank'>Website</a>
 		    	    <a href='{{contest.company.facebook_url}}' class='btn btn-oj'  target='_blank'>Facebook</a>
@@ -103,19 +107,19 @@
 </div>
 
 <div ng-show='view.submissions' class='row' style='padding-bottom:10px;'>
-	<div class='col-sm-4 col-xs-12' ng-repeat='submission in submissions'>
-		<div class="contest-box" style='min-height:250px; max-height:250px;'>
-			<div style='width:75%;float:left'>
+	<div class='col-md-4 col-sm-6 col-xs-12' ng-repeat='submission in submissions'>
+		<div class="contest-box submissions-page">
+			<div class='col-xs-12'>
 					<h3>{{submission.headline}}</h3>
 					<div class="contest-content">
 					    <span>{{submission.text}}</span>
 					</div>
 					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 			</div>
-			<div class='text-center' style='width:20%;float:right;'>
-            	<img width='65px' height='65px' ng-if='!submission.user_may_vote' src='public/img/filled.png'>
-            	<img width='65px' height='65px' ng-click='upvote(submission)' ng-if='submission.user_may_vote' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
-            	<h3 style='margin-top:15px;'>{{submission.votes | number}}</h3>
+			<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
+	    		<h4 style='padding-left:5px;' class='text-left'>{{submission.votes | number}}</h4>
+	        	<img ng-if='!submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+	        	<img ng-click='upvote(submission)' ng-if='submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
 	        </div>
             <div class="contest-info">
                 <h5>
@@ -124,10 +128,11 @@
                 	</span>
                	</h5>
             </div>
-        <!-- Generate a select as winner button if campaign is over and user owns contest -->
-		<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj btn-lg'>Choose Winner</button>
-    </div>
-	<h3 class='text-center' ng-if='submissions.length == 0'>This contest has no submissions yet, you could be the first!</h3>
+        	<!-- Generate a select as winner button if campaign is over and user owns contest -->
+			<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj btn-lg'>Choose Winner</button>
+    	</div>
+		<h3 class='text-center' ng-if='submissions.length == 0'>This contest has no submissions yet, you could be the first!</h3>
+	</div>
 </div>
 	
 

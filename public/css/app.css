@@ -1883,6 +1883,10 @@ footer {
 	.cd-multi-steps.text-top.count li.current > *::before, .cd-multi-steps.text-bottom.count li.current > *::before {
     box-shadow: none !important;
 }
+.submissions-page-mobile{
+ 	min-height:350px; 
+ 	max-height:350px;
+	}
 }
 @media screen and (max-width: 550px) {
 	.hero-banner2 {
@@ -1927,7 +1931,6 @@ footer {
   	padding: 0 4px 0 9px;
   	font-size: 14px;
   }
-
 }
 
   .message-alert{
@@ -2178,14 +2181,12 @@ nav .dropdown-menu{
 }
 .modal_tips.ng-hide{
     top:-50;
-    opacity: 0;
 }
 .modal_tips{
     z-index:100000000 !important;
     position:fixed;
     top:2.5%;
-    height:40%; 
-    opacity: 1;
+    height:250px; 
 }
 .modal_tips.ng-hide-add.ng-hide-add-active,
 .modal_tips.ng-hide-remove.ng-hide-remove-active {
@@ -2255,3 +2256,14 @@ nav .dropdown-menu{
 .border-submish{
 	border:1px solid #ff5e00;
 }
+.submissions-page{
+ min-height:250px; 
+ max-height:250px;
+}
+
+@media only screen
+   and (min-device-width : 320px)
+   and (max-device-width : 480px){ .submissions-page{
+ min-height:350px; 
+ max-height:350px;
+}}

@@ -1,5 +1,7 @@
-tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory){
+tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
 	$scope.amazon_connect('tappyn');
+	$scope.states = profileModel.states;
+
 	$scope.select_file = function($files){
 	    var file = $files[0];
 	    var url = 'https://tappyn.s3.amazonaws.com/';
@@ -34,7 +36,12 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 	$scope.update_profile = function(profile){
 		profileFactory.updateProfile(profile).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$rootScope.user.first_name = $scope.profile.first_name;
+					$rootScope.user.last_name = $scope.profile.last_name;
+					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
+				}	
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
