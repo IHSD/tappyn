@@ -346,8 +346,8 @@
 				<div class='contest-box'>
 					<h3 class='text-center'>Payment</h3>
 					<h4 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} - {{contest.display | capUnderscore}} : $99.99</h4>
-					<div class='col-xs-12' ng-show='payments.length > 0'>
-						<div class='col-sm-12 payment-method-container'>
+					<div ng-show='payments.length > 0'>
+						<div class='payment-method-container'>
 							<div class='payment-method-card' ng-repeat='payment in payments'>
 								<h5>
 									<img height='20' ng-if='account.brand == "Visa"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
