@@ -12,6 +12,7 @@ class Contests extends CI_Controller
         $this->load->library('submission_library');
         $this->load->library('mailer');
         $this->load->model('user');
+        $this->load->library('vote');
     }
 
     /**
@@ -61,6 +62,8 @@ class Contests extends CI_Controller
         foreach($contests as $contest)
         {
             $contest->votes = $this->vote->select('COUNT(*) as count')->where('contest_id', $contest->id)->fetch()->row()->count;
+            $contest->submission_count = $this->contest->submissionsCount($contest->id);
+            $contest->company = $this->user->profile($contest->id);
         }
 
         usort($contests, function($a, $b)
@@ -68,7 +71,7 @@ class Contests extends CI_Controller
                 return strcmp($b->votes, $a->votes);
             }
         );
-        $this->responder->data(array('contests' => array_slice($contests, 0, 5)))->respond();
+        $this->responder->data(array('contests' => array_slice($contests, 0, 6)))->respond();
     }
 
     /**
