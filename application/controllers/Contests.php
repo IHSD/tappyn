@@ -72,6 +72,7 @@ class Contests extends CI_Controller
             }
         );
         $this->responder->data(array('contests' => array_slice($contests, 0, 6)))->respond();
+        
     }
 
     /**
