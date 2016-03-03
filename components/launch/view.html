@@ -348,25 +348,27 @@
 					<h4 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} - {{contest.display | capUnderscore}} : $99.99</h4>
 					<div ng-show='payments.length > 0'>
 						<div class='payment-method-container'>
-							<div class='payment-method-card' ng-repeat='payment in payments'>
-								<h5>
-									<img height='20' ng-if='account.brand == "Visa"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-									<img height='20' ng-if='account.brand == "MasterCard"' src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_5.gif" />
-									<img height='20' ng-if='account.brand == "American Express"' src="http://www.credit-card-logos.com/images/american_express_credit-card-logos/american_express_logo_9.gif" />
-									<img height='20' ng-if='account.brand == "Discover"' src="http://www.credit-card-logos.com/images/discover_credit-card-logos/discover_network1.jpg" />
-									<img height='20' ng-if='account.brand == "JCB"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-									<img height='20' ng-if='account.brand == "Diners CLub"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-									<img height='20' ng-if='account.brand == "Unknown"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-									&nbsp;&nbsp;&nbsp;********{{account.last4}}
-								</h5>
-								<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
-								<div class='payment-method-actions' uib-dropdown>
-		                            <button href uib-dropdown-toggle>Actions<span class="caret"></span></button>
-		                            <ul uib-dropdown-menu role="menu">
-		                                <li role='menuitem' ng-if='!account.default_for_currency' ng-click='set_default(account.id)'><a>Set As Default</a></li>
-			                            <li role='menuitem' ng-if='!account.default_for_currency' ng-click='remove_method(account.id)'><a>Remove</a></li>
-		                            </ul>
-			                    </div>
+							<div class='row'>
+								<div class='col-sm-4 payment-method-card' ng-repeat='payment in payments'>
+									<h5>
+										<img height='20' ng-if='account.brand == "Visa"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
+										<img height='20' ng-if='account.brand == "MasterCard"' src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_5.gif" />
+										<img height='20' ng-if='account.brand == "American Express"' src="http://www.credit-card-logos.com/images/american_express_credit-card-logos/american_express_logo_9.gif" />
+										<img height='20' ng-if='account.brand == "Discover"' src="http://www.credit-card-logos.com/images/discover_credit-card-logos/discover_network1.jpg" />
+										<img height='20' ng-if='account.brand == "JCB"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
+										<img height='20' ng-if='account.brand == "Diners CLub"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
+										<img height='20' ng-if='account.brand == "Unknown"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
+										&nbsp;&nbsp;&nbsp;********{{payment.last4}}
+									</h5>
+									<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+									<div class='payment-method-actions' uib-dropdown>
+			                            <button href uib-dropdown-toggle>Actions<span class="caret"></span></button>
+			                            <ul uib-dropdown-menu role="menu">
+			                                <li role='menuitem' ng-if='!account.default_for_currency' ng-click='set_default(account.id)'><a>Set As Default</a></li>
+				                            <li role='menuitem' ng-if='!account.default_for_currency' ng-click='remove_method(account.id)'><a>Remove</a></li>
+			                            </ul>
+				                    </div>
+								</div>
 							</div>
 						</div>
 					</div>
