@@ -99,6 +99,8 @@ class Submissions extends CI_Controller
         foreach($check->result() as $sub)
         {
             $submission = $this->submission->get($sub->submission_id);
+            $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            $submission->user_may_vote = (bool)$this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
             $submissions[] = $submission;
         }
         $this->responder->data(array(
