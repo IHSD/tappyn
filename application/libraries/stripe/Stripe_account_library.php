@@ -121,6 +121,24 @@ class Stripe_account_library
                     case 'legal_entity.dob.year':
                         $account->legal_entity->dob->year = $value;
                         break;
+                    case 'legal_entity.address.line1':
+                        $account->legal_entity->address->line1 = $value;
+                        break;
+                    case 'legal_entity.address.line2':
+                        $account->legal_entity->address->line2 = $value;
+                        break;
+                    case 'legal_entity.address.city':
+                        $account->legal_entity->address->city = $value;
+                        break;
+                    case 'legal_entity.address.state':
+                        $account->legal_entity->address->state = $value;
+                        break;
+                    case 'legal_entity.address.postal_code':
+                        $account->legal_entity->address->postal_code = $value;
+                        break;
+                    case 'legal_entity.ssn_last_4':
+                        $account->legal_entity->ssn_last_4 = $value;
+                        break;
                     default:
                         $account->$key = $value;
                     }
