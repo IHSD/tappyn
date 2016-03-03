@@ -242,7 +242,7 @@ class Companies extends CI_Controller
             $this->responder->fail("We were unable to process your request")->code(500)->respond();
             return;
         }
-
+        ano
         // Check if charge was succesful and handle accordingly
         if($charge)
         {
@@ -260,7 +260,7 @@ class Companies extends CI_Controller
                              'contest' => $contest,
                              'eid' => $eid,
                              'charge' => $charge
-                         )), TRUE)
+                         ), TRUE))
                          ->send();
             return;
         }
