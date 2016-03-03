@@ -201,6 +201,10 @@ class MY_Model extends CI_Model
       }
 
       $this->response = $this->db->get();
+      if(!$this->response)
+      {
+          die($this->db->error()['message']);
+      }
       return $this;
   }
 

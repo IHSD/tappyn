@@ -24,6 +24,7 @@ class Contests extends CI_Controller
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
+
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
@@ -32,12 +33,41 @@ class Contests extends CI_Controller
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
         $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
+
         if($contests !== FALSE)
         {
             $this->responder->data($contests)->respond();
         } else {
             $this->responder->fail("An unknown error occured")->code(500)->respond();
         }
+    }
+
+    public function leaderboard()
+    {
+        $this->params = array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1
+        );
+
+        if(!$this->contest->where($this->params)->fetch())
+        {
+            $this->responder->fail("Server Error Occured")->code(500)->respond();
+            return;
+        }
+        $contests = $this->contest->result();
+
+        foreach($contests as $contest)
+        {
+            $contest->votes = $this->vote->select('COUNT(*) as count')->where('contest_id', $contest->id)->fetch()->row()->count;
+        }
+
+        usort($contests, function($a, $b)
+            {
+                return strcmp($b->votes, $a->votes);
+            }
+        );
+        $this->responder->data(array('contests' => array_slice($contests, 0, 5)))->respond();
     }
 
     /**
@@ -74,7 +104,7 @@ class Contests extends CI_Controller
      * Create a new contest, or render the creation form
      * @return void
      */
-    public function create()
+    public function create($id = null)
     {
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
@@ -110,8 +140,14 @@ class Contests extends CI_Controller
             if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
             if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
             if(!empty($images)) $data['additional_images'] = json_encode($images);
+            if(is_null($id))
+            {
+                $cid = $this->contest->create($data);
+            } else {
+                $cid = $this->contest->update($id, $data);
+            }
         }
-        if($this->form_validation->run() == true && ($cid = $this->contest->create($data)))
+        if($this->form_validation->run() == true && $cid)
         {
             $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
             $this->analytics->track(array(
