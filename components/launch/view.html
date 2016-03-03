@@ -349,7 +349,7 @@
 					<div ng-show='payments.length > 0'>
 						<div class='payment-method-container'>
 							<div class='row'>
-								<div class='col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments'> <!--ng-click='set_as_method(payment.id)' -->
+								<div class='col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='set_as_method(payment.id)'>
 									<h5>
 										<img height='20' ng-if='payment.brand == "Visa"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
 										<img height='20' ng-if='payment.brand == "MasterCard"' src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_5.gif" />
@@ -365,7 +365,7 @@
 							</div>
 						</div>
 					</div>
-					<div class='alert alert-warning' ng-show='payments.length==0'>You dont have any saved payment methods</div>
+					<div class='alert alert-warning' ng-show='payments.length < 1'>You dont have any saved payment methods</div>
 					<div class='text-center'>
 						<button class='btn btn-oj' ng-click='adding_payment=true'>Add Payment Method</button>
 					</div>
