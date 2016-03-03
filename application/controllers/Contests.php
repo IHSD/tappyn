@@ -71,10 +71,9 @@ class Contests extends CI_Controller
                 return strcmp($b->votes, $a->votes);
             }
         );
-        $this->responder->data(array('contests' => array_slice($contests, 0, 6)))->respond();
-        
-    }
+        $this->responder->data(array('contests' => array_slice($contests, 0, 4)))->respond();
 
+    }
     /**
      * Fetch a single contest
      *

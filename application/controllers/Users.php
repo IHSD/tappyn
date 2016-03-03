@@ -155,6 +155,8 @@ class Users extends CI_Controller
             }
         } else {
             $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+            $profile->first_name = $this->ion_auth->user()->row()->first_name;
+            $profile->last_name = $this->ion_auth->user()->row()->last_name;
             $this->responder->data(array(
                 'profile' => $profile
             ))->respond();
