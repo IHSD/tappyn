@@ -56,6 +56,7 @@ if(!isset($contest) ||
     </tr>
 </table>
 <br>
+
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
 <p style='text-align:center'>To keep up with your contests, your upvotes, and of course, the <strong>$$$</strong> in your account: <br></p>
 <p style='text-align:center'>
