@@ -10,7 +10,10 @@ class Home extends CI_Controller
           // redirect('/', 'refresh');
         }
         if(empty($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest') {
-        	$this->load->view('templates/navbar');
+            if($this->input->get('navbar') != 'hide')
+            {
+        	       $this->load->view('templates/navbar');
+            }
         }
         $this->load->model('submission');
         $this->load->model('contest');
@@ -56,7 +59,16 @@ class Home extends CI_Controller
                     'company' => uniqid(),
                     'description' => substr(lorem(), 0, 45)
                 )
-            )
+            ),
+            'platform' => 'facebook',
+            'objective' => 'webiste_clicks',
+            'display_type' => 'right_column',
+            'start_time' => date('Y-m-d H:00 A'),
+            'stop_time' => date('Y-m-d H:00 A', strtotime('+7 days')),
+            'payment_method' => 'card_abcxyz123890',
+            'last_4'    => '1234',
+            'expiration_date'       => '01/2015',
+            'brand' => 'Visa'
         );
         $this->load->view($path.$template.'.php', $args);
     }

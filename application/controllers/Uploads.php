@@ -7,9 +7,11 @@ class Uploads extends CI_Controller
         parent::__construct();
     }
 
-    public function index($filename)
+    public function index($filename = NULL)
     {
+        if(is_null($filename)) return;
         $name = APPPATH.'uploads/'.$filename;
+        if(!file_exists($name)) return;
         $fp = fopen($name, 'rb');
 
         header("Content-Type: image/png");

@@ -11,7 +11,6 @@
 if(!isset($company))
 {
    error_log("Creating email with missing data!");
-   throw new Exception("Tried creating email with missing data");
 }
 ?>
 
@@ -28,7 +27,8 @@ if(!isset($company))
 <p style='text-align:center;margin:auto;width:600px'>Unlesss it's peach vodka. Then keep it far, far away from our mailbox.</p><br><br>
 <p style='text-align:center;margin:auto;width:600px'>
     Collect your winnings <a href"<?php echo base_url().'#/payment'; ?>">here</a>
-</p><br>
+</p>
+<br>
 
 <!-- Begin footer -->
 <p style='margin:auto;width:600px;'>
