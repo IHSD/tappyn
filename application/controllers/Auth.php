@@ -430,7 +430,7 @@ class Auth extends CI_Controller {
 
 		if(!$this->input->post('identity'))
 	    {
-		    $this->responder->fail("Request was missing necessary fields")->code(500)->respond();
+		    $this->responder->fail("Email field is required")->code(500)->respond();
 	    	return;
 	   	}
 
@@ -439,14 +439,15 @@ class Auth extends CI_Controller {
             $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
-			if($this->input->post('group_id') !== 2)
+			error_log($this->input->post('group_id'));
+			if($this->input->post('group_id') == 2)
 			{
 				$name_chunks = explode(' ', $this->input->post('name'));
 	            $additional_data = array(
 	                'first_name' => $name_chunks[0],
 	                'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
 					'age'		=> ($this->input->post('age') ? $this->input->post('age') : NULL),
-					'gender' 	=> ($this->input->post('gender') ? $this->input->post('gender') : NULL),
+					'gender' 	=> ($this->input->post('gender') ? $this->_genderize($this->input->post('gender')) : NULL),
 	            );
 			} else {
 				$additional_data = array(
@@ -507,6 +508,13 @@ class Auth extends CI_Controller {
 		{
 			return FALSE;
 		}
+	}
+
+	function _genderize($gender)
+	{
+		if($gender == 'female') return 2;
+		if($gender == 'male') return 1;
+		return 0;
 	}
 
 	function _render_page($view, $data=null, $returnhtml=false)//I think this makes more sense
