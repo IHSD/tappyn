@@ -369,65 +369,67 @@
 					<div class='text-center'>
 						<button class='btn btn-oj' ng-click='adding_payment=true'>Add Payment Method</button>
 					</div>
-					<form ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
-						<button ng-show='payment_methods.length > 0' ng-click='adding_payment = false' class='btn btn-oj pull-right'>Use a saved method</button>
-						<div class='col-xs-12'>
-						    <div class="form-group">
-						    	<label>Card Number</label>
-						      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
+					<div class='row'>
+						<form class='col-sm-6 col-sm-offset-3 col-xs-12' ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
+							<button ng-show='payment_methods.length > 0' ng-click='adding_payment = false' class='btn btn-oj pull-right'>Use a saved method</button>
+							<div class='col-xs-12'>
+							    <div class="form-group">
+							    	<label>Card Number</label>
+							      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
+							    </div>
+							</div>
+						    <div class='col-xs-12 col-sm-4'>
+							  <div class="form-group">
+								    <label>CVC</label>
+								    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>
+							  </div>
 						    </div>
-						</div>
-					    <div class='col-xs-12 col-sm-4'>
-						  <div class="form-group">
-							    <label>CVC</label>
-							    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>
-						  </div>
-					    </div>
-					  	<div class='col-xs-12 col-sm-4'>
-					      <div class="form-group">
-					       		<label>Month Exp</label>
-					  	      	<select class='form-control' data-stripe="exp-month">
-						            <option value='01'>01</option>
-						            <option value='02'>02</option>
-						            <option value='03'>03</option>
-						            <option value='04'>04</option>
-						            <option value='05'>05</option>
-						            <option value='06'>06</option>
-						            <option value='07'>07</option>
-						            <option value='08'>08</option>
-						            <option value='09'>09</option>
-						            <option value='10'>10</option>
-						            <option value='11'>11</option>
-						            <option value='12'>12</option>
-					          </select>
-					      </div>
-					    </div>
-					    <div class='col-xs-12 col-sm-4'>
-					    	<div class='form-group'>
-					        	<label>Year Exp</label>
-					  	    	<select class='form-control' data-stripe="exp-year">
-						             <option value='2016'>2016</option>
-						             <option value='2017'>2017</option>
-						             <option value='2018'>2018</option>
-						             <option value='2019'>2019</option>
-						             <option value='2020'>2020</option>
-						             <option value='2021'>2021</option>
-						             <option value='2022'>2022</option>
-						             <option value='2023'>2023</option>
-						             <option value='2024'>2024</option>
-						             <option value='2025'>2025</option>
-						             <option value='2026'>2026</option>
-						             <option value='2027'>2027</option>
-					        	</select>
-					  	  	</div>
-					  	</div>
-	    				<input type='hidden' data-stripe='currency' value='usd'/>
-	    				<div class='form-group'>
-	    					<label class='control-label'>Save Method
-	    						<input type='checkbox' ng-model='save_method'>
-	    					</label>
-	    				</div>
-					</form>
+						  	<div class='col-xs-12 col-sm-4'>
+						      <div class="form-group">
+						       		<label>Month Exp</label>
+						  	      	<select class='form-control' data-stripe="exp-month">
+							            <option value='01'>01</option>
+							            <option value='02'>02</option>
+							            <option value='03'>03</option>
+							            <option value='04'>04</option>
+							            <option value='05'>05</option>
+							            <option value='06'>06</option>
+							            <option value='07'>07</option>
+							            <option value='08'>08</option>
+							            <option value='09'>09</option>
+							            <option value='10'>10</option>
+							            <option value='11'>11</option>
+							            <option value='12'>12</option>
+						          </select>
+						      </div>
+						    </div>
+						    <div class='col-xs-12 col-sm-4'>
+						    	<div class='form-group'>
+						        	<label>Year Exp</label>
+						  	    	<select class='form-control' data-stripe="exp-year">
+							             <option value='2016'>2016</option>
+							             <option value='2017'>2017</option>
+							             <option value='2018'>2018</option>
+							             <option value='2019'>2019</option>
+							             <option value='2020'>2020</option>
+							             <option value='2021'>2021</option>
+							             <option value='2022'>2022</option>
+							             <option value='2023'>2023</option>
+							             <option value='2024'>2024</option>
+							             <option value='2025'>2025</option>
+							             <option value='2026'>2026</option>
+							             <option value='2027'>2027</option>
+						        	</select>
+						  	  	</div>
+						  	</div>
+		    				<input type='hidden' data-stripe='currency' value='usd'/>
+		    				<div class='form-group'>
+		    					<label class='control-label'>Save Method
+		    						<input type='checkbox' ng-model='save_method'>
+		    					</label>
+		    				</div>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
