@@ -11,7 +11,6 @@
 if(!isset($company))
 {
    error_log("Creating email with missing data!");
-   throw new Exception("Tried creating email with missing data");
 }
 ?>
 

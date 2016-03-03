@@ -5,13 +5,7 @@
  * @param object   $contest Created contest
  * @param string  $company Name of the company
  * @param integer $eid ID of the email for tracking purposes
- */
-
-if(!isset($contest) || empty($contest) || !isset($company))
-{
-    throw new Exception("Invalid contests object array supplied for email");
-}
-
+*/
 ?>
 
 <br>
@@ -36,14 +30,13 @@ if(!isset($contest) || empty($contest) || !isset($company))
 </h4>
 
 <!-- END COMPANY RECEIPT -->
+<h4 style='text-align:center;margin:auto;width:600px'>
+    Contest details
+</h4>
 <table>
     <tr>
         <td>Contest ID</td>
         <td><?php echo $cid; ?></td>
-    </tr>
-    <tr>
-        <td>Contest Name</td>
-        <td><?php echo $contest; ?></td>
     </tr>
     <tr>
         <td>Platform</td>
@@ -60,6 +53,20 @@ if(!isset($contest) || empty($contest) || !isset($company))
     <tr>
         <td>Stop Time</td>
         <td><?php echo $stop_time; ?></td>
+    </tr>
+</table>
+
+<h4 style='text-align:center;margin:auto;width:600px'>
+    Payment details
+</h4>
+<table>
+    <tr>
+        <td>Amount</td>
+        <td>$99.99</td>
+    </tr>
+    <tr>
+        <td>Source</td>
+        <td><?php echo $payment_method; ?></td>
     </tr>
 </table>
 <br>
