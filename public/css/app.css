@@ -2130,6 +2130,8 @@ nav .dropdown-menu{
 	position:absolute;
 	right:3;
 	top:3;
+	cursor: pointer;
+	text-align:center;
 }
 .package-highlight{
 	border:2px solid #ff6c00;
