@@ -82,7 +82,6 @@ class Stripe_account_library
                     $account_data[$key] = $value;
             }
         }
-        error_log(json_encode($account_data));
         try{
             $account = \Stripe\Account::create($account_data);
         } catch(Exception $e) {
@@ -94,7 +93,8 @@ class Stripe_account_library
             'user_id' => $this->ion_auth->user()->row()->id,
             'publishable_key' => $account->keys->publishable,
             'secret_key' => $account->keys->secret,
-            'transfers_enabled' => false
+            'transfers_enabled' => false,
+            'created_at' => time()
         ));
         return $account;
     }
@@ -130,7 +130,8 @@ class Stripe_account_library
             $this->errors = $e->getMessage();
             return false;
         }
-        $this->stripe_account->save($account);
+        $this->db->where('account_id', $id)->update('stripe_accounts', array('updated_at' => time()));
+        // $this->stripe_account->save($account);
         return true;
     }
 
