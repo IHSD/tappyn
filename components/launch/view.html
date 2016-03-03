@@ -346,7 +346,7 @@
 				<div class='contest-box'>
 					<h3 class='text-center'>Payment</h3>
 					<h4 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} - {{contest.display | capUnderscore}} : $99.99</h4>
-					<div class='col-xs-12' ng-show='account.external_accounts.data.length > 0'>
+					<div class='col-xs-12' ng-show='payments.length > 0'>
 						<div class='col-sm-12 payment-method-container'>
 							<div class='payment-method-card' ng-repeat='payment in payments'>
 								<h5>
@@ -370,6 +370,7 @@
 							</div>
 						</div>
 					</div>
+					<div class='alert alert-warning' ng-show='payments.length==0'>You dont have any saved payment methods</div>
 					<form ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
 						<button ng-show='payment_methods.length > 0' ng-click='adding_payment = false' class='btn btn-oj pull-right'>Use a saved method</button>
 						<div class='col-xs-12'>
