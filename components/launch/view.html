@@ -366,6 +366,9 @@
 						</div>
 					</div>
 					<div class='alert alert-warning' ng-show='payments.length==0'>You dont have any saved payment methods</div>
+					<div class='text-center'>
+						<button class='btn btn-oj' ng-click='adding_payment=true'>Add Payment Method</button>
+					</div>
 					<form ng-show='adding_payment' class='form' action="" method="POST" id="payment-form">
 						<button ng-show='payment_methods.length > 0' ng-click='adding_payment = false' class='btn btn-oj pull-right'>Use a saved method</button>
 						<div class='col-xs-12'>
