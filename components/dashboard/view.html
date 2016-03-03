@@ -36,9 +36,9 @@
 	               		</div>
 	               	</h5>
 	            </div>
-		        <button ng-if='submish.payout' ng-disabled='submish.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submish.payout.id)'>
-						<span ng-show='submish.payout.claimed == "0"'>Claim</span>
-						<span ng-show='submish.payout.claimed != "0"'>Claimed</span>
+		        <button ng-if='submission.payout' ng-disabled='submission.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submission.payout.id)'>
+						<span ng-show='submission.payout.claimed == "0"'>Claim</span>
+						<span ng-show='submission.payout.claimed != "0"'>Claimed</span>
 				</button>
 	    	</div>
 	    </div>

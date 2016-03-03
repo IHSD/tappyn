@@ -77,7 +77,7 @@ tappyn.filter('untilFilter', function() {
 
 tappyn.filter('legibleDate', function() {
 	return function(date){
-		date = moment(date).format("lll");
+		date = moment(date).format("MMM, Do");
 		return date;
 	};
 });
@@ -112,6 +112,7 @@ tappyn.filter('firstChar', function() {
     }
   }
 });
+
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $route, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		

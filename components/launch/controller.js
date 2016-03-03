@@ -56,7 +56,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 			if(response.http_status_code == 200){
 				if(response.success){
 					if(response.data.account == false) $scope.adding_payment = true;
-					else $scope.payments = response.data.account.external_accounts.data;
+					else $scope.payments = response.data.customer.sources.data;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}

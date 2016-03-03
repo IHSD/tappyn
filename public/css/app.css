@@ -204,7 +204,7 @@ header .btn-login {
 .hero-banner {
 	background: url(img-banner.jpg) no-repeat 50% 0;
 	background-size: cover;
-	height: 620px;
+	height: 300px;
 	position: relative;
 }
 .hero-banner2 {
@@ -222,10 +222,9 @@ header .btn-login {
 
 .hero-content {
 	vertical-align: middle;
-	text-align: center;
 	z-index:2;
 	position:relative;
-	top:150;
+	top:25;
 }
 .hero-content h2 {
 	color: #fff;
@@ -244,7 +243,7 @@ header .btn-login {
 /** How it works **/
 .how-it-works {
 	text-align: center;
-	padding:  68px 0;
+	padding-bottom:50px;
 	background-color:#fff;
 }
 .title {
@@ -1985,6 +1984,51 @@ footer {
     left: -20px;
     width: 0;
 }
+.home-industry{
+	position: absolute;
+	height:35px;
+	left:70;
+	top:5;
+	color:#ff5c00;
+	font-weight:300;
+	font-size:16;
+}
+.contest-price-home{
+	position: absolute;
+    width: 42px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    left:0;
+    background: #FF5E00;
+    color: #fff;
+    top: 0;
+    z-index: 20;
+	border-top-left-radius: 5px;
+}
+.contest-price-home:before{
+    border-right: 1.5em solid transparent;
+    border-top:1.75em solid #FF5E00;
+    content: "";
+    height: 0;
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    right: -20px;
+    width: 0;
+}
+.contest-price-home:after{
+	border-right: 1.5em solid transparent;
+    border-bottom: 1.75em solid #FF5E00;
+    content: "";
+    height: 0;
+    z-index: 1;
+    bottom: 0;
+    position: absolute;
+    right: -20px;
+    width: 0;
+}
 .pagination-container {
     float: right;
 }
@@ -2113,6 +2157,22 @@ nav .dropdown-menu{
 }
 .modal_actions.ng-hide-add.ng-hide-add-active,
 .modal_actions.ng-hide-remove.ng-hide-remove-active {
+    -webkit-transition:all linear 0.5;
+       transition:all linear 0.5s;
+}
+.modal_tips.ng-hide{
+    top:-50;
+    opacity: 0;
+}
+.modal_tips{
+    z-index:100000000 !important;
+    position:fixed;
+    top:2.5%;
+    height:40%; 
+    opacity: 1;
+}
+.modal_tips.ng-hide-add.ng-hide-add-active,
+.modal_tips.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
