@@ -260,7 +260,7 @@ class Companies extends CI_Controller
                              'contest' => $contest,
                              'eid' => $eid,
                              'charge' => $charge
-                         ))
+                         )), TRUE)
                          ->send();
             return;
         }
