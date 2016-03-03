@@ -44,6 +44,7 @@
 					<div class='text-center'><button class='btn btn-oj btn-lg' type='submit'>Update Your Info</button></div>
 				</form>
 				<div ng-show='user.type=="member"'>
+					<h4>Profile</h4>
 					<form class='form' ng-submit='update_profile(profile)'>
 						<div class='col-xs-12 col-sm-6'>
 							<div class='form-group'>
@@ -73,7 +74,7 @@
 							<div class='form-group'>
 								<label>Gender</label>
 								<select class='form-control' ng-model='profile.gender'>
-									<option value=''>Gender</option>
+									<option value='0'>Gender</option>
 									<option value='1'>Male</option>
 									<option value='2'>Female</option>
 								</select>
@@ -92,14 +93,20 @@
 					<form class='form'>
 						<div class='col-sm-12'>
 							<div class='form-group col-sm-6'>
-								<label>Password</label>
-								<input type='password' class='form-control' placeholder='New Password' ng-model='password'>
+								<label>Current Password</label>
+								<input type='password' class='form-control' placeholder='Current Password' ng-model='password.old'>
+							</div>
+						</div>
+						<div class='col-sm-12'>
+							<div class='form-group col-sm-6'>
+								<label>New Password</label>
+								<input type='password' class='form-control' placeholder='New Password' ng-model='password.new'>
 							</div>
 						</div>
 						<div class='col-sm-12'>
 							<div class='form-group col-sm-6'>
 								<label>Confirm</label>
-								<input type='password' class='form-control' placeholder='Confirm Password' ng-model='confirm'>
+								<input type='password' class='form-control' placeholder='Confirm Password' ng-model='password.new_confirm'>
 							</div>
 						</div>
 						<div class='text-center'>

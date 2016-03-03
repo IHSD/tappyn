@@ -11,6 +11,7 @@ class Contests extends CI_Controller
         $this->load->model('submission');
         $this->load->library('submission_library');
         $this->load->library('mailer');
+        $this->load->model('user');
     }
 
     /**
@@ -155,6 +156,18 @@ class Contests extends CI_Controller
                 'object_type' => "contest",
                 'object_id' => $cid
             ));
+            $profile_data = array();
+            $profile = $this->ion_auth->profile();
+            if(is_null($profile->mission)) $profile_data['mission'] = $this->input->post('audience');
+            if(is_null($profile->extra_info)) error_log("ExtraInfo null");
+            if(is_null($profile->different)) $profile_data['different'] = $this->input->post('different');
+            if(is_null($profile->summary)) $profile_data['summary'] = $this->input->post('summary');
+            if(is_null($profile->company_email)) $profile_data['company_email'] = $this->input->post('company_email');
+            if(is_null($profile->company_url)) $profile_data['company_url'] = $this->input->post('company_url');
+            if(!empty($profile_data))
+            {
+                $this->user->saveProfile($this->ion_auth->user()->row()->id, $profile_data);
+            }
         }
         else
         {
