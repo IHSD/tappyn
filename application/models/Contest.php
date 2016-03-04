@@ -100,19 +100,7 @@ class Contest extends MY_Model
         }
         return false;
     }
-
-    public function count($params = array())
-    {
-        $this->db->select("COUNT(*) as count")->from('contests');
-        if(!empty($params)) $this->db->where($params);
-        $count = $this->db->get();
-        if($count && $count->num_rows() == 1)
-        {
-            return (int) $count->row()->count;
-        }
-        return false;
-    }
-
+    
     public function create($data)
     {
         if(!$this->validate())

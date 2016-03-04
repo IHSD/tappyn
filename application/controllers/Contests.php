@@ -271,14 +271,4 @@ class Contests extends CI_Controller
             return;
         }
     }
-
-    /**
-     * [update description]
-     * @param  integer $cid ID of the contest to update
-     * @return void
-     */
-    public function update($cid = NULL)
-    {
-
-    }
 }

@@ -137,7 +137,7 @@ class Companies extends CI_Controller
                 'customer' => $this->data['customer']
             ))->respond();
         } else {
-            $this->responder->fail("You dont have any account details yet")->code(500)->respond();
+            $this->responder->fail("You dont have any account details yet")->code(200)->respond();
             return;
         }
     }
@@ -182,7 +182,10 @@ class Companies extends CI_Controller
      */
     public function payment($contest_id = FALSE)
     {
+        // Initialize the control variables
         $charge = FALSE;
+        $amount = 9999;
+
         if(!$contest_id)
         {
             $this->responder->fail("You must supply a contest")->code(500)->respond();
@@ -202,47 +205,77 @@ class Companies extends CI_Controller
             return;
         }
 
+        // If there was a voucher supplied, lets run that.
+        // If we no longer need a charge, we can skip all the stripe crap
+        $this->load->library('vouchers_library');
         $this->load->library('stripe/stripe_charge_library');
         $this->load->library('stripe/stripe_customer_library');
-        // If payment details were supplied, we're either going to charge the card, or create / update a customer
-        if($this->input->post('stripe_token'))
+        if($this->input->post('voucher_code'))
         {
-            if($this->input->post('save_method'))
+            $voucher = $this->voucher->where('code', $this->input->post('voucher_code'))->limit(1)->fetch();
+            // Make sure the voucher exists
+            if(!$voucher || $voucher->num_rows() == 0)
             {
-                // Update the customer with the new payment method, and get the source id
-                if($this->stripe_customer_id)
-                {
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
-                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 100);
-                }
-                // We need to create a customer, save the payment method, and charge them accordingly
-                else
-                {
-                    // Create the customer
-                    $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripe_token'), $this->ion_auth->user()->row()->email);
-                    // Charge the customer_id
-                    $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 100);
-                }
+                $this->responder->fail("We couldnt find the voucher you supplied")->code(500)->respond();
+                return;
             }
-            // The user does not want to save the method, so we just charge the card
-            else
+            $voucher = $voucher->row();
+            if(!$this->vouchers_library->is_valid($voucher->id))
             {
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), NULL, NULL, 100);
+                $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "An unknown error occured"))->code(500)->respond();
+                return;
+            }
+            if($voucher->discount_type == 'amount')
+            {
+                $amount = $amount - ($voucher->value * 100);
+            } else {
+                $amount = $amount - ($amount * $voucher->value);
             }
         }
 
-        // Check if we have a customer, and chosen source
-        else if($this->input->post('source_id') && $this->stripe_customer_id)
-        {
-            $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 100);
+        if($amount > 000) {
+
+            // If payment details were supplied, we're either going to charge the card, or create / update a customer
+            if($this->input->post('stripe_token'))
+            {
+                if($this->input->post('save_method'))
+                {
+                    // Update the customer with the new payment method, and get the source id
+                    if($this->stripe_customer_id)
+                    {
+                        $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
+                        $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, NULL, 100);
+                    }
+                    // We need to create a customer, save the payment method, and charge them accordingly
+                    else
+                    {
+                        // Create the customer
+                        $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripe_token'), $this->ion_auth->user()->row()->email);
+                        // Charge the customer_id
+                        $charge = $this->stripe_charge_library->create($contest_id, NULL, $customer->id, NULL, 100);
+                    }
+                }
+                // The user does not want to save the method, so we just charge the card
+                else
+                {
+                    $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), NULL, NULL, 100);
+                }
+            }
+
+            // Check if we have a customer, and chosen source
+            else if($this->input->post('source_id') && $this->stripe_customer_id)
+            {
+                $charge = $this->stripe_charge_library->create($contest_id, NULL, $this->stripe_customer_id, $this->input->post('source_id'), 100);
+            }
+            // Tell them we cant process their request
+            else
+            {
+                $this->responder->fail("We were unable to process your request")->code(500)->respond();
+                return;
+            }
+        } else {
+            $charge = array();
         }
-        // Tell them we cant process their request
-        else
-        {
-            $this->responder->fail("We were unable to process your request")->code(500)->respond();
-            return;
-        }
-        
         // Check if charge was succesful and handle accordingly
         if($charge)
         {
@@ -256,10 +289,11 @@ class Companies extends CI_Controller
                          ->from('squad@tappyn.com')
                          ->subject("Receipt for your launched contest")
                          ->html($this->load->view('emails/contest_payment', array(
-                             'company' => $this->ion_auth->profile('company_name'),
+                             'company' => $this->ion_auth->profile('name'),
                              'contest' => $contest,
                              'eid' => $eid,
-                             'charge' => $charge
+                             'charge' => $charge,
+                             'voucher' => isset($voucher) ? $voucher : FALSE
                          ), TRUE))
                          ->send();
             return;
@@ -268,9 +302,9 @@ class Companies extends CI_Controller
         // An error occured, so respond as such
         else
         {
-            $this->responder->fail(array(
-                ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : "An unknown error occured with payment"))
-            ))->code(500)->respond();
+            $this->responder->fail(
+                $this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : "An unknown error occured with payment")
+            )->code(500)->respond();
             return;
         }
     }
