@@ -439,7 +439,7 @@ class Auth extends CI_Controller {
             $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
-			error_log($this->input->post('group_id'));
+
 			if($this->input->post('group_id') == 2)
 			{
 				$name_chunks = explode(' ', $this->input->post('name'));
