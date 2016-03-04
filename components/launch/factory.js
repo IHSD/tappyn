@@ -15,6 +15,17 @@ tappyn.factory('launchFactory', function($http){
 	fact.update = function(contest){
 		return $http({
 			method : 'POST',
+			url : 'index.php/contests/create/'+contest.id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(contest)
+		});	
+	}
+
+	fact.update = function(contest){
+		return $http({
+			method : 'POST',
 			url : 'index.php/contests/update/'+contest.id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
