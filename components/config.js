@@ -23,6 +23,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/profile/view.html',
 		controller : 'profileController'
 	})
+	.when('/top', {
+		templateUrl : 'components/top/view.html',
+		controller : 'topController'
+	})
 	.when('/contests', {
 		templateUrl : 'components/contests/view.html',
 		controller : 'contestsController'

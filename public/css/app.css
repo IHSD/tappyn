@@ -426,7 +426,7 @@ header .btn-login {
 .raw-info {
 	padding:  50px 0;
 	overflow: hidden;
-	background: #A5BEC7;
+	background: #999;
 }
 .raw-info h2 {
 	color: #fff;
@@ -2260,10 +2260,7 @@ nav .dropdown-menu{
  min-height:250px; 
  max-height:250px;
 }
-
-@media only screen
-   and (min-device-width : 320px)
-   and (max-device-width : 480px){ .submissions-page{
+.submissions-page-mobile{
  min-height:350px; 
  max-height:350px;
 }}
