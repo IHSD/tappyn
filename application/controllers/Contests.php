@@ -160,7 +160,7 @@ class Contests extends CI_Controller
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
-                'emotions'          => $this->input->post('emotion')
+                'emotion'          => $this->input->post('emotion')
             );
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
