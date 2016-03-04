@@ -1,8 +1,8 @@
 tappyn.controller('launchController', function($scope, $location, $upload, $rootScope, launchFactory, AppFact){
 	$scope.steps = {
-		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 0},
-		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 33},
-		'payment'		 : {step : 'payment',  next : 'none',    previous : 'detail',  fill : 66},
+		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
+		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 50},
+		'payment'		 : {step : 'payment',  next : 'none',    previous : 'detail',  fill : 75},
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
 	$scope.current = $scope.steps['package'];
@@ -55,7 +55,10 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					if(response.data.account == false) $scope.adding_payment = true;
+					if(response.data.account == false){
+						$scope.adding_payment = true;
+						$rootScope.modal_up = true;
+					}
 					else $scope.payments = response.data.customer.sources.data;
 				}
 				else $scope.set_alert(response.message, "default");	 
@@ -72,10 +75,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	}
 
 	$scope.submit_contest = function(contest){
-		if(!$rootScope.user){
-			$rootScope.modal_up = true;
-			$scope.registering = true;
-		}
+		if(!$rootScope.user) $scope.open_register("company", '');
 		else{
 			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
 			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
@@ -116,20 +116,6 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 		})
 	}
 
-	$scope.old_payment = function(id){
-		launchFactory.payContest($scope.contest.id, {source_id : id}).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");	
-					$scope.set_step("done");
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		});
-	}
-
 	var stripeResponseHandler = function(status, response) {
       if(response.error){
       	var erroring = (response.error.message).toString();
@@ -139,11 +125,13 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
-       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method}).success(function(res){
+       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
 					$scope.set_step("done");
+					$rootScope.modal_up = false;
+					$scope.adding_payment = false;
 					$scope.form_disabled = false;
 				}
 				else $scope.set_alert(res.message, "default");	 
@@ -164,6 +152,27 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
         $scope.form_disabled = true;
 
 		Stripe.card.createToken($form, stripeResponseHandler);
+	}
+
+	$scope.old_payment = function(){
+		if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
+		else{
+			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
+	       		if(res.http_status_code == 200){
+					if(res.success){
+						$scope.set_alert(res.message, "default");	
+						$scope.set_step("done");
+					}
+					else $scope.set_alert(res.message, "default");	 
+				}
+				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+				else $scope.check_code(res.http_status_code);
+	       	});
+		}
+	}
+
+	$scope.select_current = function(pass){
+		$scope.passing_method = pass;
 	}
 
 	$scope.amazon_connect('tappyn');
@@ -192,5 +201,15 @@ tappyn.controller('launchController', function($scope, $location, $upload, $root
 	       	else if(type == 'pic2') $scope.contest.additional_image_2 = url+new_name;
 	       	else if(type == 'pic3') $scope.contest.additional_image_3 = url+new_name;
 	    });
+	}
+
+	$scope.open_payment = function(){
+		$rootScope.modal_up = true;
+		$scope.adding_payment = true;
+	}
+
+	$scope.close_payment = function(){
+		$rootScope.modal_up = false;
+		$scope.adding_payment = false;
 	}
 });

@@ -17,30 +17,65 @@
 		</div>
 	</div>
 	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
-		<div ng-if='user.type == "member"' class='col-sm-6 col-md-4 col-xs-12' ng-repeat='submission in dash.submissions'>
-			<div class="contest-box" style='min-height:250px; max-height:250px;' ng-class='{"border-submish" : submish.payout}'>
-				<h4>{{submission.headline}}</h4>
-				<div class="contest-content">
-				    <span>{{submission.text}}</span>
-				</div>
-	            <div class="contest-info">
-	                <h5>
-	                	<span class='duration' style='position: absolute;left: 3px;bottom: 2px;'>
-	                		<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
-	                		<br>
-	                		{{submission.created_at | legibleDate}}
-	                	</span>
-	                	<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;border-top:1px #ff6c00 solid;border-left:1px #ff6c00 solid;border-radius:2px;'>
-                			<h3 style='padding-left:5px;margin-top:10px' class='text-left'>{{submission.votes | number}}</h3>
-		                	<img style='width:30px;height:30px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-	               		</div>
-	               	</h5>
-	            </div>
-		        <button ng-if='submission.payout' ng-disabled='submission.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submission.payout.id)'>
+		<div ng-if='user.type == "member"'>
+			<div class='col-md-4 col-sm-6 col-xs-12' ng-repeat='submission in dash.submissions'>
+				<div class="contest-box submissions-page hidden-xs">
+					<div class='col-xs-12'>
+							<h3>{{submission.headline}}</h3>
+							<div class="contest-content">
+							    <span>{{submission.text}}</span>
+							</div>
+					</div>
+					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
+			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
+			        	<img style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+			        </div>
+		            <div class="contest-info">
+		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
+		                	<div ng-if='submission.payout'>
+			                	<a style='color:#ff5e00' ng-click='claim_winnings(submission.payout.id)' ng-if='submission.payout.claimed == "0"'>Claim</a>
+								<span style='color:#ff5e00' ng-show='submission.payout.claimed != "0"'>Claimed</span>
+								<br>
+							</div>
+		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
+		                	<br>
+		                	<span class='duration'>
+		                		{{submission.created_at  | legibleDate}}
+		                	</span>
+		               	</h5>
+		            </div>
+		            <button ng-if='submission.payout' ng-disabled='submission.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submission.payout.id)'>
 						<span ng-show='submission.payout.claimed == "0"'>Claim</span>
 						<span ng-show='submission.payout.claimed != "0"'>Claimed</span>
-				</button>
-	    	</div>
+					</button>
+		    	</div>
+		    	<div class="contest-box submissions-page-mobile visible-xs">
+					<div class='col-xs-12'>
+							<h3>{{submission.headline}}</h3>
+							<div class="contest-content">
+							    <span>{{submission.text}}</span>
+							</div>
+					</div>
+					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
+			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
+			        	<img style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
+			        </div>
+		            <div class="contest-info">
+		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
+		                	<div ng-if='submission.payout'>
+			                	<a style='color:#ff5e00' ng-click='claim_winnings(submission.payout.id)' ng-if='submission.payout.claimed == "0"'>Claim</a>
+								<span style='color:#ff5e00' ng-show='submission.payout.claimed != "0"'>Claimed</span>
+								<br>
+							</div>
+		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
+		                	<br>
+		                	<span class='duration'>
+		                		{{submission.created_at  | legibleDate}}
+		                	</span>
+		               	</h5>
+		            </div>
+		        </div>
+			</div>
 	    </div>
 		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in dash.contests'>
 			<div class='contest-box'>

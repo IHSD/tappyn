@@ -2264,3 +2264,11 @@ nav .dropdown-menu{
  min-height:350px; 
  max-height:350px;
 }}
+
+.tappyn-bars div p {
+	color:#fff !important;
+}
+
+.highlight_payment{
+	border : 2px #ff5c00 solid;
+}

@@ -12,10 +12,10 @@
 	                <ul>
 	                	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
 	                    <li><a href="#/contests">Discover Companies</a></li>
-	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">For Companies</a></li>
+	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
 	                     <li><a href="#/top">Top Taps</a></li>
 	                    <li><a href="#/faq">How it Works</a></li>
-	                    <li ng-if='user' style='float:right;'>{{user.points}} Taps</li>
+	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
                             <ul uib-dropdown-menu role="menu">
