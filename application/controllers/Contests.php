@@ -104,6 +104,28 @@ class Contests extends CI_Controller
         ));
     }
 
+    public function winner($contest_id)
+    {
+        $this->load->library('payout');
+        $contest = $this->contest->get($contest_id);
+        if(!$contest)
+        {
+            $this->responder->fail("That contest does not exist")->code(500)->respond();
+            return;
+        }
+
+        if($payout = $this->payout->exists(array('contest_id')))
+        {
+            $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
+            $owner = $this->user->profile($contest->winner->owner);
+            $contest->winner->owner = new StdClass();
+            $contest->winner->owner->first_name = $owner->first_name;
+            $contest->winner->owner->last_name = $owner->last_name;
+        } else {
+            $contest->payout = FALSE;
+        }
+        $this->responder->data(array('contest' => $contest))->respond();
+    }
     /**
      * Create a new contest, or render the creation form
      * @return void
@@ -137,7 +159,8 @@ class Contests extends CI_Controller
                 'owner'             => $this->ion_auth->user()->row()->id,
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
-                'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days'))
+                'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
+                'emotions'          => $this->input->post('emotion')
             );
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');

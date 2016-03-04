@@ -36,7 +36,14 @@ class Submissions extends CI_Controller
         );
 
         $contest = $this->contest->get($contest_id);
+        if($contest->stop_time < date('Y-m-d H:i:s'))
+        {
+            $contest->status = 'ended';
+        } else {
+            $contest->status = 'active';
+        }
         $contest->views = $this->contest->views($contest_id);
+        $contest->additional_images = json_decode($contest->additional_images);
         $this->responder->data(array(
             'submissions' => $submissions,
             'contest' => $contest
