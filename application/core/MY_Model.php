@@ -248,4 +248,20 @@ class MY_Model extends CI_Model
       return $this->response->result();
   }
 
+  /**
+   * Get count of users
+   * @param array $where
+   * @param array $like
+   * @return integer  Count of rows given params
+   */
+  public function count($where = array(), $like = array())
+  {
+      $this->db->select("COUNT(*) as count")->from($this->table);
+      if(!empty($where)) $this->db->where($where);
+      if(!empty($like)) $this->db->like($like);
+
+      return (int) $this->db->get()->row()->count;
+  }
+
+
 }

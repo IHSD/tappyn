@@ -1,10 +1,9 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Vouchers
+class Vouchers_library
 {
     public function __construct()
     {
-        parent::__construct();
         $this->load->model('voucher');
     }
 
@@ -15,11 +14,11 @@ class Vouchers
 
     public function __call($method, $arguments)
     {
-        if (!method_exists( $this->ion_auth_model, $method) )
+        if (!method_exists( $this->voucher, $method) )
         {
             throw new Exception('Undefined method Vouchers::' . $method . '() called');
         }
-        return call_user_func_array( array($this->ion_auth_model, $method), $arguments);
+        return call_user_func_array( array($this->voucher, $method), $arguments);
     }
 
     /**
@@ -37,10 +36,18 @@ class Vouchers
             return FALSE;
         }
 
+        return $id;
+
         // Do post processing for voucher creation
     }
 
-    public function redeem($vid)
+    /**
+     * Log the redeemed voucher
+     * @param  integer $vid ID of the voucher
+     * @param  integer $cid ID of the contest
+     * @return boolean
+     */
+    public function redeem($vid, $cid)
     {
         // Check that the voucher is still valid
         if(!$this->is_valid($vid))
@@ -49,5 +56,10 @@ class Vouchers
             return FALSE;
         }
 
+        if($this->voucher->redeem($vid))
+        {
+            return TRUE;
+        }
+        return FALSE;
     }
 }

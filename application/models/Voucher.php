@@ -23,17 +23,97 @@ class Voucher extends MY_Model
 {
     protected $table = 'vouchers';
     protected $errors = FALSE;
+
     public function __construct()
     {
         parent::__construct();
     }
 
     public function create($data)
-    {}
+    {
+        if($this->db->insert('vouchers', $data))
+        {
+            return $this->db->insert_id();
+        }
+        $this->errors = $this->db->error()['message'];
+        return FALSE;
+    }
 
+    /**
+     * Check the validity of a given vouchers
+     * @param  integer  $vid Voucher ID
+     * @return boolean      Wether or not voucher is valid
+     */
+    public function is_valid($vid)
+    {
+        $voucher = $this->where('id', $vid)->limit(1)->fetch();
+        // Does voucher exist?
+        if(!$voucher || $voucher->num_rows() == 0)
+        {
+            $this->errors = "I couldn't find a voucher with that discount code";
+            return FALSE;
+        }
+        $voucher = $voucher->row();
+        // Is it active?
+        if($voucher->status == 0)
+        {
+            $this->errors = "This voucher has been disabled";
+            return FALSE;
+        }
+        // Based on its expiration, is it currently valid
+        if(!is_null($voucher->ends_at) && $voucher->ends_at < time())
+        {
+            $this->errors = "We're sorry, but that voucher has expired";
+            return FALSE;
+        }
+        // If the expiration is uses, has it reached its capacity yet?
+        if($voucher->expiration == 'uses' && $voucher->times_used > $voucher->usage_limit)
+        {
+            $this->errors = "Were sorry, but that voucher can no longer be used";
+            return FALSE;
+        }
+        return TRUE;
+    }
+
+    /**
+     * Validate the voucher data is agreeable before trying to insert
+     * @param  array $data Voucher Data
+     * @return boolean       Valid or not
+     */
+    public function validate($data)
+    {
+
+    }
+
+    /**
+     * Update a voucher
+     * @param  integer  $id  ID of the voucher
+     * @param  array $data Data to insert
+     * @return boolean
+     */
     public function update($id, $data)
     {
 
+    }
+
+    /**
+     * Redeem a voucher_uses
+     * @param  integer $vid ID of the voucher
+     * @param  integer $cid ID of the contest
+     * @return void
+     */
+    public function redeem($vid, $cid)
+    {
+        if($this->db->insert('voucher_uses', array(
+            'created_at' => time(),
+            'voucher_id' => $vid,
+            'contest_id' => $cid
+        )))
+        {
+            return TRUE;
+        }
+        $this->errors = $this->db->error()['message'];
+        return FALSE;
     }
 
     public function errors()

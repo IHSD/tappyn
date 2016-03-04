@@ -50,6 +50,7 @@ class Submission extends MY_Model
             $results = $submissions->result();
             foreach($results as $result)
             {
+
                 $result->contest = $this->parentContest($result->contest_id);
                 $result->payout = $this->db->select('*')->from('payouts')->where('submission_id', $result->id)->get()->row();
                 $result->company = $this->db->select('*')->from('users')->join('profiles', 'users.id = profiles.id', 'left')->where('users.id', $result->contest->owner)->get()->row();
@@ -124,16 +125,6 @@ class Submission extends MY_Model
             }
         }
         return $results;
-    }
-
-    public function count($params)
-    {
-        $count = $this->db->select('COUNT(*) as count')->from('submissions')->where($params)->get();
-        if($count && $count->num_rows() > 0)
-        {
-            return (int) $count->row()->count;
-        }
-        return FALSE;
     }
 
     public function parentContest($cid)
