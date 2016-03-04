@@ -133,11 +133,13 @@ class Ion_auth
 	{
 		$user_data = $this->user()->row();
 		$results = array(
+			'id' => $user_data->id,
 			'email' => $user_data->email,
 			'first_name' => $user_data->first_name,
 			'last_name' => $user_data->last_name,
 			'is_admin' => $this->is_admin(),
-			'points' => (int)$user_data->points
+			'points' => (int)$user_data->points,
+			'created_at' => $user_data->created_on
 		);
 		if($this->in_group(2))
 		{
