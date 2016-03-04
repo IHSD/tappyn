@@ -61,11 +61,6 @@
 						</label>
 					</div>
 				</div>
-				<div class='col-xs-6'>
-					<div class='form-group'>
-						<input type='text' placeholder='Voucher code' ng-model='voucher_code' class='form-control'>
-					</div>
-				</div>
 			</form>
 			<div class='col-xs-12 text-center'><button ng-disabled='form_disabled' class='btn btn-oj' type='submit'>Pay</button></div>
 		</div>
@@ -417,16 +412,21 @@
 									<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
 								</div>
 							</div>
-							<div class='col-xs-6'>
-								<div class='form-group'>
-									<input type='text' placeholder='Voucher code' ng-model='voucher_code' class='form-control'>
-								</div>
-							</div>
 						</div>
 					</div>
 					<div class='alert alert-warning' ng-show='payments.length < 1'>You dont have any saved payment methods</div>
-					<div class='text-center'>
-						<button class='btn btn-oj' ng-click='open_payment()'>Add Payment Method</button>
+					<div class='row'>	
+						<div class='col-xs-6 text-center'>
+							<button class='btn btn-oj' ng-click='open_payment()'>Add Payment Method</button>
+						</div>
+						<div class='col-xs-6 text-center'>
+							<div class='input-group'>
+								<input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'>
+								<div class='input-group-btn'>	
+									<button class='btn btn-oj' ng-click='use_voucher()'>Use Voucher</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
