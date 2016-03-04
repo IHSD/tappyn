@@ -4,6 +4,7 @@
  * @param string $company Name of the company
  * @param object $contest Object containing contest metadata
  * @param object $charge Object containing payment metadata
+ * @param object $voucher Object containing voucher if used
  * @param integer $eid  ID of the email for tracking purposes
 */
 ?>
@@ -60,21 +61,63 @@
 <br>
 <table style='text-align:left;margin:auto;width:600px'>
     <tr>
-        <td>Amount</td>
+        <td>Price</td>
         <td>$99.99</td>
     </tr>
-    <tr>
-        <td>Source</td>
-        <td><?php echo $charge->source->brand; ?></td>
-    </tr>
-    <tr>
-        <td>Last 4</td>
-        <td><?php echo $charge->source->last4; ?></td>
-    </tr>
-    <tr>
-        <td>Exp</td>
-        <td><?php echo $charge->source->exp_month.' / '.$charge->source->exp_year; ?></td>
-    </tr>
+    <?php if($voucher): ?>
+        <?php
+            $amount = 9999;
+            if($voucher->discount_type == 'amount') {
+                $disc = $voucher->value;
+            } else {
+                $disc = ($amount * $voucher->value) / 100;
+            }
+
+        ?>
+
+        <tr>
+            <td>Voucher <?php echo $voucher->code; ?></td>
+            <td>
+                - $<?php echo $disc; ?>
+            </td>
+        </tr>
+    <?php endif; ?>
+
+    <?php if(!empty($charge)): ?>
+        <tr>
+            <td>Source</td>
+            <td><?php echo $charge->source->brand; ?></td>
+        </tr>
+        <tr>
+            <td>Last 4</td>
+            <td><?php echo $charge->source->last4; ?></td>
+        </tr>
+        <tr>
+            <td>Exp</td>
+            <td><?php echo $charge->source->exp_month.' / '.$charge->source->exp_year; ?></td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td>
+                <?php if($voucher): ?>
+                    <?php
+                        $amount = 9999;
+                        if($voucher->discount_type == 'amount') {
+                            $amount = $amount - ($voucher->value * 100);
+                        } else {
+                            $amount = $amount - ($amount * $voucher->value);
+                        }
+                        echo '$'.$amount / 100;
+                    ?>
+                <?php else: ?>
+                    $99.99
+                <?php endif; ?>
+            </td>
+        </tr>
+    <?php else: ?>
+        No Payment Necessary!
+    <?php endif; ?>
+
 </table>
 <br>
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p><br>

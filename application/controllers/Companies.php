@@ -225,14 +225,19 @@ class Companies extends CI_Controller
                 $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "An unknown error occured"))->code(500)->respond();
                 return;
             }
+            if(!$this->vouchers_library->redeem($voucher->id, $contest->id))
+            {
+                $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "An unknown error occured"))->code(500)->respond();
+                return;
+            }
             if($voucher->discount_type == 'amount')
             {
                 $amount = $amount - ($voucher->value * 100);
             } else {
                 $amount = $amount - ($amount * $voucher->value);
             }
-        }
 
+        }
         if($amount > 000) {
 
             // If payment details were supplied, we're either going to charge the card, or create / update a customer
@@ -277,7 +282,7 @@ class Companies extends CI_Controller
             $charge = array();
         }
         // Check if charge was succesful and handle accordingly
-        if($charge)
+        if($charge !== FALSE)
         {
             $this->contest->update($contest_id, array('paid' => 1));
 
