@@ -180,6 +180,15 @@ header nav ul li .btn:hover {
 	background: #ed5700;
 	color:#fff;
 }
+.btn-white {
+	background: #fff;
+	color: #ff5c00;
+	font-weight:  400;
+}
+.btn-white:hover{
+	background: #eee;
+	color:#ff5c00;
+}
 .btn:focus, .btn.focus{
 	color:#fff;
 }
@@ -266,6 +275,7 @@ header .btn-login {
 	bottom: 0;
 }
 .features-box {
+	padding-top:10px;
 	overflow:  hidden;
 }
 .features-box img {
@@ -273,14 +283,15 @@ header .btn-login {
 	margin:  0 0 25px;
 }
 .features-box h3 {
-	font-size: 24px;
+	font-size: 30px;
 	margin:  0 0 20px;
 	font-weight: 300;
 	line-height: 24px;
-	color: #555;
+	color: #ff5c00;
 }
 .features-box p {
-	color: #979797;
+	color: #333;
+	font-size:18px;
 }
 /** Contests **/
 .contests {
@@ -415,7 +426,7 @@ header .btn-login {
 .raw-info {
 	padding:  50px 0;
 	overflow: hidden;
-	background: url("bg-orange.png") 50% 0 no-repeat #ff5e00;
+	background: #999;
 }
 .raw-info h2 {
 	color: #fff;
@@ -1618,10 +1629,15 @@ footer {
 }
 /** Testimonials **/
 .testimonials {
-	background: url("bg-orange.png") 50% 0 no-repeat #ff5e00;
+	background: #ff843e;
 	padding: 50px 0;
 	background-size: 30%, auto;
 	overflow: hidden;
+}
+.testimonials h2 {
+	color:#fff;
+	font-weight: 500;
+	font-size:30;
 }
 .testimonial-img img {
 	width: 100%;
@@ -1867,6 +1883,10 @@ footer {
 	.cd-multi-steps.text-top.count li.current > *::before, .cd-multi-steps.text-bottom.count li.current > *::before {
     box-shadow: none !important;
 }
+.submissions-page-mobile{
+ 	min-height:350px; 
+ 	max-height:350px;
+	}
 }
 @media screen and (max-width: 550px) {
 	.hero-banner2 {
@@ -1911,7 +1931,6 @@ footer {
   	padding: 0 4px 0 9px;
   	font-size: 14px;
   }
-
 }
 
   .message-alert{
@@ -2162,14 +2181,12 @@ nav .dropdown-menu{
 }
 .modal_tips.ng-hide{
     top:-50;
-    opacity: 0;
 }
 .modal_tips{
     z-index:100000000 !important;
     position:fixed;
     top:2.5%;
-    height:40%; 
-    opacity: 1;
+    height:250px; 
 }
 .modal_tips.ng-hide-add.ng-hide-add-active,
 .modal_tips.ng-hide-remove.ng-hide-remove-active {
@@ -2239,3 +2256,11 @@ nav .dropdown-menu{
 .border-submish{
 	border:1px solid #ff5e00;
 }
+.submissions-page{
+ min-height:250px; 
+ max-height:250px;
+}
+.submissions-page-mobile{
+ min-height:350px; 
+ max-height:350px;
+}}

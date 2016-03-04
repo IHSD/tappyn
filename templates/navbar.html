@@ -11,10 +11,10 @@
 	            <nav class='hidden-xs'>
 	                <ul>
 	                	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
-	                    <li><a href="#/contests">Contests</a></li>
-	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">Launch</a></li>
-	                    <li><a href="#/contact_us">Contact Us</a></li>
-	                    <li><a href="#/faq">FAQ</a></li>
+	                    <li><a href="#/contests">Discover Companies</a></li>
+	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">For Companies</a></li>
+	                     <li><a href="#/top">Top Taps</a></li>
+	                    <li><a href="#/faq">How it Works</a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Taps</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
@@ -25,8 +25,8 @@
                             </ul>
 	                    </li>
 	                    <li ng-if='user.is_admin'><a href='/admin'>Admin</a></li>
-                        <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>LOGIN</a></li>
-                        <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "")'>SIGN UP</a></li>                          
+                        <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
+                        <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>                          
 	                </ul>
 	            </nav>
 	            <nav class='visible-xs'>
@@ -39,7 +39,6 @@
 				            	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
 			                    <li><a href="#/contests">Contests</a></li>
 			                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">Launch</a></li>
-			                    <li><a href="#/contact_us">Contact Us</a></li>
 			                    <li><a href="#/faq">FAQ</a></li>
                                 <li ng-hide='!user'><a href="#/payment">Payment</a></li>
 	                            <li ng-hide='!user'><a href="#/profile">Profile</a></li>
