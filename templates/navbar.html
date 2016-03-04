@@ -34,8 +34,8 @@
 	                	<li style='float:right;' uib-dropdown>
 		                	<a href uib-dropdown-toggle> Menu <span class="caret"></span></a>
 				            <ul uib-dropdown-menu role='menu'>
-				            	<li ng-if='!user' class='pull-right'><a href="#/login">Login</a></li>
-		                        <li ng-if='!user' class='pull-right'><a href="#/register">Sign Up</a></li>
+				            	<li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
+		                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>
 				            	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
 			                    <li><a href="#/contests">Contests</a></li>
 			                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">Launch</a></li>
