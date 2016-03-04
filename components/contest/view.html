@@ -85,7 +85,8 @@
 		<div class='panel'>
 			<div class='panel-body'>
 				<form class='form' ng-submit='submit_to(contest.id, submit)'>
-		 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here <span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span></h4>	
+		 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
+		 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
 		            <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
 			        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
 			        	<div class='input-count'>
