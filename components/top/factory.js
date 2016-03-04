@@ -4,7 +4,7 @@ tappyn.factory('topFactory', function($http){
 	fact.grabTops = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/welcome/leaderboards',
+			url : 'index.php/submissions/leaderboard',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
