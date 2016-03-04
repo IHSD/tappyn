@@ -140,6 +140,26 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 		}
 	})
 
+	if($rootScope.user){
+		window.Intercom('boot', {
+		   app_id: 'qj6arzfj',
+		   email: $rootScope.user.email,
+		   user_id: $rootScope.user.id,
+		   created_at: $rootScope.user.created_at
+		   /* widget: {
+		      activator: '#IntercomDefaultWidget'
+		   }  */
+		});
+	}
+	else{
+		window.Intercom('boot', {
+		 app_id: 'qj6arzfj'
+		 /*widget: {
+		 activator: '#IntercomDefaultWidget'
+		 } */
+		})	
+	}
+
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
 			if(response.success) $rootScope.key = response.data.access_token;
@@ -222,6 +242,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					if($scope.signing_in.type == 'must') $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
+					window.Intercom('boot', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at
+					   /* widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }  */
+					});
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -249,6 +278,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					$scope.registration = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					$scope.step = 1;
+					window.Intercom('boot', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at
+					   /* widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }  */
+					});
 					fbq('track', 'Lead');
 				}
 				else $scope.set_alert(response.message, "default");	 
