@@ -79,6 +79,7 @@ class Users extends CI_Controller
             {
 
                 $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+                $submission->company = $this->user->profile($submission->owner)->name;
             }
             $this->responder->data(
                 array(
