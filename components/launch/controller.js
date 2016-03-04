@@ -43,7 +43,12 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	$scope.grab_profile = function(){
 		launchFactory.grabProfile().success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.profile = response.data;
+				if(response.success){
+					$scope.profile = response.data;
+					$scope.contest.different = $scope.profile.different;
+					$scope.contest.audience = $scope.profile.audience;
+					$scope.contest.summary = $scope.profile.summary;
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
