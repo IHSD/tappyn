@@ -43,7 +43,7 @@ class Payout
         $payout = $this->db->get();
         if($payout && $payout->num_rows() > 0)
         {
-            return TRUE;
+            return $payout->row();
         }
         return FALSE;
     }
