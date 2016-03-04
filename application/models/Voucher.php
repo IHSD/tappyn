@@ -104,13 +104,21 @@ class Voucher extends MY_Model
      */
     public function redeem($vid, $cid)
     {
+        error_log("Redeeming voucher");
         if($this->db->insert('voucher_uses', array(
             'created_at' => time(),
             'voucher_id' => $vid,
             'contest_id' => $cid
         )))
         {
-            return TRUE;
+            if($this->db->where('id', $vid)
+                     ->set('times_used', 'times_used+1', FALSE)
+                     ->update('vouchers')) {
+                return TRUE;
+            } else {
+                $this->errors = $this->db->error()['message'];
+                return FALSE;
+            }
         }
         $this->errors = $this->db->error()['message'];
         return FALSE;

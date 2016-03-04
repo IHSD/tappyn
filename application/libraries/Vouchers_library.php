@@ -56,7 +56,7 @@ class Vouchers_library
             return FALSE;
         }
 
-        if($this->voucher->redeem($vid))
+        if($this->voucher->redeem($vid, $cid))
         {
             return TRUE;
         }
