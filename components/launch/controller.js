@@ -43,7 +43,12 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	$scope.grab_profile = function(){
 		launchFactory.grabProfile().success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.profile = response.data;
+				if(response.success){
+					$scope.profile = response.data;
+					$scope.contest.different = $scope.profile.different;
+					$scope.contest.audience = $scope.profile.audience;
+					$scope.contest.summary = $scope.profile.summary;
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -79,41 +84,38 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
 			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
 			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
-			else{	
-				launchFactory.submission(contest).success(function(response){
-					if(response.http_status_code == 200){
-						if(response.success){
-							$scope.set_alert(response.message, "default");
-							$scope.contest.id = response.data.id;
-							$scope.set_step('payment');
+			else{
+				if(contest.id){
+					launchFactory.update(contest).success(function(response){
+						if(response.http_status_code == 200){
+							if(response.success){
+								$scope.set_alert(response.message, "default");
+								$scope.contest.id = response.data.id;
+								$scope.set_step('payment');
+							}
+							else $scope.set_alert(response.message, "default");	 
 						}
-						else $scope.set_alert(response.message, "default");	 
-					}
-					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-					else $scope.check_code(response.http_status_code);
-				});	
+						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+						else $scope.check_code(response.http_status_code);
+					});	
+				}	
+				else{
+					launchFactory.submission(contest).success(function(response){
+						if(response.http_status_code == 200){
+							if(response.success){
+								$scope.set_alert(response.message, "default");
+								$scope.contest.id = response.data.id;
+								$scope.set_step('payment');
+							}
+							else $scope.set_alert(response.message, "default");	 
+						}
+						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+						else $scope.check_code(response.http_status_code);
+					});	
+				}
 			}
 		}
 	}
-
-	$scope.create_company = function(registrant){
-		registrant.group_id = 3;
-		AppFact.signUp(registrant).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$rootScope.user = response.data;
-					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$rootScope.modal_up = false;
-					$scope.registering = false;
-					$scope.submit_contest($scope.contest);
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
 	var stripeResponseHandler = function(status, response) {
       if(response.error){
       	var erroring = (response.error.message).toString();

@@ -10,7 +10,6 @@
 	        <div class="col-xs-10">
 	            <nav class='hidden-xs'>
 	                <ul>
-	                	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
 	                    <li><a href="#/contests">Discover Companies</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
 	                     <li><a href="#/top">Top Taps</a></li>
@@ -19,6 +18,7 @@
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
                             <ul uib-dropdown-menu role="menu">
+                            	<li role='menuitem'><a href="#/dashboard">Dashboard</a></li>
                                 <li role='menuitem'><a href="#/payment">Payment</a></li>
 	                            <li role='menuitem'><a href="#/profile">Profile</a></li>
 	                            <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>

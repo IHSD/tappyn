@@ -10,11 +10,12 @@
 	<div class='col-xs-12'>
 		<div class='panel' style='margin-bottom:0;'>
 			<div class='panel-body'>
-				<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
-					<h3>{{contest.title}}</h3>
+				<div class='col-sm-3 col-xs-12' style='padding-top:5px;'>
+					<h3 style='margin-top:0px;'><img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+					<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
 					<div>
-		            	<a class='btn btn-sm' ng-class='{"btn-oj" : view.brief, "btn-default" : !view.brief}' ng-click='view_brief()'>Brief</a>
-		            	<a class='btn btn-sm' ng-class='{"btn-oj" : view.submissions, "btn-default" : !view.submissions}' ng-click='view_submissions()'>Submissions</a>
+		            	<button class='btn btn-sm' ng-class='{"btn-oj" : view.brief, "btn-default" : !view.brief}' ng-click='view_brief()'>Brief</button>
+		            	<button class='btn btn-sm' ng-class='{"btn-oj" : view.submissions, "btn-default" : !view.submissions}' ng-click='view_submissions()'>Submissions</button>
 		            </div>
 				</div>
 				<div class='col-sm-3 col-xs-12' style='padding-top:10px;'>
@@ -46,9 +47,12 @@
 	<div class='col-xs-12 col-sm-8'>
 		<div class='panel'>
 			<div class='panel-body'>
-				<div class='text-center' style='margin-bottom:5px;'>
-					<img ng-if='!contest.company.logo_url' style='height:auto;' width='150px' src="public/img/contest-default.jpg">
-					<img ng-if='contest.company.logo_url' style='height:auto;' width='150px' src="{{contest.company.logo_url}}">
+				<div class='text-center' style='margin-bottom:5px;' ng-init='indexer = 0'>
+					<div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.additional_images && contest.additional_images.length > 0'>
+						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button>
+						<img style='height:auto;' width='150px' src="{{contest.additional_images[indexer]}}">
+						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button>
+					</div>
 				</div>
 				<div class='row'>
 			        <div class='col-xs-12' style='margin-top:15px'>
