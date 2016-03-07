@@ -67,7 +67,7 @@ tappyn.config(function($routeProvider) {
 
 tappyn.filter('untilFilter', function() {
 	return function(date){
-		date = moment(date).fromNow();
+		date = moment(date).fromNow("hh");
 		return date;
 	};
 });
@@ -138,27 +138,26 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 				sessionStorage.setItem("user", JSON.stringify(response.data));
 			}
 		}
+		if($rootScope.user){
+			window.Intercom('boot', {
+			   app_id: 'qj6arzfj',
+			   email: $rootScope.user.email,
+			   user_id: $rootScope.user.id,
+			   created_at: $rootScope.user.created_at,
+			   widget: {
+			      activator: '#IntercomDefaultWidget'
+			   }
+			});
+		}
+		else{
+			window.Intercom('boot', {
+				 app_id: 'qj6arzfj',
+				 widget: {
+				 	activator: '#IntercomDefaultWidget'
+				 }
+			})	
+		}
 	})
-
-	if($rootScope.user){
-		window.Intercom('boot', {
-		   app_id: 'qj6arzfj',
-		   email: $rootScope.user.email,
-		   user_id: $rootScope.user.id,
-		   created_at: $rootScope.user.created_at
-		   /* widget: {
-		      activator: '#IntercomDefaultWidget'
-		   }  */
-		});
-	}
-	else{
-		window.Intercom('boot', {
-		 app_id: 'qj6arzfj'
-		 /*widget: {
-		 activator: '#IntercomDefaultWidget'
-		 } */
-		})	
-	}
 
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
@@ -183,6 +182,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 		}
 		else if(code == 404) $location.path('/not_found')
 	}
+
 	$scope.alert = {show : false, message : '', type : ''}; //default our alert to a blank nonshowing object
 	$scope.set_alert = function(msg, type){
 		$scope.alert = {show : true, message : msg, type : type};
@@ -246,10 +246,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					   app_id: 'qj6arzfj',
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
-					   created_at: $rootScope.user.created_at
-					   /* widget: {
+					   created_at: $rootScope.user.created_at,
+					   widget: {
 					      activator: '#IntercomDefaultWidget'
-					   }  */
+					   }
 					});
 				}
 				else $scope.set_alert(response.message, "default");	 
@@ -262,12 +262,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 		AppFact.loggingOut().success(function(response){
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
+			window.Intercom('shutdown');
 			if(!$scope.signing_in.show && ($location.url() == "/dashboard" || $location.url() == "/profile" || $location.url() == "/payment")) $location.path("/home");
 		});
 	}
 
 	$scope.sign_up = function(registrant){
-		if($scope.registration.type == "contest" || $scope.registration == "upvote") registrant.group_id = 2;
+		if($scope.registration.type == "contest" || $scope.registration.type == "upvote") registrant.group_id = 2;
 		else if($scope.registration.type == "company") registrant.group_id = 3;
 
 		AppFact.signUp(registrant).success(function(response){
@@ -282,10 +283,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					   app_id: 'qj6arzfj',
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
-					   created_at: $rootScope.user.created_at
-					   /* widget: {
+					   created_at: $rootScope.user.created_at,
+					   widget: {
 					      activator: '#IntercomDefaultWidget'
-					   }  */
+					   }
 					});
 					fbq('track', 'Lead');
 				}
@@ -316,6 +317,20 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 		})
+	}
+
+	/* column functions */
+	$scope.first_third = function(index){
+		var number_array = [0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48];
+		return number_array.includes(index);
+	}
+	$scope.second_third = function(index){
+		var number_array = [1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49];
+		return number_array.includes(index);
+	}
+	$scope.third_third = function(index){
+		var number_array = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50];	
+		return number_array.includes(index);
 	}
 
 });
