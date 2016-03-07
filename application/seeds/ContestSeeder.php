@@ -60,7 +60,7 @@ class ContestSeeder extends AbstractSeed
                 'different' => $faker->text(),
                 'summary' => $faker->text(),
                 'paid' => 1,
-                'additional_images' => NULL,
+                'additional_images' => "[]",
                 'industry' => $faker->randomElement($industries),
                 'emotion' => NULL
             ];
