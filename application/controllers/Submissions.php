@@ -115,4 +115,10 @@ class Submissions extends CI_Controller
             'submissions' => $submissions
         ))->respond();
     }
+
+    public function share($id)
+    {
+        $submission = $this->submission->get($id);
+        $this->load->view('submissions/share', array('submission' => $submission));
+    }
 }
