@@ -27,18 +27,31 @@ class Contests extends CI_Controller
             'paid' => 1
         );
 
+        $has_more = FALSE;
+
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
-        $config['per_page'] = 20;
+        $config['per_page'] = ($this->input->get('per_page') ? $this->input->get('per_page') : 20);
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
         $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
 
+        if(($offset + $config['per_page']) < $config['total_rows'])
+        {
+            $has_more = TRUE;
+        }
+
         if($contests !== FALSE)
         {
-            $this->responder->data($contests)->respond();
+            $this->responder->data(array(
+                'contests' => $contests,
+                'total_rows' => $config['total_rows'],
+                'per_page' => (int)$config['per_page'],
+                'has_more' => $has_more,
+                'page' => $offset == 0 ? 1 : floor($offset / $config['per_page'] + 1),
+            ))->respond();
         } else {
             $this->responder->fail("An unknown error occured")->code(500)->respond();
         }
@@ -104,6 +117,13 @@ class Contests extends CI_Controller
         ));
     }
 
+    /**
+     * Show winner of contest_id
+     *
+     * @todo Add winning submission to response
+     * @param  [type] $contest_id [description]
+     * @return [type]             [description]
+     */
     public function winner($contest_id)
     {
         $this->load->library('payout');
@@ -114,7 +134,7 @@ class Contests extends CI_Controller
             return;
         }
 
-        if($payout = $this->payout->exists(array('contest_id')))
+        if($payout = $this->payout->exists(array('contest_id' => $contest_id)))
         {
             $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
             $owner = $this->user->profile($contest->winner->owner);
@@ -160,7 +180,7 @@ class Contests extends CI_Controller
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
-                'emotions'          => $this->input->post('emotion')
+                'emotion'          => $this->input->post('emotion')
             );
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
