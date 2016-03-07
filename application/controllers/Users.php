@@ -139,14 +139,15 @@ class Users extends CI_Controller
                     'logo_url' => $this->input->post('logo_url'),
                     'mission' => $this->input->post('mission'),
                     'extra_info' => $this->input->post('extra_info'),
-                    'name' => $this->input->post('name'),
+                    'name' => $this->input->post('company_name'),
                     'company_email' => $this->input->post('company_email'),
                     'company_url' => $this->input->post('company_url'),
                     'twitter_handle' => $this->input->post('twitter_handle'),
                     'facebook_url' => $this->input->post('facebook_url'),
                     'different' => $this->input->post('different'),
-                    'summary' => $this->input->post('summary')
+                    'summary' => $this->input->post('summary'),
                 );
+                error_log(json_encode($data));
                 if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
@@ -158,6 +159,7 @@ class Users extends CI_Controller
             $profile = $this->user->profile($this->ion_auth->user()->row()->id);
             $profile->first_name = $this->ion_auth->user()->row()->first_name;
             $profile->last_name = $this->ion_auth->user()->row()->last_name;
+            $profile->company_name = $profile->name;
             $this->responder->data(array(
                 'profile' => $profile
             ))->respond();
