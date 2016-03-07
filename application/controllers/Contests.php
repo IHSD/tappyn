@@ -117,6 +117,13 @@ class Contests extends CI_Controller
         ));
     }
 
+    /**
+     * Show winner of contest_id
+     *
+     * @todo Add winning submission to response
+     * @param  [type] $contest_id [description]
+     * @return [type]             [description]
+     */
     public function winner($contest_id)
     {
         $this->load->library('payout');
@@ -127,7 +134,7 @@ class Contests extends CI_Controller
             return;
         }
 
-        if($payout = $this->payout->exists(array('contest_id')))
+        if($payout = $this->payout->exists(array('contest_id' => $contest_id)))
         {
             $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
             $owner = $this->user->profile($contest->winner->owner);
