@@ -148,6 +148,35 @@ class Submissions extends CI_Controller
         $this->load->view('submissions/share', array('submission' => $submission));
     }
 
+    public function rate()
+    {
+        if(!$this->input->post("submission_id") || !$this->input->post('rating'))
+        {
+            $this->responder->fail("You must provide a submission")->code(500)->respond();
+            return;
+        }
+        $sid = $this->input->post('submission_id');
+        $rating = (int)$this->input->post('rating');
+        $submission = $this->submission->get($sid);
+        if(!$submission)
+        {
+            $this->responder->fail("That submission does not exist")->code(500)->respond();
+            return;
+        }
+        $contest = $this->contest->get($submission->contest_id);
+        if(!$contest || $contest->owner !== $this->ion_auth->user()->row()->id)
+        {
+            $this->responder->fail("That contest doesnt exist, or you dont have permission")->code(500)->respond();
+            return;
+        }
+        if($this->db->where('id', $sid)->update('submissions', array('rating' => $rating)))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error rating your submission")->code(500)->respond();
+        }
+    }
+
     public function test()
     {
         $n1 = $_GET['n1'];
