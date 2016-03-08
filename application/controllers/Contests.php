@@ -137,10 +137,9 @@ class Contests extends CI_Controller
         if($payout = $this->payout->exists(array('contest_id' => $contest_id)))
         {
             $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
-            $owner = $this->user->profile($contest->winner->owner);
-            $contest->winner->owner = new StdClass();
-            $contest->winner->owner->first_name = $this->ion_auth->user($contest->winner->owner)->row()->first_name;
-            $contest->winner->owner->last_name = $this->ion_auth->user($contest->winner->owner)->row()->last_name;
+            $owner = $contest->winner->owner;
+            $contest->winner->owner->first_name = $this->ion_auth->user($owner)->row()->first_name;
+            $contest->winner->owner->last_name = $this->ion_auth->user($owner)->row()->last_name;
         } else {
             $contest->payout = FALSE;
         }
