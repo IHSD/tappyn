@@ -35,6 +35,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contest/view.html',
 		controller : 'contestController'
 	})
+	.when('/ended/:id', {
+		templateUrl : 'components/ended/view.html',
+		controller : 'endedController'
+	})
 	.when('/payment', {
 		templateUrl : 'components/payment/view.html',
 		controller : 'paymentController'
@@ -400,19 +404,19 @@ tappyn.factory("AppFact", function($http){
 })
 tappyn.controller('contestsController', function($scope, contestsFactory){
 	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data;
+		$scope.contests = response.data.contests;
 	});
 
 	$scope.filter_industry = function(pass){
 		contestsFactory.filterGrab(pass).success(function(response){
-			$scope.contests = response.data;
+			$scope.contests = response.data.contests;
 		})
 	}
 	
 	$scope.grab_all = function(){
 		$scope.industry_filter = '';
 		contestsFactory.grabContests().success(function(response){
-			$scope.contests = response.data;
+			$scope.contests = response.data.contests;
 		});
 	}
 })
@@ -445,6 +449,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
+		if($scope.contest.status == "ended" && ($rootScope.user.id != $scope.content.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
 	});
 
 	$scope.view = {brief : true, submissions : false};
@@ -576,7 +581,7 @@ tappyn.factory("endedFactory", function($http){
 	fact.grabContest = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/contest/winner/'+id,
+			url : 'index.php/contests/winner/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

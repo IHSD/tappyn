@@ -35,6 +35,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contest/view.html',
 		controller : 'contestController'
 	})
+	.when('/ended/:id', {
+		templateUrl : 'components/ended/view.html',
+		controller : 'endedController'
+	})
 	.when('/payment', {
 		templateUrl : 'components/payment/view.html',
 		controller : 'paymentController'

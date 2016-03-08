@@ -2,6 +2,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
+		if($scope.contest.status == "ended" && ($rootScope.user.id != $scope.content.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
 	});
 
 	$scope.view = {brief : true, submissions : false};
@@ -34,7 +35,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 			else $scope.open_register("contest", encodeURIComponent(JSON.stringify({contest : id, headline : submission.headline, text : submission.text})));
 		}
 	}
-
 
 	$scope.choose_winner = function(id){
 		contestFactory.chooseWinner($scope.contest.id, id).success(function(response){
