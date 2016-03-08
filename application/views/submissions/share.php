@@ -10,7 +10,7 @@
     </head>
     <body>
         <script>
-            window.location = "<?php echo base_url().'#/contest/'.$submission->contest_id; ?>";
+            //window.location = "<?php echo base_url().'#/contest/'.$submission->contest_id; ?>";
         </script>
     </body>
 </html>

@@ -118,7 +118,33 @@ class Submissions extends CI_Controller
 
     public function share($id)
     {
+
         $submission = $this->submission->get($id);
+        $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+        $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+
+        // If the png hasnt been created, we generate an image
+        if(!file_exists(FCPATH."public/img/subs/sub_{$id}.png"))
+        {
+            $my_img = imagecreate( 1200, 630 );
+            $background = imagecolorallocate( $my_img, 255, 255, 255 );
+            $text_colour = imagecolorallocate( $my_img, 255, 92, 0 );
+            $black = imagecolorallocate($my_img, 0,0,0);
+            $text_length = 50;
+            $sig = wordwrap($submission->text, $text_length, "<br />", true);
+            $text = str_replace('<br />', "\n", $sig);
+            imagettftext($my_img, 45, 0, 45, 100, $text_colour, FCPATH.'fonts/Lato-Medium.ttf', $submission->headline);
+            imagettftext($my_img, 35, 0, 45,210, $black, FCPATH.'fonts/Lato-Thin.ttf', $text);
+            imagettftext($my_img, 35, 0, 750,450, $text_colour, FCPATH.'fonts/Lato-Thin.ttf', '-- '.$submission->owner->first_name.' '.$submission->owner->last_name[0]);
+            imagesetthickness ( $my_img, 5 );
+            imagerectangle($my_img, 0, 0, 1200, 630, $text_colour);
+            //ImageArc($my_img, 1120, 550, 125, 125, 0, 360, $text_colour);
+
+            imagepng( $my_img , FCPATH."public/img/subs/sub_{$id}.png");
+            imagecolordeallocate( $my_img, $text_colour );
+            imagecolordeallocate( $my_img, $background );
+            imagedestroy( $my_img );
+        }
         // Create image based on submission
         $this->load->view('submissions/share', array('submission' => $submission));
     }
