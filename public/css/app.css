@@ -306,7 +306,7 @@ header .btn-login {
 	background: #fff;
 	position: relative;
 	margin:  0 0 20px;
-	padding:  20px;
+	padding:  10px;
 	border: 1px solid #E0E0E0;
 	border-radius: 4px;
     word-wrap:break-word;
@@ -668,9 +668,6 @@ footer {
  .min-height {
      min-height: 350px;
  }
- .submission-box .ad-company-info img {
- 	margin: 0 5px 0 0px;
- }
  .submission-box .ad-company-info h5 {
  	text-align: left;
  }
@@ -728,9 +725,6 @@ footer {
  }
 .ad-company-info {
 	overflow: hidden;
-}
-.ad-company-info img {
-	float: left;
 }
 .ad-company-info h4 {
 	margin:  0;
@@ -2005,7 +1999,7 @@ footer {
 }
 .home-industry{
 	position: absolute;
-	height:35px;
+	height:50px;
 	left:70;
 	top:5;
 	color:#ff5c00;
@@ -2271,4 +2265,25 @@ nav .dropdown-menu{
 
 .highlight_payment{
 	border : 2px #ff5c00 solid;
+}
+
+.upvote-circle{
+	width:50px;
+	height:50px;
+    float:right;
+	border:1px solid #ff5c00;
+	border-radius:40px;
+	cursor:pointer;
+}
+.empty-upvote{
+	background-color:#fff;
+}
+.empty-upvote h4{
+	color:#ff5c00;
+}
+.filled-upvote{
+	background-color:#ff5c00;
+}
+.filled-upvote h4{
+	color:#fff;
 }

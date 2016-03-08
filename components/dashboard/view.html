@@ -1,5 +1,5 @@
 <div class='row content-padding'>
-	<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-center'>
+	<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left'>
 		<div  ng-if='user.type == "member"'>
 			<h4 class='text-left'>Your Work</h4>
 			<div class='btn-group btn-group-sm'>
@@ -26,10 +26,9 @@
 							    <span>{{submission.text}}</span>
 							</div>
 					</div>
-					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
-			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
-			        	<img style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-			        </div>
+					<div class='upvote-circle filled-upvote'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
 		            <div class="contest-info">
 		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
 		                	<div ng-if='submission.payout'>
@@ -56,10 +55,9 @@
 							    <span>{{submission.text}}</span>
 							</div>
 					</div>
-					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
-			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
-			        	<img style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-			        </div>
+			    	<div class='upvote-circle filled-upvote'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
 		            <div class="contest-info">
 		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
 		                	<div ng-if='submission.payout'>

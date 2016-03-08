@@ -10,10 +10,10 @@
 	        <div class="col-xs-10">
 	            <nav class='hidden-xs'>
 	                <ul>
-	                    <li><a href="#/contests">Discover Companies</a></li>
+	                    <li><a href="#/contests">See Contests</a></li>
+	                    <li><a href="#/top">Top Tapps</a></li>
+	                    <li><a href="#/faq">FAQ</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
-	                     <li><a href="#/top">Top Taps</a></li>
-	                    <li><a href="#/faq">How it Works</a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>

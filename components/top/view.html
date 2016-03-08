@@ -13,11 +13,12 @@
 							</div>
 							<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 					</div>
-					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
-			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
-			        	<img ng-if='!submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-			        	<img ng-click='upvote(submission)' ng-if='submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
-			        </div>
+					<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
+			    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
 		            <div class="contest-info">
 		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
 		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
@@ -36,11 +37,12 @@
 							</div>
 							<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 					</div>
-					<div style='width:100px;height:40px;position:absolute;right:0px;bottom:0px;'>
-			    		<h4 style='position:absolute;right:53;font-weight:400;' class='text-right'>{{submission.votes | number}}</h4>
-			        	<img ng-if='!submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='public/img/filled.png'>
-			        	<img ng-click='upvote(submission)' ng-if='submission.user_may_vote' style='width:45px;height:45px;position:absolute;right:3px;bottom:2px;' src='{{submission.heart}}' ng-init='submission.heart = "public/img/empty.png"' ng-mouseover='submission.heart = "public/img/filled.png"' ng-mouseleave='submission.heart = "public/img/empty.png"'>
-			        </div>
+					<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
+			    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
+			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			    	</div>
 		            <div class="contest-info">
 		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
 		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
