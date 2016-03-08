@@ -46,6 +46,7 @@ class Accounts extends CI_Controller
             $this->form_validation->set_rules('address_line1', 'Address Line 1', 'required');
             $this->form_validation->set_rules('state', 'State', 'required');
             $this->form_validation->set_rules('postal_code', 'Postal Code', 'required');
+            $this->form_validation->set_rules('ssn_last_4', 'SSN Last 4', 'required');s
 
             if($this->form_validation->run() === TRUE)
             {
@@ -61,6 +62,7 @@ class Accounts extends CI_Controller
                 if($this->input->post('city'))          $data['legal_entity.address.city'] = $this->input->post('city');
                 if($this->input->post('state'))         $data['legal_entity.address.state'] = $this->input->post('state');
                 if($this->input->post('postal_code'))   $data['legal_entity.address.postal_code'] = $this->input->post('postal_code');
+                if($this->input->post('ssn_last_4'))    $data['legal_entity.ssn_last_4'] = $this->input->post('ssn_last_4');
                 if($this->input->post('country') &&
                    is_null($this->account->country))    $data['country'] = $this->input->post('country');
             }

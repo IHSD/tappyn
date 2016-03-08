@@ -78,16 +78,20 @@ class Stripe_account_library
                 case 'legal_entity.address.city':
                     $account_data['legal_entity']['address']['city'] = $value;
                     break;
+                case 'legal_entity.ssn_last_4':
+                    $account_data['legal_entity']['ssn_last_4'] = $value;
                 default:
                     $account_data[$key] = $value;
             }
         }
+
         try{
             $account = \Stripe\Account::create($account_data);
         } catch(Exception $e) {
             $this->errors = $e->getMessage();
             return false;
         }
+        
         $this->db->insert('stripe_accounts', array(
             'account_id' => $account->id,
             'user_id' => $this->ion_auth->user()->row()->id,

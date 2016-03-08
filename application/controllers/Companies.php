@@ -63,6 +63,26 @@ class Companies extends CI_Controller
             foreach($contests as $contest)
             {
                 $contest->submission_count = $this->contest->submissionsCount($contest->id);
+                $contest->views = $this->contest->views($contest->id);
+                $contest->votes = $this->vote->select("COUNT(*) as count")->where('contest_id', $contest->id)->fetch()->row()->count;
+                /**
+                 * Denote the status of the contest
+                 */
+                 $contest->status = 'active';
+
+                 if($contest->paid == 0)
+                 {
+                     $contest->status = 'draft';
+                 } else if($contest->stop_time < date('Y-m-d H:i:s')) {
+                     if($this->payout->exists(array('contest_id' => $contest->id)))
+                     {
+                         $contest->status = 'completed';
+                     } else {
+                         $contest->status = 'needs_winner';
+                     }
+                 } else if($contest->start_time > date('Y-m-d H:i:s')) {
+                     $contest->status = 'scheduled';
+                 }
             }
             $this->responder->data(
                 array(
