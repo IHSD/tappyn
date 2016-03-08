@@ -6,7 +6,7 @@
         <meta property="og:type" content="article">
         <meta property="og:title" content="Test Title">
         <meta property="og:description" content="Test Description">
-        <meta property="og:image:secure_url" content="https://tappyn.com/public/img/TappynLogo2.png">
+        <meta property="og:image:secure_url" content="http://test.tappyn.com/public/img/TappynLogo2.png">
     </head>
     <body>
         <script>
