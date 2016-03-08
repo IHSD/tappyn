@@ -163,6 +163,7 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
+        $this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
         if($this->form_validation->run() == true)
         {
@@ -180,7 +181,8 @@ class Contests extends CI_Controller
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
-                'emotion'          => $this->input->post('emotion')
+                'emotion'           => $this->input->post('emotion'),
+                'display_type'      => $this->input->post('display_type')
             );
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
