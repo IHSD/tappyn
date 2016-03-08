@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Tappyn</title>
-        <meta property="og:url" content="http://test.tappyn.com/#/contest/<?php echo $submission->contest_id; ?>">
+        <meta property="og:url" content="http://test.tappyn.com/submissions/share/<?php echo $submission->id; ?>">
         <meta property="og:type" content="article">
         <meta property="og:title" content="Test Title">
         <meta property="og:description" content="Test Description">
