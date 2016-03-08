@@ -37,7 +37,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	}
 
 	$scope.select_display = function(display){
-		$scope.contest.display = display;
+		$scope.contest.display_type = display;
 	}
 
 	$scope.grab_profile = function(){

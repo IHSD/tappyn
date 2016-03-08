@@ -134,16 +134,26 @@ class Contests extends CI_Controller
             return;
         }
 
+        if($contest->stop_time < date('Y-m-d H:i:s'))
+        {
+            $contest->status = 'ended';
+        } else {
+            $contest->status = 'active';
+        }
+
         if($payout = $this->payout->exists(array('contest_id' => $contest_id)))
         {
-            $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
-            $owner = $contest->winner->owner;
-            $contest->winner->owner->first_name = $this->ion_auth->user($owner)->row()->first_name;
-            $contest->winner->owner->last_name = $this->ion_auth->user($owner)->row()->last_name;
+            $winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
+            $owner = $winner->owner;
+            $winner->first_name = $this->ion_auth->user($owner)->row()->first_name;
+            $winner->last_name = $this->ion_auth->user($owner)->row()->last_name;
+            $winner->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
+            $contest->payout = TRUE;
+            $this->responder->data(array('contest' => $contest, 'winner' => $winner))->respond();
         } else {
             $contest->payout = FALSE;
+            $this->responder->data(array('contest' => $contest, 'winner' => false))->respond();
         }
-        $this->responder->data(array('contest' => $contest))->respond();
     }
     /**
      * Create a new contest, or render the creation form

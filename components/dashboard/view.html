@@ -75,7 +75,17 @@
 		        </div>
 			</div>
 	    </div>
-		<div ng-if='user.type == "company"' class='col-xs-12 col-sm-3' ng-repeat='contest in dash.contests'>
+		<div ng-if='user.type == "company"'>
+			<table class='table table-striped'>
+				<thead>
+					<tr>
+						<th></th>
+					</tr>
+				</thead>
+				<tr ng-repeat='contest in dash.contests'>
+
+				</tr>
+			</table>
 			<div class='contest-box'>
 				<div>
 	                <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.title}}</h5>
