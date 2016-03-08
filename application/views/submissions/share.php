@@ -10,7 +10,7 @@
     </head>
     <body>
         <script>
-            window.location.href("<?php echo base_url().'#/contest/'.$submission->contest_id; ?>");
+            //window.location.href("<?php echo base_url().'#/contest/'.$submission->contest_id; ?>");
         </script>
     </body>
 </html>
