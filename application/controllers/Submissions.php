@@ -31,7 +31,7 @@ class Submissions extends CI_Controller
         /** Sort our submissions on upvotes **/
         usort($submissions, function($a, $b)
             {
-                return strcmp($b->votes, $a->votes);
+                return ((int) $b->votes > (int) $a->votes) ? -1 : 1;
             }
         );
 

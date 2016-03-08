@@ -81,7 +81,7 @@ class Contests extends CI_Controller
 
         usort($contests, function($a, $b)
             {
-                return strcmp($b->votes, $a->votes);
+                return ((int) $b->votes > (int) $a->votes) ? -1 : 1;
             }
         );
         $this->responder->data(array('contests' => array_slice($contests, 0, 4)))->respond();
