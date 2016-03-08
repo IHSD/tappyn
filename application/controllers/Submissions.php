@@ -120,7 +120,6 @@ class Submissions extends CI_Controller
     {
         $submission = $this->submission->get($id);
         // Create image based on submission
-        $submission->url =
         $this->load->view('submissions/share', array('submission' => $submission));
     }
 
