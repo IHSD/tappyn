@@ -135,7 +135,6 @@ class Submissions extends CI_Controller
             $text = str_replace('<br />', "\n", $sig);
             imagettftext($my_img, 45, 0, 45, 100, $text_colour, FCPATH.'fonts/Lato-Medium.ttf', $submission->headline);
             imagettftext($my_img, 35, 0, 45,210, $black, FCPATH.'fonts/Lato-Thin.ttf', $text);
-            imagettftext($my_img, 35, 0, 750,450, $text_colour, FCPATH.'fonts/Lato-Thin.ttf', '-- '.$submission->owner->first_name.' '.$submission->owner->last_name[0]);
             imagesetthickness ( $my_img, 5 );
             imagerectangle($my_img, 0, 0, 1200, 630, $text_colour);
             //ImageArc($my_img, 1120, 550, 125, 125, 0, 360, $text_colour);
