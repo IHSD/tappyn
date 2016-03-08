@@ -6,11 +6,11 @@
         <meta property="og:type" content="article">
         <meta property="og:title" content="Test Title">
         <meta property="og:description" content="Test Description">
-        <meta property="og:image:url" content="http://test.tappyn.com/public/img/TappynLogo2.png">
+        <meta property="og:image" content="http://test.tappyn.com/public/img/TappynLogo2.png">
     </head>
     <body>
         <script>
-            //window.location.href("<?php echo base_url().'#/contest/'.$submission->contest_id; ?>");
+            window.location.href("<?php echo base_url().'#/contest/'.$submission->contest_id; ?>");
         </script>
     </body>
 </html>
