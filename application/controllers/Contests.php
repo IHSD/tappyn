@@ -81,7 +81,7 @@ class Contests extends CI_Controller
 
         usort($contests, function($a, $b)
             {
-                return strcmp($b->votes, $a->votes);
+                return ((int) $b->votes > (int) $a->votes) ? -1 : 1;
             }
         );
         $this->responder->data(array('contests' => array_slice($contests, 0, 4)))->respond();
@@ -139,8 +139,8 @@ class Contests extends CI_Controller
             $contest->winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
             $owner = $this->user->profile($contest->winner->owner);
             $contest->winner->owner = new StdClass();
-            $contest->winner->owner->first_name = $owner->first_name;
-            $contest->winner->owner->last_name = $owner->last_name;
+            $contest->winner->owner->first_name = $this->ion_auth->user($contest->winner->owner)->row()->first_name;
+            $contest->winner->owner->last_name = $this->ion_auth->user($contest->winner->owner)->row()->last_name;
         } else {
             $contest->payout = FALSE;
         }
