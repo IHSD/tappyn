@@ -35,6 +35,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contest/view.html',
 		controller : 'contestController'
 	})
+	.when('/edit/:id', {
+		templateUrl : 'components/edit/view.html',
+		controller : 'editController'
+	})
 	.when('/ended/:id', {
 		templateUrl : 'components/ended/view.html',
 		controller : 'endedController'
@@ -82,6 +86,13 @@ tappyn.filter('legibleDate', function() {
 		return date;
 	};
 });
+
+tappyn.filter('dashDate', function() {
+	return function(date){
+		date = moment(date).format("lll");
+		return date;
+	};
+}); 
 
 tappyn.filter('capitalize', function() {
   return function(input) {

@@ -23,17 +23,6 @@ tappyn.factory('launchFactory', function($http){
 		});	
 	}
 
-	fact.update = function(contest){
-		return $http({
-			method : 'POST',
-			url : 'index.php/contests/update/'+contest.id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(contest)
-		});	
-	}
-
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',
