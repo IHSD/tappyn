@@ -139,7 +139,7 @@ class Submissions extends CI_Controller
         }
 
         $check = $this->vote->select('COUNT(*) as count, submission_id, contest_id')->where_in('contest_id', $ids)->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
-        error_log($this->db->last_query());
+
         if(!$check)
         {
             $this->responder->fail("An unexpected error occured")->code(500)->respond();
