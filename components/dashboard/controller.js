@@ -82,6 +82,9 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
       }
     }
 
+	$scope.select_current = function(pass){
+		$scope.passing_method = pass;
+	}
 
 	$scope.new_payment = function(){
 		// This identifies your website in the createToken call below

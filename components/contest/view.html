@@ -46,7 +46,7 @@
 				<div class='text-center' style='margin-bottom:5px;' ng-init='indexer = 0'>
 					<div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.additional_images && contest.additional_images.length > 0'>
 						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button>
-						<img style='height:auto;' width='150px' src="{{contest.additional_images[indexer]}}">
+						<img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}">
 						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button>
 					</div>
 				</div>
