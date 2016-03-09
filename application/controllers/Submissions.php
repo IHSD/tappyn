@@ -119,8 +119,27 @@ class Submissions extends CI_Controller
     public function leaderboard()
     {
         $leaderboard_size = $this->config->item('leaderboard_limit');
-        // Get the top 5 submissions
-        $check = $this->vote->select('COUNT(*) as count, submission_id')->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+        // Get a list of all active contests
+        $ids = array();
+        $contests = $this->contest->where(array(
+            'paid' => 1,
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s')
+        ))->fetch()->result();
+
+        // We dont have any active contests, so ets just exit out with success
+        if(empty($contests))
+        {
+            $this->responder->message("There currently aren't any active contests")->respond();
+            return;
+        }
+        foreach($contests as $contest)
+        {
+            $ids[] = (int)$contest->id;
+        }
+
+        $check = $this->vote->select('COUNT(*) as count, submission_id, contest_id')->where_in('contest_id', $ids)->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+        error_log($this->db->last_query());
         if(!$check)
         {
             $this->responder->fail("An unexpected error occured")->code(500)->respond();
