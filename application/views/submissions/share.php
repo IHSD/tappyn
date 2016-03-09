@@ -7,7 +7,7 @@
         <meta property="og:type" content="article">
         <meta property="og:title" content="Check out the ad I just created!">
         <meta property="og:description" content="Tappyn lets content creators create content">
-        <meta property="og:image:secure_url" content="<?php echo base_url().'public/img/subs/sub_'.$submission->id.'.png'; ?>">
+        <meta property="og:image" content="<?php echo base_url().'public/img/subs/sub_'.$submission->id.'.png'; ?>">
         <meta property="og:image:width" content="1200">
         <meta property="og:image:height" content="630">
     </head>
