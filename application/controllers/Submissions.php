@@ -44,9 +44,9 @@ class Submissions extends CI_Controller
         {
             foreach($submissions as $key => $submission)
             {
+                $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
                 if($submission->owner == $this->ion_auth->user()->row()->id)
                 {
-                    $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
                     $submissions[$key]->user_owned = TRUE;
                     $usub = $submissions[$key];
                     unset($submissions[$key]);
