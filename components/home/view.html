@@ -127,7 +127,7 @@
                                     </span>
                                 </div>
                                 <div class="company-img text-center" style='margin-top:10px;height:100px'>
-                                    <img algin='middle' ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
+                                    <img algin='middle' ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
                                     <img algin='middle' ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
                                 </div>
                                 <div style='height:100px;width: 100%;overflow: hidden;'>
@@ -136,7 +136,7 @@
                                     </div>
                                 </div>
                                 <div style='height:100px;'>
-                                    <h5 class='text-left'><img style='margin-right:5px;' class='pull-left' src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
+                                    <h5 class='text-left'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
                                     <h5 class='text-left'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
                                     <uib-progressbar value='contest.submission_count' max='50' type="warning" style='margin-bottom:0;'></uib-progressbar>                
                                     <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>

@@ -20,5 +20,26 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
+
+	fact.grabDetails = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies/accounts',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
+	}
+
+	fact.payContest = function(id, obj){
+		return $http({
+			method : 'POST',
+			url : 'index.php/companies/payment/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(obj) 
+		})	
+	}
 	return fact;
 })

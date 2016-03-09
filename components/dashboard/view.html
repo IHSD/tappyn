@@ -1,68 +1,101 @@
 <div class='wrapper'>
-	<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3' ng-show='adding_payment'>
+	<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3' ng-show='adding_payment.show'>
 		<div class='col-xs-12' style='background-color:#fff;border-radius:3px;padding:10px;'>
-			<div class='col-xs-12'><h3 style='margin-top:5px;' class='pull-right'><span style='cursor:pointer' ng-click='close_payment()'>X</span></h3></div>
-			<form class='form' action="" method="POST" id="payment-form" ng-submit='new_payment()'>
-				<div class='col-xs-12'>
-				    <div class="form-group">
-				    	<label>Card Number</label>
-				      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
-				    </div>
-				</div>
-			    <div class='col-xs-12 col-sm-4'>
-				  <div class="form-group">
-					    <label>CVC</label>
-					    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>
-				  </div>
-			    </div>
-			  	<div class='col-xs-12 col-sm-4'>
-			      <div class="form-group">
-			       		<label>Month Exp</label>
-			  	      	<select class='form-control' data-stripe="exp-month">
-				            <option value='01'>01</option>
-				            <option value='02'>02</option>
-				            <option value='03'>03</option>
-				            <option value='04'>04</option>
-				            <option value='05'>05</option>
-				            <option value='06'>06</option>
-				            <option value='07'>07</option>
-				            <option value='08'>08</option>
-				            <option value='09'>09</option>
-				            <option value='10'>10</option>
-				            <option value='11'>11</option>
-				            <option value='12'>12</option>
-			          </select>
-			      </div>
-			    </div>
-			    <div class='col-xs-12 col-sm-4'>
-			    	<div class='form-group'>
-			        	<label>Year Exp</label>
-			  	    	<select class='form-control' data-stripe="exp-year">
-				             <option value='2016'>2016</option>
-				             <option value='2017'>2017</option>
-				             <option value='2018'>2018</option>
-				             <option value='2019'>2019</option>
-				             <option value='2020'>2020</option>
-				             <option value='2021'>2021</option>
-				             <option value='2022'>2022</option>
-				             <option value='2023'>2023</option>
-				             <option value='2024'>2024</option>
-				             <option value='2025'>2025</option>
-				             <option value='2026'>2026</option>
-				             <option value='2027'>2027</option>
-			        	</select>
-			  	  	</div>
-			  	</div>
-				<input type='hidden' data-stripe='currency' value='usd'/>
-				<div class="col-xs-6">
-					<div class='form-group'>
-						<label class='control-label'>Save Method
-							<input type='checkbox' ng-model='save_method'>
-						</label>
+			<div class='col-xs-12'><h3>Paying for {{adding_payment.contest.id}} {{adding_payment.contest.platform | capUnderscore}} - {{adding_payment.contest.objective | capUnderscore}} <span class='pull-right' style='cursor:pointer' ng-click='close_payment()'>X</span></h3></div>
+			<ul class="nav nav-tabs" role="tablist">
+			    <li role="presentation" ng-class='{"active" : adding_payment.type == "old"}'><a href ng-click='set_type("old")' role="tab" data-toggle="tab">Saved Methods</a></li>
+			    <li role="presentation" ng-class='{"active" : adding_payment.type == "new"}'><a href ng-click='set_type("new")' role="tab" data-toggle="tab">New Method</a></li>
+			    <li role="presentation" ng-class='{"active" : adding_payment.type == "voucher"}'><a href ng-click='set_type("voucher")' role="tab" data-toggle="tab">Voucher Code</a></li>
+			 </ul>
+			<div style='padding-top:10px' ng-show='adding_payment.type == "old"'>
+				<div ng-show='payments.length > 0'>
+					<div class='payment-method-container'>
+						<div class='row'>
+							<div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+								<h5>
+									<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
+									<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
+									<img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
+									<img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
+									&nbsp;&nbsp;&nbsp;********{{payment.last4}}
+								</h5>
+								<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+							</div>
+						</div>
+						<div class='text-center'><button class='btn btn-oj' ng-click='old_payment()'>Pay</button></div>
 					</div>
 				</div>
-			</form>
-			<div class='col-xs-12 text-center'><button ng-disabled='form_disabled' class='btn btn-oj' type='submit'>Pay</button></div>
+				<div class='alert alert-warning' ng-show='payments.length < 1 || !payments'>You dont have any saved payment methods</div>
+			</div>
+			<div style='padding-top:10px' ng-show='adding_payment.type == "voucher"'>
+				<form class='form col-xs-12 col-sm-10 col-sm-offset-1' ng-submit='use_voucher()'>
+					<div class='form-group'><input class='form-control' ng-model='voucher_code' type='text' placeholder='Enter a Voucher Code'></div>
+					<div class='col-xs-12 text-center'><button class='btn btn-oj' type='submit'>Use Voucher</button></div>
+				</form>
+			</div>
+			<div style='padding-top:10px' ng-show='adding_payment.type == "new"'>
+				<form class='form' action="" method="POST" id="payment-form" ng-submit='new_payment()'>
+					<div class='col-xs-12'>
+					    <div class="form-group">
+					    	<label>Card Number</label>
+					      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
+					    </div>
+					</div>
+				    <div class='col-xs-12 col-sm-4'>
+					  <div class="form-group">
+						    <label>CVC</label>
+						    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>
+					  </div>
+				    </div>
+				  	<div class='col-xs-12 col-sm-4'>
+				      <div class="form-group">
+				       		<label>Month Exp</label>
+				  	      	<select class='form-control' data-stripe="exp-month">
+					            <option value='01'>01</option>
+					            <option value='02'>02</option>
+					            <option value='03'>03</option>
+					            <option value='04'>04</option>
+					            <option value='05'>05</option>
+					            <option value='06'>06</option>
+					            <option value='07'>07</option>
+					            <option value='08'>08</option>
+					            <option value='09'>09</option>
+					            <option value='10'>10</option>
+					            <option value='11'>11</option>
+					            <option value='12'>12</option>
+				          </select>
+				      </div>
+				    </div>
+				    <div class='col-xs-12 col-sm-4'>
+				    	<div class='form-group'>
+				        	<label>Year Exp</label>
+				  	    	<select class='form-control' data-stripe="exp-year">
+					             <option value='2016'>2016</option>
+					             <option value='2017'>2017</option>
+					             <option value='2018'>2018</option>
+					             <option value='2019'>2019</option>
+					             <option value='2020'>2020</option>
+					             <option value='2021'>2021</option>
+					             <option value='2022'>2022</option>
+					             <option value='2023'>2023</option>
+					             <option value='2024'>2024</option>
+					             <option value='2025'>2025</option>
+					             <option value='2026'>2026</option>
+					             <option value='2027'>2027</option>
+				        	</select>
+				  	  	</div>
+				  	</div>
+					<input type='hidden' data-stripe='currency' value='usd'/>
+					<div class="col-xs-6">
+						<div class='form-group'>
+							<label class='control-label'>Save Method
+								<input type='checkbox' ng-model='save_method'>
+							</label>
+						</div>
+					</div>
+					<div class='col-xs-12 text-center'><button ng-disabled='form_disabled' class='btn btn-oj' type='submit'>Pay</button></div>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
@@ -168,12 +201,12 @@
 	                        <a class='btn btn-oj btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
 	                        <ul uib-dropdown-menu role="menu">
 	                        	<li role='menuitem'><a href="#/contest/{{contest.id}}">View Contest</a></li>
-	                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest.id)'>Pay for Contest</a></li>
+	                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
 	                            <li role='menuitem'><a href="#/edit/{{contest.id}}">Edit Contest</a></li>
 	                        </ul>
                         </div>
 					</td>
-					<td>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
+					<td>{{contest.id}} {{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
 					<td>{{contest.status | capUnderscore}}</td>
 					<td>{{contest.start_time | dashDate}}</td>
 					<td>{{contest.stop_time | dashDate}}</td>

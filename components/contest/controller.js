@@ -71,7 +71,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
   			method: 'share',
 		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
 		}, function(response){
-			console.log(response);
+			
 		});
 	}
 
