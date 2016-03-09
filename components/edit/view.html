@@ -1,0 +1,55 @@
+<div class='row content-padding'>
+	<div class='col-sm-8 col-sm-offset-2 col-xs-12'>	
+		<div class='contest-box'>
+			<h3 class='text-center'>Edit Contest</h3>
+			<form class='form' ng-submit='edit(contest)'>
+				<div class='form-group'>
+					<div class='row'>
+						<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
+						<div class='col-sm-4 col-xs-12'>
+							<input ng-file-select='select_file($files, "pic1")' type='file'>
+							<img class='img-responsive' ng-if='contest.additional_image_1' src='{{contest.additional_image_1}}'>
+						</div>
+						<div class='col-sm-4 col-xs-12'>
+							<input ng-file-select='select_file($files, "pic2")' type='file'>
+							<img class='img-responsive' ng-if='contest.additional_image_2' src='{{contest.additional_image_2}}'>
+						</div>
+						<div class='col-sm-4 col-xs-12'>
+							<input ng-file-select='select_file($files, "pic3")' type='file'>
+							<img class='img-responsive' ng-if='contest.additional_image_3' src='{{contest.additional_image_3}}'>
+						</div>
+					</div>
+				</div>
+				<div class='form-group'>
+					<label>Industry</label>
+					<select class='form-control' ng-model='contest.industry'>
+						<option value=''>Choose an industry for ease of search</option>
+						<option value='pets'>Pets</option>
+						<option value='food_beverage'>Food & Beverage</option>
+						<option value='finance_business'>Finance & Business</option>
+						<option value='health_wellness'>Health & Wellness</option>
+						<option value='travel'>Travel</option>
+						<option value='social_network'>Social Network</option>
+						<option value='home_garden'>Home & Garden</option>
+						<option value='education'>Education</option>
+						<option value='art_entertainment'>Art & Entertainment</option>
+						<option value='fashion_beauty'>Fashion & Beauty</option>
+					</select>
+				</div>
+				<div class='form-group'>
+					<label>Summary of product or service</label>
+					<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
+				</div>
+				<div class='form-group'>
+					<label class='control-label'>Describe in more detail what your product or service does and who it's for.</label>
+					<textarea class='form-control' rows='4' ng-model='contest.audience' placeholder='i.e., We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.'></textarea>
+				</div>
+				<div class='form-group'>
+					<label class='control-label'>Describe what makes you different (and better) than your competition.</label>
+					<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
+				</div>
+					<div class='text-center'><button class='btn btn-oj' type='submit'>Edit</button></div>
+			</form>
+		</div>
+	</div>
+</div>

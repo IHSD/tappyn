@@ -69,7 +69,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	$scope.share = function(submission){
 		FB.ui({
   			method: 'share',
-		 	href: 'https://test.tappyn.com/submissions/share/'+submission.id,
+		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
 		}, function(response){
 			console.log(response);
 		});
