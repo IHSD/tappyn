@@ -400,13 +400,10 @@
 							<div class='row'>
 								<div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
 									<h5>
-										<img height='20' ng-if='payment.brand == "Visa"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-										<img height='20' ng-if='payment.brand == "MasterCard"' src="http://www.credit-card-logos.com/images/mastercard_credit-card-logos/mastercard_logo_5.gif" />
-										<img height='20' ng-if='payment.brand == "American Express"' src="http://www.credit-card-logos.com/images/american_express_credit-card-logos/american_express_logo_9.gif" />
-										<img height='20' ng-if='payment.brand == "Discover"' src="http://www.credit-card-logos.com/images/discover_credit-card-logos/discover_network1.jpg" />
-										<img height='20' ng-if='payment.brand == "JCB"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-										<img height='20' ng-if='payment.brand == "Diners CLub"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
-										<img height='20' ng-if='payment.brand == "Unknown"' src="http://www.credit-card-logos.com/images/visa_credit-card-logos/visa_logo_7.gif" />
+										<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
+										<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
+										<img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
+										<img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
 										&nbsp;&nbsp;&nbsp;********{{payment.last4}}
 									</h5>
 									<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
