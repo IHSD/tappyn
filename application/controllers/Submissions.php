@@ -22,7 +22,7 @@ class Submissions extends CI_Controller
      */
     public function index($contest_id)
     {
-        $submissions = $this->contest->submissions($contest_id);
+        $submissions = $this->submission->where(array('contest_id' => $contest_id))->fetch()->result();
         foreach($submissions as $submission)
         {
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
@@ -35,6 +35,28 @@ class Submissions extends CI_Controller
             }
         );
 
+        /*
+         * If the user has created one of the submissions, we then push it to
+         * the front of the results automatically
+         */
+        $usub = FALSE;
+        if($this->ion_auth->logged_in())
+        {
+            foreach($submissions as $key => $submission)
+            {
+                if($submission->owner == $this->ion_auth->user()->row()->id)
+                {
+                    $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+                    $submissions[$key]->user_owned = TRUE;
+                    $usub = $submissions[$key];
+                    unset($submissions[$key]);
+                }
+            }
+            if($usub)
+            {
+                $submissions = array_values(array($usub) + $submissions);
+            }
+        }
         $contest = $this->contest->get($contest_id);
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
@@ -146,6 +168,11 @@ class Submissions extends CI_Controller
         }
         // Create image based on submission
         $this->load->view('submissions/share', array('submission' => $submission));
+        $this->analytics->track(array(
+            'event_name' => "submission_share_view",
+            'object_type' => "submission",
+            'object_id' => $id
+        ));
     }
 
     public function rate()
