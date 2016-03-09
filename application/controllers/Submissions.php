@@ -70,6 +70,8 @@ class Submissions extends CI_Controller
             'submissions' => $submissions,
             'contest' => $contest
         ))->respond();
+
+        $this->contest->log_impression($contest_id);
     }
 
     /**
