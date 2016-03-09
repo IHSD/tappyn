@@ -61,8 +61,33 @@ class Crons extends CI_Controller
      *
      * @return void
      */
-    public function new_contests()
+    public function facebook()
     {
-        
+        $this->load->model('contest');
+        $contests = $this->contest->where(array(
+            'paid' => 1,
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s')
+        ))->order_by('id', 'asc')->fetch()->result();
+
+        foreach($contests as $contest)
+        {
+            echo "=======================================\n";
+            echo "        Contest {$contest->id}\n";
+            echo "=======================================\n\n";
+            echo "Submission   Shares\n";
+            echo "-------------------\n";
+
+            $submissions = $this->contest->submissions($contest->id);
+            foreach($submissions as $sub)
+            {
+                $data = json_decode(file_get_contents('https://graph.facebook.com/?id='.base_url().'submissions/share/'.$sub->id));
+                echo " {$sub->id}         ".(isset($data->shares) ? $data->shares : 0)."\n";
+                if(isset($data->shares && $data->shares > 0))
+                {
+                    $this->db->where('id', $sub->id)->update('submissions', array('shares' => $data->shares));
+                }
+            }
+        }
     }
 }

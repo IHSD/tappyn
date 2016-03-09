@@ -173,6 +173,10 @@ class Submissions extends CI_Controller
             'object_type' => "submission",
             'object_id' => $id
         ));
+
+        $this->db->where('id', $id)
+        $this->db->set('share_clicks', 'share_clicks + 1', FALSE);
+        $this->db->update('submissions');
     }
 
     public function rate()
