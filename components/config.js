@@ -257,7 +257,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					if($scope.signing_in.type == 'must') $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
-					window.Intercom('boot', {
+					window.Intercom('update', {
 					   app_id: 'qj6arzfj',
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
@@ -294,7 +294,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					$scope.registration = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					$scope.step = 1;
-					window.Intercom('boot', {
+					window.Intercom('update', {
 					   app_id: 'qj6arzfj',
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
