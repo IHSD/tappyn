@@ -161,6 +161,7 @@ class Contests extends CI_Controller
      */
     public function create($id = null)
     {
+        $update = FALSE;
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
             $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
@@ -202,12 +203,21 @@ class Contests extends CI_Controller
             {
                 $cid = $this->contest->create($data);
             } else {
+                // Check that they own the contest
+                $contest = $this->contest->get($id);
+                if(!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id))
+                {
+                    $this->responder->fail("You do not own this contest brody")->code(403)->respond();
+                    return;
+                }
                 $cid = $this->contest->update($id, $data);
+                $update = TRUE;
             }
         }
         if($this->form_validation->run() == true && $cid)
         {
-            $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
+            $message = $update ? 'updated' : 'created';
+            $this->responder->message("Contest successfully {$message}")->data(array('id' => $cid))->respond();
             $this->analytics->track(array(
                 'event_name' => "contest_creation",
                 'object_type' => "contest",
@@ -323,6 +333,24 @@ class Contests extends CI_Controller
                 $this->payout->errors() ? $this->payout->errors() : "An unknown error occured"
             )->code(500)->respond();
             return;
+        }
+    }
+
+    public function delete($id = NULL)
+    {
+        if(is_null($id))
+        {
+            $this->responder->fail("You must provide a contest to delete")->code(500)->respond();
+            return;
+        }
+
+        if($this->contest->delete($id))
+        {
+            $this->responder->data()->message("Contest successfully deleted")->respond();
+        }
+        else
+        {
+            $this->responder->fail(($this->contest->errors() ? $this->contest->errors() : "There was an error deleting your contest"))->code(500)->respond();
         }
     }
 }

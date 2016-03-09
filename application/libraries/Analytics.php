@@ -24,7 +24,7 @@ class Analytics
     {
         // Ignore any command line requests
         if(is_cli()) return;
-        
+
         $parser = Parser::create();
         $ua = $parser->parse($this->input->server('HTTP_USER_AGENT'));
         /**
@@ -45,7 +45,10 @@ class Analytics
         $this->os = $ua->os->family;
         $this->os_major = $ua->os->major;
         $this->is_mobile = $this->ismobile();
-        $this->geoCheckIP($this->input->server('REMOTE_ADDR'));
+        //$this->geoCheckIP($this->input->server('REMOTE_ADDR'));
+        $this->domain = NULL;
+        $this->country = NULL;
+        $this->state = NULL;
         $this->session_hash();
     }
 

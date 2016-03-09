@@ -100,7 +100,7 @@ class Contest extends MY_Model
         }
         return false;
     }
-    
+
     public function create($data)
     {
         if(!$this->validate())
@@ -145,5 +145,21 @@ class Contest extends MY_Model
     public function validate()
     {
         return true;
+    }
+
+    public function delete($id)
+    {
+        $contest = $this->get($id);
+        if(!$contest)
+        {
+            $this->errors = "That contest does not exist";
+            return false;
+        }
+        if($contest->owner !== $this->ion_auth->user()->row()->id)
+        {
+            $this->errors = "You dont own that contest brody";
+            return FALSE;
+        }
+        return $this->db->where('id', $id)->delete('contests');
     }
 }
