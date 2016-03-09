@@ -334,4 +334,22 @@ class Contests extends CI_Controller
             return;
         }
     }
+
+    public function delete($id = NULL)
+    {
+        if(is_null($id))
+        {
+            $this->responder->fail("You must provide a contest to delete")->code(500)->respond();
+            return;
+        }
+
+        if($this->contest->delete($id))
+        {
+            $this->responder->data()->message("Contest successfully deleted")->respond();
+        }
+        else
+        {
+            $this->responder->fail(($this->contest->errors() ? $this->contest->errors() : "There was an error deleting your contest"))->code(500)->respond();
+        }
+    }
 }
