@@ -189,8 +189,22 @@ header nav ul li .btn:hover {
 	background: #eee;
 	color:#ff5c00;
 }
+.btn-outliner{
+	background: #fff;
+	color: #ff5c00;
+	font-weight:  400;
+	border:1px solid #ff5c00;
+}
+.btn-outliner:hover{
+	background:#ff5c00;
+	color : #fff;
+	border:1px solid transparent;
+}
 .btn:focus, .btn.focus{
 	color:#fff;
+}
+.btn.btn-outliner:focus, .btn.btn-outliner.focus{
+	color:#ff5c00;
 }
 .btn-xl, .btn-group-xl>.btn {
     padding: 15px 22px;

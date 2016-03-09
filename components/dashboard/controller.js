@@ -68,7 +68,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
-					if($scope.adding_payment.contest.start_time >= moment()) $scope.adding_payment.contest.status = 'active';
+					if(moment($scope.adding_payment.contest.start_time) <= moment()) $scope.adding_payment.contest.status = 'active';
 					else $scope.adding_payment.contest.status = 'scheduled';
 					$rootScope.modal_up = false;
 					$scope.adding_payment = {show : false, contest : '', type : ''};
@@ -82,6 +82,9 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
       }
     }
 
+	$scope.select_current = function(pass){
+		$scope.passing_method = pass;
+	}
 
 	$scope.new_payment = function(){
 		// This identifies your website in the createToken call below
@@ -101,7 +104,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
-						if($scope.adding_payment.contest.start_time >= moment()) $scope.adding_payment.contest.status = 'active';
+						if(moment($scope.adding_payment.contest.start_time) <= moment()) $scope.adding_payment.contest.status = 'active';
 						else $scope.adding_payment.contest.status = 'scheduled';
 						$scope.adding_payment = {show : false, contest : '', type : ''};
 						$rootScope.modal_up = false;
@@ -121,7 +124,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
-						if($scope.adding_payment.contest.start_time >= moment()) $scope.adding_payment.contest.status = 'active';
+						if(moment($scope.adding_payment.contest.start_time) <= moment()) $scope.adding_payment.contest.status = 'active';
 						else $scope.adding_payment.contest.status = 'scheduled';
 						$scope.adding_payment = {show : false, contest : '', type : ''};
 						$rootScope.modal_up = false;

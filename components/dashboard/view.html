@@ -198,7 +198,7 @@
 				<tr ng-repeat='contest in dash.contests | orderBy : predicate : reverse'>
 					<td>
 						<div uib-dropdown>
-	                        <a class='btn btn-oj btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
+	                        <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
 	                        <ul uib-dropdown-menu role="menu">
 	                        	<li role='menuitem'><a href="#/contest/{{contest.id}}">View Contest</a></li>
 	                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
