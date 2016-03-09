@@ -174,7 +174,7 @@ class Submissions extends CI_Controller
             'object_id' => $id
         ));
 
-        $this->db->where('id', $id)
+        $this->db->where('id', $id);
         $this->db->set('share_clicks', 'share_clicks + 1', FALSE);
         $this->db->update('submissions');
     }
