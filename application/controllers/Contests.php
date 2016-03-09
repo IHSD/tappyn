@@ -216,7 +216,8 @@ class Contests extends CI_Controller
         }
         if($this->form_validation->run() == true && $cid)
         {
-            $this->responder->message("Contest successfully {$update ? 'updated' : 'created'}")->data(array('id' => $cid))->respond();
+            $message = $update ? 'updated' : 'created';
+            $this->responder->message("Contest successfully {$message}")->data(array('id' => $cid))->respond();
             $this->analytics->track(array(
                 'event_name' => "contest_creation",
                 'object_type' => "contest",
