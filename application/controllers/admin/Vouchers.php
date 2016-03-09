@@ -9,7 +9,11 @@ class Vouchers extends CI_Controller
         {
             redirect('/', 'refresh');
         }
-        $this->load->view('templates/navbar');
+        if(!is_ajax())
+        {
+            $this->load->view('templates/navbar');
+        }
+        $this->load->model('contest');
         $this->load->library('vouchers_library');
     }
 
@@ -56,7 +60,17 @@ class Vouchers extends CI_Controller
      */
     public function show($vid)
     {
+        $voucher = $this->vouchers_library->where('id', $vid)->limit(1)->fetch();
+        if(!$voucher)
+        {
+            $this->session->set_flashdata('error', "That voucher doesn't exist");
+            redirect('admin/vouchers/index', 'refresh');
+        }
 
+        $voucher = $voucher->row();
+        $voucher->uses = $this->vouchers_library->uses($vid);
+        $this->data['voucher'] = $voucher;
+        $this->load->view('admin/vouchers/show', $this->data);
     }
 
     /**
@@ -107,7 +121,12 @@ class Vouchers extends CI_Controller
      */
     public function activate($vid)
     {
-
+        if($this->vouchers_library->update($vid, array('status' => 1)))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error activating that voucher")->code(500)->respond();
+        }
     }
 
     /**
@@ -117,7 +136,12 @@ class Vouchers extends CI_Controller
      */
     public function deactivate($vid)
     {
-
+        if($this->vouchers_library->update($vid, array('status' => 0)))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error deactivating that voucher")->code(500)->respond();
+        }
     }
 
     /**

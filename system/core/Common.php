@@ -49,6 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		http://codeigniter.com/user_guide/
  */
 
+if( ! function_exists( 'is_ajax') )
+{
+    function is_ajax()
+    {
+        return !empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
+    }
+}
 if(! function_exists( 'lorem' ) )
 {
     function lorem()
