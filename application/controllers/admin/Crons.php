@@ -83,7 +83,7 @@ class Crons extends CI_Controller
             {
                 $data = json_decode(file_get_contents('https://graph.facebook.com/?id='.base_url().'submissions/share/'.$sub->id));
                 echo " {$sub->id}         ".(isset($data->shares) ? $data->shares : 0)."\n";
-                if(isset($data->shares && $data->shares > 0))
+                if(isset($data->shares) && $data->shares > 0)
                 {
                     $this->db->where('id', $sub->id)->update('submissions', array('shares' => $data->shares));
                 }
