@@ -161,6 +161,7 @@ class Contests extends CI_Controller
      */
     public function create($id = null)
     {
+        $update = FALSE;
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
             $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
@@ -202,12 +203,20 @@ class Contests extends CI_Controller
             {
                 $cid = $this->contest->create($data);
             } else {
+                // Check that they own the contest
+                $contest = $this->contest->get($id);
+                if(!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id))
+                {
+                    $this->responder->fail("You do not own this contest brody")->code(403)->respond();
+                    return;
+                }
                 $cid = $this->contest->update($id, $data);
+                $update = TRUE;
             }
         }
         if($this->form_validation->run() == true && $cid)
         {
-            $this->responder->message($this->contest->messages())->data(array('id' => $cid))->respond();
+            $this->responder->message("Contest successfully {$update ? 'updated' : 'created'}")->data(array('id' => $cid))->respond();
             $this->analytics->track(array(
                 'event_name' => "contest_creation",
                 'object_type' => "contest",
