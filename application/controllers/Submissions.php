@@ -22,7 +22,7 @@ class Submissions extends CI_Controller
      */
     public function index($contest_id)
     {
-        $submissions = $this->contest->submissions($contest_id);
+        $submissions = $this->submission->where(array('contest_id' => $contest_id))->fetch()->result();
         foreach($submissions as $submission)
         {
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
@@ -35,6 +35,28 @@ class Submissions extends CI_Controller
             }
         );
 
+        /*
+         * If the user has created one of the submissions, we then push it to
+         * the front of the results automatically
+         */
+        $usub = FALSE;
+        if($this->ion_auth->logged_in())
+        {
+            foreach($submissions as $key => $submission)
+            {
+                if($submission->owner == $this->ion_auth->user()->row()->id)
+                {
+                    $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+                    $submissions[$key]->user_owned = TRUE;
+                    $usub = $submissions[$key];
+                    unset($submissions[$key]);
+                }
+            }
+            if($usub)
+            {
+                $submissions = array_values(array($usub) + $submissions);
+            }
+        }
         $contest = $this->contest->get($contest_id);
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
@@ -48,6 +70,8 @@ class Submissions extends CI_Controller
             'submissions' => $submissions,
             'contest' => $contest
         ))->respond();
+
+        $this->contest->log_impression($contest_id);
     }
 
     /**
@@ -95,8 +119,27 @@ class Submissions extends CI_Controller
     public function leaderboard()
     {
         $leaderboard_size = $this->config->item('leaderboard_limit');
-        // Get the top 5 submissions
-        $check = $this->vote->select('COUNT(*) as count, submission_id')->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+        // Get a list of all active contests
+        $ids = array();
+        $contests = $this->contest->where(array(
+            'paid' => 1,
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s')
+        ))->fetch()->result();
+
+        // We dont have any active contests, so ets just exit out with success
+        if(empty($contests))
+        {
+            $this->responder->message("There currently aren't any active contests")->respond();
+            return;
+        }
+        foreach($contests as $contest)
+        {
+            $ids[] = (int)$contest->id;
+        }
+
+        $check = $this->vote->select('COUNT(*) as count, submission_id, contest_id')->where_in('contest_id', $ids)->group_by('submission_id')->order_by('count', 'DESC')->limit($leaderboard_size)->fetch();
+
         if(!$check)
         {
             $this->responder->fail("An unexpected error occured")->code(500)->respond();
@@ -146,6 +189,15 @@ class Submissions extends CI_Controller
         }
         // Create image based on submission
         $this->load->view('submissions/share', array('submission' => $submission));
+        $this->analytics->track(array(
+            'event_name' => "submission_share_view",
+            'object_type' => "submission",
+            'object_id' => $id
+        ));
+
+        $this->db->where('id', $id);
+        $this->db->set('share_clicks', 'share_clicks + 1', FALSE);
+        $this->db->update('submissions');
     }
 
     public function rate()

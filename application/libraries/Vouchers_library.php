@@ -21,6 +21,23 @@ class Vouchers_library
         return call_user_func_array( array($this->voucher, $method), $arguments);
     }
 
+    public function uses($vid)
+    {
+        $uses = $this->db->select('*')->from('voucher_uses')->where('voucher_id', $vid)->get();
+        if(!$uses || $uses->num_rows() == 0)
+        {
+            return array();
+        }
+        $uses = $uses->result();
+        foreach($uses as $use)
+        {
+            $use->contest = $this->contest->get($use->contest_id);
+            $company = $this->ion_auth->user($use->user_id)->row();
+            $company->profile = $this->user->profile($use->user_id);
+            $use->company = $company;
+        }
+        return $uses;
+    }
     /**
      * Create a new voucher
      * @param  array $data Voucher Data

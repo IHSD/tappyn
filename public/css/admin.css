@@ -24,3 +24,30 @@ body {
 .payout-table-row {
     border-bottom: 1px solid #ebeef0;
 }
+
+.toggle-container-centering {
+    text-align:center;
+    vertical-align:center;
+}
+
+.toggle-container {
+    border-radius: 15px;
+    height: 20px;
+    width: 35px;
+    padding: 1px;
+}
+
+.toggle-on {
+    background-color: #ff5c00;
+}
+.toggle-off {
+    background-color: #ffcfb3;
+    padding-left: 16px;
+}
+
+.toggle-ball {
+    height:18px;
+    border-radius: 9px;
+    background-color: white;
+    width: 18px;
+}

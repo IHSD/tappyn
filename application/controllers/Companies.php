@@ -65,6 +65,9 @@ class Companies extends CI_Controller
                 $contest->submission_count = $this->contest->submissionsCount($contest->id);
                 $contest->views = $this->contest->views($contest->id);
                 $contest->votes = $this->vote->select("COUNT(*) as count")->where('contest_id', $contest->id)->fetch()->row()->count;
+                $share_data = $this->submission->select('SUM(shares) as shares, SUM(share_clicks) as share_clicks')->where('contest_id', $contest->id)->fetch()->row();
+                $contest->shares = $share_data->shares;
+                $contest->share_clicks = $share_data->share_clicks;
                 /**
                  * Denote the status of the contest
                  */

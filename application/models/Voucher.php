@@ -93,7 +93,7 @@ class Voucher extends MY_Model
      */
     public function update($id, $data)
     {
-
+        return $this->db->where('id', $id)->update('vouchers', $data);
     }
 
     /**

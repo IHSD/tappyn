@@ -26,7 +26,7 @@ if(!isset($company))
 <p style='text-align:center;margin:auto;width:600px'>We don't know what you're drinking, but send some to our PO Box.</p><br>
 <p style='text-align:center;margin:auto;width:600px'>Unlesss it's peach vodka. Then keep it far, far away from our mailbox.</p><br><br>
 <p style='text-align:center;margin:auto;width:600px'>
-    Collect your winnings <a href"<?php echo base_url().'#/payment'; ?>">here</a>
+    Collect your winnings <a href="<?php echo base_url().'#/dashboard'; ?>">here</a>
 </p>
 <br>
 

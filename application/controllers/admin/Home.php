@@ -36,7 +36,7 @@ class Home extends CI_Controller
 
     public function index()
     {
-        $this->load->view('admin/index.php');
+        //$this->load->view('admin/index.php');
     }
 
     public function email()
@@ -71,5 +71,10 @@ class Home extends CI_Controller
             'brand' => 'Visa'
         );
         $this->load->view($path.$template.'.php', $args);
+    }
+
+    public function docs()
+    {
+
     }
 }

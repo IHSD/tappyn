@@ -37,9 +37,7 @@
 	                    <li><a href="<?php echo base_url().'admin/contests' ?>">Contests</a></li>
                         <li><a href="<?php echo base_url().'admin/submissions' ?>">Submissions</a></li>
                         <li><a href="<?php echo base_url().'admin/payments' ?>">Payouts</a></li>
-	                    <!--<li><a href="#/launch">Launch</a></li> -->
-	                    <li><a href="<?php echo base_url().'#/contact_us' ?>">Contact Us</a></li>
-	                    <li><a href="<?php echo base_url().'#/faq' ?>">FAQ</a></li>
+                        <li><a href="<?php echo base_url().'admin/vouchers' ?>">Vouchers</a></li>
 
 	                    <!-- <li style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
