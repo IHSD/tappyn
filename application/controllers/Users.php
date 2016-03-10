@@ -166,4 +166,21 @@ class Users extends CI_Controller
             return;
         }
     }
+
+    /**
+     * Update a users interests
+     * @todo Enable actually modification
+     * @return void
+     */
+    public function interests()
+    {
+        $this->load->library('interest');
+        // Update the users interests
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+            
+        }
+        // Return the users interests after every request
+        $this->responder->data(array('interests' => []))->respond();
+    }
 }

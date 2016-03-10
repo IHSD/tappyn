@@ -42,6 +42,11 @@ class Interest
         return $this->db->insert("users_interests", array("user_id" => $uid, "interest_id" => $iid, 'created_at' =>time()));
     }
 
+    public function removeUserInterest($uid, $iid)
+    {
+        return $this->db->where(array('user_id' => $uid, 'interest_id' => $iid))->delete('users_interests');
+    }
+
     /**
      * Generate an tree / sub-tree base on the hierarchial data in the DB
      * @param integer $id  ID of tree section to start at
