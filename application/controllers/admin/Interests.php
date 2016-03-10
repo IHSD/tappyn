@@ -34,8 +34,9 @@ class Interests extends CI_Controller
         if($this->form_validation->run() === TRUE)
         {
             // Pre-process
+            $name = str_replace(' ', '_', $this->input->post('name'));
         }
-        if($this->form_validation->run() === TRUE && $this->interest->create($this->input->post('name'), $this->input->post('display_name'), $this->input->post('parent_id')))
+        if($this->form_validation->run() === TRUE && $this->interest->create($name, $this->input->post('display_name'), $this->input->post('parent_id')))
         {
             $this->session->set_flashdata('message', 'Interest successfully created');
         }
