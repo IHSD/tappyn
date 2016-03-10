@@ -34,7 +34,12 @@ class Interest
      */
     public function giveUserInterest($uid, $iid)
     {
-
+        $check = $this->db->select('*')->from('users_interests')->where(array('user_id' => $uid, 'interest_id' => $iid))->get();
+        if(!$check || $check->num_rows() > 0)
+        {
+            return;
+        }
+        return $this->db->insert("users_interests", array("user_id" => $uid, "interest_id" => $iid, 'created_at' =>time()));
     }
 
     /**
