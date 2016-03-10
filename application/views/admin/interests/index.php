@@ -4,9 +4,13 @@ $level = 0;
 
 function _display($result)
 {
+    if(!isset($result->children))
+    {
+        $result->children = array();
+    }
     global $level;
         echo "<div class='col-sm-12 interest-card'  style='text-indent:".($level *  5).'em;'.($level > 1 ? 'display:none' : NULL)."' data-left='".$result->lft."' data-right=".$result->rgt."'>";
-            echo "<h4><span class='glyphicon glyphicon-chevron-up click_to_show' data-left='".$result->lft."' data-right='".$result->rgt."' ></span>&nbsp;&nbsp;".$result->display_name."<a class='pull-right remove-link' id='".$result->id."'>Remove</a></h4>";
+            echo "<h4><span class='glyphicon glyphicon-chevron-up click_to_show' data-left='".$result->lft."' data-right='".$result->rgt."' ></span>&nbsp;&nbsp;".$result->display_name."<span class='head-label'>&nbsp;&nbsp;&nbsp;(".count($result->children)." sub_interests)<a class='pull-right remove-link' id='".$result->id."'>Remove</a></h4>";
             echo "<div style='margin-left:".($level * 5)."em'><a data-toggle='modal' data-target='#createInterestModal' data-parent_id='".$result->id."' data-parent_name='".$result->display_name."'>Add Interest</a></div>";
             echo "<hr>";
         echo "</div>";
@@ -105,3 +109,8 @@ $(document).ready(function() {
     })
 })
 </script>
+
+<style>
+.head-label {
+    font-size: 0.8em;
+}

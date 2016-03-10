@@ -27,6 +27,17 @@ class Interest
     }
 
     /**
+     * Assign an interest as followed by a user
+     * @param  integer $uid ID of the user
+     * @param  integer $iid ID of the interest
+     * @return void
+     */
+    public function giveUserInterest($uid, $iid)
+    {
+
+    }
+
+    /**
      * Generate an tree / sub-tree base on the hierarchial data in the DB
      * @param integer $id  ID of tree section to start at
      * @return array
