@@ -57,6 +57,7 @@ class Submissions extends CI_Controller
                 $submissions = array_values(array($usub) + $submissions);
             }
         }
+
         $contest = $this->contest->get($contest_id);
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
@@ -65,7 +66,20 @@ class Submissions extends CI_Controller
             $contest->status = 'active';
         }
         $contest->views = $this->contest->views($contest_id);
-        $contest->additional_images = json_decode($contest->additional_images);
+
+        // Process the images array, and remove all nulls
+        $addtl_images = json_decode($contest->additional_images);
+
+        foreach($addtl_images as $key => $image)
+        {
+            if(is_null($image)) unset($addtl_images[$key]);
+        }
+
+        if(!empty($addtl_images))
+        {
+            $contest->additional_images = array_values($addtl_images);
+        } else $contest->additional_images = FALSE;
+
         $this->responder->data(array(
             'submissions' => $submissions,
             'contest' => $contest

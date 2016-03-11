@@ -177,7 +177,7 @@ class Contests extends CI_Controller
 
         if($this->form_validation->run() == true)
         {
-            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s'));
+            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
             // Do some preliminary formatting
             $data = array(
                 'audience'          => $this->input->post('audience'),
