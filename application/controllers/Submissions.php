@@ -77,7 +77,7 @@ class Submissions extends CI_Controller
 
         if(!empty($addtl_images))
         {
-            $contest->additional_images = $addtl_images;
+            $contest->additional_images = array_values($addtl_images);
         } else $contest->additional_images = FALSE;
 
         $this->responder->data(array(
