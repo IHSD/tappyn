@@ -1,4 +1,4 @@
-tappyn.controller('launchController', function($scope, $location, $upload, $route, $rootScope, launchFactory, AppFact){
+tappyn.controller('launchController', function($scope, $location, $upload, $route, $rootScope, launchFactory, emotions){
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 50},
@@ -6,7 +6,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
 	$scope.current = $scope.steps['package'];
-
+	$scope.personalities = emotions; 
 	$scope.contest = {};
 	$scope.company = {};
 	$scope.save_method = false;
@@ -38,6 +38,10 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 
 	$scope.select_display = function(display){
 		$scope.contest.display_type = display;
+	}
+
+	$scope.choose_personality = function(type){
+		$scope.contest.emotion = type;
 	}
 
 	$scope.grab_profile = function(){

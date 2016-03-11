@@ -63,16 +63,16 @@
 			    			{{contest.different}}
 			    		</div>
 			    	</div>
-			    	<div class='col-xs-12' style='margin-top:15px'>
-						<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Objective</h4></div>
+			    	<div class='col-xs-12' style='margin-top:15px' ng-if='contest.emotion'>
+						<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Ad Personality</h4></div>
 			    		<div class='col-sm-9 col-xs-12'>
-			    			{{contest.objective}}
+			    			<img ng-src='{{emotion_contest.icon}}' style='margin-right:5px;'  height='25px' width='25px'>{{emotion_contest.adj}} 
 			    		</div>
 			        </div>
 			    </div>
 		        <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
-		            <a href='{{contest.company.company_url}}' class='btn btn-oj'  target='_blank'>Website</a>
-		    	    <a href='{{contest.company.facebook_url}}' class='btn btn-oj'  target='_blank'>Facebook</a>
+		            <a ng-if='contest.company.company_url' href='{{contest.company.company_url}}' class='btn btn-oj'  target='_blank'>Website</a>
+		    	    <a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url}}' class='btn btn-oj'  target='_blank'>Facebook</a>
 		       	</div>
 		    </div>
 		</div>
@@ -96,10 +96,13 @@
 		        		<button class='btn btn-oj' type='submit'>Submit</button>
 		      		</div>
 				</form>
-		        <div class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+		        <div ng-if='!emotion_contest && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
 			        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
 			        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
 			        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
+			    </div>
+			    <div ng-if='emotion_contest' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+			    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
 			    </div>
 		   </div>
 		</div>

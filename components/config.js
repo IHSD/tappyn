@@ -125,6 +125,27 @@ tappyn.filter('firstChar', function() {
   }
 });
 
+tappyn.constant('emotions', [
+	{type : 'dove', adjectives : 'Wholesomeness, ethics, simplicity, purity', 
+		google : '', facebook : '', twitter : 'public/img/dove_t.jpg', icon : 'public/img/dove.png'},
+	{type : 'books', adjectives : 'Truth, objectivity, education, disclipline', 
+		google : 'public/img/book_g.jpg', facebook : '', twitter : 'public/img/book_t.jpg', icon : 'public/img/book.png'},
+	{type : 'mountain',  adjectives : 'Freedom, adventure, self-discovery, ambition',  
+		google : 'public/img/mountain_g.jpg', facebook : '', twitter : '', icon : 'public/img/mountain.png'},
+	{type : 'athelete', adjectives : 'Performance, reslience, steadfastness', 
+		google : 'public/img/athlete_g.jpg', facebook : '', twitter : 'public/img/athlete_t.jpg', icon : 'public/img/athlete.png'},
+	{type : 'eagle', adjectives : 'Independence, controversy, freedom', 
+		google : '', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
+	{type : 'lightbulb', adjectives : 'Imagination, surprise, curiosity', 
+		google : 'public/img/lightbulb_g.jpg', facebook : '', twitter : 'public/img/lightbulb_t.png', icon : 'public/img/lightbulb.png'},
+	{type : 'glass', adjectives : 'Spontaneity, charm, humor', 
+		google : 'public/img/wine_g.jpg', facebook : '', twitter : 'public/img/wine_t.jpg', icon : 'public/img/wine.png'},
+	{type : 'cross', adjectives : 'Compassion, kindness, care, love', 
+		google : 'public/img/cross_g.jpg', facebook : '', twitter : '', icon : 'public/img/cross.png'},
+	{type : 'crown', adjectives : 'Determination, respect, dominance, wealth', 
+		google : '', facebook : '', twitter : '', icon : 'public/img/crown.png'}
+]);
+
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $route, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
