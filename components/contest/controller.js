@@ -1,8 +1,13 @@
-tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, contestFactory, AppFact){
+tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
+	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
 		if($scope.contest.status == "ended" && (!$rootScope.user || $rootScope.user.id != $scope.contest.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
+		if($scope.contest.emotion){
+			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
+		}
+	    else $scope.example = false;
 	});
 
 	$scope.view = {brief : true, submissions : false};

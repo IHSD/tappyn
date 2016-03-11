@@ -2315,3 +2315,14 @@ nav .dropdown-menu{
     -webkit-transition:all linear 0.3;
        transition:all linear 0.3s;
 }
+.personality{
+	width:150x;
+	height: 100px;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border:1px solid transparent; 
+}
+.personality-highlight{
+	border:1px solid #ff5c00; 
+}
