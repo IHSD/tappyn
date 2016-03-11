@@ -147,7 +147,7 @@ class Users extends CI_Controller
                     'different' => $this->input->post('different'),
                     'summary' => $this->input->post('summary'),
                 );
-                error_log(json_encode($data));
+
                 if($this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
@@ -168,19 +168,11 @@ class Users extends CI_Controller
     }
 
     /**
-     * Update a users interests
-     * @todo Enable actually modification
+     * Fetch all of a users interests
      * @return void
      */
     public function interests()
     {
-        $this->load->library('interest');
-        // Update the users interests
-        if($_SERVER['REQUEST_METHOD'] == "POST")
-        {
-            
-        }
-        // Return the users interests after every request
-        $this->responder->data(array('interests' => []))->respond();
+
     }
 }

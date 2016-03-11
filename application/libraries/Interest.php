@@ -8,6 +8,12 @@ class Interest
      */
     protected $db;
 
+    /**
+     * ID of the current user
+     * @var integer
+     */
+    protected $user;
+
     protected $message = FALSE;
 
     protected $errors = FALSE;
@@ -27,24 +33,44 @@ class Interest
     }
 
     /**
+     * Set our user ID
+     * @param [type] $id [description]
+     */
+    public function setUser($id)
+    {
+        $this->user = $id;
+    }
+
+    /**
      * Assign an interest as followed by a user
      * @param  integer $uid ID of the user
      * @param  integer $iid ID of the interest
      * @return void
      */
-    public function giveUserInterest($uid, $iid)
+    public function addToUser($iid)
     {
-        $check = $this->db->select('*')->from('users_interests')->where(array('user_id' => $uid, 'interest_id' => $iid))->get();
+        if(!$this->_exists(array('id' => $iid)))
+        {
+            $this->errors = "That interest does not exist";
+            return FALSE;
+        }
+        $check = $this->db->select('*')->from('users_interests')->where(array('user_id' => $this->user, 'interest_id' => $iid))->get();
         if(!$check || $check->num_rows() > 0)
         {
-            return;
+            return TRUE;
         }
-        return $this->db->insert("users_interests", array("user_id" => $uid, "interest_id" => $iid, 'created_at' =>time()));
+        if($this->db->insert("users_interests", array("user_id" => $this->user, "interest_id" => $iid, 'created_at' =>time())))
+        {
+            return TRUE;
+        }
+        $this->errors = $this->db->error()['message'];
+        return FALSE;
     }
 
-    public function removeUserInterest($uid, $iid)
+    public function removeFromUser($iid)
     {
-        return $this->db->where(array('user_id' => $uid, 'interest_id' => $iid))->delete('users_interests');
+
+        return $this->db->where(array('user_id' => $this->user, 'interest_id' => $iid))->delete('users_interests');
     }
 
     /**
@@ -71,6 +97,7 @@ class Interest
 
         }
 
+        $this->followedByUser();
         $results = $this->branch_result($results);
         return $results;
 
@@ -271,6 +298,11 @@ class Interest
            $return = $results[0];
            array_shift($results);
 
+           $return->followed_by_user = FALSE;
+           if(in_array($return->id, $this->follows))
+           {
+               $return->followed_by_user = TRUE;
+           }
            if ($return->lft + 1 == $return->rgt)
                $return->leaf = true;
            else {
@@ -292,6 +324,26 @@ class Interest
 
            //unset($return->lft,$return->rgt);
            return $return;
+    }
+
+    /**
+     * Fetch an array of interests followed by user
+     * @return array
+     */
+    public function followedByUser()
+    {
+        $return = array();
+        $interests = $this->db->select('*')->from('users_interests')->where('user_id', $this->user)->get();
+        if(!$interests || $interests->num_rows() == 0)
+        {
+            return $return;
+        }
+        foreach($interests->result() as $interest)
+        {
+            $return[] = $interest->interest_id;
+        }
+        $this->follows = $return;
+        return;
     }
     /**
      * Begin a transaction
