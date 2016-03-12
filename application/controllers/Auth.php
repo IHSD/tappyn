@@ -349,6 +349,38 @@ class Auth extends CI_Controller {
 	}
 
 	/**
+	 * Activate a users account
+	 *
+	 * Can be done through email link or admin panel
+	 * @param  integer $id   ID of the user
+	 * @param  string $code Activation code (required if done through email)
+	 * @return void
+	 */
+	function activate($id, $code=false)
+	{
+		if ($code !== false)
+		{
+			$activation = $this->ion_auth->activate($id, $code);
+		}
+		else if ($this->ion_auth->is_admin())
+		{
+			$activation = $this->ion_auth->activate($id);
+		}
+		if ($activation)
+		{
+			// redirect them to the auth page
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("auth", 'refresh');
+		}
+		else
+		{
+			// redirect them to the forgot password page
+			$this->session->set_flashdata('message', $this->ion_auth->errors());
+			redirect("auth/forgot_password", 'refresh');
+		}
+	}
+
+	/**
 	 * Deactivate a user
 	 * @param  integer $id
 	 * @return void
@@ -423,6 +455,8 @@ class Auth extends CI_Controller {
 		{
 			$this->form_validation->set_rules('age', 'Age', 'required');
 			$this->form_validation->set_rules('gender', 'Gender', 'required');
+		} else {
+			$this->config->set_item('email_activation', FALSE);
 		}
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
         $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
@@ -459,24 +493,34 @@ class Auth extends CI_Controller {
 
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
         {
-			$this->mailer
-				->to($email)
-				->from("Registration@tappyn.com")
-				->subject('Account Successfully Created')
-				->html($this->load->view('auth/email/registration', array(), true))
-				->send();
-			$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
-            if($this->ion_auth->login($identity, $password))
+			// Succesful company regstration
+			if($this->input->post('group_id') == 3)
 			{
-				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
-				$this->analytics->track(array(
-		            'event_name' => 'registration',
-		            'object_type' => 'user',
-		            'object_id'  => $id
-		        ));
-			} else {
-				$this->responder->fail("An unknown error occured")->code(500)->respond();
+				$this->mailer
+					->to($email)
+					->from("Registration@tappyn.com")
+					->subject('Account Successfully Created')
+					->html($this->load->view('auth/email/registration', array(), true))
+					->send();
+				$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
+	            if($this->ion_auth->login($identity, $password))
+				{
+					$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+				} else {
+					$this->responder->fail("An unknown error occured")->code(500)->respond();
+				}
 			}
+			else
+			{
+				
+			}
+
+			// Track the login event
+			$this->analytics->track(array(
+				'event_name' => 'registration',
+				'object_type' => 'user',
+				'object_id'  => $id
+			));
         }
         else
         {
