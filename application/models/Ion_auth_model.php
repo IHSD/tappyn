@@ -226,8 +226,7 @@ class Ion_auth_model extends CI_Model
 			$this->error_start_delimiter   = $this->config->item('error_start_delimiter', 'ion_auth');
 			$this->error_end_delimiter     = $this->config->item('error_end_delimiter', 'ion_auth');
 		}
-
-
+		
 		// initialize our hooks object
 		$this->_ion_hooks = new stdClass;
 
@@ -994,13 +993,6 @@ class Ion_auth_model extends CI_Model
 
 			if ($password === TRUE)
 			{
-				if ($user->active == 0)
-				{
-					$this->trigger_events('post_login_unsuccessful');
-					$this->set_error('login_unsuccessful_not_active');
-
-					return FALSE;
-				}
 
 				$this->set_session($user);
 
