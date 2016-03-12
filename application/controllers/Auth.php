@@ -512,7 +512,8 @@ class Auth extends CI_Controller {
 			}
 			else
 			{
-				
+				$this->responder->message("Account created successfully. Please checck your email for verification")->respond();
+				return;
 			}
 
 			// Track the login event
