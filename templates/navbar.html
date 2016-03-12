@@ -10,8 +10,8 @@
 	        <div class="col-xs-10">
 	            <nav class='hidden-xs'>
 	                <ul>
-	                    <li><a href="#/contests">See Contests</a></li>
-	                    <li><a href="#/top">Top Tapps</a></li>
+	                    <li ng-if='user'><a href="#/contests">See Contests</a></li>
+	                    <li ng-if='user'><a href="#/top">Top Tapps</a></li>
 	                    <li><a href="#/faq">FAQ</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
@@ -24,7 +24,6 @@
 	                            <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
                             </ul>
 	                    </li>
-	                    <li ng-if='user.is_admin'><a href='/admin'>Admin</a></li>
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>                          
 	                </ul>
@@ -37,7 +36,7 @@
 				            	<li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
 		                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>
 				            	<li ng-hide='!user'><a href="#/dashboard">Dashboard</a></li>
-			                    <li><a href="#/contests">Contests</a></li>
+			                    <li ng-hide='!user'><a href="#/contests">Contests</a></li>
 			                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/launch">Launch</a></li>
 			                    <li><a href="#/faq">FAQ</a></li>
                                 <li ng-hide='!user'><a href="#/payment">Payment</a></li>

@@ -39,8 +39,6 @@
 		    	<div ng-show='signing_in.show' ng-include src="'templates/signin.html'"></div>
 		    	<div ng-show='registration.show'>
 		    		<div ng-show='registration.type == "default" || registration.type == "company" || resigration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
-		    		<div ng-show='registration.type == "contest"' ng-include src="'templates/sign_up/submit_register.html'"></div>
-		    		<div ng-show='registration.type == "upvote"' ng-include src="'templates/sign_up/upvote_register.html'"></div>
 		    	</div>
 		    </div>
 		    <section class='innerpage' ng-view></section>

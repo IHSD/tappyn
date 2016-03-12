@@ -239,6 +239,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.close_login = function(){
 		$scope.signing_in = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
+		$location.path('/home');
 	}
 
 	$scope.open_register = function(type, obj){
@@ -249,6 +250,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.close_register = function(){
 		$scope.registration = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
+		$location.path('/home');
 	}
 	$scope.login_to_register = function(){
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
@@ -275,7 +277,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					if($scope.signing_in.type == 'must') $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					window.Intercom('update', {
@@ -287,6 +288,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
+					$route.reload();
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -299,7 +301,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
 			window.Intercom('shutdown');
-			if(!$scope.signing_in.show && ($location.url() == "/dashboard" || $location.url() == "/profile" || $location.url() == "/payment")) $location.path("/home");
+			$location.path("/home");
 		});
 	}
 
@@ -325,6 +327,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					   }
 					});
 					fbq('track', 'Lead');
+					$route.reload();
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
