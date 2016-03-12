@@ -29,6 +29,7 @@ class Facebook_ion_auth {
 
 	}
 
+
     public function login() {
 
     	// null at first
@@ -48,6 +49,8 @@ class Facebook_ion_auth {
 	       	redirect($url_to_redirect);
 
 	   	} else {
+
+			$this->CI->email_activation = FALSE;
 
 	   		// check if session state is equal to the returned state
 
@@ -75,6 +78,8 @@ class Facebook_ion_auth {
 				curl_close($c);
 				$user = json_decode($response);
 				// check if this user is already registered
+
+				// Here we actually register / login
 				if(!$this->CI->ion_auth_model->identity_check($user->email)){
 					$name = explode(" ", $user->name);
 					$register = $this->CI->ion_auth->register($user->name, $user->id, $user->email, array('first_name' => $name[0], 'last_name' => $name[1]));
@@ -85,6 +90,9 @@ class Facebook_ion_auth {
 					}
 					$this->CI->ion_auth->login($user->email, $user->id, 1);
 				} else {
+					// We need to update their password to their user->id, so we can then log them in
+					$password = $user->id;
+					$this->CI->ion_auth->reset_password($user->email, $user->id);
 					$login = $this->CI->ion_auth->login($user->email, $user->id, 1);
 				}
 
