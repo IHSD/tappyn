@@ -19,3 +19,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |   cache_override              => Enables you to call your own metho instead of the _display_cache() method
 |   post_system                 => Called after the final rendered page has been sent to the browser
 */
+
+$hooks['pre_system']                    = array();
+$hooks['pre_controller']                = array();
+$hooks['post_controller_constructor']   = array();
+$hooks['post_controller']               = array();
+$hooks['display_override']              = array();
+$hooks['cache_override']                = array();
+$hooks['post_system']                   = array();
+
+/*
+ | -----------------------------------------------------------------------
+ | Controller Hooks
+ |
+ */
