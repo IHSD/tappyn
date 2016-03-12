@@ -37,57 +37,13 @@ class Auth extends CI_Controller {
 	 */
 	function facebook()
 	{
+		$this->email_activation = FALSE;
 		//$this->ion_auth->logout();
 		$this->load->library('facebook_ion_auth');
-		if($this->input->get('submission'))
-		{
-			$submission_data = json_decode(urldecode($this->input->get('submission')));
-			if(is_null($submission_data)) die("Invalid data provided in submission object");
-			$this->session->set_flashdata('contest', $submission_data->contest);
-			$this->session->set_flashdata('text', $submission_data->text);
-			$this->session->set_flashdata('headline', $submission_data->headline);
-			$this->session->set_flashdata('submitting_as_guest', 'true');
-		} else if($this->input->get('vote')) {
-			$this->session->set_userdata('voting_as_guest', 'true');
-			$this->session->set_userdata('contest_id', $this->input->get('cid'));
-			$this->session->set_userdata('submission_id', $this->input->get('sid'));
-		}
+
 		if($this->facebook_ion_auth->login())
 		{
-			// User has successfully logged in, so let's
-			// see if theyre creating a submission
-			if($this->session->flashdata('submitting_as_guest'))
-			{
-				// Attempt the creation
-				$this->load->library('submission_library');
-				if($this->submission_library->create(
-					$this->session->flashdata('contest'),
-					$this->session->flashdata('headline'),
-					$this->session->flashdata('text')))
-				{
-					$this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
-					$this->session->set_flashdata('message', "Submission successfully created");
-					redirect('#/contests', 'refresh');
-				}
-				else
-				{
-					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"));
-					redirect("/#/contest/".$this->session->flashdata('contest'), 'refresh');
-				}
-			} else if($this->session->userdata('voting_as_guest'))
-			{
-				$this->load->library('vote');
-				if($this->vote->upvote($this->session->userdata('submission_id'),
-									   $this->session->userdata('contest_id'),
-									   $this->ion_auth->user()->row()->id))
-				{
-					$this->session->set_flashdata('message', "Vote succesful!");
-					redirect("#/submissions/".$this->session->userdata('contest_id'));
-				} else {
-					$this->session->set_flashdata('error', ($this->vote->errors() ? $this->vote->errors() : "An unknown error occured"));
-				}
-				redirect("#/submissions/".$this->session->userdata('contest_id'), 'refresh');
-			}
+			// User has successfully logged in
 			redirect('#/dashboard', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', $this->facebook_ion_auth->errors());
@@ -349,6 +305,38 @@ class Auth extends CI_Controller {
 	}
 
 	/**
+	 * Activate a users account
+	 *
+	 * Can be done through email link or admin panel
+	 * @param  integer $id   ID of the user
+	 * @param  string $code Activation code (required if done through email)
+	 * @return void
+	 */
+	function activate($id, $code=false)
+	{
+		if ($code !== false)
+		{
+			$activation = $this->ion_auth->activate($id, $code);
+		}
+		else if ($this->ion_auth->is_admin())
+		{
+			$activation = $this->ion_auth->activate($id);
+		}
+		if ($activation)
+		{
+			// redirect them to the auth page
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("auth", 'refresh');
+		}
+		else
+		{
+			// redirect them to the forgot password page
+			$this->session->set_flashdata('message', $this->ion_auth->errors());
+			redirect("auth/forgot_password", 'refresh');
+		}
+	}
+
+	/**
 	 * Deactivate a user
 	 * @param  integer $id
 	 * @return void
@@ -404,6 +392,7 @@ class Auth extends CI_Controller {
 	 */
 	function create_user()
     {
+		$this->email_activation = $this->config->item('email_activation', 'ion_auth');
 		//$this->ion_auth->logout();
 		// Check if they are registering as a guest, which limits the required fields for registration
 		$as_guest = false;
@@ -417,12 +406,12 @@ class Auth extends CI_Controller {
 		{
 			die('Invalid request');
 		}
-        // $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
-        // $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 		if($this->input->post('group_id') == 2)
 		{
 			$this->form_validation->set_rules('age', 'Age', 'required');
 			$this->form_validation->set_rules('gender', 'Gender', 'required');
+		} else {
+			$this->email_activation = FALSE;
 		}
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
         $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
@@ -459,24 +448,35 @@ class Auth extends CI_Controller {
 
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
         {
-			$this->mailer
-				->to($email)
-				->from("Registration@tappyn.com")
-				->subject('Account Successfully Created')
-				->html($this->load->view('auth/email/registration', array(), true))
-				->send();
-			$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
-            if($this->ion_auth->login($identity, $password))
+			// Succesful company regstration
+			if($this->input->post('group_id') == 3)
 			{
-				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
-				$this->analytics->track(array(
-		            'event_name' => 'registration',
-		            'object_type' => 'user',
-		            'object_id'  => $id
-		        ));
-			} else {
-				$this->responder->fail("An unknown error occured")->code(500)->respond();
+				$this->mailer
+					->to($email)
+					->from("Registration@tappyn.com")
+					->subject('Account Successfully Created')
+					->html($this->load->view('auth/email/registration', array(), true))
+					->send();
+				$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
+	            if($this->ion_auth->login($identity, $password))
+				{
+					$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+				} else {
+					$this->responder->fail("An unknown error occured")->code(500)->respond();
+				}
 			}
+			else
+			{
+				$this->responder->message("Account created successfully. Please checck your email for verification")->respond();
+				return;
+			}
+
+			// Track the login event
+			$this->analytics->track(array(
+				'event_name' => 'registration',
+				'object_type' => 'user',
+				'object_id'  => $id
+			));
         }
         else
         {

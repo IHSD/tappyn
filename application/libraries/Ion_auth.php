@@ -315,11 +315,9 @@ class Ion_auth
 	{
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
-		$email_activation = $this->config->item('email_activation', 'ion_auth');
-
 		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
 
-		if (!$email_activation)
+		if (!$this->email_activation)
 		{
 			if ($id !== FALSE)
 			{
