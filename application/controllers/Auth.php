@@ -35,8 +35,14 @@ class Auth extends CI_Controller {
 	{
 		if(!$this->ion_auth->logged_in())
 		{
-			$this->responder->fail("You need to be logged in")->code(403)->respond();
-			return;
+			if(is_ajax())
+			{
+				$this->responder->fail("You need to be logged in")->code(403)->respond();
+				return;
+			} else {
+				$this->load->view('auth/errors/failed_activation', array('error' => "You have to be logged in to activate your email"));
+				return;
+			}
 		}
 		$user = $this->ion_auth->user()->row();
 		if($user->active == 1)
@@ -359,6 +365,13 @@ class Auth extends CI_Controller {
 		{
 			$activation = $this->ion_auth->activate($id);
 		}
+
+		if($this->ion_auth->user($id)->row()->active == 1)
+		{
+			redirect('#/dashboard?activate=successful', 'refresh');
+			return;
+		}
+
 		if ($activation)
 		{
 			if($this->ion_auth->is_admin())
@@ -366,7 +379,7 @@ class Auth extends CI_Controller {
 				$this->session->set_flashdata('message', 'User successfully activated');
 				redirect('admin/users/show/'.$id, 'refresh');
 			} else {
-				redirect("#/dashboard", 'refresh');
+				redirect("#/dashboard?activate=successful", 'refresh');
 			}
 		}
 		// Error activating yuser
@@ -379,7 +392,7 @@ class Auth extends CI_Controller {
 			}
 			else
 			{
-				$this->load->view('auth/errors/failed_activation');
+				redirect('#/dashboard?activate=unsuccessful', 'refresh');
 			}
 		}
 	}
