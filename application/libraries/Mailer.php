@@ -8,7 +8,6 @@ class Mailer
     protected $subject;
     protected $html;
     protected $callback;
-    protected $eid;
 
     public function __construct()
     {
@@ -21,11 +20,6 @@ class Mailer
     public function __get($var)
     {
         return get_instance()->$var;
-    }
-
-    public function event($event)
-    {
-        
     }
 
     public function to($to)

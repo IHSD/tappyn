@@ -111,6 +111,14 @@ class Submissions extends CI_Controller
             return;
         }
 
+        if($this->ion_auth->user()->row()->active == 0)
+        {
+            $this->responder->fail(
+                "Your account has not been verified yet"
+            )->code(500)->respond();
+            return;
+        }
+
         if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
         {
             $this->responder->message(
