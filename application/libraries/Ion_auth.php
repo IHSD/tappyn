@@ -313,15 +313,11 @@ class Ion_auth
 	 **/
 	public function register($identity, $password, $email, $additional_data = array(), $group_ids = array()) //need to test email activation
 	{
-		error_log('registering');
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
-		$email_activation = $this->config->item('email_activation');
-
-		error_log($email_activation);
 		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
 
-		if (!$email_activation)
+		if (!$this->email_activation)
 		{
 			if ($id !== FALSE)
 			{
