@@ -39,8 +39,7 @@ tappyn.factory('profileFactory', function($http){
 			url : 'index.php/auth/resend_verification',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(pass)
+			}
 		});
 	}
 	return fact;

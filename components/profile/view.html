@@ -2,7 +2,7 @@
 	<div class='col-xs-12 col-sm-6 col-sm-offset-3'>
 		<div class='panel'>
 			<div class='panel-body'>
-				<p class='text-center' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></p>
+				<div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
 				<form class='form' ng-show='user.type == "company"' ng-submit='update_profile(profile)'>
 					<div class='form-group'>
 						<label>Your company's name</label>
