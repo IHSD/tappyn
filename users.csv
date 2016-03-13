@@ -1,4 +1,4 @@
 iid,ip_address,identity,password,salt,email,,,,,,,active,first_name,last_name,,,points
-17,68.15.45.3,NULL,$2y$08$xbsx.rOvdEeegIzMsCaYK.4wLakG7gSk6Z21ZLXo1xCPHh/UZ1ErW,NULL,rob@ihsdigital.com,NULL,NULL,NULL,NULL,1454707701,1457135507,1,John,Smith,NULL,NULL,100
-23,68.15.45.3,NULL,$2y$08$ayAOuvL2UG/ErgvXIe238uxGoiK2whitdZ8leM/e2hHXY./3Un/ke,NULL,mike@ihsdigital.com,NULL,NULL,NULL,NULL,1454781238,1454781239,1,Alek,Alek,NULL,NULL,100
-23,68.15.45.3,NULL,$2y$08$ayAOuvL2UG/ErgvXIe238uxGoiK2whitdZ8leM/e2hHXY./3Un/ke,NULL,zach@ihsdigital.com,NULL,NULL,NULL,NULL,1454781238,1454781239,1,Alek,Alek,NULL,NULL,100
+17,68.15.45.3,NULL,$2y$08$xbsx.rOvdEeegIzMsCaYK.4wLakG7gSk6Z21ZLXo1xCPHh/UZ1ErW,NULL,bill@ihsdigital.com,NULL,NULL,NULL,NULL,1454707701,1457135507,1,Bill,Cesare,NULL,NULL,100
+23,68.15.45.3,NULL,$2y$08$ayAOuvL2UG/ErgvXIe238uxGoiK2whitdZ8leM/e2hHXY./3Un/ke,NULL,alek@tappyn.com,NULL,NULL,NULL,NULL,1454781238,1454781239,1,Alek,Matthiessen,NULL,NULL,100
+23,68.15.45.3,NULL,$2y$08$ayAOuvL2UG/ErgvXIe238uxGoiK2whitdZ8leM/e2hHXY./3Un/ke,NULL,austin@tappyn.com,NULL,NULL,NULL,NULL,1454781238,1454781239,1,Austin,Matthiessen,NULL,NULL,100
