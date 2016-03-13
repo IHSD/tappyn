@@ -68,7 +68,9 @@ class Auth extends CI_Controller {
 		{
 			$this->responder->message("Verification email successfully resent")->respond();
 			return;
-		} else {
+		}
+		else
+		{
 			$this->responder->fail("There was an error sending your verification email")->code(500)->respond();
 			return;
 		}

@@ -32,7 +32,7 @@ class CreateContestsTable extends AbstractMigration
         $contests->addColumn('owner', 'integer', array('limit' => 11, 'null' => FALSE))
                  ->addColumn('title', 'string', array('limit' => 45, 'null' => TRUE, 'default' => NULL))
                  ->addColumn('time_length', 'integer', array('limit' => MysqlAdapter::INT_TINY, 'null' => TRUE, 'default' => NULL))
-                 ->addColumn('start_time', 'timestamp', array('default' => 'CURRENT_TIMESTAMP', 'null' => FALSE))
+                 ->addColumn('start_time', 'timestamp', array('null' => FALSE))
                  ->addColumn('stop_time', 'timestamp', array('null' => FALSE))
                  ->addColumn('submission_limit', 'integer', array('limit' => MysqlAdapter::INT_TINY, 'default' => 50))
                  ->addColumn('prize', 'float', array('limit' => '8,2', 'default' => 50))
