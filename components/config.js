@@ -147,7 +147,7 @@ tappyn.constant('emotions', [
 ]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $route, $location, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $route, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
@@ -165,35 +165,40 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 			'art_entertainment' : 'Art & Entertainment',
 			'fashion_beauty' : 'Fashion & Beauty'
 	}
-
-	AppFact.isLoggedIn().success(function(response){
-		if(response.http_status_code == 200){
-			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
-			else{
-				$rootScope.user = response.data;
-				sessionStorage.setItem("user", JSON.stringify(response.data));
-			}
-		}
-		if($rootScope.user){
-			window.Intercom('boot', {
-			   app_id: 'qj6arzfj',
-			   email: $rootScope.user.email,
-			   user_id: $rootScope.user.id,
-			   created_at: $rootScope.user.created_at,
-			   widget: {
-			      activator: '#IntercomDefaultWidget'
-			   }
-			});
-		}
-		else{
-			window.Intercom('boot', {
-				 app_id: 'qj6arzfj',
-				 widget: {
-				 	activator: '#IntercomDefaultWidget'
-				 }
-			})	
-		}
-	})
+	$scope.logged_in = function(){
+		return $q(function(resolve, reject) {
+			AppFact.isLoggedIn().success(function(response){
+				if(response.http_status_code == 200){
+					if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
+					else{
+						$rootScope.user = response.data;
+						sessionStorage.setItem("user", JSON.stringify(response.data));
+					}
+				}
+				if($rootScope.user){
+					window.Intercom('boot', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at,
+					   widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }
+					});
+					resolve('All logged in');
+				}
+				else{
+					window.Intercom('boot', {
+						 app_id: 'qj6arzfj',
+						 widget: {
+						 	activator: '#IntercomDefaultWidget'
+						 }
+					})
+					reject("Guesterino");	
+				}
+			})
+		});
+	}
 
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){

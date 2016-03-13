@@ -1,4 +1,5 @@
 tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
+	$scope.logged_in();
 	$scope.countries = paymentModel.countries;
 	$scope.showing = "methods";
 	paymentFactory.grabDetails().success(function(response){

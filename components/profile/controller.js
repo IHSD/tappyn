@@ -1,4 +1,5 @@
 tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
+	$scope.logged_in();
 	$scope.amazon_connect('tappyn');
 	$scope.states = profileModel.states;
 
