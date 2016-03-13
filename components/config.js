@@ -194,7 +194,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 						 	activator: '#IntercomDefaultWidget'
 						 }
 					})
-					reject("Guesterino");	
+					resolve("Guesterino");	
 				}
 			})
 		});
