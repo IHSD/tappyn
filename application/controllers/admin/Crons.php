@@ -94,6 +94,7 @@ class Crons extends CI_Controller
     public function generate_users($filename)
     {
         $filename = urldecode($filename);
+
         $data = $this->csv_to_array($filename);
 
         $this->email_activation = FALSE;
@@ -119,11 +120,11 @@ class Crons extends CI_Controller
             {
                 echo $email.' | '.$this->ion_auth->errors()."\n";
             } else {
-                $this->mailer->to('rob@ihsdigital.com')
+                $this->mailer->to($email)
                              ->from('alek@tappyn.com')
                              ->subject('Your Tappyn Account is ready! '.$email)
-                             ->html($this->load->view('emails/onboard', array('username' => $datum['first_name'], 'password' => $password), TRUE));
-                            // ->send();
+                             ->html($this->load->view('emails/onboard', array('username' => $datum['first_name'], 'password' => $password), TRUE))
+                             ->send();
             }
         }
     }
