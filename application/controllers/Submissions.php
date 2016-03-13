@@ -69,11 +69,13 @@ class Submissions extends CI_Controller
 
         // Process the images array, and remove all nulls
         $addtl_images = json_decode($contest->additional_images);
-
-        foreach($addtl_images as $key => $image)
+        if(!is_null($addtl_images))
         {
-            if(is_null($image)) unset($addtl_images[$key]);
-        }
+            foreach($addtl_images as $key => $image)
+            {
+                if(is_null($image)) unset($addtl_images[$key]);
+            }
+        } else $addtl_images = array();
 
         if(!empty($addtl_images))
         {
