@@ -62,7 +62,7 @@ class Auth extends CI_Controller {
 		$this->mailer
 				->to($data['identity'])
 				->from('Registration@tappyn.com')
-				->subject("Account successfully created")
+				->subject("Tappyn Account Verification")
 				->html($message);
 		if ($this->mailer->send() == TRUE)
 		{
