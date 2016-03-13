@@ -1,17 +1,20 @@
 tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
-	if($rootScope.user){	
-		contestFactory.grabContest($routeParams.id).success(function(response){
-			$scope.contest = response.data.contest;
-			$scope.submissions = response.data.submissions;
-			if($scope.contest.status == "ended" && (!$rootScope.user || $rootScope.user.id != $scope.contest.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
-			if($scope.contest.emotion){
-				$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
-			}
-		    else $scope.example = false;
-		});
-	}
-	else $scope.open_register("default", '');
+	$scope.logged_in().then(function(response){
+		if($rootScope.user){	
+			contestFactory.grabContest($routeParams.id).success(function(response){
+				$scope.contest = response.data.contest;
+				$scope.submissions = response.data.submissions;
+				if($scope.contest.status == "ended" && (!$rootScope.user || $rootScope.user.id != $scope.contest.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
+				if($scope.contest.emotion){
+					$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
+					console.log($scope.emotion_contest);
+				}
+			    else $scope.example = false;
+			});
+		}
+		else $scope.open_register("default", '');
+	});
 
 	$scope.view = {brief : true, submissions : false};
 	$scope.view_brief = function(){

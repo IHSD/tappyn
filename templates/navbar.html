@@ -16,7 +16,9 @@
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
-                            <a href uib-dropdown-toggle>{{user.first_name}}<span class="caret"></span></a>
+                            <a href uib-dropdown-toggle>{{user.first_name}}&nbsp;
+                            <span ng-if='!user.is_active' uib-tooltip="Your account isn't verified, check your email to verify" tooltip-placement='bottom' class='glyphicon glyphicon-exclamation-sign' style='color:#f00;'></span>
+                            <span class="caret"></span></a>
                             <ul uib-dropdown-menu role="menu">
                             	<li role='menuitem'><a href="#/dashboard">Dashboard</a></li>
                                 <li role='menuitem'><a href="#/payment">Payment</a></li>
