@@ -7,8 +7,29 @@
 		<div class='panel' style='margin-bottom:0;'>
 			<div class='panel-body text-center'>
 				<h4><?php echo isset($error) ? $error : "There was an error verifying your email"; ?></h4>
-                <h4>Please try again, or click <?php echo anchor('auth/resend_verification/', 'here'); ?> to have a new one sent to you</h4>
+                <h4>Please try again, or click <a href="#" id='resend'>here</a> to have a new one sent to you</h4>
 			</div>
 		</div>
 	</div>
 </div>
+
+
+<script>
+	$(document).ready(function(){
+		$('#resend').click(function() {
+			$.ajax({
+				url : "<?php echo base_url().'auth/resend_verification'; ?>",
+				method : 'post',
+				data : 'json',
+				success: function(response)
+				{
+					if(response.success) {
+						alert("New verification email sent");
+					} else {
+						alert("There was an error sending your email");
+					}
+				}
+			})
+		})
+	})
+</script>
