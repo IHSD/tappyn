@@ -31,6 +31,51 @@ class Auth extends CI_Controller {
 		}
 	}
 
+	function resend_verification()
+	{
+		if(!$this->ion_auth->logged_in())
+		{
+			if(is_ajax())
+			{
+				$this->responder->fail("You need to be logged in")->code(403)->respond();
+				return;
+			} else {
+				$this->load->view('auth/errors/failed_activation', array('error' => "You have to be logged in to activate your email"));
+				return;
+			}
+		}
+		$user = $this->ion_auth->user()->row();
+		if($user->active == 1)
+		{
+			$this->responder->message("Your account has already been verified")->respond();
+			return;
+		}
+		$data = array(
+			'identity'   => $user->email,
+			'id'         => $user->id,
+			'email'      => $user->email,
+			'activation' => $user->activation_code,
+		);
+
+		$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
+
+		$this->mailer
+				->to($data['identity'])
+				->from('Registration@tappyn.com')
+				->subject("Tappyn Account Verification")
+				->html($message);
+		if ($this->mailer->send() == TRUE)
+		{
+			$this->responder->message("Verification email successfully resent")->respond();
+			return;
+		}
+		else
+		{
+			$this->responder->fail("There was an error sending your verification email")->code(500)->respond();
+			return;
+		}
+	}
+
 	/**
 	 * Facebook login endpoint
 	 * @return void
@@ -322,17 +367,35 @@ class Auth extends CI_Controller {
 		{
 			$activation = $this->ion_auth->activate($id);
 		}
+
+		if($this->ion_auth->user($id)->row()->active == 1)
+		{
+			redirect('#/dashboard?activate=successful', 'refresh');
+			return;
+		}
+
 		if ($activation)
 		{
-			// redirect them to the auth page
-			$this->session->set_flashdata('message', $this->ion_auth->messages());
-			redirect("auth", 'refresh');
+			if($this->ion_auth->is_admin())
+			{
+				$this->session->set_flashdata('message', 'User successfully activated');
+				redirect('admin/users/show/'.$id, 'refresh');
+			} else {
+				redirect("#/dashboard?activate=successful", 'refresh');
+			}
 		}
+		// Error activating yuser
 		else
 		{
-			// redirect them to the forgot password page
-			$this->session->set_flashdata('message', $this->ion_auth->errors());
-			redirect("auth/forgot_password", 'refresh');
+			if($this->ion_auth->is_admin())
+			{
+				$this->session->set_flashdata('error', $this->ion_auth->errors());
+				redirect('admin/users/show/'.$id, 'refresh');
+			}
+			else
+			{
+				redirect('#/dashboard?activate=unsuccessful', 'refresh');
+			}
 		}
 	}
 
@@ -462,12 +525,18 @@ class Auth extends CI_Controller {
 				{
 					$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
 				} else {
-					$this->responder->fail("An unknown error occured")->code(500)->respond();
+					$this->responder->fail("Your account was created, but we hit an error logging you in")->code(500)->respond();
 				}
+				return;
 			}
 			else
 			{
-				$this->responder->message("Account created successfully. Please checck your email for verification")->respond();
+				if($this->ion_auth->login($identity, $password))
+				{
+					$this->responder->data($this->ion_auth->ajax_user())->message("Account successfully created. Check your email for verification")->respond();
+				} else {
+					$this->responder->fail("Your account was created, but we hit an error logging you in")->code(500)->respond();
+				}
 				return;
 			}
 

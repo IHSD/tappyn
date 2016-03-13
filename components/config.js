@@ -147,7 +147,7 @@ tappyn.constant('emotions', [
 ]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $route, $location, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $route, $location, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
@@ -165,35 +165,40 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 			'art_entertainment' : 'Art & Entertainment',
 			'fashion_beauty' : 'Fashion & Beauty'
 	}
-
-	AppFact.isLoggedIn().success(function(response){
-		if(response.http_status_code == 200){
-			if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
-			else{
-				$rootScope.user = response.data;
-				sessionStorage.setItem("user", JSON.stringify(response.data));
-			}
-		}
-		if($rootScope.user){
-			window.Intercom('boot', {
-			   app_id: 'qj6arzfj',
-			   email: $rootScope.user.email,
-			   user_id: $rootScope.user.id,
-			   created_at: $rootScope.user.created_at,
-			   widget: {
-			      activator: '#IntercomDefaultWidget'
-			   }
-			});
-		}
-		else{
-			window.Intercom('boot', {
-				 app_id: 'qj6arzfj',
-				 widget: {
-				 	activator: '#IntercomDefaultWidget'
-				 }
-			})	
-		}
-	})
+	$scope.logged_in = function(){
+		return $q(function(resolve, reject) {
+			AppFact.isLoggedIn().success(function(response){
+				if(response.http_status_code == 200){
+					if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
+					else{
+						$rootScope.user = response.data;
+						sessionStorage.setItem("user", JSON.stringify(response.data));
+					}
+				}
+				if($rootScope.user){
+					window.Intercom('boot', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at,
+					   widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }
+					});
+					resolve('All logged in');
+				}
+				else{
+					window.Intercom('boot', {
+						 app_id: 'qj6arzfj',
+						 widget: {
+						 	activator: '#IntercomDefaultWidget'
+						 }
+					})
+					resolve("Guesterino");	
+				}
+			})
+		});
+	}
 
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
@@ -239,6 +244,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.close_login = function(){
 		$scope.signing_in = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
+		$location.path('/home');
 	}
 
 	$scope.open_register = function(type, obj){
@@ -249,6 +255,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 	$scope.close_register = function(){
 		$scope.registration = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
+		$location.path('/home');
 	}
 	$scope.login_to_register = function(){
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
@@ -275,7 +282,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					if($scope.signing_in.type == 'must') $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					window.Intercom('update', {
@@ -287,6 +293,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
+					$route.reload();
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -299,7 +306,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 			$rootScope.user = null;
 			sessionStorage.removeItem('user');
 			window.Intercom('shutdown');
-			if(!$scope.signing_in.show && ($location.url() == "/dashboard" || $location.url() == "/profile" || $location.url() == "/payment")) $location.path("/home");
+			$location.path("/home");
 		});
 	}
 
@@ -325,6 +332,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $route, 
 					   }
 					});
 					fbq('track', 'Lead');
+					$route.reload();
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}

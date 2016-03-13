@@ -1,7 +1,9 @@
 tappyn.controller('homeController', function($scope, $location, homeFactory){
-	homeFactory.grabCool().success(function(response){
-		$scope.contests = response.data.contests;
-	})
+	$scope.logged_in().then(function(response){
+		homeFactory.grabCool().success(function(response){
+			$scope.contests = response.data.contests;
+		})
+	});
 
 
 	$scope.mailing_list = function(email){

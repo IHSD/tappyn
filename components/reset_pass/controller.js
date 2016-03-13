@@ -1,4 +1,6 @@
 tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
+	$scope.logged_in();
+	
 	resetFactory.checkCode($routeParams.code).success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success){

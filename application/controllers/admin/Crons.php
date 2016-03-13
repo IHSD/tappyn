@@ -7,7 +7,7 @@ class Crons extends CI_Controller
         parent::__construct();
         if(!is_cli())
         {
-            die();
+        //    die();
         }
     }
 
@@ -89,5 +89,64 @@ class Crons extends CI_Controller
                 }
             }
         }
+    }
+
+    public function generate_users($filename)
+    {
+        $filename = urldecode($filename);
+
+        $data = $this->csv_to_array($filename);
+
+        $this->email_activation = FALSE;
+        $tables = $this->config->item('tables','ion_auth');
+        $identity_column = $this->config->item('identity','ion_auth');
+        $this->data['identity_column'] = $identity_column;
+
+        foreach($data as $datum)
+        {
+            $password = bin2hex(openssl_random_pseudo_bytes(4));
+            $email    = strtolower($datum['email']);
+            $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
+
+			$name_chunks = explode(' ', $this->input->post('name'));
+            $additional_data = array(
+                'first_name' => $datum['first_name'],
+                'last_name'  => $datum['last_name'],
+				'age'		=> NULL,
+				'gender' 	=> NULL,
+            );
+
+            if(!$this->ion_auth->register($identity, $password, $email, $additional_data, array(2)))
+            {
+                echo $email.' | '.$this->ion_auth->errors()."\n";
+            } else {
+                $this->mailer->to($email)
+                             ->from('alek@tappyn.com')
+                             ->subject('Your Tappyn Account is ready! '.$email)
+                             ->html($this->load->view('emails/onboard', array('username' => $datum['first_name'], 'password' => $password), TRUE))
+                             ->send();
+            }
+        }
+    }
+
+    private function csv_to_array($filename='', $delimiter=',')
+    {
+    	if(!file_exists($filename) || !is_readable($filename))
+    		return FALSE;
+
+    	$header = NULL;
+    	$data = array();
+    	if (($handle = fopen($filename, 'r')) !== FALSE)
+    	{
+    		while (($row = fgetcsv($handle, 1000, $delimiter)) !== FALSE)
+    		{
+    			if(!$header)
+    				$header = $row;
+    			else
+    				$data[] = array_combine($header, $row);
+    		}
+    		fclose($handle);
+    	}
+    	return $data;
     }
 }

@@ -1,4 +1,5 @@
 tappyn.controller("editController", function($scope, $routeParams, editFactory){
+	$scope.logged_in();
 	if($routeParams.id){
 		editFactory.grabEdit($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){

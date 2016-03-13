@@ -7,7 +7,6 @@ class Votes extends CI_Controller {
         if(!$this->ion_auth->logged_in())
         {
             $this->responder->fail("You must be logged in to perform this function")->code(401)->respond();
-            // We have to exit so that we don't continue request execution
             exit();
         }
         $this->load->library('vote');
@@ -36,6 +35,15 @@ class Votes extends CI_Controller {
             $this->responder->fail("What submission did you want to vote for?")->code(500)->respond();
             return;
         }
+
+        if($this->ion_auth->user()->row()->active == 0)
+        {
+            $this->responder->fail(
+                "Your account has not been verified yet"
+            )->code(500)->respond();
+            return;
+        }
+
         $submission_id = $this->input->post('submission_id');
         $submission = $this->submission->get($submission_id);
         if($submission->owner == $this->ion_auth->user()->row()->id)

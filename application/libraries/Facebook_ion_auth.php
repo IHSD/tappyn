@@ -89,11 +89,13 @@ class Facebook_ion_auth {
 						return FALSE;
 					}
 					$this->CI->ion_auth->login($user->email, $user->id, 1);
+					$this->CI->ion_auth->update($this->CI->ion_auth->user()->row()->id, array('facebook_login' => 1));
 				} else {
 					// We need to update their password to their user->id, so we can then log them in
 					$password = $user->id;
 					$this->CI->ion_auth->reset_password($user->email, $user->id);
 					$login = $this->CI->ion_auth->login($user->email, $user->id, 1);
+					$this->CI->ion_auth->update($this->CI->ion_auth->user()->row()->id, array('facebook_login' => 1));
 				}
 
 				return true;
