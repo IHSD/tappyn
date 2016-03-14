@@ -46,7 +46,7 @@ class Accounts extends CI_Controller
             $this->form_validation->set_rules('address_line1', 'Address Line 1', 'required');
             $this->form_validation->set_rules('state', 'State', 'required');
             $this->form_validation->set_rules('postal_code', 'Postal Code', 'required');
-            $this->form_validation->set_rules('ssn_last_4', 'SSN Last 4', 'required');s
+            $this->form_validation->set_rules('ssn_last_4', 'SSN Last 4', 'required');
 
             if($this->form_validation->run() === TRUE)
             {
