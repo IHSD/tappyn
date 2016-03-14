@@ -132,7 +132,7 @@ class Submissions extends CI_Controller
                 'object_type' => "submission",
                 'object_id' => $sid
             ));
-            // Create notification for submission confirmation
+            
             $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
         }
         else {
