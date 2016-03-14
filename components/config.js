@@ -169,11 +169,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		return $q(function(resolve, reject) {
 			AppFact.isLoggedIn().success(function(response){
 				if(response.http_status_code == 200){
-					if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
-					else{
-						$rootScope.user = response.data;
-						sessionStorage.setItem("user", JSON.stringify(response.data));
-					}
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
 				}
 				if($rootScope.user){
 					window.Intercom('boot', {
@@ -264,6 +261,28 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 	$scope.register_to_login = function(){
 		$scope.signing_in = {show : true, type : $scope.registration.type, object : $scope.registration.object};
 		$scope.registration = {show :false, type : '', object : ''};
+	}
+
+	$scope.open_notifications = function(){
+		AppFact.grabNotifications().success(function(){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.notification_show = true;
+					$scope.notifications = response.data.notifications;
+				}	
+			}
+		});
+	}
+
+	$scope.toggle_read = function(id, index){
+		AppFact.readNotification(id).success(function(){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
 	}
 
 	/** example response
@@ -438,6 +457,13 @@ tappyn.factory("AppFact", function($http){
             url:'index.php/amazon/connect',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
             data : $.param({bucket : bucket})
+        })
+	}
+	fact.grabNotifications = function(){
+		return $http({
+            method:'GET',
+            url:'index.php/auth/notifications/unread',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
 	return fact;

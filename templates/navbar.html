@@ -14,6 +14,7 @@
 	                    <li ng-if='user'><a href="#/top">Top Tapps</a></li>
 	                    <li><a href="#/faq">FAQ</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
+	                    <li ng-if='user' style='float:right;'><a href ng-click='open_notifications()'>o</a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}&nbsp;
