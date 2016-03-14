@@ -43,7 +43,7 @@ class Notifications extends CI_Controller
     public function read()
     {
         $type = $this->input->post('type');
-        $object_id = $this->input->post('object_id')
+        $object_id = $this->input->post('object_id');
         if($this->notification->markAsRead(array('type' => $type, 'object_id' => $object_id)))
         {
             $this->responder->message("Notifications marked as read")->respond();
