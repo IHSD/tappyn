@@ -23,7 +23,7 @@ class UserSeeder extends AbstractSeed
             $data[] = [
                 'id' => $i,
                 'email' => $faker->email,
-                'password' => sha1($faker->password),
+                'password' => 'davol350',
                 'ip_address' => '::1',
                 'created_on' => time(),
                 'last_login' => time(),
