@@ -35,10 +35,7 @@ class Notification
         if(!$notifications) return FALSE;
         $nots = array();
         $notifications = $notifications->result();
-<<<<<<< HEAD
-=======
 
->>>>>>> a9f434e761f5f3b5c34e30bdfde109e02381359a
         foreach($notifications as $notification)
         {
             $not = new StdClass();
