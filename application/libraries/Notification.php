@@ -44,7 +44,6 @@ class Notification
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
-                    echo $contest->owner;
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     // Fetch vote count for x submission
