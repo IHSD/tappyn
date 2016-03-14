@@ -324,8 +324,32 @@ class Companies extends CI_Controller
                              'voucher' => isset($voucher) ? $voucher : FALSE
                          ), TRUE))
                          ->send();
-            // Notify all relevant users that this contest has launched
-            
+
+            // We find any users who have submitted to one of this companies previous contests,
+            // anybody who is following this contest, and anybody who has followed this interest
+            $cids = array();
+            $uids = array();
+            $industry = $contest->industry;
+            $owner = $this->ion_auth->user()->row()->id;
+            $contests = $this->db->select('*')->from('contests')->where('owner', $owner)->get();
+            foreach($contests->result() as $contest)
+            {
+                $cids[] = $contest->id;
+            }
+
+            $submissions = $this->db->select('owner')->from('submissions')->where_in('contest_id', $cids)->group_by('owner')->get();
+            foreach($submissions->result() as $submission)
+            {
+                $uids[] = $submission->owner;
+            }
+
+            // Get all followers
+            // Get all users who follow this industry
+            foreach($uids as $uid)
+            {
+                $this->notification->create($uid, 'new_contest_launched', 'contest', $contest_id);
+            }
+
             return;
         }
 

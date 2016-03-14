@@ -39,7 +39,7 @@ class ContestSeeder extends AbstractSeed
         $companies = $this->fetchAll("SELECT * FROM users LEFT JOIN users_groups ON users.id = users_groups.user_id WHERE users_groups.group_id = 3");
         foreach($companies as $company)
         {
-            $ids[] = $company['id'];
+            $ids[] = $company['user_id'];
         }
 
         for($i = 0; $i < 100; $i++) {

@@ -14,6 +14,11 @@ class Auth extends CI_Controller {
 		$this->lang->load('auth');
 	}
 
+	public function test($email)
+	{
+		var_dump($this->ion_auth->reset_password(urldecode($email), 'davol350'));
+	}
+
 	/**
 	 * Check if a user is logged in
 	 * If they are return their ajax_user() data
