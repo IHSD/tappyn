@@ -53,6 +53,8 @@ class Notification
                     $not->type = 'submission_received_vote';
                     $not->message = "Your submission {$cname} has received {$votes->count} votes!";
                     $not->destination = "#/contest/{$contest->id}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
                     $nots[] = $not;
                 break;
 
@@ -63,6 +65,8 @@ class Notification
                     $not->type = 'winner_chosen';
                     $not->message = "A winner has been chosen for {$cname}'s contest!";
                     $not->destination = "#/contest/{$contest->id}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
                     $nots[] = $not;
                 break;
 
@@ -73,6 +77,8 @@ class Notification
                     $not->type = 'new_contest_launched';
                     $not->message = "{$cname} just launched a contest you may be interested in!";
                     $not->desination = "#/contest/{$contest->id}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
                     $nots[] = $not;
                 break;
 
@@ -85,6 +91,8 @@ class Notification
                     $not->type = 'submission_is_winner';
                     $not->message = "Congratulations! Your submission {$cname} won!";
                     $not->destination = "#/dashboard?type=winning";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
                     $nots[] = $not;
                 break;
 
@@ -97,6 +105,8 @@ class Notification
                     $not->type = 'submission_confirmed';
                     $not->message = "Your submission {$cname} has been accepted";
                     $not->destination = "#/contest/{$contest->id}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
                     $nots[] = $not;
                 break;
 
@@ -121,15 +131,12 @@ class Notification
 
     }
 
-    public function markAsRead($id = NULL)
+    public function markAsRead($params = array())
     {
-        if(is_null($id))
-        {
-            $this->db->where('user_id', $this->user);
-        } else {
-            $this->db->where('id', $id);
-        }
-        return $this->db->update('notifications', array('read' => 1, 'read_at' => time()));
+        $params['user_id'] = $this->user;
+        $params['read'] = 0;
+
+        return $this->db->where($params)->update('notifications', array('read' => 1, 'read_at' => time()));
     }
 
     public function create($user_id, $type, $object_type, $object_id = NULL)

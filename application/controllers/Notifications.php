@@ -39,4 +39,21 @@ class Notifications extends CI_Controller
             )->code(500)->respond();
         }
     }
+
+    public function read()
+    {
+        $type = $this->input->post('type');
+        $object_id = $this->input->post('object_id')
+        if($this->notification->markAsRead(array('type' => $type, 'object_id' => $object_id)))
+        {
+            $this->responder->message("Notifications marked as read")->respond();
+        } else {
+            $this->responder->fail("There was an error updating your notifications")->code(500)->respond();
+        }
+    }
+
+    public function read_all()
+    {
+        $this->notification->markAsRead();
+    }
 }
