@@ -42,46 +42,79 @@ class Notification
             switch($notification->type) {
                 case 'submission_received_vote':
                     $sid = $notification->object_id;
+                    $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
+                    $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
+                    echo $contest->owner;
+                    $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $cname = $this->parse($company);
                     // Fetch vote count for x submission
                     $votes = $this->db->select('COUNT(*) as count')->from('votes')->where('submission_id', $sid)->get();
                     if(!$votes || $votes->num_rows() == 0) continue;
                     $votes = $votes->row();
                     $not->type = 'submission_received_vote';
-                    $not->message = "Your submission to random contest has received {$votes->count} votes!";
-                    $not->destination = "#/contest/:id";
+                    $not->message = "Your submission {$cname} has received {$votes->count} votes!";
+                    $not->destination = "#/contest/{$contest->id}";
                     $nots[] = $not;
                 break;
 
                 case 'winner_chosen':
-
+                    $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
+                    $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $cname = $this->parse($company);
+                    $not->type = 'winner_chosen';
+                    $not->message = "A winner has been chosen for {$cname}'s contest!";
+                    $not->destination = "#/contest/{$contest->id}";
+                    $nots[] = $not;
                 break;
 
                 case 'new_contest_launched':
+                    $contest = $this->db->select('id')->from('contests')->where('id', $notification->object_id)->get()->row();
+                    $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $cname = $this->parse($company);
                     $not->type = 'new_contest_launched';
-                    $not->message = "Random company just launched a contest you may be interested in!";
-                    $not->desination = "#/contest/:id";
+                    $not->message = "{$cname} just launched a contest you may be interested in!";
+                    $not->desination = "#/contest/{$contest->id}";
                     $nots[] = $not;
                 break;
 
                 case 'submission_is_winner':
+                    $sid = $notification->object_id;
+                    $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
+                    $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
+                    $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $cname = $this->parse($company);
                     $not->type = 'submission_is_winner';
-                    $not->message = "Congratulations! Your submission won!";
+                    $not->message = "Congratulations! Your submission {$cname} won!";
                     $not->destination = "#/dashboard?type=winning";
                     $nots[] = $not;
                 break;
 
                 case 'submission_confirmed':
+                    $sid = $notification->object_id;
+                    $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
+                    $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
+                    $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $cname = $this->parse($company);
                     $not->type = 'submission_confirmed';
-                    $not->message = "Your submission to random contest has been accepted";
-                    $not->destination = "#/contest/:id";
+                    $not->message = "Your submission {$cname} has been accepted";
+                    $not->destination = "#/contest/{$contest->id}";
                     $nots[] = $not;
                 break;
 
             }
         }
-        $this->markAsRead();
+        //$this->markAsRead();
 
         return $nots;
+    }
+
+    function parse($obj)
+    {
+        if(is_null($obj) || is_null($obj->name))
+        {
+            return "";
+        }
+        return "for {$obj->name}";
     }
 
     public function fetchForType($type, $object_type, $objec_id)
