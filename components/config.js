@@ -264,7 +264,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 	}
 
 	$scope.open_notifications = function(){
-		AppFact.grabNotifications().success(function(){
+		AppFact.grabNotifications().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.notification_show = true;
@@ -274,10 +274,14 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		});
 	}
 
+	$scope.close_notifications = function(){
+		$scope.notification_show = false;
+	}
+
 	$scope.toggle_read = function(id, index){
-		AppFact.readNotification(id).success(function(){
+		AppFact.readNotification(id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
+				if(response.success) $scope.notifications.splice(index, 1);
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -285,6 +289,16 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		});
 	}
 
+	$scope.read_all = function(){
+		AppFact.readAll().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.notifications = [];
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
@@ -462,7 +476,7 @@ tappyn.factory("AppFact", function($http){
 	fact.grabNotifications = function(){
 		return $http({
             method:'GET',
-            url:'index.php/auth/notifications/unread',
+            url:'index.php/notifications/unread',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
