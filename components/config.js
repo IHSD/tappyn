@@ -264,10 +264,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 	}
 
 	$scope.open_notifications = function(){
+		$scope.notification_show = true;
 		AppFact.grabNotifications().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.notification_show = true;
 					$scope.notifications = response.data.notifications;
 				}	
 			}
@@ -278,8 +278,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		$scope.notification_show = false;
 	}
 
-	$scope.toggle_read = function(id, index){
-		AppFact.readNotification(id).success(function(response){
+	$scope.read_notification = function(notification, index){
+		AppFact.readNotification(notification).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.notifications.splice(index, 1);
 				else $scope.set_alert(response.message, "default");	 
@@ -478,6 +478,14 @@ tappyn.factory("AppFact", function($http){
             method:'GET',
             url:'index.php/notifications/unread',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
+        })
+	}
+	fact.readNotification = function(notification){
+		return $http({
+            method:'POST',
+            url:'index.php/notifications/read',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
+            data : $.param(notification)
         })
 	}
 	return fact;

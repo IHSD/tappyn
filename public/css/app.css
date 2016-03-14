@@ -2335,6 +2335,7 @@ nav .dropdown-menu{
     z-index:100000000 !important;
     right:0;
     opacity: 1;
+    border-left:1px solid #333;
 }
 .modal_note.ng-hide{
 	right:-50;
@@ -2344,4 +2345,14 @@ nav .dropdown-menu{
 .modal_note.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear .5;
        transition:all linear 0.5s;
+}
+
+.notification{
+	border:1px solid #ff5c00;
+	border-radius : 5px;
+	margin-top:5px;
+	padding-top:10px;
+}
+.notification:hover{
+	background:#eee;
 }
