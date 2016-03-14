@@ -324,7 +324,7 @@ class Companies extends CI_Controller
                              'voucher' => isset($voucher) ? $voucher : FALSE
                          ), TRUE))
                          ->send();
-            // Notify all relevant users that this contest has launched
+
             // We find any users who have submitted to one of this companies previous contests,
             // anybody who is following this contest, and anybody who has followed this interest
             $cids = array();
@@ -349,6 +349,7 @@ class Companies extends CI_Controller
             {
                 $this->notification->create($uid, 'new_contest_launched', 'contest', $contest_id);
             }
+
             return;
         }
 
