@@ -11,7 +11,6 @@ class Notifications extends CI_Controller
             exit();
         }
         $this->load->library('notification');
-        $this->notification->setDatabase($this->db);
         $this->notification->setUser($this->ion_auth->user()->row()->id);
     }
 
@@ -26,7 +25,7 @@ class Notifications extends CI_Controller
         ))->respond();
     }
 
-    public function show()
+    public function unread()
     {
         $notifications = $this->notification->fetchUnread();
         if($notifications)
