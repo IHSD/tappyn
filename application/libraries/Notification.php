@@ -17,6 +17,11 @@ class Notification
         return get_instance()->$var;
     }
 
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
     public function count()
     {
         $notifications = $this->db->select('COUNT(*) as count')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->get();
@@ -26,9 +31,21 @@ class Notification
 
     public function fetchUnread()
     {
-        $notifications = $this->db->select('*')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->get();
+        $notifications = $this->db->select('type, object_type, object_id')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->group_by(array('type', 'object_type', 'object_id'))->get();
         if(!$notifications) return FALSE;
+        $nots = array();
+        $notifications = $notifications->result();
+        foreach($notifications as $notification)
+        {
+            $not = new StdClass();
+
+        }
         return $notifications->result();
+    }
+
+    public function fetchForType($type, $object_type, $objec_id)
+    {
+        
     }
 
     public function create($user_id, $type, $object_type, $object_id = NULL)
