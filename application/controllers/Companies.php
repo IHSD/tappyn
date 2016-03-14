@@ -324,6 +324,8 @@ class Companies extends CI_Controller
                              'voucher' => isset($voucher) ? $voucher : FALSE
                          ), TRUE))
                          ->send();
+            // Notify all relevant users that this contest has launched
+            
             return;
         }
 

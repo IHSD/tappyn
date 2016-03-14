@@ -214,6 +214,7 @@ class Contests extends CI_Controller
                 $update = TRUE;
             }
         }
+
         if($this->form_validation->run() == true && $cid)
         {
             $message = $update ? 'updated' : 'created';
