@@ -28,6 +28,6 @@ class AddDefaultPointsToUser extends AbstractMigration
     public function change()
     {
         $users = $this->table('users');
-        $user->changeColumn('points', 'string', array('default' => 100))->update();
+        $users->changeColumn('points', 'string', array('default' => 100))->update();
     }
 }
