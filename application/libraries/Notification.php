@@ -3,7 +3,6 @@
 class Notification
 {
     protected $user;
-    protected $db;
     protected $errors = FALSE;
     protected $messages = FALSE;
     protected $table = 'notifications';
@@ -12,14 +11,10 @@ class Notification
 
     }
 
-    public function setDatabase(CI_DB $db)
-    {
-        $this->db = $db;
-    }
 
-    public function setUser($user)
+    public function __get($var)
     {
-        $this->user = $user;
+        return get_instance()->$var;
     }
 
     public function count()
@@ -34,6 +29,20 @@ class Notification
         $notifications = $this->db->select('*')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->get();
         if(!$notifications) return FALSE;
         return $notifications->result();
+    }
+
+    public function create($user_id, $type, $object_type, $object_id = NULL)
+    {
+        $data = array(
+            'user_id' => $user_id,
+            'type' => $type,
+            'created' => time(),
+            'read' => 0,
+            'read_at' => NULL,
+            'object_type' => $object_type,
+            'object_id' => $object_id
+        );
+        $this->db->insert('notifications', $data);
     }
 
     public function errors()
