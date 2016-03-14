@@ -35,7 +35,6 @@ class Notification
         if(!$notifications) return FALSE;
         $nots = array();
         $notifications = $notifications->result();
-
         foreach($notifications as $notification)
         {
             $not = new StdClass();
@@ -67,11 +66,10 @@ class Notification
                 break;
 
                 case 'new_contest_launched':
-                    $contest = $this->db->select('id')->from('contests')->where('id', $notification->object_id)->get()->row();
+                    $contest = $this->db->select('*')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
-                    $cname = $this->parse($company);
                     $not->type = 'new_contest_launched';
-                    $not->message = "{$cname} just launched a contest you may be interested in!";
+                    $not->message = "{$company->name} just launched a contest you may be interested in!";
                     $not->desination = "#/contest/{$contest->id}";
                     $nots[] = $not;
                 break;
