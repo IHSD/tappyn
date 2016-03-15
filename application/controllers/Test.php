@@ -9,6 +9,23 @@ class Test extends CI_Controller
         $this->interest->setDatabase($this->db);
     }
 
+    public function pcp()
+    {
+        $faker = Faker\Factory::create();
+        $package_data = array(
+            'platform' => 'facebook',
+            'objective' => 'website_clicks',
+            'headline' => $faker->text(50),
+            'text' => $faker->text(200)
+        );
+        $this->mailer
+             ->to($this->ion_auth->user()->row()->email)
+             ->from("squad@tappyn.com")
+             ->subject("Here's your post contest package!")
+             ->html($this->load->view('emails/post_contest_package', $package_data, TRUE))
+             ->send();
+    }
+
     public function fetch()
     {
         if($this->interest->create('asdfasaadfasdasdf', "asdfaasdfaasdfdfaasdf", 12))
@@ -34,6 +51,11 @@ class Test extends CI_Controller
 
         }
         redirect('test/tree', 'refresh');
+    }
+
+    function parse_objective()
+    {
+
     }
 
     public function tree()
