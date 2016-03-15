@@ -16,7 +16,7 @@ if(!isset($contest) ||
    !isset($text))
    {
        error_log("Creating email with missing data!");
-       throw new Exception("Tried creating email with missing data");
+      // throw new Exception("Tried creating email with missing data");
    }
 ?>
 

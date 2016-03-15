@@ -11,7 +11,6 @@ class Notifications extends CI_Controller
             exit();
         }
         $this->load->library('notification');
-        $this->notification->setDatabase($this->db);
         $this->notification->setUser($this->ion_auth->user()->row()->id);
     }
 
@@ -26,10 +25,10 @@ class Notifications extends CI_Controller
         ))->respond();
     }
 
-    public function show()
+    public function unread()
     {
         $notifications = $this->notification->fetchUnread();
-        if($notifications)
+        if($notifications !== FALSE)
         {
             $this->responder->data(array(
                 'notifications' => $notifications
@@ -39,5 +38,23 @@ class Notifications extends CI_Controller
                 ($this->notification->errors() ? $this->notification->errors() : "An unknown error occured")
             )->code(500)->respond();
         }
+    }
+
+    public function read()
+    {
+        $type = $this->input->post('type');
+        $object_id = $this->input->post('object_id');
+        if($this->notification->markAsRead(array('type' => $type, 'object_id' => $object_id)))
+        {
+            $this->responder->message("Notifications marked as read")->respond();
+        } else {
+            $this->responder->fail("There was an error updating your notifications")->code(500)->respond();
+        }
+    }
+
+    public function read_all()
+    {
+        $this->notification->markAsRead();
+        $this->responder->data(array())->respond();
     }
 }

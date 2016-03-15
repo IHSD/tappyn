@@ -299,7 +299,7 @@ class Interest
            array_shift($results);
 
            $return->followed_by_user = FALSE;
-           if(in_array($return->id, $this->follows))
+           if(!empty($this->follows) && in_array($return->id, $this->follows))
            {
                $return->followed_by_user = TRUE;
            }

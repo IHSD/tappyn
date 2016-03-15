@@ -3,7 +3,7 @@
 	        <div class="col-xs-2">
 	            <div class="logo">
 	                <a href="#/home">
-	                	<img src="public/img/TappynLogo2.png" width='70'>
+	                	<img src="public/img/beta_logo.png" width='70'>
 	                </a>
 	            </div>
 	        </div>
@@ -14,6 +14,7 @@
 	                    <li ng-if='user'><a href="#/top">Top Tapps</a></li>
 	                    <li><a href="#/faq">FAQ</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="#/companies">For Companies</a></li>
+	                    <li ng-if='user' style='float:right;' ng-click='open_notifications()'><a href><span class='glyphicon glyphicon-envelope'></span></a></li>
 	                    <li ng-if='user' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}&nbsp;
