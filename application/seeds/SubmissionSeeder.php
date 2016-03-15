@@ -18,9 +18,10 @@ class SubmissionSeeder extends AbstractSeed
         // Get possible users
         $ids = array();
         $users = $this->fetchAll("SELECT * FROM users LEFT JOIN users_groups ON users.id = users_groups.user_id WHERE users_groups.group_id = 2");
+
         foreach($users as $user)
         {
-            $ids[] = $user['id'];
+            $ids[] = $user['user_id'];
         }
         // Get possible contests
         $cids = array();
@@ -29,7 +30,7 @@ class SubmissionSeeder extends AbstractSeed
         {
             $cids[] = $contest['id'];
         }
-        
+
         $data = array();
 
         for($i = 0; $i < 1000; $i++)

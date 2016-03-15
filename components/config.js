@@ -169,11 +169,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		return $q(function(resolve, reject) {
 			AppFact.isLoggedIn().success(function(response){
 				if(response.http_status_code == 200){
-					if(sessionStorage.getItem("user")) $rootScope.user = JSON.parse(sessionStorage.getItem("user"));
-					else{
-						$rootScope.user = response.data;
-						sessionStorage.setItem("user", JSON.stringify(response.data));
-					}
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
 				}
 				if($rootScope.user){
 					window.Intercom('boot', {
@@ -266,6 +263,42 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		$scope.registration = {show :false, type : '', object : ''};
 	}
 
+	$scope.open_notifications = function(){
+		$scope.notification_show = true;
+		AppFact.grabNotifications().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.notifications = response.data.notifications;
+				}	
+			}
+		});
+	}
+
+	$scope.close_notifications = function(){
+		$scope.notification_show = false;
+	}
+
+	$scope.read_notification = function(notification, index){
+		AppFact.readNotification(notification).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.notifications.splice(index, 1);
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.read_all = function(){
+		AppFact.readAll().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.notifications = [];
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
 	/** example response
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
@@ -438,6 +471,28 @@ tappyn.factory("AppFact", function($http){
             url:'index.php/amazon/connect',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
             data : $.param({bucket : bucket})
+        })
+	}
+	fact.grabNotifications = function(){
+		return $http({
+            method:'GET',
+            url:'index.php/notifications/unread',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
+        })
+	}
+	fact.readNotification = function(notification){
+		return $http({
+            method:'POST',
+            url:'index.php/notifications/read',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
+            data : $.param(notification)
+        })
+	}
+	fact.readAll = function(){
+		return $http({
+            method:'POST',
+            url:'index.php/notifications/read_all',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
 	return fact;
