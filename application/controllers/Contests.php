@@ -327,7 +327,7 @@ class Contests extends CI_Controller
                 'object_id' => $cid
             ));
             $this->notifications->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
-
+            
             return;
         }
         else

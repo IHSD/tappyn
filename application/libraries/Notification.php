@@ -31,7 +31,7 @@ class Notification
 
     public function fetchUnread()
     {
-        $notifications = $this->db->select('type, object_type, object_id')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->group_by(array('type', 'object_type', 'object_id'))->get();
+        $notifications = $this->db->select('type, object_type, object_id, created')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->group_by(array('type', 'object_type', 'object_id'))->order_by('created', 'desc')->get();
         if(!$notifications) return FALSE;
         $nots = array();
         $notifications = $notifications->result();
@@ -39,6 +39,7 @@ class Notification
         foreach($notifications as $notification)
         {
             $not = new StdClass();
+            $not->created = $notification->created;
             switch($notification->type) {
                 case 'submission_received_vote':
                     $sid = $notification->object_id;
@@ -82,13 +83,13 @@ class Notification
                     $nots[] = $not;
                 break;
 
-                case 'submission_is_winner':
+                case 'submission_chosen':
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
-                    $not->type = 'submission_is_winner';
+                    $not->type = 'submission_chosen';
                     $not->message = "Congratulations! Your submission {$cname} won!";
                     $not->destination = "#/dashboard?type=winning";
                     $not->object_type = $notification->object_type;
