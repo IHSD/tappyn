@@ -488,5 +488,12 @@ tappyn.factory("AppFact", function($http){
             data : $.param(notification)
         })
 	}
+	fact.readAll = function(){
+		return $http({
+            method:'POST',
+            url:'index.php/notifications/read_all',
+            headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
+        })
+	}
 	return fact;
 })

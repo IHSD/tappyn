@@ -1,0 +1,14 @@
+<div ng-show='notification_show' class='modal_note col-xs-12 col-sm-3'>
+	<div class='row'>	
+		<div class='col-xs-12'><h3>Notifications <span style='float:right;' ng-click='close_notifications()' class='glyphicon glyphicon-chevron-right'></span></h3></div>
+		<button class='btn btn-outliner col-xs-12' ng-click='read_all()'>Dismiss All</button>
+		<div class='col-xs-12 notification' ng-repeat='notification in notifications'>
+			<div class='col-xs-9'><p class='text-center'>{{notification.message}}</p></div>
+			<div class='col-xs-3'>
+				<button class='btn btn-outliner btn-sm' ng-click='read_notification(notification, $index)'>
+					<span class='glyphicon glyphicon-ok'></span>
+				</button>
+			</div>
+		</div>	
+	</div>
+</div>
