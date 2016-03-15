@@ -55,5 +55,6 @@ class Notifications extends CI_Controller
     public function read_all()
     {
         $this->notification->markAsRead();
+        $this->responder->data(array())->respond();
     }
 }

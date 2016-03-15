@@ -71,7 +71,7 @@ class Notification
                 break;
 
                 case 'new_contest_launched':
-                    $contest = $this->db->select('id')->from('contests')->where('id', $notification->object_id)->get()->row();
+                    $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     $not->type = 'new_contest_launched';
