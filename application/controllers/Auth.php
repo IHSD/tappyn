@@ -26,14 +26,17 @@ class Auth extends CI_Controller {
 	 */
 	function is_logged_in()
 	{
-		$this->load->library('interest');
-		$this->interest->setDatabase($this->db);
-		$this->interest->setUser($this->ion_auth->user()->row()->id);
 		if($this->ion_auth->logged_in())
 		{
+			$this->load->library('notification');
+	        $this->notification->setUser($this->ion_auth->user()->row()->id);
 			$user = $this->ion_auth->ajax_user();
+			$this->load->library('interest');
+			$this->interest->setDatabase($this->db);
+			$this->interest->setUser($this->ion_auth->user()->row()->id);
 	        $interests = $this->interest->tree();
 	        $user['interests'] = $interests;
+			$user['notifications'] = $this->notification->count();
 			$this->responder
 				 ->data($user)
 				 ->message($this->session->flashdata('message'))
