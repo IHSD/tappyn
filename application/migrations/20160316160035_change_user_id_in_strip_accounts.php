@@ -28,6 +28,6 @@ class ChangeUserIdInStripAccounts extends AbstractMigration
     public function change()
     {
         $accounts = $this->table('stripe_accounts');
-        $account->changeColumn('user_id', 'integer', array('limit' => 11, 'null' => FALSE))->update();
+        $accounts->changeColumn('user_id', 'integer', array('limit' => 11, 'null' => FALSE))->update();
     }
 }
