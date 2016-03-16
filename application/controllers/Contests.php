@@ -57,6 +57,10 @@ class Contests extends CI_Controller
         }
     }
 
+    /**
+     * Contest leaderboard endpoint
+     * @return void
+     */
     public function leaderboard()
     {
         $this->params = array(
@@ -173,7 +177,7 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
-        $this->form_validation->set_rules('display_type', 'Display Type', 'required');
+        //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
         if($this->form_validation->run() == true)
         {
@@ -327,7 +331,7 @@ class Contests extends CI_Controller
                 'object_id' => $cid
             ));
             $this->notifications->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
-            
+
             return;
         }
         else
