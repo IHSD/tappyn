@@ -22,7 +22,16 @@ class Vouchers extends CI_Controller
     {
         if($this->vouchers_library->is_valid($vid))
         {
-            $this->responder->data(array('is_valid' => true))->respond();
+            $price = 99.99;
+            $voucher = $this->vouchers_library->get($vid);
+            if($voucher->discount_type == 'amount')
+            {
+                $price = $price - $voucher->amount;
+            } else {
+                $price = $price - ($price * $voucher->amount);
+            }
+
+            $this->responder->data(array('is_valid' => true, 'price' => $price))->respond();
         } else {
             $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "Voucher invalid"))->code(500)->respond();
         }
