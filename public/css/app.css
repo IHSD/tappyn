@@ -2319,9 +2319,12 @@ nav .dropdown-menu{
 	width:150x;
 	height: 100px;
     margin-bottom: 5px;
-    padding: 5px;
+    padding: 15px 5px 5px 5px;
     border-radius: 5px;
     border:1px solid transparent; 
+}
+.personality:hover{
+	background: #eee;
 }
 .personality-highlight{
 	border:1px solid #ff5c00; 
@@ -2346,7 +2349,6 @@ nav .dropdown-menu{
     -webkit-transition:all linear .5;
        transition:all linear 0.5s;
 }
-
 .notification{
 	border:1px solid #ff5c00;
 	border-radius : 5px;

@@ -1,71 +1,3 @@
-<div class='wrapper'>
-	<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3' ng-show='adding_payment'>
-		<div class='col-xs-12' style='background-color:#fff;border-radius:3px;padding:10px;'>
-			<div class='col-xs-12'><h3 style='margin-top:5px;' class='pull-right'><span style='cursor:pointer' ng-click='close_payment()'>X</span></h3></div>
-			<form class='form' action="" method="POST" id="payment-form" ng-submit='new_payment()'>
-				<div class='col-xs-12'>
-				    <div class="form-group">
-				    	<label>Card Number</label>
-				      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
-				    </div>
-				</div>
-			    <div class='col-xs-12 col-sm-4'>
-				  <div class="form-group">
-					    <label>CVC</label>
-					    <input class='form-control' placeholder='Enter your CVC' type="text" size="4" data-stripe="cvc"/>
-				  </div>
-			    </div>
-			  	<div class='col-xs-12 col-sm-4'>
-			      <div class="form-group">
-			       		<label>Month Exp</label>
-			  	      	<select class='form-control' data-stripe="exp-month">
-				            <option value='01'>01</option>
-				            <option value='02'>02</option>
-				            <option value='03'>03</option>
-				            <option value='04'>04</option>
-				            <option value='05'>05</option>
-				            <option value='06'>06</option>
-				            <option value='07'>07</option>
-				            <option value='08'>08</option>
-				            <option value='09'>09</option>
-				            <option value='10'>10</option>
-				            <option value='11'>11</option>
-				            <option value='12'>12</option>
-			          </select>
-			      </div>
-			    </div>
-			    <div class='col-xs-12 col-sm-4'>
-			    	<div class='form-group'>
-			        	<label>Year Exp</label>
-			  	    	<select class='form-control' data-stripe="exp-year">
-				             <option value='2016'>2016</option>
-				             <option value='2017'>2017</option>
-				             <option value='2018'>2018</option>
-				             <option value='2019'>2019</option>
-				             <option value='2020'>2020</option>
-				             <option value='2021'>2021</option>
-				             <option value='2022'>2022</option>
-				             <option value='2023'>2023</option>
-				             <option value='2024'>2024</option>
-				             <option value='2025'>2025</option>
-				             <option value='2026'>2026</option>
-				             <option value='2027'>2027</option>
-			        	</select>
-			  	  	</div>
-			  	</div>
-				<input type='hidden' data-stripe='currency' value='usd'/>
-				<div class="col-xs-6">
-					<div class='form-group'>
-						<label class='control-label'>Save Method
-							<input type='checkbox' ng-model='save_method'>
-						</label>
-					</div>
-				</div>
-			</form>
-			<div class='col-xs-12 text-center'><button ng-disabled='form_disabled' class='btn btn-oj' type='submit'>Pay</button></div>
-		</div>
-	</div>
-</div>
 <div class='row content-padding' style='background-color:#fff'>
 	<div class='col-sm-10 col-sm-offset-1 col-xs-12 text-center'>
 		<div ng-show='current.step == "package"'>
@@ -90,7 +22,7 @@
 
 <div class='row content-padding'>
 	<div class='col-sm-10 col-sm-offset-1 col-xs-12'>
-		<div ng-show='current.step == "package"'>
+		<div ng-show='current.step == "package"' id='package'>
 			<div class='col-xs-12'>
 				<h3 class='text-center'>Where do you want to advertise?</h3>
 				<h4 class='text-center'>Choose your platform</h4>
@@ -119,84 +51,102 @@
 					</div>
 				</div>
 			</div>
-			<div class='col-xs-12 package-selection' ng-show='contest.platform'>
+			<div class='col-xs-12 package-selection' id='objective' ng-show='contest.platform'>
 				<hr style='border-color:#ff6c00'>
 				<h3 class='text-center'>What do you want your ad to do?</h3>
 				<h4 class='text-center'>Choose your objective</h4>
 				<div ng-show='contest.platform=="facebook"' style='color:#ff6c00'>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "exposure"}' class='contest-box launch-page-hover' ng-click='select_objective("exposure")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Get Exposure</h3>
+						<div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='contest-box launch-page-hover' ng-click='select_objective("clicks_to_website")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Send People to Your Website</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' class='text-center' src='public/img/exposure.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience learn about your business
+							<div>
+								Reach people who are likely to click on your ad and visit your website.
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "close_sales"}' class='contest-box launch-page-hover' ng-click='select_objective("close_sales")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Close Sales</h3>
+						<div ng-class='{"package-highlight" : contest.objective == "conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("conversions")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Conversions on Your Website</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/close_sales.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help users looking for your service to find you.
+							<div>
+								Reach people in your audience who are likely to convert on your website.
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Engagement</h3>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Boost your Posts</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/engagement.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience engage with your social media
+							<div>
+								Increase engagement on your post and get people seeing, liking, commenting on and sharing your Page content.
 							</div>
 						</div>
 					</div>
 				</div>
 				<div ng-show='contest.platform=="google"' style='color:#ff6c00'>
-					<div class='col-xs-12 col-sm-4 col-sm-offset-2'>
-						<div ng-class='{"package-highlight" : contest.objective == "exposure"}' class='contest-box launch-page-hover' ng-click='select_objective("exposure")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Get Exposure</h3>
-							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/exposure.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience learn about your business
+					<div class='col-xs-12 col-sm-3'>
+						<div ng-class='{"package-highlight" : contest.objective == "awareness"}' class='contest-box launch-page-hover' ng-click='select_objective("awareness")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Build Awareness</h3>
+							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/engagement.png'></div>
+							<div>
+								Get customers to see your ads. Best for introducing customers to what you offer.
 							</div>
 						</div>
 					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "close_sales"}' class='contest-box launch-page-hover' ng-click='select_objective("close_sales")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Close Sales</h3>
+					<div class='col-xs-12 col-sm-3'>
+						<div ng-class='{"package-highlight" : contest.objective == "consideration"}' class='contest-box launch-page-hover' ng-click='select_objective("consideration")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Influence Consideration</h3>
+							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/exposure.png'></div>
+							<div>
+								Get customers to engage with your content and visit your website. Best for educating your customers about your product or service. 
+							</div>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-3'>
+						<div ng-class='{"package-highlight" : contest.objective == "drive_action"}' class='contest-box launch-page-hover' ng-click='select_objective("drive_action")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Drive Action</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/close_sales.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help users looking for your service to find you.
+							<div>
+								Get customers to take action, buy on your website, visit your business or install your mobile app. 
+							</div>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-3'>
+						<div ng-class='{"package-highlight" : contest.objective == "search_presence"}' class='contest-box launch-page-hover' ng-click='select_objective("search_presence")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Search Presence</h3>
+							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/googlepackage.png'></div>
+							<div>
+								Use this type of campaign when you want your ads to appear next to google search results and you want to reach customers searching for your specific product or service. 
 							</div>
 						</div>
 					</div>
 				</div>
 				<div ng-show='contest.platform=="twitter"' style='color:#ff6c00'>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "exposure"}' class='contest-box launch-page-hover' ng-click='select_objective("exposure")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Get Exposure</h3>
-							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/exposure.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience learn about your business
+						<div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("site_clicks_conversions")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Website Clicks / Conversions</h3>
+							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/close_sales.png'></div>
+							<div>
+								Grow your site traffic, increase online purchases or connect with high quality leads.
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "close_sales"}' class='contest-box launch-page-hover' ng-click='select_objective("close_sales")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Close Sales</h3>
-							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/close_sales.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help users looking for your service to find you.
+						<div ng-class='{"package-highlight" : contest.objective == "followers"}' class='contest-box launch-page-hover' ng-click='select_objective("followers")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Gain Followers</h3>
+							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/exposure.png'></div>
+							<div>
+								Grow an interested audience with which you can engage with over time.
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
 						<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Engagement</h3>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Tweet Engagements</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/engagement.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience engage with your social media
+							<div>
+								Reach a large targeted group of people, place your best content in fromt of the audience that matters to you.
 							</div>
 						</div>
 					</div>
@@ -206,17 +156,17 @@
 						<div ng-class='{"package-highlight" : contest.objective == "brand_positioning"}' class='contest-box launch-page-hover' ng-click='select_objective("brand_positioning")'>
 							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Brand Positioning</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/exposure.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience learn about your business
+							<div>
+								Identify and 'own' a marketing niche for a brand, product, or service.
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.objective == "close_sales"}' class='contest-box launch-page-hover' ng-click='select_objective("close_sales")'>
-							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Close Sales</h3>
+						<div ng-class='{"package-highlight" : contest.objective == "drive_action"}' class='contest-box launch-page-hover' ng-click='select_objective("drive_action")'>
+							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Drive Action</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/close_sales.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help users looking for your service to find you.
+							<div>
+								Get customers to take action, buy on your website, or visit your business. 
 							</div>
 						</div>
 					</div>
@@ -224,84 +174,51 @@
 						<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
 							<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Engagement</h3>
 							<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/engagement.png'></div>
-							<div style='height:100px;'>
-								Use this objective to get ads that help your audience engage with your social media
+							<div>
+								Increase engagement in your website and get people seeing, liking, commenting on and sharing your Page content.
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class='col-xs-12 package-selection' ng-show='contest.objective'>
+			<div class='col-xs-12 package-selection' id='display' ng-show='contest.objective'>
 				<hr style='border-color:#ff6c00'>
 				<h3 class='text-center'>Choose your display type</h3>
-				<h4 class='text-center'>Where do you want your ad to appear?</h4>
-				<div class='ad-location' ng-show='contest.platform == "facebook"'>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "newsfeed"}' class='contest-box launch-page-hover' ng-click='select_display("newsfeed")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Newsfeed</h3>
-						</div>
-					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "right_column"}' class='contest-box launch-page-hover' ng-click='select_display("right_column")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Right Column</h3>
-						</div>
-					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "mobile"}' class='contest-box launch-page-hover' ng-click='select_display("mobile")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Mobile</h3>
-						</div>
-					</div>
-				</div>
-				<div class='ad-location' ng-show='contest.platform == "google"'>
+				<h4 class='text-center'>How will your ad appear?</h4>
+				<div class='ad-location' ng-show='contest.platform == "facebook" || contest.platform == "twitter" || (contest.platform == "google" && contest.objective != "search_presence")'>
 					<div class='col-xs-12 col-sm-4 col-sm-offset-2'>
-						<div ng-class='{"package-highlight" : contest.display_type == "search"}' class='contest-box launch-page-hover' ng-click='select_display("search")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Search</h3>
-							<div style='height:100px;'>
-								Includes Google search sites and non-Google sites that use Google as a search engine
+						<div ng-class='{"package-highlight" : contest.display_type == "text_only"}' class='contest-box launch-page-hover' ng-click='select_display("text_only")'>
+							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text Only</h3>
+							<div style='height:100px;' style='color:#ff6c00'>
+								Choose this if you do not plan on attaching a photo to the ad you create
 							</div>
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "display"}' class='contest-box launch-page-hover' ng-click='select_display("display")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Display</h3>
-							<div style='height:100px;'>
-								Includes Google content sites and non-Google content partners that show ads
+						<div ng-class='{"package-highlight" : contest.display_type == "with_photo"}' class='contest-box launch-page-hover' ng-click='select_display("with_photo")'>
+							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text with Photo</h3>
+							<div style='height:100px;' style='color:#ff6c00'>
+								This merely adjusts the word limit of each submission, for now users will only be able to submit text content, but we are actively working on a photo submission process as well
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class='ad-location' ng-show='contest.platform == "twitter"'>
+				<div class='ad-location' ng-show='contest.platform == "google" && contest.objective == "search_presence"'>
 					<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "tweet"}' class='contest-box launch-page-hover' ng-click='select_display("tweet")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Tweet</h3>
-							<div style='height:100px;'>
-								A 140-max text line for use with your twitter handle
+						<div ng-class='{"package-highlight" : contest.display_type == "text_only"}' class='contest-box launch-page-hover' ng-click='select_display("text_only")'>
+							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text Only</h3>
+							<div style='height:100px;' style='color:#ff6c00'>
+								Establishing search presence only allows for ads that contain text
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class='ad-location' ng-show='contest.platform == "general"'>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "tagline"}' class='contest-box launch-page-hover' ng-click='select_display("tagline")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Tagline</h3>
-							<div style='height:100px;'>
-								A tagline embodying the purpose of your company
-							</div>
-						</div>
-					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "headline"}' class='contest-box launch-page-hover' ng-click='select_display("headline")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Headline</h3>
-							<div style='height:100px;'>
-								An engaging headline for the banner on your website
-							</div>
-						</div>
-					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<div ng-class='{"package-highlight" : contest.display_type == "copies"}' class='contest-box launch-page-hover' ng-click='select_display("copies")'>
-							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Copies</h3>
-							<div style='height:100px;'>
-								Copies
+					<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
+						<div ng-class='{"package-highlight" : contest.display_type == "text_only"}' class='contest-box launch-page-hover' ng-click='select_display("text_only")'>
+							<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text Only</h3>
+							<div style='height:100px;' style='color:#ff6c00'>
+								Our general categories current only support text for content such as general taglines and website banners
 							</div>
 						</div>
 					</div>
@@ -320,15 +237,15 @@
 									<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
 									<div class='col-sm-4 col-xs-12'>
 										<input ng-file-select='select_file($files, "pic1")' type='file'>
-										<img class='img-responsive' ng-if='contest.additional_image_1' src='{{contest.additional_image_1}}'>
+										<img class='img-responsive' ng-if='contest.additional_image_1' ng-src='{{contest.additional_image_1}}'>
 									</div>
 									<div class='col-sm-4 col-xs-12'>
 										<input ng-file-select='select_file($files, "pic2")' type='file'>
-										<img class='img-responsive' ng-if='contest.additional_image_2' src='{{contest.additional_image_2}}'>
+										<img class='img-responsive' ng-if='contest.additional_image_2' ng-src='{{contest.additional_image_2}}'>
 									</div>
 									<div class='col-sm-4 col-xs-12'>
 										<input ng-file-select='select_file($files, "pic3")' type='file'>
-										<img class='img-responsive' ng-if='contest.additional_image_3' src='{{contest.additional_image_3}}'>
+										<img class='img-responsive' ng-if='contest.additional_image_3' ng-src='{{contest.additional_image_3}}'>
 									</div>
 								</div>
 							</div>
@@ -364,8 +281,8 @@
 								<label class='col-xs-12 text-left'>Ad Personality (optional)</label>
 								<div class='col-xs-4' ng-repeat='personality in personalities'>
 									<div class='text-center personality' ng-click='choose_personality(personality.type)' ng-class='{"personality-highlight" : personality.type == contest.emotion}'>
-										<img ng-src='{{personality.icon}}' width='50px' height='50px'>
-										<h5>{{personality.adjectives}}</h5>	
+										<img ng-src='{{personality.icon}}' uib-tooltip='{{personality.adjectives}}'  width='50px' height='50px'>
+										<h5>{{personality.brand}}</h5>	
 									</div>
 								</div>
 							</div>
@@ -379,17 +296,15 @@
 					<h4 class='text-center'>The preferred demographic for your submissions</h4>
 					<form class='form'>
 						<div class='form-group' ng-init='contest.age = "18-24"'>
-							<label>Age :</label>
-							<label><input type='radio' ng-model='contest.age' value='18-24'>18-24</label>
-							<label><input type='radio' ng-model='contest.age' value='25-34'>25-34</label>
-							<label><input type='radio' ng-model='contest.age' value='35-44'>35-44</label>
-							<label><input type='radio' ng-model='contest.age' value='45+'>45+</label>
+							<label><input type='radio' ng-model='contest.age' value='18-24'> 18-24</label>
+							<label><input type='radio' ng-model='contest.age' value='25-34'> 25-34</label>
+							<label><input type='radio' ng-model='contest.age' value='35-44'> 35-44</label>
+							<label><input type='radio' ng-model='contest.age' value='45+'> 45+</label>
 						</div>
 						<div class='form-group' ng-init='contest.gender = "all"'>
-							<label>Gender :</label>
-							<label><input type='radio' ng-model='contest.gender' value='all'>All</label>
-							<label><input type='radio' ng-model='contest.gender' value='men'>Men</label>
-							<label><input type='radio' ng-model='contest.gender' value='women'>Women</label>
+							<label><input type='radio' ng-model='contest.gender' value='all'> All</label>
+							<label><input type='radio' ng-model='contest.gender' value='men'> Men</label>
+							<label><input type='radio' ng-model='contest.gender' value='women'> Women</label>
 						</div>
 						<div class='form-group'>
 							<label class='control-label'>Any additional information :</label>
@@ -402,34 +317,103 @@
 		<div ng-show='current.step == "payment"'>
 			<div class='col-xs-12 col-sm-10 col-sm-offset-1'>
 				<div class='contest-box'>
-					<h3 class='text-center'>Payment</h3>
-					<h4 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} - {{contest.display_type | capUnderscore}} : $99.99</h4>
-					<div ng-show='payments.length > 0'>
-						<div class='payment-method-container'>
-							<div class='row'>
-								<div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
-									<h5>
-										<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
-										<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
-										<img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
-										<img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
-										&nbsp;&nbsp;&nbsp;********{{payment.last4}}
-									</h5>
-									<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+					<div class='row'>	
+						<div class='col-xs-12 col-sm-6' style='border-right:1px solid #ff5c00;'>
+							<div ng-show='!adding_payment'>	
+								<div ng-show='payments.length > 0'>
+									<div class='payment-method-container'>
+										<div class='row'>
+											<div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+												<h5>
+													<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
+													<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
+													<img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
+													<img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
+													&nbsp;&nbsp;&nbsp;********{{payment.last4}}
+												</h5>
+												<span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class='alert alert-warning' ng-show='payments.length < 1'>You dont have any saved payment methods</div>
+								<div class='text-center'>
+									<button class='btn btn-oj' ng-click='open_payment()'>Add Payment Method</button>
 								</div>
 							</div>
+							<div ng-show='adding_payment'>
+								<div class='text-center' ng-show='payments.length > 0'>
+									<button class='btn btn-oj' ng-click='close_payment()'>Use a saved method</button>
+								</div>
+								<form class='form' action="" method="POST" id="payment-form">
+									<div class='col-xs-12'>
+									    <div class="form-group">
+									    	<label>Card Number</label>
+									      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
+									    </div>
+									</div>
+								    <div class='col-xs-12 col-sm-4'>
+									  <div class="form-group">
+										    <label>CVC</label>
+										    <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc"/>
+									  </div>
+								    </div>
+								  	<div class='col-xs-12 col-sm-4'>
+								      <div class="form-group">
+								       		<label>Month Exp</label>
+								  	      	<select class='form-control' data-stripe="exp-month">
+									            <option value='01'>01</option>
+									            <option value='02'>02</option>
+									            <option value='03'>03</option>
+									            <option value='04'>04</option>
+									            <option value='05'>05</option>
+									            <option value='06'>06</option>
+									            <option value='07'>07</option>
+									            <option value='08'>08</option>
+									            <option value='09'>09</option>
+									            <option value='10'>10</option>
+									            <option value='11'>11</option>
+									            <option value='12'>12</option>
+								          </select>
+								      </div>
+								    </div>
+								    <div class='col-xs-12 col-sm-4'>
+								    	<div class='form-group'>
+								        	<label>Year Exp</label>
+								  	    	<select class='form-control' data-stripe="exp-year">
+									             <option value='2016'>2016</option>
+									             <option value='2017'>2017</option>
+									             <option value='2018'>2018</option>
+									             <option value='2019'>2019</option>
+									             <option value='2020'>2020</option>
+									             <option value='2021'>2021</option>
+									             <option value='2022'>2022</option>
+									             <option value='2023'>2023</option>
+									             <option value='2024'>2024</option>
+									             <option value='2025'>2025</option>
+									             <option value='2026'>2026</option>
+									             <option value='2027'>2027</option>
+								        	</select>
+								  	  	</div>
+								  	</div>
+									<input type='hidden' data-stripe='currency' value='usd'/>
+									<div class="col-xs-6">
+										<div class='form-group'>
+											<label class='control-label'>Save Method
+												<input type='checkbox' ng-model='save_method'>
+											</label>
+										</div>
+									</div>
+									<div class='text-center'><img class='img-responsive' src='public/img/stripe.png'></div>
+								</form>
+							</div>
 						</div>
-					</div>
-					<div class='alert alert-warning' ng-show='payments.length < 1'>You dont have any saved payment methods</div>
-					<div class='row'>	
-						<div class='col-xs-6 text-center'>
-							<button class='btn btn-oj' ng-click='open_payment()'>Add Payment Method</button>
-						</div>
-						<div class='col-xs-6 text-center'>
+						<div class='col-xs-12 col-sm-6'>
+							<h4 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} - {{contest.display_type | capUnderscore}} : {{price}}</h4>	
 							<div class='input-group'>
 								<input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'>
 								<div class='input-group-btn'>	
-									<button class='btn btn-oj' ng-click='use_voucher()'>Use Voucher</button>
+									<button class='btn btn-oj' ng-click='use_voucher()'>Check Voucher</button>
 								</div>
 							</div>
 						</div>
@@ -447,7 +431,8 @@
 			</div>
 			<div ng-show='current.step == "payment"'>
 				<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("detail")'>Edit Contest</button>
-				<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='old_payment()'>Pay</button>
+				<button ng-show='!adding_payment' class='btn btn-oj btn-lg pull-right' type='button' ng-click='old_payment()'>Pay</button>
+				<button ng-show='adding_payment' ng-disabled='form_disabled' class='btn btn-oj btn-lg pull-right' type='submit' ng-click='new_payment()'>Pay</button>
 			</div>
 			<div ng-show='current.step == "done"'>
 				<div class='col-xs-12'>	

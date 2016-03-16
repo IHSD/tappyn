@@ -1,4 +1,4 @@
-tappyn.controller('launchController', function($scope, $location, $upload, $route, $rootScope, launchFactory, emotions){
+tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, emotions){
 	$scope.logged_in()
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
@@ -14,6 +14,8 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 
 	$scope.registering = false;
 
+	$scope.price = 99.99;
+
 	$scope.close_register = function(){
 		$rootScope.modal_up = false;
 		$scope.registering = false;
@@ -27,19 +29,31 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 		else if(step == 'detail'){
 			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
 		}
+		$scope.to_top();
 	}
 
 	$scope.select_objective = function(objective){
 		$scope.contest.objective = objective;
+		$scope.contest.platform = null;
+		$scope.contest.display_type = null;
+		var old = $location.hash();
+		$location.hash("objective");
+		$anchorScroll();
+		$location.hash(old);
 	}
 
 	$scope.select_platform = function(platform){
 		$scope.contest.platform = platform;
+		$scope.contest.display_type = null;
+		var old = $location.hash();
+		$location.hash("display");
+		$anchorScroll();
+		$location.hash(old);
 	}
 
-	$scope.select_display = function(display){
-		$scope.contest.display_type = display;
-	}
+	$scope.select_display = function(type){
+		$scope.contest.display_type = type;
+	}	
 
 	$scope.choose_personality = function(type){
 		$scope.contest.emotion = type;
@@ -66,9 +80,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data.customer.sources.data;
 				else{
-					$scope.adding_payment = true;
-					$rootScope.modal_up = true;
-					$scope.set_alert(response.error, "default");	
+					$scope.adding_payment = true;	
 				} 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -181,10 +193,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 		else{
 			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
-					if(res.success){
-						$scope.set_alert(res.message, "default");	
-						$scope.set_step("done");
-					}
+					if(res.success) $scope.price = response.data.price;
 					else $scope.set_alert(res.message, "default");	 
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
@@ -226,12 +235,10 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	}
 
 	$scope.open_payment = function(){
-		$rootScope.modal_up = true;
 		$scope.adding_payment = true;
 	}
 
 	$scope.close_payment = function(){
-		$rootScope.modal_up = false;
 		$scope.adding_payment = false;
 	}
 

@@ -9,7 +9,7 @@ tappyn.service("contestModel", function(){
 
 				if(contest.platform == 'facebook'){
 					if(emotions[i].facebook != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].facebook};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/facebook_submish.png'};
+					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/fb_submish.png'};
 				}
 
 				if(contest.platform == 'twitter'){
