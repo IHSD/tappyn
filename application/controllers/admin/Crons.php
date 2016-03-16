@@ -69,7 +69,7 @@ class Crons extends CI_Controller
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s')
         ))->order_by('id', 'asc')->fetch()->result();
-
+        
         foreach($contests as $contest)
         {
             echo "=======================================\n";
@@ -122,7 +122,7 @@ class Crons extends CI_Controller
             } else {
                 $this->mailer->to($email)
                              ->from('alek@tappyn.com')
-                             ->subject('Your Tappyn Account is ready! '.$email)
+                             ->subject('Your Tappyn Account is ready!')
                              ->html($this->load->view('emails/onboard', array('username' => $datum['first_name'], 'password' => $password), TRUE))
                              ->send();
             }

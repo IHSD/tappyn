@@ -34,19 +34,19 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 
 	$scope.select_objective = function(objective){
 		$scope.contest.objective = objective;
-		$scope.contest.platform = null;
 		$scope.contest.display_type = null;
 		var old = $location.hash();
-		$location.hash("objective");
+		$location.hash("display");
 		$anchorScroll();
 		$location.hash(old);
 	}
 
 	$scope.select_platform = function(platform){
 		$scope.contest.platform = platform;
+		$scope.contest.objective = null;
 		$scope.contest.display_type = null;
 		var old = $location.hash();
-		$location.hash("display");
+		$location.hash("objective");
 		$anchorScroll();
 		$location.hash(old);
 	}
