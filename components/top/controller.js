@@ -1,4 +1,4 @@
-tappyn.controller('topController', function($scope, $rootScope, topFactory){
+tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
 	
 
 	topFactory.grabTops().success(function(response){
@@ -23,5 +23,14 @@ tappyn.controller('topController', function($scope, $rootScope, topFactory){
 				else $scope.check_code(response.http_status_code);
 			})
 		}
+	}
+
+	$scope.share = function(submission){
+		FB.ui({
+  			method: 'share',
+		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
+		}, function(response){
+			
+		});
 	}
 })

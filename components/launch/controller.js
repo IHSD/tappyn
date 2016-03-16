@@ -107,7 +107,6 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						if(response.http_status_code == 200){
 							if(response.success){
 								$scope.set_alert(response.message, "default");
-								$scope.contest.id = response.data.id;
 								$scope.set_step('payment');
 							}
 							else $scope.set_alert(response.message, "default");	 
