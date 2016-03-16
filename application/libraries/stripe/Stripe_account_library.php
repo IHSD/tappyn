@@ -83,6 +83,7 @@ class Stripe_account_library
                 default:
                     $account_data[$key] = $value;
             }
+            error_log(json_encode($account_data));
         }
 
         try{
@@ -91,7 +92,7 @@ class Stripe_account_library
             $this->errors = $e->getMessage();
             return false;
         }
-        
+
         $this->db->insert('stripe_accounts', array(
             'account_id' => $account->id,
             'user_id' => $this->ion_auth->user()->row()->id,
