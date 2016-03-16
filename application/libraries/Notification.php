@@ -111,6 +111,16 @@ class Notification
                     $nots[] = $not;
                 break;
 
+                case 'submission_created':
+                    $cid = $notification->object_id;
+                    $submissions = $this->db->select('COUNT(*) as count')->from('contests')->where('contest_id', $cid)->get()->row()->count;
+                    $not->type = 'submission_created';
+                    $not->message = "Your contest has gotten {$submissions} submissions!";
+                    $not->destination = "#/contest/{$cid}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
+                    $nots[] = $not;
+
             }
         }
         //$this->markAsRead();
