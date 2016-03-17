@@ -133,6 +133,16 @@ class Voucher extends MY_Model
         return FALSE;
     }
 
+    public function fetchByCode($code)
+    {
+        $check = $this->db->select('*')->from('vouchers')->where('code', $code)->get();
+        error_log($this->db->last_query());
+        if($check && $check->num_rows() > 0)
+        {
+            return $check->row();
+        }
+        return FALSE;
+    }
     public function errors()
     {
         return $this->errors;
