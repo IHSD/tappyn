@@ -18,20 +18,28 @@ class Vouchers extends CI_Controller
      * @param  integer  $vid Voucher ID
      * @return void
      */
-    public function is_valid($vid)
+    public function is_valid()
     {
+        $code = $this->input->post('voucher_code');
+        $voucher = $this->vouchers_library->fetchByCode($code);
+        if(!$voucher)
+        {
+            $this->responder->fail("We couldnt find a voucher with that code")->code(500)->respond();
+            return;
+        }
+        $vid = $voucher->id;
         if($this->vouchers_library->is_valid($vid))
         {
             $price = 99.99;
-            $voucher = $this->vouchers_library->get($vid);
+
             if($voucher->discount_type == 'amount')
             {
-                $price = $price - $voucher->amount;
+                $price = $price - $voucher->value;
             } else {
-                $price = $price - ($price * $voucher->amount);
+                $price = $price - ($price * $voucher->value);
             }
-
-            $this->responder->data(array('is_valid' => true, 'price' => $price))->respond();
+            if($price < 000) $price = 00.00;
+            $this->responder->data(array('is_valid' => true, 'price' => number_format($price, 2)))->respond();
         } else {
             $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "Voucher invalid"))->code(500)->respond();
         }
