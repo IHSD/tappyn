@@ -1,9 +1,9 @@
-tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, emotions){
+tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
 	$scope.logged_in()
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 50},
-		'payment'		 : {step : 'payment',  next : 'none',    previous : 'detail',  fill : 75},
+		'preview' 		 : {step : 'preview',   next : 'payment', previous : 'package', fill : 75},
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
 	$scope.current = $scope.steps['package'];
@@ -28,6 +28,9 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		}
 		else if(step == 'detail'){
 			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
+		}
+		else if(step == 'preview'){
+
 		}
 		$scope.to_top();
 	}
@@ -94,7 +97,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		else $scope.set_step("detail");
 	}
 
-	$scope.submit_contest = function(contest){
+	$scope.submit_contest = function(contest, pay){
 		if(!$rootScope.user) $scope.open_register("company", '');
 		else{
 			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
@@ -106,8 +109,11 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					launchFactory.update(contest).success(function(response){
 						if(response.http_status_code == 200){
 							if(response.success){
-								$scope.set_alert(response.message, "default");
-								$scope.set_step('payment');
+								if(pay)$scope.open_payment();
+								else{
+									$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+									$scope.set_step('done');
+								}
 							}
 							else $scope.set_alert(response.message, "default");	 
 						}
@@ -119,9 +125,12 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					launchFactory.submission(contest).success(function(response){
 						if(response.http_status_code == 200){
 							if(response.success){
-								$scope.set_alert(response.message, "default");
 								$scope.contest.id = response.data.id;
-								$scope.set_step('payment');
+								if(pay) $scope.open_payment();
+								else{
+									$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+									$scope.set_step('done');
+								}
 							}
 							else $scope.set_alert(response.message, "default");	 
 						}
@@ -141,7 +150,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
-       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method}).success(function(res){
+       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
@@ -173,7 +182,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.old_payment = function(){
 		if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
 		else{
-			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method}).success(function(res){
+			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
@@ -235,10 +244,14 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 
 	$scope.open_payment = function(){
 		$scope.adding_payment = true;
+		$rootScope.modal_up = true;
 	}
 
 	$scope.close_payment = function(){
 		$scope.adding_payment = false;
+		$rootScope.modal_up = false;
+		$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+		$scope.set_step("done");
 	}
 
 	$scope.reload = function(){
