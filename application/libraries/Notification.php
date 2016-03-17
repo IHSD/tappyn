@@ -25,7 +25,8 @@ class Notification
     public function count()
     {
         $notifications = $this->db->select('COUNT(*) as count')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->get();
-        if(!$notifications) return 0;
+        if(!$notifications)
+            return 0;
         return (int)$notifications->row()->count;
     }
 
@@ -120,7 +121,16 @@ class Notification
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
                     $nots[] = $not;
+                break;
 
+                case 'new_update':
+                    $not->type = 'new_update';
+                    $not->message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
+                    $not->destination = "#";
+                    $not->object_type = NULL;
+                    $not->object_id = NULL;
+                    $nots[] = $not;
+                break;
             }
         }
         //$this->markAsRead();
