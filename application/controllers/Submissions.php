@@ -118,7 +118,7 @@ class Submissions extends CI_Controller
         {
             $this->responder->fail(
                 "That contest does not exist"
-            )->code(403)->respond():
+            )->code(403)->respond();
             return;
         }
 
