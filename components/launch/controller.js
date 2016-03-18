@@ -88,9 +88,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data.customer.sources.data;
-				else{
-					$scope.adding_payment = true;	
-				} 
+				else $scope.add_new = true; 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -104,6 +102,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.open_payment = function(){
+		$scope.grab_payments();
 		$scope.adding_payment = true;
 		$rootScope.modal_up = true;
 	}
@@ -209,9 +208,9 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.use_voucher = function(){
 		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 		else{
-			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+			launchFactory.voucherValid($scope.voucher_code).success(function(res){
 	       		if(res.http_status_code == 200){
-					if(res.success) $scope.price = response.data.price;
+					if(res.success) $scope.price = res.data.price;
 					else $scope.set_alert(res.message, "default");	 
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
