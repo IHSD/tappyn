@@ -1,40 +1,56 @@
 <?php defined("BASEPATH") or exit('No direct script access ALLOWED');
 
+/**
+ * Feed Library
+ *
+ * Class for generating and managing a users content feed. Whenever an event,
+ * we store the event metadata in the pending_feed_events table. Every minute or
+ * so, we then pull in all the pending events, and write their event data in the
+ * feeds table, where we then pull an aggregated feed on behalff of the user
+ */
 class Feed_library {
-    protected $client;
+
+    protected $table = 'feeds';
+    protected $pend_table = 'pending_feed_events';
 
     public function __construct()
     {
-        $this->client = new GetStream\Stream\Client('r9h8b7nn5gra', 'bsvv4zhw4qgak8h6jd45cdardsdy877n6k5jru7v8vqc4xxa5w8gzf3f9667ea56');
-        $this->user_feed_1 = $this->client->feed('tappyn', '1');
+
     }
 
-    public function addToFeed()
+    public function __get($var)
     {
-        $data = [
-            "actor" => "User:2",
-            "verb" => "pin",
-            "object" => "Place:42",
-            "target" => "oard:1"
-        ];
-        try {
-            $this->user_feed_1->addActivity($data);
-            echo "Feed updated";
-        } catch(Exception $e)
-        {
-            die(var_dump($e));
-        }
+        return get_instance()->$var;
     }
 
-    public function fetch()
+    /**
+     * Stash an event in the pending feeds table
+     * @param  string  $event         Event that has occured
+     * @param  string  $actor         Entity that created the action
+     * @param  string  $verb          Action verb
+     * @param  string  $object        Object type that was acted on
+     * @param  string  $target        Where event was aimed?
+     * @return boolean
+     */
+    public function createEvent($event, $actor, $verb, $object, $target = NULL)
     {
-        $results = $this->user_feed_1->getActivities();
-        echo json_encode($results);
-        die();
+        $object = $this->_($object);
+
+        return $this->db->insert($this->pend_table, array(
+            'event' => $event,
+            'actor' => $actor,
+            'verb' => $verb,
+            'object' => $object[0],
+            'object_id' => $object[1],
+            'target' => $target,
+            'created' => time()
+        ));
     }
 
-    public function ()
-    {
 
+
+    public function _($object)
+    {
+        return explode(':', $object);
     }
 }
