@@ -12,7 +12,7 @@
 				<span ng-switch-when='winner_chosen' class='glyphicon glyphicon-off glyphicon-oj glyph-lg'></span>
 				<span ng-switch-default class='glyphicon glyphicon-info-sign glyphicon-oj glyph-lg'></span>
 			</div>
-			<div class='col-xs-11'><p class='text-center' ng-bind-html="notification.message"></p></div>
+			<div class='col-xs-11'><div ng-bind-html="notification.message"></div></div>
 			<span class='glyphicon glyphicon-remove glyphicon-oj remove-glyph cursor' class='pull-right' ng-click='read_notification(notification, $index)'></span>
 		</div>
 	</div>
