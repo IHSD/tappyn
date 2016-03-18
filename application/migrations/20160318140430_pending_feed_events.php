@@ -28,11 +28,12 @@ class PendingFeedEvents extends AbstractMigration
     public function change()
     {
         $pending_feed_events = $this->table('pending_feed_events');
-        $feed->addColumn('event', 'string', array('limit' => 45, 'null' => FALSE))
+        $pending_feed_events->addColumn('event', 'string', array('limit' => 45, 'null' => FALSE))
              ->addColumn('actor', 'string', array('limit' => 45, 'null' => FALSE))
              ->addColumn('verb', 'string', array('limit' => 45, 'null' => FALSE))
              ->addColumn('object', 'string', array('limit' => 45, 'null' => FALSE))
-             ->addColumn('target', 'string', array('limit' => 45, 'null' => FALSE))
+             ->addColumn('object_id', 'integer', array('limit' => 45, 'null' => FALSE))
+             ->addColumn('target', 'string', array('limit' => 45, 'null' => TRUE))
              ->addColumn('created', 'integer', array('limit' => 11, 'null'=> FALSE))
              ->create();
     }
