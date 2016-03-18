@@ -1,6 +1,4 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
-
-<?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
         <div class='row'>
             <div class='col-sm-8 col-sm-offset-2 content'>
                 <div class='inner-content'>

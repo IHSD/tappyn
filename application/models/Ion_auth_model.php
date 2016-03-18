@@ -227,7 +227,6 @@ class Ion_auth_model extends CI_Model
 			$this->error_end_delimiter     = $this->config->item('error_end_delimiter', 'ion_auth');
 		}
 
-
 		// initialize our hooks object
 		$this->_ion_hooks = new stdClass;
 
@@ -899,7 +898,7 @@ class Ion_auth_model extends CI_Model
 		$default_group = $query;
 
 		// IP Address
-		$ip_address = $this->_prepare_ip($this->input->ip_address());
+		$ip_address = $this->_prepare_ip(isset($additional_data['ip_address']) ? $additional_data['ip_address'] : $this->input->ip_address());
 		$salt       = $this->store_salt ? $this->salt() : FALSE;
 		$password   = $this->hash_password($password, $salt);
 
@@ -994,13 +993,6 @@ class Ion_auth_model extends CI_Model
 
 			if ($password === TRUE)
 			{
-				if ($user->active == 0)
-				{
-					$this->trigger_events('post_login_unsuccessful');
-					$this->set_error('login_unsuccessful_not_active');
-
-					return FALSE;
-				}
 
 				$this->set_session($user);
 

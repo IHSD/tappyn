@@ -69,11 +69,13 @@ class Submissions extends CI_Controller
 
         // Process the images array, and remove all nulls
         $addtl_images = json_decode($contest->additional_images);
-
-        foreach($addtl_images as $key => $image)
+        if(!is_null($addtl_images))
         {
-            if(is_null($image)) unset($addtl_images[$key]);
-        }
+            foreach($addtl_images as $key => $image)
+            {
+                if(is_null($image)) unset($addtl_images[$key]);
+            }
+        } else $addtl_images = array();
 
         if(!empty($addtl_images))
         {
@@ -111,6 +113,23 @@ class Submissions extends CI_Controller
             return;
         }
 
+        $contest = $this->contest->get($contest_id);
+        if(!$contest)
+        {
+            $this->responder->fail(
+                "That contest does not exist"
+            )->code(403)->respond():
+            return;
+        }
+
+        if($this->ion_auth->user()->row()->active == 0)
+        {
+            $this->responder->fail(
+                "Your account has not been verified yet"
+            )->code(500)->respond();
+            return;
+        }
+
         if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
         {
             $this->responder->message(
@@ -122,6 +141,9 @@ class Submissions extends CI_Controller
                 'object_type' => "submission",
                 'object_id' => $sid
             ));
+
+            $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
+            $this->notification->create($contest->owner, 'submission_created', 'contest', $contest_id);
         }
         else {
             $this->responder->fail(

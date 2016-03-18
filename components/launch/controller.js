@@ -1,4 +1,5 @@
 tappyn.controller('launchController', function($scope, $location, $upload, $route, $rootScope, launchFactory, emotions){
+	$scope.logged_in()
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 50},

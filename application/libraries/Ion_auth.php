@@ -139,8 +139,10 @@ class Ion_auth
 			'last_name' => $user_data->last_name,
 			'is_admin' => $this->is_admin(),
 			'points' => (int)$user_data->points,
-			'created_at' => $user_data->created_on
+			'created_at' => $user_data->created_on,
+			'is_active' => $user_data->active == 0 ? FALSE : TRUE
 		);
+
 		if($this->in_group(2))
 		{
 			$results['type'] = 'member';
@@ -315,11 +317,9 @@ class Ion_auth
 	{
 		$this->ion_auth_model->trigger_events('pre_account_creation');
 
-		$email_activation = $this->config->item('email_activation', 'ion_auth');
-
 		$id = $this->ion_auth_model->register($identity, $password, $email, $additional_data, $group_ids);
 
-		if (!$email_activation)
+		if (!$this->email_activation)
 		{
 			if ($id !== FALSE)
 			{
@@ -366,6 +366,7 @@ class Ion_auth
 				'email'      => $email,
 				'activation' => $activation_code,
 			);
+
 			if(!$this->config->item('use_ci_email', 'ion_auth'))
 			{
 				$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));

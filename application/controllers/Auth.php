@@ -14,6 +14,11 @@ class Auth extends CI_Controller {
 		$this->lang->load('auth');
 	}
 
+	public function test($email)
+	{
+		var_dump($this->ion_auth->reset_password(urldecode($email), 'davol350'));
+	}
+
 	/**
 	 * Check if a user is logged in
 	 * If they are return their ajax_user() data
@@ -23,11 +28,66 @@ class Auth extends CI_Controller {
 	{
 		if($this->ion_auth->logged_in())
 		{
-			$this->responder->data(
-				$this->ion_auth->ajax_user()
-			)->message($this->session->flashdata('message'))->respond();
+			$this->load->library('notification');
+	        $this->notification->setUser($this->ion_auth->user()->row()->id);
+			$user = $this->ion_auth->ajax_user();
+			$this->load->library('interest');
+			$this->interest->setDatabase($this->db);
+			$this->interest->setUser($this->ion_auth->user()->row()->id);
+	        $interests = $this->interest->tree();
+	        $user['interests'] = $interests;
+			$user['notifications'] = $this->notification->count();
+			$this->responder
+				 ->data($user)
+				 ->message($this->session->flashdata('message'))
+				 ->respond();
 		} else {
 			$this->responder->fail($this->session->flashdata('error'))->code(401)->respond();
+		}
+	}
+
+	function resend_verification()
+	{
+		if(!$this->ion_auth->logged_in())
+		{
+			if(is_ajax())
+			{
+				$this->responder->fail("You need to be logged in")->code(403)->respond();
+				return;
+			} else {
+				$this->load->view('auth/errors/failed_activation', array('error' => "You have to be logged in to activate your email"));
+				return;
+			}
+		}
+		$user = $this->ion_auth->user()->row();
+		if($user->active == 1)
+		{
+			$this->responder->message("Your account has already been verified")->respond();
+			return;
+		}
+		$data = array(
+			'identity'   => $user->email,
+			'id'         => $user->id,
+			'email'      => $user->email,
+			'activation' => $user->activation_code,
+		);
+
+		$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
+
+		$this->mailer
+				->to($data['identity'])
+				->from('Registration@tappyn.com')
+				->subject("Tappyn Account Verification")
+				->html($message);
+		if ($this->mailer->send() == TRUE)
+		{
+			$this->responder->message("Verification email successfully resent")->respond();
+			return;
+		}
+		else
+		{
+			$this->responder->fail("There was an error sending your verification email")->code(500)->respond();
+			return;
 		}
 	}
 
@@ -37,57 +97,13 @@ class Auth extends CI_Controller {
 	 */
 	function facebook()
 	{
+		$this->email_activation = FALSE;
 		//$this->ion_auth->logout();
 		$this->load->library('facebook_ion_auth');
-		if($this->input->get('submission'))
-		{
-			$submission_data = json_decode(urldecode($this->input->get('submission')));
-			if(is_null($submission_data)) die("Invalid data provided in submission object");
-			$this->session->set_flashdata('contest', $submission_data->contest);
-			$this->session->set_flashdata('text', $submission_data->text);
-			$this->session->set_flashdata('headline', $submission_data->headline);
-			$this->session->set_flashdata('submitting_as_guest', 'true');
-		} else if($this->input->get('vote')) {
-			$this->session->set_userdata('voting_as_guest', 'true');
-			$this->session->set_userdata('contest_id', $this->input->get('cid'));
-			$this->session->set_userdata('submission_id', $this->input->get('sid'));
-		}
+
 		if($this->facebook_ion_auth->login())
 		{
-			// User has successfully logged in, so let's
-			// see if theyre creating a submission
-			if($this->session->flashdata('submitting_as_guest'))
-			{
-				// Attempt the creation
-				$this->load->library('submission_library');
-				if($this->submission_library->create(
-					$this->session->flashdata('contest'),
-					$this->session->flashdata('headline'),
-					$this->session->flashdata('text')))
-				{
-					$this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
-					$this->session->set_flashdata('message', "Submission successfully created");
-					redirect('#/contests', 'refresh');
-				}
-				else
-				{
-					$this->session->set_flashdata('error', ($this->submission_library->errors() ? $this->submission_library->errors() : "An unknown error occured"));
-					redirect("/#/contest/".$this->session->flashdata('contest'), 'refresh');
-				}
-			} else if($this->session->userdata('voting_as_guest'))
-			{
-				$this->load->library('vote');
-				if($this->vote->upvote($this->session->userdata('submission_id'),
-									   $this->session->userdata('contest_id'),
-									   $this->ion_auth->user()->row()->id))
-				{
-					$this->session->set_flashdata('message', "Vote succesful!");
-					redirect("#/submissions/".$this->session->userdata('contest_id'));
-				} else {
-					$this->session->set_flashdata('error', ($this->vote->errors() ? $this->vote->errors() : "An unknown error occured"));
-				}
-				redirect("#/submissions/".$this->session->userdata('contest_id'), 'refresh');
-			}
+			// User has successfully logged in
 			redirect('#/dashboard', 'refresh');
 		} else {
 			$this->session->set_flashdata('error', $this->facebook_ion_auth->errors());
@@ -349,6 +365,56 @@ class Auth extends CI_Controller {
 	}
 
 	/**
+	 * Activate a users account
+	 *
+	 * Can be done through email link or admin panel
+	 * @param  integer $id   ID of the user
+	 * @param  string $code Activation code (required if done through email)
+	 * @return void
+	 */
+	function activate($id, $code=false)
+	{
+		if ($code !== false)
+		{
+			$activation = $this->ion_auth->activate($id, $code);
+		}
+		else if ($this->ion_auth->is_admin())
+		{
+			$activation = $this->ion_auth->activate($id);
+		}
+
+		if($this->ion_auth->user($id)->row()->active == 1)
+		{
+			redirect('#/dashboard?activate=successful', 'refresh');
+			return;
+		}
+
+		if ($activation)
+		{
+			if($this->ion_auth->is_admin())
+			{
+				$this->session->set_flashdata('message', 'User successfully activated');
+				redirect('admin/users/show/'.$id, 'refresh');
+			} else {
+				redirect("#/dashboard?activate=successful", 'refresh');
+			}
+		}
+		// Error activating yuser
+		else
+		{
+			if($this->ion_auth->is_admin())
+			{
+				$this->session->set_flashdata('error', $this->ion_auth->errors());
+				redirect('admin/users/show/'.$id, 'refresh');
+			}
+			else
+			{
+				redirect('#/dashboard?activate=unsuccessful', 'refresh');
+			}
+		}
+	}
+
+	/**
 	 * Deactivate a user
 	 * @param  integer $id
 	 * @return void
@@ -404,6 +470,7 @@ class Auth extends CI_Controller {
 	 */
 	function create_user()
     {
+		$this->email_activation = $this->config->item('email_activation', 'ion_auth');
 		//$this->ion_auth->logout();
 		// Check if they are registering as a guest, which limits the required fields for registration
 		$as_guest = false;
@@ -417,12 +484,12 @@ class Auth extends CI_Controller {
 		{
 			die('Invalid request');
 		}
-        // $this->form_validation->set_rules('first_name', $this->lang->line('create_user_validation_fname_label'), 'required');
-        // $this->form_validation->set_rules('last_name', $this->lang->line('create_user_validation_lname_label'), 'required');
 		if($this->input->post('group_id') == 2)
 		{
 			$this->form_validation->set_rules('age', 'Age', 'required');
 			$this->form_validation->set_rules('gender', 'Gender', 'required');
+		} else {
+			$this->email_activation = FALSE;
 		}
 		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']');
         $this->form_validation->set_rules('identity', $this->lang->line('create_user_validation_email_label'), 'required|valid_email|is_unique[' . $tables['users'] . '.email]');
@@ -459,24 +526,41 @@ class Auth extends CI_Controller {
 
         if ($this->form_validation->run() == true && ($id = $this->ion_auth->register($identity, $password, $email, $additional_data, array($this->input->post('group_id')))))
         {
-			$this->mailer
-				->to($email)
-				->from("Registration@tappyn.com")
-				->subject('Account Successfully Created')
-				->html($this->load->view('auth/email/registration', array(), true))
-				->send();
-			$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
-            if($this->ion_auth->login($identity, $password))
+			// Succesful company regstration
+			if($this->input->post('group_id') == 3)
 			{
-				$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
-				$this->analytics->track(array(
-		            'event_name' => 'registration',
-		            'object_type' => 'user',
-		            'object_id'  => $id
-		        ));
-			} else {
-				$this->responder->fail("An unknown error occured")->code(500)->respond();
+				$this->mailer
+					->to($email)
+					->from("Registration@tappyn.com")
+					->subject('Account Successfully Created')
+					->html($this->load->view('auth/email/registration', array(), true))
+					->send();
+				$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
+	            if($this->ion_auth->login($identity, $password))
+				{
+					$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
+				} else {
+					$this->responder->fail("Your account was created, but we hit an error logging you in")->code(500)->respond();
+				}
+				return;
 			}
+			else
+			{
+				if($this->ion_auth->login($identity, $password))
+				{
+					$this->responder->data($this->ion_auth->ajax_user())->message("Account successfully created. Check your email for verification")->respond();
+				} else {
+					$this->responder->fail("Your account was created, but we hit an error logging you in")->code(500)->respond();
+				}
+				return;
+			}
+
+			// Track the login event
+			$this->analytics->track(array(
+				'event_name' => 'registration',
+				'object_type' => 'user',
+				'object_id'  => $id
+			));
         }
         else
         {

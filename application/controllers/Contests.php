@@ -57,6 +57,10 @@ class Contests extends CI_Controller
         }
     }
 
+    /**
+     * Contest leaderboard endpoint
+     * @return void
+     */
     public function leaderboard()
     {
         $this->params = array(
@@ -173,7 +177,7 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
-        $this->form_validation->set_rules('display_type', 'Display Type', 'required');
+        //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
         if($this->form_validation->run() == true)
         {
@@ -214,6 +218,7 @@ class Contests extends CI_Controller
                 $update = TRUE;
             }
         }
+
         if($this->form_validation->run() == true && $cid)
         {
             $message = $update ? 'updated' : 'created';
@@ -320,11 +325,13 @@ class Contests extends CI_Controller
                 ->subject("Congratulations, you're submission won!")
                 ->html($this->load->view('emails/submission_chosen', array('company' => $company_name, 'eid' => $eid), TRUE))
                 ->send();
-                $this->analytics->track(array(
-                    'event_name' => "winner_selected",
-                    'object_type' => "contest",
-                    'object_id' => $cid
-                ));
+            $this->analytics->track(array(
+                'event_name' => "winner_selected",
+                'object_type' => "contest",
+                'object_id' => $cid
+            ));
+            $this->notifications->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
+
             return;
         }
         else

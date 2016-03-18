@@ -5,13 +5,13 @@ class Test extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->library('interests');
-        $this->interests->setDatabase($this->db);
+        $this->load->library('interest');
+        $this->interest->setDatabase($this->db);
     }
 
     public function fetch()
     {
-        if($this->interests->create('asdfasaadfasdasdf', "asdfaasdfaasdfdfaasdf", 12))
+        if($this->interest->create('asdfasaadfasdasdf', "asdfaasdfaasdfdfaasdf", 12))
         {
 
         } else {
@@ -27,7 +27,7 @@ class Test extends CI_Controller
 
     public function delete($id)
     {
-        if($this->interests->delete($id))
+        if($this->interest->delete($id))
         {
 
         } else {
@@ -38,6 +38,13 @@ class Test extends CI_Controller
 
     public function tree()
     {
-        echo json_encode($this->interests->tree());
+        echo json_encode($this->interest->tree());
+    }
+
+    public function auth()
+    {
+        var_dump($this->config->item('email_activation', 'ion_auth'));
+        $this->config->set_item('email_activation', FALSE);
+        var_dump($this->config->item('email_activation'));
     }
 }

@@ -15,9 +15,9 @@ class Vote_model extends MY_Model
     public function create($uid, $sid, $cid)
     {
         return $this->db->insert($this->table, array(
-            'user_id' => $uid,
-            'submission_id' => $sid,
-            'contest_id' => $cid,
+            'user_id' => (int)$uid,
+            'submission_id' => (int)$sid,
+            'contest_id' => (int)$cid,
             'created_at' => time()
         ));
     }

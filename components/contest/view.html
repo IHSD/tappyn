@@ -80,30 +80,37 @@
 	<div class='col-sm-4 col-xs-12'>
 		<div class='panel'>
 			<div class='panel-body'>
-				<form class='form' ng-submit='submit_to(contest.id, submit)'>
-		 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
-		 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
-		            <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
-			        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
-			        	<div class='input-count'>
-			        		<span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of 35 characters</div>
-			        </div>
-			        <div class='form-group'>
-			        	<textarea class='form-control' ng-model='submit.text' rows='3' placeholder='*Tell what the product will do for the customer in a clear, specific way'></textarea>
-			        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of 250 characters</div>
-			        </div> 
-		       		<div class='text-right'>
-		        		<button class='btn btn-oj' type='submit'>Submit</button>
-		      		</div>
-				</form>
-		        <div ng-if='!emotion_contest && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-			        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
-			        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
-			        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
-			    </div>
-			    <div ng-if='emotion_contest' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-			    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
-			    </div>
+				<div ng-hide='user.is_active'>	
+					<div class='alert alert-danger text-center'>
+						Only verified users can submit to contests, check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
+					</div>
+				</div>
+				<div ng-show='user.is_active'>
+					<form class='form' ng-submit='submit_to(contest.id, submit)'>
+			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
+			 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
+			            <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
+				        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
+				        	<div class='input-count'>
+				        		<span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of 35 characters</div>
+				        </div>
+				        <div class='form-group'>
+				        	<textarea class='form-control' ng-model='submit.text' rows='3' placeholder='*Tell what the product will do for the customer in a clear, specific way'></textarea>
+				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of 250 characters</div>
+				        </div> 
+			       		<div class='text-right'>
+			        		<button class='btn btn-oj' type='submit'>Submit</button>
+			      		</div>
+					</form>
+			        <div ng-if='!emotion_contest && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+				        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
+				        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
+				        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
+				    </div>
+				    <div ng-if='emotion_contest' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+				    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
+				    </div>
+				</div>
 		   </div>
 		</div>
 	</div>
