@@ -246,9 +246,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	$scope.close_login = function(){
-		$scope.signing_in = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
-		$location.path('/home');
+		if($scope.signing_in.type != 'company') $location.path('/home');
+		$scope.signing_in = {show : false, type : '', object : ''};
 	}
 
 	$scope.open_register = function(type, obj){
@@ -257,9 +257,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	$scope.close_register = function(){
-		$scope.registration = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
-		$location.path('/home');
+		if($scope.registration.type != 'company') $location.path('/home');
+		$scope.registration = {show : false, type : '', object : ''};
 	}
 	$scope.login_to_register = function(){
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};

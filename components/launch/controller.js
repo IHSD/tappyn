@@ -22,16 +22,26 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.set_step = function(step){
-		$scope.current = $scope.steps[step];
 		if(step == "payment"){
 			if(!$scope.payments && $rootScope.user) $scope.grab_payments();
+			$scope.current = $scope.steps[step];
 		}
 		else if(step == 'detail'){
 			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
+			$scope.current = $scope.steps[step];
 		}
 		else if(step == 'preview'){
-
+			if(!$rootScope.user) $scope.open_register("company", '');
+			else if(!$scop.summary || $scop.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!$scop.industry || $scop.industry == '')  $scope.set_alert("An industry is required", "error");
+			else if(!$scop.audience || $scop.audience == '')  $scope.set_alert("A longer description is required", "error");
+			else if(!$scop.different || $scop.different == '')  $scope.set_alert("What makes you different is required", "error");
+			else{
+				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
+				$scope.current = $scope.steps[step];
+			}
 		}
+		else $scope.current = $scope.steps[step];
 		$scope.to_top();
 	}
 
@@ -98,47 +108,38 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.submit_contest = function(contest, pay){
-		if(!$rootScope.user) $scope.open_register("company", '');
-		else{
-			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
-			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
-			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
-			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
-			else{
-				if(contest.id){
-					launchFactory.update(contest).success(function(response){
-						if(response.http_status_code == 200){
-							if(response.success){
-								if(pay)$scope.open_payment();
-								else{
-									$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-									$scope.set_step('done');
-								}
-							}
-							else $scope.set_alert(response.message, "default");	 
+		if(contest.id){
+			launchFactory.update(contest).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						if(pay) $scope.open_payment();
+						else{
+							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+							$scope.set_step('done');
 						}
-						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-						else $scope.check_code(response.http_status_code);
-					});	
-				}	
-				else{
-					launchFactory.submission(contest).success(function(response){
-						if(response.http_status_code == 200){
-							if(response.success){
-								$scope.contest.id = response.data.id;
-								if(pay) $scope.open_payment();
-								else{
-									$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-									$scope.set_step('done');
-								}
-							}
-							else $scope.set_alert(response.message, "default");	 
-						}
-						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-						else $scope.check_code(response.http_status_code);
-					});	
+					}
+					else $scope.set_alert(response.message, "default");	 
 				}
-			}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});	
+		}	
+		else{
+			launchFactory.submission(contest).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.contest.id = response.data.id;
+						if(pay) $scope.open_payment();
+						else{
+							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+							$scope.set_step('done');
+						}
+					}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});	
 		}
 	}
 	var stripeResponseHandler = function(status, response) {
