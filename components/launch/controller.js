@@ -28,10 +28,10 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		}
 		else if(step == 'preview'){
 			if(!$rootScope.user) $scope.open_register("company", '');
-			else if(!$scope.summary || $scope.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
-			else if(!$scope.industry || $scope.industry == '')  $scope.set_alert("An industry is required", "error");
-			else if(!$scope.audience || $scope.audience == '')  $scope.set_alert("A longer description is required", "error");
-			else if(!$scope.different || $scope.different == '')  $scope.set_alert("What makes you different is required", "error");
+			else if(!$scope.contest.summary || $scope.contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!$scope.contest.industry || $scope.contest.industry == '')  $scope.set_alert("An industry is required", "error");
+			else if(!$scope.contest.audience || $scope.contest.audience == '')  $scope.set_alert("A longer description is required", "error");
+			else if(!$scope.contest.different || $scope.contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{
 				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
 				$scope.current = $scope.steps[step];
