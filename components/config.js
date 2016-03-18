@@ -2,7 +2,8 @@ var tappyn = angular.module('tappyn', [
 	'ngRoute',
 	'ui.bootstrap',
 	'ngAnimate',
-	'angularFileUpload'
+	'angularFileUpload',
+	'ngSanitize'
 ]);
 
 tappyn.config(function($routeProvider) {
