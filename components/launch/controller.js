@@ -22,11 +22,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.set_step = function(step){
-		if(step == "payment"){
-			if(!$scope.payments && $rootScope.user) $scope.grab_payments();
-			$scope.current = $scope.steps[step];
-		}
-		else if(step == 'detail'){
+		if(step == 'detail'){
 			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
 			$scope.current = $scope.steps[step];
 		}
@@ -106,6 +102,19 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
 		else $scope.set_step("detail");
 	}
+
+	$scope.open_payment = function(){
+		$scope.adding_payment = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_payment = function(){
+		$scope.adding_payment = false;
+		$rootScope.modal_up = false;
+		$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+		$scope.set_step("done");
+	}
+
 
 	$scope.submit_contest = function(contest, pay){
 		if(contest.id){
@@ -241,18 +250,6 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	       	else if(type == 'pic2') $scope.contest.additional_image_2 = url+new_name;
 	       	else if(type == 'pic3') $scope.contest.additional_image_3 = url+new_name;
 	    });
-	}
-
-	$scope.open_payment = function(){
-		$scope.adding_payment = true;
-		$rootScope.modal_up = true;
-	}
-
-	$scope.close_payment = function(){
-		$scope.adding_payment = false;
-		$rootScope.modal_up = false;
-		$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-		$scope.set_step("done");
 	}
 
 	$scope.reload = function(){
