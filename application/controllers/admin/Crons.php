@@ -16,6 +16,25 @@ class Crons extends CI_Controller
 
     }
 
+    public function push_notification()
+    {
+        $users = $this->db->select('*')->from('users_groups')->where('group_id', 2)->get();
+        foreach($users->result() as $user)
+        {
+            if(!$this->db->insert('notifications', array(
+                'user_id' => $user->user_id,
+                'type' => 'new_update',
+                'created' => time(),
+                'read_at' => NULL,
+                'read' => 0,
+                'object_type' => 'update',
+                'object_id' => 0,
+            ))) {
+                die($this->db->error()['message']);
+            }
+        }
+    }
+
     /**
      * Ended contest cron job
      *
@@ -69,7 +88,7 @@ class Crons extends CI_Controller
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s')
         ))->order_by('id', 'asc')->fetch()->result();
-        
+
         foreach($contests as $contest)
         {
             echo "=======================================\n";
