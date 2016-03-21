@@ -14,11 +14,54 @@ class MY_Model extends CI_Model
   protected $joins = array();
   protected $where_not_in = array();
 
+  /**
+   * Custom __construct function
+   */
   public function __construct()
   {
-    parent::__construct();
+      parent::__construct();
   }
 
+  /**
+   * Used to inject our DB dependency
+   *
+   * In production, should just be $CI->db. However in testing,
+   * we can inject a number of reasonable database 'objects'
+   * @param  CI_DB $db Database object
+   * @return void
+   */
+  public function loadDB(CI_DB $db)
+  {
+     $this->db = $db;
+  }
+
+  /**
+   * If we try to load a nonexistent database connection, we fallback to getting
+   * the global CI $db variable. This is only for backwards compatibility.
+   *
+   * Remove once conversion is finished
+   *
+   * @todo Remove this function when model conversion is finished
+   * @param  string $var Property to search for
+   * @return mixed
+   */
+  public function __get($var)
+  {
+      $class = get_called_class();
+      if($var == 'db')
+      {
+          error_log("Calling instance of DB from {$class}");
+          return get_instance()->db;
+      }
+      throw new Exception("Property {$var} does not exist for {$class}");
+  }
+
+  /**
+   * Set where stmt in query
+   * @param  mixed $where  Where column or array of ($col => $val)
+   * @param  mixed $value  If $where is a key, this is the value
+   * @return self
+   */
   public function where($where, $value = NULL)
   {
       if(!is_array($where))
@@ -30,19 +73,32 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  /**
+   * Set where in stmt in query
+   * @param  string $col  DB Column
+   * @param  array $vals  Values to check for presence in
+   * @return self
+   */
   public function where_in($col, $vals = NULL)
   {
       $this->where_in[$col] = $vals;
       return $this;
   }
 
+  /**
+   * Set WHERE NOT IN
+   * @param  string $col
+   * @param  array  $vals
+   * @return self
+   */
   public function where_not_in($col, $vals)
   {
       $this->where_not_in[$col] = $vals;
       return $this;
   }
+
   /**
-   * Set Select Section of DB Query
+   * Set SELECT
    * @param  mixed $select
    * @return self
    */
@@ -114,6 +170,13 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  /**
+   * Set JOIN segment of query
+   * @param  string $table
+   * @param  string $statement JOIN statement
+   * @param  string $type      Type of join to perform
+   * @return self
+   */
   public function join($table, $statement, $type)
   {
       $this->joins[] = array(
@@ -208,11 +271,17 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  /**
+   * Set GROUP BY clause
+   * @param  string $col
+   * @return self
+   */
   public function group_by($col)
   {
       $this->group_by[] = $col;
       return $this;
   }
+
   /**
    * Hit DB with a manual query
    * @param  string $query
@@ -225,6 +294,10 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  /**
+   * Fetch number of rows from query result
+   * @return integer Number of rows
+   */
   public function num_rows()
   {
       return $this->response->num_rows();
@@ -249,10 +322,10 @@ class MY_Model extends CI_Model
   }
 
   /**
-   * Get count of users
+   * Get count of table
    * @param array $where
    * @param array $like
-   * @return integer  Count of rows given params
+   * @return integer  Count of rows for given params
    */
   public function count($where = array(), $like = array())
   {
@@ -262,6 +335,4 @@ class MY_Model extends CI_Model
 
       return (int) $this->db->get()->row()->count;
   }
-
-
 }
