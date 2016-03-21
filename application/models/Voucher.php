@@ -104,7 +104,6 @@ class Voucher extends MY_Model
      */
     public function redeem($vid, $cid)
     {
-        error_log("Redeeming voucher");
         if($this->db->insert('voucher_uses', array(
             'created_at' => time(),
             'voucher_id' => $vid,
@@ -124,6 +123,25 @@ class Voucher extends MY_Model
         return FALSE;
     }
 
+    public function get($vid)
+    {
+        $check = $this->db->select('*')->from('vouchers')->where('id', $vid)->get();
+        if($check && $check->num_rows() > 0)
+        {
+            return $check->row();
+        }
+        return FALSE;
+    }
+
+    public function fetchByCode($code)
+    {
+        $check = $this->db->select('*')->from('vouchers')->where('code', $code)->get();
+        if($check && $check->num_rows() > 0)
+        {
+            return $check->row();
+        }
+        return FALSE;
+    }
     public function errors()
     {
         return $this->errors;

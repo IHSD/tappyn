@@ -1,4 +1,4 @@
-tappyn.service("contestModel", function(){
+tappyn.service('launchModel', function(){
 	this.sift_images = function(contest, emotions){
 		for(var i = 0; i < emotions.length; i++){
 			if(contest.emotion == emotions[i].type){
@@ -30,5 +30,5 @@ tappyn.service("contestModel", function(){
 				if(contest.platform == "general" && contest.display_type == "copies") return null;
 			}
 		}
-	}
+	}	
 })

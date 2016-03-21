@@ -1,9 +1,9 @@
-tappyn.controller('launchController', function($scope, $location, $upload, $route, $rootScope, launchFactory, emotions){
+tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
 	$scope.logged_in()
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
 		'detail' 		 : {step : 'detail',   next : 'payment', previous : 'package', fill : 50},
-		'payment'		 : {step : 'payment',  next : 'none',    previous : 'detail',  fill : 75},
+		'preview' 		 : {step : 'preview',   next : 'payment', previous : 'package', fill : 75},
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
 	$scope.current = $scope.steps['package'];
@@ -14,32 +14,55 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 
 	$scope.registering = false;
 
+	$scope.price = 99.99;
+
 	$scope.close_register = function(){
 		$rootScope.modal_up = false;
 		$scope.registering = false;
 	}
 
 	$scope.set_step = function(step){
-		$scope.current = $scope.steps[step];
-		if(step == "payment"){
-			if(!$scope.payments && $rootScope.user) $scope.grab_payments();
-		}
-		else if(step == 'detail'){
+		if(step == 'detail'){
 			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
+			$scope.current = $scope.steps[step];
 		}
+		else if(step == 'preview'){
+			if(!$rootScope.user) $scope.open_register("company", '');
+			else if(!$scope.contest.summary || $scope.contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
+			else if(!$scope.contest.industry || $scope.contest.industry == '')  $scope.set_alert("An industry is required", "error");
+			else if(!$scope.contest.audience || $scope.contest.audience == '')  $scope.set_alert("A longer description is required", "error");
+			else if(!$scope.contest.different || $scope.contest.different == '')  $scope.set_alert("What makes you different is required", "error");
+			else{
+				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
+				$scope.current = $scope.steps[step];
+			}
+		}
+		else $scope.current = $scope.steps[step];
+		$scope.to_top();
 	}
 
 	$scope.select_objective = function(objective){
 		$scope.contest.objective = objective;
+		$scope.contest.display_type = null;
+		var old = $location.hash();
+		$location.hash("display");
+		$anchorScroll();
+		$location.hash(old);
 	}
 
 	$scope.select_platform = function(platform){
 		$scope.contest.platform = platform;
+		$scope.contest.objective = null;
+		$scope.contest.display_type = null;
+		var old = $location.hash();
+		$location.hash("objective");
+		$anchorScroll();
+		$location.hash(old);
 	}
 
-	$scope.select_display = function(display){
-		$scope.contest.display_type = display;
-	}
+	$scope.select_display = function(type){
+		$scope.contest.display_type = type;
+	}	
 
 	$scope.choose_personality = function(type){
 		$scope.contest.emotion = type;
@@ -65,11 +88,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data.customer.sources.data;
-				else{
-					$scope.adding_payment = true;
-					$rootScope.modal_up = true;
-					$scope.set_alert(response.error, "default");	
-				} 
+				else $scope.add_new = true; 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -82,43 +101,53 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 		else $scope.set_step("detail");
 	}
 
-	$scope.submit_contest = function(contest){
-		if(!$rootScope.user) $scope.open_register("company", '');
-		else{
-			if(!contest.summary || contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
-			else if(!contest.industry || contest.industry == '')  $scope.set_alert("An industry is required", "error");
-			else if(!contest.audience || contest.audience == '')  $scope.set_alert("A longer description is required", "error");
-			else if(!contest.different || contest.different == '')  $scope.set_alert("What makes you different is required", "error");
-			else{
-				if(contest.id){
-					launchFactory.update(contest).success(function(response){
-						if(response.http_status_code == 200){
-							if(response.success){
-								$scope.set_alert(response.message, "default");
-								$scope.contest.id = response.data.id;
-								$scope.set_step('payment');
-							}
-							else $scope.set_alert(response.message, "default");	 
+	$scope.open_payment = function(){
+		$scope.grab_payments();
+		$scope.adding_payment = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_payment = function(){
+		$scope.adding_payment = false;
+		$rootScope.modal_up = false;
+		$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+		$scope.set_step("done");
+	}
+
+
+	$scope.submit_contest = function(contest, pay){
+		if(contest.id){
+			launchFactory.update(contest).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						if(pay) $scope.open_payment();
+						else{
+							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+							$scope.set_step('done');
 						}
-						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-						else $scope.check_code(response.http_status_code);
-					});	
-				}	
-				else{
-					launchFactory.submission(contest).success(function(response){
-						if(response.http_status_code == 200){
-							if(response.success){
-								$scope.set_alert(response.message, "default");
-								$scope.contest.id = response.data.id;
-								$scope.set_step('payment');
-							}
-							else $scope.set_alert(response.message, "default");	 
-						}
-						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-						else $scope.check_code(response.http_status_code);
-					});	
+					}
+					else $scope.set_alert(response.message, "default");	 
 				}
-			}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});	
+		}	
+		else{
+			launchFactory.submission(contest).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.contest.id = response.data.id;
+						if(pay) $scope.open_payment();
+						else{
+							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+							$scope.set_step('done');
+						}
+					}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});	
 		}
 	}
 	var stripeResponseHandler = function(status, response) {
@@ -130,7 +159,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
-       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method}).success(function(res){
+       	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
@@ -162,7 +191,7 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	$scope.old_payment = function(){
 		if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
 		else{
-			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method}).success(function(res){
+			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
@@ -179,12 +208,9 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	$scope.use_voucher = function(){
 		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 		else{
-			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+			launchFactory.voucherValid($scope.voucher_code).success(function(res){
 	       		if(res.http_status_code == 200){
-					if(res.success){
-						$scope.set_alert(res.message, "default");	
-						$scope.set_step("done");
-					}
+					if(res.success) $scope.price = res.data.price;
 					else $scope.set_alert(res.message, "default");	 
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
@@ -223,16 +249,6 @@ tappyn.controller('launchController', function($scope, $location, $upload, $rout
 	       	else if(type == 'pic2') $scope.contest.additional_image_2 = url+new_name;
 	       	else if(type == 'pic3') $scope.contest.additional_image_3 = url+new_name;
 	    });
-	}
-
-	$scope.open_payment = function(){
-		$rootScope.modal_up = true;
-		$scope.adding_payment = true;
-	}
-
-	$scope.close_payment = function(){
-		$rootScope.modal_up = false;
-		$scope.adding_payment = false;
 	}
 
 	$scope.reload = function(){

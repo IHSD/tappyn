@@ -127,28 +127,28 @@ tappyn.filter('firstChar', function() {
 });
 
 tappyn.constant('emotions', [
-	{type : 'dove', adjectives : 'Wholesomeness, ethics, simplicity, purity', 
+	{type : 'dove', adjectives : 'Wholesomeness, ethics, simplicity, purity', brand : 'Purist',
 		google : '', facebook : '', twitter : 'public/img/dove_t.jpg', icon : 'public/img/dove.png'},
-	{type : 'books', adjectives : 'Truth, objectivity, education, disclipline', 
+	{type : 'books', adjectives : 'Truth, objectivity, education, disclipline', brand : 'Source',
 		google : 'public/img/book_g.jpg', facebook : '', twitter : 'public/img/book_t.jpg', icon : 'public/img/book.png'},
-	{type : 'mountain',  adjectives : 'Freedom, adventure, self-discovery, ambition',  
+	{type : 'mountain',  adjectives : 'Freedom, adventure, self-discovery, ambition', brand : 'Pioneer',
 		google : 'public/img/mountain_g.jpg', facebook : '', twitter : '', icon : 'public/img/mountain.png'},
-	{type : 'athelete', adjectives : 'Performance, reslience, steadfastness', 
+	{type : 'athelete', adjectives : 'Performance, reslience, steadfastness', brand : 'Conqueror',
 		google : 'public/img/athlete_g.jpg', facebook : '', twitter : 'public/img/athlete_t.jpg', icon : 'public/img/athlete.png'},
-	{type : 'eagle', adjectives : 'Independence, controversy, freedom', 
-		google : '', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
-	{type : 'lightbulb', adjectives : 'Imagination, surprise, curiosity', 
+	{type : 'eagle', adjectives : 'Independence, controversy, freedom', brand : 'Rebel',
+		google : 'eagle_g.jpg', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
+	{type : 'lightbulb', adjectives : 'Imagination, surprise, curiosity', brand : 'Wizard',
 		google : 'public/img/lightbulb_g.jpg', facebook : '', twitter : 'public/img/lightbulb_t.png', icon : 'public/img/lightbulb.png'},
-	{type : 'glass', adjectives : 'Spontaneity, charm, humor', 
+	{type : 'glass', adjectives : 'Spontaneity, charm, humor', brand : 'Entertainer',
 		google : 'public/img/wine_g.jpg', facebook : '', twitter : 'public/img/wine_t.jpg', icon : 'public/img/wine.png'},
-	{type : 'cross', adjectives : 'Compassion, kindness, care, love', 
+	{type : 'cross', adjectives : 'Compassion, kindness, care, love', brand : 'Protector',
 		google : 'public/img/cross_g.jpg', facebook : '', twitter : '', icon : 'public/img/cross.png'},
-	{type : 'crown', adjectives : 'Determination, respect, dominance, wealth', 
+	{type : 'crown', adjectives : 'Determination, respect, dominance, wealth', brand : 'Emperor',
 		google : '', facebook : '', twitter : '', icon : 'public/img/crown.png'}
 ]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $route, $location, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $q, $route, $location, $anchorScroll, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
@@ -198,6 +198,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		});
 	}
 
+	$scope.to_top = function(){
+		var old = $location.hash();
+		$location.hash("top-scroll");
+		$anchorScroll();
+		$location.hash(old);
+	}
+
 	$scope.amazon_connect = function(bucket){
 		AppFact.aws_key(bucket).success(function(response){
 			if(response.success) $rootScope.key = response.data.access_token;
@@ -240,9 +247,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 	}
 
 	$scope.close_login = function(){
-		$scope.signing_in = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
-		$location.path('/home');
+		if($scope.signing_in.type != 'company') $location.path('/home');
+		$scope.signing_in = {show : false, type : '', object : ''};
 	}
 
 	$scope.open_register = function(type, obj){
@@ -251,9 +258,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 	}
 
 	$scope.close_register = function(){
-		$scope.registration = {show : false, type : '', object : ''};
 		$rootScope.modal_up = false;
-		$location.path('/home');
+		if($scope.registration.type != 'company') $location.path('/home');
+		$scope.registration = {show : false, type : '', object : ''};
 	}
 	$scope.login_to_register = function(){
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
@@ -316,7 +323,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$scope.signing_in = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					window.Intercom('update', {
 					   app_id: 'qj6arzfj',
@@ -327,7 +333,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
-					$route.reload();
+					if($scope.signing_in.type != "company") $route.reload();
+					$scope.signing_in = {show : false, type : '', object : ''};
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -353,7 +360,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 				if(response.success){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
-					$scope.registration = {show : false, type : '', object : ''};
 					$rootScope.modal_up = false;
 					$scope.step = 1;
 					window.Intercom('update', {
@@ -366,7 +372,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 					   }
 					});
 					fbq('track', 'Lead');
-					$route.reload();
+					if($scope.registration.type != "company") $route.reload();
+					$scope.registration = {show : false, type : '', object : ''};
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -410,6 +417,32 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $q, $rou
 		var number_array = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50];	
 		return number_array.includes(index);
 	}
+
+	$scope.amazon_connect('tappyn');
+	$scope.select_logo = function($files, register){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var new_name = Date.now();
+	    var rando = Math.random() * (10000 - 1) + 1;
+	    new_name = new_name.toString() + rando.toString();
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	register.logo_url = url+new_name;
+	    });
+	}
+
 
 });
 
