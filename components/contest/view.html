@@ -80,12 +80,17 @@
 	<div class='col-sm-4 col-xs-12'>
 		<div class='panel'>
 			<div class='panel-body'>
-				<div ng-hide='user.is_active'>	
+				<div ng-show='!user'>	
+					<div class='alert alert-danger text-center'>
+						<a href ng-click='open_login("default", "")'>Sign in</a> to see if you're eligible to submit to this contest
+					</div>
+				</div>
+				<div ng-show='user && !user.is_active'>	
 					<div class='alert alert-danger text-center'>
 						Only verified users can submit to contests, check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
 					</div>
 				</div>
-				<div ng-show='user.is_active'>
+				<div ng-show='user && user.is_active'>
 					<form class='form' ng-submit='submit_to(contest.id, submit)'>
 			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
 			 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
