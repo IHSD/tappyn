@@ -113,6 +113,15 @@ class Submissions extends CI_Controller
             return;
         }
 
+        $contest = $this->contest->get($contest_id);
+        if(!$contest)
+        {
+            $this->responder->fail(
+                "That contest does not exist"
+            )->code(403)->respond();
+            return;
+        }
+
         if($this->ion_auth->user()->row()->active == 0)
         {
             $this->responder->fail(
@@ -132,8 +141,9 @@ class Submissions extends CI_Controller
                 'object_type' => "submission",
                 'object_id' => $sid
             ));
-            
+
             $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
+            $this->notification->create($contest->owner, 'submission_created', 'contest', $contest_id);
         }
         else {
             $this->responder->fail(

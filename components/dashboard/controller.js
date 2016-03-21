@@ -2,7 +2,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
 	$scope.adding_payment = {show : false, id : ''};
-	$scope.logged_in().then(function(response){
+	if($rootScope.user){
 		dashFactory.grabDash($scope.type).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.dash = response.data;
@@ -11,7 +11,8 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 			else if(response.http_status_code == 500) alert(response.error);
 			else $scope.check_code(response.http_status_code);
 		});
-	});
+	}
+	else $scope.open_login("default", '');
 
 	$scope.grab_dash = function(type){
 		$scope.type = type;

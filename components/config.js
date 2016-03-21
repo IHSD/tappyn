@@ -2,7 +2,8 @@ var tappyn = angular.module('tappyn', [
 	'ngRoute',
 	'ui.bootstrap',
 	'ngAnimate',
-	'angularFileUpload'
+	'angularFileUpload',
+	'ngSanitize'
 ]);
 
 tappyn.config(function($routeProvider) {
@@ -147,7 +148,7 @@ tappyn.constant('emotions', [
 ]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $q, $route, $location, $anchorScroll, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
@@ -165,8 +166,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			'art_entertainment' : 'Art & Entertainment',
 			'fashion_beauty' : 'Fashion & Beauty'
 	}
+
 	$scope.logged_in = function(){
-		return $q(function(resolve, reject) {
+		$interval(function(){
 			AppFact.isLoggedIn().success(function(response){
 				if(response.http_status_code == 200){
 					$rootScope.user = response.data;
@@ -182,7 +184,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
-					resolve('All logged in');
 				}
 				else{
 					window.Intercom('boot', {
@@ -191,11 +192,37 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 						 	activator: '#IntercomDefaultWidget'
 						 }
 					})
-					resolve("Guesterino");	
 				}
-			})
-		});
+			});
+		}, 20000);
 	}
+
+	AppFact.isLoggedIn().success(function(response){
+		if(response.http_status_code == 200){
+			$rootScope.user = response.data;
+			sessionStorage.setItem("user", JSON.stringify(response.data));
+		}
+		if($rootScope.user){
+			window.Intercom('boot', {
+			   app_id: 'qj6arzfj',
+			   email: $rootScope.user.email,
+			   user_id: $rootScope.user.id,
+			   created_at: $rootScope.user.created_at,
+			   widget: {
+			      activator: '#IntercomDefaultWidget'
+			   }
+			});
+		}
+		else{
+			window.Intercom('boot', {
+				 app_id: 'qj6arzfj',
+				 widget: {
+				 	activator: '#IntercomDefaultWidget'
+				 }
+			})
+		}
+	});
+	$scope.logged_in();
 
 	$scope.to_top = function(){
 		var old = $location.hash();
@@ -313,7 +340,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
-	
 	**/
 
 	$scope.log_in = function(email, pass){
