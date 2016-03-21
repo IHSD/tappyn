@@ -9,7 +9,6 @@ class Contest extends MY_Model
     public function __construct()
     {
         parent::__construct();
-        $this->load->database();
         $this->table = 'contests';
         $this->order_by = 'contests.id';
         $this->order_dir = 'desc';
