@@ -8,6 +8,19 @@ class Interest
      */
     protected $db;
 
+    protected $topLevelInterests = array(
+        'food_beverage',
+        'finance_business',
+        'health_wellness',
+        'travel',
+        'social_network',
+        'home_garden',
+        'education',
+        'art_entertainment',
+        'fashion_beauty'
+    );
+
+    
     /**
      * ID of the current user
      * @var integer
@@ -291,6 +304,11 @@ class Interest
             return TRUE;
         }
         return FALSE;
+    }
+
+    public function topLevelInterest($interest)
+    {
+
     }
 
     private function branch_result($results)

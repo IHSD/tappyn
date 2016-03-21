@@ -25,7 +25,8 @@ class Notification
     public function count()
     {
         $notifications = $this->db->select('COUNT(*) as count')->from($this->table)->where(array('user_id' => $this->user, 'read' => 0))->get();
-        if(!$notifications) return 0;
+        if(!$notifications)
+            return 0;
         return (int)$notifications->row()->count;
     }
 
@@ -111,6 +112,39 @@ class Notification
                     $nots[] = $not;
                 break;
 
+                case 'submission_created':
+                    $cid = $notification->object_id;
+                    $submissions = $this->db->select('COUNT(*) as count')->from('contests')->where('contest_id', $cid)->get()->row()->count;
+                    $not->type = 'submission_created';
+                    $not->message = "Your contest has gotten {$submissions} submissions!";
+                    $not->destination = "#/contest/{$cid}";
+                    $not->object_type = $notification->object_type;
+                    $not->object_id = $notification->object_id;
+                    $nots[] = $not;
+                break;
+
+                case 'new_update':
+                    $not->type = 'new_update';
+                    $not->message = "Welcome to the new Tappyn!
+                                    <br>
+                                    In our recent updates:
+                                    <ul>
+                                    <li>We've fixed the new up-voting system, so spam accounts can't influence your submission.</li>
+                                    <li>In order to give the voting system a fresh start, we've had to clear all past submission tables.</li>
+                                    <li>We've implemented a notification system.</li>
+                                    <li>We've increased website performance.</li>
+                                    <li>We've made the user experience more streamlined.</li>
+                                    </ul>
+                                    Feel free to contact me with any questions or check out our <a href='#/faq'>FAQ page!</a>
+                                    <br><br>
+                                    Best,
+                                    <br><br>
+                                    Austin<br>";
+                    $not->destination = "#";
+                    $not->object_type = NULL;
+                    $not->object_id = NULL;
+                    $nots[] = $not;
+                break;
             }
         }
         //$this->markAsRead();
