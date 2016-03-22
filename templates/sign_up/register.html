@@ -105,3 +105,14 @@
 		</div>
 	</div>
 </div>
+<script>
+	$("#fb-login").click(function(){
+		fbq('track', 'Lead');
+		ga(‘send’, {
+		hitType: ‘event’,
+		eventCategory: ‘User Signup’,
+		eventAction: ‘Signup,
+		eventLabel: ‘New User Facebook’
+		});
+	});
+</script>

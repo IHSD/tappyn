@@ -395,6 +395,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					   }
 					});
 					fbq('track', 'Lead');
+					ga(‘send’, {
+						hitType: ‘event’,
+						eventCategory: ‘User Signup’,
+						eventAction: ‘Signup,
+						eventLabel: ‘New User Email’
+					});
 					if($scope.registration.type != "company") $route.reload();
 					$scope.registration = {show : false, type : '', object : ''};
 				}
