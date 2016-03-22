@@ -30,11 +30,11 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 						if(response.success){
 							$scope.set_alert(response.message, "default");	 
 							$scope.update_points(2);
-							ga(‘send’, {
-							hitType: ‘event’,
-							eventCategory: ‘Contest Submission’,
-							eventAction: ‘submission’,
-							eventLabel: ‘User Submission’});
+							ga('send', {
+							hitType: 'event',
+							eventCategory: 'Contest Submission',
+							eventAction: 'submission',
+							eventLabel: 'User Submission'});
 							$route.reload();
 						}
 						else $scope.set_alert(response.message, "default");	 
