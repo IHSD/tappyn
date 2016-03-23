@@ -28,23 +28,13 @@ class Auth extends CI_Controller {
 	{
 		if($this->ion_auth->logged_in())
 		{
-			//Check if theyre a facebook login
-			if($this->ion_auth->user()->row()->facebook_login == 1)
-			{
-				// If their age or gender is null we force them to relogin with facebook
-				$profile = $this->user->profile($this->ion_auth->user()->row()->id);
-				if(is_null($profile->age) || is_null($profile->gender))
-				{
-					$this->responder->fail($this->session->flashdata('error'))->code(401)->respond();
-				}
-			}
-			//
 			$this->load->library('notification');
 	        $this->notification->setUser($this->ion_auth->user()->row()->id);
 			$user = $this->ion_auth->ajax_user();
 			$this->load->library('interest');
 			$this->interest->setDatabase($this->db);
 			$this->interest->setUser($this->ion_auth->user()->row()->id);
+			$profile = $this->user->profile
 	        $interests = $this->interest->tree();
 	        $user['interests'] = $interests;
 			$user['notifications'] = $this->notification->count();

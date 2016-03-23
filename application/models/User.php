@@ -31,6 +31,21 @@ class User extends MY_Model
         return FALSE;
     }
 
+    public function canEditAge($uid)
+    {
+        return is_null($this->profile($uid)->age);
+    }
+
+    public function canEditGender($uid)
+    {
+        return is_null($this->profile($uid)->gender);
+    }
+
+    public function canEditLocation($uid)
+    {
+        return is_null($this->profile($uid)->location);
+    }
+
     /**
      * Save a user profile
      * @param  integer $uid
