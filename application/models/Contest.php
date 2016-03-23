@@ -101,6 +101,39 @@ class Contest extends MY_Model
         return false;
     }
 
+    public function mayUserSubmit($uid, $cid)
+    {
+        // Fetch the contest
+        $contest = $this->contest->get($cid);
+        // This contest has no age / gender restrictions
+        if($contest->gender == 0 && $contest->min_age == 18 && $contest->max_age == 65)
+        {
+            return TRUE;
+        }
+
+        if($this->userIsGender($contest->gender, $profile->gender) && $this->userInAgeRange($contest->min_age, $contest->max_age, $profile->age))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    public function userIsGender($gender_req, $gender_sup)
+    {
+        if($gender_req == 0 || ($gender_req == $gender_sup)) return TRUE;
+        return FALSE;
+    }
+
+    public function userInAgeRange($min, $max, $age)
+    {
+        // There are no age requirementss
+        if($min == 18 && $max == 65)
+        {
+            return TRUE;
+        }
+        return ($min <= $age && $age <= $max);
+    }
+
     public function create($data)
     {
         if(!$this->validate())

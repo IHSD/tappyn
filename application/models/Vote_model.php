@@ -2,9 +2,9 @@
 
 class Vote_model extends MY_Model
 {
-    protected $table = 'votes';
-    protected $order_dir;
-    protected $order_by;
+    public $table = 'votes';
+    public $order_dir;
+    public $order_by;
     public function __construct()
     {
         parent::__construct();
