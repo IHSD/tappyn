@@ -37,6 +37,8 @@ class Auth extends CI_Controller {
 			$profile = $this->user->profile
 	        $interests = $this->interest->tree();
 	        $user['interests'] = $interests;
+			$user['age'] = $profile->age;
+			$user['gender'] = $profile->gender;
 			$user['notifications'] = $this->notification->count();
 			$this->responder
 				 ->data($user)
