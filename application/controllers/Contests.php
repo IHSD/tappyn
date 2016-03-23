@@ -182,6 +182,9 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true)
         {
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
+            $min_age = ($this->input->post('min_age') && $this->input->post('min_age') >= 18) ? $this->input->post('min_age') : 18;
+            $max_age = ($this->input->post('max_age') && $this->input->post('max_age') <= 65) ? $this->input->post('max_age') : 65;
+            $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
                 'audience'          => $this->input->post('audience'),
@@ -189,9 +192,10 @@ class Contests extends CI_Controller
                 'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),
                 'platform'          => $this->input->post('platform'),
-                'age'               => $this->input->post('age'),
                 'gender'            => $this->input->post('gender'),
                 'owner'             => $this->ion_auth->user()->row()->id,
+                'min_age'           => $min_age,
+                'max_age'           => $max_age,
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
