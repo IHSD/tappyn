@@ -34,6 +34,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			else if(!$scope.contest.different || $scope.contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{
 				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
+				$scope.form_limit = launchModel.parallel_submission($scope.contest);
 				$scope.current = $scope.steps[step];
 			}
 		}

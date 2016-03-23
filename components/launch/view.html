@@ -215,7 +215,7 @@
 				<div class='col-xs-12 col-sm-3'>
 					<div ng-class='{"package-highlight" : contest.objective == "consideration"}' class='contest-box launch-page-hover' ng-click='select_objective("consideration")'>
 						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Influence Consideration</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/influence_google.png'></div>
+						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/inc_consideration.png'></div>
 						<div>
 							Get customers to engage with your content and visit your site. Educate customers about your product or service. 
 						</div>
@@ -233,7 +233,7 @@
 				<div class='col-xs-12 col-sm-3'>
 					<div ng-class='{"package-highlight" : contest.objective == "search_presence"}' class='contest-box launch-page-hover' ng-click='select_objective("search_presence")'>
 						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Search Presence</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/googlepackage.png'></div>
+						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/search_launch.png'></div>
 						<div>
 							Reach customers searching for your specific product or service. Your ads will appear next to google search results. 
 						</div>
@@ -508,17 +508,24 @@
 				<div class='panel-body'>
 					<form class='form'>
 			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here</h4>	
-			            <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
-				        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
-				        	<div class='input-count'>
-				        		<span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of 35 characters</div>
+			            <div ng-show='form_limit.headline' class='form-group'>
+				        	<input class='form-control' maxlength="{{form_limit.headline}}" ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline}} characters</div>
 				        </div>
-				        <div class='form-group'>
-				        	<textarea class='form-control' ng-model='submit.text' rows='3' placeholder='*Tell what the product will do for the customer in a clear, specific way'></textarea>
-				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of 250 characters</div>
-				        </div> 
+				        <div ng-show='form_limit.text' class='form-group'>
+				        	<textarea class='form-control' maxlength="{{form_limit.text}}" ng-model='submit.text' rows='3' placeholder='*Tell what the product will do for the customer in a clear, specific way'></textarea>
+				        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text}} characters</div>
+				        </div>
+				        <div ng-show='form_limit.line_1' class='form-group'>
+				        <input class='form-control' maxlength="{{form_limit.line_1}}" ng-model='submit.link_explanation' placeholder='*The first line of text in the google ad' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1}} characters</div>
+				        </div>
+				        <div ng-show='form_limit.line_2' class='form-group'>
+				        	<input class='form-control' maxlength="{{form_limit.line_2}}" ng-model='submit.description' placeholder='*The second line of text in the google ad' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.description'>0</span><span ng-if='submit.description'>{{submit.link_description.length}}</span> of {{form_limit.line_2}} characters</div>
+				        </div>
 			       		<div class='text-right'>
-			        		<button class='btn btn-oj'>Submit</button>
+			        		<button class='btn btn-oj' type='submit'>Submit</button>
 			      		</div>
 					</form>
 			        <div ng-if='!emotion_contest && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>

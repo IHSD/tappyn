@@ -79,31 +79,33 @@
 			            	<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
 			            </div>
 			        </div>
-			        <h4 class='text-center'>The following can always be provided later in your profile</h4>
-			        <div class='col-xs-12 col-sm-6'>
-			        	<div class='form-group'>
-			            	<label>Company Logo</label>
-			            	<input ng-file-select='select_logo($files, registrar)' type='file'>
+			        <div class='hidden-xs'>
+				        <h4 class='text-center'>The following fields are optional, but recommended. They can always be provided later in your profile</h4>
+				        <div class='col-xs-12 col-sm-6'>
+				        	<div class='form-group'>
+				            	<label>Company Logo</label>
+				            	<input ng-file-select='select_logo($files, registrar)' type='file'>
+							</div>
 						</div>
-					</div>
-					<div class='col-xs-12 col-sm-6'>
+						<div class='col-xs-12 col-sm-6'>
 							<img class='img-responsive' ng-src='{{registrar.logo_url}}'>	
-			        </div>
-			        <div class='col-xs-12'>
-			        	<div class='form-group'>
-			            	<input class='form-control' ng-model='registrar.company_url' placeholder='Company Website' type='text'>
-			            </div>
-			        </div>  
-			        <div class='col-xs-12'>
-			        	<div class='form-group'>
-			            	<input class='form-control' ng-model='registrar.facebook_url' placeholder='Company Facebook' type='text'>
-			            </div>
-			        </div>  
-			         <div class='col-xs-12'>
-			        	<div class='form-group'>
-			            	<input class='form-control' ng-model='registrar.twitter_handle' placeholder='Company Twitter Handle' type='text'>
-			            </div>
-			        </div>   
+				        </div>
+				        <div class='col-xs-12'>
+				        	<div class='form-group'>
+				            	<input class='form-control' ng-model='registrar.company_url' placeholder='Company Website' type='text'>
+				            </div>
+				        </div>
+				        <div class='col-xs-12'>
+				        	<div class='form-group'>
+				            	<input class='form-control' ng-model='registrar.facebook_url' placeholder='Company Facebook' type='text'>
+				            </div>
+				        </div>
+				         <div class='col-xs-12'>
+				        	<div class='form-group'>
+				            	<input class='form-control' ng-model='registrar.twitter_handle' placeholder='Company Twitter Handle' type='text'>
+				            </div>
+				        </div>   
+				    </div>
 			        <div class='col-xs-12'>
 			        	<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj'>Sign Up</button>
 			        </div>
