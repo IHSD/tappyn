@@ -21,8 +21,10 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 
 	$scope.submit = {headline : '', text: ''};
 	$scope.submit_to = function(id, submission){
-		if(!submission.text || submission.text.length < 1) $scope.set_alert("Text is required", "error");
-		else if(($scope.contest.platform == "google" || $scope.contest.platform == "facebook") && (!submission.headline || submission.headline.length < 1)) $scope.set_alert("Headline is required", "error");
+		if($scope.form_limit.headline && submission.headline.length < 1) $scope.set_alert("Headline is required", "error");
+		else if($scope.form_limit.text && submission.text.length < 1) $scope.set_alert("Text is required", "error");
+		else if($scope.form_limit.line_1 && submission.link_explanation.length < 1) $scope.set_alert("Line 1 is required", "error");
+		else if($scope.form_limit.line_2 && submission.description.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else{
 			if($rootScope.user){
 				contestFactory.submitTo(id, submission).success(function(response){
