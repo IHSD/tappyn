@@ -6,7 +6,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		if($scope.contest.status == "ended" && (!$rootScope.user || $rootScope.user.id != $scope.contest.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
 		if($scope.contest.emotion){
 			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
-			console.log($scope.emotion_contest);
+			$scope.form_limit = contestModel.parallel_submission($scope.contest);
 		}
 	    else $scope.example = false;
 	});

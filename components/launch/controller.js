@@ -73,9 +73,9 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.profile = response.data;
-					$scope.contest.different = $scope.profile.different;
-					$scope.contest.audience = $scope.profile.audience;
-					$scope.contest.summary = $scope.profile.summary;
+					if(!$scope.contest.summary || $scope.contest.summary == '') $scope.contest.summary = $scope.profile.summary;
+					else if(!$scope.contest.audience || $scope.contest.audience == '') $scope.contest.audience = $scope.profile.audience;
+					else if(!$scope.contest.different || $scope.contest.different == '') $scope.contest.different = $scope.profile.different;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
