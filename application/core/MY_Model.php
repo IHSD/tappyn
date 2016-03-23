@@ -2,17 +2,18 @@
 
 class MY_Model extends CI_Model
 {
-  protected $where = array();
-  protected $where_in = array();
-  protected $table;
-  protected $select = '*';
-  protected $order_by = NULL;
-  protected $order_dir = NULL;
-  protected $limit = NULL;
-  protected $offset = NULL;
-  protected $group_by = array();
-  protected $joins = array();
-  protected $where_not_in = array();
+  public $where = array();
+  public $where_in = array();
+  public $from = NULL;
+  public $table;
+  public $select = '*';
+  public $order_by = NULL;
+  public $order_dir = NULL;
+  public $limit = NULL;
+  public $offset = NULL;
+  public $group_by = array();
+  public $joins = array();
+  public $where_not_in = array();
 
   public function __construct()
   {
@@ -124,6 +125,11 @@ class MY_Model extends CI_Model
       return $this;
   }
 
+  public function from($table)
+  {
+      $this->from = $table;
+      return $this;
+  }
   /**
    * Execute the generated db query
    * @return self
@@ -131,7 +137,8 @@ class MY_Model extends CI_Model
   public function fetch()
   {
       $this->db->select($this->select);
-      $this->db->from($this->table);
+      $this->db->from(is_null($this->from) ? $this->table : $this->from);
+      $this->from = NULL;
       if(!empty($this->joins))
       {
           foreach($this->joins as $join)
