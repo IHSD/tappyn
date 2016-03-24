@@ -3,8 +3,9 @@
 function help () {
     echo "test - a simple script for managing our test envrionment"
     echo ""
-    echo "    test up - Create test database"
+    echo "    test up   - Create test database"
     echo "    test down - Delete test database"
+    echo "    test run  - Run through tests and spin up server at *:8000 for review"
 }
 
 
