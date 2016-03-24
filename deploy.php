@@ -34,6 +34,7 @@ task('deploy:migrate', function() {
 task('deploy:vendors', function() {
     run('cd {{release_path}}/application && composer install');
 })->desc("Install composer dependencies");
+
 task('deploy', [
     'deploy:prepare',
     'deploy:release',
