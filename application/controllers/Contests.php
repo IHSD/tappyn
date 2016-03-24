@@ -109,6 +109,9 @@ class Contests extends CI_Controller
             )->code(404)->respond();
         } else {
             $contest->views = $this->contest->views($cid);
+            $this->ion_auth->logged_in() ?
+                $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $cid) :
+                $contest->user_may_submit = FALSE;
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
@@ -182,8 +185,7 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true)
         {
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
-            $min_age = ($this->input->post('min_age') && $this->input->post('min_age') >= 18) ? $this->input->post('min_age') : 18;
-            $max_age = ($this->input->post('max_age') && $this->input->post('max_age') <= 65) ? $this->input->post('max_age') : 65;
+            $age = $this->input->post('age');
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
@@ -194,8 +196,7 @@ class Contests extends CI_Controller
                 'platform'          => $this->input->post('platform'),
                 'gender'            => $this->input->post('gender'),
                 'owner'             => $this->ion_auth->user()->row()->id,
-                'min_age'           => $min_age,
-                'max_age'           => $max_age,
+                'age'               => $age,
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
