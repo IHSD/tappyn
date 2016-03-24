@@ -80,7 +80,7 @@ $route['uploads/(:any)'] = 'uploads/index/$1';
  * Contests
  */
 $route['contests/(:num)'] = 'contests/show/$1';
-$route['submissions/(:num)'] = 'contests/show/$1';
+$route['submissions/(:num)'] = 'submissions/index/$1';
 $route['contests/(:num)/submissions'] = 'contests/submissions/$1';
 
 /**
