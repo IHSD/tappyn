@@ -120,7 +120,7 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
             return;
         }
-
+        $uid = $this->ion_auth->user()->row()->id;
         if(!$this->contest->mayUserSubmit($uid, $contest_id))
         {
             $this->responder->fail(
