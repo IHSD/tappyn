@@ -109,7 +109,7 @@ class Users extends CI_Controller
 
                 if($this->user->canEditAge($uid) && $this->input->post('age')) $data['age'] = $this->input->post('age');
                 if($this->user->canEditGender($uid) && $this->input->post('gender')) $data['gender'] = $this->input->post('gender');
-                if($this->user->canEditLocation($uid) && $this->input->post('location')) $data['location'] = $this->input->post('location');
+                if($this->user->canEditLocation($uid) && $this->input->post('state')) $data['state'] = $this->input->post('state');
 
                 if($this->input->post('first_name') || $this->input->post('last_name'))
                 {
