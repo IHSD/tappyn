@@ -106,6 +106,7 @@ class Contest extends MY_Model
         // Fetch the contest
         $contest = $this->contest->get($cid);
         // This contest has no age / gender restrictions
+        $profile = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get()->row();
         if($contest->gender == 0 && $contest->min_age == 18 && $contest->max_age == 65)
         {
             return TRUE;
@@ -161,7 +162,7 @@ class Contest extends MY_Model
         }
         return FALSE;
     }
-    
+
     public function update($id, $data)
     {
         return $this->db->where('id', $id)->update('contests', $data);
