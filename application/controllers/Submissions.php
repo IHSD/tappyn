@@ -68,9 +68,14 @@ class Submissions extends CI_Controller
         }
 
         $contest->views = $this->contest->views($contest_id);
-        $this->ion_auth->logged_in() ?
-            $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $contest_id) && !$this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id) :
-            $contest->user_may_submit = FALSE;
+        $contest->user_has_submitted = FALSE;
+        $contest->user_may_submit = FALSE;
+        if($this->ion_auth->logged_in())
+        {
+            $contest->user_has_submitted = $this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id)
+            $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $contest_id);
+        }
+
         // Process the images array, and remove all nulls
         $addtl_images = json_decode($contest->additional_images);
         if(!is_null($addtl_images))
