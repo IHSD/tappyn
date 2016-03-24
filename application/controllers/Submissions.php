@@ -72,7 +72,7 @@ class Submissions extends CI_Controller
         $contest->user_may_submit = FALSE;
         if($this->ion_auth->logged_in())
         {
-            $contest->user_has_submitted = $this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id)
+            $contest->user_has_submitted = $this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id);
             $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $contest_id);
         }
 
