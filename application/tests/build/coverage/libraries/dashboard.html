@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/tappyn/application/libraries</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../js/html5shiv.min.js"></script>
+  <script src="../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../index.html">/var/www/tappyn/application</a></li>
+        <li><a href="index.html">libraries</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#3">stripe_charge_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#3">Payout</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#3">Stripe_account_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#3">Submission_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#3">Stripe_customer_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#3">Interest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contest_library.php.html#3">Contest_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#3">Facebook_ion_auth</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#3">Vouchers_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Feed_library.php.html#11">Feed_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#3">Stripe_transfer_library</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#5">Analytics</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#3">Notification</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#3">Responder</a></td><td class="text-right">4%</td></tr>
+       <tr><td><a href="Vote.php.html#3">Vote</a></td><td class="text-right">10%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#24">Ion_auth</a></td><td class="text-right">11%</td></tr>
+       <tr><td><a href="Mailer.php.html#3">Mailer</a></td><td class="text-right">25%</td></tr>
+       <tr><td><a href="Bcrypt.php.html#4">Bcrypt</a></td><td class="text-right">62%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Interest.php.html#3">Interest</a></td><td class="text-right">2756</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#3">Stripe_account_library</a></td><td class="text-right">2756</td></tr>
+       <tr><td><a href="Ion_auth.php.html#24">Ion_auth</a></td><td class="text-right">2251</td></tr>
+       <tr><td><a href="Analytics.php.html#5">Analytics</a></td><td class="text-right">1301</td></tr>
+       <tr><td><a href="Notification.php.html#3">Notification</a></td><td class="text-right">634</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#3">Stripe_customer_library</a></td><td class="text-right">380</td></tr>
+       <tr><td><a href="Vote.php.html#3">Vote</a></td><td class="text-right">282</td></tr>
+       <tr><td><a href="Submission_library.php.html#3">Submission_library</a></td><td class="text-right">272</td></tr>
+       <tr><td><a href="Payout.php.html#3">Payout</a></td><td class="text-right">240</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#3">Stripe_transfer_library</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#3">Vouchers_library</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#3">stripe_charge_library</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Responder.php.html#3">Responder</a></td><td class="text-right">80</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#3">Facebook_ion_auth</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Bcrypt.php.html#4">Bcrypt</a></td><td class="text-right">40</td></tr>
+       <tr><td><a href="Contest_library.php.html#3">Contest_library</a></td><td class="text-right">30</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Vote.php.html#73"><abbr title="Vote::mayUserVote">mayUserVote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vote.php.html#83"><abbr title="Vote::userVotesPerContest">userVotesPerContest</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vote.php.html#94"><abbr title="Vote::dole_out_points">dole_out_points</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vote.php.html#35"><abbr title="Vote::upvote">upvote</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vote.php.html#19"><abbr title="Vote::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#103"><abbr title="Submission_library::userCanSubmit">userCanSubmit</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#113"><abbr title="Submission_library::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vote.php.html#109"><abbr title="Vote::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#5"><abbr title="Vouchers_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#67"><abbr title="Vouchers_library::redeem">redeem</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#7"><abbr title="Stripe_account_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#46"><abbr title="Vouchers_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#24"><abbr title="Vouchers_library::uses">uses</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#10"><abbr title="Vouchers_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#15"><abbr title="Vouchers_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#23"><abbr title="Submission_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#13"><abbr title="Submission_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#39"><abbr title="Payout::exists">exists</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#50"><abbr title="Payout::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#65"><abbr title="Payout::fetch">fetch</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#23"><abbr title="Payout::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#12"><abbr title="Payout::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#196"><abbr title="Notification::messages">messages</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#7"><abbr title="Payout::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#81"><abbr title="Payout::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payout.php.html#86"><abbr title="Payout::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#41"><abbr title="Responder::respond">respond</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submission_library.php.html#7"><abbr title="Submission_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#35"><abbr title="Responder::data">data</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#29"><abbr title="Responder::message">message</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#16"><abbr title="Responder::code">code</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Responder.php.html#22"><abbr title="Responder::fail">fail</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#15"><abbr title="Stripe_account_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#20"><abbr title="Stripe_account_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#89"><abbr title="Stripe_customer_library::fetch">fetch</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#100"><abbr title="Stripe_customer_library::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#6"><abbr title="Stripe_transfer_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#76"><abbr title="Stripe_customer_library::addPaymentSource">addPaymentSource</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#59"><abbr title="Stripe_customer_library::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#29"><abbr title="Stripe_customer_library::charges">charges</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#40"><abbr title="Stripe_customer_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#14"><abbr title="Stripe_transfer_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#19"><abbr title="Stripe_transfer_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#80"><abbr title="Stripe_transfer_library::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#90"><abbr title="Stripe_transfer_library::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#64"><abbr title="Stripe_transfer_library::balance">balance</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#53"><abbr title="Stripe_transfer_library::retrieve">retrieve</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#28"><abbr title="Stripe_transfer_library::setApiKey">setApiKey</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#33"><abbr title="Stripe_transfer_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#20"><abbr title="Stripe_customer_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#15"><abbr title="Stripe_customer_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#213"><abbr title="Stripe_account_library::removeSource">removeSource</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#238"><abbr title="Stripe_account_library::get">get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#249"><abbr title="Stripe_account_library::updateTransferStatus">updateTransferStatus</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#181"><abbr title="Stripe_account_library::setAsDefault">setAsDefault</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#161"><abbr title="Stripe_account_library::addSource">addSource</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#34"><abbr title="Stripe_account_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#107"><abbr title="Stripe_account_library::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#282"><abbr title="Stripe_account_library::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#6"><abbr title="stripe_charge_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#67"><abbr title="stripe_charge_library::retrieve">retrieve</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#7"><abbr title="Stripe_customer_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#62"><abbr title="stripe_charge_library::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#29"><abbr title="stripe_charge_library::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#15"><abbr title="stripe_charge_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#20"><abbr title="stripe_charge_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#191"><abbr title="Notification::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#177"><abbr title="Notification::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#43"><abbr title="Interest::setDatabase">setDatabase</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#52"><abbr title="Interest::setUser">setUser</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#34"><abbr title="Interest::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Feed_library.php.html#52"><abbr title="Feed_library::_">_</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Feed_library.php.html#21"><abbr title="Feed_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Feed_library.php.html#35"><abbr title="Feed_library::createEvent">createEvent</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#63"><abbr title="Interest::addToUser">addToUser</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#83"><abbr title="Interest::removeFromUser">removeFromUser</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#240"><abbr title="Interest::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#298"><abbr title="Interest::_exists">_exists</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#169"><abbr title="Interest::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#145"><abbr title="Interest::hasChildren">hasChildren</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#94"><abbr title="Interest::tree">tree</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#124"><abbr title="Interest::fetch">fetch</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Feed_library.php.html#16"><abbr title="Feed_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#33"><abbr title="Facebook_ion_auth::login">login</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#139"><abbr title="Analytics::hash_gen">hash_gen</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#144"><abbr title="Analytics::validate_ses_hash">validate_ses_hash</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#90"><abbr title="Analytics::set_session_hash">set_session_hash</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#76"><abbr title="Analytics::session_hash">session_hash</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#55"><abbr title="Analytics::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#60"><abbr title="Analytics::track">track</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#149"><abbr title="Analytics::extend_session">extend_session</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#159"><abbr title="Analytics::geoCheckIP">geoCheckIP</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contest_library.php.html#16"><abbr title="Contest_library::__call">__call</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#12"><abbr title="Facebook_ion_auth::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contest_library.php.html#11"><abbr title="Contest_library::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contest_library.php.html#5"><abbr title="Contest_library::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#191"><abbr title="Analytics::ismobile">ismobile</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Bcrypt.php.html#27"><abbr title="Bcrypt::verify">verify</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#314"><abbr title="Interest::branch_result">branch_result</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#309"><abbr title="Interest::topLevelInterest">topLevelInterest</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#37"><abbr title="Mailer::subject">subject</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#43"><abbr title="Mailer::html">html</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#49"><abbr title="Mailer::id">id</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#31"><abbr title="Mailer::from">from</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#25"><abbr title="Mailer::to">to</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#351"><abbr title="Interest::followedByUser">followedByUser</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#553"><abbr title="Ion_auth::profile">profile</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Mailer.php.html#55"><abbr title="Mailer::send">send</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#15"><abbr title="Notification::__get">__get</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#164"><abbr title="Notification::fetchForType">fetchForType</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#169"><abbr title="Notification::markAsRead">markAsRead</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#155"><abbr title="Notification::parse">parse</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#33"><abbr title="Notification::fetchUnread">fetchUnread</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#20"><abbr title="Notification::setUser">setUser</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Notification.php.html#25"><abbr title="Notification::count">count</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#484"><abbr title="Ion_auth::is_admin">is_admin</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#503"><abbr title="Ion_auth::in_group">in_group</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#132"><abbr title="Ion_auth::ajax_user">ajax_user</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#467"><abbr title="Ion_auth::get_user_id">get_user_id</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#404"><abbr title="Interest::messages">messages</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#395"><abbr title="Interest::errors">errors</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#386"><abbr title="Interest::_transaction_status">_transaction_status</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#381"><abbr title="Interest::_complete_transaction">_complete_transaction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interest.php.html#370"><abbr title="Interest::_start_transaction">_start_transaction</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#285"><abbr title="Ion_auth::forgotten_password_check">forgotten_password_check</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#316"><abbr title="Ion_auth::register">register</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#406"><abbr title="Ion_auth::logout">logout</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#163"><abbr title="Ion_auth::forgotten_password">forgotten_password</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#222"><abbr title="Ion_auth::forgotten_password_complete">forgotten_password_complete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Analytics.php.html#23"><abbr title="Analytics::__construct">__construct</a></a></td><td class="text-right">5%</td></tr>
+       <tr><td><a href="Bcrypt.php.html#43"><abbr title="Bcrypt::getRandomBytes">getRandomBytes</a></a></td><td class="text-right">32%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#95"><abbr title="Ion_auth::__call">__call</a></a></td><td class="text-right">70%</td></tr>
+       <tr><td><a href="Bcrypt.php.html#17"><abbr title="Bcrypt::hash">hash</a></a></td><td class="text-right">75%</td></tr>
+       <tr><td><a href="Bcrypt.php.html#7"><abbr title="Bcrypt::__construct">__construct</a></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="Ion_auth.php.html#60"><abbr title="Ion_auth::__construct">__construct</a></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#34"><abbr title="Stripe_account_library::create">create</abbr></a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#107"><abbr title="Stripe_account_library::update">update</abbr></a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Notification.php.html#33"><abbr title="Notification::fetchUnread">fetchUnread</abbr></a></td><td class="text-right">156</td></tr>
+       <tr><td><a href="Submission_library.php.html#23"><abbr title="Submission_library::create">create</abbr></a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#249"><abbr title="Stripe_account_library::updateTransferStatus">updateTransferStatus</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Analytics.php.html#191"><abbr title="Analytics::ismobile">ismobile</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Interest.php.html#314"><abbr title="Interest::branch_result">branch_result</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Ion_auth.php.html#503"><abbr title="Ion_auth::in_group">in_group</abbr></a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Ion_auth.php.html#316"><abbr title="Ion_auth::register">register</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Bcrypt.php.html#43"><abbr title="Bcrypt::getRandomBytes">getRandomBytes</abbr></a></td><td class="text-right">48</td></tr>
+       <tr><td><a href="Vote.php.html#35"><abbr title="Vote::upvote">upvote</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Interest.php.html#169"><abbr title="Interest::create">create</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#33"><abbr title="Facebook_ion_auth::login">login</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Analytics.php.html#159"><abbr title="Analytics::geoCheckIP">geoCheckIP</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Analytics.php.html#90"><abbr title="Analytics::set_session_hash">set_session_hash</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Analytics.php.html#76"><abbr title="Analytics::session_hash">session_hash</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ion_auth.php.html#222"><abbr title="Ion_auth::forgotten_password_complete">forgotten_password_complete</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ion_auth.php.html#406"><abbr title="Ion_auth::logout">logout</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Ion_auth.php.html#163"><abbr title="Ion_auth::forgotten_password">forgotten_password</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Interest.php.html#63"><abbr title="Interest::addToUser">addToUser</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#29"><abbr title="stripe_charge_library::create">create</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#59"><abbr title="Stripe_customer_library::update">update</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ion_auth.php.html#285"><abbr title="Ion_auth::forgotten_password_check">forgotten_password_check</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#24"><abbr title="Vouchers_library::uses">uses</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Responder.php.html#41"><abbr title="Responder::respond">respond</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Interest.php.html#145"><abbr title="Interest::hasChildren">hasChildren</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Interest.php.html#124"><abbr title="Interest::fetch">fetch</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Interest.php.html#240"><abbr title="Interest::delete">delete</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Ion_auth.php.html#132"><abbr title="Ion_auth::ajax_user">ajax_user</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Payout.php.html#39"><abbr title="Payout::exists">exists</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Interest.php.html#351"><abbr title="Interest::followedByUser">followedByUser</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Submission_library.php.html#103"><abbr title="Submission_library::userCanSubmit">userCanSubmit</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Vote.php.html#73"><abbr title="Vote::mayUserVote">mayUserVote</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#76"><abbr title="Stripe_customer_library::addPaymentSource">addPaymentSource</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#213"><abbr title="Stripe_account_library::removeSource">removeSource</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#181"><abbr title="Stripe_account_library::setAsDefault">setAsDefault</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#40"><abbr title="Stripe_customer_library::create">create</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#67"><abbr title="Vouchers_library::redeem">redeem</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Vote.php.html#94"><abbr title="Vote::dole_out_points">dole_out_points</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Notification.php.html#155"><abbr title="Notification::parse">parse</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Payout.php.html#65"><abbr title="Payout::fetch">fetch</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Analytics.php.html#60"><abbr title="Analytics::track">track</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Interest.php.html#298"><abbr title="Interest::_exists">_exists</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Interest.php.html#94"><abbr title="Interest::tree">tree</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Payout.php.html#50"><abbr title="Payout::get">get</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Ion_auth.php.html#60"><abbr title="Ion_auth::__construct">__construct</abbr></a></td><td class="text-right">7</td></tr>
+       <tr><td><a href="Analytics.php.html#149"><abbr title="Analytics::extend_session">extend_session</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#20"><abbr title="Stripe_customer_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_charge_library.php.html#20"><abbr title="stripe_charge_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#29"><abbr title="Stripe_customer_library::charges">charges</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_customer_library.php.html#89"><abbr title="Stripe_customer_library::fetch">fetch</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#64"><abbr title="Stripe_transfer_library::balance">balance</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#80"><abbr title="Stripe_transfer_library::index">index</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#53"><abbr title="Stripe_transfer_library::retrieve">retrieve</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#33"><abbr title="Stripe_transfer_library::create">create</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_transfer_library.php.html#19"><abbr title="Stripe_transfer_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Contest_library.php.html#16"><abbr title="Contest_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#238"><abbr title="Stripe_account_library::get">get</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Notification.php.html#25"><abbr title="Notification::count">count</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#20"><abbr title="Stripe_account_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#15"><abbr title="Vouchers_library::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers_library.php.html#46"><abbr title="Vouchers_library::create">create</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ion_auth.php.html#553"><abbr title="Ion_auth::profile">profile</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="stripe/Stripe_account_library.php.html#161"><abbr title="Stripe_account_library::addSource">addSource</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Facebook_ion_auth.php.html#12"><abbr title="Facebook_ion_auth::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vote.php.html#83"><abbr title="Vote::userVotesPerContest">userVotesPerContest</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vote.php.html#19"><abbr title="Vote::__call">__call</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Ion_auth.php.html#467"><abbr title="Ion_auth::get_user_id">get_user_id</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Analytics.php.html#23"><abbr title="Analytics::__construct">__construct</abbr></a></td><td class="text-right">5</td></tr>
+       <tr><td><a href="Ion_auth.php.html#95"><abbr title="Ion_auth::__call">__call</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="Bcrypt.php.html#17"><abbr title="Bcrypt::hash">hash</abbr></a></td><td class="text-right">2</td></tr>
+       <tr><td><a href="Bcrypt.php.html#7"><abbr title="Bcrypt::__construct">__construct</abbr></a></td><td class="text-right">2</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.1.7</a> using <a href="http://php.net/" target="_top">PHP 5.6.11-1ubuntu3.1</a> and <a href="http://phpunit.de/">PHPUnit 4.7.6</a> at Wed Mar 23 16:54:33 UTC 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../js/holder.min.js" type="text/javascript"></script>
+  <script src="../js/d3.min.js" type="text/javascript"></script>
+  <script src="../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([11,3,2,1,0,0,0,1,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([129,1,0,0,1,0,0,0,2,2,0,11], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0.8,36,"<a href=\"Analytics.php.html#5\">Analytics<\/a>"],[62.903225806452,20,"<a href=\"Bcrypt.php.html#4\">Bcrypt<\/a>"],[0,5,"<a href=\"Contest_library.php.html#3\">Contest_library<\/a>"],[0,8,"<a href=\"Facebook_ion_auth.php.html#3\">Facebook_ion_auth<\/a>"],[0,4,"<a href=\"Feed_library.php.html#11\">Feed_library<\/a>"],[0,52,"<a href=\"Interest.php.html#3\">Interest<\/a>"],[11.206896551724,56,"<a href=\"Ion_auth.php.html#24\">Ion_auth<\/a>"],[25,8,"<a href=\"Mailer.php.html#3\">Mailer<\/a>"],[0.83333333333333,25,"<a href=\"Notification.php.html#3\">Notification<\/a>"],[0,15,"<a href=\"Payout.php.html#3\">Payout<\/a>"],[4.1666666666667,9,"<a href=\"Responder.php.html#3\">Responder<\/a>"],[0,16,"<a href=\"Submission_library.php.html#3\">Submission_library<\/a>"],[10,19,"<a href=\"Vote.php.html#3\">Vote<\/a>"],[0,13,"<a href=\"Vouchers_library.php.html#3\">Vouchers_library<\/a>"],[0,52,"<a href=\"stripe\/Stripe_account_library.php.html#3\">Stripe_account_library<\/a>"],[0,11,"<a href=\"stripe\/Stripe_charge_library.php.html#3\">stripe_charge_library<\/a>"],[0,19,"<a href=\"stripe\/Stripe_customer_library.php.html#3\">Stripe_customer_library<\/a>"],[0,14,"<a href=\"stripe\/Stripe_transfer_library.php.html#3\">Stripe_transfer_library<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[5.2631578947368,2,"<a href=\"Analytics.php.html#23\">Analytics::__construct<\/a>"],[0,1,"<a href=\"Analytics.php.html#55\">Analytics::__get<\/a>"],[0,3,"<a href=\"Analytics.php.html#60\">Analytics::track<\/a>"],[0,5,"<a href=\"Analytics.php.html#76\">Analytics::session_hash<\/a>"],[0,6,"<a href=\"Analytics.php.html#90\">Analytics::set_session_hash<\/a>"],[0,1,"<a href=\"Analytics.php.html#139\">Analytics::hash_gen<\/a>"],[0,1,"<a href=\"Analytics.php.html#144\">Analytics::validate_ses_hash<\/a>"],[0,2,"<a href=\"Analytics.php.html#149\">Analytics::extend_session<\/a>"],[0,6,"<a href=\"Analytics.php.html#159\">Analytics::geoCheckIP<\/a>"],[0,9,"<a href=\"Analytics.php.html#191\">Analytics::ismobile<\/a>"],[80,2,"<a href=\"Bcrypt.php.html#7\">Bcrypt::__construct<\/a>"],[75,2,"<a href=\"Bcrypt.php.html#17\">Bcrypt::hash<\/a>"],[0,1,"<a href=\"Bcrypt.php.html#27\">Bcrypt::verify<\/a>"],[100,1,"<a href=\"Bcrypt.php.html#32\">Bcrypt::getSalt<\/a>"],[32.142857142857,11,"<a href=\"Bcrypt.php.html#43\">Bcrypt::getRandomBytes<\/a>"],[100,3,"<a href=\"Bcrypt.php.html#83\">Bcrypt::encodeBytes<\/a>"],[0,1,"<a href=\"Contest_library.php.html#5\">Contest_library::__construct<\/a>"],[0,1,"<a href=\"Contest_library.php.html#11\">Contest_library::__get<\/a>"],[0,2,"<a href=\"Contest_library.php.html#16\">Contest_library::__call<\/a>"],[100,1,"<a href=\"Contest_library.php.html#25\">Contest_library::<\/a>"],[0,2,"<a href=\"Facebook_ion_auth.php.html#12\">Facebook_ion_auth::__construct<\/a>"],[0,6,"<a href=\"Facebook_ion_auth.php.html#33\">Facebook_ion_auth::login<\/a>"],[0,1,"<a href=\"Feed_library.php.html#16\">Feed_library::__construct<\/a>"],[0,1,"<a href=\"Feed_library.php.html#21\">Feed_library::__get<\/a>"],[0,1,"<a href=\"Feed_library.php.html#35\">Feed_library::createEvent<\/a>"],[0,1,"<a href=\"Feed_library.php.html#52\">Feed_library::_<\/a>"],[0,1,"<a href=\"Interest.php.html#34\">Interest::__construct<\/a>"],[0,1,"<a href=\"Interest.php.html#43\">Interest::setDatabase<\/a>"],[0,1,"<a href=\"Interest.php.html#52\">Interest::setUser<\/a>"],[0,5,"<a href=\"Interest.php.html#63\">Interest::addToUser<\/a>"],[0,1,"<a href=\"Interest.php.html#83\">Interest::removeFromUser<\/a>"],[0,3,"<a href=\"Interest.php.html#94\">Interest::tree<\/a>"],[0,4,"<a href=\"Interest.php.html#124\">Interest::fetch<\/a>"],[0,4,"<a href=\"Interest.php.html#145\">Interest::hasChildren<\/a>"],[0,6,"<a href=\"Interest.php.html#169\">Interest::create<\/a>"],[0,4,"<a href=\"Interest.php.html#240\">Interest::delete<\/a>"],[0,3,"<a href=\"Interest.php.html#298\">Interest::_exists<\/a>"],[0,1,"<a href=\"Interest.php.html#309\">Interest::topLevelInterest<\/a>"],[0,9,"<a href=\"Interest.php.html#314\">Interest::branch_result<\/a>"],[0,4,"<a href=\"Interest.php.html#351\">Interest::followedByUser<\/a>"],[0,1,"<a href=\"Interest.php.html#370\">Interest::_start_transaction<\/a>"],[0,1,"<a href=\"Interest.php.html#381\">Interest::_complete_transaction<\/a>"],[0,1,"<a href=\"Interest.php.html#386\">Interest::_transaction_status<\/a>"],[0,1,"<a href=\"Interest.php.html#395\">Interest::errors<\/a>"],[0,1,"<a href=\"Interest.php.html#404\">Interest::messages<\/a>"],[88.888888888889,7,"<a href=\"Ion_auth.php.html#60\">Ion_auth::__construct<\/a>"],[70,4,"<a href=\"Ion_auth.php.html#95\">Ion_auth::__call<\/a>"],[100,1,"<a href=\"Ion_auth.php.html#123\">Ion_auth::__get<\/a>"],[0,4,"<a href=\"Ion_auth.php.html#132\">Ion_auth::ajax_user<\/a>"],[0,5,"<a href=\"Ion_auth.php.html#163\">Ion_auth::forgotten_password<\/a>"],[0,5,"<a href=\"Ion_auth.php.html#222\">Ion_auth::forgotten_password_complete<\/a>"],[0,4,"<a href=\"Ion_auth.php.html#285\">Ion_auth::forgotten_password_check<\/a>"],[0,7,"<a href=\"Ion_auth.php.html#316\">Ion_auth::register<\/a>"],[0,5,"<a href=\"Ion_auth.php.html#406\">Ion_auth::logout<\/a>"],[100,1,"<a href=\"Ion_auth.php.html#454\">Ion_auth::logged_in<\/a>"],[0,2,"<a href=\"Ion_auth.php.html#467\">Ion_auth::get_user_id<\/a>"],[0,1,"<a href=\"Ion_auth.php.html#484\">Ion_auth::is_admin<\/a>"],[0,8,"<a href=\"Ion_auth.php.html#503\">Ion_auth::in_group<\/a>"],[0,2,"<a href=\"Ion_auth.php.html#553\">Ion_auth::profile<\/a>"],[100,1,"<a href=\"Mailer.php.html#12\">Mailer::__construct<\/a>"],[100,1,"<a href=\"Mailer.php.html#20\">Mailer::__get<\/a>"],[0,1,"<a href=\"Mailer.php.html#25\">Mailer::to<\/a>"],[0,1,"<a href=\"Mailer.php.html#31\">Mailer::from<\/a>"],[0,1,"<a href=\"Mailer.php.html#37\">Mailer::subject<\/a>"],[0,1,"<a href=\"Mailer.php.html#43\">Mailer::html<\/a>"],[0,1,"<a href=\"Mailer.php.html#49\">Mailer::id<\/a>"],[0,1,"<a href=\"Mailer.php.html#55\">Mailer::send<\/a>"],[100,1,"<a href=\"Notification.php.html#9\">Notification::__construct<\/a>"],[0,1,"<a href=\"Notification.php.html#15\">Notification::__get<\/a>"],[0,1,"<a href=\"Notification.php.html#20\">Notification::setUser<\/a>"],[0,2,"<a href=\"Notification.php.html#25\">Notification::count<\/a>"],[0,12,"<a href=\"Notification.php.html#33\">Notification::fetchUnread<\/a>"],[0,3,"<a href=\"Notification.php.html#155\">Notification::parse<\/a>"],[0,1,"<a href=\"Notification.php.html#164\">Notification::fetchForType<\/a>"],[0,1,"<a href=\"Notification.php.html#169\">Notification::markAsRead<\/a>"],[0,1,"<a href=\"Notification.php.html#177\">Notification::create<\/a>"],[0,1,"<a href=\"Notification.php.html#191\">Notification::errors<\/a>"],[0,1,"<a href=\"Notification.php.html#196\">Notification::messages<\/a>"],[0,1,"<a href=\"Payout.php.html#7\">Payout::__construct<\/a>"],[0,1,"<a href=\"Payout.php.html#12\">Payout::__get<\/a>"],[0,1,"<a href=\"Payout.php.html#23\">Payout::create<\/a>"],[0,4,"<a href=\"Payout.php.html#39\">Payout::exists<\/a>"],[0,3,"<a href=\"Payout.php.html#50\">Payout::get<\/a>"],[0,3,"<a href=\"Payout.php.html#65\">Payout::fetch<\/a>"],[0,1,"<a href=\"Payout.php.html#81\">Payout::update<\/a>"],[0,1,"<a href=\"Payout.php.html#86\">Payout::errors<\/a>"],[100,1,"<a href=\"Responder.php.html#11\">Responder::__construct<\/a>"],[0,1,"<a href=\"Responder.php.html#16\">Responder::code<\/a>"],[0,1,"<a href=\"Responder.php.html#22\">Responder::fail<\/a>"],[0,1,"<a href=\"Responder.php.html#29\">Responder::message<\/a>"],[0,1,"<a href=\"Responder.php.html#35\">Responder::data<\/a>"],[0,4,"<a href=\"Responder.php.html#41\">Responder::respond<\/a>"],[0,1,"<a href=\"Submission_library.php.html#7\">Submission_library::__construct<\/a>"],[0,1,"<a href=\"Submission_library.php.html#13\">Submission_library::__get<\/a>"],[0,10,"<a href=\"Submission_library.php.html#23\">Submission_library::create<\/a>"],[0,3,"<a href=\"Submission_library.php.html#103\">Submission_library::userCanSubmit<\/a>"],[0,1,"<a href=\"Submission_library.php.html#113\">Submission_library::errors<\/a>"],[100,1,"<a href=\"Vote.php.html#7\">Vote::__construct<\/a>"],[100,1,"<a href=\"Vote.php.html#14\">Vote::__get<\/a>"],[0,2,"<a href=\"Vote.php.html#19\">Vote::__call<\/a>"],[0,6,"<a href=\"Vote.php.html#35\">Vote::upvote<\/a>"],[0,3,"<a href=\"Vote.php.html#73\">Vote::mayUserVote<\/a>"],[0,2,"<a href=\"Vote.php.html#83\">Vote::userVotesPerContest<\/a>"],[0,3,"<a href=\"Vote.php.html#94\">Vote::dole_out_points<\/a>"],[0,1,"<a href=\"Vote.php.html#109\">Vote::errors<\/a>"],[0,1,"<a href=\"Vouchers_library.php.html#5\">Vouchers_library::__construct<\/a>"],[0,1,"<a href=\"Vouchers_library.php.html#10\">Vouchers_library::__get<\/a>"],[0,2,"<a href=\"Vouchers_library.php.html#15\">Vouchers_library::__call<\/a>"],[0,4,"<a href=\"Vouchers_library.php.html#24\">Vouchers_library::uses<\/a>"],[0,2,"<a href=\"Vouchers_library.php.html#46\">Vouchers_library::create<\/a>"],[0,3,"<a href=\"Vouchers_library.php.html#67\">Vouchers_library::redeem<\/a>"],[0,1,"<a href=\"stripe\/Stripe_account_library.php.html#7\">Stripe_account_library::__construct<\/a>"],[0,1,"<a href=\"stripe\/Stripe_account_library.php.html#15\">Stripe_account_library::__get<\/a>"],[0,2,"<a href=\"stripe\/Stripe_account_library.php.html#20\">Stripe_account_library::__call<\/a>"],[0,14,"<a href=\"stripe\/Stripe_account_library.php.html#34\">Stripe_account_library::create<\/a>"],[0,14,"<a href=\"stripe\/Stripe_account_library.php.html#107\">Stripe_account_library::update<\/a>"],[0,2,"<a href=\"stripe\/Stripe_account_library.php.html#161\">Stripe_account_library::addSource<\/a>"],[0,3,"<a href=\"stripe\/Stripe_account_library.php.html#181\">Stripe_account_library::setAsDefault<\/a>"],[0,3,"<a href=\"stripe\/Stripe_account_library.php.html#213\">Stripe_account_library::removeSource<\/a>"],[0,2,"<a href=\"stripe\/Stripe_account_library.php.html#238\">Stripe_account_library::get<\/a>"],[0,9,"<a href=\"stripe\/Stripe_account_library.php.html#249\">Stripe_account_library::updateTransferStatus<\/a>"],[0,1,"<a href=\"stripe\/Stripe_account_library.php.html#282\">Stripe_account_library::errors<\/a>"],[0,1,"<a href=\"stripe\/Stripe_charge_library.php.html#6\">stripe_charge_library::__construct<\/a>"],[0,1,"<a href=\"stripe\/Stripe_charge_library.php.html#15\">stripe_charge_library::__get<\/a>"],[0,2,"<a href=\"stripe\/Stripe_charge_library.php.html#20\">stripe_charge_library::__call<\/a>"],[0,5,"<a href=\"stripe\/Stripe_charge_library.php.html#29\">stripe_charge_library::create<\/a>"],[0,1,"<a href=\"stripe\/Stripe_charge_library.php.html#62\">stripe_charge_library::errors<\/a>"],[0,1,"<a href=\"stripe\/Stripe_charge_library.php.html#67\">stripe_charge_library::retrieve<\/a>"],[0,1,"<a href=\"stripe\/Stripe_customer_library.php.html#7\">Stripe_customer_library::__construct<\/a>"],[0,1,"<a href=\"stripe\/Stripe_customer_library.php.html#15\">Stripe_customer_library::__get<\/a>"],[0,2,"<a href=\"stripe\/Stripe_customer_library.php.html#20\">Stripe_customer_library::__call<\/a>"],[0,2,"<a href=\"stripe\/Stripe_customer_library.php.html#29\">Stripe_customer_library::charges<\/a>"],[0,3,"<a href=\"stripe\/Stripe_customer_library.php.html#40\">Stripe_customer_library::create<\/a>"],[0,4,"<a href=\"stripe\/Stripe_customer_library.php.html#59\">Stripe_customer_library::update<\/a>"],[0,3,"<a href=\"stripe\/Stripe_customer_library.php.html#76\">Stripe_customer_library::addPaymentSource<\/a>"],[0,2,"<a href=\"stripe\/Stripe_customer_library.php.html#89\">Stripe_customer_library::fetch<\/a>"],[0,1,"<a href=\"stripe\/Stripe_customer_library.php.html#100\">Stripe_customer_library::errors<\/a>"],[0,1,"<a href=\"stripe\/Stripe_transfer_library.php.html#6\">Stripe_transfer_library::__construct<\/a>"],[0,1,"<a href=\"stripe\/Stripe_transfer_library.php.html#14\">Stripe_transfer_library::__get<\/a>"],[0,2,"<a href=\"stripe\/Stripe_transfer_library.php.html#19\">Stripe_transfer_library::__call<\/a>"],[0,1,"<a href=\"stripe\/Stripe_transfer_library.php.html#28\">Stripe_transfer_library::setApiKey<\/a>"],[0,2,"<a href=\"stripe\/Stripe_transfer_library.php.html#33\">Stripe_transfer_library::create<\/a>"],[0,2,"<a href=\"stripe\/Stripe_transfer_library.php.html#53\">Stripe_transfer_library::retrieve<\/a>"],[0,2,"<a href=\"stripe\/Stripe_transfer_library.php.html#64\">Stripe_transfer_library::balance<\/a>"],[0,2,"<a href=\"stripe\/Stripe_transfer_library.php.html#80\">Stripe_transfer_library::index<\/a>"],[0,1,"<a href=\"stripe\/Stripe_transfer_library.php.html#90\">Stripe_transfer_library::errors<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>
