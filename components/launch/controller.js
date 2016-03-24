@@ -190,6 +190,8 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
 							$scope.set_step("done");
+							$rootScope.modal_up = false;
+							$scope.adding_payment = false;
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -219,6 +221,8 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
 							$scope.set_step("done");
+							$rootScope.modal_up = false;
+							$scope.adding_payment = false;
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -235,6 +239,8 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
 							$scope.set_step("done");
+							$rootScope.modal_up = false;
+							$scope.adding_payment = false;
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -270,6 +276,8 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
 						$scope.set_step("done");
+						$rootScope.modal_up = false;
+						$scope.adding_payment = false;
 					}
 					else $scope.set_alert(res.message, "default");	 
 				}
