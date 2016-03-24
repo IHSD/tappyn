@@ -252,7 +252,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					if(response.success){
 						$scope.set_alert(response.message, "default");	
 						$rootScope.user.age = age;
-						$rootScope.user.gender = gender;
+						$rootScope.user.gender = gen;
 						sessionStorage.setItem("user", JSON.stringify($rootScope.user));
 						$rootScope.modal_up = false;
 						$scope.add_age = false;
