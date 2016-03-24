@@ -2,7 +2,7 @@
 
 class Payout_model extends MY_Model
 {
-    protected $table = 'payouts';
+    public $table = 'payouts';
 
     public function __construct()
     {

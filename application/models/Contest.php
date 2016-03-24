@@ -101,8 +101,44 @@ class Contest extends MY_Model
         return false;
     }
 
+    public function mayUserSubmit($uid, $cid)
+    {
+        // Fetch the contest
+        $contest = $this->contest->get($cid);
+        // This contest has no age / gender restrictions
+        $profile = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get()->row();
+        if($contest->gender == 0 && $contest->min_age == 18 && $contest->max_age == 65)
+        {
+            return TRUE;
+        }
+
+        if($this->userIsGender($contest->gender, $profile->gender) && $this->userInAgeRange($contest->min_age, $contest->max_age, $profile->age))
+        {
+            return TRUE;
+        }
+        return FALSE;
+    }
+
+    public function userIsGender($gender_req, $gender_sup)
+    {
+        if($gender_req == 0 || ($gender_req == $gender_sup)) return TRUE;
+        return FALSE;
+    }
+
+    public function userInAgeRange($min, $max, $age)
+    {
+        if($age > 45) $age = 45;
+        // There are no age requirementss
+        if($min == 18 && $max == 45)
+        {
+            return TRUE;
+        }
+        return ($min <= $age && $age <= $max);
+    }
+
     public function create($data)
     {
+        $this->validate($data);
         if(!$this->validate())
         {
             return false;
@@ -125,8 +161,8 @@ class Contest extends MY_Model
             return TRUE;
         }
         return FALSE;
-
     }
+
     public function update($id, $data)
     {
         return $this->db->where('id', $id)->update('contests', $data);
@@ -142,9 +178,33 @@ class Contest extends MY_Model
         return $this->messages;
     }
 
-    public function validate()
+    public function validate(&$data)
     {
-        return true;
+        switch($data['age'])
+        {
+            case 0:
+                $data['min_age'] = 18;
+                $data['max_age'] = 45;
+                break;
+            case 1:
+                $data['min_age'] = 18;
+                $data['max_age'] = 24;
+                break;
+            case 2:
+                $data['min_age'] = 25;
+                $data['max_age'] = 34;
+                break;
+            case 3:
+                $data['min_age'] = 35;
+                $data['max_age'] = 45;
+                break;
+            case 4:
+                $data['min_age'] = 45;
+                $data['max_age'] = 45;
+                break;
+        }
+        unset($data['age']);
+        return $data;
     }
 
     public function delete($id)

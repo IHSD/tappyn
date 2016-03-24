@@ -201,6 +201,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		if(response.http_status_code == 200){
 			$rootScope.user = response.data;
 			sessionStorage.setItem("user", JSON.stringify(response.data));
+			if($rootScope.user.type == 'member'){	
+				if(!$rootScope.user.age || !$rootScope.user.gender){
+					$rootScope.modal_up = true;
+					$scope.add_age = true;
+				}
+			}
 		}
 		if($rootScope.user){
 			window.Intercom('boot', {
@@ -235,6 +241,28 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		AppFact.aws_key(bucket).success(function(response){
 			if(response.success) $rootScope.key = response.data.access_token;
 		});
+	}
+
+	$scope.save_agegen = function(age, gen){
+		if(!age) $scope.set_alert("Please provide your age", "error");
+		else if(!gen) $scope.set_alert("Please provide your gender", "error");
+		else{
+			AppFact.agegen(age, gen).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");	
+						$rootScope.user.age = age;
+						$rootScope.user.gender = gender;
+						sessionStorage.setItem("user", JSON.stringify($rootScope.user));
+						$rootScope.modal_up = false;
+						$scope.add_age = false;
+					}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});
+		}
 	}
 
 	$scope.update_points = function(points){
@@ -358,6 +386,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					});
 					if($scope.signing_in.type != "company") $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
+					if($rootScope.user.type == 'member'){	
+						if(!$rootScope.user.age || !$rootScope.user.gender){
+							$rootScope.modal_up = true;
+							$scope.add_age = true;
+						}
+					}
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -557,6 +591,16 @@ tappyn.factory("AppFact", function($http){
             url:'index.php/notifications/read_all',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
+	}
+	fact.agegen = function(age, gen){
+		return $http({
+			method : 'POST',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({age : age, gender : gen})
+		});
 	}
 	return fact;
 })

@@ -13,13 +13,15 @@ application/config/secrets.php
 application/config/config.php
 application/config/facebook_ion_auth.php
 application/config/interest.php
-application/bin/*
+
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
 application/vendor/*
 application/phinx.yml
+application/tests/build/*
+
 repo.php
 vendor/*
 uploads/

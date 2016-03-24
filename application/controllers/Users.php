@@ -103,11 +103,14 @@ class Users extends CI_Controller
         {
             if($this->ion_auth->in_group(2))
             {
-                $data = array(
-                    'age' => $this->input->post('age'),
-                    'gender' => $this->input->post('gender'),
-                    'state' => $this->input->post('state'),
-                );
+                // Can the user change theyre age / gender / location?
+                $data = array();
+                $uid = $this->ion_auth->user()->row()->id;
+
+                if($this->user->canEditAge($uid) && $this->input->post('age')) $data['age'] = $this->input->post('age');
+                if($this->user->canEditGender($uid) && $this->input->post('gender')) $data['gender'] = $this->input->post('gender');
+                if($this->user->canEditLocation($uid) && $this->input->post('location')) $data['location'] = $this->input->post('location');
+
                 if($this->input->post('first_name') || $this->input->post('last_name'))
                 {
                     $userdata = array();

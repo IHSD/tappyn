@@ -2,9 +2,9 @@
 
 class Contact extends MY_Model
 {
-    protected $table = 'contacts';
-    protected $order_by;
-    protected $order_dir;
+    public $table = 'contacts';
+    public $order_by;
+    public $order_dir;
     protected $errors = FALSE;
     public function __construct()
     {
