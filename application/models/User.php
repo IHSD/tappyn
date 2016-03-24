@@ -43,7 +43,7 @@ class User extends MY_Model
 
     public function canEditLocation($uid)
     {
-        return is_null($this->profile($uid)->location);
+        return is_null($this->profile($uid)->state);
     }
 
     /**
