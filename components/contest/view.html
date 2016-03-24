@@ -90,7 +90,12 @@
 						Only verified users can submit to contests, check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
 					</div>
 				</div>
-				<div ng-show='user && user.is_active'>
+				<div ng-show='user && user.is_active && !user.user_may_submit'>
+					<div class='alert alert-danger text-center'>
+						You have either already submitted to this contest or do not meet the requirements!
+					</div>
+				</div>
+				<div ng-show='user && user.is_active && user.user_may_submit'>
 					<form class='form' ng-submit='submit_to(contest.id, submit)'>
 			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
 			 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
