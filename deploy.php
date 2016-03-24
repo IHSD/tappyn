@@ -2,20 +2,29 @@
 
 require 'recipe/common.php';
 
+/**
+ * Set our shared and writeable directories. This is where all the log, cache and
+ * release shared files should be placed
+ */
 set('shared_dirs', ['application/cache', 'application/logs']);
 set('writeable_dirs', ['application/cache', 'application/logs']);
+
+/**
+ * Setup our server farm
+ */
+/*----------------
+production
+----------------*/
 server("app-01", "104.236.199.116", 22)
     ->user('root')
     ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
     ->stage('production')
     ->env('deploy_path', "/var/www/tappyn");
-
 server('app-02', "104.236.207.136", 22)
     ->user('root')
     ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
     ->stage('production')
     ->env('deploy_path', '/var/www/tappyn');
-
 set('repository', 'git@github.com:IHSD/tappyn.git');
 
 task('deploy:config', function() {
