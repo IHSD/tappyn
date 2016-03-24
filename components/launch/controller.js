@@ -36,6 +36,11 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
 				$scope.form_limit = launchModel.parallel_submission($scope.contest);
 				$scope.current = $scope.steps[step];
+				$scope.contest.additional_images = [];
+				if($scope.contest.additional_image_1) $scope.contest.additional_images.push($scope.contest.additional_image_1);
+				if($scope.contest.additional_image_2) $scope.contest.additional_images.push($scope.contest.additional_image_2);
+				if($scope.contest.additional_image_3) $scope.contest.additional_images.push($scope.contest.additional_image_3);
+				if($scope.contest.additional_images.length < 1) $scope.contest.additional_images = null;
 			}
 		}
 		else $scope.current = $scope.steps[step];
@@ -248,6 +253,23 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					if(res.success){
 						$scope.price = res.data.price;
 						$scope.reduction = res.data.discount;
+					}
+					else $scope.set_alert(res.message, "default");	 
+				}
+				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+				else $scope.check_code(res.http_status_code);
+	       	});
+		}
+	}
+
+	$scope.voucher_payment = function(){
+		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
+		else{
+			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+	       		if(res.http_status_code == 200){
+					if(res.success){
+						$scope.set_alert(res.message, "default");	
+						$scope.set_step("done");
 					}
 					else $scope.set_alert(res.message, "default");	 
 				}
