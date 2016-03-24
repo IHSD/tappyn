@@ -101,6 +101,17 @@ class Contest extends MY_Model
         return false;
     }
 
+    public function hasUserSubmitted($uid, $cid)
+    {
+        $check = $this->db->select('*')->from('contests')->where(array('user_id' => $uid, 'contest_id' => $cid))->get();
+        if($check)
+        {
+            return $check->num_rows() > 0;
+        } else {
+            return FALSE;
+        }
+    }
+
     public function mayUserSubmit($uid, $cid)
     {
         // Fetch the contest
