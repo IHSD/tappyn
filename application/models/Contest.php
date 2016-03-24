@@ -103,7 +103,7 @@ class Contest extends MY_Model
 
     public function hasUserSubmitted($uid, $cid)
     {
-        $check = $this->db->select('*')->from('contests')->where(array('user_id' => $uid, 'contest_id' => $cid))->get();
+        $check = $this->db->select('*')->from('submissions')->where(array('user_id' => $uid, 'contest_id' => $cid))->get();
         if($check)
         {
             return $check->num_rows() > 0;
