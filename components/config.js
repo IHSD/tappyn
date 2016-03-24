@@ -136,7 +136,7 @@ tappyn.constant('emotions', [
 	{type : 'athelete', adjectives : 'Performance, reslience, steadfastness', brand : 'Conqueror',
 		google : 'public/img/athlete_g.jpg', facebook : '', twitter : 'public/img/athlete_t.jpg', icon : 'public/img/athlete.png'},
 	{type : 'eagle', adjectives : 'Independence, controversy, freedom', brand : 'Rebel',
-		google : 'eagle_g.jpg', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
+		google : 'public/img/eagle_g.jpg', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
 	{type : 'lightbulb', adjectives : 'Imagination, surprise, curiosity', brand : 'Wizard',
 		google : 'public/img/lightbulb_g.jpg', facebook : '', twitter : 'public/img/lightbulb_t.png', icon : 'public/img/lightbulb.png'},
 	{type : 'glass', adjectives : 'Spontaneity, charm, humor', brand : 'Entertainer',
