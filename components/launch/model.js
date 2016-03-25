@@ -31,4 +31,22 @@ tappyn.service('launchModel', function(){
 			}
 		}
 	}	
+	this.parallel_submission = function(contest){
+		var layout = {};
+		if(contest.platform == "facebook"){
+			layout.text = 250;
+			if(contest.objective != 'engagement') layout.headline = 35;
+		}
+		else if(contest.platform == "twitter"){
+			if(contest.display_type == 'with_photo')layout.text = 116;
+			else layout.text = 140;
+		}
+		else if(contest.platform == "google"){
+			layout.headline = 25;
+			layout.line_1 = 35;
+			layout.line_2 = 35;
+		}
+		else if(contest.platform == "general") layout.headline = 35;
+		return layout;
+	}
 })

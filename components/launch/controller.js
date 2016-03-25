@@ -34,7 +34,13 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			else if(!$scope.contest.different || $scope.contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{
 				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
+				$scope.form_limit = launchModel.parallel_submission($scope.contest);
 				$scope.current = $scope.steps[step];
+				$scope.contest.additional_images = [];
+				if($scope.contest.additional_image_1) $scope.contest.additional_images.push($scope.contest.additional_image_1);
+				if($scope.contest.additional_image_2) $scope.contest.additional_images.push($scope.contest.additional_image_2);
+				if($scope.contest.additional_image_3) $scope.contest.additional_images.push($scope.contest.additional_image_3);
+				if($scope.contest.additional_images.length < 1) $scope.contest.additional_images = null;
 			}
 		}
 		else $scope.current = $scope.steps[step];
@@ -73,9 +79,9 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.profile = response.data;
-					$scope.contest.different = $scope.profile.different;
-					$scope.contest.audience = $scope.profile.audience;
-					$scope.contest.summary = $scope.profile.summary;
+					if(!$scope.contest.summary || $scope.contest.summary == '') $scope.contest.summary = $scope.profile.summary;
+					else if(!$scope.contest.audience || $scope.contest.audience == '') $scope.contest.audience = $scope.profile.audience;
+					else if(!$scope.contest.different || $scope.contest.different == '') $scope.contest.different = $scope.profile.different;
 				}
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -110,8 +116,6 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.close_payment = function(){
 		$scope.adding_payment = false;
 		$rootScope.modal_up = false;
-		$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-		$scope.set_step("done");
 	}
 
 
@@ -178,24 +182,77 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 
 
 	$scope.new_payment = function(){
-		// This identifies your website in the createToken call below
-		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $('#payment-form');
+		if($scope.price == 0.00){
+			if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
+			else{
+				launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+		       		if(res.http_status_code == 200){
+						if(res.success){
+							$scope.set_alert(res.message, "default");	
+							$scope.set_step("done");
+						}
+						else $scope.set_alert(res.message, "default");	 
+					}
+					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+					else $scope.check_code(res.http_status_code);
+		       	});
+			}
+		}
+		else{	
+			// This identifies your website in the createToken call below
+			Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+			var $form = $('#payment-form');
 
-        // Disable the submit button to prevent repeated clicks
-        $scope.form_disabled = true;
+	        // Disable the submit button to prevent repeated clicks
+	        $scope.form_disabled = true;
 
-		Stripe.card.createToken($form, stripeResponseHandler);
+			Stripe.card.createToken($form, stripeResponseHandler);
+		}
 	}
 
 	$scope.old_payment = function(){
-		if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
+		if($scope.price == 0.00){
+			if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
+			else{
+				launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+		       		if(res.http_status_code == 200){
+						if(res.success){
+							$scope.set_alert(res.message, "default");	
+							$scope.set_step("done");
+						}
+						else $scope.set_alert(res.message, "default");	 
+					}
+					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+					else $scope.check_code(res.http_status_code);
+		       	});
+			}
+		}	
 		else{
-			launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
+			if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
+			else{
+				launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
+		       		if(res.http_status_code == 200){
+						if(res.success){
+							$scope.set_alert(res.message, "default");	
+							$scope.set_step("done");
+						}
+						else $scope.set_alert(res.message, "default");	 
+					}
+					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+					else $scope.check_code(res.http_status_code);
+		       	});
+			}
+		}
+	}
+
+	$scope.use_voucher = function(){
+		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
+		else{
+			launchFactory.voucherValid($scope.voucher_code).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
-						$scope.set_alert(res.message, "default");	
-						$scope.set_step("done");
+						$scope.price = res.data.price;
+						$scope.reduction = res.data.discount;
 					}
 					else $scope.set_alert(res.message, "default");	 
 				}
@@ -205,12 +262,15 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		}
 	}
 
-	$scope.use_voucher = function(){
+	$scope.voucher_payment = function(){
 		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 		else{
-			launchFactory.voucherValid($scope.voucher_code).success(function(res){
+			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
-					if(res.success) $scope.price = res.data.price;
+					if(res.success){
+						$scope.set_alert(res.message, "default");	
+						$scope.set_step("done");
+					}
 					else $scope.set_alert(res.message, "default");	 
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");

@@ -139,7 +139,7 @@ class Submissions extends CI_Controller
             return;
         }
 
-        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text')))
+        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation')))
         {
             $this->responder->message(
                 "You're submission has succesfully been created"
