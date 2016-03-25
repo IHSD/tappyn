@@ -12,7 +12,7 @@
 			<div class='panel-body'>
 				<div class='col-sm-4 col-xs-12' style='padding-top:5px;'>
 					<h3 style='margin-top:0px;'><img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-					<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
+					<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
 					<div>
 		            	<button class='btn btn-sm' ng-class='{"btn-oj" : view.brief, "btn-default" : !view.brief}' ng-click='view_brief()'>Brief</button>
 		            	<button class='btn btn-sm' ng-class='{"btn-oj" : view.submissions, "btn-default" : !view.submissions}' ng-click='view_submissions()'>Submissions</button>
@@ -80,24 +80,40 @@
 	<div class='col-sm-4 col-xs-12'>
 		<div class='panel'>
 			<div class='panel-body'>
-				<div ng-hide='user.is_active'>	
+				<div ng-show='!user'>	
+					<div class='alert alert-danger text-center'>
+						<a href ng-click='open_login("default", "")'>Sign in</a> to see if you're eligible to submit to this contest
+					</div>
+				</div>
+				<div ng-show='user && !user.is_active'>	
 					<div class='alert alert-danger text-center'>
 						Only verified users can submit to contests, check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
 					</div>
 				</div>
-				<div ng-show='user.is_active'>
+				<div ng-show='user && user.is_active'>
 					<form class='form' ng-submit='submit_to(contest.id, submit)'>
 			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
 			 			<!--<span class='pull-right' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span> --></h4>	
-			            <div ng-show='contest.platform == "google" || contest.platform == "facebook"' class='form-group'>
-				        	<input class='form-control' ng-model='submit.headline' placeholder='*Captivating header capturing what makes this business unique' type='text'>
-				        	<div class='input-count'>
-				        		<span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of 35 characters</div>
+			            <div ng-show='form_limit.headline' class='form-group'>
+				        	<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
 				        </div>
-				        <div class='form-group'>
-				        	<textarea class='form-control' ng-model='submit.text' rows='3' placeholder='*Tell what the product will do for the customer in a clear, specific way'></textarea>
-				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of 250 characters</div>
-				        </div> 
+				        <div ng-show='form_limit.text' class='form-group'>
+				        	<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
+				        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
+				        </div>
+				        <div ng-show='form_limit.line_1' class='form-group'>
+				        <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
+				        </div>
+				        <div ng-show='form_limit.line_2' class='form-group'>
+				        	<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.description' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.description'>0</span><span ng-if='submit.description'>{{submit.link_description.length}}</span> of {{form_limit.line_2.limit}} characters</div>
+				        </div>
+				        <div ng-show='form_limit.card_title' class='form-group'>
+				        	<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.description' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
+				        	<div class='input-count'><span ng-if='!submit.description'>0</span><span ng-if='submit.description'>{{submit.link_description.length}}</span> of {{form_limit.card_title.limit}} characters</div>
+				        </div>
 			       		<div class='text-right'>
 			        		<button class='btn btn-oj' type='submit'>Submit</button>
 			      		</div>
@@ -120,63 +136,12 @@
 	<div class='col-sm-4 hidden-xs'>
 		<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
 			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-        	<!-- Generate a select as winner button if campaign is over and user owns contest -->
-			<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
-    	</div>
-    </div>
-    <div class='col-sm-4 hidden-xs'>
-		<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-        	<!-- Generate a select as winner button if campaign is over and user owns contest -->
-			<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
-    	</div>
-    </div>
-    <div class='col-sm-4 hidden-xs'>
-		<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-				<h3>{{submission.headline}}</h3>
+				<h3 ng-show='form_limit.headline'>{{submission.headline}}</h3>
 				<div class="contest-content">
-				    <span>{{submission.text}}</span>
+					<span ng-show='form_limit.card_title'>{{submission.description}}</span>
+				    <span ng-show='form_limit.text'>{{submission.text}}</span>
+				    <span ng-show='form_limit.line_1'>{{submission.link_explanation}}<br></span>
+				    <span ng-show='form_limit.line_2'>{{submission.description}}</span>
 				</div>
 				<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 			</div>
@@ -195,17 +160,80 @@
                	</h5>
             </div>
         	<!-- Generate a select as winner button if campaign is over and user owns contest -->
-			<button ng-disabled='' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
+			<button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
+    	</div>
+    </div>
+    <div class='col-sm-4 hidden-xs'>
+		<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+			<div class='col-xs-12'>
+				<h3 ng-show='form_limit.headline'>{{submission.headline}}</h3>
+				<div class="contest-content">
+					<span ng-show='form_limit.card_title'>{{submission.description}}</span>
+				    <span ng-show='form_limit.text'>{{submission.text}}</span>
+				    <span ng-show='form_limit.line_1'>{{submission.link_explanation}}<br></span>
+				    <span ng-show='form_limit.line_2'>{{submission.description}}</span>
+				</div>
+				<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+			</div>
+			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
+	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+	    	</div>
+	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
+	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+	    	</div>
+	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
+            <div class="contest-info">
+                <h5>
+                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+                		{{submission.created_at  | legibleDate}}
+                	</span>
+               	</h5>
+            </div>
+        	<!-- Generate a select as winner button if campaign is over and user owns contest -->
+			<button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
+    	</div>
+    </div>
+    <div class='col-sm-4 hidden-xs'>
+		<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+			<div class='col-xs-12'>
+				<h3 ng-show='form_limit.headline'>{{submission.headline}}</h3>
+					<div class="contest-content">
+						<span ng-show='form_limit.card_title'>{{submission.description}}</span>
+					    <span ng-show='form_limit.text'>{{submission.text}}</span>
+					    <span ng-show='form_limit.line_1'>{{submission.link_explanation}}<br></span>
+					    <span ng-show='form_limit.line_2'>{{submission.description}}</span>
+					</div>
+				<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+			</div>
+			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
+	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+	    	</div>
+	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
+	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+	    	</div>
+	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
+            <div class="contest-info">
+                <h5>
+                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+                		{{submission.created_at  | legibleDate}}
+                	</span>
+               	</h5>
+            </div>
+        	<!-- Generate a select as winner button if campaign is over and user owns contest -->
+			<button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
 		</div>
     </div>
     <div class='col-xs-12 visible-xs'>
     	<div class="contest-box row" ng-repeat='submission in submissions'>
 			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+				<h3 ng-show='form_limit.headline'>{{submission.headline}}</h3>
+				<div class="contest-content">
+					 <span ng-show='form_limit.card_title'>{{submission.description}}</span>
+				    <span ng-show='form_limit.text'>{{submission.text}}</span>
+				    <span ng-show='form_limit.line_1'>{{submission.link_explanation}}<br></span>
+				    <span ng-show='form_limit.line_2'>{{submission.description}}</span>
+				</div>
+				<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 			</div>
 			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
 	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
