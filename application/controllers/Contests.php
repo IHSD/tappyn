@@ -330,7 +330,7 @@ class Contests extends CI_Controller
                 'object_type' => "contest",
                 'object_id' => $cid
             ));
-            $this->notifications->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
+            $this->notification->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
 
             return;
         }

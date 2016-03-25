@@ -7,7 +7,7 @@ class Crons extends CI_Controller
         parent::__construct();
         if(!is_cli())
         {
-        //    die();
+            die();
         }
     }
 
