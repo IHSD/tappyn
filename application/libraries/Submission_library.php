@@ -20,6 +20,7 @@ class Submission_library
      * @param  array $data Fields required for creation
      * @return boolean
      */
+
     public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL)
     {
         if(!$this->ion_auth->logged_in())
