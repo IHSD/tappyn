@@ -1,0 +1,11 @@
+{
+	"multistr":true,
+	"evil":true,
+	"supernew":true,
+    "asi" : true,
+    "-W041": false,
+    "shadow":true,
+    "-W032":false,
+    "-W038":false,
+    "-W069":false
+}
