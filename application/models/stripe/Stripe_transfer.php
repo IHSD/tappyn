@@ -2,9 +2,9 @@
 
 class Stripe_transfer extends MY_Model
 {
-    protected $table = 'stripe_transfers';
-    protected $order_by = 'stripe_transfers.created_at';
-    protected $order_dir = 'desc';
+    public $table = 'stripe_transfers';
+    public $order_by = 'stripe_transfers.created_at';
+    public $order_dir = 'desc';
 
     public function __construct()
     {
