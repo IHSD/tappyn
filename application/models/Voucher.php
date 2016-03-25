@@ -21,7 +21,7 @@
  */
 class Voucher extends MY_Model
 {
-    protected $table = 'vouchers';
+    public $table = 'vouchers';
     protected $errors = FALSE;
 
     public function __construct()
