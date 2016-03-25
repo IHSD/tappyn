@@ -41,5 +41,15 @@ tappyn.factory('dashFactory', function($http){
 			data : $.param(obj) 
 		})	
 	}
+	fact.voucherValid = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/vouchers/is_valid',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({voucher_code : id}) 
+		})	
+	}
 	return fact;
 })

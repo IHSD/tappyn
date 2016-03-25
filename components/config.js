@@ -136,7 +136,7 @@ tappyn.constant('emotions', [
 	{type : 'athelete', adjectives : 'Performance, reslience, steadfastness', brand : 'Conqueror',
 		google : 'public/img/athlete_g.jpg', facebook : '', twitter : 'public/img/athlete_t.jpg', icon : 'public/img/athlete.png'},
 	{type : 'eagle', adjectives : 'Independence, controversy, freedom', brand : 'Rebel',
-		google : 'eagle_g.jpg', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
+		google : 'public/img/eagle_g.jpg', facebook : '', twitter : '', icon : 'public/img/eagle.png'},
 	{type : 'lightbulb', adjectives : 'Imagination, surprise, curiosity', brand : 'Wizard',
 		google : 'public/img/lightbulb_g.jpg', facebook : '', twitter : 'public/img/lightbulb_t.png', icon : 'public/img/lightbulb.png'},
 	{type : 'glass', adjectives : 'Spontaneity, charm, humor', brand : 'Entertainer',
@@ -148,7 +148,7 @@ tappyn.constant('emotions', [
 ]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $q, $route, $location, $anchorScroll, $timeout, AppFact){
+tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact){
 	$rootScope.modal_up = false;		
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
@@ -166,8 +166,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			'art_entertainment' : 'Art & Entertainment',
 			'fashion_beauty' : 'Fashion & Beauty'
 	}
+
 	$scope.logged_in = function(){
-		return $q(function(resolve, reject) {
+		$interval(function(){
 			AppFact.isLoggedIn().success(function(response){
 				if(response.http_status_code == 200){
 					$rootScope.user = response.data;
@@ -183,7 +184,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
-					resolve('All logged in');
 				}
 				else{
 					window.Intercom('boot', {
@@ -192,11 +192,37 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 						 	activator: '#IntercomDefaultWidget'
 						 }
 					})
-					resolve("Guesterino");	
 				}
-			})
-		});
+			});
+		}, 20000);
 	}
+
+	AppFact.isLoggedIn().success(function(response){
+		if(response.http_status_code == 200){
+			$rootScope.user = response.data;
+			sessionStorage.setItem("user", JSON.stringify(response.data));
+		}
+		if($rootScope.user){
+			window.Intercom('boot', {
+			   app_id: 'qj6arzfj',
+			   email: $rootScope.user.email,
+			   user_id: $rootScope.user.id,
+			   created_at: $rootScope.user.created_at,
+			   widget: {
+			      activator: '#IntercomDefaultWidget'
+			   }
+			});
+		}
+		else{
+			window.Intercom('boot', {
+				 app_id: 'qj6arzfj',
+				 widget: {
+				 	activator: '#IntercomDefaultWidget'
+				 }
+			})
+		}
+	});
+	$scope.logged_in();
 
 	$scope.to_top = function(){
 		var old = $location.hash();
@@ -248,7 +274,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	$scope.close_login = function(){
 		$rootScope.modal_up = false;
-		if($scope.signing_in.type != 'company') $location.path('/home');
 		$scope.signing_in = {show : false, type : '', object : ''};
 	}
 
@@ -259,7 +284,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	$scope.close_register = function(){
 		$rootScope.modal_up = false;
-		if($scope.registration.type != 'company') $location.path('/home');
 		$scope.registration = {show : false, type : '', object : ''};
 	}
 	$scope.login_to_register = function(){
@@ -314,7 +338,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
-	
 	**/
 
 	$scope.log_in = function(email, pass){
@@ -372,6 +395,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					   }
 					});
 					fbq('track', 'Lead');
+					ga('send', {
+						hitType: 'event',
+						eventCategory: 'User Signup',
+						eventAction: 'Signup',
+						eventLabel: 'New User Email'
+					});
 					if($scope.registration.type != "company") $route.reload();
 					$scope.registration = {show : false, type : '', object : ''};
 				}
