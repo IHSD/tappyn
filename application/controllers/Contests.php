@@ -109,6 +109,9 @@ class Contests extends CI_Controller
             )->code(404)->respond();
         } else {
             $contest->views = $this->contest->views($cid);
+            $this->ion_auth->logged_in() ?
+                $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $cid) :
+                $contest->user_may_submit = FALSE;
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
@@ -182,6 +185,8 @@ class Contests extends CI_Controller
         if($this->form_validation->run() == true)
         {
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
+            $age = $this->input->post('age');
+            $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
                 'audience'          => $this->input->post('audience'),
@@ -189,9 +194,9 @@ class Contests extends CI_Controller
                 'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),
                 'platform'          => $this->input->post('platform'),
-                'age'               => $this->input->post('age'),
                 'gender'            => $this->input->post('gender'),
                 'owner'             => $this->ion_auth->user()->row()->id,
+                'age'               => $age,
                 'industry'          => $this->input->post('industry'),
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),

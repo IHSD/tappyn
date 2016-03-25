@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for /var/www/tappyn/application/controllers/admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/nv.d3.min.css" rel="stylesheet">
+  <link href="../../css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="../../js/html5shiv.min.js"></script>
+  <script src="../../js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="../../index.html">/var/www/tappyn/application</a></li>
+        <li><a href="../index.html">controllers</a></li>
+        <li><a href="index.html">admin</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Submissions.php.html#3">Submissions</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#3">Payments</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Transfers.php.html#3">Transfers</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#3">Users</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#3">Vouchers</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interests.php.html#3">Interests</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#3">Home</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Companies.php.html#3">Companies</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contacts.php.html#3">Contacts</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#3">Contests</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#3">Crons</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#3">Accounts</a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Vouchers.php.html#3">Vouchers</a></td><td class="text-right">1056</td></tr>
+       <tr><td><a href="Crons.php.html#3">Crons</a></td><td class="text-right">812</td></tr>
+       <tr><td><a href="Payments.php.html#3">Payments</a></td><td class="text-right">702</td></tr>
+       <tr><td><a href="Users.php.html#3">Users</a></td><td class="text-right">650</td></tr>
+       <tr><td><a href="Contests.php.html#3">Contests</a></td><td class="text-right">600</td></tr>
+       <tr><td><a href="Submissions.php.html#3">Submissions</a></td><td class="text-right">342</td></tr>
+       <tr><td><a href="Interests.php.html#3">Interests</a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Home.php.html#3">Home</a></td><td class="text-right">132</td></tr>
+       <tr><td><a href="Companies.php.html#3">Companies</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Contacts.php.html#3">Contacts</a></td><td class="text-right">110</td></tr>
+       <tr><td><a href="Accounts.php.html#3">Accounts</a></td><td class="text-right">72</td></tr>
+       <tr><td><a href="Transfers.php.html#3">Transfers</a></td><td class="text-right">42</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Submissions.php.html#58"><abbr title="Submissions::edit">edit</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#53"><abbr title="Submissions::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#19"><abbr title="Submissions::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#80"><abbr title="Submissions::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Transfers.php.html#5"><abbr title="Transfers::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#5"><abbr title="Users::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Transfers.php.html#22"><abbr title="Transfers::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Submissions.php.html#5"><abbr title="Submissions::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#88"><abbr title="Payments::paid_out">paid_out</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#5"><abbr title="Payments::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interests.php.html#50"><abbr title="Interests::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interests.php.html#28"><abbr title="Interests::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#21"><abbr title="Payments::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#66"><abbr title="Payments::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#83"><abbr title="Payments::test">test</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Payments.php.html#78"><abbr title="Payments::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#20"><abbr title="Users::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#58"><abbr title="Users::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#153"><abbr title="Vouchers::valid">valid</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#137"><abbr title="Vouchers::deactivate">deactivate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#122"><abbr title="Vouchers::activate">activate</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#162"><abbr title="Vouchers::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#171"><abbr title="Vouchers::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#190"><abbr title="Vouchers::expiration_check">expiration_check</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#176"><abbr title="Vouchers::discount_type_check">discount_type_check</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#80"><abbr title="Vouchers::create">create</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#61"><abbr title="Vouchers::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#127"><abbr title="Users::transfers">transfers</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#90"><abbr title="Users::submissions">submissions</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#66"><abbr title="Users::search">search</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#132"><abbr title="Users::payouts">payouts</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Users.php.html#143"><abbr title="Users::account">account</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#24"><abbr title="Vouchers::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Vouchers.php.html#5"><abbr title="Vouchers::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interests.php.html#22"><abbr title="Interests::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Interests.php.html#5"><abbr title="Interests::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contacts.php.html#50"><abbr title="Contacts::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contacts.php.html#18"><abbr title="Contacts::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contacts.php.html#5"><abbr title="Contacts::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contacts.php.html#55"><abbr title="Contacts::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#5"><abbr title="Contests::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#66"><abbr title="Contests::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#21"><abbr title="Contests::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Companies.php.html#50"><abbr title="Companies::payment_history">payment_history</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Companies.php.html#32"><abbr title="Companies::account_details">account_details</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#27"><abbr title="Accounts::edit">edit</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#22"><abbr title="Accounts::show">show</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#17"><abbr title="Accounts::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#32"><abbr title="Accounts::suspend">suspend</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#37"><abbr title="Accounts::respend">respend</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Companies.php.html#16"><abbr title="Companies::contests">contests</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Companies.php.html#5"><abbr title="Companies::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#78"><abbr title="Contests::submissons">submissons</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#89"><abbr title="Contests::edit">edit</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#5"><abbr title="Home::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#151"><abbr title="Crons::csv_to_array">csv_to_array</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#113"><abbr title="Crons::generate_users">generate_users</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#23"><abbr title="Home::data">data</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#37"><abbr title="Home::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#76"><abbr title="Home::docs">docs</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Home.php.html#42"><abbr title="Home::email">email</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#83"><abbr title="Crons::facebook">facebook</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#47"><abbr title="Crons::contest_ended">contest_ended</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#126"><abbr title="Contests::suspend">suspend</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#121"><abbr title="Contests::delete">delete</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#94"><abbr title="Contests::update">update</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Contests.php.html#131"><abbr title="Contests::respend">respend</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#5"><abbr title="Crons::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#19"><abbr title="Crons::push_notification">push_notification</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Crons.php.html#14"><abbr title="Crons::index">index</a></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="Accounts.php.html#5"><abbr title="Accounts::__construct">__construct</a></a></td><td class="text-right">0%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="Payments.php.html#21"><abbr title="Payments::index">index</abbr></a></td><td class="text-right">210</td></tr>
+       <tr><td><a href="Vouchers.php.html#80"><abbr title="Vouchers::create">create</abbr></a></td><td class="text-right">90</td></tr>
+       <tr><td><a href="Users.php.html#90"><abbr title="Users::submissions">submissions</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Contests.php.html#21"><abbr title="Contests::index">index</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Submissions.php.html#19"><abbr title="Submissions::index">index</abbr></a></td><td class="text-right">56</td></tr>
+       <tr><td><a href="Contests.php.html#94"><abbr title="Contests::update">update</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Crons.php.html#151"><abbr title="Crons::csv_to_array">csv_to_array</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Crons.php.html#47"><abbr title="Crons::contest_ended">contest_ended</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Home.php.html#5"><abbr title="Home::__construct">__construct</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Payments.php.html#88"><abbr title="Payments::paid_out">paid_out</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Vouchers.php.html#24"><abbr title="Vouchers::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Users.php.html#20"><abbr title="Users::index">index</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Submissions.php.html#58"><abbr title="Submissions::edit">edit</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Crons.php.html#83"><abbr title="Crons::facebook">facebook</abbr></a></td><td class="text-right">42</td></tr>
+       <tr><td><a href="Interests.php.html#50"><abbr title="Interests::delete">delete</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Interests.php.html#28"><abbr title="Interests::create">create</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Contacts.php.html#18"><abbr title="Contacts::index">index</abbr></a></td><td class="text-right">30</td></tr>
+       <tr><td><a href="Crons.php.html#113"><abbr title="Crons::generate_users">generate_users</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Vouchers.php.html#5"><abbr title="Vouchers::__construct">__construct</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Users.php.html#66"><abbr title="Users::search">search</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Transfers.php.html#5"><abbr title="Transfers::__construct">__construct</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="Users.php.html#5"><abbr title="Users::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Crons.php.html#19"><abbr title="Crons::push_notification">push_notification</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Accounts.php.html#5"><abbr title="Accounts::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Companies.php.html#5"><abbr title="Companies::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Companies.php.html#16"><abbr title="Companies::contests">contests</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Interests.php.html#5"><abbr title="Interests::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Contacts.php.html#5"><abbr title="Contacts::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Payments.php.html#5"><abbr title="Payments::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Submissions.php.html#5"><abbr title="Submissions::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Contests.php.html#5"><abbr title="Contests::__construct">__construct</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="Vouchers.php.html#190"><abbr title="Vouchers::expiration_check">expiration_check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers.php.html#61"><abbr title="Vouchers::show">show</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers.php.html#137"><abbr title="Vouchers::deactivate">deactivate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers.php.html#176"><abbr title="Vouchers::discount_type_check">discount_type_check</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Vouchers.php.html#122"><abbr title="Vouchers::activate">activate</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Companies.php.html#50"><abbr title="Companies::payment_history">payment_history</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Contests.php.html#66"><abbr title="Contests::show">show</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Contests.php.html#78"><abbr title="Contests::submissons">submissons</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Home.php.html#42"><abbr title="Home::email">email</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Transfers.php.html#22"><abbr title="Transfers::index">index</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Companies.php.html#32"><abbr title="Companies::account_details">account_details</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Crons.php.html#5"><abbr title="Crons::__construct">__construct</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="Users.php.html#143"><abbr title="Users::account">account</abbr></a></td><td class="text-right">6</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="http://github.com/sebastianbergmann/php-code-coverage" target="_top">PHP_CodeCoverage 2.1.7</a> using <a href="http://php.net/" target="_top">PHP 5.6.11-1ubuntu3.1</a> and <a href="http://phpunit.de/">PHPUnit 4.7.6</a> at Thu Mar 24 15:46:25 UTC 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="../../js/jquery.min.js" type="text/javascript"></script>
+  <script src="../../js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="../../js/holder.min.js" type="text/javascript"></script>
+  <script src="../../js/d3.min.js" type="text/javascript"></script>
+  <script src="../../js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([12,0,0,0,0,0,0,0,0,0,0,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([71,0,0,0,0,0,0,0,0,0,0,0], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[0,8,"<a href=\"Accounts.php.html#3\">Accounts<\/a>"],[0,10,"<a href=\"Companies.php.html#3\">Companies<\/a>"],[0,10,"<a href=\"Contacts.php.html#3\">Contacts<\/a>"],[0,24,"<a href=\"Contests.php.html#3\">Contests<\/a>"],[0,28,"<a href=\"Crons.php.html#3\">Crons<\/a>"],[0,11,"<a href=\"Home.php.html#3\">Home<\/a>"],[0,14,"<a href=\"Interests.php.html#3\">Interests<\/a>"],[0,26,"<a href=\"Payments.php.html#3\">Payments<\/a>"],[0,18,"<a href=\"Submissions.php.html#3\">Submissions<\/a>"],[0,6,"<a href=\"Transfers.php.html#3\">Transfers<\/a>"],[0,25,"<a href=\"Users.php.html#3\">Users<\/a>"],[0,32,"<a href=\"Vouchers.php.html#3\">Vouchers<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.scatter.onlyCircles(false);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[0,3,"<a href=\"Accounts.php.html#5\">Accounts::__construct<\/a>"],[0,1,"<a href=\"Accounts.php.html#17\">Accounts::index<\/a>"],[0,1,"<a href=\"Accounts.php.html#22\">Accounts::show<\/a>"],[0,1,"<a href=\"Accounts.php.html#27\">Accounts::edit<\/a>"],[0,1,"<a href=\"Accounts.php.html#32\">Accounts::suspend<\/a>"],[0,1,"<a href=\"Accounts.php.html#37\">Accounts::respend<\/a>"],[0,3,"<a href=\"Companies.php.html#5\">Companies::__construct<\/a>"],[0,3,"<a href=\"Companies.php.html#16\">Companies::contests<\/a>"],[0,2,"<a href=\"Companies.php.html#32\">Companies::account_details<\/a>"],[0,2,"<a href=\"Companies.php.html#50\">Companies::payment_history<\/a>"],[0,3,"<a href=\"Contacts.php.html#5\">Contacts::__construct<\/a>"],[0,5,"<a href=\"Contacts.php.html#18\">Contacts::index<\/a>"],[0,1,"<a href=\"Contacts.php.html#50\">Contacts::show<\/a>"],[0,1,"<a href=\"Contacts.php.html#55\">Contacts::update<\/a>"],[0,3,"<a href=\"Contests.php.html#5\">Contests::__construct<\/a>"],[0,7,"<a href=\"Contests.php.html#21\">Contests::index<\/a>"],[0,2,"<a href=\"Contests.php.html#66\">Contests::show<\/a>"],[0,2,"<a href=\"Contests.php.html#78\">Contests::submissons<\/a>"],[0,1,"<a href=\"Contests.php.html#89\">Contests::edit<\/a>"],[0,6,"<a href=\"Contests.php.html#94\">Contests::update<\/a>"],[0,1,"<a href=\"Contests.php.html#121\">Contests::delete<\/a>"],[0,1,"<a href=\"Contests.php.html#126\">Contests::suspend<\/a>"],[0,1,"<a href=\"Contests.php.html#131\">Contests::respend<\/a>"],[0,2,"<a href=\"Crons.php.html#5\">Crons::__construct<\/a>"],[0,1,"<a href=\"Crons.php.html#14\">Crons::index<\/a>"],[0,3,"<a href=\"Crons.php.html#19\">Crons::push_notification<\/a>"],[0,6,"<a href=\"Crons.php.html#47\">Crons::contest_ended<\/a>"],[0,6,"<a href=\"Crons.php.html#83\">Crons::facebook<\/a>"],[0,4,"<a href=\"Crons.php.html#113\">Crons::generate_users<\/a>"],[0,6,"<a href=\"Crons.php.html#151\">Crons::csv_to_array<\/a>"],[0,6,"<a href=\"Home.php.html#5\">Home::__construct<\/a>"],[0,1,"<a href=\"Home.php.html#23\">Home::data<\/a>"],[0,1,"<a href=\"Home.php.html#37\">Home::index<\/a>"],[0,2,"<a href=\"Home.php.html#42\">Home::email<\/a>"],[0,1,"<a href=\"Home.php.html#76\">Home::docs<\/a>"],[0,3,"<a href=\"Interests.php.html#5\">Interests::__construct<\/a>"],[0,1,"<a href=\"Interests.php.html#22\">Interests::index<\/a>"],[0,5,"<a href=\"Interests.php.html#28\">Interests::create<\/a>"],[0,5,"<a href=\"Interests.php.html#50\">Interests::delete<\/a>"],[0,3,"<a href=\"Payments.php.html#5\">Payments::__construct<\/a>"],[0,14,"<a href=\"Payments.php.html#21\">Payments::index<\/a>"],[0,1,"<a href=\"Payments.php.html#66\">Payments::show<\/a>"],[0,1,"<a href=\"Payments.php.html#78\">Payments::update<\/a>"],[0,1,"<a href=\"Payments.php.html#83\">Payments::test<\/a>"],[0,6,"<a href=\"Payments.php.html#88\">Payments::paid_out<\/a>"],[0,3,"<a href=\"Submissions.php.html#5\">Submissions::__construct<\/a>"],[0,7,"<a href=\"Submissions.php.html#19\">Submissions::index<\/a>"],[0,1,"<a href=\"Submissions.php.html#53\">Submissions::show<\/a>"],[0,6,"<a href=\"Submissions.php.html#58\">Submissions::edit<\/a>"],[0,1,"<a href=\"Submissions.php.html#80\">Submissions::delete<\/a>"],[0,4,"<a href=\"Transfers.php.html#5\">Transfers::__construct<\/a>"],[0,2,"<a href=\"Transfers.php.html#22\">Transfers::index<\/a>"],[0,3,"<a href=\"Users.php.html#5\">Users::__construct<\/a>"],[0,6,"<a href=\"Users.php.html#20\">Users::index<\/a>"],[0,1,"<a href=\"Users.php.html#58\">Users::show<\/a>"],[0,4,"<a href=\"Users.php.html#66\">Users::search<\/a>"],[0,7,"<a href=\"Users.php.html#90\">Users::submissions<\/a>"],[0,1,"<a href=\"Users.php.html#127\">Users::transfers<\/a>"],[0,1,"<a href=\"Users.php.html#132\">Users::payouts<\/a>"],[0,2,"<a href=\"Users.php.html#143\">Users::account<\/a>"],[0,4,"<a href=\"Vouchers.php.html#5\">Vouchers::__construct<\/a>"],[0,6,"<a href=\"Vouchers.php.html#24\">Vouchers::index<\/a>"],[0,2,"<a href=\"Vouchers.php.html#61\">Vouchers::show<\/a>"],[0,9,"<a href=\"Vouchers.php.html#80\">Vouchers::create<\/a>"],[0,2,"<a href=\"Vouchers.php.html#122\">Vouchers::activate<\/a>"],[0,2,"<a href=\"Vouchers.php.html#137\">Vouchers::deactivate<\/a>"],[0,1,"<a href=\"Vouchers.php.html#153\">Vouchers::valid<\/a>"],[0,1,"<a href=\"Vouchers.php.html#162\">Vouchers::update<\/a>"],[0,1,"<a href=\"Vouchers.php.html#171\">Vouchers::delete<\/a>"],[0,2,"<a href=\"Vouchers.php.html#176\">Vouchers::discount_type_check<\/a>"],[0,2,"<a href=\"Vouchers.php.html#190\">Vouchers::expiration_check<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

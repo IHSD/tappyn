@@ -2,7 +2,7 @@
 
 class Submission extends MY_Model
 {
-    protected $table = 'submissions';
+    public $table = 'submissions';
 
     protected $metafields = array(
         'submissions.id',

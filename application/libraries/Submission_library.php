@@ -20,7 +20,8 @@ class Submission_library
      * @param  array $data Fields required for creation
      * @return boolean
      */
-    public function create($cid, $headline = NULL, $text = NULL, $link_exp = NULL)
+
+    public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL)
     {
         if(!$this->ion_auth->logged_in())
         {
@@ -63,8 +64,8 @@ class Submission_library
             'owner' => $this->ion_auth->user()->row()->id,
             'contest_id' => $contest->id,
             'headline' => $headline,
-            'text' => $text,
-            'link_explanation' => $link_exp
+            'link_explanation' => $link_explanation,
+            'text' => $text
         );
 
         $success = false;
@@ -80,6 +81,7 @@ class Submission_library
             $email_data = array(
                 'headline' => $this->input->post('headline'),
                 'text' => $this->input->post('text'),
+                'link_explanation' => $this->input->post('link_explanation'),
                 'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
                 'contest' => $contest->title,
                 'company' => $contest->company->name,

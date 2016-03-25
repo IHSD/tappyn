@@ -28,15 +28,26 @@ class Auth extends CI_Controller {
 	{
 		if($this->ion_auth->logged_in())
 		{
+			$uid = $this->ion_auth->user()->row()->id;
 			$this->load->library('notification');
-	        $this->notification->setUser($this->ion_auth->user()->row()->id);
+	        $this->notification->setUser($uid);
 			$user = $this->ion_auth->ajax_user();
 			$this->load->library('interest');
 			$this->interest->setDatabase($this->db);
-			$this->interest->setUser($this->ion_auth->user()->row()->id);
+			$this->interest->setUser($uid);
+			$profile = $this->user->profile($uid);
 	        $interests = $this->interest->tree();
 	        $user['interests'] = $interests;
+			$user['age'] = $profile->age;
+			$user['gender'] = $profile->gender;
 			$user['notifications'] = $this->notification->count();
+			if($user['type'] == 'company')
+			{
+				$profile = $this->user->profile($this->ion_auth->user()->row()->id);
+				if(!is_null($profile->facebook_url)) $user['facebook_url'] = $profile->facebook_url;
+				if(!is_null($profile->twitter_handle)) $user['twitter_handle'] = $profile->twitter_handle;
+				if(!is_null($profile->company_url)) $user['company_url'] = $profile->company_url;
+			}
 			$this->responder
 				 ->data($user)
 				 ->message($this->session->flashdata('message'))

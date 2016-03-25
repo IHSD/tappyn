@@ -41,6 +41,7 @@
 		    		<div ng-show='registration.type == "default" || registration.type == "company" || resigration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
 		    	</div>
 		    	<div ng-include src="'templates/notifications.html'"></div>
+				<div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
 		    </div>
 		    <section class='innerpage' ng-view></section>
 		    <div ng-include src="'templates/footer.html'"></div>
