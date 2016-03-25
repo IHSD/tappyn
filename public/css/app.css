@@ -2358,3 +2358,11 @@ nav .dropdown-menu{
 .notification:hover{
 	background:#eee;
 }
+#faqpayment .panel-heading{
+	border : 1px solid #ff5c00;
+	background: #fff;
+	color:#ff5c00 !important;
+}
+#faqpayment .panel-body{
+	border : 1px solid #ff5c00;
+}
