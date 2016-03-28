@@ -24,7 +24,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		if($scope.form_limit.headline && submission.headline.length < 1) $scope.set_alert("Headline is required", "error");
 		else if($scope.form_limit.text && submission.text.length < 1) $scope.set_alert("Text is required", "error");
 		else if($scope.form_limit.line_1 && submission.link_explanation.length < 1) $scope.set_alert("Line 1 is required", "error");
-		else if($scope.form_limit.line_2 && submission.description.length < 1) $scope.set_alert("Line 2 is required", "error");
+		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
+		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
 		else{
 			if($rootScope.user){
 				contestFactory.submitTo(id, submission).success(function(response){
