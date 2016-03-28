@@ -194,7 +194,7 @@ class Users extends CI_Controller
 
     public function upvoted()
     {
-        $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->limit(50)->fetch();
+        $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->order_by('votes.created_at', 'desc')->limit(50)->fetch();
         $this->responder->data(array('submissions' => $submissions->result()))->respond();
     }
 
