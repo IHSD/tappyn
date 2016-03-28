@@ -2366,3 +2366,21 @@ nav .dropdown-menu{
 #faqpayment .panel-body{
 	border : 1px solid #ff5c00;
 }
+.dash-black {
+	color:#333;
+	cursor: pointer;
+}
+.dash-black:hover{
+	color:#ff5c00;
+}
+.dash-oj{
+	color:#ff5c00;
+	cursor: pointer;
+}
+  .glyph-lg {
+        font-size:1.6em;
+    }
+.dash-bordered{
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+}
