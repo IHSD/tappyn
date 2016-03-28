@@ -3,15 +3,32 @@
 class Payout
 {
     protected $errors = FALSE;
-
+    protected $callable = array(
+        'db',
+        'load',
+        'payout_model'
+    );
     public function __construct()
     {
-
+        $this->load->model('payout_model');
     }
 
     public function __get($var)
     {
-        return get_instance()->$var;
+        if(in_array($var, $this->callable))
+        {
+            return get_instance()->$var;
+        }
+        throw new Exception('Undefined property Payout->'.$var);
+    }
+
+    public function __call($method, $args)
+    {
+        if(!method_exists('payout_model', $method))
+        {
+            throw new Exception("Call to undefined method Payout::{$method}()");
+        }
+        call_user_func_array(array($this->payout_model, $method), $args);
     }
 
     /**
