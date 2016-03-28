@@ -192,6 +192,12 @@ class Users extends CI_Controller
         ))->respond();
     }
 
+    public function upvoted()
+    {
+        $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->limit(50)->fetch();
+        $this->responder->data(array('submissions' => $submissions->result()))->respond();
+    }
+
     /**
      * Fetch all of a users interests
      * @return void
