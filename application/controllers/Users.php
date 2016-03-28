@@ -118,7 +118,17 @@ class Users extends CI_Controller
                     if($this->input->post('last_name')) $userdata['last_name'] = $this->input->post('last_name');
                     $this->ion_auth->update($this->ion_auth->user()->row()->id, $userdata);
                 }
-
+                if(empty($data)) {
+                    $this->responder
+                        ->message(
+                            'Profile was successfully updated'
+                        )
+                        ->data(array(
+                            'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
+                        ))
+                        ->respond();
+                    return;
+                }
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder

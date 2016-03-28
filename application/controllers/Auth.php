@@ -151,7 +151,7 @@ class Auth extends CI_Controller {
 
 			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password'), $remember))
 			{
-				$this->responder->message("Login successful")->data($this->ion_auth->ajax_user())->respond();
+				$this->is_logged_in();
 				return;
 			}
 			else
