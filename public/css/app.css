@@ -2264,14 +2264,6 @@ nav .dropdown-menu{
 .border-submish{
 	border:1px solid #ff5e00;
 }
-.submissions-page{
- min-height:275px; 
- max-height:275px;
-}
-.submissions-page-mobile{
- min-height:350px; 
- max-height:350px;
-}}
 
 .tappyn-bars div p {
 	color:#fff !important;

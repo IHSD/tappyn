@@ -10,15 +10,29 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 		else if(response.http_status_code == 500) alert(response.error);
 		else $scope.check_code(response.http_status_code);
 	});
-
+	dashFactory.grabTotals().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success) $scope.totals = response.data;
+			else alert(response.message);	 
+		}
+		else if(response.http_status_code == 500) alert(response.error);
+		else $scope.check_code(response.http_status_code);
+	})
 	$scope.price = 99.99;
 
 	$scope.grab_dash = function(type){
 		$scope.type = type;
 
-		dashFactory.grabDash(type).success(function(response){
-			if(response.success) $scope.dash = response.data;
-		});
+		if(type == "upvotes"){
+			dashFactory.grabUpvoted().success(function(response){
+				if(response.success) $scope.dash = response.data;
+			});
+		}	
+		else{
+			dashFactory.grabDash(type).success(function(response){
+				if(response.success) $scope.dash = response.data;
+			});
+		}
 	}
 
 	$scope.claim_winnings = function(id){

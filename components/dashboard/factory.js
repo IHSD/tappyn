@@ -51,5 +51,23 @@ tappyn.factory('dashFactory', function($http){
 			data : $.param({voucher_code : id}) 
 		})	
 	}
+	fact.grabTotals = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/stats',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+	fact.grabUpvoted = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/upvoted',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
 	return fact;
 })
