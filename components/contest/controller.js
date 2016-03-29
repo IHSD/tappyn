@@ -7,8 +7,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		if($scope.contest.emotion){
 			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
 		}
+		else $scope.example = false;
 		$scope.form_limit = contestModel.parallel_submission($scope.contest);
-	    else $scope.example = false;
 	});
 
 	$scope.view = {brief : true, submissions : false};
