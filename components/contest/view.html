@@ -113,7 +113,7 @@
 				        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
 				        </div>
 				        <div ng-show='form_limit.line_1' class='form-group'>
-				        <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+				        	<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
 				        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
 				        </div>
 				        <div ng-show='form_limit.line_2' class='form-group'>
