@@ -3,7 +3,9 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
-		if($scope.contest.status == "ended" && (!$rootScope.user || $rootScope.user.id != $scope.contest.owner || !$rootScope.user.is_admin)) $location.path('/ended/'+$routeParams.id);
+		if($scope.contest.status == "ended" && $rootScope.user.id != $scope.contest.owner){
+			if(!$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);
+		}
 		if($scope.contest.emotion){
 			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
 		}
