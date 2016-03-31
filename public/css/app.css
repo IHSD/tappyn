@@ -2201,9 +2201,14 @@ nav .dropdown-menu{
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
+.modal_link{
+	border-radius:5px;
+	margin-bottom:5px;
+}
 .modal_link a{
 	color:#ff5e00;
 	cursor: pointer;
+	text-decoration: none;
 }
 .close_circle{
 	background:#aaa;
@@ -2365,4 +2370,15 @@ nav .dropdown-menu{
 }
 #faqpayment .panel-body{
 	border : 1px solid #ff5c00;
+}
+.login-highlight{
+	background : #ff5c00;
+	border-radius: 5px;
+}
+.login-highlight a{
+	color:#fff;
+}
+.login-links{
+	width:33.3%;
+	float:left;
 }
