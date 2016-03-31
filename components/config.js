@@ -77,6 +77,7 @@ tappyn.config(function($routeProvider) {
 tappyn.filter('untilFilter', function() {
 	return function(date){
 		date = moment(date).fromNow("hh");
+		if(date == "a day") date = "1 day";
 		return date;
 	};
 });
@@ -469,16 +470,32 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	/* column functions */
 	$scope.first_third = function(index){
-		var number_array = [0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48];
-		return number_array.includes(index);
+		return index%3 == 0;
 	}
 	$scope.second_third = function(index){
-		var number_array = [1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49];
-		return number_array.includes(index);
+		return index%3 == 1;
 	}
 	$scope.third_third = function(index){
-		var number_array = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50];	
-		return number_array.includes(index);
+		return index%3 == 2;
+	}
+
+	$scope.first_six = function(index){
+		return index%6 == 0;
+	}
+	$scope.second_six = function(index){
+		return index%6 == 1;
+	}
+	$scope.third_six = function(index){
+		return index%6 == 2;
+	}
+	$scope.fourth_six = function(index){
+		return index%6 == 3;
+	}
+	$scope.fifth_six = function(index){	
+		return index%6 == 4;
+	}
+	$scope.sixth_six = function(index){	
+		return index%6 == 5;
 	}
 
 	$scope.amazon_connect('tappyn');

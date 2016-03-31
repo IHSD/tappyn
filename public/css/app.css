@@ -398,7 +398,7 @@ header .btn-login {
 	float: left;
 }
 .contest-box .contest-content {
-	color: #7E7E7E;
+	color: #333;
 }
 .contest-box .contest-info{
 	color: #FF5E00;
@@ -1072,7 +1072,8 @@ footer {
 	margin:  0 0 20px;
 }
 .company-img img {
-	height:100%;
+	height:auto;
+	width:100%;
 }
 .browse-contest .ad-company-info h4 {
 	margin: 0 0 15px;
@@ -2272,14 +2273,13 @@ nav .dropdown-menu{
 .highlight_payment{
 	border : 2px #ff5c00 solid;
 }
-
 .upvote-circle{
 	width:50px;
 	height:50px;
-    float:right;
 	border:1px solid #ff5c00;
 	border-radius:40px;
 	cursor:pointer;
+	float:right;
 }
 .empty-upvote{
 	background-color:#fff;
@@ -2296,6 +2296,16 @@ nav .dropdown-menu{
 .share_logo{
 	cursor:pointer;
 	opacity: 1;
+	background-color: #3B5998;
+	color:#fff;
+	height:30px;
+	width:50px;
+	border-top-left-radius: 5px;
+	text-align: center;
+	padding-top: 5px;
+}
+.share_logo:hover{
+	background-color: #355088;
 }
 .share_logo.ng-hide{
 	opacity: 0;

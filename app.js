@@ -77,6 +77,7 @@ tappyn.config(function($routeProvider) {
 tappyn.filter('untilFilter', function() {
 	return function(date){
 		date = moment(date).fromNow("hh");
+		if(date == "a day") date = "1 day";
 		return date;
 	};
 });
@@ -469,16 +470,32 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	/* column functions */
 	$scope.first_third = function(index){
-		var number_array = [0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48];
-		return number_array.includes(index);
+		return index%3 == 0;
 	}
 	$scope.second_third = function(index){
-		var number_array = [1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49];
-		return number_array.includes(index);
+		return index%3 == 1;
 	}
 	$scope.third_third = function(index){
-		var number_array = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50];	
-		return number_array.includes(index);
+		return index%3 == 2;
+	}
+
+	$scope.first_six = function(index){
+		return index%6 == 0;
+	}
+	$scope.second_six = function(index){
+		return index%6 == 1;
+	}
+	$scope.third_six = function(index){
+		return index%6 == 2;
+	}
+	$scope.fourth_six = function(index){
+		return index%6 == 3;
+	}
+	$scope.fifth_six = function(index){	
+		return index%6 == 4;
+	}
+	$scope.sixth_six = function(index){	
+		return index%6 == 5;
 	}
 
 	$scope.amazon_connect('tappyn');
@@ -803,6 +820,49 @@ tappyn.service("contestModel", function(){
 		return layout;
 	}
 })
+tappyn.controller('contestsController', function($scope, $rootScope, contestsFactory){
+	contestsFactory.grabContests().success(function(response){
+		$scope.contests = response.data.contests;
+	});
+
+	$scope.filter_industry = function(pass){
+		contestsFactory.filterGrab(pass).success(function(response){
+			$scope.contests = response.data.contests;
+		})
+	}
+	
+	$scope.grab_all = function(){
+		$scope.industry_filter = '';
+		contestsFactory.grabContests().success(function(response){
+			$scope.contests = response.data.contests;
+		});
+	}
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.filterGrab = function(pass){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests?industry='+pass,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
@@ -1059,49 +1119,6 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
-	return fact;
-})
-tappyn.controller('contestsController', function($scope, $rootScope, contestsFactory){
-	contestsFactory.grabContests().success(function(response){
-		$scope.contests = response.data.contests;
-	});
-
-	$scope.filter_industry = function(pass){
-		contestsFactory.filterGrab(pass).success(function(response){
-			$scope.contests = response.data.contests;
-		})
-	}
-	
-	$scope.grab_all = function(){
-		$scope.industry_filter = '';
-		contestsFactory.grabContests().success(function(response){
-			$scope.contests = response.data.contests;
-		});
-	}
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.filterGrab = function(pass){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests?industry='+pass,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
 	return fact;
 })
 tappyn.controller("editController", function($scope, $routeParams, editFactory){
@@ -2130,68 +2147,6 @@ tappyn.factory("resetFactory", function($http){
 
 	return fact;
 })
-tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
-	
-
-	topFactory.grabTops().success(function(response){
-		$scope.submissions = response.data.submissions;
-	})
-
-
-	$scope.upvote = function(submission){
-		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
-		else {	
-			topFactory.upvote(submission.contest_id,submission.id).success(function(response){
-				if(response.http_status_code == 200){
-					if(response.success){
-						$scope.set_alert(response.message, "default");
-						$scope.update_points(1);
-						submission.user_may_vote = false;
-						submission.votes++;
-					}	
-					else $scope.set_alert(response.message, "default");	 
-				}
-				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-				else $scope.check_code(response.http_status_code);
-			})
-		}
-	}
-
-	$scope.share = function(submission){
-		FB.ui({
-  			method: 'share',
-		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
-		}, function(response){
-			
-		});
-	}
-})
-tappyn.factory('topFactory', function($http){
-	var fact = {}
-
-	fact.grabTops = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/submissions/leaderboard',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	fact.upvote = function(contest, id){
-		return $http({
-			method : 'POST',
-			url : 'index.php/votes/create',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({contest_id : contest, submission_id : id})
-		});
-	}
-
-	return fact;
-})
 tappyn.controller("submissionsController", function($scope, $rootScope, $routeParams, contestFactory, submissionsFactory, AppFact){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -2264,4 +2219,66 @@ tappyn.factory("submissionsFactory", function($http){
 		});
 	}
 	return fact; 
+})
+tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
+	
+
+	topFactory.grabTops().success(function(response){
+		$scope.submissions = response.data.submissions;
+	})
+
+
+	$scope.upvote = function(submission){
+		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
+		else {	
+			topFactory.upvote(submission.contest_id,submission.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");
+						$scope.update_points(1);
+						submission.user_may_vote = false;
+						submission.votes++;
+					}	
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			})
+		}
+	}
+
+	$scope.share = function(submission){
+		FB.ui({
+  			method: 'share',
+		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
+		}, function(response){
+			
+		});
+	}
+})
+tappyn.factory('topFactory', function($http){
+	var fact = {}
+
+	fact.grabTops = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/submissions/leaderboard',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	fact.upvote = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/votes/create',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({contest_id : contest, submission_id : id})
+		});
+	}
+
+	return fact;
 })

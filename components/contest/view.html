@@ -28,7 +28,7 @@
 		        	<h1 style='color:#ff6c00'>$50</h1>
 		        </div>
 		        <div class='col-sm-2 col-xs-6 text-right'>
-					<h4 style='margin:0px;margin-top:20px;'><span class='glyphicon glyphicon-time'></span> {{contest.stop_time | untilFilter}}</h4>
+					<h4 style='margin:0px;margin-top:20px;'><span class='glyphicon glyphicon-time'></span>{{contest.stop_time | untilFilter}}</h4>
 					<h4><span class='glyphicon glyphicon-eye-open'></span> {{contest.views}}</h4>
 					<h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
 				</div>	
@@ -143,22 +143,22 @@
 <div ng-show='view.submissions' class='row' style='padding-bottom:10px;'>
 	<div class='col-sm-4 hidden-xs'>
 		<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div ng-include src="'templates/contestsubmit.html'"></div>
+			<div ng-include src="'templates/submits/contestsubmit.html'"></div>
     	</div>
     </div>
     <div class='col-sm-4 hidden-xs'>
 		<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div ng-include src="'templates/contestsubmit.html'"></div>
+			<div ng-include src="'templates/submits/contestsubmit.html'"></div>
     	</div>
     </div>
     <div class='col-sm-4 hidden-xs'>
 		<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div ng-include src="'templates/contestsubmit.html'"></div>
+			<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		</div>
     </div>
     <div class='col-xs-12 visible-xs'>
     	<div class="contest-box row" ng-repeat='submission in submissions'>
-			<div ng-include src="'templates/contestsubmit.html'"></div>
+			<div ng-include src="'templates/submits/contestsubmit.html'"></div>
     	</div>
     </div>
 	<h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This contest has no submissions yet, you could be the first!</h3>
