@@ -90,10 +90,13 @@
 <div ng-show='contests'>	
 	<div class='row content-padding'>
 		<div class='contests-heading'>
-			<h2 class='text-center'>Find a few contests you like.</h2>
+			<h2 class='text-center'>
+				<span ng-if='contests.length > 0'>Find a few contests you like.</span>
+				<span ng-if='contests.length == 0'>After some awesome user feedback, we've ended all contests that weren't available to all users!</span>
+			</h2>
 			<h4 class='text-center'>
 				<span ng-if='contests.length > 0'>Just click on any contest to get started!</span>
-				<span ng-if='contests.length == 0'>More contests are on the way!</span>
+				<span ng-if='contests.length == 0'>From here on out, anyone can submit to all contests! Thanks to all the users who have reached out! Stay tuned, more contests are on the way!</span>
 			</h4>
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-repeat='contest in contests'>
