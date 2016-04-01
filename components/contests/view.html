@@ -91,7 +91,10 @@
 	<div class='row content-padding'>
 		<div class='contests-heading'>
 			<h2 class='text-center'>Find a few contests you like.</h2>
-			<h4 class='text-center'>Just click on any contest to get started!</h4>
+			<h4 class='text-center'>
+				<span ng-if='contests.length > 0'>Just click on any contest to get started!</span>
+				<span ng-if='contests.length == 0'>More contests are on the way!</span>
+			</h4>
 		</div>
 		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-repeat='contest in contests'>
 		    <a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
