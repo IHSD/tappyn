@@ -479,6 +479,19 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		return index%3 == 2;
 	}
 
+	$scope.first_fourth = function(index){
+		return index%4 == 0;
+	}
+	$scope.second_fourth = function(index){
+		return index%4 == 1;
+	}
+	$scope.third_fourth = function(index){
+		return index%4 == 2;
+	}
+	$scope.fourth_fourth = function(index){
+		return index%4 == 3;
+	}
+
 	$scope.first_six = function(index){
 		return index%6 == 0;
 	}
