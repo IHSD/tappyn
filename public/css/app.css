@@ -2188,17 +2188,17 @@ nav .dropdown-menu{
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
-.modal_tips.ng-hide{
-    top:-50;
+.tip-section{
+	border:1px solid #ff5c00;
+	border-radius: 5px;
+	margin-bottom:10px;
+	opacity: 1;
 }
-.modal_tips{
-    z-index:100000000 !important;
-    position:fixed;
-    top:2.5%;
-    height:250px; 
+.tip-section.ng-hide{
+	opacity: 0;
 }
-.modal_tips.ng-hide-add.ng-hide-add-active,
-.modal_tips.ng-hide-remove.ng-hide-remove-active {
+.tip-section.ng-hide-add.ng-hide-add-active,
+.tip-section.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
@@ -2348,6 +2348,36 @@ nav .dropdown-menu{
 .modal_note.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear .5;
        transition:all linear 0.5s;
+}
+.notif-tab-left{
+	border-width : 1px 0px 1px 1px; 
+	border-style : solid;
+	border-color : #ff5c00;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+.notif-tab-right{
+	border-width: 1px 1px 1px 0px;
+	border-style :  solid;
+	border-color : #ff5c00;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+.notif-tab{
+	height:35px;
+	background:#fff;
+	color:#ff5c00;
+	cursor:pointer;
+	text-align:center;
+	padding-top:7px;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+.notif-tab:hover{
+	background:#ddd;
+}
+.notif-active{
+	background:#ddd;
 }
 .notification{
 	border:1px solid #ff5c00;
