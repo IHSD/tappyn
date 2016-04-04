@@ -13,21 +13,42 @@ class Contests extends CI_Controller
         $this->load->library('mailer');
         $this->load->model('user');
         $this->load->library('vote');
+        $this->load->library('interest');
     }
 
     /**
      * View all available contests
      * @return void
      */
-    public function index()
+    public function index($type = 'all')
     {
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
-
         $has_more = FALSE;
+
+        $sql_interests = array();
+
+        if($type='interesting')
+        {
+
+            $interests = $this->load->library('interest');
+            $this->interest->setDatabase($this->db);
+            $this->interest->setUser($this->ion_auth->user()->row()->id);
+            $ints = $this->flatten($this->interest->tree()->children);
+            foreach($ints as $int)
+            {
+                if($int->followed_by_user) $sql_interests[] = $int->name;
+            }
+
+            if(empty($sql_interests))
+            {
+                $this->responder->fail("You dont have any interests yet brudda!")->code(500)->respond();
+                return;
+            }
+        }
 
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
@@ -36,12 +57,13 @@ class Contests extends CI_Controller
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
-        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
+        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset, $sql_interests);
 
         if(($offset + $config['per_page']) < $config['total_rows'])
         {
             $has_more = TRUE;
         }
+
 
         if($contests !== FALSE)
         {
@@ -201,7 +223,8 @@ class Contests extends CI_Controller
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion'           => $this->input->post('emotion'),
-                'display_type'      => $this->input->post('display_type')
+                'display_type'      => $this->input->post('display_type'),
+                'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30
             );
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
@@ -364,5 +387,22 @@ class Contests extends CI_Controller
         {
             $this->responder->fail(($this->contest->errors() ? $this->contest->errors() : "There was an error deleting your contest"))->code(500)->respond();
         }
+    }
+
+    public function flatten($array)
+    {
+        $return = array();
+
+        for($x = 0; $x < count($array); $x++) {
+    		if(is_array($array[$x])) {
+    			$return = array_flatten($array[$x], $return);
+    		}
+    		else {
+    			if(isset($array[$x])) {
+    				$return[] = $array[$x];
+    			}
+    		}
+    	}
+    	return $return;
     }
 }

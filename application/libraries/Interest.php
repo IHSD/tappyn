@@ -20,7 +20,7 @@ class Interest
         'fashion_beauty'
     );
 
-    
+
     /**
      * ID of the current user
      * @var integer
@@ -116,6 +116,10 @@ class Interest
 
     }
 
+    public function flatten($tree)
+    {
+            
+    }
     /**
      * Fetch data on an individual interest
      * @param  integer $id
