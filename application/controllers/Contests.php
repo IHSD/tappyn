@@ -107,6 +107,7 @@ class Contests extends CI_Controller
         }
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
+        $config['total_rows'] = $this->contest->count($params);
         $config['per_page'] = ($this->input->get('per_page') ? $this->input->get('per_page') : 20);
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
