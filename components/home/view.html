@@ -117,33 +117,7 @@
             <div class='col-sm-10 col-sm-offset-1 col-xs-12'>
                 <h2>Coolest Live Contests</h2>
                 <div class="col-lg-3 col-sm-4 col-xs-12" ng-repeat='contest in contests'>
-                    <a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
-                        <div class="submission-box">
-                            <div class="ad-company-info">
-                                <div>
-                                    <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.company_name}}</h5>
-                                    <span class='contest-price'>
-                                        $50
-                                    </span>
-                                </div>
-                                <div class="company-img text-center" style='margin-top:10px;height:100px'>
-                                    <img algin='middle' ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
-                                    <img algin='middle' ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
-                                </div>
-                                <div style='height:100px;width: 100%;overflow: hidden;'>
-                                    <div class='contest-audience'>
-                                        <span ng-if='contest.summary'>{{contest.summary}}</span>
-                                    </div>
-                                </div>
-                                <div style='height:100px;'>
-                                    <h5 class='text-left'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
-                                    <h5 class='text-left'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
-                                    <uib-progressbar value='contest.submission_count' max='50' type="warning" style='margin-bottom:0;'></uib-progressbar>                
-                                    <p class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                    <div ng-include src="'templates/contests.html'"></div>
                 </div>
                 <div class='col-xs-12 text-center'><a href='#/contests' class='btn btn-white btn-lg'>See Contests</a></div>
             </div>
