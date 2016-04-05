@@ -155,17 +155,72 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.registration = {show : false, type : '', object : ''};
 	$scope.step = 1;
 
-	$scope.industries = {
-			'pets' : 'Pets',
-			'food_beverage' : 'Food & Beverage',
-			'finance_business' : 'Finance & Business',
-			'health_wellness' : 'Health & Wellness',
-			'travel' : 'Travel',
-			'social_network' : 'Social Network',
-			'home_garden' : 'Home & Garden',
-			'education' : 'Education',
-			'art_entertainment' : 'Art & Entertainment',
-			'fashion_beauty' : 'Fashion & Beauty'
+	$scope.interests = [
+			{id : 10, text : 'Fashion', picture : 'public/img/fashion_interest.png', checked : false},
+			{id : 2, text : 'Food & Drink', picture : 'public/img/food_interest.png', checked : false},
+			{id : 4, text : 'Health & Fitness', picture : 'public/img/health_interest.png', checked : false},
+			{id : 6, text : 'Social', picture : 'public/img/social_interest.png', checked : false},
+			{id : 3, text : 'Business', picture : 'public/img/business_interest.png', checked : false},
+			{id : 7, text : 'Home & Garden', picture : 'public/img/home_interest.png', checked : false},
+			{id : 5, text : 'Travel', picture : 'public/img/travel_interest.png', checked : false},
+			{id : 9, text : 'Art & Entertainment', picture : 'public/img/art_interest.png', checked : false}
+	]
+	$scope.checked_amount = 0;
+	$scope.check_interests = function(){
+		$scope.checked_amount = 0
+		for(var i = 0; i < $scope.interests.length; i++){
+			if($rootScope.user.interests.indexOf($scope.interests[i].id)){
+				$scope.interests[i].checked = true; 
+				$scope.checked_amount++;
+			}
+		}
+	}
+
+	$scope.adding_interests = function(){
+		$scope.add_interest = true;
+		$rootScope.modal_up = true;
+	}
+
+	$scope.close_interests = function(){ 
+		$scope.add_interest = false;
+		$rootScope.modal_up = false;
+		$route.reload();
+	}
+
+	$scope.pass_interest = function(id){
+		for(var i = 0; i < $scope.interests.length; i++){
+			if(id == $scope.interests[i].id){
+				if($scope.interests[i].checked){
+					AppFact.unfollowInterest(id).success(function(response){
+						if(response.http_status_code == 200){
+							if(response.success){
+								$scope.interests[i].checked = false;	
+								$scope.
+							}
+							else $scope.set_alert(response.message, "default");	 
+						}
+						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+						else $scope.check_code(response.http_status_code);
+					});
+				}
+				else{
+					if($scope.checked_amount < 3){
+						AppFact.followInterest(id).success(function(response){
+							if(response.http_status_code == 200){
+								if(response.success){
+									$scope.interests[i].checked = true;
+									$scope.checked_amount++;	
+								}
+								else $scope.set_alert(response.message, "default");	 
+							}
+							else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+							else $scope.check_code(response.http_status_code);
+						});
+					}
+					else $scope.set_alert("You have already followed three types!", 'default');
+				}
+			}
+		}
 	}
 
 	$scope.logged_in = function(){
@@ -174,6 +229,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 				if(response.http_status_code == 200){
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
+					$scope.check_interests();
 				}
 				if($rootScope.user){
 					window.Intercom('boot', {
@@ -376,6 +432,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$rootScope.modal_up = false;
+					$scope.check_interests();
 					window.Intercom('update', {
 					   app_id: 'qj6arzfj',
 					   email: $rootScope.user.email,
@@ -630,6 +687,26 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param({age : age, gender : gen})
+		});
+	}
+	fact.followInterest = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/interests/add',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({id : id})
+		});
+	}
+	fact.unfollowInterest = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/interests/remove',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({id : id})
 		});
 	}
 	return fact;
