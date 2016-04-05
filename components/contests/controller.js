@@ -18,7 +18,7 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 			}
 			else if(response.http_status_code == 500){
 				$scope.set_alert(response.error, "default");
-				$scope.adding_interests();
+				$scope.adding_interests("first");
 			}
 			else $scope.check_code(response.http_status_code);
 		})

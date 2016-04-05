@@ -2,8 +2,14 @@
 	<div class='col-xs-12 row text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
 		<div class='col-xs-12'>
 			<div class='close_circle' ng-click='close_interests()'>X</div>
-			<h3 class='text-center interest-heading'>Follow up to three interests</h3>
-			<h4 class='text-center interest-heading hidden-xs'>We'll assemble a feed of contests we know you'll love</h4>
+			<div ng-if='add_interest.type == "new"'>
+				<h3 class='text-center interest-heading'>Follow (or un-follow!) some more topics</h3>
+				<h4 class='text-center interest-heading hidden-xs'>We'll fine tune your home feed for you with your new picks</h4>
+			</div>
+			<div ng-if='add_interest.type == "first"'>
+				<h3 class='text-center interest-heading'>Follow up to three topics</h3>
+				<h4 class='text-center interest-heading hidden-xs'>Then we'll build a custom home feed for you</h4>
+			</div>
 		</div>
 		<div class='modal_scrolling'>
 			<div class='col-xs-6 col-sm-3 text-center' style='padding:0;' ng-repeat='interest in interests' ng-click='pass_interest(interest.id)'>
@@ -13,5 +19,6 @@
 				<p class='interest-text'>{{interest.text}}</p>
 			</div>
 		</div>
+		<button style='margin-top:5px;' class='col-xs-12 btn btn-oj' ng-click='close_interests()'>Done</button>
 	</div>
 </div>

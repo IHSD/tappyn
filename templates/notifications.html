@@ -16,7 +16,7 @@
 		</div>
 		<button class='btn btn-outliner col-xs-12' ng-click='read_all()'>Dismiss All</button>
 		<div class='alert alert-warning col-xs-12' style='padding-top:10px' ng-if='notifications.length==0'>You're all caught up!</div>
-		<div class='col-xs-12 notification' ng-repeat='notification in notifications | filter : section == tab_filter' ng-if='notifications.length > 0'>
+		<div class='col-xs-12 notification' ng-repeat='notification in notifications | filter : {section : tab_filter}' ng-if='notifications.length > 0'>
 			<div class='col-xs-1' ng-switch on='notification.type'>
 				<span ng-switch-when='submission_received_vote' class='glyphicon glyphicon-thumbs-up glyphicon-oj glyph-lg'></span>
 				<span ng-switch-when='new_contest_launched' class='glyphicon glyphicon-fire glyphicon-oj glyph-lg'></span>

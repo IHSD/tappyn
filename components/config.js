@@ -190,14 +190,14 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		}
 	}
 
-	$scope.adding_interests = function(){
-		$scope.add_interest = true;
+	$scope.adding_interests = function(type){
+		$scope.add_interest = {show :true, type : type};
 		$rootScope.modal_up = true;
 		$scope.check_interests();
 	}
 
 	$scope.close_interests = function(){ 
-		$scope.add_interest = false;
+		$scope.add_interest = {show :false, type : ''};
 		$rootScope.modal_up = false;
 		$route.reload();
 	}
