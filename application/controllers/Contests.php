@@ -149,7 +149,7 @@ class Contests extends CI_Controller
             $contest->submission_count = $this->contest->submissionsCount($contest->id);
             $contest->company = $this->user->profile($contest->owner);
         }
-        
+
         usort($contests, function($a, $b)
             {
                 return ((int) $b->votes > (int) $a->votes) ? -1 : 1;
@@ -434,22 +434,5 @@ class Contests extends CI_Controller
         {
             $this->responder->fail(($this->contest->errors() ? $this->contest->errors() : "There was an error deleting your contest"))->code(500)->respond();
         }
-    }
-
-    public function flatten($array)
-    {
-        $return = array();
-
-        for($x = 0; $x < count($array); $x++) {
-    		if(is_array($array[$x])) {
-    			$return = array_flatten($array[$x], $return);
-    		}
-    		else {
-    			if(isset($array[$x])) {
-    				$return[] = $array[$x];
-    			}
-    		}
-    	}
-    	return $return;
     }
 }

@@ -66,4 +66,21 @@ class Interests extends CI_Controller
             $this->responder->fail(($this->interest->errors() ? $this->interest->errors() : "An unkonwn error occured"))->code(500)->respond();
         }
     }
+
+    public function flatten($array)
+    {
+        $return = array();
+
+        for($x = 0; $x < count($array); $x++) {
+    		if(is_array($array[$x])) {
+    			$return = array_flatten($array[$x], $return);
+    		}
+    		else {
+    			if(isset($array[$x])) {
+    				$return[] = $array[$x];
+    			}
+    		}
+    	}
+    	return $return;
+    }
 }
