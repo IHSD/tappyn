@@ -158,15 +158,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	$scope.industries = {
 			'pets' : 'Pets',
-			'food_beverage' : 'Food & Beverage',
-			'finance_business' : 'Finance & Business',
-			'health_wellness' : 'Health & Wellness',
+			'food_beverage' : 'Food & Drink',
+			'finance_business' : 'Business',
+			'health_wellness' : 'Health & Fitness',
 			'travel' : 'Travel',
-			'social_network' : 'Social Network',
+			'social_network' : 'Social',
 			'home_garden' : 'Home & Garden',
 			'education' : 'Education',
 			'art_entertainment' : 'Art & Entertainment',
-			'fashion_beauty' : 'Fashion & Beauty'
+			'fashion_beauty' : 'Fashion'
 	}
 	$scope.interests = [
 			{id : '10', text : 'Fashion', picture : 'public/img/fashion_interest.png', checked : false},

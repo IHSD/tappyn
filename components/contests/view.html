@@ -91,7 +91,7 @@
 	<div class='row content-padding'>
 		<div class='contests-heading'>
 			<div class='col-xs-12 col-sm-6 col-sm-offset-3 text-center'>
-				<button class='btn' ng-click='grab_my()' ng-class='{"btn-oj" : tab == "my", "btn-outliner" : tab != "my"}' >My Contests</button>
+				<button ng-hide='user.type == "company"' class='btn' ng-click='grab_my()' ng-class='{"btn-oj" : tab == "my", "btn-outliner" : tab != "my"}' >My Contests</button>
 				<button class='btn' ng-click='grab_all()' ng-class='{"btn-oj" : tab == "all", "btn-outliner" : tab != "all"}'>All Contests</button>
 			</div>
 			<div class='col-xs-12'>
