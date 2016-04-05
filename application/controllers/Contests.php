@@ -92,7 +92,7 @@ class Contests extends CI_Controller
 
             if(empty($sql_interests))
             {
-                $this->responder->fail("You dont have any interests yet brudda!")->code(500)->respond();
+                $this->responder->fail("You dont have any interests yet!")->code(500)->respond();
                 return;
             }
         }

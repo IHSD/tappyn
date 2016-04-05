@@ -52,7 +52,7 @@ class Interests extends CI_Controller
      * @param  integer $id ID of the interest
      * @return void
      */
-    public function remove($id)
+    public function remove($id = NULL)
     {
         if($_SERVER['REQUEST_METHOD'] !== 'POST' || is_null($id))
         {
@@ -67,20 +67,5 @@ class Interests extends CI_Controller
         }
     }
 
-    public function flatten($array)
-    {
-        $return = array();
 
-        for($x = 0; $x < count($array); $x++) {
-    		if(is_array($array[$x])) {
-    			$return = array_flatten($array[$x], $return);
-    		}
-    		else {
-    			if(isset($array[$x])) {
-    				$return[] = $array[$x];
-    			}
-    		}
-    	}
-    	return $return;
-    }
 }
