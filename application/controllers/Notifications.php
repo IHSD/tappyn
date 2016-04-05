@@ -28,6 +28,7 @@ class Notifications extends CI_Controller
     public function unread()
     {
         $notifications = $this->notification->fetchUnread();
+        error_log(json_encode($notifications));
         if($notifications !== FALSE)
         {
             $this->responder->data(array(
