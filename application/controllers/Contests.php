@@ -77,7 +77,7 @@ class Contests extends CI_Controller
 
         $sql_interests = array();
 
-        if($type='interesting')
+        if($type=='interesting')
         {
 
             $interests = $this->load->library('interest');

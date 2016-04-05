@@ -16,6 +16,7 @@ class GroupSeeder extends AbstractSeed
     {
         $data = array();
         $users = $this->fetchAll("SELECT * FROM users WHERE id NOT IN (SELECT user_id FROM users_groups)");
+
         foreach($users as $user)
         {
             $data[] = [
@@ -23,6 +24,6 @@ class GroupSeeder extends AbstractSeed
                 'group_id' => 2
             ];
         }
-        $this->insert('groups', $data);
+        $this->insert('users_groups', $data);
     }
 }
