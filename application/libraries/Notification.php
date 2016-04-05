@@ -62,7 +62,7 @@ class Notification
                 break;
 
                 case 'winner_chosen':
-                    $not->section = 'contest';
+                    $not->section = 'contests';
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
@@ -75,7 +75,7 @@ class Notification
                 break;
 
                 case 'new_contest_launched':
-                    $not->section = 'contest';
+                    $not->section = 'contests';
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
@@ -103,7 +103,7 @@ class Notification
                 break;
 
                 case 'submission_confirmed':
-                    $not->section = 'contest';
+                    $not->section = 'contests';
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
@@ -115,11 +115,10 @@ class Notification
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
                     $nots[] = $not;
-                    error_log("Parsing notificaiton for ".$this->ion_auth->user()->row()->id);
                 break;
 
                 case 'submission_created':
-                    $not->section = 'contest';
+                    $not->section = 'contests';
                     $cid = $notification->object_id;
                     $submissions = $this->db->select('COUNT(*) as count')->from('contests')->where('contest_id', $cid)->get()->row()->count;
                     $not->type = 'submission_created';
