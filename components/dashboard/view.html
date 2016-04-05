@@ -164,16 +164,16 @@
 	</div>
 	<div class='content-padding'>
 		<div ng-if='user.type == "member"'>
-			<div class='col-sm-4 hidden-xs'>
+			<div class='col-sm-4 hidden-xs' ng-repeat='submission in dash.submissions'>
 				<div ng-if='first_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>
-			<div class='col-sm-4 hidden-xs'>
+			<div class='col-sm-4 hidden-xs' ng-repeat='submission in dash.submissions'>
 				<div ng-if='second_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>
-			<div class='col-sm-4 hidden-xs'>
+			<div class='col-sm-4 hidden-xs' ng-repeat='submission in dash.submissions'>
 				<div ng-if='third_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>
-			<div class='col-xs-12 visible-xs'>
+			<div class='col-xs-12 visible-xs' ng-repeat='submission in dash.submissions'>
 				<div ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>	
 	    </div>
