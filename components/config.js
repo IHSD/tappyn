@@ -195,7 +195,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 						if(response.http_status_code == 200){
 							if(response.success){
 								$scope.interests[i].checked = false;	
-								$scope.
+								$scope.checked_amount--;
 							}
 							else $scope.set_alert(response.message, "default");	 
 						}
