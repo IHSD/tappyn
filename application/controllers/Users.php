@@ -38,15 +38,15 @@ class Users extends CI_Controller
         if($this->input->get('type') === 'winning')
         {
             // Get all winnign submissions from payout table
-            // $payout_ids = array();
-            // $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
-            // if($payouts)
-            // {
-            //     foreach($payouts as $payout)
-            //     {
-            //         $payout_ids[] = $payout->submission_id;
-            //     }
-            // }
+            $payout_ids = array();
+            $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+            if($payouts)
+            {
+                foreach($payouts as $payout)
+                {
+                    $payout_ids[] = $payout->submission_id;
+                }
+            }
             if(empty($payout_ids))
             {
                 $this->responder->data(array())->respond();
