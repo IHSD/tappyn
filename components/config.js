@@ -155,6 +155,19 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.registration = {show : false, type : '', object : ''};
 	$scope.step = 1;
 
+
+	$scope.industries = {
+			'pets' : 'Pets',
+			'food_beverage' : 'Food & Beverage',
+			'finance_business' : 'Finance & Business',
+			'health_wellness' : 'Health & Wellness',
+			'travel' : 'Travel',
+			'social_network' : 'Social Network',
+			'home_garden' : 'Home & Garden',
+			'education' : 'Education',
+			'art_entertainment' : 'Art & Entertainment',
+			'fashion_beauty' : 'Fashion & Beauty'
+	}
 	$scope.interests = [
 			{id : '10', text : 'Fashion', picture : 'public/img/fashion_interest.png', checked : false},
 			{id : '2', text : 'Food & Drink', picture : 'public/img/food_interest.png', checked : false},
@@ -173,6 +186,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 				$scope.interests[i].checked = true; 
 				$scope.checked_amount++;
 			}
+			else $scope.interests[i].checked = false; 
 		}
 	}
 
@@ -196,6 +210,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					AppFact.unfollowInterest(id).success(function(response){
 						if(response.http_status_code == 200){
 							if(response.success){
+								$rootScope.user.interests.splice($rootScope.user.interests.indexOf(id), 1);
 								interest.checked = false;	
 								$scope.checked_amount--;
 							}
@@ -210,6 +225,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 						AppFact.followInterest(id).success(function(response){
 							if(response.http_status_code == 200){
 								if(response.success){
+									$rootScope.user.interests.push(id);
 									interest.checked = true;
 									$scope.checked_amount++;	
 								}

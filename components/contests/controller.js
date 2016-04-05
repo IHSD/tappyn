@@ -17,7 +17,7 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "defaults");
+				$scope.set_alert(response.error, "default");
 				$scope.adding_interests();
 			}
 			else $scope.check_code(response.http_status_code);
@@ -39,10 +39,18 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 	}
 
 	$scope.grab_my = function(){
-		$scope.tab = 'my';
+		$scope.tab = "my";
 		contestsFactory.grabMyContests().success(function(response){
-			$scope.contests = response.data.contests;
-		});
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contests = response.data.contests;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500){
+				$scope.set_alert(response.error, "default");
+				$scope.adding_interests();
+			}
+			else $scope.check_code(response.http_status_code);
+		})
 	}
 
 	$scope.to_account = function(){

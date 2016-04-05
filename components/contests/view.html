@@ -99,9 +99,12 @@
 				<h4 class='text-center'>Just click on any contest to get started!</h4>
 			</div>
 		</div>
-		<div ng-if='tab == "all" && !contests'>
+		<div class='col-xs-12' ng-if='tab == "my" && !contests'>
 			<h4 class='text-center'>You haven't followed any interests yet! Pick a few so we can assemble your feed!</h4>
-			<button class='btn btn-oj text-center' ng-click='adding_interests()'>Follow some Interests</button>
+			<div class='text-center'><button class='btn btn-oj' ng-click='adding_interests()'>Follow some Interests</button></div>
+		</div>
+		<div class='col-xs-12' ng-if='tab == "my" && contests'>
+			<div class='text-center'><button class='btn btn-oj' ng-click='adding_interests()'>Change Interests</button></div>
 		</div>
 		<div class="col-lg-2 visible-lg">
 			 <div ng-if='first_six($index)' ng-repeat='contest in contests'>
