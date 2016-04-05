@@ -116,11 +116,15 @@ class Contests extends CI_Controller
         if(($offset + $config['per_page']) < $config['total_rows'])
         {
             $has_more = TRUE;
-        }        
+        }
         if($contests !== FALSE)
         {
             $this->responder->data(array(
                 'contests' => $contests,
+                'total_rows' => $config['total_rows'],
+                'per_page' => (int)$config['per_page'],
+                'has_more' => $has_more,
+                'page' => $offset == 0 ? 1 : floor($offset / $config['per_page'] + 1),
             ))->respond();
         } else {
             $this->responder->fail("An unknown error occured")->code(500)->respond();
