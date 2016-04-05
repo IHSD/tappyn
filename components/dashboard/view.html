@@ -124,38 +124,32 @@
 </div>
 
 <div class='row'>
-	<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
-		<h4 class='text-left'>Your Contests</h4>
-		<div class='btn-group btn-group-sm'>
-			<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
-			<button ng-click='grab_dash("in_progress")' class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
-			<button ng-click='grab_dash("need_winner")' class='btn' ng-class='{"btn-oj" : type == "need_winner", "btn-default" : type != "need_winner"}'>Need Winner</button>
-			<button ng-click='grab_dash("completed")' class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
+	<div style='background-color:#fff;width:100%' class='row content-padding'>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>All</div>
+			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>Need Winner</div>
+			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>Completed</div>
 		</div>
-	</div>
-	<div ng-if='user.type == "member"' style='background-color:#fff;width:100%'>
-		<div class='row content-padding'>
-			<div class='col-xs-12 col-sm-10 col-sm-offset-1'>	
-				<div class='col-xs-12'>
-					<a class='btn btn-outliner pull-right'><span class='glyphicon glyphicon-cog glyph-lg'></span></a>
-					<a href='#/profile' class='btn btn-oj pull-right' style='margin-right:5px;'>Edit Profile</a>
-				</div>
-				<div class='col-xs-12'>
-					<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
-				</div>
-				<div class='col-xs-12'><hr style='border-color:#333'></div>
-				<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
-					<h3 class='text-center'>{{totals.submissions}}</h3>
-					<h3 class='text-center'>Submissions</h3>
-				</div>
-				<div class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-black" : type != "upvotes", "dash-oj" : type == "upvotes"}' ng-click='grab_dash("upvotes")'>
-					<h3 class='text-center'>{{totals.upvotes}}</h3>
-					<h3 class='text-center'>Upvotes</h3>
-				</div>
-				<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>	
-					<h3 class='text-center'>{{totals.won}}</h3>
-					<h3 class='text-center'>Wins</h3>
-				</div>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"'>	
+			<div class='col-xs-12'>
+				<a class='btn btn-outliner pull-right'><span class='glyphicon glyphicon-cog glyph-lg'></span></a>
+				<a href='#/profile' class='btn btn-oj pull-right' style='margin-right:5px;'>Edit Profile</a>
+			</div>
+			<div class='col-xs-12'>
+				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+			</div>
+			<div class='col-xs-12'><hr style='border-color:#333'></div>
+			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
+				<h3 class='text-center'>{{totals.submissions}}</h3>
+				<h3 class='text-center'>Submissions</h3>
+			</div>
+			<div class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-black" : type != "upvotes", "dash-oj" : type == "upvotes"}' ng-click='grab_dash("upvotes")'>
+				<h3 class='text-center'>{{totals.upvotes}}</h3>
+				<h3 class='text-center'>Upvotes</h3>
+			</div>
+			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>	
+				<h3 class='text-center'>{{totals.won}}</h3>
+				<h3 class='text-center'>Wins</h3>
 			</div>
 		</div>
 	</div>

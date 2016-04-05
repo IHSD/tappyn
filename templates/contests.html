@@ -19,8 +19,8 @@
         <div>
             <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
             <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>Ends {{contest.stop_time | untilFilter}}</h5>
-            <uib-progressbar value='contest.submission_count' max='50' type="warning" style='margin-bottom:0;'></uib-progressbar>                
-            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/50</p>
+            <uib-progressbar value='contest.submission_count' max='30' type="warning" style='margin-bottom:0;'></uib-progressbar>                
+            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/30</p>
         </div>
     </div>
 </div>

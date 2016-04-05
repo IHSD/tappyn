@@ -4,15 +4,15 @@
 		
 		<div class='col-xs-4 notif-tab notif-tab-left' ng-init='tab_filter = "account"' ng-click='tab_filter = "account"' ng-class='{"notif-active" : tab_filter == "account"}'>
 			Account
-			<span class='notifications_count' ng-if='{{(notifications | filter : section == "account").length}}'><strong>{{(notifications | filter : section == "account").length}}</strong></span>
+			<span class='notifications_count' ng-if='(notifications | filter : section == "account").length > 0'><strong>{{(notifications | filter : section == "account").length}}</strong></span>
 		</div>
 		<div class='col-xs-4 notif-tab' style='border:1px solid #ff5c00;' ng-click='tab_filter = "votes"' ng-class='{"notif-active" : tab_filter == "votes"}'>
 			Votes
-			<span class='notifications_count' ng-if='{{(notifications | filter : section == "votes").length}}'><strong>{{(notifications | filter : section == "votes").length}}</strong></span>
+			<span class='notifications_count' ng-if='(notifications | filter : section == "votes").length > 0'><strong>{{(notifications | filter : section == "votes").length}}</strong></span>
 		</div>
 		<div class='col-xs-4 notif-tab notif-tab-right' ng-click='tab_filter = "contests"' ng-class='{"notif-active" : tab_filter == "contests"}'>
 			Contests
-			<span class='notifications_count' ng-if='{{(notifications | filter : section == "contests").length}}'><strong>{{(notifications | filter : section == "contests").length}}</strong></span>
+			<span class='notifications_count' ng-if='(notifications | filter : section == "contests").length > 0'><strong>{{(notifications | filter : section == "contests").length}}</strong></span>
 		</div>
 		<button class='btn btn-outliner col-xs-12' ng-click='read_all()'>Dismiss All</button>
 		<div class='alert alert-warning col-xs-12' style='padding-top:10px' ng-if='notifications.length==0'>You're all caught up!</div>

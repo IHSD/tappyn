@@ -1,24 +1,26 @@
-<div class='col-xs-12 col-sm-9'>
-	<h3 ng-if='submission.headline'>{{submission.headline}}</h3>
-	<div class="contest-content">
-		<span ng-if='submission.link_explanation'>{{submission.link_explanation}}<br></span>
-	    <span ng-if='submission.text'>{{submission.text}}</span>
-	</div>
-</div>
-<div class='col-xs-12 col-sm-3'>
-	<div class='upvote-wrapper'>
-		<div class='upvote-circle filled-upvote'>
-			<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+<div class='contest-box row'>	
+	<div class='col-xs-12 col-sm-9'>
+		<h3 ng-if='submission.headline'>{{submission.headline}}</h3>
+		<div class="contest-content">
+			<span ng-if='submission.link_explanation'>{{submission.link_explanation}}<br></span>
+		    <span ng-if='submission.text'>{{submission.text}}</span>
 		</div>
 	</div>
-</div>
-<div class="contest-info">
-    <h5>
-    	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
-        <br>
-    	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-    		<span class='glyphicon glyphicon-time'></span>  {{submission.created_at  | untilFilter}} ago
-    	</span>
-   	</h5>
-   	<div style='position: absolute;right:0px;bottom: 0;' class="share_logo"  ng-show='submission.hovering' ng-click='share(submission)'>Share</div>
+	<div class='col-xs-12 col-sm-3'>
+		<div class='upvote-wrapper'>
+			<div class='upvote-circle filled-upvote'>
+				<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="contest-info">
+	    <h5>
+	    	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
+	        <br>
+	    	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
+	    		<span class='glyphicon glyphicon-time'></span>  {{submission.created_at  | untilFilter}} ago
+	    	</span>
+	   	</h5>
+	   	<div style='position: absolute;right:0px;bottom: 0;' class="share_logo"  ng-show='submission.hovering' ng-click='share(submission)'>Share</div>
+	</div>
 </div>
