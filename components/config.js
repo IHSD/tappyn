@@ -77,6 +77,7 @@ tappyn.config(function($routeProvider) {
 tappyn.filter('untilFilter', function() {
 	return function(date){
 		date = moment(date).fromNow("hh");
+		if(date == "a day") date = "1 day";
 		return date;
 	};
 });
@@ -154,17 +155,90 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.registration = {show : false, type : '', object : ''};
 	$scope.step = 1;
 
+
 	$scope.industries = {
 			'pets' : 'Pets',
-			'food_beverage' : 'Food & Beverage',
-			'finance_business' : 'Finance & Business',
-			'health_wellness' : 'Health & Wellness',
+			'food_beverage' : 'Food & Drink',
+			'finance_business' : 'Business',
+			'health_wellness' : 'Health & Fitness',
 			'travel' : 'Travel',
-			'social_network' : 'Social Network',
+			'social_network' : 'Social',
 			'home_garden' : 'Home & Garden',
 			'education' : 'Education',
 			'art_entertainment' : 'Art & Entertainment',
-			'fashion_beauty' : 'Fashion & Beauty'
+			'fashion_beauty' : 'Fashion'
+	}
+	$scope.interests = [
+			{id : '10', text : 'Fashion', picture : 'public/img/fashion_interest.png', checked : false},
+			{id : '2', text : 'Food & Drink', picture : 'public/img/food_interest.png', checked : false},
+			{id : '4', text : 'Health & Fitness', picture : 'public/img/health_interest.png', checked : false},
+			{id : '6', text : 'Social', picture : 'public/img/social_interest.png', checked : false},
+			{id : '3', text : 'Business', picture : 'public/img/business_interest.png', checked : false},
+			{id : '7', text : 'Home & Garden', picture : 'public/img/home_interest.png', checked : false},
+			{id : '5', text : 'Travel', picture : 'public/img/travel_interest.png', checked : false},
+			{id : '9', text : 'Art & Entertainment', picture : 'public/img/art_interest.png', checked : false}
+	]
+	$scope.checked_amount = 0;
+	$scope.check_interests = function(){
+		$scope.checked_amount = 0
+		for(var i = 0; i < $scope.interests.length; i++){
+			if($rootScope.user.interests.indexOf($scope.interests[i].id) > -1){
+				$scope.interests[i].checked = true; 
+				$scope.checked_amount++;
+			}
+			else $scope.interests[i].checked = false; 
+		}
+	}
+
+	$scope.adding_interests = function(type){
+		$scope.add_interest = {show :true, type : type};
+		$rootScope.modal_up = true;
+		$scope.check_interests();
+	}
+
+	$scope.close_interests = function(){ 
+		$scope.add_interest = {show :false, type : ''};
+		$rootScope.modal_up = false;
+		$route.reload();
+	}
+
+	$scope.pass_interest = function(id){
+		for(var i = 0; i < $scope.interests.length; i++){
+			if(id == $scope.interests[i].id){
+				var interest = $scope.interests[i];
+				if(interest.checked){
+					AppFact.unfollowInterest(id).success(function(response){
+						if(response.http_status_code == 200){
+							if(response.success){
+								$rootScope.user.interests.splice($rootScope.user.interests.indexOf(id), 1);
+								interest.checked = false;	
+								$scope.checked_amount--;
+							}
+							else $scope.set_alert(response.message, "default");	 
+						}
+						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+						else $scope.check_code(response.http_status_code);
+					});
+				}
+				else{
+					if($scope.checked_amount < 3){
+						AppFact.followInterest(id).success(function(response){
+							if(response.http_status_code == 200){
+								if(response.success){
+									$rootScope.user.interests.push(id);
+									interest.checked = true;
+									$scope.checked_amount++;	
+								}
+								else $scope.set_alert(response.message, "default");	 
+							}
+							else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+							else $scope.check_code(response.http_status_code);
+						});
+					}
+					else $scope.set_alert("You have already followed three types!", 'default');
+				}
+			}
+		}
 	}
 
 	$scope.logged_in = function(){
@@ -469,16 +543,45 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
 	/* column functions */
 	$scope.first_third = function(index){
-		var number_array = [0,3,6,9,12,15,18,21,24,27,30,33,36,39,42,45,48];
-		return number_array.includes(index);
+		return index%3 == 0;
 	}
 	$scope.second_third = function(index){
-		var number_array = [1,4,7,10,13,16,19,22,25,28,31,34,37,40,43,46,49];
-		return number_array.includes(index);
+		return index%3 == 1;
 	}
 	$scope.third_third = function(index){
-		var number_array = [2,5,8,11,14,17,20,23,26,29,32,35,38,41,44,47,50];	
-		return number_array.includes(index);
+		return index%3 == 2;
+	}
+
+	$scope.first_fourth = function(index){
+		return index%4 == 0;
+	}
+	$scope.second_fourth = function(index){
+		return index%4 == 1;
+	}
+	$scope.third_fourth = function(index){
+		return index%4 == 2;
+	}
+	$scope.fourth_fourth = function(index){
+		return index%4 == 3;
+	}
+
+	$scope.first_six = function(index){
+		return index%6 == 0;
+	}
+	$scope.second_six = function(index){
+		return index%6 == 1;
+	}
+	$scope.third_six = function(index){
+		return index%6 == 2;
+	}
+	$scope.fourth_six = function(index){
+		return index%6 == 3;
+	}
+	$scope.fifth_six = function(index){	
+		return index%6 == 4;
+	}
+	$scope.sixth_six = function(index){	
+		return index%6 == 5;
 	}
 
 	$scope.amazon_connect('tappyn');
@@ -600,6 +703,24 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param({age : age, gender : gen})
+		});
+	}
+	fact.followInterest = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/interests/add/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+	fact.unfollowInterest = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/interests/remove/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
 		});
 	}
 	return fact;

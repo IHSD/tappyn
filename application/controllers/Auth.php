@@ -36,8 +36,15 @@ class Auth extends CI_Controller {
 			$this->interest->setDatabase($this->db);
 			$this->interest->setUser($uid);
 			$profile = $this->user->profile($uid);
-	        $interests = $this->interest->tree();
-	        $user['interests'] = $interests;
+			$user['interests'] = array();
+	        $interests = $this->interest->tree()->children;
+			foreach($interests as $interest)
+			{
+				if($interest->followed_by_user)
+				{
+					$user['interests'][] = $interest->id;
+				}
+			}
 			$user['age'] = $profile->age;
 			$user['gender'] = $profile->gender;
 			$user['notifications'] = $this->notification->count();

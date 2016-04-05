@@ -398,7 +398,7 @@ header .btn-login {
 	float: left;
 }
 .contest-box .contest-content {
-	color: #7E7E7E;
+	color: #333;
 }
 .contest-box .contest-info{
 	color: #FF5E00;
@@ -575,7 +575,7 @@ footer {
 .footer-nav {
 	list-style: none;
 	padding:  0;
-	margin:  0 0 20px;
+	margin:  auto;
 }
 .footer-nav li {
 	float: left;
@@ -592,7 +592,6 @@ footer {
 	padding: 0;
 	list-style: none;
 	margin: 0 0 20px;
-	float: right;
 }
 .socials li {
 	float: left;
@@ -607,7 +606,6 @@ footer {
  	opacity: 1;
  }
  .copyrights {
- 	float: right;
  	color: #8E8E8E;
  }
  /** Inner Pages **/
@@ -1072,7 +1070,8 @@ footer {
 	margin:  0 0 20px;
 }
 .company-img img {
-	height:100%;
+	height:auto;
+	width:100%;
 }
 .browse-contest .ad-company-info h4 {
 	margin: 0 0 15px;
@@ -2187,17 +2186,17 @@ nav .dropdown-menu{
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
-.modal_tips.ng-hide{
-    top:-50;
+.tip-section{
+	border:1px solid #ff5c00;
+	border-radius: 5px;
+	margin-bottom:10px;
+	opacity: 1;
 }
-.modal_tips{
-    z-index:100000000 !important;
-    position:fixed;
-    top:2.5%;
-    height:250px; 
+.tip-section.ng-hide{
+	opacity: 0;
 }
-.modal_tips.ng-hide-add.ng-hide-add-active,
-.modal_tips.ng-hide-remove.ng-hide-remove-active {
+.tip-section.ng-hide-add.ng-hide-add-active,
+.tip-section.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
@@ -2269,14 +2268,6 @@ nav .dropdown-menu{
 .border-submish{
 	border:1px solid #ff5e00;
 }
-.submissions-page{
- min-height:275px; 
- max-height:275px;
-}
-.submissions-page-mobile{
- min-height:350px; 
- max-height:350px;
-}}
 
 .tappyn-bars div p {
 	color:#fff !important;
@@ -2285,14 +2276,13 @@ nav .dropdown-menu{
 .highlight_payment{
 	border : 2px #ff5c00 solid;
 }
-
 .upvote-circle{
 	width:50px;
 	height:50px;
-    float:right;
 	border:1px solid #ff5c00;
 	border-radius:40px;
 	cursor:pointer;
+	float:right;
 }
 .empty-upvote{
 	background-color:#fff;
@@ -2307,10 +2297,18 @@ nav .dropdown-menu{
 	color:#fff;
 }
 .share_logo{
-	margin-right:5px;
-	border-radius:40px;
 	cursor:pointer;
 	opacity: 1;
+	background-color: #3B5998;
+	color:#fff;
+	height:30px;
+	width:50px;
+	border-top-left-radius: 5px;
+	text-align: center;
+	padding-top: 5px;
+}
+.share_logo:hover{
+	background-color: #355088;
 }
 .share_logo.ng-hide{
 	opacity: 0;
@@ -2354,6 +2352,36 @@ nav .dropdown-menu{
     -webkit-transition:all linear .5;
        transition:all linear 0.5s;
 }
+.notif-tab-left{
+	border-width : 1px 0px 1px 1px; 
+	border-style : solid;
+	border-color : #ff5c00;
+	border-top-left-radius: 25px;
+	border-bottom-left-radius: 25px;
+}
+.notif-tab-right{
+	border-width: 1px 1px 1px 0px;
+	border-style :  solid;
+	border-color : #ff5c00;
+	border-top-right-radius: 25px;
+	border-bottom-right-radius: 25px;
+}
+.notif-tab{
+	height:35px;
+	background:#fff;
+	color:#ff5c00;
+	cursor:pointer;
+	text-align:center;
+	padding-top:7px;
+	margin-bottom:10px;
+	margin-top:10px;
+}
+.notif-tab:hover{
+	background:#ddd;
+}
+.notif-active{
+	background:#ddd;
+}
 .notification{
 	border:1px solid #ff5c00;
 	border-radius : 5px;
@@ -2370,6 +2398,75 @@ nav .dropdown-menu{
 }
 #faqpayment .panel-body{
 	border : 1px solid #ff5c00;
+}
+
+.dash-black {
+	color:#333;
+	cursor: pointer;
+}
+.dash-black:hover{
+	color:#ff5c00;
+}
+.dash-oj{
+	color:#ff5c00;
+	cursor: pointer;
+}
+.glyph-lg {
+    font-size:1.6em;
+}
+.dash-bordered{
+	border-left: 1px solid #333;
+	border-right: 1px solid #333;
+}
+.overlay_launch{
+	position:fixed;
+	bottom : 0;
+	background:#fff;
+	color:#ff5c00;
+	padding:20px;
+}
+.interest-overlay{
+	position:absolute;
+	top : 0;
+	left : 0;
+	bottom : 0;
+	right : 0;
+	background:#333;
+	opacity: .5;
+	cursor:pointer;
+}
+.interest-overlay:hover{
+	opacity:.7;
+	 -webkit-transition:all linear .3;
+       transition:all linear 0.3s;
+}
+.interest-text{
+	position: absolute;
+	bottom:0;
+	color:#fff;
+	font-size: 15px;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.6);
+	width:100%;
+	margin:0;
+	padding-top:5px;
+	padding-bottom:10px;
+}
+.interest-check{
+	position:absolute;
+	top:2px;
+	left:5px;
+	color:#fff;
+	font-size:20px;
+}
+.interest-heading{
+	font-weight: 300;
+	color:#ff5c00;
+}
+ .modal_scrolling{
+ 	width:100%;
+    max-height:100%;
+    overflow-y:auto;
 }
 .login-highlight{
 	background : #ff5c00;

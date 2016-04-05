@@ -1,7 +1,17 @@
 tappyn.factory('contestsFactory', function($http){
 	var fact = {};
 
-	fact.grabContests = function(){
+	fact.grabMyContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/index/interesting',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabAllContests = function(){
 		return $http({
 			method : 'GET',
 			url : 'index.php/contests',
@@ -10,6 +20,7 @@ tappyn.factory('contestsFactory', function($http){
 			}
 		});
 	}
+
 
 	fact.filterGrab = function(pass){
 		return $http({

@@ -38,15 +38,15 @@ class Users extends CI_Controller
         if($this->input->get('type') === 'winning')
         {
             // Get all winnign submissions from payout table
-            $payout_ids = array();
-            $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
-            if($payouts)
-            {
-                foreach($payouts as $payout)
-                {
-                    $payout_ids[] = $payout->submission_id;
-                }
-            }
+            // $payout_ids = array();
+            // $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+            // if($payouts)
+            // {
+            //     foreach($payouts as $payout)
+            //     {
+            //         $payout_ids[] = $payout->submission_id;
+            //     }
+            // }
             if(empty($payout_ids))
             {
                 $this->responder->data(array())->respond();
@@ -178,6 +178,30 @@ class Users extends CI_Controller
             ))->respond();
             return;
         }
+    }
+
+    public function stats()
+    {
+        $submissions = $this->submission->select('COUNT(*) as count')->where('owner', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
+        $upvotes = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
+        $won = count($this->payout->fetch('user_id', $this->ion_auth->user()->row()->id));
+        $this->responder->data(array(
+            'submissions' => $submissions,
+            'upvotes' => $upvotes,
+            'won' => $won
+        ))->respond();
+    }
+
+    public function upvoted()
+    {
+        $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->order_by('votes.created_at', 'desc')->limit(50)->fetch();
+        $subs = $submissions->result();
+        foreach($subs as $submission)
+        {
+            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+        }
+        $this->responder->data(array('submissions' => $subs))->respond();
     }
 
     /**

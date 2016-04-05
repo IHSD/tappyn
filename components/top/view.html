@@ -5,105 +5,25 @@
 			<h3 style='color:#ff5c00;font-weight: 300;'>Think you can do better?</h3>
 		</div>
 		<div class='col-sm-4 hidden-xs'>
-		<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+			<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+	    	</div>
+	    </div>
+	    <div class='col-sm-4 hidden-xs'>
+			<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+	    	</div>
+	    </div>
+	    <div class='col-sm-4 hidden-xs'>
+			<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/toptapsubmit.html'"></div>
 			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
+	    </div>
+	    <div class='col-xs-12 visible-xs'>
+	    	<div class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/toptapsubmit.html'"></div>
 	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-    	</div>
-    </div>
-    <div class='col-sm-4 hidden-xs'>
-		<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-    	</div>
-    </div>
-    <div class='col-sm-4 hidden-xs'>
-		<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-				<h3>{{submission.headline}}</h3>
-				<div class="contest-content">
-				    <span>{{submission.text}}</span>
-				</div>
-				<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-show='submission.hovering' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-		</div>
-    </div>
-    <div class='col-xs-12 visible-xs'>
-    	<div class="contest-box row" ng-repeat='submission in submissions'>
-			<div class='col-xs-12'>
-					<h3>{{submission.headline}}</h3>
-					<div class="contest-content">
-					    <span>{{submission.text}}</span>
-					</div>
-					<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-			</div>
-			<div ng-click='upvote(submission)' ng-if='submission.user_may_vote' class='upvote-circle' ng-class='{"empty-upvote" : !submission.hover, "filled-upvote" : submission.hover}' ng-mouseenter='submission.hover = true' ng-mouseleave='submission.hover = false'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<div ng-if='!submission.user_may_vote' class='upvote-circle filled-upvote'>
-	    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-	    	</div>
-	    	<img src='public/img/fb_f.png' uib-tooltip='Click to share this submission' class='pull-right share_logo' ng-click='share(submission)'>
-            <div class="contest-info">
-                <h5>
-                	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
-                		{{submission.created_at  | legibleDate}}
-                	</span>
-               	</h5>
-            </div>
-    	</div>
-    </div>
+	    </div>
 	</div>
 </div>
 

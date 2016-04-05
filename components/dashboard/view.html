@@ -123,123 +123,90 @@
 	</div>
 </div>
 
-<div class='row content-padding'>
-	<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left'>
-		<div  ng-if='user.type == "member"'>
-			<h4 class='text-left'>Your Work</h4>
-			<div class='btn-group btn-group-sm'>
-				<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
-				<button ng-click='grab_dash("in_progress")'  class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
-				<button ng-click='grab_dash("completed")'  class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
-				<button ng-click='grab_dash("winning")'  class='btn' ng-class='{"btn-oj" : type == "winning", "btn-default" : type != "winning"}'>Won</button>
+<div class='row'>
+	<div style='background-color:#fff;width:100%' class='row content-padding'>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+			<div class='col-xs-12'>
+				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+			</div>
+			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>
+				<h3 class='text-center'>All</h3>
+			</div>
+			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>
+				<h3 class='text-center'>Need Winner</h3>
+			</div>
+			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
+				<h3 class='text-center'>Completed</h3>
 			</div>
 		</div>
-		<div ng-if='user.type == "company"'>
-			<h4 class='text-left'>Your Contests</h4>
-			<div class='btn-group btn-group-sm'>
-				<button ng-click='grab_dash("all")' class='btn' ng-class='{"btn-oj" : type == "all", "btn-default" : type != "all"}'>All</button>
-				<button ng-click='grab_dash("in_progress")' class='btn' ng-class='{"btn-oj" : type == "in_progress", "btn-default" : type != "in_progress"}'>In Progress</button>
-				<button ng-click='grab_dash("need_winner")' class='btn' ng-class='{"btn-oj" : type == "need_winner", "btn-default" : type != "need_winner"}'>Need Winner</button>
-				<button ng-click='grab_dash("completed")' class='btn' ng-class='{"btn-oj" : type == "completed", "btn-default" : type != "completed"}'>Completed</button>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"'>	
+			<div class='col-xs-12'>
+				<a class='btn btn-outliner pull-right'><span class='glyphicon glyphicon-cog glyph-lg'></span></a>
+				<a href='#/profile' class='btn btn-oj pull-right' style='margin-right:5px;'>Edit Profile</a>
+			</div>
+			<div class='col-xs-12'>
+				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+			</div>
+			<div class='col-xs-12'><hr style='border-color:#333'></div>
+			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
+				<h3 class='text-center'>{{totals.submissions}}</h3>
+				<h3 class='text-center'>Submissions</h3>
+			</div>
+			<div class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-black" : type != "upvotes", "dash-oj" : type == "upvotes"}' ng-click='grab_dash("upvotes")'>
+				<h3 class='text-center'>{{totals.upvotes}}</h3>
+				<h3 class='text-center'>Upvotes</h3>
+			</div>
+			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>	
+				<h3 class='text-center'>{{totals.won}}</h3>
+				<h3 class='text-center'>Wins</h3>
 			</div>
 		</div>
 	</div>
-	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
+	<div class='content-padding'>
 		<div ng-if='user.type == "member"'>
 			<div class='col-md-4 col-sm-6 col-xs-12' ng-repeat='submission in dash.submissions'>
-				<div class="contest-box submissions-page hidden-xs">
-					<div class='col-xs-12'>
-							<h3>{{submission.headline}}</h3>
-							<div class="contest-content">
-							    <span>{{submission.text}}</span>
-							</div>
-					</div>
-					<div class='upvote-circle filled-upvote'>
-			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-			    	</div>
-		            <div class="contest-info">
-		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
-		                	<div ng-if='submission.payout'>
-			                	<a style='color:#ff5e00' ng-click='claim_winnings(submission.payout.id)' ng-if='submission.payout.claimed == "0"'>Claim</a>
-								<span style='color:#ff5e00' ng-show='submission.payout.claimed != "0"'>Claimed</span>
-								<br>
-							</div>
-		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
-		                	<br>
-		                	<span class='duration'>
-		                		{{submission.created_at  | legibleDate}} to {{submission.company}}
-		                	</span>
-		               	</h5>
-		            </div>
-		            <button ng-if='submission.payout' ng-disabled='submission.payout.claimed != "0"' class='btn btn-oj' ng-click='claim_winnings(submission.payout.id)'>
-						<span ng-show='submission.payout.claimed == "0"'>Claim</span>
-						<span ng-show='submission.payout.claimed != "0"'>Claimed</span>
-					</button>
-		    	</div>
-		    	<div class="contest-box submissions-page-mobile visible-xs">
-					<div class='col-xs-12'>
-							<h3>{{submission.headline}}</h3>
-							<div class="contest-content">
-							    <span>{{submission.text}}</span>
-							</div>
-					</div>
-			    	<div class='upvote-circle filled-upvote'>
-			    		<h4 style='margin-top:10px;font-weight:400;' class='text-center'>{{submission.votes | number}}</h4>
-			    	</div>
-		            <div class="contest-info">
-		                <h5 style='position: absolute;left: 3px;bottom: 0;'>
-		                	<div ng-if='submission.payout'>
-			                	<a style='color:#ff5e00' ng-click='claim_winnings(submission.payout.id)' ng-if='submission.payout.claimed == "0"'>Claim</a>
-								<span style='color:#ff5e00' ng-show='submission.payout.claimed != "0"'>Claimed</span>
-								<br>
-							</div>
-		                	<a class='text-left' style='color:#ff5e00' href='#/contest/{{submission.contest_id}}'>View Contest</a>
-		                	<br>
-		                	<span class='duration'>
-		                		{{submission.created_at  | legibleDate}} to {{submission.company}}
-		                	</span>
-		               	</h5>
-		            </div>
-		        </div>
+				 <div ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>
 	    </div>
 		<div ng-if='user.type == "company"'>
-			<table class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
-				<thead>
-					<tr>
-						<td>Actions</td>
-						<td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Contest</td>
-						<td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
-						<td style='cursor:pointer' ng-click='predicate="start_time";reverse=!reverse'>Start Time</td>
-						<td style='cursor:pointer' ng-click='predicate="stop_time";reverse=!reverse'>End Time</td>
-						<td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Submissions</td>
-						<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
-						<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
-						<td style='cursor:pointer' ng-click='predicate="shares";reverse=!reverse'>Shares</td>
+			<div class='col-xs-12'>
+				<table class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
+					<thead>
+						<tr>
+							<td>Actions</td>
+							<td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Contest</td>
+							<td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
+							<td style='cursor:pointer' ng-click='predicate="start_time";reverse=!reverse'>Start Time</td>
+							<td style='cursor:pointer' ng-click='predicate="stop_time";reverse=!reverse'>End Time</td>
+							<td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Submissions</td>
+							<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
+							<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
+							<td style='cursor:pointer' ng-click='predicate="shares";reverse=!reverse'>Shares</td>
+						</tr>
+					</thead>
+					<tr ng-repeat='contest in dash.contests | orderBy : predicate : reverse'>
+						<td>
+							<div uib-dropdown>
+		                        <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
+		                        <ul uib-dropdown-menu role="menu">
+		                        	<li role='menuitem'><a href="#/contest/{{contest.id}}">View Contest</a></li>
+		                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
+		                            <li role='menuitem'><a href="#/edit/{{contest.id}}">Edit Contest</a></li>
+		                        </ul>
+	                        </div>
+						</td>
+						<td>{{contest.id}} {{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
+						<td>{{contest.status | capUnderscore}}</td>
+						<td>{{contest.start_time | dashDate}}</td>
+						<td>{{contest.stop_time | dashDate}}</td>
+						<td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+						<td>{{contest.views | number}}</td>
+						<td>{{contest.votes | number}}</td>
+						<td>{{contest.shares | number}}</td>
 					</tr>
-				</thead>
-				<tr ng-repeat='contest in dash.contests | orderBy : predicate : reverse'>
-					<td>
-						<div uib-dropdown>
-	                        <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
-	                        <ul uib-dropdown-menu role="menu">
-	                        	<li role='menuitem'><a href="#/contest/{{contest.id}}">View Contest</a></li>
-	                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
-	                            <li role='menuitem'><a href="#/edit/{{contest.id}}">Edit Contest</a></li>
-	                        </ul>
-                        </div>
-					</td>
-					<td>{{contest.id}} {{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
-					<td>{{contest.status | capUnderscore}}</td>
-					<td>{{contest.start_time | dashDate}}</td>
-					<td>{{contest.stop_time | dashDate}}</td>
-					<td>{{contest.submission_count | number}}/50</td>
-					<td>{{contest.views | number}}</td>
-					<td>{{contest.votes | number}}</td>
-					<td>{{contest.shares | number}}</td>
-				</tr>
-			</table>
-		</div>	
+				</table>
+			</div>	
+		</div>
 	</div>
 </div>
 

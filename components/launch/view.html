@@ -380,22 +380,6 @@
 							</div>
 						</div>
 						<div class='form-group'>
-							<label>Industry</label>
-							<select class='form-control' ng-model='contest.industry'>
-								<option value=''>Choose an industry so our users can easily find you</option>
-								<option value='pets'>Pets</option>
-								<option value='food_beverage'>Food & Beverage</option>
-								<option value='finance_business'>Finance & Business</option>
-								<option value='health_wellness'>Health & Wellness</option>
-								<option value='travel'>Travel</option>
-								<option value='social_network'>Social Network</option>
-								<option value='home_garden'>Home & Garden</option>
-								<option value='education'>Education</option>
-								<option value='art_entertainment'>Art & Entertainment</option>
-								<option value='fashion_beauty'>Fashion & Beauty</option>
-							</select>
-						</div>
-						<div class='form-group'>
 							<label>Summary of product or service</label>
 							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
 						</div>
@@ -409,7 +393,7 @@
 						</div>
 						<div class='personality-container'>
 							<label class='col-xs-12 text-left'>Ad Personality (optional)</label>
-							<div class='col-xs-3 col-sm-2' ng-repeat='personality in personalities'>
+							<div class='col-xs-6 col-sm-2' ng-repeat='personality in personalities'>
 								<div class='text-center personality' ng-click='choose_personality(personality.type)' ng-class='{"personality-highlight" : personality.type == contest.emotion}'>
 									<img ng-src='{{personality.icon}}' uib-tooltip='{{personality.adjectives}}'  width='50px' height='50px'>
 									<h5>{{personality.brand}}</h5>	
@@ -425,6 +409,7 @@
 				<h3 class='text-center'>Your Audience</h3>
 				<h4 class='text-center'>The preferred demographic for your submissions</h4>
 				<form class='form'>
+					<h5 class='text-center'>User Age</h5>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.age = 0'>
 						<label class="btn" ng-class='{"btn-oj" : contest.age == 0, "btn-outliner" : contest.age != 0}'>
 							<input type='radio' ng-model='contest.age' value='0'>All Ages
@@ -442,7 +427,8 @@
 							<input type='radio' ng-model='contest.age' value='4'> 45+
 						</label>
 					</div>
-					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 10px;'>
+					<h5 class='text-center'>User Gender</h5>
+					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
 							<input type='radio' ng-model='contest.gender' value='0'> All Genders
 						</label>
@@ -453,9 +439,34 @@
 							<input type='radio' ng-model='contest.gender' value='2'> Women
 						</label>
 					</div>
-					<div class='form-group' style='padding-top:10px;'>
-						<label class='control-label'>Any additional information :</label>
-						<textarea class='form-control' ng-model='contest.additional' placeholder="Enter any additional information you'd like to provide here..."></textarea>
+					<h5 class='text-center'>User Interest</h5>
+					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "fashion", "btn-outliner" : contest.industry != "fashion"}'>
+							<input type='radio' ng-model='contest.industry' value="fashion"> Fashion
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "food_beverage", "btn-outliner" : contest.industry != "food_beverage"}'>
+							<input type='radio' ng-model='contest.industry' value='food_beverage'> Food & Drink
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "health_wellness", "btn-outliner" : contest.industry != "health_wellness"}'>
+							<input type='radio' ng-model='contest.industry' value='health_wellness'> Health & Fitness
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "social_network", "btn-outliner" : contest.industry != "social_network"}'>
+							<input type='radio' ng-model='contest.industry' value='social_network'> Social
+						</label>
+					</div>
+					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "finance_business", "btn-outliner" : contest.industry != "finance_business"}'>
+							<input type='radio' ng-model='contest.industry' value='finance_business'> Business
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "home_garden", "btn-outliner" : contest.industry != "home_garden"}'>
+							<input type='radio' ng-model='contest.industry' value='home_garden'> Home & Garden
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "travel", "btn-outliner" : contest.industry != "travel"}'>
+							<input type='radio' ng-model='contest.industry' value='travel'> Travel
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
+							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
+						</label>
 					</div>
 				</form>
 			</div>
@@ -476,8 +487,8 @@
 						</div>
 						<div class='col-sm-4 col-xs-12'  style='padding-top:30px;'>
 							<div style='width:100%'>
-				            	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
-				                <p class="progress-meter-text text-center" style='margin:0px;'>50 of 50 entries remaining</p>
+				            	<uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>                
+				                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
 				            </div>
 				        </div>
 				        <div class='col-sm-2 col-xs-6 text-right'>
@@ -528,7 +539,7 @@
 			        <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
 			            <a ng-if='user.company_url' href='{{user.company_url}}' class='btn btn-oj'  target='_blank'>Website</a>
 			    	    <a ng-if='user.facebook_url' href='{{user.facebook_url}}' class='btn btn-oj'  target='_blank'>Facebook</a>
-			    	     <a ng-if='user.twitter_handle' href='{{user.twitter_handle}}' class='btn btn-oj'  target='_blank'>Twitter</a>
+			    	    <a ng-if='user.twitter_handle' href='{{user.twitter_handle}}' class='btn btn-oj'  target='_blank'>Twitter</a>
 			       	</div>
 			    </div>
 			</div>
@@ -575,27 +586,29 @@
 		</div>
 	</div>
 	<div class='col-xs-12'>
-		<div ng-show='current.step == "package"'>
-			<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Fill in Details</button>
-		</div>
-		<div ng-show='current.step == "detail"'>
-			<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("package")'>Change Package</button>
-			<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Contest</button>
-		</div>
-		<div ng-show='current.step == "preview"'>
-			<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("detail")'>Edit Contest</button>
-			<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay and Launch</button>
-			<button class='btn btn-oj btn-lg pull-right' style='margin-right: 5px;' type='button' ng-click='submit_contest(contest, false)'>Save as Draft</button>
-		</div>
-		<div ng-show='current.step == "done"'>
-			<div class='col-xs-12 col-sm-4'>	
-				<div class='text-center'><a class='btn btn-lg btn-oj' href='#/contest/{{contest.id}}'>See Your Contest Now</a></div>
+		<div class='container'>
+			<div ng-show='current.step == "package"'>
+				<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Fill in Details</button>
 			</div>
-			<div class='col-xs-12 col-sm-4'>
-				<div class='text-center'><a class='btn btn-lg btn-oj' ng-click='reload()'>Launch Another Contest</a></div>
+			<div ng-show='current.step == "detail"'>
+				<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("package")'>Change Package</button>
+				<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Contest</button>
 			</div>
-			<div class='col-xs-12 col-sm-4'>
-				<div class='text-center'><a class='btn btn-lg btn-oj' href='#/dashboard'>Visit Your Dashboard</a></div>
+			<div ng-show='current.step == "preview"'>
+				<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("detail")'>Edit Contest</button>
+				<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay and Launch</button>
+				<button class='btn btn-oj btn-lg pull-right' style='margin-right: 5px;' type='button' ng-click='submit_contest(contest, false)'>Save as Draft</button>
+			</div>
+			<div ng-show='current.step == "done"'>
+				<div class='col-xs-12 col-sm-4'>	
+					<div class='text-center'><a class='btn btn-lg btn-oj' href='#/contest/{{contest.id}}'>See Your Contest Now</a></div>
+				</div>
+				<div class='col-xs-12 col-sm-4'>
+					<div class='text-center'><a class='btn btn-lg btn-oj' ng-click='reload()'>Launch Another Contest</a></div>
+				</div>
+				<div class='col-xs-12 col-sm-4'>
+					<div class='text-center'><a class='btn btn-lg btn-oj' href='#/dashboard'>Visit Your Dashboard</a></div>
+				</div>
 			</div>
 		</div>
 	</div>

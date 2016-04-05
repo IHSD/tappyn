@@ -48,24 +48,11 @@ class Contest extends MY_Model
         return false;
     }
 
-    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20, $offset = false, $gender, $age)
+    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20, $offset = false, $interests = array())
     {
         $this->db->select('*')->from('contests');
         if(!empty($params)) $this->db->where($params);
-        if(!is_null($gender))
-        {
-            $this->db->group_start();
-            $this->db->where('gender', $gender);
-            $this->db->or_where('gender', 0);
-            $this->db->group_end();
-        }
-        // We have to check
-        if(!is_null($age))
-        {
-            if($age < 18) $age = 18;
-            if($age > 45) $age = 45;
-            $this->db->where(array('min_age <=' => $age, 'max_age >=' => $age));
-        }
+        if(!empty($interests)) $this->db->where_in('industry', $interests);
         $this->db->order_by($sort_by, $sort_order);
         if($offset) {
             $this->db->limit($limit, $offset);

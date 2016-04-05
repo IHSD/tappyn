@@ -43,6 +43,7 @@ class Notification
             $not->created = $notification->created;
             switch($notification->type) {
                 case 'submission_received_vote':
+                    $not->section = 'votes';
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
@@ -61,6 +62,7 @@ class Notification
                 break;
 
                 case 'winner_chosen':
+                    $not->section = 'contest';
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
@@ -73,6 +75,7 @@ class Notification
                 break;
 
                 case 'new_contest_launched':
+                    $not->section = 'contest';
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $notification->object_id)->get()->row();
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
@@ -85,6 +88,7 @@ class Notification
                 break;
 
                 case 'submission_chosen':
+                    $not->section = 'account';
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
@@ -99,6 +103,7 @@ class Notification
                 break;
 
                 case 'submission_confirmed':
+                    $not->section = 'contest';
                     $sid = $notification->object_id;
                     $submission = $this->db->select('id, owner, contest_id')->from('submissions')->where('id', $sid)->get()->row();
                     $contest = $this->db->select('id, owner')->from('contests')->where('id', $submission->contest_id)->get()->row();
@@ -113,6 +118,7 @@ class Notification
                 break;
 
                 case 'submission_created':
+                    $not->section = 'contest';
                     $cid = $notification->object_id;
                     $submissions = $this->db->select('COUNT(*) as count')->from('contests')->where('contest_id', $cid)->get()->row()->count;
                     $not->type = 'submission_created';
@@ -124,6 +130,7 @@ class Notification
                 break;
 
                 case 'new_update':
+                    $not->section = 'account';
                     $not->type = 'new_update';
                     $not->message = "Welcome to the new Tappyn!
                                     <br>

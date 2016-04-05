@@ -24,7 +24,7 @@
 		    	<div ng-show='step == 1'>
 		    		<form class='form' ng-submit='step = 2'>
 			    		<div class='col-xs-12'>
-					        <a href="index.php/auth/facebook">
+					        <a href="index.php/auth/facebook" id='fb-login'>
 				                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
 				            </a>
 				    	</div>
@@ -121,10 +121,10 @@
 	$("#fb-login").click(function(){
 		fbq('track', 'Lead');
 		ga('send', {
-		hitType: 'event',
-		eventCategory: 'User Signup',
-		eventAction: 'Signup',
-		eventLabel: 'New User Facebook'
+			hitType: 'event',
+			eventCategory: 'User Signup',
+			eventAction: 'Signup',
+			eventLabel: 'New User Facebook'
 		});
 	});
 </script>

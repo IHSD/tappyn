@@ -1,9 +1,22 @@
 <div ng-show='notification_show' class='modal_note col-xs-12 col-sm-3'>
 	<div class='row'>
-		<div class='col-xs-12'><h4 class='text-center'>Notifications <span style='float:right;' ng-click='close_notifications()'><a href class='a-label'>Hide</a></span></h4><hr></div>
+		<div class='col-xs-12'><h4 class='text-center'>Notifications <span style='float:right;' ng-click='close_notifications()'><a href class='a-label'>Hide</a></span></h4></div>
+		
+		<div class='col-xs-4 notif-tab notif-tab-left' ng-init='tab_filter = "account"' ng-click='tab_filter = "account"' ng-class='{"notif-active" : tab_filter == "account"}'>
+			Account
+			<span class='notifications_count' ng-if='(notifications | filter : section == "account").length > 0'><strong>{{(notifications | filter : section == "account").length}}</strong></span>
+		</div>
+		<div class='col-xs-4 notif-tab' style='border:1px solid #ff5c00;' ng-click='tab_filter = "votes"' ng-class='{"notif-active" : tab_filter == "votes"}'>
+			Votes
+			<span class='notifications_count' ng-if='(notifications | filter : section == "votes").length > 0'><strong>{{(notifications | filter : section == "votes").length}}</strong></span>
+		</div>
+		<div class='col-xs-4 notif-tab notif-tab-right' ng-click='tab_filter = "contests"' ng-class='{"notif-active" : tab_filter == "contests"}'>
+			Contests
+			<span class='notifications_count' ng-if='(notifications | filter : section == "contests").length > 0'><strong>{{(notifications | filter : section == "contests").length}}</strong></span>
+		</div>
 		<button class='btn btn-outliner col-xs-12' ng-click='read_all()'>Dismiss All</button>
 		<div class='alert alert-warning col-xs-12' style='padding-top:10px' ng-if='notifications.length==0'>You're all caught up!</div>
-		<div class='col-xs-12 notification' ng-repeat='notification in notifications' ng-if='notifications.length > 0'>
+		<div class='col-xs-12 notification' ng-repeat='notification in notifications | filter : {section : tab_filter}' ng-if='notifications.length > 0'>
 			<div class='col-xs-1' ng-switch on='notification.type'>
 				<span ng-switch-when='submission_received_vote' class='glyphicon glyphicon-thumbs-up glyphicon-oj glyph-lg'></span>
 				<span ng-switch-when='new_contest_launched' class='glyphicon glyphicon-fire glyphicon-oj glyph-lg'></span>

@@ -52,7 +52,7 @@ class Interests extends CI_Controller
      * @param  integer $id ID of the interest
      * @return void
      */
-    public function remove($id)
+    public function remove($id = NULL)
     {
         if($_SERVER['REQUEST_METHOD'] !== 'POST' || is_null($id))
         {
@@ -66,4 +66,6 @@ class Interests extends CI_Controller
             $this->responder->fail(($this->interest->errors() ? $this->interest->errors() : "An unkonwn error occured"))->code(500)->respond();
         }
     }
+
+
 }
