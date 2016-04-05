@@ -115,6 +115,7 @@ class Notification
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
                     $nots[] = $not;
+                    error_log("Parsing notificaiton for ".$this->ion_auth->user()->row()->id);
                 break;
 
                 case 'submission_created':
