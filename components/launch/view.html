@@ -393,7 +393,7 @@
 						</div>
 						<div class='personality-container'>
 							<label class='col-xs-12 text-left'>Ad Personality (optional)</label>
-							<div class='col-xs-3 col-sm-2' ng-repeat='personality in personalities'>
+							<div class='col-xs-6 col-sm-2' ng-repeat='personality in personalities'>
 								<div class='text-center personality' ng-click='choose_personality(personality.type)' ng-class='{"personality-highlight" : personality.type == contest.emotion}'>
 									<img ng-src='{{personality.icon}}' uib-tooltip='{{personality.adjectives}}'  width='50px' height='50px'>
 									<h5>{{personality.brand}}</h5>	
@@ -437,7 +437,7 @@
 							<input type='radio' ng-model='contest.gender' value='2'> Women
 						</label>
 					</div>
-					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 10px;'>
+					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 10px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == "fashion", "btn-outliner" : contest.gender != "fashion"}'>
 							<input type='radio' ng-model='contest.gender' value="fashion"> Fashion
 						</label>
@@ -450,6 +450,8 @@
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == "social_network", "btn-outliner" : contest.gender != "social_network"}'>
 							<input type='radio' ng-model='contest.gender' value='social_network'> Social
 						</label>
+					</div>
+					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == "finance_business", "btn-outliner" : contest.gender != "finance_business"}'>
 							<input type='radio' ng-model='contest.gender' value='finance_business'> Business
 						</label>
@@ -458,6 +460,9 @@
 						</label>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == "travel", "btn-outliner" : contest.gender != "travel"}'>
 							<input type='radio' ng-model='contest.gender' value='travel'> Travel
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.gender == "art_entertainment", "btn-outliner" : contest.gender != "art_entertainment"}'>
+							<input type='radio' ng-model='contest.gender' value='art_entertainment'> Art & Entertainment
 						</label>
 					</div>
 				</form>
