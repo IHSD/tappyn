@@ -60,6 +60,7 @@ class Contest extends MY_Model
             $this->db->limit($limit);
         }
         $contests = $this->db->get();
+        error_log($this->db->last_query());
         if($contests && $contests->num_rows() > 0)
         {
             $results = $contests->result();

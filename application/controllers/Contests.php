@@ -68,6 +68,15 @@ class Contests extends CI_Controller
      */
     public function index($type = 'all')
     {
+        $gender = NULL;
+        $age = NULL;
+
+        if($this->ion_auth->logged_in())
+        {
+            $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+            $gender = $profile->gender;
+            $age = $profile->age;
+        }
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s'),
@@ -96,10 +105,8 @@ class Contests extends CI_Controller
                 return;
             }
         }
-
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
-        $config['total_rows'] = $this->contest->count($this->params);
         $config['per_page'] = ($this->input->get('per_page') ? $this->input->get('per_page') : 20);
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
@@ -109,16 +116,11 @@ class Contests extends CI_Controller
         if(($offset + $config['per_page']) < $config['total_rows'])
         {
             $has_more = TRUE;
-        }
-
+        }        
         if($contests !== FALSE)
         {
             $this->responder->data(array(
                 'contests' => $contests,
-                'total_rows' => $config['total_rows'],
-                'per_page' => (int)$config['per_page'],
-                'has_more' => $has_more,
-                'page' => $offset == 0 ? 1 : floor($offset / $config['per_page'] + 1),
             ))->respond();
         } else {
             $this->responder->fail("An unknown error occured")->code(500)->respond();
