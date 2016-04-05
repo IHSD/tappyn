@@ -1,0 +1,17 @@
+<div class='modal_actions col-xs-12 col-sm-6 col-sm-offset-3'>
+	<div class='col-xs-12 row text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
+		<div class='col-xs-12'>
+			<div class='close_circle' ng-click='close_interests()'>X</div>
+			<h3 class='text-center interest-heading'>Follow up to three interests</h3>
+			<h4 class='text-center interest-heading hidden-xs'>We'll assemble a feed of contests we know you'll love</h4>
+		</div>
+		<div class='modal_scrolling'>
+			<div class='col-xs-6 col-sm-3 text-center' style='padding:0;' ng-repeat='interest in interests' ng-click='pass_interest(interest.id)'>
+				<div class='interest-overlay'></div>
+				<p class='interest-check' ng-show='interest.checked'><span class='glyphicon glyphicon-ok'></span></p>
+				<img class='img-responsive' ng-src='{{interest.picture}}'>
+				<p class='interest-text'>{{interest.text}}</p>
+			</div>
+		</div>
+	</div>
+</div>
