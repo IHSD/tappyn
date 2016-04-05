@@ -83,7 +83,8 @@ class Contests extends CI_Controller
             $interests = $this->load->library('interest');
             $this->interest->setDatabase($this->db);
             $this->interest->setUser($this->ion_auth->user()->row()->id);
-            $ints = $this->flatten($this->interest->tree()->children);
+
+            $ints = $this->interest->flatten($this->interest->tree()->children);
             foreach($ints as $int)
             {
                 if($int->followed_by_user) $sql_interests[] = $int->name;

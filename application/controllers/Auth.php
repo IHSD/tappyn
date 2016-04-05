@@ -36,7 +36,7 @@ class Auth extends CI_Controller {
 			$this->interest->setDatabase($this->db);
 			$this->interest->setUser($uid);
 			$profile = $this->user->profile($uid);
-	        $interests = $this->interest->flatten($this->interest->tree());
+	        $interests = $this->interest->flatten($this->interest->tree()->children);
 	        $user['interests'] = $interests;
 			$user['age'] = $profile->age;
 			$user['gender'] = $profile->gender;

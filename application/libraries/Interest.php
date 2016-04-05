@@ -116,10 +116,6 @@ class Interest
 
     }
 
-    public function flatten($tree)
-    {
-            
-    }
     /**
      * Fetch data on an individual interest
      * @param  integer $id
@@ -408,5 +404,22 @@ class Interest
     public function messages()
     {
         return $this->message;
+    }
+
+    public function flatten($array)
+    {
+        $return = array();
+
+        for($x = 0; $x < count($array); $x++) {
+    		if(is_array($array[$x])) {
+    			$return = array_flatten($array[$x], $return);
+    		}
+    		else {
+    			if(isset($array[$x])) {
+    				$return[] = $array[$x];
+    			}
+    		}
+    	}
+    	return $return;
     }
 }
