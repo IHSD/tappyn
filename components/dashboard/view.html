@@ -164,9 +164,30 @@
 	</div>
 	<div class='content-padding'>
 		<div ng-if='user.type == "member"'>
-			<div class='col-md-4 col-sm-6 col-xs-12' ng-repeat='submission in dash.submissions'>
-				 <div ng-include src="'templates/submits/dashsubmit.html'"></div>
+			<div class='col-md-3 visible-md visible-lg' ng-repeat='submission in dash.submissions'>
+				 <div ng-if='first_fourth($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
 			</div>
+			<div class='col-md-3 visible-md visible-lg'>
+				<div ng-if='second_fourth($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>	
+			<div class='col-md-3 visible-md visible-lg'>
+				<div ng-if='third_fourth($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>
+			<div class='col-md-3 visible-md visible-lg'>
+				<div ng-if='fourth_fourth($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>
+			<div class='col-sm-4 visible-sm'>
+				<div ng-if='first_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>
+			<div class='col-sm-4 visible-sm'>
+				<div ng-if='second_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>
+			<div class='col-sm-4 visible-sm'>
+				<div ng-if='third_third($index)' ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>
+			<div class='col-xs-12 visible-xs'>
+				<div ng-include src="'templates/submits/dashsubmit.html'"></div>
+			</div>	
 	    </div>
 		<div ng-if='user.type == "company"'>
 			<div class='col-xs-12'>
