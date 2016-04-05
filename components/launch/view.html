@@ -409,6 +409,7 @@
 				<h3 class='text-center'>Your Audience</h3>
 				<h4 class='text-center'>The preferred demographic for your submissions</h4>
 				<form class='form'>
+					<h5 class='text-center'>User Age</h5>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.age = 0'>
 						<label class="btn" ng-class='{"btn-oj" : contest.age == 0, "btn-outliner" : contest.age != 0}'>
 							<input type='radio' ng-model='contest.age' value='0'>All Ages
@@ -426,7 +427,8 @@
 							<input type='radio' ng-model='contest.age' value='4'> 45+
 						</label>
 					</div>
-					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 10px;'>
+					<h5 class='text-center'>User Gender</h5>
+					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
 							<input type='radio' ng-model='contest.gender' value='0'> All Genders
 						</label>
@@ -437,39 +439,36 @@
 							<input type='radio' ng-model='contest.gender' value='2'> Women
 						</label>
 					</div>
-					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 10px;'>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "fashion", "btn-outliner" : contest.gender != "fashion"}'>
-							<input type='radio' ng-model='contest.gender' value="fashion"> Fashion
+					<h5 class='text-center'>User Interest</h5>
+					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "fashion", "btn-outliner" : contest.industry != "fashion"}'>
+							<input type='radio' ng-model='contest.industry' value="fashion"> Fashion
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "food_beverage", "btn-outliner" : contest.gender != "food_beverage"}'>
-							<input type='radio' ng-model='contest.gender' value='food_beverage'> Food & Drink
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "food_beverage", "btn-outliner" : contest.industry != "food_beverage"}'>
+							<input type='radio' ng-model='contest.industry' value='food_beverage'> Food & Drink
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "health_wellness", "btn-outliner" : contest.gender != "health_wellness"}'>
-							<input type='radio' ng-model='contest.gender' value='health_wellness'> Health & Fitness
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "health_wellness", "btn-outliner" : contest.industry != "health_wellness"}'>
+							<input type='radio' ng-model='contest.industry' value='health_wellness'> Health & Fitness
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "social_network", "btn-outliner" : contest.gender != "social_network"}'>
-							<input type='radio' ng-model='contest.gender' value='social_network'> Social
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "social_network", "btn-outliner" : contest.industry != "social_network"}'>
+							<input type='radio' ng-model='contest.industry' value='social_network'> Social
 						</label>
 					</div>
 					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "finance_business", "btn-outliner" : contest.gender != "finance_business"}'>
-							<input type='radio' ng-model='contest.gender' value='finance_business'> Business
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "finance_business", "btn-outliner" : contest.industry != "finance_business"}'>
+							<input type='radio' ng-model='contest.industry' value='finance_business'> Business
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "home_garden", "btn-outliner" : contest.gender != "home_garden"}'>
-							<input type='radio' ng-model='contest.gender' value='home_garden'> Home & Garden
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "home_garden", "btn-outliner" : contest.industry != "home_garden"}'>
+							<input type='radio' ng-model='contest.industry' value='home_garden'> Home & Garden
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "travel", "btn-outliner" : contest.gender != "travel"}'>
-							<input type='radio' ng-model='contest.gender' value='travel'> Travel
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "travel", "btn-outliner" : contest.industry != "travel"}'>
+							<input type='radio' ng-model='contest.industry' value='travel'> Travel
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.gender == "art_entertainment", "btn-outliner" : contest.gender != "art_entertainment"}'>
-							<input type='radio' ng-model='contest.gender' value='art_entertainment'> Art & Entertainment
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
+							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
 						</label>
 					</div>
 				</form>
-			</div>
-
-			<div class='contest-box'>
-				<h3>Schedule</h3>
 			</div>
 		</div>
 	</div>
@@ -488,8 +487,8 @@
 						</div>
 						<div class='col-sm-4 col-xs-12'  style='padding-top:30px;'>
 							<div style='width:100%'>
-				            	<uib-progressbar value='contest.submission_count' max='50' type="warning"></uib-progressbar>                
-				                <p class="progress-meter-text text-center" style='margin:0px;'>50 of 50 entries remaining</p>
+				            	<uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>                
+				                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
 				            </div>
 				        </div>
 				        <div class='col-sm-2 col-xs-6 text-right'>
