@@ -13,21 +13,89 @@ class Contests extends CI_Controller
         $this->load->library('mailer');
         $this->load->model('user');
         $this->load->library('vote');
+        $this->load->library('interest');
+    }
+
+    /**
+     * Find the first 5 dates that a copmany may launch  contest in that industry.
+     *
+     * The default is only allowing 3 contests to start per day per given industry
+     *
+     * @return void
+     */
+    public function start_dates()
+    {
+        $dates = array();
+        $industry = $this->input->get('industry');
+
+        // Let's get the next 5 available dates
+        $i = 1;
+        while(count($dates) < 6)
+        {
+            $date = date('Y-m-d', strtotime("+{$i} days"));
+            $count = $this->db->select('COUNT(*) as count')->from('contests')->where(array('DATE(start_time)' => $date, 'paid' => 1, 'industry' => $industry))->get();
+            if(!$count)
+            {
+                $this->responder->fail("An unknown error occured")->code(500)->respond();
+                return;
+            }
+            if($count->row()->count < 3)
+            {
+                $dates[] = $date;
+            }
+            $i++;
+            if($i > 100)
+            {
+                $this->responder->fail("Some sort of error occured")->code(500)->respond();
+                return;
+            }
+        }
+        if(empty($dates))
+        {
+            $this->responder->fail("We were unable to find any dates to launch a contest for that industry")->code(500)->respond();
+            return;
+        } else {
+            $this->responder->data(array(
+                'dates' => $dates
+            ))->respond();
+            return;
+        }
     }
 
     /**
      * View all available contests
      * @return void
      */
-    public function index()
+    public function index($type = 'all')
     {
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
-
         $has_more = FALSE;
+
+        $sql_interests = array();
+
+        if($type='interesting')
+        {
+
+            $interests = $this->load->library('interest');
+            $this->interest->setDatabase($this->db);
+            $this->interest->setUser($this->ion_auth->user()->row()->id);
+
+            $ints = $this->interest->flatten($this->interest->tree()->children);
+            foreach($ints as $int)
+            {
+                if($int->followed_by_user) $sql_interests[] = $int->name;
+            }
+
+            if(empty($sql_interests))
+            {
+                $this->responder->fail("You dont have any interests yet brudda!")->code(500)->respond();
+                return;
+            }
+        }
 
         if($this->input->get('industry')) $this->params['industry'] = $this->input->get('industry');
         $config['base_url'] = base_url().'contests/index';
@@ -36,7 +104,7 @@ class Contests extends CI_Controller
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
-        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset);
+        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset, $sql_interests);
 
         if(($offset + $config['per_page']) < $config['total_rows'])
         {
@@ -201,8 +269,10 @@ class Contests extends CI_Controller
                 'start_time'        => $start_time,
                 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion'           => $this->input->post('emotion'),
-                'display_type'      => $this->input->post('display_type')
+                'display_type'      => $this->input->post('display_type'),
+                'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30
             );
+
             $images = array();
             if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
             if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
@@ -211,7 +281,9 @@ class Contests extends CI_Controller
             if(is_null($id))
             {
                 $cid = $this->contest->create($data);
-            } else {
+            }
+            else
+            {
                 // Check that they own the contest
                 $contest = $this->contest->get($id);
                 if(!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id))
@@ -236,7 +308,6 @@ class Contests extends CI_Controller
             $profile_data = array();
             $profile = $this->ion_auth->profile();
             if(is_null($profile->mission)) $profile_data['mission'] = $this->input->post('audience');
-            if(is_null($profile->extra_info)) error_log("ExtraInfo null");
             if(is_null($profile->different)) $profile_data['different'] = $this->input->post('different');
             if(is_null($profile->summary)) $profile_data['summary'] = $this->input->post('summary');
             if(is_null($profile->company_email)) $profile_data['company_email'] = $this->input->post('company_email');
