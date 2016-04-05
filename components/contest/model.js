@@ -44,8 +44,8 @@ tappyn.service("contestModel", function(){
 		}
 		else if(contest.platform == "google"){
 			layout.headline = {limit : 25, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
-			layout.line_1 = {limit : 35, placeholder : 'Simple explaination of why this audience should pick this company. Speak like a human.'};
-			layout.line_2 = {limit : 35, placeholder : 'Simple explaination of why this audience should pick this company. Speak like a human.'};
+			layout.line_1 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
+			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
 		}
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
 		return layout;
