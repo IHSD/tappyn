@@ -139,7 +139,7 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
             return;
         }
-        $contest = $this->contest->get($contest_id)
+        $contest = $this->contest->get($contest_id);
         if(!$contest)
         {
             $this->responder->fail("That contest does not exist")->code(500)->respond();
@@ -151,7 +151,7 @@ class Submissions extends CI_Controller
             $this->responder->fail("Unfortunately, this contest has reached its limit")->code(500)->respond();
             return;
         }
-        
+
         if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation')))
         {
             $this->responder->message(
