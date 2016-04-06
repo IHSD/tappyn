@@ -7,11 +7,7 @@ class Companies extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
-        {
-            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
-            exit();
-        }
+
         $this->load->model('company');
         $this->load->model('user');
         $this->load->model('contest');
@@ -19,11 +15,27 @@ class Companies extends CI_Controller
         $this->load->library('payout');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
-        $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
+        if($this->ion_auth->logged_in()) $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
     }
+
+    public function index($offset = 0)
+    {
+        $companies = $this->db->select('*')->from('profiles')->where(
+            'summary IS NOT NULL', NULL
+        )->limit(25, $offset)->get()->result();
+        $this->responder->data(array(
+            'companies' => $companies
+        ))->respond();
+    }
+
 
     public function dashboard()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         if($this->ion_auth->in_group(2))
         {
             redirect("users/dashboard");
@@ -99,6 +111,11 @@ class Companies extends CI_Controller
 
     public function profile()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         if($_SERVER['REQUEST_METHOD'] == 'POST')
         {
             $data = array(
@@ -127,6 +144,11 @@ class Companies extends CI_Controller
 
     public function accounts()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         // Check if we have to process a form in any way
         if($this->input->post('stripeToken') && $this->stripe_customer_id)
         {
@@ -167,6 +189,11 @@ class Companies extends CI_Controller
 
     public function removeCard()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         if(!$stripe_customer_id)
         {
             $this->session->set_flashdata('You havent created a payment method with us yet');
@@ -205,6 +232,11 @@ class Companies extends CI_Controller
      */
     public function payment($contest_id = FALSE)
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         // Initialize the control variables
         $charge = FALSE;
         $amount = 9999;
@@ -365,6 +397,11 @@ class Companies extends CI_Controller
 
     public function setAsDefault()
     {
+        if(!$this->ion_auth->logged_in())
+        {
+            $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
+            exit();
+        }
         if(!$stripe_customer_id)
         {
             $this->session->set_flashdata('You havent created a payment method with us yet');

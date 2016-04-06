@@ -129,7 +129,7 @@ class Contest extends MY_Model
         {
             return TRUE;
         }
-        return FALSE;
+        return TRUE;
     }
 
     public function userIsGender($gender_req, $gender_sup)
