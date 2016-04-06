@@ -60,6 +60,8 @@ class Submissions extends CI_Controller
 
         $contest = $this->contest->get($contest_id);
 
+        $contest->submission_limit = (int) $contest->submission_limit;
+        $contest->submission_count =  (int) $contest->submission_count;
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
             $contest->status = 'ended';
