@@ -90,7 +90,7 @@
 						You have already submitted to this contest, check out how your submission is doing!
 					</div>
 				</div>
-				<div ng-show='user && user.is_active && !contest.user_has_submitted'>
+				<div ng-show='(contest.submission_count < contest.submission_limit) && user && user.is_active && !contest.user_has_submitted'>
 					<form class='form' ng-submit='submit_to(contest.id, submit)'>
 			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
 			 			<span class='pull-right' style='cursor:pointer;' ng-mouseenter='show_tips()' ng-mouseleave='hide_tips()'>Need Help?</span></h4>	
