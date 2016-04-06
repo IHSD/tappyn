@@ -735,6 +735,28 @@ tappyn.factory('comproFactory', function($http){
 
 	return fact;
 })
+tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
+	endedFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.winner = response.data.winner;
+		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
+	})
+})
+tappyn.factory("endedFactory", function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/winner/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	return fact;
+})
 tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
@@ -991,6 +1013,13 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 		})
 	}
 
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		contestsFactory.grabCompanies().success(function(response){
+			$scope.companies = response.data.companies;
+		});
+	}	
+
 	$scope.to_account = function(){
 		$scope.with_email = false;
 		$scope.have_account = true;
@@ -1043,85 +1072,13 @@ tappyn.factory('contestsFactory', function($http){
 		});
 	}
 
-	return fact;
-})
-tappyn.controller("editController", function($scope, $routeParams, editFactory){
-	$scope.logged_in();
-	if($routeParams.id){
-		editFactory.grabEdit($routeParams.id).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contest = response.data.contest;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.edit = function(contest){
-		editFactory.editContest(contest).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.amazon_connect('tappyn');
-	$scope.select_file = function($files, type){
-	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
-		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
-       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
-       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
-	    else {
-	    	var new_name = Date.now();
-		    var rando = Math.random() * (10000 - 1) + 1;
-		    namen = url + new_name.toString() + rando.toString();
-		}
-	    $upload.upload({
-	        url: url,
-	        method: 'POST',
-	        data : {
-	            key: new_name,
-	            acl: 'public-read',
-	            "Content-Type": file.type === null || file.type === '' ?
-	            'application/octet-stream' : file.type,
-	            AWSAccessKeyId: $rootScope.key.key,
-	            policy: $rootScope.key.policy,
-	            signature: $rootScope.key.signature
-	        },
-	        file: file,
-	    }).success(function (){
-	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
-	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
-	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
-	    });
-	}
-})
-tappyn.factory("editFactory", function($http){
-	var fact = {};
-
-	fact.grabEdit = function(id){
+	fact.grabCompanies = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/submissions/'+id,
+			url : 'index.php/companies',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
-		});
-	}
-
-	fact.editContest = function(contest){
-		return $http({
-			method : 'POST',
-			url : 'index.php/contests/create/'+contest.id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(contest)
 		});
 	}
 
@@ -1385,6 +1342,88 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller("editController", function($scope, $routeParams, editFactory){
+	$scope.logged_in();
+	if($routeParams.id){
+		editFactory.grabEdit($routeParams.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contest = response.data.contest;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.edit = function(contest){
+		editFactory.editContest(contest).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.amazon_connect('tappyn');
+	$scope.select_file = function($files, type){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
+       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
+       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
+	    else {
+	    	var new_name = Date.now();
+		    var rando = Math.random() * (10000 - 1) + 1;
+		    namen = url + new_name.toString() + rando.toString();
+		}
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
+	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
+	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
+	    });
+	}
+})
+tappyn.factory("editFactory", function($http){
+	var fact = {};
+
+	fact.grabEdit = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/submissions/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.editContest = function(contest){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contests/create/'+contest.id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(contest)
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('homeController', function($scope, $location, homeFactory){
 	homeFactory.grabCool().success(function(response){
 		$scope.contests = response.data.contests;
@@ -1428,28 +1467,6 @@ tappyn.factory('homeFactory', function($http){
 
 	return fact;
 });
-tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
-	endedFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.winner = response.data.winner;
-		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
-	})
-})
-tappyn.factory("endedFactory", function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/winner/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	return fact;
-})
 tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
 	$scope.logged_in()
 	$scope.steps = {
@@ -2088,6 +2105,67 @@ tappyn.service('paymentModel', function(){
         'US' : 'United States'
 	};
 })
+tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
+	$scope.logged_in();
+	
+	resetFactory.checkCode($routeParams.code).success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success){
+				$scope.set_alert("Verified, please change your password", "default");
+				$scope.code = $routeParams.code;
+				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
+			}
+			else{
+				$scope.set_alert("Unauthorized", "error");
+				$location.path('/login');
+			}
+		}
+		else{
+			$scope.set_alert("Unauthorized", "error");
+			$location.path('/login');
+		}
+	});
+
+	$scope.change_pass = function(pass){
+		resetFactory.changePass(pass, $scope.code).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$location.path('/login')
+				}	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+})
+tappyn.factory("resetFactory", function($http){
+	var fact = {};
+
+	fact.checkCode = function(code){
+		return $http({
+			method : 'GET',
+			url : 'index.php/auth/reset_password/'+code,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	fact.changePass = function(pass, code){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/reset_password/'+code,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(pass)
+		})
+	}
+
+	return fact;
+})
 tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
 	$scope.logged_in();
 	$scope.amazon_connect('tappyn');
@@ -2273,67 +2351,6 @@ this.states =
 }
 
 });
-tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
-	$scope.logged_in();
-	
-	resetFactory.checkCode($routeParams.code).success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success){
-				$scope.set_alert("Verified, please change your password", "default");
-				$scope.code = $routeParams.code;
-				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
-			}
-			else{
-				$scope.set_alert("Unauthorized", "error");
-				$location.path('/login');
-			}
-		}
-		else{
-			$scope.set_alert("Unauthorized", "error");
-			$location.path('/login');
-		}
-	});
-
-	$scope.change_pass = function(pass){
-		resetFactory.changePass(pass, $scope.code).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");
-					$location.path('/login')
-				}	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory("resetFactory", function($http){
-	var fact = {};
-
-	fact.checkCode = function(code){
-		return $http({
-			method : 'GET',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	fact.changePass = function(pass, code){
-		return $http({
-			method : 'POST',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(pass)
-		})
-	}
-
-	return fact;
-})
 tappyn.controller("submissionsController", function($scope, $rootScope, $routeParams, contestFactory, submissionsFactory, AppFact){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
