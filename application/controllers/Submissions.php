@@ -70,7 +70,7 @@ class Submissions extends CI_Controller
         $contest->views = $this->contest->views($contest_id);
         $contest->user_has_submitted = FALSE;
         $contest->user_may_submit = FALSE;
-        
+
         if($this->ion_auth->logged_in())
         {
             $contest->user_has_submitted = $this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id);
@@ -130,6 +130,7 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
             return;
         }
+
         $uid = $this->ion_auth->user()->row()->id;
         if(!$this->contest->mayUserSubmit($uid, $contest_id))
         {
@@ -138,7 +139,19 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
             return;
         }
+        $contest = $this->contest->get($contest_id)
+        if(!$contest)
+        {
+            $this->responder->fail("That contest does not exist")->code(500)->respond();
+            return;
+        }
 
+        if($contest->submission_count >= $contest->submission_limit)
+        {
+            $this->responder->fail("Unfortunately, this contest has reached its limit")->code(500)->respond();
+            return;
+        }
+        
         if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation')))
         {
             $this->responder->message(
@@ -189,6 +202,7 @@ class Submissions extends CI_Controller
             $this->responder->fail("An unexpected error occured")->code(500)->respond();
             return;
         }
+
         $submissions = array();
         foreach($check->result() as $sub)
         {
