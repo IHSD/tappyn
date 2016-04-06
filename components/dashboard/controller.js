@@ -1,4 +1,4 @@
-tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
+tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
 	$scope.adding_payment = {show : false, id : ''};
@@ -82,6 +82,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 							$scope.set_alert(res.message, "default");	
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -112,6 +113,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 							$scope.set_alert(res.message, "default");	
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -129,6 +131,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 							$scope.set_alert(res.message, "default");	
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -165,6 +168,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 						$scope.set_alert(res.message, "default");	
 						$rootScope.modal_up = false;
 						$scope.adding_payment = false;
+						$route.reload();
 					}
 					else $scope.set_alert(res.message, "default");	 
 				}
