@@ -725,6 +725,16 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller('comproController', function($scope, $rootScope, $routeParams, comproFactory){
+	if($routeParams.id){
+		
+	}
+});
+tappyn.factory('comproFactory', function($http){
+	var fact = {};
+
+	return fact;
+})
 tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
@@ -1375,28 +1385,6 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
-	endedFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.winner = response.data.winner;
-		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
-	})
-})
-tappyn.factory("endedFactory", function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/winner/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	return fact;
-})
 tappyn.controller('homeController', function($scope, $location, homeFactory){
 	homeFactory.grabCool().success(function(response){
 		$scope.contests = response.data.contests;
@@ -1440,6 +1428,28 @@ tappyn.factory('homeFactory', function($http){
 
 	return fact;
 });
+tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
+	endedFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.winner = response.data.winner;
+		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
+	})
+})
+tappyn.factory("endedFactory", function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/winner/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	return fact;
+})
 tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
 	$scope.logged_in()
 	$scope.steps = {
@@ -1893,21 +1903,26 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 	paymentFactory.grabDetails().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success){
-				if($scope.user.type == "member" && response.data.account == false){
-					$scope.detail = {first_name : $scope.user.first_name, last_name : $scope.user.last_name};
+				if($rootScope.user.type == "member" && response.data.account == false){
+					$scope.detail = {first_name : $rootScope.user.first_name, last_name : $rootScope.user.last_name};
 					$scope.showing = 'details';
 				}
-				else if($scope.user.type == "member" && response.data.account){
+				else if($rootScope.user.type == "member" && response.data.account){
 					var account = response.data.account;
 					$scope.detail = {first_name : account.legal_entity.first_name, 
 						last_name : account.legal_entity.last_name, 
 						dob_year : account.legal_entity.dob.year, 
 						dob_month : account.legal_entity.dob.month, 
 						dob_day : account.legal_entity.dob.day, 
-						country : account.legal_entity.address.country};
+						city : account.legal_entity.address.city,
+						state : account.legal_entity.address.state,
+						postal_code : account.legal_entity.address.postal_code,
+						country : account.legal_entity.address.country,
+						address_line1 : account.legal_entity.address.line1,
+						address_line2 : account.legal_entity.address.line2};
 					$scope.showing = 'methods';
+					console.log(account);
 				}
-				else $scope.showing = 'methods';
 				$scope.account = response.data.account;
 			}
 			else $scope.set_alert(response.message, "default");	 
