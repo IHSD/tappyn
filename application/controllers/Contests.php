@@ -190,7 +190,7 @@ class Contests extends CI_Controller
             $this->responder->data(array(
                 'contest' => $contest
             ))->respond();
-            $this->contest->log_impression($cid);
+            $this->contest->log_impression($cid, $this->ion_auth->user()->row()->id);
         }
         $this->analytics->track(array(
             'event_name' => 'view_contest',
@@ -237,6 +237,7 @@ class Contests extends CI_Controller
             $this->responder->data(array('contest' => $contest, 'winner' => false))->respond();
         }
     }
+
     /**
      * Create a new contest, or render the creation form
      * @return void
@@ -375,7 +376,8 @@ class Contests extends CI_Controller
             $company_name = '';
         }
         // Check that we are admin or the ccontest owner
-        if(!$this->ion_auth->user()->row()->id !== $contest->owner)
+
+        if($this->ion_auth->user()->row()->id != $contest->owner)
         {
             if(!$this->ion_auth->is_admin())
             {
@@ -401,13 +403,21 @@ class Contests extends CI_Controller
             $this->user->attribute_points($submission->owner, $this->config->item('points_per_winning_submission'));
             $this->load->library('vote');
             $this->vote->dole_out_points($submission->id);
+
+            // We have to notify the winner they won, and all other users that it ended but they didnt win
             $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_chosen');
-            $this->mailer
-                ->to($this->ion_auth->user($submission->owner)->row()->email)
-                ->from("squad@tappyn.com")
-                ->subject("Congratulations, you're submission won!")
-                ->html($this->load->view('emails/submission_chosen', array('company' => $company_name, 'eid' => $eid), TRUE))
-                ->send();
+            $submissions = $this->db->select('users.*, submissions.id as sub_id, users.id as uid')->from('submissions')->join('users', 'submissions.owner = users.id', 'left')->where('contest_id', $contest->id)->get()->result();
+            foreach($submissions as $entry)
+            {
+                if($entry->sub_id == $this->input->post('submission'))
+                {
+                    // Notify the winner
+                    $this->mailer->queue($entry->email, $entry->uid, 'submission_chosen', 'contest', $contest->id);
+                } else {
+                    // Let them know it ended, but they didnt win
+                    $this->mailer->queue($entry->email, $entry->uid, 'winner_announced', 'contest', $contest->id);
+                }
+            }
             $this->analytics->track(array(
                 'event_name' => "winner_selected",
                 'object_type' => "contest",

@@ -345,17 +345,18 @@ class Companies extends CI_Controller
                 "Your payment was successfully processed!"
             )->respond();
             $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'contest_create');
-            $this->mailer->to($this->ion_auth->user()->row()->email)
-                         ->from('squad@tappyn.com')
-                         ->subject("Receipt for your launched contest")
-                         ->html($this->load->view('emails/contest_payment', array(
-                             'company' => $this->ion_auth->profile('name'),
-                             'contest' => $contest,
-                             'eid' => $eid,
-                             'charge' => $charge,
-                             'voucher' => isset($voucher) ? $voucher : FALSE
-                         ), TRUE))
-                         ->send();
+            $this->mailer->queue($this->ion_auth->user()->row()->email, $this->ion_auth->user()->row()->id, 'contest_receipt', 'contest', $contest->id);
+            // $this->mailer->to($this->ion_auth->user()->row()->email)
+            //              ->from('squad@tappyn.com')
+            //              ->subject("Receipt for your launched contest")
+            //              ->html($this->load->view('emails/contest_payment', array(
+            //                  'company' => $this->ion_auth->profile('name'),
+            //                  'contest' => $contest,
+            //                  'eid' => $eid,
+            //                  'charge' => $charge,
+            //                  'voucher' => isset($voucher) ? $voucher : FALSE
+            //              ), TRUE))
+            //              ->send();
 
             // We find any users who have submitted to one of this companies previous contests,
             // anybody who is following this contest, and anybody who has followed this interest
