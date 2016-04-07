@@ -1,4 +1,4 @@
-tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
+tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
 	//on page load grab all
 	$scope.type = 'all';
 	$scope.adding_payment = {show : false, id : ''};
@@ -76,13 +76,13 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 		if($scope.price == 0.00){
 			if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 			else{
-				launchFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+				dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
-							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -107,13 +107,13 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 		if($scope.price == 0.00){
 			if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 			else{
-				launchFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+				dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
-							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -125,13 +125,13 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 		else{
 			if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
 			else{
-				launchFactory.payContest($scope.adding_payment.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
+				dashFactory.payContest($scope.adding_payment.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
 							$scope.set_alert(res.message, "default");	
-							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
+							$route.reload();
 						}
 						else $scope.set_alert(res.message, "default");	 
 					}
@@ -145,7 +145,7 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	$scope.use_voucher = function(){
 		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 		else{
-			launchFactory.voucherValid($scope.voucher_code).success(function(res){
+			dashFactory.voucherValid($scope.voucher_code).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.price = res.data.price;
@@ -162,13 +162,13 @@ tappyn.controller('dashController', function($scope, $rootScope, dashFactory){
 	$scope.voucher_payment = function(){
 		if(!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
 		else{
-			launchFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
+			dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
 						$scope.set_alert(res.message, "default");	
-						$scope.set_step("done");
 						$rootScope.modal_up = false;
 						$scope.adding_payment = false;
+						$route.reload();
 					}
 					else $scope.set_alert(res.message, "default");	 
 				}
