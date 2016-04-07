@@ -53,7 +53,7 @@ class Companies extends CI_Controller
             'paid' => 1,
             'owner' => $company->id
         ))->get()->result();
-        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
+        $company->completed_contests = $this->db->select('*')->from('contests')->where(array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time <' => date('Y-m-d H:i:s'),
             'paid' => 1,
@@ -65,13 +65,48 @@ class Companies extends CI_Controller
             'paid' => 1,
             'owner' => $company->id
         ))->get()->result();
-        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+        $company->contest_requests = (int)$this->db->select('COUNT(*) as count')->from('requests')->where(array(
             'company_id' => $company->id,
             'fulfilled' => 0
         ))->get()->row()->count;
+        $company->follows = (int)$this->db->select('COUNT(*) as count')->from('follows')->where('following', $company->id)->get()->row()->count;
         $this->responder->data(array(
             'company' => $company
         ))->respond();
+    }
+
+    public function request_contest($cid)
+    {
+        if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(2))
+        {
+            $this->responder->fail("Unauthorized Access")
+                            ->code(403)
+                            ->respond();
+                            return;
+        }
+
+        $req_check = $this->company->select('*')->from('requests')->where(array(
+            'user_id' => $this->ion_auth->user()->row()->id,
+            'company_id' => $cid,
+            'fulfilled' => 0
+        ))->fetch();
+        if(!$req_check || $req_check->num_rows() > 0)
+        {
+            $this->responder->fail("You've already requested a contest from them!")->code(500)->respond();
+            return;
+        }
+
+        if($this->db->insert('requests', array(
+            'company_id' => $cid,
+            'user_id' => $this->ion_auth->user()->row()->id,
+            'fulfilled' => 0,
+            'requested_at' => time()
+        )))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error making your request")->code(500)->respond();
+        }
     }
 
 
@@ -97,7 +132,8 @@ class Companies extends CI_Controller
         {
             $this->contest->where(array(
                 'start_time <' => date('Y-m-d H:i:s'),
-                'stop_time >' => date('Y-m-d H:i:s')
+                'stop_time >' => date('Y-m-d H:i:s'),
+                'paid' => 1
             ));
         }
 

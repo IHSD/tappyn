@@ -206,6 +206,45 @@ class Users extends CI_Controller
         $this->responder->data(array('submissions' => $subs))->respond();
     }
 
+    public function follow($fid)
+    {
+        $this->load->model('follow');
+        $follower_check = $this->follow->select('*')->from('follows')->where(array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid
+        ))->fetch();
+        if(!$follower_check || $follower_check->num_rows() > 0)
+        {
+            $this->responder->fail("You're already ollowing that company")->code(500)->respond();
+            return;
+        }
+        if($this->db->insert('follows', array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid,
+            'created' => time()
+        )))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error following that company")->code(500)->respond();
+        }
+    }
+
+    public function unfollow($fid)
+    {
+        $this->load->model('follow');
+        if($this->db->where(array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid
+        ))->delete('follows')) {
+            $this->responder->respond();
+        }
+        else
+        {
+            $this->responder->fail("There was an error unfollowing that user")->code(500)->respond();
+        }
+    }
+
     /**
      * Fetch all of a users interests
      * @return void
