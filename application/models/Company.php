@@ -13,6 +13,16 @@ class Company extends CI_Model
         return get_instance()->$var;
     }
 
+    public function get($id)
+    {
+        $company = $this->db->select('*')->from('profiles')->where('id', $id)->limit(1)->get();
+        if(!$company || $company->num_rows() == 0)
+        {
+            return FALSE;
+        }
+        return $company->row();
+    }
+
     public function payment_details($uid)
     {
         $info = $this->db->select('*')->from('stripe_customers')->where('user_id', $uid)->limit(1)->get();

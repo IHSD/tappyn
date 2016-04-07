@@ -28,6 +28,52 @@ class Companies extends CI_Controller
         ))->respond();
     }
 
+    public function show($cid = 0)
+    {
+        if(!$this->ion_auth->in_group(3, $cid))
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+
+        $company = $this->company->get($cid);
+        unset($company->stripe_customer_id);
+        if(!$company)
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $company->id
+        ))->get()->result();
+        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $company->id
+        ))->get()->result();
+        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time >' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $company->id
+        ))->get()->result();
+        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+            'company_id' => $company->id,
+            'fulfilled' => 0
+        ))->get()->row()->count;
+        $this->responder->data(array(
+            'company' => $company
+        ))->respond();
+    }
+
 
     public function dashboard()
     {
@@ -124,7 +170,8 @@ class Companies extends CI_Controller
                 'extra_info' => $this->input->post('extra_info'),
                 'name' => $this->input->post('name'),
                 'company_email' => $this->input->post('company_email'),
-                'company_url' => $this->input->post('facebook_url'),
+                'company_url' => $this->input->post('company_url'),
+                'facebook_url' => $this->input->post('facebook_url'),
                 'twitter_handle' => $this->input->post('twitter_handle'),
                 'different' => $this->input->post('different'),
                 'summary' => $this->input->post('summary')
