@@ -33,6 +33,7 @@
 <?php endif; ?>
 <br>
 <br>
+<!-- Test -->
 <!-- Begin footer -->
 <p style='margin:auto;width:600px;'>
     We hope to see you again soon!
