@@ -127,6 +127,9 @@
 	<div style='background-color:#fff;width:100%' class='row content-padding'>
 		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
 			<div class='col-xs-12'>
+				<a href='#/launch' class='btn btn-oj pull-left'>Launch a Contest</a>
+			</div>
+			<div class='col-xs-12'>
 				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
 			</div>
 			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>

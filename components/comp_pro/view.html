@@ -1,0 +1,18 @@
+<div class='row'>
+	<div style='background-color:#fff;width:100%' class='row content-padding'>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+			<div class='col-xs-12'>
+				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+			</div>
+			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>
+				<h3 class='text-center'>All</h3>
+			</div>
+			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>
+				<h3 class='text-center'>Need Winner</h3>
+			</div>
+			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
+				<h3 class='text-center'>Completed</h3>
+			</div>
+		</div>
+	</div>
+</div>

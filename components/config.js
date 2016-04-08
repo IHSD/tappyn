@@ -159,24 +159,30 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.industries = {
 			'pets' : 'Pets',
 			'food_beverage' : 'Food & Drink',
-			'finance_business' : 'Business',
+			'finance_business' : 'Business & Finance',
 			'health_wellness' : 'Health & Fitness',
 			'travel' : 'Travel',
-			'social_network' : 'Social',
+			'social_network' : 'Social & Gaming',
 			'home_garden' : 'Home & Garden',
 			'education' : 'Education',
 			'art_entertainment' : 'Art & Entertainment',
-			'fashion_beauty' : 'Fashion'
+			'fashion_beauty' : 'Fashion & Beauty',
+			'sports_outdoors' : 'Sports & Outdoors',
+			'tech_science' : 'Tech & Science'
 	}
 	$scope.interests = [
-			{id : '10', text : 'Fashion', picture : 'public/img/fashion_interest.png', checked : false},
+			{id : '10', text : 'Fashion & Beauty', picture : 'public/img/fashion_interest.png', checked : false},
 			{id : '2', text : 'Food & Drink', picture : 'public/img/food_interest.png', checked : false},
 			{id : '4', text : 'Health & Fitness', picture : 'public/img/health_interest.png', checked : false},
-			{id : '6', text : 'Social', picture : 'public/img/social_interest.png', checked : false},
-			{id : '3', text : 'Business', picture : 'public/img/business_interest.png', checked : false},
+			{id : '6', text : 'Social & Gaming', picture : 'public/img/social_interest.png', checked : false},
+			{id : '3', text : 'Business & Finance', picture : 'public/img/business_interest.png', checked : false},
 			{id : '7', text : 'Home & Garden', picture : 'public/img/home_interest.png', checked : false},
 			{id : '5', text : 'Travel', picture : 'public/img/travel_interest.png', checked : false},
-			{id : '9', text : 'Art & Entertainment', picture : 'public/img/art_interest.png', checked : false}
+			{id : '9', text : 'Art & Music', picture : 'public/img/art_interest.png', checked : false},
+			{id : '12', text : 'Pets', picture : 'public/img/pets_interest.png', checked : false},
+			{id : '13', text : 'Sports & Outdoors', picture : 'public/img/sport_interest.png', checked : false},
+			{id : '8', text : 'Education', picture : 'public/img/education_interest.png', checked : false},
+			{id : '11', text : 'Tech & Science', picture : 'public/img/tech_interest.png', checked : false}
 	]
 	$scope.checked_amount = 0;
 	$scope.check_interests = function(){

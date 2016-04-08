@@ -53,6 +53,13 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 		})
 	}
 
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		contestsFactory.grabCompanies().success(function(response){
+			$scope.companies = response.data.companies;
+		});
+	}	
+
 	$scope.to_account = function(){
 		$scope.with_email = false;
 		$scope.have_account = true;

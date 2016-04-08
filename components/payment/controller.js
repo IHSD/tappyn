@@ -23,6 +23,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 						address_line1 : account.legal_entity.address.line1,
 						address_line2 : account.legal_entity.address.line2};
 					$scope.showing = 'methods';
+					console.log(account);
 				}
 				$scope.account = response.data.account;
 			}
