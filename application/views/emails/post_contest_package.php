@@ -16,19 +16,19 @@
 <p style='text-align:left;margin:auto;width:600px'><strong><u>Details</u></strong></p>
 <p style='text-align:left;margin:auto;width:600px'><strong>Medium: </strong><?php echo ucfirst($contest->platform); ?></p>
 <p style='text-align:left;margin:auto;width:600px'><strong>Objecive: </strong><?php echo snake_to_string($contest->objective); ?></p>
-<p style='text-align:left;margin:auto;width:600px'><strong>Target Audience: </strong><?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year old<?php echo $contest->gender == 0 ? 's' : ($contest->gender == 1 ? 'Males' : 'Females'); ?> who like '<?php echo parse_interest($contest->industry); ?>'</p>
+<p style='text-align:left;margin:auto;width:600px'><strong>Target Audience: </strong><?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year old<?php echo $contest->gender == 0 ? 's' : ($contest->gender == 1 ? ' Males' : ' Females'); ?> who like '<?php echo parse_interest($contest->industry); ?>'</p>
 <br>
 <p style='text-align:left;margin:auto;width:600px'><strong><u>Ad Creative</u></strong></p>
-<?php if(!is_null($submission->headline)): ?>
+<?php if(!is_null($submission->headline) && $submission->headline != ''): ?>
     <p style='text-align:left;margin:auto;width:600px'><u><strong>Headline :</strong></u> <?php echo $submission->headline; ?>
 <?php endif; ?>
-<?php if(!is_null($submission->text)): ?>
+<?php if(!is_null($submission->text) && $submission->text != ''): ?>
     <p style='text-align:left;margin:auto;width:600px'><u><strong>Text :</strong></u> <?php echo $submission->text; ?>
 <?php endif; ?>
-<?php if(!is_null($submission->description)): ?>
+<?php if(!is_null($submission->description) && $submission->description != ''): ?>
     <p style='text-align:left;margin:auto;width:600px'><u><strong>Description :</strong></u> <?php echo $submission->description; ?>
 <?php endif; ?>
-<?php if(!is_null($submission->link_explanation)): ?>
+<?php if(!is_null($submission->link_explanation) && $submission->link_explanation != ''): ?>
     <p style='text-align:left;margin:auto;width:600px'><u><strong>Link Explanation :</strong></u> <?php echo $submission->link_explanation; ?>
 <?php endif; ?>
 <br>

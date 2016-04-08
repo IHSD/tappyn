@@ -19,7 +19,7 @@ class Admin extends CI_Controller
     public function test_post_contest_package($contest_id, $email = 'rob')
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $contest_id)->get()->row();
-        $company_name = 'Random Company Name';
+        $company = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
         $submission = $this->db->select('*')->from('payouts')->join('submissions', 'payouts.submission_id = submissions.id', 'left')->where('payouts.contest_id', $contest->id)->get()->row();
         var_dump($this->mailer->to($email.'@ihsdigital.com')
                      ->from('squad@tappyn.com')
