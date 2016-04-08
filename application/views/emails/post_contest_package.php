@@ -11,28 +11,28 @@
 <br>
 
 <p style='text-align:left;margin:auto;width:600px'>Thanks for using Tappyn and congrats on picking an amazing ad!</p><br>
-<p style='text-align:left;margin:auto;width:600px'>Youre audience is going to love it.</p><br>
+<p style='text-align:left;margin:auto;width:600px'>Youre audience is going to love it.</p><br><br>
 
-<p style='text-align:left;margin:auto;width:600px'><strong><u>Details</u></strong></p>
-<p style='text-align:left;margin:auto;width:600px'><strong>Medium: </strong><?php echo ucfirst($contest->platform); ?></p>
-<p style='text-align:left;margin:auto;width:600px'><strong>Objecive: </strong><?php echo snake_to_string($contest->objective); ?></p>
+<p style='text-align:left;margin:auto;width:600px'><strong><u>Details</u></strong></p><br>
+<p style='text-align:left;margin:auto;width:600px'><strong>Medium: </strong><?php echo ucfirst($contest->platform); ?></p><br>
+<p style='text-align:left;margin:auto;width:600px'><strong>Objecive: </strong><?php echo snake_to_string($contest->objective); ?></p><br>
 <p style='text-align:left;margin:auto;width:600px'><strong>Target Audience: </strong><?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year old<?php echo $contest->gender == 0 ? 's' : ($contest->gender == 1 ? ' Males' : ' Females'); ?> who like '<?php echo parse_interest($contest->industry); ?>'</p>
-<br>
+<br><br>
 <p style='text-align:left;margin:auto;width:600px'><strong><u>Ad Creative</u></strong></p>
 <?php if(!is_null($submission->headline) && $submission->headline != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Headline :</strong></u> <?php echo $submission->headline; ?>
+    <p style='text-align:left;margin:auto;width:600px'><u><strong>Headline :</strong></u> <?php echo $submission->headline; ?></p><br>
 <?php endif; ?>
 <?php if(!is_null($submission->text) && $submission->text != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Text :</strong></u> <?php echo $submission->text; ?>
+    <p style='text-align:left;margin:auto;width:600px'><u><strong>Text :</strong></u> <?php echo $submission->text; ?></p><br>
 <?php endif; ?>
 <?php if(!is_null($submission->description) && $submission->description != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Description :</strong></u> <?php echo $submission->description; ?>
+    <p style='text-align:left;margin:auto;width:600px'><u><strong>Description :</strong></u> <?php echo $submission->description; ?></p><br>
 <?php endif; ?>
 <?php if(!is_null($submission->link_explanation) && $submission->link_explanation != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Link Explanation :</strong></u> <?php echo $submission->link_explanation; ?>
+    <p style='text-align:left;margin:auto;width:600px'><u><strong>Link Explanation :</strong></u> <?php echo $submission->link_explanation; ?></p><br>
 <?php endif; ?>
 <br>
-
+<br>
 <!-- Begin footer -->
 <p style='margin:auto;width:600px;'>
     We hope to see you again soon!
