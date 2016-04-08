@@ -25,7 +25,7 @@ class Admin extends CI_Controller
                      ->from('squad@tappyn.com')
                      ->subject('Your Tappyn Ad')
                      ->html($this->load->view('emails/post_contest_package', array(
-                         'cname' => $company_name,
+                         'cname' => $company->name,
                          'contest' => $contest,
                          'submission' => $submission
                      ), TRUE))
