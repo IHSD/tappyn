@@ -468,6 +468,20 @@
 							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
 						</label>
 					</div>
+					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "pets", "btn-outliner" : contest.industry != "pets"}'>
+							<input type='radio' ng-model='contest.industry' value='pets'> Pets
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "sports_outdoors", "btn-outliner" : contest.industry != "sports_outdoors"}'>
+							<input type='radio' ng-model='contest.industry' value="sports_outdoors">Sports & Outdoors 
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "tech_science", "btn-outliner" : contest.industry != "tech_science"}'>
+							<input type='radio' ng-model='contest.industry' value='tech_science'> Science & Tech
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "education", "btn-outliner" : contest.industry != "education"}'>
+							<input type='radio' ng-model='contest.industry' value='education'> Education
+						</label>
+					</div>
 				</form>
 			</div>
 		</div>
