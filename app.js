@@ -741,6 +741,207 @@ tappyn.factory('comproFactory', function($http){
 
 	return fact;
 })
+tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
+	$scope.emotions = emotions;
+	contestFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.submissions = response.data.submissions;
+		if($scope.contest.status == "ended" && $rootScope.user.id != $scope.contest.owner){
+			if(!$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);
+		}
+		if($scope.contest.emotion){
+			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
+		}
+		else $scope.example = false;
+		$scope.form_limit = contestModel.parallel_submission($scope.contest);
+	});
+
+	$scope.view = {brief : true, submissions : false};
+	$scope.view_brief = function(){
+		$scope.view = {brief : true, submissions : false};
+	}
+	$scope.view_submissions = function(){
+		$scope.view = {brief : false, submissions : true};
+	}
+
+	$scope.submit = {headline : '', text: ''};
+	$scope.submit_to = function(id, submission){
+		if($scope.form_limit.headline && submission.headline.length < 1) $scope.set_alert("Headline is required", "error");
+		else if($scope.form_limit.text && submission.text.length < 1) $scope.set_alert("Text is required", "error");
+		else if($scope.form_limit.line_1 && submission.link_explanation.length < 1) $scope.set_alert("Line 1 is required", "error");
+		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
+		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
+		else{
+			if($rootScope.user){
+				contestFactory.submitTo(id, submission).success(function(response){
+					if(response.http_status_code == 200){
+						if(response.success){
+							$scope.set_alert(response.message, "default");	 
+							$scope.update_points(2);
+							ga('send', {
+							hitType: 'event',
+							eventCategory: 'Contest Submission',
+							eventAction: 'submission',
+							eventLabel: 'User Submission'});
+							$route.reload();
+						}
+						else $scope.set_alert(response.message, "default");	 
+					}
+					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+					else $scope.check_code(response.http_status_code);
+				})
+			}
+			else $scope.open_register("contest", encodeURIComponent(JSON.stringify({contest : id, headline : submission.headline, text : submission.text})));
+		}
+	}
+
+	$scope.choose_winner = function(id){
+		contestFactory.chooseWinner($scope.contest.id, id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.upvote = function(submission){
+		if(!$rootScope.user) $scope.open_register("upvote", {contest : $scope.contest.id, submission : submission.id});
+		else {	
+			contestFactory.upvote($scope.contest.id,submission.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");
+						$scope.update_points(1);
+						submission.user_may_vote = false;
+						submission.votes++;
+					}	
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			})
+		}
+	}
+
+	$scope.share = function(submission){
+		FB.ui({
+  			method: 'share',
+		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
+		}, function(response){
+			
+		});
+	}
+
+	$scope.show_tips = function(){
+		$scope.tips = true;
+	}
+	$scope.hide_tips = function(){
+		$scope.tips = false;
+	} 
+});
+tappyn.factory('contestFactory', function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/submissions/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.submitTo = function(id, submission){
+		return $http({
+			method : 'POST',
+			url : 'index.php/submissions/create/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			'data' : $.param(submission)
+		});	
+	}
+
+	fact.chooseWinner = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/contests/select_winner/'+contest,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({submission : id})
+		});
+	}
+
+	fact.upvote = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/votes/create',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({contest_id : contest, submission_id : id})
+		});
+	}
+
+	return fact;
+})
+tappyn.service("contestModel", function(){
+	this.sift_images = function(contest, emotions){
+		for(var i = 0; i < emotions.length; i++){
+			if(contest.emotion == emotions[i].type){
+				if(contest.platform == "google"){
+					if(emotions[i].google != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].google};
+					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/google_submish.png'};
+				}
+
+				if(contest.platform == 'facebook'){
+					if(emotions[i].facebook != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].facebook};
+					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/fb_submish.png'};
+				}
+
+				if(contest.platform == 'twitter'){
+					if(emotions[i].twitter != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].twitter};
+					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/Twitter_submish.png'};
+				}
+
+				if(contest.platform == "general" && contest.display_type == "headline"){
+					if(emotions[i].general.headline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.headline};
+					else return null;
+				}
+
+				if(contest.platform == "general" && contest.display_type == "tagline"){
+					if(emotions[i].general.tagline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.tagline};
+					else return null;
+				}
+
+				if(contest.platform == "general" && contest.display_type == "copies") return null;
+			}
+		}
+	}
+	this.parallel_submission = function(contest){
+		var layout = {};
+		if(contest.platform == "facebook"){
+			layout.text = {limit : 250, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
+			if(contest.objective != 'engagement') layout.headline = {limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+		}
+		else if(contest.platform == "twitter"){
+			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'Insert Tweet. No such thing as dull products only dull writers. '};
+			else layout.text = {limit : 140, placeholder : 'Insert Tweet. No such thing as dull products only dull writers. '};
+			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'}
+		}
+		else if(contest.platform == "google"){
+			layout.headline = {limit : 25, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+			layout.line_1 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
+			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
+		}
+		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+		return layout;
+	}
+})
 tappyn.controller('contestsController', function($scope, $rootScope, contestsFactory){
 	if(!$rootScope.user){
 		$scope.tab = "all";
@@ -1125,229 +1326,6 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $location, emotions, contestFactory, contestModel){
-	$scope.emotions = emotions;
-	contestFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.submissions = response.data.submissions;
-		if($scope.contest.status == "ended" && $rootScope.user.id != $scope.contest.owner){
-			if(!$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);
-		}
-		if($scope.contest.emotion){
-			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
-		}
-		else $scope.example = false;
-		$scope.form_limit = contestModel.parallel_submission($scope.contest);
-	});
-
-	$scope.view = {brief : true, submissions : false};
-	$scope.view_brief = function(){
-		$scope.view = {brief : true, submissions : false};
-	}
-	$scope.view_submissions = function(){
-		$scope.view = {brief : false, submissions : true};
-	}
-
-	$scope.submit = {headline : '', text: ''};
-	$scope.submit_to = function(id, submission){
-		if($scope.form_limit.headline && submission.headline.length < 1) $scope.set_alert("Headline is required", "error");
-		else if($scope.form_limit.text && submission.text.length < 1) $scope.set_alert("Text is required", "error");
-		else if($scope.form_limit.line_1 && submission.link_explanation.length < 1) $scope.set_alert("Line 1 is required", "error");
-		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
-		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
-		else{
-			if($rootScope.user){
-				contestFactory.submitTo(id, submission).success(function(response){
-					if(response.http_status_code == 200){
-						if(response.success){
-							$scope.set_alert(response.message, "default");	 
-							$scope.update_points(2);
-							ga('send', {
-							hitType: 'event',
-							eventCategory: 'Contest Submission',
-							eventAction: 'submission',
-							eventLabel: 'User Submission'});
-							$route.reload();
-						}
-						else $scope.set_alert(response.message, "default");	 
-					}
-					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-					else $scope.check_code(response.http_status_code);
-				})
-			}
-			else $scope.open_register("contest", encodeURIComponent(JSON.stringify({contest : id, headline : submission.headline, text : submission.text})));
-		}
-	}
-
-	$scope.choose_winner = function(id){
-		contestFactory.chooseWinner($scope.contest.id, id).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.upvote = function(submission){
-		if(!$rootScope.user) $scope.open_register("upvote", {contest : $scope.contest.id, submission : submission.id});
-		else {	
-			contestFactory.upvote($scope.contest.id,submission.id).success(function(response){
-				if(response.http_status_code == 200){
-					if(response.success){
-						$scope.set_alert(response.message, "default");
-						$scope.update_points(1);
-						submission.user_may_vote = false;
-						submission.votes++;
-					}	
-					else $scope.set_alert(response.message, "default");	 
-				}
-				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-				else $scope.check_code(response.http_status_code);
-			})
-		}
-	}
-
-	$scope.share = function(submission){
-		FB.ui({
-  			method: 'share',
-		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
-		}, function(response){
-			
-		});
-	}
-
-	$scope.show_tips = function(){
-		$scope.tips = true;
-	}
-	$scope.hide_tips = function(){
-		$scope.tips = false;
-	} 
-});
-tappyn.factory('contestFactory', function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/submissions/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.submitTo = function(id, submission){
-		return $http({
-			method : 'POST',
-			url : 'index.php/submissions/create/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param(submission)
-		});	
-	}
-
-	fact.chooseWinner = function(contest, id){
-		return $http({
-			method : 'POST',
-			url : 'index.php/contests/select_winner/'+contest,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({submission : id})
-		});
-	}
-
-	fact.upvote = function(contest, id){
-		return $http({
-			method : 'POST',
-			url : 'index.php/votes/create',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({contest_id : contest, submission_id : id})
-		});
-	}
-
-	return fact;
-})
-tappyn.service("contestModel", function(){
-	this.sift_images = function(contest, emotions){
-		for(var i = 0; i < emotions.length; i++){
-			if(contest.emotion == emotions[i].type){
-				if(contest.platform == "google"){
-					if(emotions[i].google != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].google};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/google_submish.png'};
-				}
-
-				if(contest.platform == 'facebook'){
-					if(emotions[i].facebook != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].facebook};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/fb_submish.png'};
-				}
-
-				if(contest.platform == 'twitter'){
-					if(emotions[i].twitter != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].twitter};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/Twitter_submish.png'};
-				}
-
-				if(contest.platform == "general" && contest.display_type == "headline"){
-					if(emotions[i].general.headline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.headline};
-					else return null;
-				}
-
-				if(contest.platform == "general" && contest.display_type == "tagline"){
-					if(emotions[i].general.tagline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.tagline};
-					else return null;
-				}
-
-				if(contest.platform == "general" && contest.display_type == "copies") return null;
-			}
-		}
-	}
-	this.parallel_submission = function(contest){
-		var layout = {};
-		if(contest.platform == "facebook"){
-			layout.text = {limit : 250, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
-			if(contest.objective != 'engagement') layout.headline = {limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
-		}
-		else if(contest.platform == "twitter"){
-			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'Insert Tweet. No such thing as dull products only dull writers. '};
-			else layout.text = {limit : 140, placeholder : 'Insert Tweet. No such thing as dull products only dull writers. '};
-			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'}
-		}
-		else if(contest.platform == "google"){
-			layout.headline = {limit : 25, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
-			layout.line_1 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
-			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
-		}
-		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
-		return layout;
-	}
-})
-tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
-	endedFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.winner = response.data.winner;
-		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
-	})
-})
-tappyn.factory("endedFactory", function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/winner/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	return fact;
-})
 tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	$scope.logged_in();
 	if($routeParams.id){
@@ -1426,6 +1404,28 @@ tappyn.factory("editFactory", function($http){
 			},
 			data : $.param(contest)
 		});
+	}
+
+	return fact;
+})
+tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
+	endedFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.winner = response.data.winner;
+		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
+	})
+})
+tappyn.factory("endedFactory", function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/winner/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
 	}
 
 	return fact;
@@ -1919,6 +1919,191 @@ tappyn.service('launchModel', function(){
 		return layout;
 	}
 })
+tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
+	$scope.logged_in();
+	$scope.amazon_connect('tappyn');
+	$scope.states = profileModel.states;
+
+	$scope.select_file = function($files){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var new_name = Date.now();
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	$scope.profile.logo_url = url+new_name;
+	    });
+	}
+	//grab that funky fresh profile on load
+	profileFactory.grabProfile().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success) $scope.profile = response.data.profile;	
+			else $scope.set_alert(response.message, "default");	 
+		}
+		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+		else $scope.check_code(response.http_status_code);
+	})
+
+	$scope.update_profile = function(profile){
+		profileFactory.updateProfile(profile).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$rootScope.user.first_name = $scope.profile.first_name;
+					$rootScope.user.last_name = $scope.profile.last_name;
+					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
+				}	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.change_pass = function(pass){
+		profileFactory.updatePass(pass).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.resend = function(){
+		profileFactory.resendVerification().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);	
+		})
+	}	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.updateProfile = function(profile){
+		return $http({
+			method : 'POST',
+			url : 'index.php/users/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(profile)
+		});
+	}
+
+	fact.updatePass = function(pass){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/change_password',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(pass)
+		});
+	}
+
+	fact.resendVerification = function(){
+		return $http({
+			method : 'POST',
+			url : 'index.php/auth/resend_verification',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+	return fact;
+})
+tappyn.service("profileModel", function(){
+this.states = 
+{
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AS": "American Samoa",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "DC": "District Of Columbia",
+    "FM": "Federated States Of Micronesia",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "GU": "Guam",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MH": "Marshall Islands",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "MP": "Northern Mariana Islands",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PW": "Palau",
+    "PA": "Pennsylvania",
+    "PR": "Puerto Rico",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VI": "Virgin Islands",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming"
+}
+
+});
 tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
 	$scope.logged_in();
 	$scope.countries = paymentModel.countries;
@@ -2111,50 +2296,33 @@ tappyn.service('paymentModel', function(){
         'US' : 'United States'
 	};
 })
-tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
+tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
 	$scope.logged_in();
-	$scope.amazon_connect('tappyn');
-	$scope.states = profileModel.states;
-
-	$scope.select_file = function($files){
-	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
-	    var new_name = Date.now();
-	    $upload.upload({
-	        url: url,
-	        method: 'POST',
-	        data : {
-	            key: new_name,
-	            acl: 'public-read',
-	            "Content-Type": file.type === null || file.type === '' ?
-	            'application/octet-stream' : file.type,
-	            AWSAccessKeyId: $rootScope.key.key,
-	            policy: $rootScope.key.policy,
-	            signature: $rootScope.key.signature
-	        },
-	        file: file,
-	    }).success(function (){
-	       	$scope.profile.logo_url = url+new_name;
-	    });
-	}
-	//grab that funky fresh profile on load
-	profileFactory.grabProfile().success(function(response){
+	
+	resetFactory.checkCode($routeParams.code).success(function(response){
 		if(response.http_status_code == 200){
-			if(response.success) $scope.profile = response.data.profile;	
-			else $scope.set_alert(response.message, "default");	 
+			if(response.success){
+				$scope.set_alert("Verified, please change your password", "default");
+				$scope.code = $routeParams.code;
+				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
+			}
+			else{
+				$scope.set_alert("Unauthorized", "error");
+				$location.path('/login');
+			}
 		}
-		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-		else $scope.check_code(response.http_status_code);
-	})
+		else{
+			$scope.set_alert("Unauthorized", "error");
+			$location.path('/login');
+		}
+	});
 
-	$scope.update_profile = function(profile){
-		profileFactory.updateProfile(profile).success(function(response){
+	$scope.change_pass = function(pass){
+		resetFactory.changePass(pass, $scope.code).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.set_alert(response.message, "default");
-					$rootScope.user.first_name = $scope.profile.first_name;
-					$rootScope.user.last_name = $scope.profile.last_name;
-					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
+					$location.path('/login')
 				}	
 				else $scope.set_alert(response.message, "default");	 
 			}
@@ -2162,140 +2330,33 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 			else $scope.check_code(response.http_status_code);
 		})
 	}
-
-	$scope.change_pass = function(pass){
-		profileFactory.updatePass(pass).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.resend = function(){
-		profileFactory.resendVerification().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);	
-		})
-	}	
-});
-tappyn.factory('profileFactory', function($http){
+})
+tappyn.factory("resetFactory", function($http){
 	var fact = {};
 
-	fact.grabProfile = function(){
+	fact.checkCode = function(code){
 		return $http({
 			method : 'GET',
-			url : 'index.php/users/profile',
+			url : 'index.php/auth/reset_password/'+code,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
-		});
+		})
 	}
 
-	fact.updateProfile = function(profile){
+	fact.changePass = function(pass, code){
 		return $http({
 			method : 'POST',
-			url : 'index.php/users/profile',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(profile)
-		});
-	}
-
-	fact.updatePass = function(pass){
-		return $http({
-			method : 'POST',
-			url : 'index.php/auth/change_password',
+			url : 'index.php/auth/reset_password/'+code,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			data : $.param(pass)
-		});
+		})
 	}
 
-	fact.resendVerification = function(){
-		return $http({
-			method : 'POST',
-			url : 'index.php/auth/resend_verification',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
 	return fact;
 })
-tappyn.service("profileModel", function(){
-this.states = 
-{
-    "AL": "Alabama",
-    "AK": "Alaska",
-    "AS": "American Samoa",
-    "AZ": "Arizona",
-    "AR": "Arkansas",
-    "CA": "California",
-    "CO": "Colorado",
-    "CT": "Connecticut",
-    "DE": "Delaware",
-    "DC": "District Of Columbia",
-    "FM": "Federated States Of Micronesia",
-    "FL": "Florida",
-    "GA": "Georgia",
-    "GU": "Guam",
-    "HI": "Hawaii",
-    "ID": "Idaho",
-    "IL": "Illinois",
-    "IN": "Indiana",
-    "IA": "Iowa",
-    "KS": "Kansas",
-    "KY": "Kentucky",
-    "LA": "Louisiana",
-    "ME": "Maine",
-    "MH": "Marshall Islands",
-    "MD": "Maryland",
-    "MA": "Massachusetts",
-    "MI": "Michigan",
-    "MN": "Minnesota",
-    "MS": "Mississippi",
-    "MO": "Missouri",
-    "MT": "Montana",
-    "NE": "Nebraska",
-    "NV": "Nevada",
-    "NH": "New Hampshire",
-    "NJ": "New Jersey",
-    "NM": "New Mexico",
-    "NY": "New York",
-    "NC": "North Carolina",
-    "ND": "North Dakota",
-    "MP": "Northern Mariana Islands",
-    "OH": "Ohio",
-    "OK": "Oklahoma",
-    "OR": "Oregon",
-    "PW": "Palau",
-    "PA": "Pennsylvania",
-    "PR": "Puerto Rico",
-    "RI": "Rhode Island",
-    "SC": "South Carolina",
-    "SD": "South Dakota",
-    "TN": "Tennessee",
-    "TX": "Texas",
-    "UT": "Utah",
-    "VT": "Vermont",
-    "VI": "Virgin Islands",
-    "VA": "Virginia",
-    "WA": "Washington",
-    "WV": "West Virginia",
-    "WI": "Wisconsin",
-    "WY": "Wyoming"
-}
-
-});
 tappyn.controller("submissionsController", function($scope, $rootScope, $routeParams, contestFactory, submissionsFactory, AppFact){
 	submissionsFactory.grabSubmissions($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -2368,67 +2429,6 @@ tappyn.factory("submissionsFactory", function($http){
 		});
 	}
 	return fact; 
-})
-tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
-	$scope.logged_in();
-	
-	resetFactory.checkCode($routeParams.code).success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success){
-				$scope.set_alert("Verified, please change your password", "default");
-				$scope.code = $routeParams.code;
-				$scope.pass = {csrf : response.data.csrf, user_id : response.data.user_id, new : '', new_confirm : ''}
-			}
-			else{
-				$scope.set_alert("Unauthorized", "error");
-				$location.path('/login');
-			}
-		}
-		else{
-			$scope.set_alert("Unauthorized", "error");
-			$location.path('/login');
-		}
-	});
-
-	$scope.change_pass = function(pass){
-		resetFactory.changePass(pass, $scope.code).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");
-					$location.path('/login')
-				}	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-})
-tappyn.factory("resetFactory", function($http){
-	var fact = {};
-
-	fact.checkCode = function(code){
-		return $http({
-			method : 'GET',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	fact.changePass = function(pass, code){
-		return $http({
-			method : 'POST',
-			url : 'index.php/auth/reset_password/'+code,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(pass)
-		})
-	}
-
-	return fact;
 })
 tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
 	
