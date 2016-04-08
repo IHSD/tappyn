@@ -1,6 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
-
+<?php $obj = parse_objective($contest->platform, $contest->objective); ?>
 <!-- Start Template -->
 <br>
 <p style='width:100%;text-align:center'>
@@ -11,26 +11,15 @@
 <br>
 
 <p style='text-align:left;margin:auto;width:600px'>Thanks for using Tappyn and congrats on picking an amazing ad!</p><br>
-<p style='text-align:left;margin:auto;width:600px'>Youre audience is going to love it.</p><br><br>
+<p style='text-align:left;margin:auto;width:600px'>Your audience is going to love it.</p><br><br>
 
 <p style='text-align:left;margin:auto;width:600px'><strong><u>Details</u></strong></p><br>
 <p style='text-align:left;margin:auto;width:600px'><strong>Medium: </strong><?php echo ucfirst($contest->platform); ?></p><br>
-<p style='text-align:left;margin:auto;width:600px'><strong>Objecive: </strong><?php echo snake_to_string($contest->objective); ?></p><br>
+<p style='text-align:left;margin:auto;width:600px'><strong>Objective: </strong><?php echo $obj; ?></p><br>
 <p style='text-align:left;margin:auto;width:600px'><strong>Target Audience: </strong><?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year old<?php echo $contest->gender == 0 ? 's' : ($contest->gender == 1 ? ' Males' : ' Females'); ?> who like '<?php echo parse_interest($contest->industry); ?>'</p>
 <br><br>
-<p style='text-align:left;margin:auto;width:600px'><strong><u>Ad Creative</u></strong></p><br>
-<?php if(!is_null($submission->headline) && $submission->headline != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Headline :</strong></u> <?php echo $submission->headline; ?></p><br>
-<?php endif; ?>
-<?php if(!is_null($submission->text) && $submission->text != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Text :</strong></u> <?php echo $submission->text; ?></p><br>
-<?php endif; ?>
-<?php if(!is_null($submission->description) && $submission->description != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Description :</strong></u> <?php echo $submission->description; ?></p><br>
-<?php endif; ?>
-<?php if(!is_null($submission->link_explanation) && $submission->link_explanation != ''): ?>
-    <p style='text-align:left;margin:auto;width:600px'><u><strong>Link Explanation :</strong></u> <?php echo $submission->link_explanation; ?></p><br>
-<?php endif; ?>
+<?php $this->load->view('emails/templates/'.$contest->platform.'.php', array('submission' => $submission, 'contest' => $contest)); ?>
+
 <br>
 <br>
 <!-- Test -->
@@ -91,4 +80,34 @@ function parse_interest($interest)
             break;
         default: return $interest;
     }
+}
+
+function parse_objective($platform,$objective)
+{
+    if($platform == 'facebook')
+    {
+        if($objective == 'clicks_to_website') return 'Send People To Your Website';
+        if($objective == 'conversions') return 'Increase Conversions On Your Website';
+        if($objective == 'engagement') return 'Boost Your Posts';
+    }
+    else if($platform == 'google')
+    {
+        if($objective == 'awareness') return 'Build Awareness';
+        if($objective == 'consideration') return 'Influence Consideration';
+        if($objective == 'drive_action') return 'Drive Action';
+        if($objective == 'search_presence') return 'Increase Search Presence';
+    }
+    else if($platform == 'twitter')
+    {
+        if($objective == 'site_clicks_conversions') return 'Website Clicks or Conversions';
+        if($objective == 'followers') return 'Gain Followers';
+        if($objective == 'engagement') return 'Tweet Engagements';
+    }
+    else if($platform == 'general')
+    {
+        if($objective == 'brand_positioning') return 'Brand Positioning';
+        if($objective == 'drive_action') return 'Drive Action';
+        if($objective == 'engagement') return 'Increase Engagement';
+    }
+    return snake_to_string($objective);
 }

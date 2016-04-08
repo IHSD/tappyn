@@ -408,6 +408,17 @@ class Contests extends CI_Controller
                 ->subject("Congratulations, you're submission won!")
                 ->html($this->load->view('emails/submission_chosen', array('company' => $company_name, 'eid' => $eid), TRUE))
                 ->send();
+
+            // Send our company the post contest package
+            $this->mailer->to($this->ion_auth->user()->row()->email)
+                         ->from('squad@tappyn.com')
+                         ->subject('Your Tappyn Ad')
+                         ->html($this->load->view('emails/post_contest_package', array(
+                             'cname' => $company_name,
+                             'contest' => $contest,
+                             'submission' => $submission
+                         ), TRUE))
+                         ->send();
             $this->analytics->track(array(
                 'event_name' => "winner_selected",
                 'object_type' => "contest",
