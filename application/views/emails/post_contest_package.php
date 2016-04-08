@@ -18,7 +18,7 @@
 <p style='text-align:left;margin:auto;width:600px'><strong>Objecive: </strong><?php echo snake_to_string($contest->objective); ?></p><br>
 <p style='text-align:left;margin:auto;width:600px'><strong>Target Audience: </strong><?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year old<?php echo $contest->gender == 0 ? 's' : ($contest->gender == 1 ? ' Males' : ' Females'); ?> who like '<?php echo parse_interest($contest->industry); ?>'</p>
 <br><br>
-<p style='text-align:left;margin:auto;width:600px'><strong><u>Ad Creative</u></strong></p>
+<p style='text-align:left;margin:auto;width:600px'><strong><u>Ad Creative</u></strong></p><br>
 <?php if(!is_null($submission->headline) && $submission->headline != ''): ?>
     <p style='text-align:left;margin:auto;width:600px'><u><strong>Headline :</strong></u> <?php echo $submission->headline; ?></p><br>
 <?php endif; ?>
