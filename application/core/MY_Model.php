@@ -14,10 +14,12 @@ class MY_Model extends CI_Model
   public $group_by = array();
   public $joins = array();
   public $where_not_in = array();
+  public $_data;
 
   public function __construct()
   {
     parent::__construct();
+    $this->_data = new StdClass();
   }
 
   public function where($where, $value = NULL)

@@ -9,9 +9,16 @@ class Test extends MY_Controller
         $this->interest->setDatabase($this->db);
     }
 
+    public function testarooni($id)
+    {
+        $this->load->model('contest');
+        $this->contest->get($id);
+        var_dump($this->contest->_data);
+    }
+
     public function index()
     {
-        
+
     }
 
     // public function fetch()

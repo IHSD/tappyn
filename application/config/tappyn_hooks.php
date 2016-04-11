@@ -15,19 +15,27 @@
  */
 $config['hooks'] = array();
 
-$config['hooks']['test'] = array();
-$config['hooks']['test'][] = [
-    'event' => 'hook_initialize',
-    'name' => 'test_it',
-    'class' => 'test_library',
-    'method' => 'greet',
-    'args' => array('testarino')
-];
+/**
+ * Authentication hooks
+ */
 $config['hooks']['auth'] = array();
 $config['hooks']['auth'][] = [
     'event' => 'user_registration',
     'name' => 'send_user_verification_email',
     'class' => 'mailer',
-    'method' => 'queue',
-    'args' => array()
+    'method' => 'queueWithArray',
+    'args' => array(
+        'type' => 'sign_up_conf',
+        'object' => 'user'
+    )
+];
+$config['hooks']['auth'][] = [
+    'event' => 'company_registration',
+    'name' => 'send_company_welcome_email',
+    'class' => 'mailer',
+    'method' => 'queueWithArray',
+    'args' => array(
+        'type' => 'company_sign_up_conf',
+        'object' => 'user',
+    )
 ];
