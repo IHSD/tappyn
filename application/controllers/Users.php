@@ -186,7 +186,6 @@ class Users extends CI_Controller
         $upvotes = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
         $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
         $won = count($payouts);
-        error_log(json_encode($payouts));
         $this->responder->data(array(
             'submissions' => $submissions,
             'upvotes' => $upvotes,
@@ -204,14 +203,5 @@ class Users extends CI_Controller
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
         }
         $this->responder->data(array('submissions' => $subs))->respond();
-    }
-
-    /**
-     * Fetch all of a users interests
-     * @return void
-     */
-    public function interests()
-    {
-
     }
 }
