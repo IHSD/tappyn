@@ -83,6 +83,18 @@ class Mailer
         ));
     }
 
+    public function queueWithArray($data)
+    {
+        return $this->db->insert('mailing_queue', array(
+            'queued_at' => time(),
+            'recipient' => $data['email'],
+            'recipient_id' => $data['uid'],
+            'email_type' => $data['type'],
+            'object_type' => $data['object'],
+            'object_id'  => $data['object_id']
+        ));
+    }
+
     public function errors()
     {
         return $this->errors;

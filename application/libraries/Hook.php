@@ -109,7 +109,7 @@ class Hook
      * @param  string $event
      * @param  string $name
      * @param  array  $args
-     * @return void        
+     * @return void
      */
     public static function call_hook($event, $name, $args = array())
 	{
@@ -119,7 +119,7 @@ class Hook
             $arguments = $hook->arguments;
             if(!empty($args))
             {
-                foreach($args as $key = $value)
+                foreach($args as $key => $value)
                 {
                     $arguments[$key] = $value;
                 }
