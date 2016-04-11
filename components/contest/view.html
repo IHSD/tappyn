@@ -62,10 +62,17 @@
 			    		</div>
 			        </div>
 			    </div>
-		        <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
-		            <a ng-if='contest.company.company_url' href='{{contest.company.company_url}}' class='btn btn-outliner'  target='_blank'>View Website</a>
-		    	    <a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url}}' class='btn btn-outliner'  target='_blank'>View Facebook</a>
-		       	</div>
+			    <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
+					<div class='btn-group'>
+						<a ng-if='contest.company.company_url' href='{{contest.company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+						<a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+							<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+						</a>
+						<a ng-if='contest.company.twitter_handle' href='https://twitter.com/{{contest.company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+							<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+						</a>
+					</div>
+				</div>
 		    </div>
 		</div>
 	</div>
