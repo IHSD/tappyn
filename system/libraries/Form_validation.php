@@ -142,7 +142,6 @@ class CI_Form_validation {
 
 		// Validation rules can be stored in a config file.
 		$this->_config_rules = $rules;
-
 		// Automatically load the form helper
 		$this->CI->load->helper('form');
 
@@ -630,7 +629,6 @@ class CI_Form_validation {
 					break;
 				}
 			}
-
 			if ( ! $callback)
 			{
 				return;
@@ -1135,6 +1133,38 @@ class CI_Form_validation {
 		return isset($this->CI->db)
 			? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 0)
 			: FALSE;
+	}
+
+	//---------------------------------------------------------------------
+
+	/**
+	 * Check if the object exists in its table
+	 * @param  string $str
+	 * @param  string $field
+	 * @return bool
+	 */
+	public function exists($str, $field)
+	{
+		sscanf($field, '%[^.].%[^.]', $table, $field);
+		$check = isset($this->CI->db)
+			? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->num_rows() === 1)
+			: FALSE;
+	    return $check;
+	}
+
+	//---------------------------------------------------------------------
+
+	/**
+	 * Check that the owner of the object is the logged in user
+	 * @return boolean
+	 */
+	public function owns($str, $field)
+	{
+        sscanf($field, '%[^.].%[^.]', $table, $field);
+		$check = (isset($this->CI->db) && $this->CI->ion_auth->logged_in())
+			? ($this->CI->db->limit(1)->get_where($table, array($field => $str))->row()->id == $this->CI->ion_auth->user()->row()->id)
+			: FALSE;
+		return $check;
 	}
 
 	// --------------------------------------------------------------------

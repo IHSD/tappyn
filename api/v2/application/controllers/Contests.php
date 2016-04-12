@@ -34,24 +34,35 @@ class Contests extends MY_Controller
         {
             $this->response->fail("That contest does not exist")->code(404);
         } else {
-            $contest->submissions = Submission::find(array(SubmissionFields::CONTEST_ID => $contest->id));
-            $contest->votes = Vote::find(array(VoteFields::CONTEST_ID => $contest->id));
-            foreach($contest->submissions as $submission)
-            {
-                $submission->votes = Vote::find(array(VoteFields::SUBMISSION_ID => $submission->id));
-                //$submission->user_has_voted = Vote::hasUserVoted(array('submission_id' => $submission->id, 'user_id'));
-            }
+
+            // Get some contest metadata
+            $contest->votes = Vote::count(array(VoteFields::CONTEST_ID => $contest->id));
             $contest->impressions = Impression::count(array(ImpressionFields::CONTEST_ID => $contest->id));
 
+            // Pull in and sort all of our submissions
+            $submissions = Submission::find(array(SubmissionFields::CONTEST_ID => $contest->id));
+            foreach($submissions as $submission)
+            {
+                $submission->votes = Vote::count(array(VoteFields::SUBMISSION_ID => $submission->id));
+                if($this->user) $submission->user_has_voted = Vote::find(array(VoteFields::SUBMISSION_ID => $submission->id, VoteFields::USER_ID => $this->user->id));
+
+            }
+            $contest->submissions = $this->sort($submissions);
+
+            // Respond with our contest
             $this->response->data(array(
                 'contest' => $contest
             ));
+
+            Hook::trigger('viewed_contest', array('contest_id' => $contest, 'user' => $this->user));
         }
         $this->response->respond();
     }
 
     public function create()
     {
+        Hook::trigger('contest_creation_started');
+
         if($this->form_validation->run('contest:create') === TRUE)
         {
             $contest = new Contest();
@@ -63,6 +74,8 @@ class Contests extends MY_Controller
                 $this->response->fail($e->getMessage())->code(500)->respond();
                 return;
             }
+
+            Hook::trigger('contest_created', array('object' => 'contest', 'id' => $cid));
             redirect('contests/'.$cid, 'refresh');
         }
         else
@@ -81,5 +94,10 @@ class Contests extends MY_Controller
     public function delete()
     {
 
+    }
+
+    function sort($submissions)
+    {
+        return $submissions;
     }
 }

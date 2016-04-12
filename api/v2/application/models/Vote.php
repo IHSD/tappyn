@@ -25,13 +25,18 @@ class Vote extends MY_Model
 
     static function find($params)
     {
-        $votes = self::$db->select('*')->from(self::$table)->where($params)->get()->result('Vote');
-        return $votes;
+        $votes = self::$db->select('*')->from(self::$table)->where($params)->get();
+        if($votes->num_rows() == 0)
+        {
+            return FALSE;
+        }
+        return $votes->result('Vote');
+
     }
 
     static function count($params)
     {
         $count = self::$db->select('COUNT(*) as count')->from(self::$table)->where($params)->get()->row()->count;
-        return $count;
+        return (int) $count;
     }
 }
