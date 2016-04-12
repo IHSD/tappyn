@@ -37,6 +37,7 @@ class Companies extends CI_Controller
             'paid' => 1,
             'owner' => $cid
         ))->get()->result();
+
         $contests['completed_contests'] = $this->db->select('*')->from('contests')->where(array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time <' => date('Y-m-d H:i:s'),
@@ -44,7 +45,12 @@ class Companies extends CI_Controller
             'owner' => $cid
         ))->get()->result();
 
-        foreach($contest['completed_contests'] as $contest)
+
+        foreach($contests['active_contests'] as $result)
+        {
+            $result->submission_count = $this->contest->submissionsCount($result->id);
+        }
+        foreach($contests['completed_contests'] as $contest)
         {
             $submission = new StdClass();
             $payout = $this->db->select('*')->from('payouts')->where('contest_id', $contest->id)->limit(1)->get();
@@ -66,7 +72,6 @@ class Companies extends CI_Controller
 
     public function show($cid = 0)
     {
-        $uid = $this->ion_auth->user()->row()->id;
         if(!$this->ion_auth->in_group(3, $cid))
         {
             $this->responder->fail(
@@ -84,18 +89,21 @@ class Companies extends CI_Controller
             return;
         }
 
-        $company->requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+        $company->requests = (int) $this->db->select('COUNT(*) as count')->from('requests')->where(array(
             'company_id' => $cid,
             'fulfilled' => 0
         ))->get()->row()->count;
 
         $company->follows = $this->db->select('COUNT(*) as count')->from('follows')->where('following', $company->id)->get()->row()->count;
 
-        $user_follow = $this->db->select('*')->from('follows')->where(array('follower' => $uid, 'following' => $cid))->get();
-        $company->user_may_follow = TRUE;
-        if($user_follow->num_rows() == 1)
-        {
-            $company->user_may_follow = FALSE;
+        if($this->ion_auth->logged_in()){
+            $uid = $this->ion_auth->user()->row()->id;
+            $user_follow = $this->db->select('*')->from('follows')->where(array('follower' => $uid, 'following' => $cid))->get();
+            $company->user_may_follow = TRUE;
+            if($user_follow->num_rows() == 1)
+            {
+                $company->user_may_follow = FALSE;
+            }
         }
         $this->responder->data(array(
             'company' => $company

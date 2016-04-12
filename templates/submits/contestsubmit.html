@@ -27,4 +27,4 @@
    	<div style='position: absolute;right:0px;bottom: 0;' class="share_logo"  ng-show='submission.hovering' ng-click='share(submission)'>Share</div>
 </div>
 
-<button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
+<div class='col-xs-12 text-center'><button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button></div>

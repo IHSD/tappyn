@@ -11,6 +11,16 @@ tappyn.factory('comproFactory', function($http){
 		});
 	}
 
+	fact.grabContests = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
 	fact.requestContest = function(id){
 		return $http({
 			method : 'POST',
@@ -24,7 +34,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.followCompany = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/user/follow/'+id,
+			url : 'index.php/users/follow/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -34,7 +44,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.unfollowCompany = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/user/unfollow/'+id,
+			url : 'index.php/users/unfollow/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
