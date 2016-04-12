@@ -20,9 +20,21 @@ class Companies extends CI_Controller
 
     public function index($offset = 0)
     {
-        $companies = $this->db->select('*')->from('profiles')->where(
+        $companies = $this->company->select('*')->from('profiles')->where(
             'summary IS NOT NULL', NULL
-        )->limit(25, $offset)->get()->result();
+        )->limit(25, $offset);
+        $followed = $this->input->get('followed');
+        if($followed)
+        {
+            $follows = $this->user->following($this->ion_auth->user()->row()->id);
+            if(empty($follows))
+            {
+                $this->responder->data(array())->respond();
+                return;
+            }
+            $this->company->where_in('id', $follows);
+        }
+        $companies = $this->company->fetch()->result();
         $this->responder->data(array(
             'companies' => $companies
         ))->respond();
