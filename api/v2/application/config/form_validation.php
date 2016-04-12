@@ -40,62 +40,11 @@ $config['contest:create'] = array(
 );
 $config['auth:user_register'] = array(
 
-)
+);
 
 $config['auth:company_register'] = array(
 
-)
-
-$config['stripe:account'] = array(
-    array(
-        'field' => 'first_name',
-        'label' => "First Name",
-        'rules' => 'required'
-    ),
-    array(
-        'field' => 'last_name',
-        'label' => "Last Name",
-        'rules' => 'required'
-    ),
-    array(
-        'field' => 'dob_day',
-        'label' => "DOB - Day",
-        'rules' => 'required'
-    ),
-    array(
-        'field' => 'dob_year',
-        'label' => "DOB - Year",
-        'rules' => 'required',
-    ),
-    array(
-        'field' => "dob_month",
-        'label' => "DOB - Month",
-        'rules' => 'required',
-    ),
-    array(
-        'field' => 'address_line1',
-        'label' => 'Address Line 1',
-        'rules' => 'required',
-    ),
-    array(
-        'field' => 'state',
-        'label' => "State",
-        'rules' => 'required'
-    ),
-    array(
-        'field' => 'postal_code',
-        'label' => "Postal Code",
-        'rules' => 'required',
-    ),
-    array(
-        'field' => 'country',
-        'label' => "Country",
-        'rules' => 'required'
-    )
 );
-
-$config['stripe:']
-
 $config['auth:login'] = array(
     array(
         'field' => 'identity',
@@ -105,6 +54,6 @@ $config['auth:login'] = array(
     array(
         'field' => "password",
         'label' => "Password",
-        'rules' => 'required';
+        'rules' => 'required'
     )
-)
+);

@@ -2,5 +2,8 @@
 
 class ContestPlatforms
 {
-    const
+    const FACEBOOK  = 'facebook';
+    const GOOGLE    = 'google';
+    const GENERAL   = 'general';
+    const TWITTER   = 'twitter';
 }

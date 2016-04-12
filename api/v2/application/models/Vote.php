@@ -1,10 +1,10 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Impression extends MY_Model
+class Vote extends MY_Model
 {
     private static $db;
 
-    private static $table = 'impressions';
+    private static $table = 'votes';
 
     function __construct()
     {
@@ -14,8 +14,8 @@ class Impression extends MY_Model
 
     static function get($id)
     {
-        $impression = self::$db->select('*')->from(self::$table)->where('id', $id)->limit(1)->get()->row(0, 'Impression');
-        return $impression;
+        $vote = self::$db->select('*')->from(self::$table)->where('id', $id)->limit(1)->get()->row(0, 'Vote');
+        return $vote;
     }
 
     static function findByUser($uid)
@@ -25,8 +25,8 @@ class Impression extends MY_Model
 
     static function find($params)
     {
-        $impressions = self::$db->select('*')->from(self::$table)->where($params)->get()->result('Impression');
-        return $impressions;
+        $votes = self::$db->select('*')->from(self::$table)->where($params)->get()->result('Vote');
+        return $votes;
     }
 
     static function count($params)
