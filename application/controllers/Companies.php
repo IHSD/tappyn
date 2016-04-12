@@ -28,8 +28,45 @@ class Companies extends CI_Controller
         ))->respond();
     }
 
+    public function contests($cid)
+    {
+        $contests = array();
+        $contests['active_contests'] = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        $contests['completed_contests'] = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+
+        foreach($contest['completed_contests'] as $contest)
+        {
+            $submission = new StdClass();
+            $payout = $this->db->select('*')->from('payouts')->where('contest_id', $contest->id)->limit(1)->get();
+            if($payout->num_rows() == 1)
+            {
+                $submission = $this->submission->get($payout->row()->submission_id);
+            }
+            $contest->winner = $submission;
+        }
+
+        $contests['pending_contests'] = $this->db->select('*')->from('contests')->where(array(
+            'start_time >' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        $this->responder->data(array('contests' => $contests))->respond();
+    }
+
     public function show($cid = 0)
     {
+        $uid = $this->ion_auth->user()->row()->id;
         if(!$this->ion_auth->in_group(3, $cid))
         {
             $this->responder->fail(
@@ -37,7 +74,6 @@ class Companies extends CI_Controller
             )->code(500)->respond();
             return;
         }
-
         $company = $this->company->get($cid);
         unset($company->stripe_customer_id);
         if(!$company)
@@ -47,29 +83,20 @@ class Companies extends CI_Controller
             )->code(500)->respond();
             return;
         }
-        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->completed_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time >' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->contest_requests = (int)$this->db->select('COUNT(*) as count')->from('requests')->where(array(
-            'company_id' => $company->id,
+
+        $company->requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+            'company_id' => $cid,
             'fulfilled' => 0
         ))->get()->row()->count;
-        $company->follows = (int)$this->db->select('COUNT(*) as count')->from('follows')->where('following', $company->id)->get()->row()->count;
+
+        $company->follows = $this->db->select('COUNT(*) as count')->from('follows')->where('following', $company->id)->get()->row()->count;
+
+        $user_follow = $this->db->select('*')->from('follows')->where(array('follower' => $uid, 'following' => $cid))->get();
+        $company->user_may_follow = TRUE;
+        if($user_follow->num_rows() == 1)
+        {
+            $company->user_may_follow = FALSE;
+        }
         $this->responder->data(array(
             'company' => $company
         ))->respond();
