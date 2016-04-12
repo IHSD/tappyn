@@ -1,17 +1,34 @@
 <div class='row'>
 	<div style='background-color:#fff;width:100%' class='row content-padding'>
-		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left'>
 			<div class='col-xs-12'>
-				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+				<h2 class='text-center'><img ng-if='company.logo_url' style='height:auto;' width='50px' ng-src="{{company.logo_url}}">{{company.name | capitalize}}</h2>
 			</div>
-			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>
-				<h3 class='text-center'>All</h3>
+			<div class='col-xs-12'>
+				<hr style='border:1px solid #555;'>
 			</div>
-			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>
-				<h3 class='text-center'>Need Winner</h3>
+			<div class='col-xs-12 col-sm-4'>
+				<div class='btn-group'>
+					<a ng-if='company.company_url != ""' href='{{company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+					<a ng-if='company.facebook_url != ""' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+						<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+					</a>
+					<a ng-if='company.twitter_handle != ""' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+						<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+					</a>
+				</div>
 			</div>
-			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
-				<h3 class='text-center'>Completed</h3>
+			<div class='col-xs-12 col-sm-4 text-center'>
+				<div class='col-xs-6'>
+					<h4>{{company.active_contests.length + company.completed_contests.length + company.pending_contests.length}}</h4>
+				</div>
+				<div class='col-xs-6'>
+					<h4>{{company.follows}}</h4>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4 text-center'>
+				<button class='btn btn-oj' ng-click='follow()'>Follow</button>
+				<button class='btn btn-outliner' ng-click='unfollow()'>Unfollow</button>
 			</div>
 		</div>
 	</div>

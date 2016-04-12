@@ -2,7 +2,7 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 	if($routeParams.id){
 		comproFactory.grabProfile($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.company = response.data;
+				if(response.success) $scope.company = response.data.company;
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -13,7 +13,10 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 	$scope.follow = function(){
 		comproFactory.followCompany($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.company.follows++;
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -24,7 +27,10 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 	$scope.unfollow = function(){
 		comproFactory.unfollowCompany($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$scope.company.follows--;
+				}	
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -35,7 +41,10 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 	$scope.request_contest = function(){
 		comproFactory.requestContest($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.company.contest_requests++;
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
