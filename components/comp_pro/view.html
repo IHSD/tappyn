@@ -1,17 +1,93 @@
 <div class='row'>
 	<div style='background-color:#fff;width:100%' class='row content-padding'>
-		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left'>
 			<div class='col-xs-12'>
-				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+				<div class='text-center'><img ng-if='company.logo_url' style='height:auto;' width='50px' ng-src="{{company.logo_url}}"></div>
+				<h2 class='text-center'>{{company.name | capitalize}}</h2>
 			</div>
-			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>
-				<h3 class='text-center'>All</h3>
+			<div class='col-xs-12'>
+				<hr style='border:1px solid #555;'>
 			</div>
-			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>
-				<h3 class='text-center'>Need Winner</h3>
+			<div class='col-xs-12 col-sm-4 text-center'>
+				<div class='btn-group'>
+					<a ng-show='company.company_url != ""' href='{{company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+					<a ng-show='company.facebook_url != ""' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+						<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+					</a>
+					<a ng-show='company.twitter_handle != ""' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+						<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+					</a>
+				</div>
 			</div>
-			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
-				<h3 class='text-center'>Completed</h3>
+			<div class='col-xs-12 col-sm-4 text-center'>
+				<div class='col-xs-6'>
+					<h4>{{contests.active_contests.length + contests.completed_contests.length + contests.pending_contests.length}}<br>Contests</h4>
+				</div>
+				<div class='col-xs-6'>
+					<h4>{{company.follows}}<br>Followers</h4>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4 text-center' ng-if='user'>
+				<button class='btn btn-oj' ng-click='follow()' ng-if='company.user_may_follow'>Follow</button>
+				<button class='btn btn-outliner' ng-click='unfollow()' ng-if='!company.user_may_follow'>Unfollow</button>
+			</div>
+		</div>
+	</div>
+	<div class='col-xs-12 col-sm-10 col-sm-offset-1 content-padding'>
+		<div class='col-xs-12 col-sm-4'>
+			<h3 class='text-center'>About</h3>
+			<div class='contest-box row text-center'>
+				<p>{{company.mission}}</p>
+				<hr style='border:1px solid #333;'>
+				<p>{{company.different}}</p>
+			</div>
+		</div>
+
+		<div class='col-xs-12 col-sm-4'>
+			<div class='text-center' ng-if='contests.active_contests.length == 0'>
+				<h3>This company has no active contests</h3>
+				<div class='contest-box row'>
+					<button class='btn btn-oj' style='margin-bottom:10px;' ng-click='request_contest()'>Request a Contest</button>
+					<div style='width:100%'>
+		            	<uib-progressbar value='company.requests' max='50' type="warning"></uib-progressbar>                
+		                <p ng-if='company.requests > 0' class="text-center" style='margin:0px;'>{{company.requests | number}} other Tapper<span ng-if='company.requests > 1'>s</span> want<span ng-if='company.requests == 1'>s</span> more! Whether you missed out on a previous contest, or just love what this company is about, click that button and we'll handle the rest.</p>
+		                <p ng-if='company.requests == 0' class="text-center" style='margin:0px;'>Be the first to show your support</p>
+		            </div>
+				</div>
+			</div>
+			<div ng-if='contests.active_contests.length > 0'>
+				<h3 class='text-center'>Active Contests</h3>
+				<a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;' ng-repeat='contest in contests.active_contests'>
+					<div class="submission-box">
+					    <div class="ad-company-info">
+					        <div>
+					            <span class='contest-price'>
+					                $50
+					            </span>
+					        </div>
+					        <div style='width: 100%;margin-top:35px;'>
+					            <div class='contest-audience'>
+					              	<span ng-if='contest.summary'>{{contest.summary}}</span>
+					            </div>
+					        </div>
+					        <div>
+					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
+					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
+					            <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>                
+					            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
+					        </div>
+					    </div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class='col-xs-12 col-sm-4'>
+			<div class='' ng-if='contests.completed_contests.length == 0'>
+
+			</div>
+			<div class='' ng-if='contests.completed_contests.length > 0'>
+
 			</div>
 		</div>
 	</div>
