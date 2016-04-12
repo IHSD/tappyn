@@ -18,4 +18,5 @@ $config['contests'] = array(
 $config['welcome'] = array(
     'test'
 );
+$config['votes'] = TRUE;
 $config['errors'] = FALSE;

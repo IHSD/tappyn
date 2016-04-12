@@ -2,9 +2,9 @@
 
 class ImpressionFields
 {
-    const ID = 'id';
-    const CONTEST_ID = 'contest_id';
-    const IP_ADDRESS = 'ip_address';
-    const CREATED_AT = 'created_at';
-    const USER_AGENT = 'user_agent';
+    const ID            = 'id';
+    const CONTEST_ID    = 'contest_id';
+    const IP_ADDRESS    = 'ip_address';
+    const CREATED_AT    = 'created_at';
+    const USER_AGENT    = 'user_agent';
 }

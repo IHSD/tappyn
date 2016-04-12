@@ -52,10 +52,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = 'errors/show_404';
 $route['translate_uri_dashes'] = FALSE;
+
+/*=============
+  Contests
+=============*/
 $route['contests']['get'] = 'contests/index';
 $route['contests']['post'] = 'contests/create';
 $route['contests/(:num)']['get'] = 'contests/show/$1';
 $route['contests/create'] = 'contests/create';
+
+/*=============
+  Votes
+=============*/
+$route['votes']['post'] = 'votes/create';
+
 $route['welcome/auth'] = 'welcome/auth';
 $route['welcome/test'] = 'welcome/test';
 

@@ -38,6 +38,9 @@ class MY_Controller extends CI_Controller
             // Redirect them to a 403 unauthorized page;
             redirect('errors/show_403', 'refresh');
         }
+
+        include_once(APPPATH.'libraries/Hook.php');
+        Hook::initialize();
     }
 
     protected function is_authorized($class, $method)
