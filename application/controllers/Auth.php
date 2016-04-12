@@ -51,6 +51,7 @@ class Auth extends CI_Controller {
 			if($user['type'] == 'company')
 			{
 				$profile = $this->user->profile($this->ion_auth->user()->row()->id);
+				if(!is_null($profile->logo_url)) $user['logo_url'] = $profile->logo_url;
 				if(!is_null($profile->facebook_url)) $user['facebook_url'] = $profile->facebook_url;
 				if(!is_null($profile->twitter_handle)) $user['twitter_handle'] = $profile->twitter_handle;
 				if(!is_null($profile->company_url)) $user['company_url'] = $profile->company_url;

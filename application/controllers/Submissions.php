@@ -60,6 +60,8 @@ class Submissions extends CI_Controller
 
         $contest = $this->contest->get($contest_id);
 
+        $contest->submission_limit = (int) $contest->submission_limit;
+        $contest->submission_count =  (int) $contest->submission_count;
         if($contest->stop_time < date('Y-m-d H:i:s'))
         {
             $contest->status = 'ended';
@@ -130,12 +132,25 @@ class Submissions extends CI_Controller
             )->code(500)->respond();
             return;
         }
+
         $uid = $this->ion_auth->user()->row()->id;
         if(!$this->contest->mayUserSubmit($uid, $contest_id))
         {
             $this->responder->fail(
                 "Unfortunately, you are not eligible for this contest!"
             )->code(500)->respond();
+            return;
+        }
+        $contest = $this->contest->get($contest_id);
+        if(!$contest)
+        {
+            $this->responder->fail("That contest does not exist")->code(500)->respond();
+            return;
+        }
+
+        if($contest->submission_count >= $contest->submission_limit)
+        {
+            $this->responder->fail("Unfortunately, this contest has reached its limit")->code(500)->respond();
             return;
         }
 
@@ -189,6 +204,7 @@ class Submissions extends CI_Controller
             $this->responder->fail("An unexpected error occured")->code(500)->respond();
             return;
         }
+
         $submissions = array();
         foreach($check->result() as $sub)
         {
