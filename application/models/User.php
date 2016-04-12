@@ -137,6 +137,17 @@ class User extends MY_Model
         return (int) $this->db->get()->row()->count;
     }
 
+    public function following($uid)
+    {
+        $res = array();
+        $follows = $this->db->select('following')->from('follows')->where('follower', $uid)->get()->result();
+        foreach($follows as $follow)
+        {
+            $res[] = $follow->following;
+        }
+        return $res;
+    }
+
     public function errors()
     {
         return $this->errors;
