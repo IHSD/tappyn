@@ -27,9 +27,9 @@
 					<h4>{{company.follows}}<br>Follower<span ng-if='company.follows != 1'>s</span></h4>
 				</div>
 			</div>
-			<div class='col-xs-12 col-sm-4 text-center' ng-if='user'>
-				<button class='btn btn-oj' ng-click='follow()' ng-if='company.user_may_follow'>Follow</button>
-				<button class='btn btn-outliner' ng-click='unfollow()' ng-if='!company.user_may_follow'>Unfollow</button>
+			<div class='col-xs-12 col-sm-4 text-center'>
+				<button class='btn btn-oj' ng-click='follow()' ng-if='!user || company.user_may_follow'>Follow</button>
+				<button class='btn btn-outliner' ng-click='unfollow()' ng-if='user && !company.user_may_follow'>Unfollow</button>
 			</div>
 		</div>
 	</div>
@@ -103,7 +103,7 @@
 					        </div>
 					        <div>
 					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
-					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
+					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Ago</h5>
 					            <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>                
 					            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
 					        </div>

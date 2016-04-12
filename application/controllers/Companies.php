@@ -71,6 +71,7 @@ class Companies extends CI_Controller
                 $submission = $this->submission->get($payout->row()->submission_id);
             }
             $contest->winner = $submission;
+            $contest->submission_count = $this->contest->submissionsCount($contest->id);
         }
 
         $contests['pending_contests'] = $this->db->select('*')->from('contests')->where(array(
