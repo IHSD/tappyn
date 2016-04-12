@@ -93,7 +93,6 @@
 			<div class='col-xs-12 col-sm-6 col-sm-offset-3 text-center'>
 				<button ng-hide='user.type == "company"' class='btn' ng-click='grab_my()' ng-class='{"btn-oj" : tab == "my", "btn-outliner" : tab != "my"}' >My Contests</button>
 				<button class='btn' ng-click='grab_all()' ng-class='{"btn-oj" : tab == "all", "btn-outliner" : tab != "all"}'>All Contests</button>
-				<button class='btn' ng-click='grab_companies()' ng-class='{"btn-oj" : tab == "company", "btn-outliner" : tab != "company"}'>Companies</button>
 			</div>
 			<div class='col-xs-12' ng-if='tab == "my"'>
 				<h2 class='text-center'>Here are a few contests we think you might like to enter.</h2>
@@ -102,10 +101,6 @@
 			<div class='col-xs-12' ng-if='tab == "all"'>
 				<h2 class='text-center'>Here are all the active contests.</h2>
 				<h4 class='text-center'>Just click on any contest to get started!</h4>
-			</div>
-			<div class='col-xs-12' ng-if='tab == "company"'>
-				<h2 class='text-center'>Here are the companies that have launched contests.</h2>
-				<h4 class='text-center'>Just click on any company to view their profile!</h4>
 			</div>
 		</div>
 		<div class='col-xs-12' ng-if='tab == "my" && !contests'>
@@ -184,48 +179,6 @@
 			<div class="col-xs-12 visible-xs">
 				 <div ng-repeat='contest in contests'>
 				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-		</div>
-		<div ng-if='tab == "company"'>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='first_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='second_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='third_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='fourth_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='first_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='second_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='third_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>
-			</div>
-			<div class="col-xs-12 visible-xs">
-				 <div ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
 				 </div>		   
 			</div>
 		</div>
