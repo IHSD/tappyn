@@ -4,6 +4,7 @@ class Contest extends MY_Model
 {
     private static $db;
     private static $table = 'contests';
+
     function __construct($data = NULL)
     {
         parent::__construct();
@@ -23,6 +24,7 @@ class Contest extends MY_Model
 
     public function save()
     {
+
         if(!self::$db->insert(self::$table, $this->data))
         {
             throw new Exception("Error saving contest");

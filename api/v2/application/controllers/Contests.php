@@ -45,7 +45,6 @@ class Contests extends MY_Controller
             {
                 $submission->votes = Vote::count(array(VoteFields::SUBMISSION_ID => $submission->id));
                 if($this->user) $submission->user_has_voted = Vote::find(array(VoteFields::SUBMISSION_ID => $submission->id, VoteFields::USER_ID => $this->user->id));
-
             }
             $contest->submissions = $this->sort($submissions);
 
@@ -53,7 +52,6 @@ class Contests extends MY_Controller
             $this->response->data(array(
                 'contest' => $contest
             ));
-
             Hook::trigger('viewed_contest', array('contest_id' => $contest, 'user' => $this->user));
         }
         $this->response->respond();
@@ -63,11 +61,22 @@ class Contests extends MY_Controller
     {
         Hook::trigger('contest_creation_started');
 
-        if($this->form_validation->run('contest:create') === TRUE)
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        if($this->form_validation->run() === TRUE)
         {
             $contest = new Contest();
 
-            $contest->setData($data);
+            $contest->setData(array(
+                ContestFields::OWNER => $this->user->id,
+                ContestFields::OBJECTIVE => $this->input->post('objective'),
+                ContestFields::PLATFORM => $this->input->post('platform'),
+                ContestFields::AUDIENCE => $this->input->post('audience'),
+                ContestFields::DIFFERENT => $this->input->post('different'),
+                ContestFields::SUMMARY => $this->input->post('summary'),
+                ContestFields::INDUSTRY => $this->input->post('industry'),
+                ContestFields::EMOTION => $this->input->post('emotion'),
+                ContestFields::DISPLAY_TYPE => $this->input->post('display_type'),
+            ));
             try {
                 $contest->save();
             } catch(Exception $e) {
