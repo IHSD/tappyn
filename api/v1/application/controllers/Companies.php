@@ -18,11 +18,23 @@ class Companies extends CI_Controller
         if($this->ion_auth->logged_in()) $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
     }
 
-    public function index($offset = 0)
+    public function index()
     {
-        $companies = $this->db->select('*')->from('profiles')->where(
+        $companies = $this->company->select('*')->from('profiles')->where(
             'summary IS NOT NULL', NULL
-        )->limit(25, $offset)->get()->result();
+        )->limit(25, ($this->input->get('offset') ? $this->input->get('offset') : 0));
+        $followed = $this->input->get('followed');
+        if($followed)
+        {
+            $follows = $this->user->following($this->ion_auth->user()->row()->id);
+            if(empty($follows))
+            {
+                $this->responder->data(array())->respond();
+                return;
+            }
+            $this->company->where_in('id', $follows);
+        }
+        $companies = $this->company->fetch()->result();
         $this->responder->data(array(
             'companies' => $companies
         ))->respond();
