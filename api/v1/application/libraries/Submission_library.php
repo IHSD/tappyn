@@ -20,7 +20,6 @@ class Submission_library
      * @param  array $data Fields required for creation
      * @return boolean
      */
-
     public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL, $attachment = NULL)
     {
         if(!$this->ion_auth->logged_in())
@@ -65,8 +64,8 @@ class Submission_library
             'contest_id' => $contest->id,
             'headline' => $headline,
             'link_explanation' => $link_explanation,
-            'text' => $text
-            'attachment_url' => $attachment
+            'text' => $text,
+            'attachment' => $attachment
         );
 
         $success = false;
@@ -89,6 +88,7 @@ class Submission_library
                 'attachment_url' => $attachment,
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );
+
             $this->mailer->to($this->ion_auth->user()->row()->email)
                          ->from('squad@tappyn.com')
                          ->subject("Your submission was created!")
