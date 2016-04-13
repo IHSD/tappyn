@@ -10,11 +10,11 @@
 			</div>
 			<div class='col-xs-12 col-sm-4 text-center'>
 				<div class='btn-group'>
-					<a ng-show='company.company_url != ""' href='{{company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
-					<a ng-show='company.facebook_url != ""' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+					<a ng-show='company.company_url != "" && company.company_url != null' href='{{company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+					<a ng-show='company.facebook_url != "" && company.facebook_url != null' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 						<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 					</a>
-					<a ng-show='company.twitter_handle != ""' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+					<a ng-show='company.twitter_handle != "" && company.twitter_handle != null' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
 						<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
 					</a>
 				</div>
