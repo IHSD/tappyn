@@ -46,8 +46,8 @@ $route['accounts/default_method']['post']   = 'accounts/default_method';
 /*========================
   Company Accounts
 ========================*/
-$route['companies']['get']            = 'companies/index';
-$route['companies/accounts']['post']        = 'companies/accounts';
+$route['companies']['get']                  = 'companies/index';
+$route['companies/accounts']                = 'companies/accounts';
 $route['companies/remove_method']['post']   = 'companies/removeCard';
 $route['companies/payment/(:num)']['post']  = 'companies/payment/$1';
 $route['companies/default_method']['post']  = 'companies/setAsDefault';
