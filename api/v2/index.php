@@ -55,6 +55,17 @@
  */
 	define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
+
+
+	// Check that we are in a development environment. This API version is not
+	// ready for production
+	if(!isset($_SERVER['CI_ENV']) || $_SERVER['CI_ENV'] !== 'development')
+	{
+		die(json_encode(array(
+			'success' => FALSE,
+			'code' => 500,
+			'error' => "API version 2.0 is not yet ready for production use")));
+	}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
