@@ -23,7 +23,10 @@ class MY_Model extends CI_Model
 
     public function setData($data)
     {
-        $this->data = $data;
+        foreach($data as $key => $value)
+        {
+            $this->data[$key] = $value;
+        }
     }
 
     public function data()
