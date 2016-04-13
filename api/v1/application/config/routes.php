@@ -4,9 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*========================
   Globals
 ========================*/
-$route['default_controller'] = 'errors/no_route';
-$route['404_override'] = 'errors/show_404';
-$route['translate_uri_dashes'] = FALSE;
+$route['default_controller']        = 'errors/no_route';
+$route['404_override']              = 'errors/show_404';
+$route['translate_uri_dashes']      = FALSE;
+$route['amazon/connect']            = 'amazon/connect';
 
 /*========================
   Authentication
@@ -70,7 +71,7 @@ $route['contests/(:num)/delete']['post']    = 'contests/delete/$1';
 $route['contests/(:num)/submissions']['post']   = 'submissions/create/$1';
 $route['submissions/leaderboard']['get']        = 'submissions/leaderboard';
 $route['submissions/(:num)/shares']['post']     = 'submissions/share/$1';
-$route['submisisons/(num)/rating']['post']      = 'submissions/rating/$1';
+$route['submissions/(num)/rating']['post']      = 'submissions/rating/$1';
 $route['submissions/(:num)/votes']['post']      = 'votes/create/$1';
 
 /*========================

@@ -9,8 +9,10 @@ class Amazon extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->aws_access_key_id = 'AKIAIKTBSRSNTPRV6TNA';
-        $this->aws_secret_key  = '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';
+        $this->CI->load->config('secrets', TRUE);
+
+        $this->aws_access_key_id = $this->config->item('aws_access_key_id', 'secrets');
+        $this->aws_secret_key  = $this->config->item('aws_secret_key', 'secrets');
     }
 
     public function connect()
