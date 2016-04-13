@@ -21,7 +21,7 @@
 			</div>
 			<div class='col-xs-12 col-sm-4 text-center'>
 				<div class='col-xs-6'>
-					<h4>{{contests.active_contests.length + contests.completed_contests.length + contests.pending_contests.length}}<br>Contests</h4>
+					<h4>{{contests.length | number}}<br>Contest<span ng-if='contests.length != 1'>s</span></h4>
 				</div>
 				<div class='col-xs-6'>
 					<h4>{{company.follows}}<br>Follower<span ng-if='company.follows != 1'>s</span></h4>
@@ -34,83 +34,75 @@
 		</div>
 	</div>
 	<div class='content-padding'>
-		<div class='col-xs-12 col-sm-4'>
-			<h3 class='text-center'>About</h3>
-			<div class='contest-box row text-center' style='border-color:#ff5c00;'>
-				<p>{{company.mission}}</p>
-				<hr style='border:1px solid #333;'>
-				<p>{{company.different}}</p>
-			</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='first_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
 		</div>
-
-		<div class='col-xs-12 col-sm-4'>
-			<div class='text-center' ng-if='contests.active_contests.length == 0'>
-				<h3>This company has no active contests</h3>
-				<div class='contest-box row' style='border-color:#ff5c00;'>
-					<button class='btn btn-oj' style='margin-bottom:10px;' ng-click='request_contest()'>Request a Contest</button>
-					<div style='width:100%'>
-		            	<uib-progressbar value='company.requests' max='50' type="warning"></uib-progressbar>                
-		                <p ng-if='company.requests > 0' class="text-center" style='margin:0px;'>{{company.requests | number}} other Tapper<span ng-if='company.requests > 1'>s</span> want<span ng-if='company.requests == 1'>s</span> more! Whether you missed out on a previous contest, or just love what this company is about, click that button and we'll handle the rest.</p>
-		                <p ng-if='company.requests == 0' class="text-center" style='margin:0px;'>Be the first to show your support</p>
-		            </div>
-				</div>
-			</div>
-			<div ng-if='contests.active_contests.length > 0'>
-				<h3 class='text-center'>Active Contests</h3>
-				<a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;' ng-repeat='contest in contests.active_contests'>
-					<div class="submission-box">
-					    <div class="ad-company-info">
-					        <div>
-					            <span class='contest-price'>
-					                $50
-					            </span>
-					        </div>
-					        <div style='width: 100%;margin-top:35px;'>
-					            <div class='contest-audience'>
-					              	<span ng-if='contest.summary'>{{contest.summary}}</span>
-					            </div>
-					        </div>
-					        <div>
-					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
-					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
-					            <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>                
-					            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
-					        </div>
-					    </div>
-					</div>
-				</a>
-			</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='second_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
 		</div>
-
-		<div class='col-xs-12 col-sm-4'>
-			<div ng-if='contests.completed_contests.length == 0'>
-				<h3 class='text-center'>This company has no completed contests</h3>
-			</div>
-			<div ng-if='contests.completed_contests.length > 0'>
-				<h3 class='text-center'>Completed Contests</h3>
-				<a href="#/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;' ng-repeat='contest in contests.completed_contests'>
-					<div class="submission-box">
-					    <div class="ad-company-info">
-					        <div>
-					            <span class='contest-price'>
-					                $50
-					            </span>
-					        </div>
-					        <div style='width: 100%;margin-top:35px;'>
-					            <div class='contest-audience'>
-					              	<span ng-if='contest.summary'>{{contest.summary}}</span>
-					            </div>
-					        </div>
-					        <div>
-					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
-					            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Ago</h5>
-					            <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>                
-					            <p uib-tooltip="Number of entries" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
-					        </div>
-					    </div>
-					</div>
-				</a>
-			</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='third_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='fourth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='fifth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='sixth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='first_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='second_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='third_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='fourth_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='first_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='second_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='third_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>
+		</div>
+		<div class="col-xs-12 visible-xs">
+			 <div ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/profilecontest.html'"></div>
+			 </div>		   
 		</div>
 	</div>
 </div>

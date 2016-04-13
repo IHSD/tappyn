@@ -43,43 +43,23 @@ class Companies extends CI_Controller
     public function contests($cid)
     {
         $contests = array();
-        $contests['active_contests'] = $this->db->select('*')->from('contests')->where(array(
+        $contests = $this->db->select('*')->from('contests')->where(array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1,
             'owner' => $cid
-        ))->get()->result();
-
-        $contests['completed_contests'] = $this->db->select('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $cid
-        ))->get()->result();
-
-
-        foreach($contests['active_contests'] as $result)
+        ))->order_by('start_time', 'desc')->get()->result();
+        foreach($contests as $contest)
         {
-            $result->submission_count = $this->contest->submissionsCount($result->id);
-        }
-        foreach($contests['completed_contests'] as $contest)
-        {
-            $submission = new StdClass();
-            $payout = $this->db->select('*')->from('payouts')->where('contest_id', $contest->id)->limit(1)->get();
-            if($payout->num_rows() == 1)
-            {
-                $submission = $this->submission->get($payout->row()->submission_id);
-            }
-            $contest->winner = $submission;
             $contest->submission_count = $this->contest->submissionsCount($contest->id);
+            if($contest->stop_time < date('Y-m-d H:i:s'))
+            {
+                $contest->status = 'ended';
+                $contest->link = 'ended';
+            } else {
+                $contest->status = 'active';
+                $contest->link = 'contest';
+            }
         }
-
-        $contests['pending_contests'] = $this->db->select('*')->from('contests')->where(array(
-            'start_time >' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $cid
-        ))->get()->result();
         $this->responder->data(array('contests' => $contests))->respond();
     }
 

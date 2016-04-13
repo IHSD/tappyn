@@ -1,5 +1,5 @@
 tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
-	if(!$rootScope.user){
+	if(!$rootScope.user || $rootScope.user.type == 'company'){
 		$scope.tab = "all";
 		contestsFactory.grabAllContests().success(function(response){
 			$scope.contests = response.data.contests;
