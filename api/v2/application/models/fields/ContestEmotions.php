@@ -2,13 +2,15 @@
 
 class ContestEmotions
 {
-    const DOVE      = 'dove';
-    const BOOKS     = 'books';
-    const MOUNTAIN  = 'mountain';
-    const ATHLETE   = 'athelete';
-    const EAGLE     = 'eagle';
-    const LIGHTBULB = 'lightbulb';
-    const GLASS     = 'glass';
-    const CROSS     = 'cross';
-    const CROWN     = 'crown';
+    static $emotions = array(
+        'dove',
+        'books',
+        'mountain',
+        'athelete',
+        'eagle',
+        'lightbulb',
+        'glass',
+        'cross',
+        'crown'
+    );
 }

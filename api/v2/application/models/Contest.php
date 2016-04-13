@@ -24,18 +24,7 @@ class Contest extends MY_Model
     );
 
     private static $industries = array(
-        ContestInterests::FOOD_BEVERAGE,
-        ContestInterests::FINANCE_BUSINESS,
-        ContestInterests::HEALTH_WELLNESS,
-        ContestInterests::TRAVEL,
-        ContestInterests::SOCIAL_NETWORK,
-        ContestInterests::HOME_GARDEN,
-        ContestInterests::EDUCATION,
-        ContestInterests::ART_ENTERTAINMENT,
-        ContestInterests::FASHION_BEAUTY,
-        ContestInterests::TECH_SCIENCE,
-        ContestInterests::PETS,
-        ContestInterests::SPORTS_OUTDOORS,
+
     );
     private static $objective = array();
 
@@ -82,12 +71,12 @@ class Contest extends MY_Model
 
     public function validate_emotion($str)
     {
-        return in_array($str, self::$emotions);
+        return in_array($str, ContestEmotions::$emotions);
     }
 
     public function validate_platform($str)
     {
-        return in_array($str, self::$platforms);
+        return in_array($str, self::$platform);
     }
 
     public function validate_objective($str)
