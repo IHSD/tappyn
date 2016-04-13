@@ -186,7 +186,6 @@ class Users extends CI_Controller
         $upvotes = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
         $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
         $won = count($payouts);
-        error_log(json_encode($payouts));
         $this->responder->data(array(
             'submissions' => $submissions,
             'upvotes' => $upvotes,
