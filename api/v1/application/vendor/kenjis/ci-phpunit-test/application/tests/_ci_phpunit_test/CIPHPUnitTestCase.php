@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of CI PHPUnit Test
+ * Part of ci-phpunit-test
  *
  * @author     Kenji Suzuki <https://github.com/kenjis>
  * @license    MIT License
@@ -335,7 +335,12 @@ class CIPHPUnitTestCase extends PHPUnit_Framework_TestCase
 			$CI =& get_instance();
 			$CI->load->helper('url');
 		}
-		$absolute_url = site_url($uri);
+
+		if (! preg_match('#^(\w+:)?//#i', $uri))
+		{
+			$uri = site_url($uri);
+		}
+		$absolute_url = $uri;
 		$expected = 'Redirect to ' . $absolute_url;
 
 		$this->assertSame(

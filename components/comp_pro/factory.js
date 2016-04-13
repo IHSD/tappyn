@@ -4,7 +4,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.grabProfile = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies/show/'+id,
+			url : 'api/v1/companies/show/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.grabContests = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies/contests/'+id,
+			url : 'api/v1/companies/contests/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -24,7 +24,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.requestContest = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/companies/request_contest/'+id,
+			url : 'api/v1/companies/request_contest/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -34,7 +34,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.followCompany = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/users/follow/'+id,
+			url : 'api/v1/companies/'+id+'/follow',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -44,7 +44,7 @@ tappyn.factory('comproFactory', function($http){
 	fact.unfollowCompany = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/users/unfollow/'+id,
+			url : 'api/v1/companies/'+id+'/unfollow',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

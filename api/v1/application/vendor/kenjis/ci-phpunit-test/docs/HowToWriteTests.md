@@ -1,6 +1,6 @@
-# CI PHPUnit Test for CodeIgniter 3.0
+# ci-phpunit-test for CodeIgniter 3.0
 
-version: **v0.11.0** | 
+version: **v0.11.3** | 
 [v0.10.1](https://github.com/kenjis/ci-phpunit-test/blob/v0.10.1/docs/HowToWriteTests.md) | 
 [v0.9.1](https://github.com/kenjis/ci-phpunit-test/blob/v0.9.1/docs/HowToWriteTests.md) | 
 [v0.8.2](https://github.com/kenjis/ci-phpunit-test/blob/v0.8.2/docs/HowToWriteTests.md) | 
@@ -30,7 +30,6 @@ version: **v0.11.0** |
 - [Libraries](#libraries)
 - [Controllers](#controllers)
 	- [Request to Controller](#request-to-controller)
-	- [Request to URI string](#request-to-uri-string)
 	- [REST Request](#rest-request)
 	- [Ajax Request](#ajax-request)
 	- [Request and Use Mocks](#request-and-use-mocks)
@@ -51,6 +50,7 @@ version: **v0.11.0** |
 - [More Samples](#more-samples)
 - [Third Party Libraries](#third-party-libraries)
 	- [CodeIgniter Rest Server](#codeigniter-rest-server)
+	- [Modular Extensions - HMVC](#modular-extensions---hmvc)
 
 ### Introduction
 
@@ -71,15 +71,17 @@ If you don't know well about config files and environments, see [CodeIgniter Use
 
 ### Can and Can't
 
-*CI PHPUnit Test* does not want to modify CodeIgniter files. The more you modify them, the more you get difficulities when you update CodeIgniter.
+ci-phpunit-test does not want to modify CodeIgniter files. The more you modify them, the more you get difficulties when you update CodeIgniter.
 
-In fact, it uses a modified class and a few functions. But I try to modify as little as possible.
+In fact, it uses modified classes and some functions. But I try to modify as little as possible.
 
-The core functions and a class which are modified:
+The core functions and classes which are modified:
 
 * function `get_instance()`
 * function `load_class()`
 * function `is_loaded()`
+* function `get_config()`
+* function `config_item()`
 * function `is_cli()`
 * function `show_error()`
 * function `show_404()`
@@ -91,38 +93,41 @@ and a helper which is modified:
 
 * function `redirect()` in URL helper
 
-All of them are in `tests/_ci_phpunit_test/replacing` folder.
+All of them are placed in `tests/_ci_phpunit_test/replacing` folder.
 
-And *CI PHPUnit Test* adds properties dynamically:
+And ci-phpunit-test adds properties dynamically:
 
 * property `CI_Output::_status`
 * property `CI_Output::_cookies`
 
-And *CI PHPUnit Test* has a modified bootstrap file:
+And ci-phpunit-test has a modified bootstrap file:
 
 * `core/CodeIgniter.php`
 
+**Note to Maintainer:** If you modify another CodeIgniter file, update `bin/check-diff.sh` and `bin/check-ci-diff.sh`, too.
+
 #### MY_Loader
 
-*CI PHPUnit Test* replaces `CI_Loader` and modifies below methods:
+ci-phpunit-test replaces `CI_Loader` and modifies below methods:
 
 * `CI_Loader::model()`
 * `CI_Loader::_ci_load_library()`
 * `CI_Loader::_ci_load_stock_library()`
 
-But if you place MY_Loader, your MY_Loader extends the loader of *CI PHPUnit Test*.
+But if you place MY_Loader, your MY_Loader extends the loader of ci-phpunit-test.
 
-If your MY_Loader overrides the above methods, you have to take care of changes in the loader of *CI PHPUnit Test*.
+If your MY_Loader overrides the above methods, you have to take care of changes in the loader of ci-phpunit-test.
 
 #### MY_Input
 
-*CI PHPUnit Test* replaces `CI_Input` and modifies below method:
+ci-phpunit-test replaces `CI_Input` and modifies below method:
 
 * `CI_Input::set_cookie()`
+* `CI_Input::get_request_header()`
 
-But if you place MY_Input, your MY_Input extends the CI_Input of *CI PHPUnit Test*.
+But if you place MY_Input, your MY_Input extends the CI_Input of ci-phpunit-test.
 
-If your MY_Input overrides the above method, you have to take care of changes in the CI_Input of *CI PHPUnit Test*.
+If your MY_Input overrides the above method, you have to take care of changes in the CI_Input of ci-phpunit-test.
 
 #### `exit()`
 
@@ -134,23 +139,23 @@ I recommend you not using `exit()` or `die()` in your code.
 
 **Monkey Patching on `exit()`**
 
-*CI PHPUnit Test* has functionality that makes all `exit()` and `die()` in your code throw `CIPHPUnitTestExitException`.
+ci-phpunit-test has functionality that makes all `exit()` and `die()` in your code throw `CIPHPUnitTestExitException`.
 
 See [Monkey Patching](#monkey-patching) for details.
 
 **`show_error()` and `show_404()`**
 
-And *CI PHPUnit Test* has special [show_error() and show_404()](#show_error-and-show_404).
+And ci-phpunit-test has special [show_error() and show_404()](#show_error-and-show_404).
 
 **`redirect()`**
 
-*CI PHPUnit Test* replaces `redirect()` function in URL helper. Using it, you can easily test controllers that contain `redirect()`. See [redirect()](#redirect) for details.
+ci-phpunit-test replaces `redirect()` function in URL helper. Using it, you can easily test controllers that contain `redirect()`. See [redirect()](#redirect) for details.
 
 #### Reset CodeIgniter object
 
 CodeIgniter has a function `get_instance()` to get the CodeIgniter object (CodeIgniter instance or CodeIgniter super object).
 
-*CI PHPUnit Test* has a new function [reset_instance()](FunctionAndClassReference.md#function-reset_instance) which reset the current CodeIgniter object. After resetting, you can (and must) create a new your Controller instance with new state.
+ci-phpunit-test has a new function [reset_instance()](FunctionAndClassReference.md#function-reset_instance) which reset the current CodeIgniter object. After resetting, you can (and must) create a new your Controller instance with new state.
 
 #### Hooks
 
@@ -162,9 +167,9 @@ See [Controller with Hooks](#controller-with-hooks) for details.
 
 #### Autoloader
 
-*CI PHPUnit Test* has an autoloader for class files.
+ci-phpunit-test has an autoloader for class files.
 
-To change the search paths, change the line [`CIPHPUnitTest::init();`](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.0/application/tests/Bootstrap.php#L331) in `tests/Bootstrap.php` like below:
+To change the search paths, change the line [`CIPHPUnitTest::init();`](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.3/application/tests/Bootstrap.php#L336) in `tests/Bootstrap.php` like below:
 
 ~~~php
 CIPHPUnitTest::init([
@@ -181,7 +186,7 @@ You must put all directories to search class files in the array.
 ### Basic Conventions
 
 1. The tests for a class `Class` go into a class `Class_test`.
-2. `Class_test` inherits from [TestCase](FunctionAndClassReference.md#class-testcase) class in *CI PHPUnit Test*.
+2. `Class_test` inherits from [TestCase](FunctionAndClassReference.md#class-testcase) class in ci-phpunit-test.
 3. The tests are public methods that are named `test_*`. (Or you can use the `@test` annotation in a method's docblock to mark it as a test method.)
 
 * Don't forget to write `parent::setUpBeforeClass();` if you override `setUpBeforeClass()` method.
@@ -207,7 +212,7 @@ class Foo_test extends TestCase
 }
 ~~~
 
-[$this->resetInstance()](FunctionAndClassReference.md#testcaseresetinstance) method in *CI PHPUnit Test* is a helper method to reset CodeIgniter instance and assign new CodeIgniter instance as `$this->CI`.
+[$this->resetInstance()](FunctionAndClassReference.md#testcaseresetinstance) method in ci-phpunit-test is a helper method to reset CodeIgniter instance and assign new CodeIgniter instance as `$this->CI`.
 
 ### Models
 
@@ -248,7 +253,7 @@ class Inventory_model_test extends TestCase
 }
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/models/Category_model_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/models/Category_model_test.php).
 
 #### Database Seeding
 
@@ -269,11 +274,11 @@ You can use them like below:
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/models/Category_model_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/models/Category_model_test.php).
 
 #### Using PHPUnit Mock Objects
 
-You can use `$this->getMockBuilder()` method in PHPUnit and [$this->verifyInvoked*()](FunctionAndClassReference.md#testcaseverifyinvokedmock-method-params) helper method in *CI PHPUnit Test*.
+You can use `$this->getMockBuilder()` method in PHPUnit and [$this->verifyInvoked*()](FunctionAndClassReference.md#testcaseverifyinvokedmock-method-params) helper method in ci-phpunit-test.
 
 If you don't know well about PHPUnit Mock Objects, see [Test Doubles](https://phpunit.de/manual/current/en/test-doubles.html).
 
@@ -334,7 +339,7 @@ If you don't know well about PHPUnit Mock Objects, see [Test Doubles](https://ph
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/models/Category_model_mocking_db_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/models/Category_model_mocking_db_test.php).
 
 ### Libraries
 
@@ -358,13 +363,27 @@ If your library is decoupled from CodeIgniter functionality, you can use `setUp(
 	}
 ~~~
 
-In this case, *CI PHPUnit Test* autoloads your libraries in `application/libraries` folder.
+In this case, ci-phpunit-test autoloads your libraries in `application/libraries` folder.
 
 ### Controllers
 
 #### Request to Controller
 
-You can use [$this->request()](FunctionAndClassReference.md#testcaserequestmethod-argv-params--) method in *CI PHPUnit Test*.
+You can use [$this->request()](FunctionAndClassReference.md#testcaserequestmethod-argv-params--) method in ci-phpunit-test.
+
+~~~php
+	public function test_uri_sub_sub_index()
+	{
+		$output = $this->request('GET', 'sub/sub/index');
+		$this->assertContains('<title>Page Title</title>', $output);
+	}
+~~~
+
+**Note:** If you pass URI string to the 2nd argument of `$this->request()`, it invokes the routing. If the resolved controller has `_remap()` and/or `_output()` methods, they will be invoked, too.
+
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/sub/Sub_test.php).
+
+If you want to call a controller method directly, you can pass an array to the 2nd argument of `$this->request()`.
 
 *tests/controllers/Welcome_test.php*
 ~~~php
@@ -380,19 +399,9 @@ class Welcome_test extends TestCase
 }
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Welcome_test.php).
+**Note:** If you pass an array to the 2nd argument of `$this->request()`, it does not invokes the routing. The `_remap()` and/or `_output()` methods in a controller are not invoked, too.
 
-#### Request to URI string
-
-~~~php
-	public function test_uri_sub_sub_index()
-	{
-		$output = $this->request('GET', 'sub/sub/index');
-		$this->assertContains('<title>Page Title</title>', $output);
-	}
-~~~
-
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/sub/Sub_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Welcome_test.php).
 
 #### REST Request
 
@@ -410,7 +419,7 @@ You can specify request method in 2nd argument of [$this->request()](FunctionAnd
 		);
 ~~~
 
-You can set request header with [$this->request->setHeader()](FunctionAndClassReference.md#request-setheader) method in *CI PHPUnit Test*. And you can confirm response header with [$this->assertResponseHeader()](FunctionAndClassReference.md#testcaseassertresponseheadername-value) method in *CI PHPUnit Test*.
+You can set request header with [$this->request->setHeader()](FunctionAndClassReference.md#request-setheader) method in ci-phpunit-test. And you can confirm response header with [$this->assertResponseHeader()](FunctionAndClassReference.md#testcaseassertresponseheadername-value) method in ci-phpunit-test.
 
 ~~~php
 	public function test_users_get_id_with_http_accept_header()
@@ -430,11 +439,11 @@ You can set request header with [$this->request->setHeader()](FunctionAndClassRe
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/api/Example_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/api/Example_test.php).
 
 #### Ajax Request
 
-You can use [$this->ajaxRequest()](FunctionAndClassReference.md#testcaseajaxrequestmethod-argv-params--) method in *CI PHPUnit Test*.
+You can use [$this->ajaxRequest()](FunctionAndClassReference.md#testcaseajaxrequestmethod-argv-params--) method in ci-phpunit-test.
 
 ~~~php
 	public function test_index_ajax_call()
@@ -445,11 +454,11 @@ You can use [$this->ajaxRequest()](FunctionAndClassReference.md#testcaseajaxrequ
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Ajax_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Ajax_test.php).
 
 #### Request and Use Mocks
 
-You can use [$this->request->setCallable()](FunctionAndClassReference.md#request-setcallable) method in *CI PHPUnit Test*. [$this->getDouble()](FunctionAndClassReference.md#testcasegetdoubleclassname-params) is a helper method in *CI PHPUnit Test*.
+You can use [$this->request->setCallable()](FunctionAndClassReference.md#request-setcallable) method in ci-phpunit-test. [$this->getDouble()](FunctionAndClassReference.md#testcasegetdoubleclassname-params-enable_constructor--false) is a helper method in ci-phpunit-test.
 
 ~~~php
 	public function test_send_okay()
@@ -475,7 +484,7 @@ You can use [$this->request->setCallable()](FunctionAndClassReference.md#request
 
 **Note:** When you have not loaded a class with CodeIgniter loader, if you make a mock object for the class, your application code may not work correclty. If you have got an error, please try to load it with CodeIgniter loader, before getting the mock object.
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Mock_phpunit_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Mock_phpunit_test.php).
 
 The function you set by `$this->request->setCallable()` runs after controller instantiation. So you can't inject mocks into controller constructor.
 
@@ -502,7 +511,7 @@ class Auth extends CI_Controller
 }
 ~~~
 
-In this case, You can use [$this->request->setCallablePreConstructor()](FunctionAndClassReference.md#request-setcallablepreconstructor) method and [load_class_instance()](FunctionAndClassReference.md#function-load_class_instanceclassname-instance) function in *CI PHPUnit Test*.
+In this case, You can use [$this->request->setCallablePreConstructor()](FunctionAndClassReference.md#request-setcallablepreconstructor) method and [load_class_instance()](FunctionAndClassReference.md#function-load_class_instanceclassname-instance) function in ci-phpunit-test.
 
 **Note:** Unlike `$this->request->setCallable()`, this callback runs before the controller is created. So there is no CodeIgniter instance yet. You can't use CodeIgniter objects.
 
@@ -525,7 +534,7 @@ In this case, You can use [$this->request->setCallablePreConstructor()](Function
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Auth_check_in_construct_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Auth_check_in_construct_test.php).
 
 **Note:** If you can't create mocks or it is too hard to create mocks, it may be better to use Monkey Patching.
 
@@ -547,7 +556,7 @@ See also [Patching Methods in User-defined Classes](#patching-methods-in-user-de
 
 #### Check Status Code
 
-You can use [$this->assertResponseCode()](FunctionAndClassReference.md#testcaseassertresponsecodecode) method in *CI PHPUnit Test*.
+You can use [$this->assertResponseCode()](FunctionAndClassReference.md#testcaseassertresponsecodecode) method in ci-phpunit-test.
 
 ~~~php
 		$this->request('GET', 'welcome');
@@ -569,7 +578,7 @@ See [working sample](https://github.com/kenjis/codeigniter-tettei-apps/blob/deve
 
 #### Controller with Authentication
 
-I recommend using PHPUnit mock objects. [$this->getDouble()](FunctionAndClassReference.md#testcasegetdoubleclassname-params) is a helper method in *CI PHPUnit Test*.
+I recommend using PHPUnit mock objects. [$this->getDouble()](FunctionAndClassReference.md#testcasegetdoubleclassname-params-enable_constructor--false) is a helper method in ci-phpunit-test.
 
 ~~~php
 	public function test_index_logged_in()
@@ -589,15 +598,15 @@ I recommend using PHPUnit mock objects. [$this->getDouble()](FunctionAndClassRef
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Auth_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Auth_test.php).
 
 #### `redirect()`
 
-By default, *CI PHPUnit Test* replaces `redirect()` function in URL helper. Using it, you can easily test controllers that contain `redirect()`.
+By default, ci-phpunit-test replaces `redirect()` function in URL helper. Using it, you can easily test controllers that contain `redirect()`.
 
 But you could still override `redirect()` using your `MY_url_helper.php`. If you place `MY_url_helper.php`, your `redirect()` will be used.
 
-If you use `redirect()` in *CI PHPUnit Test*, you can write tests like this:
+If you use `redirect()` in ci-phpunit-test, you can write tests like this:
 
 ~~~php
 	public function test_index()
@@ -607,9 +616,9 @@ If you use `redirect()` in *CI PHPUnit Test*, you can write tests like this:
 	}
 ~~~
 
-[$this->assertRedirect()](FunctionAndClassReference.md#testcaseassertredirecturi-code--null) is a method in *CI PHPUnit Test*.
+[$this->assertRedirect()](FunctionAndClassReference.md#testcaseassertredirecturi-code--null) is a method in ci-phpunit-test.
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Redirect_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Redirect_test.php).
 
 ##### Upgrade Note for v0.4.0
 
@@ -641,7 +650,7 @@ v0.4.0 has new `MY_url_helper.php`. If you use it, you must update your tests.
 
 #### `show_error()` and `show_404()`
 
-You can use [$this->assertResponseCode()](FunctionAndClassReference.md#testcaseassertresponsecodecode) method in *CI PHPUnit Test*.
+You can use [$this->assertResponseCode()](FunctionAndClassReference.md#testcaseassertresponsecodecode) method in ci-phpunit-test.
 
 ~~~php
 	public function test_index()
@@ -651,7 +660,7 @@ You can use [$this->assertResponseCode()](FunctionAndClassReference.md#testcasea
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Nocontroller_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Nocontroller_test.php).
 
 If you don't call `$this->request()` in your tests, `show_error()` throws `CIPHPUnitTestShowErrorException` and `show_404()` throws `CIPHPUnitTestShow404Exception`. So you must expect the exceptions. You can use `@expectedException` annotation in PHPUnit.
 
@@ -701,7 +710,7 @@ If you want to enable hooks, call [$this->request->enableHooks()](FunctionAndCla
 		$output = $this->request('GET', 'products/shoes/show/123');
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Hook_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Hook_test.php).
 
 #### Controller with Name Collision
 
@@ -727,7 +736,7 @@ class sub_Welcome_test extends TestCase
 }
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/sub/Welcome_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/sub/Welcome_test.php).
 
 ### Mock Libraries
 
@@ -751,7 +760,7 @@ Mock library class name must be `Mock_Libraries_*`, and it is autoloaded.
 
 ### Monkey Patching
 
-*CI PHPUnit Test* has three monkey patchers.
+ci-phpunit-test has three monkey patchers.
 
 * `ExitPatcher`: Converting `exit()` to Exception
 * `FunctionPatcher`: Patching Functions
@@ -822,7 +831,7 @@ Add the above code (`require` and `MonkeyPatchManager::init()`) before
 ~~~php
 /*
  * -------------------------------------------------------------------
- *  Added for CI PHPUnit Test
+ *  Added for ci-phpunit-test
  * -------------------------------------------------------------------
  */
 ~~~
@@ -863,7 +872,7 @@ A test case could be like this:
 	}
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Exit_to_exception_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Exit_to_exception_test.php).
 
 #### Patching Functions
 
@@ -871,7 +880,7 @@ This patcher allows replacement of global functions that can't be mocked by PHPU
 
 But it has a few limitations. Some functions can't be replaced and it might cause errors.
 
-So by default we can replace only a dozen pre-defined functions in [FunctionPatcher](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.0/application/tests/_ci_phpunit_test/patcher/Patcher/FunctionPatcher.php#L27).
+So by default we can replace only a dozen pre-defined functions in [FunctionPatcher](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.3/application/tests/_ci_phpunit_test/patcher/Patcher/FunctionPatcher.php#L27).
 
 ~~~php
 	public function test_index()
@@ -884,7 +893,7 @@ So by default we can replace only a dozen pre-defined functions in [FunctionPatc
 
 [MonkeyPatch::patchFunction()](FunctionAndClassReference.md#monkeypatchpatchfunctionfunction-return_value-class_method) replaces PHP native function `mt_rand()` in `Welcome::index` method, and it will return `100` in the test method.
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Patching_on_function_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Patching_on_function_test.php).
 
 **Note:** If you call `MonkeyPatch::patchFunction()` without 3rd argument, all the functions (located in `include_paths` and not in `exclude_paths`) called in the test method will be replaced. So, for example, a function in CodeIgniter code might be replaced and it results in unexpected outcome.
 
@@ -917,11 +926,11 @@ You could change return value of patched function using PHP closure:
 		);
 ~~~
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Patching_on_function_test.php#L59-L80).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Patching_on_function_test.php#L59-L80).
 
 **Patch on Other Functions**
 
-If you want to patch other functions, you can add them to [functions_to_patch](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.0/application/tests/Bootstrap.php#L319) in `MonkeyPatchManager::init()`.
+If you want to patch other functions, you can add them to [functions_to_patch](https://github.com/kenjis/ci-phpunit-test/blob/v0.11.3/application/tests/Bootstrap.php#L323) in `MonkeyPatchManager::init()`.
 
 But there are a few known limitations:
 
@@ -946,18 +955,18 @@ This patcher allows replacement of methods in user-defined classes.
 
 [MonkeyPatch::patchMethod()](FunctionAndClassReference.md#monkeypatchpatchmethodclassname-params) replaces `get_category_list()` method in `Category_model`, and it will return `[(object) ['name' => 'Nothing']]` in the test method.
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.0/application/tests/controllers/Patching_on_method_test.php).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/blob/v0.11.3/application/tests/controllers/Patching_on_method_test.php).
 
 ### More Samples
 
 Want to see more tests?
 
-* https://github.com/kenjis/ci-app-for-ci-phpunit-test/tree/v0.10.0/application/tests
+* https://github.com/kenjis/ci-app-for-ci-phpunit-test/tree/v0.11.3/application/tests
 * https://github.com/kenjis/codeigniter-tettei-apps/tree/develop/application/tests
 
 ### Third Party Libraries
 
-*CI PHPUnit Test* has powerful functionality for testing. So normally you don't have to modify your application or library code.
+ci-phpunit-test has powerful functionality for testing. So normally you don't have to modify your application or library code.
 
 But there are still libraries which can't be tested without code modification.
 
@@ -1029,4 +1038,15 @@ And if you copy sample api controllers, you must change `require` statement to `
 
 If you require `REST_Controller.php` more than once, you get `Fatal error: Cannot redeclare class REST_Controller`.
 
-See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/tree/v0.10.0/application/tests/controllers/api).
+See [working sample](https://github.com/kenjis/ci-app-for-ci-phpunit-test/tree/v0.11.3/application/tests/controllers/api).
+
+#### [Modular Extensions - HMVC](https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc)
+
+It seems some users try to work ci-phpunit-test with the HMVC, and they work mostly. But the HMVC is a very complex system, and is against CodeIgniter's basic design. It brings complexity to CodeIgniter.
+
+There is a known limitation:
+See <https://github.com/kenjis/ci-hmvc-ci-phpunit-test#note-to-use>.
+
+And if you have an issue, please report it to: <https://github.com/kenjis/ci-phpunit-test/issues/34>
+
+See [working sample](https://github.com/kenjis/ci-hmvc-ci-phpunit-test).

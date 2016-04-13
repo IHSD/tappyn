@@ -1,4 +1,4 @@
-# CI PHPUnit Test for CodeIgniter 3.0
+# ci-phpunit-test for CodeIgniter 3.0
 
 [![Latest Stable Version](https://poser.pugx.org/kenjis/ci-phpunit-test/v/stable)](https://packagist.org/packages/kenjis/ci-phpunit-test) [![Total Downloads](https://poser.pugx.org/kenjis/ci-phpunit-test/downloads)](https://packagist.org/packages/kenjis/ci-phpunit-test) [![Latest Unstable Version](https://poser.pugx.org/kenjis/ci-phpunit-test/v/unstable)](https://packagist.org/packages/kenjis/ci-phpunit-test) [![License](https://poser.pugx.org/kenjis/ci-phpunit-test/license)](https://packagist.org/packages/kenjis/ci-phpunit-test)
 
@@ -22,6 +22,11 @@ An easier way to use PHPUnit with [CodeIgniter](https://github.com/bcit-ci/CodeI
 * PHPUnit 4.3 or later (4.7 or later is recommended)
   * If you use NetBeans 8.0.2, please use 4.7. 4.8 is not compatible yet. You can download old version of `phpunit.phar` from <https://phar.phpunit.de/>.
 
+## Optional
+
+* NetBeans
+  * Go to *Project Properties > Testing > PHPUnit*, check *Use Custom Test Suite* checkbox, and select `application/tests/_ci_phpunit_test/TestSuiteProvider.php`.
+
 ## Change Log
 
 See [Change Log](https://github.com/kenjis/ci-phpunit-test/blob/master/docs/ChangeLog.md).
@@ -32,7 +37,7 @@ See [Change Log](https://github.com/kenjis/ci-phpunit-test/blob/master/docs/Chan
 codeigniter/
 ├── application/
 │   └── tests/
-│        ├── _ci_phpunit_test/ ... don't touch! files CI PHPUnit Test uses
+│        ├── _ci_phpunit_test/ ... don't touch! files ci-phpunit-test uses
 │        ├── Bootstrap.php     ... bootstrap file for PHPUnit
 │        ├── TestCase.php      ... TestCase class
 │        ├── controllers/      ... put your controller tests
@@ -105,6 +110,12 @@ Generating code coverage report in HTML format ... done
 
 To generate coverage report, Xdebug is needed.
 
+If you want to run a single test case file:
+
+~~~
+$ phpunit models/Category_model_test.php
+~~~
+
 ## How to Write Tests
 
 As an example, a test case class for `Inventory_model` would be as follows:
@@ -174,3 +185,4 @@ See [Function and Class Reference](https://github.com/kenjis/ci-phpunit-test/blo
 * [CodeIgniter Doctrine](https://github.com/kenjis/codeigniter-doctrine)
 * [CodeIgniter Deployer](https://github.com/kenjis/codeigniter-deployer)
 * [CodeIgniter3 Filename Checker](https://github.com/kenjis/codeigniter3-filename-checker)
+* [CodeIgniter Widget (View Partial) Sample](https://github.com/kenjis/codeigniter-widgets)

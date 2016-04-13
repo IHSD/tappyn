@@ -20,6 +20,21 @@ This is request list for CodeIgniter 3.x.
 
 If so, we can test the status code.
 
+## Output class has cookie data
+
+If so, we can test the cookie data.
+
+## Input class has no static variables in methods
+
+We can't reset the static variable below. It makes difficult to run another test using headers.
+
+~~~php
+    public function get_request_header($index, $xss_clean = FALSE)
+    {
+        static $headers;
+        ...
+~~~
+
 ## Way to reset CodeIgniter object
 
 To test singleton, we need a method to reset it.

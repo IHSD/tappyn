@@ -661,3 +661,9 @@ ERROR - 2016-04-13 11:13:17 --> Severity: Error --> Class 'MY_Loader' not found 
 DEBUG - 2016-04-13 11:13:37 --> UTF-8 Support Enabled
 DEBUG - 2016-04-13 11:13:37 --> Global POST, GET and COOKIE data sanitized
 ERROR - 2016-04-13 11:13:37 --> Severity: Error --> Class 'MY_Loader' not found /var/www/tappyn/system/core/Common.php 230
+DEBUG - 2016-04-13 19:41:47 --> UTF-8 Support Enabled
+DEBUG - 2016-04-13 19:41:47 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2016-04-13 19:41:47 --> Config file loaded: /var/www/html/tappyn/api/v1/application/config/upvote.php
+DEBUG - 2016-04-13 19:41:59 --> UTF-8 Support Enabled
+DEBUG - 2016-04-13 19:41:59 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2016-04-13 19:41:59 --> Config file loaded: /var/www/html/tappyn/api/v1/application/config/upvote.php

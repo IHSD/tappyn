@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of CI PHPUnit Test
+ * Part of ci-phpunit-test
  *
  * @author     Kenji Suzuki <https://github.com/kenjis>
  * @license    MIT License
@@ -10,5 +10,9 @@
 
 require __DIR__ . '/Installer.php';
 
+$app = 'application';
+if ($argv && $argv[1] && is_dir($argv[1])) {
+    $app = $argv[1];
+}
 $installer = new Installer();
-$installer->install();
+$installer->install($app);

@@ -1,6 +1,6 @@
 <?php
 /**
- * Part of CI PHPUnit Test
+ * Part of ci-phpunit-test
  *
  * @author     Kenji Suzuki <https://github.com/kenjis>
  * @license    MIT License
@@ -10,23 +10,23 @@
 
 class Installer
 {
-    const TEST_FOLDER = 'application/tests';
+    const TEST_FOLDER = 'tests';
 
-    public static function install()
+    public static function install($app = 'application')
     {
         self::recursiveCopy(
-            'vendor/kenjis/ci-phpunit-test/application/tests',
-            static::TEST_FOLDER
+            dirname(__FILE__) . '/application/tests',
+            $app . '/' . static::TEST_FOLDER
         );
-        self::fixPath();
+        self::fixPath($app);
     }
 
     /**
      * Fix paths in Bootstrap.php
      */
-    private static function fixPath()
+    private static function fixPath($app = 'application')
     {
-        $file = static::TEST_FOLDER . '/Bootstrap.php';
+        $file = $app . '/' . static::TEST_FOLDER . '/Bootstrap.php';
         $contents = file_get_contents($file);
         
         if (! file_exists('system')) {
@@ -43,11 +43,38 @@ class Installer
         
         if (! file_exists('index.php')) {
             if (file_exists('public/index.php')) {
+                // CodeIgniter 3.0.6 and after
+                $contents = str_replace(
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../..').DIRECTORY_SEPARATOR);",
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../../public').DIRECTORY_SEPARATOR);",
+                    $contents
+                );
+                // CodeIgniter 3.0.5 and before
                 $contents = str_replace(
                     "define('FCPATH', realpath(dirname(__FILE__).'/../..').'/');",
                     "define('FCPATH', realpath(dirname(__FILE__).'/../../public').'/');",
                     $contents
                 );
+            } elseif (file_exists($app . '/public/index.php')) {
+                // CodeIgniter 3.0.6 and after
+                $contents = str_replace(
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../..').DIRECTORY_SEPARATOR);",
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../public').DIRECTORY_SEPARATOR);",
+                    $contents
+                );
+                // CodeIgniter 3.0.5 and before
+                $contents = str_replace(
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../..').'/');",
+                    "define('FCPATH', realpath(dirname(__FILE__).'/../public').'/');",
+                    $contents
+                );
+                if ($app != 'application') {
+                    $contents = str_replace(
+                        "\$application_folder = '../../application';",
+                        "\$application_folder = '../../{$app}';",
+                        $contents
+                    );
+                }
             } else {
                 throw new Exception('Can\'t find "index.php".');
             }
@@ -56,12 +83,13 @@ class Installer
         file_put_contents($file, $contents);
     }
 
-    public static function update()
+    public static function update($app = 'application')
     {
-        self::recursiveUnlink('application/tests/_ci_phpunit_test');
+        $target_dir = $app . '/' . static::TEST_FOLDER . '/_ci_phpunit_test';
+        self::recursiveUnlink($target_dir);
         self::recursiveCopy(
-            'vendor/kenjis/ci-phpunit-test/application/tests/_ci_phpunit_test',
-            'application/tests/_ci_phpunit_test'
+            dirname(__FILE__) . '/application/tests/_ci_phpunit_test',
+            $target_dir
         );
     }
 

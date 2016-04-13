@@ -1,4 +1,33 @@
-# Change Log for CI PHPUnit Test
+# Change Log for ci-phpunit-test
+
+## v0.11.3 (2016/03/25)
+
+### Fixed
+
+* `assertRedirect()` does not work with external redirects. See [#104](https://github.com/kenjis/ci-phpunit-test/pull/104).
+
+### Others
+
+* Compatible with CodeIgniter 3.0.6
+* Improved installer. See [#103](https://github.com/kenjis/ci-phpunit-test/pull/103).
+
+## v0.11.2 (2016/03/17)
+
+### Others
+
+* Compatible with CodeIgniter 3.0.5
+
+## v0.11.1 (2016/02/22)
+
+### Fixed
+
+* Fix bug that `$this->input->get_request_header()` returns the first header value for all tests. See [#92](https://github.com/kenjis/ci-phpunit-test/issues/92).
+* Fix bug that config values are not reset between tests. See [#94](https://github.com/kenjis/ci-phpunit-test/issues/94).
+*  Fix bug that `CI_Output::_display()` is called even if you call a controller method directly (when you pass an array to the 2nd argument of `$this->request()`).
+
+### Others
+
+* Improved documentation for `$this->request()`.
 
 ## v0.11.0 (2016/01/20)
 
@@ -172,11 +201,11 @@
 
 ### Changed
 
-* Now *CI PHPUnit Test* replaces `redirect()` function by default. See [#33](https://github.com/kenjis/ci-phpunit-test/pull/33).
+* Now ci-phpunit-test replaces `redirect()` function by default. See [#33](https://github.com/kenjis/ci-phpunit-test/pull/33).
 
 ### Added
 
-* Monkey Patching on `exit()`. *CI PHPUnit Test* could convert `exit()` in your code to Exception on the fly. See [#32](https://github.com/kenjis/ci-phpunit-test/pull/32).
+* Monkey Patching on `exit()`. ci-phpunit-test could convert `exit()` in your code to Exception on the fly. See [#32](https://github.com/kenjis/ci-phpunit-test/pull/32).
 * `$this->request->setCallablePreConstructor()` to inject mocks into your controller constructors. See [#29](https://github.com/kenjis/ci-phpunit-test/pull/29).
 
 ### Fixed
