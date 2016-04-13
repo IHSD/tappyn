@@ -21,7 +21,7 @@ class Submission_library
      * @return boolean
      */
 
-    public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL)
+    public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL, $attachment = NULL)
     {
         if(!$this->ion_auth->logged_in())
         {
@@ -66,6 +66,7 @@ class Submission_library
             'headline' => $headline,
             'link_explanation' => $link_explanation,
             'text' => $text
+            'attachment_url' => $attachment
         );
 
         $success = false;
@@ -85,6 +86,7 @@ class Submission_library
                 'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
                 'contest' => $contest->title,
                 'company' => $contest->company->name,
+                'attachment_url' => $attachment,
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );
             $this->mailer->to($this->ion_auth->user()->row()->email)

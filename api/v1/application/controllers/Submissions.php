@@ -139,7 +139,7 @@ class Submissions extends CI_Controller
             return;
         }
 
-        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation')))
+        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation'), $this->input->post('attachment_url')))
         {
             $this->responder->message(
                 "You're submission has succesfully been created"
@@ -150,7 +150,7 @@ class Submissions extends CI_Controller
                 'object_type' => "submission",
                 'object_id' => $sid
             ));
-            
+
             $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
         }
         else {
