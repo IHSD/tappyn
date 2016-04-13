@@ -204,7 +204,7 @@ class Users extends CI_Controller
         }
         $this->responder->data(array('submissions' => $subs))->respond();
     }
-
+    
     public function follow($fid)
     {
         $this->load->model('follow');
