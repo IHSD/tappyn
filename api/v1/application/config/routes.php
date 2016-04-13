@@ -91,7 +91,7 @@ $route['payouts/(:num)/claim']['post']      = 'payouts/claim/$1';
 /*========================
   Vouchers
 ========================*/
-$route['vouchers']['get']                   = 'vouchers/is_valid';
+$route['vouchers']                   = 'vouchers/is_valid';
 
 /**
  * Anything that does not match a defined route, we send to the 404 of our
