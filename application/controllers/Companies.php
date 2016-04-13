@@ -20,12 +20,121 @@ class Companies extends CI_Controller
 
     public function index($offset = 0)
     {
-        $companies = $this->db->select('*')->from('profiles')->where(
+        $companies = $this->company->select('*')->from('profiles')->where(
             'summary IS NOT NULL', NULL
-        )->limit(25, $offset)->get()->result();
+        )->limit(25, $offset);
+        $followed = $this->input->get('followed');
+        if($followed)
+        {
+            $follows = $this->user->following($this->ion_auth->user()->row()->id);
+            if(empty($follows))
+            {
+                $this->responder->data(array())->respond();
+                return;
+            }
+            $this->company->where_in('id', $follows);
+        }
+        $companies = $this->company->fetch()->result();
         $this->responder->data(array(
             'companies' => $companies
         ))->respond();
+    }
+
+    public function contests($cid)
+    {
+        $contests = array();
+        $contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->order_by('start_time', 'desc')->get()->result();
+        foreach($contests as $contest)
+        {
+            $contest->submission_count = $this->contest->submissionsCount($contest->id);
+            if($contest->stop_time < date('Y-m-d H:i:s'))
+            {
+                $contest->status = 'ended';
+                $contest->link = 'ended';
+            } else {
+                $contest->status = 'active';
+                $contest->link = 'contest';
+            }
+        }
+        $this->responder->data(array('contests' => $contests))->respond();
+    }
+
+    public function show($cid = 0)
+    {
+        if(!$this->ion_auth->in_group(3, $cid))
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+        $company = $this->company->get($cid);
+        unset($company->stripe_customer_id);
+        if(!$company)
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+
+        $company->requests = (int) $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+            'company_id' => $cid,
+            'fulfilled' => 0
+        ))->get()->row()->count;
+
+        $company->follows = $this->db->select('COUNT(*) as count')->from('follows')->where('following', $company->id)->get()->row()->count;
+
+        if($this->ion_auth->logged_in()){
+            $uid = $this->ion_auth->user()->row()->id;
+            $user_follow = $this->db->select('*')->from('follows')->where(array('follower' => $uid, 'following' => $cid))->get();
+            $company->user_may_follow = TRUE;
+            if($user_follow->num_rows() == 1)
+            {
+                $company->user_may_follow = FALSE;
+            }
+        }
+        $this->responder->data(array(
+            'company' => $company
+        ))->respond();
+    }
+
+    public function request_contest($cid)
+    {
+        if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(2))
+        {
+            $this->responder->fail("Unauthorized Access")
+                            ->code(403)
+                            ->respond();
+                            return;
+        }
+
+        $req_check = $this->company->select('*')->from('requests')->where(array(
+            'user_id' => $this->ion_auth->user()->row()->id,
+            'company_id' => $cid,
+            'fulfilled' => 0
+        ))->fetch();
+        if(!$req_check || $req_check->num_rows() > 0)
+        {
+            $this->responder->fail("You've already requested a contest from them!")->code(500)->respond();
+            return;
+        }
+
+        if($this->db->insert('requests', array(
+            'company_id' => $cid,
+            'user_id' => $this->ion_auth->user()->row()->id,
+            'fulfilled' => 0,
+            'requested_at' => time()
+        )))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error making your request")->code(500)->respond();
+        }
     }
 
 
@@ -51,7 +160,8 @@ class Companies extends CI_Controller
         {
             $this->contest->where(array(
                 'start_time <' => date('Y-m-d H:i:s'),
-                'stop_time >' => date('Y-m-d H:i:s')
+                'stop_time >' => date('Y-m-d H:i:s'),
+                'paid' => 1
             ));
         }
 
@@ -124,7 +234,8 @@ class Companies extends CI_Controller
                 'extra_info' => $this->input->post('extra_info'),
                 'name' => $this->input->post('name'),
                 'company_email' => $this->input->post('company_email'),
-                'company_url' => $this->input->post('facebook_url'),
+                'company_url' => $this->input->post('company_url'),
+                'facebook_url' => $this->input->post('facebook_url'),
                 'twitter_handle' => $this->input->post('twitter_handle'),
                 'different' => $this->input->post('different'),
                 'summary' => $this->input->post('summary')
@@ -345,17 +456,18 @@ class Companies extends CI_Controller
                 "Your payment was successfully processed!"
             )->respond();
             $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'contest_create');
-            $this->mailer->to($this->ion_auth->user()->row()->email)
-                         ->from('squad@tappyn.com')
-                         ->subject("Receipt for your launched contest")
-                         ->html($this->load->view('emails/contest_payment', array(
-                             'company' => $this->ion_auth->profile('name'),
-                             'contest' => $contest,
-                             'eid' => $eid,
-                             'charge' => $charge,
-                             'voucher' => isset($voucher) ? $voucher : FALSE
-                         ), TRUE))
-                         ->send();
+            $this->mailer->queue($this->ion_auth->user()->row()->email, $this->ion_auth->user()->row()->id, 'contest_receipt', 'contest', $contest->id);
+            // $this->mailer->to($this->ion_auth->user()->row()->email)
+            //              ->from('squad@tappyn.com')
+            //              ->subject("Receipt for your launched contest")
+            //              ->html($this->load->view('emails/contest_payment', array(
+            //                  'company' => $this->ion_auth->profile('name'),
+            //                  'contest' => $contest,
+            //                  'eid' => $eid,
+            //                  'charge' => $charge,
+            //                  'voucher' => isset($voucher) ? $voucher : FALSE
+            //              ), TRUE))
+            //              ->send();
 
             // We find any users who have submitted to one of this companies previous contests,
             // anybody who is following this contest, and anybody who has followed this interest

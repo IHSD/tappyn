@@ -24,6 +24,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/profile/view.html',
 		controller : 'profileController'
 	})
+	.when('/company_profile/:id', {
+		templateUrl : 'components/comp_pro/view.html',
+		controller : 'comproController'
+	})
 	.when('/top', {
 		templateUrl : 'components/top/view.html',
 		controller : 'topController'
@@ -52,6 +56,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contact_us/view.html'
 	})
 	.when('/companies', {
+		templateUrl : 'components/companies/view.html',
+		controller : 'companiesController'
+	})
+	.when('/for_companies', {
 		templateUrl : 'components/company/view.html'
 	})
 	.when('/faq', {
@@ -115,6 +123,15 @@ tappyn.filter('capUnderscore', function() {
     	}
     	return new_stringers;
     }
+  }
+});
+
+tappyn.filter('urlFilter', function() {
+  return function(input) {
+    if (/^(https?:\/\/)/.exec(input)){
+    	return input
+    }
+    else return 'http://'+input;
   }
 });
 
@@ -731,13 +748,186 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
+tappyn.controller("companiesController", function($scope, $rootScope, companiesFactory){
+	$scope.grab_my = function(){
+		$scope.tab = "my";
+		companiesFactory.grabMyCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		companiesFactory.grabCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		});
+	}	
+
+	$scope.grab_companies();
+});
+tappyn.factory("companiesFactory", function($http){
+	var fact = {};
+
+	fact.grabCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+ 	fact.grabMyCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies?followed=1',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('comproController', function($scope, $rootScope, $routeParams, comproFactory){
 	if($routeParams.id){
-		
+		comproFactory.grabProfile($routeParams.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.company = response.data.company;
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});	
+		comproFactory.grabContests($routeParams.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contests = response.data.contests;
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});	
+	}
+
+	$scope.follow = function(){
+		if(!$rootScope.user){
+			$scope.set_alert("Please make an account to follow companies!", "default");
+			$scope.open_register("default", "");
+		}	
+		else{
+			comproFactory.followCompany($routeParams.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert("You're following "+$scope.company.name, "default");	
+						$scope.company.follows++;
+						$scope.company.user_may_follow = false;
+					}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});
+		}
+	}
+
+	$scope.unfollow = function(){
+		comproFactory.unfollowCompany($routeParams.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert("You unfollowed "+$scope.company.name, "default");
+					$scope.company.follows--;
+					$scope.company.user_may_follow = true;
+				}	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.request_contest = function(){
+		if(!$rootScope.user){
+			$scope.set_alert("Please make an account to request contests!", "default");
+			$scope.open_register("default", "");
+		}
+		else{
+			comproFactory.requestContest($routeParams.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");	
+						$scope.company.contest_requests++;
+					}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			});
+		}
 	}
 });
 tappyn.factory('comproFactory', function($http){
 	var fact = {};
+
+	fact.grabProfile = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies/show/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabContests = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/companies/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.requestContest = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/companies/request_contest/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.followCompany = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/users/follow/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.unfollowCompany = function(id){
+		return $http({
+			method : 'POST',
+			url : 'index.php/users/unfollow/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
 
 	return fact;
 })
@@ -746,8 +936,11 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
-		if($scope.contest.status == "ended" && $rootScope.user.id != $scope.contest.owner){
-			if(!$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);
+		if($scope.contest.status == "ended"){
+			if($rootScope.user){
+				if($rootScope.user.id != $scope.contest.owner && !$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);
+			}
+			else $location.path('/ended/'+$routeParams.id);
 		}
 		if($scope.contest.emotion){
 			$scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);
@@ -942,8 +1135,8 @@ tappyn.service("contestModel", function(){
 		return layout;
 	}
 })
-tappyn.controller('contestsController', function($scope, $rootScope, contestsFactory){
-	if(!$rootScope.user){
+tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
+	if(!$rootScope.user || $rootScope.user.type == 'company'){
 		$scope.tab = "all";
 		contestsFactory.grabAllContests().success(function(response){
 			$scope.contests = response.data.contests;
@@ -968,6 +1161,11 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 		})
 	}
 
+	$scope.close_contests_login = function(){
+		$scope.contests_login = false;
+		$rootScope.modal_up = false;
+		$location.path('/home');
+	}
 
 	$scope.filter_industry = function(pass){
 		contestsFactory.filterGrab(pass).success(function(response){
@@ -1326,6 +1524,28 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
+tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
+	endedFactory.grabContest($routeParams.id).success(function(response){
+		$scope.contest = response.data.contest;
+		$scope.winner = response.data.winner;
+		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
+	})
+})
+tappyn.factory("endedFactory", function($http){
+	var fact = {};
+
+	fact.grabContest = function(id){
+		return $http({
+			method : 'GET',
+			url : 'index.php/contests/winner/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	return fact;
+})
 tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	$scope.logged_in();
 	if($routeParams.id){
@@ -1408,33 +1628,8 @@ tappyn.factory("editFactory", function($http){
 
 	return fact;
 })
-tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
-	endedFactory.grabContest($routeParams.id).success(function(response){
-		$scope.contest = response.data.contest;
-		$scope.winner = response.data.winner;
-		if($scope.contest.status == 'active') $location.path('/contest/'+$routeParams.id);
-	})
-})
-tappyn.factory("endedFactory", function($http){
-	var fact = {};
-
-	fact.grabContest = function(id){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests/winner/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})
-	}
-
-	return fact;
-})
-tappyn.controller('homeController', function($scope, $location, homeFactory){
-	homeFactory.grabCool().success(function(response){
-		$scope.contests = response.data.contests;
-	})
-
+tappyn.controller('homeController', function($scope, $rootScope, $location, homeFactory){
+	$rootScope.modal_up = false;
 
 	$scope.mailing_list = function(email){
 		homeFactory.mailingList(email).success(function(response){

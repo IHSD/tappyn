@@ -184,7 +184,7 @@ class Users extends CI_Controller
     {
         $submissions = $this->submission->select('COUNT(*) as count')->where('owner', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
         $upvotes = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
-        $payouts = $this->payout->fetch(array('user_id', $this->ion_auth->user()->row()->id));
+        $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
         $won = count($payouts);
         error_log(json_encode($payouts));
         $this->responder->data(array(
@@ -204,6 +204,45 @@ class Users extends CI_Controller
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
         }
         $this->responder->data(array('submissions' => $subs))->respond();
+    }
+
+    public function follow($fid)
+    {
+        $this->load->model('follow');
+        $follower_check = $this->follow->select('*')->from('follows')->where(array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid
+        ))->fetch();
+        if(!$follower_check || $follower_check->num_rows() > 0)
+        {
+            $this->responder->fail("You're already ollowing that company")->code(500)->respond();
+            return;
+        }
+        if($this->db->insert('follows', array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid,
+            'created' => time()
+        )))
+        {
+            $this->responder->respond();
+        } else {
+            $this->responder->fail("There was an error following that company")->code(500)->respond();
+        }
+    }
+
+    public function unfollow($fid)
+    {
+        $this->load->model('follow');
+        if($this->db->where(array(
+            'follower' => $this->ion_auth->user()->row()->id,
+            'following' => $fid
+        ))->delete('follows')) {
+            $this->responder->respond();
+        }
+        else
+        {
+            $this->responder->fail("There was an error unfollowing that user")->code(500)->respond();
+        }
     }
 
     /**

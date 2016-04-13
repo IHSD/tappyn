@@ -24,6 +24,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/profile/view.html',
 		controller : 'profileController'
 	})
+	.when('/company_profile/:id', {
+		templateUrl : 'components/comp_pro/view.html',
+		controller : 'comproController'
+	})
 	.when('/top', {
 		templateUrl : 'components/top/view.html',
 		controller : 'topController'
@@ -52,6 +56,10 @@ tappyn.config(function($routeProvider) {
 		templateUrl : 'components/contact_us/view.html'
 	})
 	.when('/companies', {
+		templateUrl : 'components/companies/view.html',
+		controller : 'companiesController'
+	})
+	.when('/for_companies', {
 		templateUrl : 'components/company/view.html'
 	})
 	.when('/faq', {
@@ -115,6 +123,15 @@ tappyn.filter('capUnderscore', function() {
     	}
     	return new_stringers;
     }
+  }
+});
+
+tappyn.filter('urlFilter', function() {
+  return function(input) {
+    if (/^(https?:\/\/)/.exec(input)){
+    	return input
+    }
+    else return 'http://'+input;
   }
 });
 

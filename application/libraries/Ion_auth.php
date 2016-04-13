@@ -377,17 +377,19 @@ class Ion_auth
 			{
 				$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_activate', 'ion_auth'), $data, true);
 
-				$this->mailer
-						->to($data['identity'])
-						->from('Registration@tappyn.com')
-						->subject("Account successfully created")
-						->html($message);
-				if ($this->mailer->send() == TRUE)
-				{
-					$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
-					$this->set_message('activation_email_successful');
-					return $id;
-				}
+				$this->mailer->queue($data['identity'], $user->id, 'sign_up_conf', 'user', $user->id);
+				$this->ion_auth_model->trigger_events(array('post_account_creation', 'post_account_creation_successful', 'activation_email_successful'));
+				$this->set_message('activation_email_successful');
+				return $id;
+				// // $this->mailer
+				// // 		->to($data['identity'])
+				// // 		->from('Registration@tappyn.com')
+				// // 		->subject("Account successfully created")
+				// // 		->html($message);
+				//
+				// if ($this->mailer->send() == TRUE)
+				// {
+				// }
 
 			}
 

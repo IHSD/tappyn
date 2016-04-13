@@ -8,6 +8,7 @@ class Mailer
     protected $subject;
     protected $html;
     protected $callback;
+    protected $errors = array();
 
     public function __construct()
     {
@@ -59,8 +60,31 @@ class Mailer
             ->setFrom($this->from)
             ->setSubject($this->subject)
             ->setHtml($this->html);
-        $this->handler->send($this->email);
-        $this->email = new SendGrid\Email();
+        try{
+            $this->handler->send($this->email);
+        } catch(\SendGrid\Exception $e) {
+            $this->errors = json_encode($e->getErrors());
+            return FALSE;
+        } finally {
+            $this->email = new SendGrid\Email();
+        }
         return TRUE;
+    }
+
+    public function queue($email, $uid, $type, $object, $object_id = 0)
+    {
+        $this->db->insert('mailing_queue', array(
+            'queued_at' => time(),
+            'recipient' => $email,
+            'recipient_id' => $uid,
+            'email_type' => $type,
+            'object_type' => $object,
+            'object_id' => $object_id
+        ));
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }

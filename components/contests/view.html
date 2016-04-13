@@ -3,6 +3,7 @@
 		<div class='panel'>
 			<div class='panel-body'>
 				<div class='col-xs-12' style='margin-bottom:7px;'>
+					<div class='close_circle' ng-click='close_contests_login()'>X</div>
 					<div class='text-center'><img style='position:absolute;top:-35;right:43%;border-radius:40px;width:50px;height:50px;' src='public/img/TappynFB6.jpg'></div>
 					<h4 class='text-center'>Alyssa used Tappyn to create a short ad about juice cleanses - and won $50</h4>
 					<h5 class='text-center'>Join Tappyn (for free!) and see which companies are looking for you</h5>
@@ -102,10 +103,6 @@
 				<h2 class='text-center'>Here are all the active contests.</h2>
 				<h4 class='text-center'>Just click on any contest to get started!</h4>
 			</div>
-			<div class='col-xs-12' ng-if='tab == "company"'>
-				<h2 class='text-center'>Here are the companies that have launched contests.</h2>
-				<h4 class='text-center'>Just click on any company to view their profile!</h4>
-			</div>
 		</div>
 		<div class='col-xs-12' ng-if='tab == "my" && !contests'>
 			<h4 class='text-center'>You haven't followed any interests yet! Pick a few so we can assemble your feed!</h4>
@@ -113,120 +110,76 @@
 		</div>
 		<div class='col-xs-12' ng-if='tab == "my" && contests'>
 			<div class='text-right'><button class='btn btn-outliner' ng-click='adding_interests("new")'>Follow New Interests</button></div>
+		</div>	
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='first_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
 		</div>
-		<div ng-if='tab == "all" || tab == "my"'>	
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='first_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='second_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='third_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='fourth_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='fifth_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-lg-2 visible-lg">
-				 <div ng-if='sixth_six($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md">
-				 <div ng-if='first_fourth($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md">
-				 <div ng-if='second_fourth($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md">
-				 <div ng-if='third_fourth($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md">
-				 <div ng-if='fourth_fourth($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='first_third($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='second_third($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='third_third($index)' ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>
-			</div>
-			<div class="col-xs-12 visible-xs">
-				 <div ng-repeat='contest in contests'>
-				 		<div ng-include src="'templates/contests.html'"></div>
-				 </div>		   
-			</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='second_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
 		</div>
-		<div ng-if='tab == "company"'>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='first_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='second_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='third_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-md-3 visible-md visible-lg">
-				 <div ng-if='fourth_fourth($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='first_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='second_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
-			<div class="col-sm-4 visible-sm">
-				 <div ng-if='third_third($index)' ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>
-			</div>
-			<div class="col-xs-12 visible-xs">
-				 <div ng-repeat='company in companies'>
-				 		<div ng-include src="'templates/companies.html'"></div>
-				 </div>		   
-			</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='third_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='fourth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='fifth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-lg-2 visible-lg">
+			 <div ng-if='sixth_six($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='first_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='second_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='third_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-md-3 visible-md">
+			 <div ng-if='fourth_fourth($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='first_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='second_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
+		</div>
+		<div class="col-sm-4 visible-sm">
+			 <div ng-if='third_third($index)' ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>
+		</div>
+		<div class="col-xs-12 visible-xs">
+			 <div ng-repeat='contest in contests'>
+			 		<div ng-include src="'templates/contests.html'"></div>
+			 </div>		   
 		</div>
 	</div>
 </div>	

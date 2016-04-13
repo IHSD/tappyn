@@ -548,12 +548,13 @@ class Auth extends CI_Controller {
 			// Succesful company regstration
 			if($this->input->post('group_id') == 3)
 			{
-				$this->mailer
-					->to($email)
-					->from("Registration@tappyn.com")
-					->subject('Account Successfully Created')
-					->html($this->load->view('auth/email/registration', array(), true))
-					->send();
+				$this->mailer->queue($email, $id, 'company_sign_up_conf', 'user', $id);
+				// $this->mailer
+				// 	->to($email)
+				// 	->from("Registration@tappyn.com")
+				// 	->subject('Account Successfully Created')
+				// 	->html($this->load->view('auth/email/registration', array(), true))
+				// 	->send();
 				$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
 	            if($this->ion_auth->login($identity, $password))
 				{

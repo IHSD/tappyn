@@ -15,12 +15,13 @@ class Contest extends MY_Model
         $this->order_dir = 'desc';
     }
 
-    public function log_impression($cid)
+    public function log_impression($cid, $uid = NULL)
     {
         $this->db->insert('impressions', array(
             'contest_id' => $cid,
             'ip_address' => $_SERVER['REMOTE_ADDR'],
-            'user_agent' => $_SERVER['HTTP_USER_AGENT']
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'user_id'    => $uid
         ));
     }
 
@@ -151,8 +152,7 @@ class Contest extends MY_Model
 
     public function create($data)
     {
-        $this->validate($data);
-        if(!$this->validate())
+        if(!$data = $this->validate($data))
         {
             return false;
         }
@@ -191,7 +191,7 @@ class Contest extends MY_Model
         return $this->messages;
     }
 
-    public function validate(&$data)
+    public function validate($data)
     {
         switch($data['age'])
         {

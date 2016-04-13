@@ -680,7 +680,8 @@ footer {
 	background: #fff;
 	padding: 10px;
 	margin:  10px 0 20px;
-	border-radius: 4px;
+	border-radius: 6px;
+	border:1px solid #ff5c00;
  }
  .min-height {
      min-height: 350px;
@@ -689,7 +690,7 @@ footer {
  	text-align: left;
  }
  .submission-box:hover {
- 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
  }
  .submission-box .submission-title {
  	color: #FF5E00;
@@ -754,7 +755,7 @@ footer {
 	font-size: 14px;
 	text-align: center;
 	font-weight: 400;
-	color: #8e8e8e;
+	color: #333;
 }
 .ad-company-info .progress-box .progress{
 	margin: 0;

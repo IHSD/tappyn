@@ -54,6 +54,8 @@ class User extends MY_Model
      */
     public function saveProfile($uid, $data)
     {
+        if($data['company_url'] && (strpos('http://', $data['company_url']) === FALSE)) $data['company_url'] = 'http://'.$data['company_url'];
+        if($data['facebook_url'] && (strpos('http://', $data['facebook_url']) === FALSE)) $data['facebook_url'] = 'http://'.$data['facebook_url'];
         $check = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
         if($check !== FALSE)
         {
@@ -133,6 +135,17 @@ class User extends MY_Model
         if(!empty($like)) $this->db->like($like);
 
         return (int) $this->db->get()->row()->count;
+    }
+
+    public function following($uid)
+    {
+        $res = array();
+        $follows = $this->db->select('following')->from('follows')->where('follower', $uid)->get()->result();
+        foreach($follows as $follow)
+        {
+            $res[] = $follow->following;
+        }
+        return $res;
     }
 
     public function errors()

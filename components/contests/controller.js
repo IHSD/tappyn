@@ -1,5 +1,5 @@
-tappyn.controller('contestsController', function($scope, $rootScope, contestsFactory){
-	if(!$rootScope.user){
+tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
+	if(!$rootScope.user || $rootScope.user.type == 'company'){
 		$scope.tab = "all";
 		contestsFactory.grabAllContests().success(function(response){
 			$scope.contests = response.data.contests;
@@ -24,6 +24,11 @@ tappyn.controller('contestsController', function($scope, $rootScope, contestsFac
 		})
 	}
 
+	$scope.close_contests_login = function(){
+		$scope.contests_login = false;
+		$rootScope.modal_up = false;
+		$location.path('/home');
+	}
 
 	$scope.filter_industry = function(pass){
 		contestsFactory.filterGrab(pass).success(function(response){
