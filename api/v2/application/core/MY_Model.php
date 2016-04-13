@@ -4,6 +4,7 @@ class MY_Model extends CI_Model
 {
     private static $table = NULL;
     protected $data = array();
+    protected $errors = FALSE;
 
     public function __construct()
     {
@@ -32,5 +33,10 @@ class MY_Model extends CI_Model
     public function data()
     {
         return $this->data;
+    }
+
+    public function errors()
+    {
+        return $this->errors;
     }
 }

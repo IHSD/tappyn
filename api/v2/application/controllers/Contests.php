@@ -61,26 +61,39 @@ class Contests extends MY_Controller
     {
         Hook::trigger('contest_creation_started');
 
-        $this->form_validation->set_rules('title', 'Title', 'required');
+        $this->form_validation->set_rules('platform', 'Platform', array('required', array( 'platform_callable', array($this->contest, 'validate_platform'))));
+        $this->form_validation->set_rules('objective', "Objective", array('required', array( 'objective_callable', array($this->contest, 'validate_objective'))));
+        $this->form_validation->set_rules('industry', "Industry", array('required', array( 'industry_callable', array($this->contest, 'validate_industry'))));
+        $this->form_validation->set_rules('emotion', "Emotion", array(array('emotion_callable', array($this->contest, 'validate_emotion'))));
+        $this->form_validation->set_message('industry_callable', "Invalid industry supplied");
+        $this->form_validation->set_message('emotion_callable', "Invalid emotion supplied");
+        $this->form_validation->set_message('objective_callable', "Invalid objective supplied");
+        $this->form_validation->set_message('platform_callable', "Invalid platform supplied");
         if($this->form_validation->run() === TRUE)
         {
             $contest = new Contest();
 
+            $images = array();
+            if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
+            if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
+            if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
+            if(!empty($images)) $data['additional_images'] = json_encode($images);
+
             $contest->setData(array(
-                ContestFields::OWNER => $this->user->id,
-                ContestFields::OBJECTIVE => $this->input->post('objective'),
-                ContestFields::PLATFORM => $this->input->post('platform'),
-                ContestFields::AUDIENCE => $this->input->post('audience'),
-                ContestFields::DIFFERENT => $this->input->post('different'),
-                ContestFields::SUMMARY => $this->input->post('summary'),
-                ContestFields::INDUSTRY => $this->input->post('industry'),
-                ContestFields::EMOTION => $this->input->post('emotion'),
-                ContestFields::DISPLAY_TYPE => $this->input->post('display_type'),
+                ContestFields::OWNER             => $this->user->id,
+                ContestFields::OBJECTIVE         => $this->input->post('objective'),
+                ContestFields::PLATFORM          => $this->input->post('platform'),
+                ContestFields::AUDIENCE          => $this->input->post('audience'),
+                ContestFields::DIFFERENT         => $this->input->post('different'),
+                ContestFields::SUMMARY           => $this->input->post('summary'),
+                ContestFields::INDUSTRY          => $this->input->post('industry'),
+                ContestFields::EMOTION           => $this->input->post('emotion'),
+                ContestFields::DISPLAY_TYPE      => $this->input->post('display_type'),
+                ContestFields::ADDITIONAL_IMAGES => $images
             ));
-            try {
-                $contest->save();
-            } catch(Exception $e) {
-                $this->response->fail($e->getMessage())->code(500)->respond();
+            if(!$contest->save())
+            {
+                $this->response->fail($contest->errors() ? $contest->errors() : "An unknown error occured")->code(500)->respond();
                 return;
             }
 

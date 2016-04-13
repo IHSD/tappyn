@@ -8,6 +8,8 @@ class ContestFields
     const STOP_TIME         = 'stop_time';
     const START_TIME        = 'start_time';
     const SUBMISSION_LIMIT  = 'submission_limit';
+    const AGE               = 'age';
+    const GENDER            = 'gender';
     const PRIZE             = 'prize';
     const OBJECTIVE         = 'objective';
     const PLATFORM          = 'platform';

@@ -14,4 +14,11 @@ class ContestInterests
     const TECH_SCIENCE      = 'tech_science';
     const PETS              = 'pets';
     const SPORTS_OUTDOORS   = 'sports_outdoors';
+
+    static function all()
+    {
+        return array(
+            FOOD_BEVERAGE
+        );
+    }
 }

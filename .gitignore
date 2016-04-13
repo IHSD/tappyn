@@ -8,15 +8,16 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-application/config/database.php
-application/config/secrets.php
-application/config/config.php
-application/config/facebook_ion_auth.php
+api/*/application/config/database.php
+api/*/application/config/secrets.php
+api/*/application/config/config.php
+api/*/application/config/facebook_ion_auth.php
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
 user_guide_src/cilexer/pycilexer.egg-info/*
+api/*/application/vendor/*
 application/vendor/*
 application/phinx.yml
 application/tests/build/*
