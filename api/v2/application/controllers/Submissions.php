@@ -10,17 +10,38 @@ class Submissions extends MY_Controller
     }
 
 
-    public function create()
+    public function create($contest_id)
     {
-        if($this->form_validation->run('submissions:create') === TRUE)
+        $this->config->load('form_validation', TRUE);
+        $rules = $this->config->item('submission_create');
+
+        // Validate that the contest exists, and also set our validation
+        // rules based on the contest platform and objective
+        $contest = Contest::get($contest_id);
+        if(!$contest)
         {
-            try {
-                $submission->save();
-            } catch(Exception $e) {
-                $this->response->fail($submission->errors())->code(500)->respond();
-                return;
+            $this->response->fail("That contest does not exist")->code(500)->respond();
+            return;
+        }
+
+        // Check that the contest is accepting submissions
+        if(!$contest->accepting_submissions())
+        {
+            $this->response->fail("That contest is no longer acccepting submissions")->code(500)->respond();
+            return;
+        }
+
+        if($this->form_validation->run($rules[$contest->platform][$contest->objective]) === TRUE)
+        {
+            if($submission->save())
+            {
+                $this->response->data(array('submission' => $submission->data()));
+                Hook::trigger('submission_created', array('submission' => $submission, 'user' => $this->user));
             }
-            Hook::trigger('submission_created', array());
+            else
+            {
+                $this->response->fail($submission->errors() ? $submission->errors() : "An unknown error occured")->code(500);
+            }
             $this->response->data(array('submission' => $submission->data));
         }
         else
@@ -32,7 +53,7 @@ class Submissions extends MY_Controller
 
     public function update()
     {
-        if($this->form_validation->run('submissions:updated') === TRUE)
+        if($this->form_validation->run() === TRUE)
         {
             try {
                 $submission->update();

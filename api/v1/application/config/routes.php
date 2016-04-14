@@ -84,6 +84,7 @@ $route['submissions/(:num)/votes']['post']      = 'votes/create/$1';
 $route['notifications']['get']              = 'notifications/index';
 $route['notifications/unread']['get']       = 'notifications/unread';
 $route['notifications/read']['post']        = 'notifications/read';
+$route['notifications/read_all']['post']    = 'notifications/read_all';
 
 /*========================
   Payouts

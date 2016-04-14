@@ -20,4 +20,5 @@ $config['welcome'] = array(
 );
 $config['votes'] = TRUE;
 $config['errors'] = FALSE;
-$config['accounts'] = TRUE;
+$config['accounts'] = FALSE;
+$config['submissions'] = FALSE;

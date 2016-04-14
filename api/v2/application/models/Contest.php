@@ -22,6 +22,18 @@ class Contest extends MY_Model
         return $contest;
     }
 
+    public function accepting_submissions()
+    {
+        if($this->{ContestFields::STOP_TIME} < date('Y-m-d H:i:s') ||
+           $this->{ContestFields::START_TIME} > date('Y-m-d H:i:s') ||
+           $this->submission_count() >= $this->{ContestFields::SUBMISSION_LIMIT} ||
+           $this->{ContestFields::PAID} == 0)
+           {
+               return FALSE;
+           }
+          return TRUE;
+    }
+
     public function save()
     {
         // Preprocess all the contest data before trying to save
@@ -55,6 +67,11 @@ class Contest extends MY_Model
             return FALSE;
         }
         return TRUE;
+    }
+
+    function submission_count()
+    {
+        return self::$db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $this->{ContestFields::ID})->get()->row()->count;
     }
 
     function impressions()
