@@ -20,12 +20,14 @@ class ContestSeeder extends AbstractSeed
             'brand_positioning',
             'exposure'
         );
+        
         $platforms = array(
             'facebook',
             'twitter',
             'google',
             'general'
         );
+
         $industries = array(
             'health_wellness',
             'social_network',
