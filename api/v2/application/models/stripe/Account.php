@@ -1,6 +1,6 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-class Profile extends MY_Model
+class Account extends MY_Model
 {
     private static $db;
     private static $table = 'users';
