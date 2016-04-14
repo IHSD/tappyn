@@ -8,7 +8,7 @@ $db['master'] = array(
 	'dsn'	=> 'mysql:host=localhost;dbname=tappyn',
 	'hostname' => 'localhost',
 	'username' => 'root',
-	'password' => 'davol350',
+	'password' => 'root',
 	'database' => 'tappyn',
 	'dbdriver' => 'pdo',
 	'dbprefix' => '',

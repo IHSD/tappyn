@@ -4,7 +4,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.submission = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contests/create',
+			url : 'api/v1/contests',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -15,7 +15,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.update = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contests/create/'+contest.id,
+			url : 'api/v1/contests/'+contest.id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -26,7 +26,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/users/profile',
+			url : 'api/v1/profile',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -36,7 +36,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies/accounts',
+			url : 'api/v1/companies/accounts',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -46,7 +46,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.payContest = function(id, obj){
 		return $http({
 			method : 'POST',
-			url : 'index.php/companies/payment/'+id,
+			url : 'api/v1/companies/payment/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -57,7 +57,7 @@ tappyn.factory('launchFactory', function($http){
 	fact.voucherValid = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/vouchers/is_valid',
+			url : 'api/v1/vouchers',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},

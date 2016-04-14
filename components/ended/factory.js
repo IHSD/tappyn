@@ -4,7 +4,7 @@ tappyn.factory("endedFactory", function($http){
 	fact.grabContest = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/contests/winner/'+id,
+			url : 'api/v1/contests/'+id+'/winner',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

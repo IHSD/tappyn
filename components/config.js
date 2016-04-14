@@ -6,7 +6,7 @@ var tappyn = angular.module('tappyn', [
 	'ngSanitize'
 ]);
 
-tappyn.config(function($routeProvider) {
+tappyn.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/home', {
 		templateUrl : 'components/home/view.html',
@@ -80,6 +80,7 @@ tappyn.config(function($routeProvider) {
 	})
 	.otherwise({redirectTo : '/home'})
 
+	$locationProvider.html5Mode(true);
 });
 
 tappyn.filter('untilFilter', function() {
@@ -641,7 +642,7 @@ tappyn.factory("AppFact", function($http){
 		var object = {'identity' : email, 'password' : pass}; 
 		return $http({
 			method : 'POST',
-			url : 'index.php/login',
+			url : 'api/v1/login',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -651,7 +652,7 @@ tappyn.factory("AppFact", function($http){
 	fact.loggingOut = function(){
 		return $http({
 			method : 'POST',
-			url : 'index.php/logout',
+			url : 'api/v1/logout',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -660,7 +661,7 @@ tappyn.factory("AppFact", function($http){
 	fact.signUp = function(registrant){
 		return $http({
 			method : 'POST',
-			url : 'index.php/signup',
+			url : 'api/v1/signup',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(registrant)
 		});
@@ -668,7 +669,7 @@ tappyn.factory("AppFact", function($http){
 	fact.contactUs = function(issue){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contact',
+			url : 'api/v1/contact',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(issue)
 		});	
@@ -676,14 +677,14 @@ tappyn.factory("AppFact", function($http){
 	fact.isLoggedIn = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/auth/is_logged_in',
+			url : 'api/v1/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
 		});	
 	}
 	fact.forgotPass = function(email){
 		return $http({
 			method : 'POST',
-			url : 'index.php/auth/forgot_password',
+			url : 'api/v1/forgot_password',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			data : $.param({identity : email})
 		});	
@@ -691,7 +692,7 @@ tappyn.factory("AppFact", function($http){
 	fact.aws_key = function(bucket){
         return $http({
             method:'POST',
-            url:'index.php/amazon/connect',
+            url:'api/v1/amazon/connect',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
             data : $.param({bucket : bucket})
         })
@@ -699,14 +700,14 @@ tappyn.factory("AppFact", function($http){
 	fact.grabNotifications = function(){
 		return $http({
             method:'GET',
-            url:'index.php/notifications/unread',
+            url:'api/v1/notifications/unread',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
 	fact.readNotification = function(notification){
 		return $http({
             method:'POST',
-            url:'index.php/notifications/read',
+            url:'api/v1/notifications/read',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'},
             data : $.param(notification)
         })
@@ -714,14 +715,14 @@ tappyn.factory("AppFact", function($http){
 	fact.readAll = function(){
 		return $http({
             method:'POST',
-            url:'index.php/notifications/read_all',
+            url:'api/v1/notifications/read_all',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
 	fact.agegen = function(age, gen){
 		return $http({
 			method : 'POST',
-			url : 'index.php/users/profile',
+			url : 'api/v1/profile',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -731,7 +732,7 @@ tappyn.factory("AppFact", function($http){
 	fact.followInterest = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/interests/add/'+id,
+			url : 'api/v1/interests/'+id+'/add',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -740,7 +741,7 @@ tappyn.factory("AppFact", function($http){
 	fact.unfollowInterest = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/interests/remove/'+id,
+			url : 'api/v1/interests/'+id+'/remove',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

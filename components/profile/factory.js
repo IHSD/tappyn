@@ -4,7 +4,7 @@ tappyn.factory('profileFactory', function($http){
 	fact.grabProfile = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/users/profile',
+			url : 'api/v1/profile',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory('profileFactory', function($http){
 	fact.updateProfile = function(profile){
 		return $http({
 			method : 'POST',
-			url : 'index.php/users/profile',
+			url : 'api/v1/profile',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -25,7 +25,7 @@ tappyn.factory('profileFactory', function($http){
 	fact.updatePass = function(pass){
 		return $http({
 			method : 'POST',
-			url : 'index.php/auth/change_password',
+			url : 'api/v1/password',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -36,7 +36,7 @@ tappyn.factory('profileFactory', function($http){
 	fact.resendVerification = function(){
 		return $http({
 			method : 'POST',
-			url : 'index.php/auth/resend_verification',
+			url : 'api/v1/resend_verification',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

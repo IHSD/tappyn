@@ -4,7 +4,7 @@ tappyn.factory('topFactory', function($http){
 	fact.grabTops = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/submissions/leaderboard',
+			url : 'api/v1/submissions/leaderboard',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,11 +14,10 @@ tappyn.factory('topFactory', function($http){
 	fact.upvote = function(contest, id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/votes/create',
+			url : 'api/v1/submissions/'+id+'/vote',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({contest_id : contest, submission_id : id})
+			}
 		});
 	}
 
