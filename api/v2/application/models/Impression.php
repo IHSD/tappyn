@@ -34,4 +34,10 @@ class Impression extends MY_Model
         $count = self::$db->select('COUNT(*) as count')->from(self::$table)->where($params)->get()->row()->count;
         return (int) $count;
     }
+
+    public function log($params = NULL)
+    {
+        var_dump($params);
+        self::$db->insert('impressions', $params);
+    }
 }

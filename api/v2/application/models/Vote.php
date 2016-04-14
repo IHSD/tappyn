@@ -39,4 +39,19 @@ class Vote extends MY_Model
         $count = self::$db->select('COUNT(*) as count')->from(self::$table)->where($params)->get()->row()->count;
         return (int) $count;
     }
+
+    public function save()
+    {
+        if(!$this->process())
+        {
+            return FALSE;
+        }
+
+        return self::$db->insert(self::$table, $this->data);
+    }
+
+    protected function process()
+    {
+        return TRUE;
+    }
 }

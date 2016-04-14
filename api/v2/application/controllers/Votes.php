@@ -8,12 +8,18 @@ class Votes extends MY_Controller
         $this->load->model(array('vote', 'submission'));
     }
 
-    public function create()
+    public function create($submission)
     {
-        $this->form_validation->set_rules('submission_id', "Submission", 'required|exists[submissions.id]|owns[submissions.owner]');
+        $this->form_validation->set_rules('submission_id', "Submission", 'required');
+        $submission = Submission::get($this->input->post('submission_id'));
+        if(!$submission)
+        {
+            $this->response->fail("That submission does not exist")->code(404)->respond();
+            return;
+        }
+
         if($this->form_validation->run() === TRUE)
         {
-            $submission = Submission::get($this->input->post('submission_id'));
             $vote = new Vote();
             $data = array(
                 VoteFields::SUBMISSION_ID => $this->input->post('submission_id'),
@@ -34,10 +40,5 @@ class Votes extends MY_Controller
             $this->response->fail($errors ? reset($errors) : "An unknown error occured");
         }
         $this->response->respond();
-    }
-
-    public function delete()
-    {
-
     }
 }

@@ -2,16 +2,18 @@
 
 class ContestInterests
 {
-    const FOOD_BEVERAGE     = 'food_beverage';
-    const FINANCE_BUSINESS  = 'finance_business';
-    const HEALTH_WELLNESS   = 'health_wellness';
-    const TRAVEL            = 'travel';
-    const SOCIAL_NETWORK    = 'social_network';
-    const HOME_GARDEN       = 'home_garden';
-    const EDUCATION         = 'education';
-    const ART_ENTERTAINMENT = 'art_entertainment';
-    const FASHION_BEAUTY    = 'fashion_beauty';
-    const TECH_SCIENCE      = 'tech_science';
-    const PETS              = 'pets';
-    const SPORTS_OUTDOORS   = 'sports_outdoors';
+    static $interests = array(
+        'food_beverage',
+        'finance_business',
+        'health_wellness',
+        'travel',
+        'social_network',
+        'home_garden',
+        'education',
+        'art_entertainment',
+        'fashion_beauty',
+        'tech_science',
+        'pets',
+        'sports_outdoors',
+    );
 }

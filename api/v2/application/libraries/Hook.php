@@ -4,19 +4,23 @@ class Hook
 {
     public static $hooks;
     public static $manager = FALSE;
-    public static $libraries = array();
-    public function __construct()
+    public static $models = array();
+    public function __construct($hooks)
     {
         self::$hooks = new StdClass();
+        foreach($hooks as $hook)
+        {
+            self::register($hook['event'], $hook['name'], $hook['class'], $hook['method'], $hook['args']);
+        }
     }
 
     /**
      * Initialize our Hook Manager
      * @return self
      */
-    public static function initialize()
+    public static function initialize($hooks)
     {
-        if(!self::$manager) self::$manager = new Hook();
+        if(!self::$manager) self::$manager = new Hook($hooks);
         return self::$manager;
     }
 
@@ -67,14 +71,24 @@ class Hook
     }
 
     /**
-     * Register a library for the hook manager to use to call functions
-     * @param  object $library Instance of the class to use
+     * Register a model for the hook manager to use to call functions
+     * @param  object $model Instance of the class to use
      * @return void
      */
-    public static function register_library($library)
+    public static function register_model($model)
     {
-        $className = strtolower(get_class($library));
-        self::$libraries[$className] = $library;
+        if(!is_array($model))
+        {
+            $className = strtolower(get_class($model));
+            self::$models[$className] = $model;
+        }
+        else
+        {
+            foreach($model as $mod)
+            {
+                self::register_model($mod);
+            }
+        }
     }
 
     /**
@@ -94,7 +108,6 @@ class Hook
 		}
 		else
 		{
-            error_log("Triggering event {$events} with arguments ".json_encode($args));
 			if (isset(self::$hooks->$events) && !empty(self::$hooks->$events))
 			{
 				foreach (self::$hooks->$events as $name => $hook)
@@ -125,7 +138,7 @@ class Hook
                     $arguments[$key] = $value;
                 }
             }
-			return call_user_func_array(array(self::$libraries[$hook->class], $hook->method), $arguments);
+			return call_user_func_array(array(self::$models[strtolower($hook->class)], $hook->method), array($arguments));
 		}
 
 		return FALSE;

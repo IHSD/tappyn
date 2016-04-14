@@ -17,6 +17,9 @@ class MY_Controller extends CI_Controller
             'response'
         ));
 
+        $this->load->model(array(
+            'notification'
+        ));
         // Set and decode our token
         $this->token->setToken($this->request->token());
 
@@ -30,17 +33,19 @@ class MY_Controller extends CI_Controller
                 $this->token->unsetToken();
             }
         }
-
         // Check authentication for our route
         $this->config->load('authorization');
+        $this->config->load('tappyn_hooks', TRUE);
         if(!$this->is_authorized(get_called_class(), $this->router->fetch_method()))
         {
             // Redirect them to a 403 unauthorized page;
             redirect('errors/show_403', 'refresh');
         }
 
+        /* Load and instantiate our Hook manager */
         include_once(APPPATH.'libraries/Hook.php');
-        Hook::initialize();
+        Hook::initialize($this->config->item('hooks', 'tappyn_hooks'));
+        Hook::register_model($this->notification);
     }
 
     protected function is_authorized($class, $method)
