@@ -14,7 +14,7 @@ $route['mailing_list']['post']      = 'welcome/mailing_list';
   Authentication
 ========================*/
 $route['login']['post']                 = 'auth/login';
-$route['logout']['get']                 = 'auth/logout';
+$route['logout']['post']                 = 'auth/logout';
 $route['is_logged_in']['get']           = 'auth/is_logged_in';
 $route['facebook']['get']               = 'auth/facebook';
 $route['password']['post']              = 'auth/change_password';
