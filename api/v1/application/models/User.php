@@ -125,7 +125,7 @@ class User extends MY_Model
     public function following($id)
     {
         $res = array();
-        $follows = $this->db->selectg('*')->from('follows')->where('follower', $id)->get()->result();
+        $follows = $this->db->select('*')->from('follows')->where('follower', $id)->get()->result();
         foreach($follows as $follow)
         {
             $res[] = $follow->following;
