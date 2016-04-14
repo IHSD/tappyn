@@ -17,7 +17,7 @@ class Contests extends CI_Controller
     }
 
     /**
-     * Find the first 5 dates that a copmany may launch  contest in that industry.
+     * Find the first 5 dates that a company may launch  contest in that industry.
      *
      * The default is only allowing 3 contests to start per day per given industry
      *
@@ -77,11 +77,13 @@ class Contests extends CI_Controller
             $gender = $profile->gender;
             $age = $profile->age;
         }
+
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
+
         $has_more = FALSE;
 
         $sql_interests = array();
@@ -242,7 +244,7 @@ class Contests extends CI_Controller
      * Create a new contest, or render the creation form
      * @return void
      */
-    public function create($id = null)
+    public function create()
     {
         $update = FALSE;
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
@@ -433,6 +435,90 @@ class Contests extends CI_Controller
                 $this->payout->errors() ? $this->payout->errors() : "An unknown error occured"
             )->code(500)->respond();
             return;
+        }
+    }
+
+    public function update($id)
+    {
+        $update = FALSE;
+        if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
+        {
+            $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
+            return;
+        }
+
+        $this->form_validation->set_rules('audience', 'Audience Description', 'required');
+        $this->form_validation->set_rules('different', 'How Your Different', 'required');
+        $this->form_validation->set_rules('objective', 'Objective', 'required');
+        $this->form_validation->set_rules('platform', 'Format', 'required');
+        $this->form_validation->set_rules('summary', 'Summary', 'required');
+        //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
+
+        if($this->form_validation->run() == true)
+        {
+            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
+            $age = $this->input->post('age');
+            $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
+            // Do some preliminary formatting
+            $data = array(
+                'audience'          => $this->input->post('audience'),
+                'summary'           => $this->input->post('summary'),
+                'different'         => $this->input->post('different'),
+                'objective'         => $this->input->post('objective'),
+                'platform'          => $this->input->post('platform'),
+                'gender'            => $this->input->post('gender'),
+                'owner'             => $this->ion_auth->user()->row()->id,
+                'age'               => $age,
+                'industry'          => $this->input->post('industry'),
+                'start_time'        => $start_time,
+                'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
+                'emotion'           => $this->input->post('emotion'),
+                'display_type'      => $this->input->post('display_type'),
+                'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30
+            );
+
+            $images = array();
+            if($this->input->post('additional_image_1')); $images[] = $this->input->post('additional_image_1');
+            if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
+            if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
+            if(!empty($images)) $data['additional_images'] = json_encode($images);
+
+            // Check that they own the contest
+            $contest = $this->contest->get($id);
+            if(!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id))
+            {
+                $this->responder->fail("You do not own this contest brody")->code(403)->respond();
+                return;
+            }
+            $cid = $this->contest->update($id, $data);
+        }
+
+        if($this->form_validation->run() == true && $cid)
+        {
+            $message = $update ? 'updated' : 'created';
+            $this->responder->message("Contest successfully updated")->data(array('id' => $cid))->respond();
+            $this->analytics->track(array(
+                'event_name' => "contest_creation",
+                'object_type' => "contest",
+                'object_id' => $cid
+            ));
+            $profile_data = array();
+            $profile = $this->ion_auth->profile();
+            if(is_null($profile->mission)) $profile_data['mission'] = $this->input->post('audience');
+            if(is_null($profile->different)) $profile_data['different'] = $this->input->post('different');
+            if(is_null($profile->summary)) $profile_data['summary'] = $this->input->post('summary');
+            if(is_null($profile->company_email)) $profile_data['company_email'] = $this->input->post('company_email');
+            if(is_null($profile->company_url)) $profile_data['company_url'] = $this->input->post('company_url');
+            if(!empty($profile_data))
+            {
+                $this->user->saveProfile($this->ion_auth->user()->row()->id, $profile_data);
+            }
+        }
+        else
+        {
+            $this->responder->fail(
+                (validation_errors() ? validation_errors() : ($this->contest->errors() ? $this->contest->errors() : 'An unknown error occured'))
+            )->code(500)->respond();
         }
     }
 

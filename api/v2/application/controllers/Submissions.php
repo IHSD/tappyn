@@ -33,6 +33,7 @@ class Submissions extends MY_Controller
 
         if($this->form_validation->run($rules[$contest->platform][$contest->objective]) === TRUE)
         {
+            echo "form_validation successful";
             if($submission->save())
             {
                 $this->response->data(array('submission' => $submission->data()));
@@ -46,7 +47,8 @@ class Submissions extends MY_Controller
         }
         else
         {
-            $this->response->fail(($errors = $this->form_validation->errors_array()) ? reset($errors) : "An unknown error occured");
+            var_dump(validation_errors());
+            $this->response->fail(($errors = $this->form_validation->error_array()) ? reset($errors) : "An unknown error occured");
         }
         $this->response->respond();
     }
