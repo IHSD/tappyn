@@ -4,7 +4,7 @@ tappyn.factory('contestFactory', function($http){
 	fact.grabContest = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/submissions/'+id,
+			url : 'api/v1/contests/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory('contestFactory', function($http){
 	fact.submitTo = function(id, submission){
 		return $http({
 			method : 'POST',
-			url : 'index.php/submissions/create/'+id,
+			url : 'api/v1/contests/'+id+'/submissions',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -25,7 +25,7 @@ tappyn.factory('contestFactory', function($http){
 	fact.chooseWinner = function(contest, id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contests/select_winner/'+contest,
+			url : 'api/v1/contests/'+contest+'/winner',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -36,11 +36,10 @@ tappyn.factory('contestFactory', function($http){
 	fact.upvote = function(contest, id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/votes/create',
+			url : 'api/v1/submissions/'+id+'/votes',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({contest_id : contest, submission_id : id})
+			}
 		});
 	}
 

@@ -50,4 +50,67 @@ tappyn.service("contestModel", function(){
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
 		return layout;
 	}
+
+	this.fire_google = function(contest){
+		if(contest.gender == "0"){
+			switch(contest.min_age){
+				case "18" : 
+					ga('set', 'contentGroup11', '<18-24 All Gender Contest>');
+					ga('send', 'pageview');
+				break;
+				case "25" : 
+					ga('set', 'contentGroup12', '<25-34 All Gender Contest>');
+					ga('send', 'pageview');
+				break;
+				case "35" : 
+					ga('set', 'contentGroup13', '<35-44 All Gender Contest>');
+					ga('send', 'pageview');
+				break;
+				case "45" : 
+					ga('set', 'contentGroup14', '<45+ All Gender Contest>');
+					ga('send', 'pageview');
+				break;
+			}
+		}
+		else if(contest.gender == "1"){
+			switch(contest.max_age){
+				case "18" : 
+					ga('set', 'contentGroup7', '<18-24 Male Contest>');
+					ga('send', 'pageview');
+				break;
+				case "25" : 
+					ga('set', 'contentGroup8', '<25-34 Male Contest>');
+					ga('send', 'pageview');
+				break;
+				case "35" : 
+					ga('set', 'contentGroup9', '<35-44 Male Contest>');
+					ga('send', 'pageview');
+				break;
+				case "45" : 
+					ga('set', 'contentGroup10', '<45+ Male Contest>');
+					ga('send', 'pageview');
+				break;
+			}
+		}
+		else if(contest.gender == "2"){
+			switch(contest.max_age){
+				case "18" : 
+					ga('set', 'contentGroup3', '<18-24 Female Contest>');
+					ga('send', 'pageview');
+				break;
+				case "25" : 
+					ga('set', 'contentGroup4', '<25-34 Female Contest>');
+					ga('send', 'pageview');
+				break;
+				case "35" : 
+					ga('set', 'contentGroup5', '<35-44 Female Contest>');
+					ga('send', 'pageview');
+				break;
+				case "45" : 
+					ga('set', 'contentGroup6', '<45+ Female Contest>');
+					ga('send', 'pageview');
+				break;
+			}
+		}
+	}
 })

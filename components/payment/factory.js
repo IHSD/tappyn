@@ -4,7 +4,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/accounts/details',
+			url : 'api/v1/accounts/details',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.verifyIdentity = function(details){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/details',
+			url : 'api/v1/accounts/details',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -25,7 +25,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.addPayment = function(token){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/payment_methods',
+			url : 'api/v1/accounts/payment_methods',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -36,7 +36,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.removeMethod = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/remove_method',
+			url : 'api/v1/accounts/remove_method',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -47,7 +47,7 @@ tappyn.factory("paymentFactory", function($http){
 	fact.setDefault = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/accounts/default_method',
+			url : 'api/v1/accounts/default_method',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
