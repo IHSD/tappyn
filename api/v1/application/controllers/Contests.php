@@ -17,7 +17,7 @@ class Contests extends CI_Controller
     }
 
     /**
-     * Find the first 5 dates that a copmany may launch  contest in that industry.
+     * Find the first 5 dates that a company may launch  contest in that industry.
      *
      * The default is only allowing 3 contests to start per day per given industry
      *
@@ -77,11 +77,13 @@ class Contests extends CI_Controller
             $gender = $profile->gender;
             $age = $profile->age;
         }
+
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
             'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1
         );
+
         $has_more = FALSE;
 
         $sql_interests = array();
