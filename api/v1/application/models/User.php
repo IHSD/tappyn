@@ -122,6 +122,17 @@ class User extends MY_Model
         return $check;
     }
 
+    public function following($id)
+    {
+        $res = array();
+        $follows = $this->db->selectg('*')->from('follows')->where('follower', $id)->get()->result();
+        foreach($follows as $follow)
+        {
+            $res[] = $follow->following;
+        }
+        return $res;
+    }
+
     /**
      * Get count of users
      * @param array $where
