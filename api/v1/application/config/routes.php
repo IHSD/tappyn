@@ -8,7 +8,7 @@ $route['default_controller']        = 'errors/no_route';
 $route['404_override']              = 'errors/show_404';
 $route['translate_uri_dashes']      = FALSE;
 $route['amazon/connect']            = 'amazon/connect';
-$route['contact_us']['post']        = 'welcome/contact_us';
+$route['contact']['post']        = 'welcome/contact_us';
 $route['mailing_list']['post']      = 'welcome/mailing_list';
 /*========================
   Authentication
