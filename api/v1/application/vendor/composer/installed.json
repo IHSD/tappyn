@@ -105,7 +105,6 @@
     },
     {
         "name": "symfony/yaml",
-<<<<<<< HEAD
         "version": "v3.0.4",
         "version_normalized": "3.0.4.0",
         "source": {
@@ -117,29 +116,12 @@
             "type": "zip",
             "url": "https://api.github.com/repos/symfony/yaml/zipball/0047c8366744a16de7516622c5b7355336afae96",
             "reference": "0047c8366744a16de7516622c5b7355336afae96",
-=======
-        "version": "v3.0.3",
-        "version_normalized": "3.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/yaml.git",
-            "reference": "b5ba64cd67ecd6887f63868fa781ca094bd1377c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/yaml/zipball/b5ba64cd67ecd6887f63868fa781ca094bd1377c",
-            "reference": "b5ba64cd67ecd6887f63868fa781ca094bd1377c",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9"
         },
-<<<<<<< HEAD
         "time": "2016-03-04 07:55:57",
-=======
-        "time": "2016-02-23 15:16:06",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -174,7 +156,6 @@
     },
     {
         "name": "symfony/polyfill-mbstring",
-<<<<<<< HEAD
         "version": "v1.1.1",
         "version_normalized": "1.1.1.0",
         "source": {
@@ -319,48 +300,15 @@
         "extra": {
             "branch-alias": {
                 "dev-master": "3.0-dev"
-=======
-        "version": "v1.1.0",
-        "version_normalized": "1.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/polyfill-mbstring.git",
-            "reference": "1289d16209491b584839022f29257ad859b8532d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
-            "reference": "1289d16209491b584839022f29257ad859b8532d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.3"
-        },
-        "suggest": {
-            "ext-mbstring": "For best performance"
-        },
-        "time": "2016-01-20 09:13:37",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "1.1-dev"
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             }
         },
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-<<<<<<< HEAD
                 "Symfony\\Component\\Filesystem\\": ""
             },
             "exclude-from-classmap": [
                 "/Tests/"
-=======
-                "Symfony\\Polyfill\\Mbstring\\": ""
-            },
-            "files": [
-                "bootstrap.php"
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
@@ -369,20 +317,14 @@
         ],
         "authors": [
             {
-<<<<<<< HEAD
                 "name": "Fabien Potencier",
                 "email": "fabien@symfony.com"
-=======
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             },
             {
                 "name": "Symfony Community",
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-<<<<<<< HEAD
         "description": "Symfony Filesystem Component",
         "homepage": "https://symfony.com"
     },
@@ -399,57 +341,16 @@
             "type": "zip",
             "url": "https://api.github.com/repos/symfony/config/zipball/980ee40c28f00acff8906c11b778aab5f0db74c2",
             "reference": "980ee40c28f00acff8906c11b778aab5f0db74c2",
-=======
-        "description": "Symfony polyfill for the Mbstring extension",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "compatibility",
-            "mbstring",
-            "polyfill",
-            "portable",
-            "shim"
-        ]
-    },
-    {
-        "name": "symfony/console",
-        "version": "v3.0.3",
-        "version_normalized": "3.0.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/console.git",
-            "reference": "2ed5e2706ce92313d120b8fe50d1063bcfd12e04"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/console/zipball/2ed5e2706ce92313d120b8fe50d1063bcfd12e04",
-            "reference": "2ed5e2706ce92313d120b8fe50d1063bcfd12e04",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "shasum": ""
         },
         "require": {
             "php": ">=5.5.9",
-<<<<<<< HEAD
             "symfony/filesystem": "~2.8|~3.0"
         },
         "suggest": {
             "symfony/yaml": "To use the yaml reference dumper"
         },
         "time": "2016-03-04 07:55:57",
-=======
-            "symfony/polyfill-mbstring": "~1.0"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/event-dispatcher": "~2.8|~3.0",
-            "symfony/process": "~2.8|~3.0"
-        },
-        "suggest": {
-            "psr/log": "For using the console logger",
-            "symfony/event-dispatcher": "",
-            "symfony/process": ""
-        },
-        "time": "2016-02-28 16:24:34",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -459,11 +360,7 @@
         "installation-source": "dist",
         "autoload": {
             "psr-4": {
-<<<<<<< HEAD
                 "Symfony\\Component\\Config\\": ""
-=======
-                "Symfony\\Component\\Console\\": ""
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             },
             "exclude-from-classmap": [
                 "/Tests/"
@@ -483,11 +380,7 @@
                 "homepage": "https://symfony.com/contributors"
             }
         ],
-<<<<<<< HEAD
         "description": "Symfony Config Component",
-=======
-        "description": "Symfony Console Component",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "homepage": "https://symfony.com"
     },
     {
@@ -666,7 +559,6 @@
         "homepage": "https://symfony.com"
     },
     {
-<<<<<<< HEAD
         "name": "guzzle/guzzle",
         "version": "v3.9.3",
         "version_normalized": "3.9.3.0",
@@ -677,193 +569,6 @@
         },
         "dist": {
             "type": "zip",
-=======
-        "name": "robmorgan/phinx",
-        "version": "v0.5.1",
-        "version_normalized": "0.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/robmorgan/phinx.git",
-            "reference": "9e41ae609670645546e08e3907a68b3b8fb60f31"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/robmorgan/phinx/zipball/9e41ae609670645546e08e3907a68b3b8fb60f31",
-            "reference": "9e41ae609670645546e08e3907a68b3b8fb60f31",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.4",
-            "symfony/config": "~2.8|~3.0",
-            "symfony/console": "~2.8|~3.0",
-            "symfony/yaml": "~2.8|~3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^3.7|^4.0|^5.0"
-        },
-        "time": "2015-12-30 21:16:52",
-        "bin": [
-            "bin/phinx"
-        ],
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Phinx\\": "src/Phinx"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Rob Morgan",
-                "email": "robbym@gmail.com",
-                "homepage": "http://robmorgan.id.au",
-                "role": "Lead Developer"
-            },
-            {
-                "name": "Woody Gilk",
-                "email": "woody.gilk@gmail.com",
-                "homepage": "http://shadowhand.me",
-                "role": "Developer"
-            }
-        ],
-        "description": "Phinx makes it ridiculously easy to manage the database migrations for your PHP app.",
-        "homepage": "https://phinx.org",
-        "keywords": [
-            "database",
-            "database migrations",
-            "db",
-            "migrations",
-            "phinx"
-        ]
-    },
-    {
-        "name": "sendgrid/smtpapi",
-        "version": "0.5.0",
-        "version_normalized": "0.5.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sendgrid/smtpapi-php.git",
-            "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sendgrid/smtpapi-php/zipball/05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-            "reference": "05ccf57bad5d1524e479b6dc0a2dfade88b3fbe5",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3"
-        },
-        "replace": {
-            "sendgrid/smtpapi-php": "*"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "3.7.*"
-        },
-        "time": "2015-04-14 02:37:45",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-0": {
-                "Smtpapi": "lib/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "description": "Build SendGrid X-SMTPAPI headers in PHP.",
-        "homepage": "http://github.com/sendgrid/smtpapi-php",
-        "keywords": [
-            "X-SMTP",
-            "api",
-            "email",
-            "grid",
-            "send",
-            "sendgrid",
-            "smtp",
-            "smtpapi",
-            "xsmtp"
-        ]
-    },
-    {
-        "name": "symfony/event-dispatcher",
-        "version": "v2.8.2",
-        "version_normalized": "2.8.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/event-dispatcher.git",
-            "reference": "ee278f7c851533e58ca307f66305ccb9188aceda"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ee278f7c851533e58ca307f66305ccb9188aceda",
-            "reference": "ee278f7c851533e58ca307f66305ccb9188aceda",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.3.9"
-        },
-        "require-dev": {
-            "psr/log": "~1.0",
-            "symfony/config": "~2.0,>=2.0.5|~3.0.0",
-            "symfony/dependency-injection": "~2.6|~3.0.0",
-            "symfony/expression-language": "~2.6|~3.0.0",
-            "symfony/stopwatch": "~2.3|~3.0.0"
-        },
-        "suggest": {
-            "symfony/dependency-injection": "",
-            "symfony/http-kernel": ""
-        },
-        "time": "2016-01-13 10:28:07",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.8-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\EventDispatcher\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony EventDispatcher Component",
-        "homepage": "https://symfony.com"
-    },
-    {
-        "name": "guzzle/guzzle",
-        "version": "v3.9.3",
-        "version_normalized": "3.9.3.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/guzzle/guzzle3.git",
-            "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9"
-        },
-        "dist": {
-            "type": "zip",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "url": "https://api.github.com/repos/guzzle/guzzle3/zipball/0645b70d953bc1c067bbc8d5bc53194706b628d9",
             "reference": "0645b70d953bc1c067bbc8d5bc53194706b628d9",
             "shasum": ""
@@ -952,7 +657,6 @@
     },
     {
         "name": "sendgrid/sendgrid",
-<<<<<<< HEAD
         "version": "4.0.4",
         "version_normalized": "4.0.4.0",
         "source": {
@@ -964,19 +668,6 @@
             "type": "zip",
             "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
             "reference": "b7d88a78b5ef7c029237e449e0adcaa1b7b70092",
-=======
-        "version": "4.0.2",
-        "version_normalized": "4.0.2.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sendgrid/sendgrid-php.git",
-            "reference": "ebf68af9d4158450b6d673bf6d31ff5297057882"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/ebf68af9d4158450b6d673bf6d31ff5297057882",
-            "reference": "ebf68af9d4158450b6d673bf6d31ff5297057882",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "shasum": ""
         },
         "require": {
@@ -992,11 +683,7 @@
             "phpunit/phpunit": "~4.4",
             "vlucas/phpdotenv": "~1.0"
         },
-<<<<<<< HEAD
         "time": "2016-02-18 21:40:14",
-=======
-        "time": "2015-12-15 17:04:40",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -1019,7 +706,6 @@
     },
     {
         "name": "stripe/stripe-php",
-<<<<<<< HEAD
         "version": "v3.12.1",
         "version_normalized": "3.12.1.0",
         "source": {
@@ -1031,19 +717,6 @@
             "type": "zip",
             "url": "https://api.github.com/repos/stripe/stripe-php/zipball/869e119e6f6f1fed4b6cfb617d32bd5aee5b7c81",
             "reference": "869e119e6f6f1fed4b6cfb617d32bd5aee5b7c81",
-=======
-        "version": "v3.9.0",
-        "version_normalized": "3.9.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/stripe/stripe-php.git",
-            "reference": "81bea2927de98045b7f1b660d274e17deda713c2"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/stripe/stripe-php/zipball/81bea2927de98045b7f1b660d274e17deda713c2",
-            "reference": "81bea2927de98045b7f1b660d274e17deda713c2",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "shasum": ""
         },
         "require": {
@@ -1057,11 +730,7 @@
             "satooshi/php-coveralls": "~0.6.1",
             "squizlabs/php_codesniffer": "~2.0"
         },
-<<<<<<< HEAD
         "time": "2016-04-07 23:05:59",
-=======
-        "time": "2016-02-10 02:19:11",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1196,7 +865,6 @@
     },
     {
         "name": "kenjis/ci-phpunit-test",
-<<<<<<< HEAD
         "version": "v0.11.3",
         "version_normalized": "0.11.3.0",
         "source": {
@@ -1208,19 +876,6 @@
             "type": "zip",
             "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/d71c4b5158518217bfc2afe101c1ef2fa2efa3f5",
             "reference": "d71c4b5158518217bfc2afe101c1ef2fa2efa3f5",
-=======
-        "version": "v0.11.0",
-        "version_normalized": "0.11.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/kenjis/ci-phpunit-test.git",
-            "reference": "e203543dfe3fd5b63eeb44b85f4a67467b343210"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/kenjis/ci-phpunit-test/zipball/e203543dfe3fd5b63eeb44b85f4a67467b343210",
-            "reference": "e203543dfe3fd5b63eeb44b85f4a67467b343210",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
             "shasum": ""
         },
         "require": {
@@ -1229,11 +884,7 @@
         "replace": {
             "nikic/php-parser": "2.0.0"
         },
-<<<<<<< HEAD
         "time": "2016-03-25 10:14:36",
-=======
-        "time": "2016-01-20 11:13:15",
->>>>>>> ba326946a0becdd9018eadc3cda665acf9814570
         "type": "library",
         "extra": {
             "branch-alias": {
