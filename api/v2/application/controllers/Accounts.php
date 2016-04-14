@@ -10,6 +10,6 @@ class Accounts extends MY_Controller
 
     public function details()
     {
-        var_dump($this->account);
+        var_dump(Account::get());
     }
 }

@@ -11,8 +11,9 @@ class Account extends MY_Model
         self::$db = &get_instance()->db;
     }
 
-    protected function save()
+    static function get()
     {
-
+        $account = \Stripe\Account::retrieve();
+        var_dump($account);
     }
 }
