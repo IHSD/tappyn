@@ -271,6 +271,4 @@ class MY_Model extends CI_Model
 
       return (int) $this->db->get()->row()->count;
   }
-
-
 }

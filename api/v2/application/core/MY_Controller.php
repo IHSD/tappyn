@@ -9,7 +9,6 @@ class MY_Controller extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
         // Load some of our libraries
         $this->load->library(array(
             'request',
@@ -47,6 +46,9 @@ class MY_Controller extends CI_Controller
         include_once(APPPATH.'libraries/Hook.php');
         Hook::initialize($this->config->item('hooks', 'tappyn_hooks'));
         Hook::register_model($this->notification);
+
+        $this->config->load('secrets', TRUE);
+        \Stripe\Stripe::setApiKey($this->config->item('stripe_api_key', 'secrets'));
     }
 
     protected function is_authorized($class, $method)
