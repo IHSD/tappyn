@@ -19,7 +19,7 @@
                 	<p class='text-left' style='color:#fff;'><span class='glyphicon glyphicon-ok'></span> 30 Ads to choose from</p>
                 	<p class='text-left' style='color:#fff;'><span class='glyphicon glyphicon-ok'></span> $99 Flat Fee</p>
                 </div>
-               	<div class='col-sm-6 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg' style='padding-left: 35px;padding-right: 35px' href="/launch">Get Started Now</a></div>
+               	<div class='col-sm-6 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg get_started' style='padding-left: 35px;padding-right: 35px' href="/launch">Get Started Now</a></div>
             </div>
         </div>
     </section>
@@ -87,4 +87,13 @@
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
+
+$(".get_started").click(function(){
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'Company Click',
+        eventAction: 'Company Launch',
+        eventLabel: 'Company clicked to launch'
+    });
+});
 </script>

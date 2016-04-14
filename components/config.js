@@ -669,7 +669,7 @@ tappyn.factory("AppFact", function($http){
 	fact.contactUs = function(issue){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contact',
+			url : 'api/v1/contact',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(issue)
 		});	
@@ -715,7 +715,7 @@ tappyn.factory("AppFact", function($http){
 	fact.readAll = function(){
 		return $http({
             method:'POST',
-            url:'index.php/notifications/read_all',
+            url:'api/v1/notifications/read_all',
             headers:{'Content-Type' : 'application/x-www-form-urlencoded'}
         })
 	}
