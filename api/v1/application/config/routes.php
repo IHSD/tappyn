@@ -8,7 +8,8 @@ $route['default_controller']        = 'errors/no_route';
 $route['404_override']              = 'errors/show_404';
 $route['translate_uri_dashes']      = FALSE;
 $route['amazon/connect']            = 'amazon/connect';
-
+$route['contact_us']['post']        = 'welcome/contact_us';
+$route['mailing_list']['post']      = 'welcome/mailing_list';
 /*========================
   Authentication
 ========================*/
@@ -46,8 +47,10 @@ $route['accounts/default_method']['post']   = 'accounts/default_method';
 /*========================
   Company Accounts
 ========================*/
-$route['companies']['get']            = 'companies/index';
-$route['companies/accounts']['post']        = 'companies/accounts';
+$route['companies']['get']                  = 'companies/index';
+$route['companies/(:num)']['get']           = 'companies/show/$1';
+$route['companies/(:num)/contests']['get']  = 'companies/contests/$1';
+$route['companies/accounts']                = 'companies/accounts';
 $route['companies/remove_method']['post']   = 'companies/removeCard';
 $route['companies/payment/(:num)']['post']  = 'companies/payment/$1';
 $route['companies/default_method']['post']  = 'companies/setAsDefault';
@@ -64,6 +67,7 @@ $route['contests']['post']                  = 'contests/create';
 $route['contests/(:num)']['post']           = 'contests/update/$1';
 $route['contests/(:num)/winner']['post']    = 'contests/select_winner/$1';
 $route['contests/(:num)/delete']['post']    = 'contests/delete/$1';
+$route['contests/(:any)']['get']            = 'contests/index/$1';
 
 /*========================
   Submissions
@@ -91,7 +95,7 @@ $route['payouts/(:num)/claim']['post']      = 'payouts/claim/$1';
 /*========================
   Vouchers
 ========================*/
-$route['vouchers']['get']                   = 'vouchers/is_valid';
+$route['vouchers']                   = 'vouchers/is_valid';
 
 /**
  * Anything that does not match a defined route, we send to the 404 of our

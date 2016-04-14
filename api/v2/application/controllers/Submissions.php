@@ -1,18 +1,15 @@
-<?php defined("BASEATH") or exit('No direct script access allowed');
+<?php defined("BASEPATH") or exit('No direct script access allowed');
 
 class Submissions extends MY_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model(array('contest', 'submission', 'payout'));
+        $this->load->model(array('contest', 'submission', 'payout', 'vote'));
+        Hook::register_model(array($this->contest, $this->submission, $this->payout, $this->vote));
     }
 
-    public function set_as_winner()
-    {
 
-    }
-    
     public function create()
     {
         if($this->form_validation->run('submissions:create') === TRUE)
@@ -53,8 +50,23 @@ class Submissions extends MY_Controller
         $this->response->respond();
     }
 
-    public function delete()
+    public function set_as_winner()
     {
 
+    }
+
+    public function share()
+    {
+        Hook::trigger('submission_shared');
+    }
+
+    public function rating()
+    {
+        Hook::trigger('submission_rated');
+    }
+
+    public function delete()
+    {
+        Hook::trigger('submission_deleted');
     }
 }

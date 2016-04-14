@@ -2,8 +2,10 @@
 
 class ContestPlatforms
 {
-    const FACEBOOK  = 'facebook';
-    const GOOGLE    = 'google';
-    const GENERAL   = 'general';
-    const TWITTER   = 'twitter';
+    static $platforms = array(
+        'facebook',
+        'google',
+        'general',
+        'twitter'
+    );
 }
