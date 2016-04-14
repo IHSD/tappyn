@@ -96,7 +96,7 @@ class Companies extends CI_Controller
         }
         if($this->ion_auth->in_group(2))
         {
-            redirect("users/dashboard");
+            redirect("api/v1/users/dashboard");
         }
 
         $this->data['status'] = 'all';
@@ -256,7 +256,7 @@ class Companies extends CI_Controller
         if(!$stripe_customer_id)
         {
             $this->session->set_flashdata('You havent created a payment method with us yet');
-            redirect('companies/accounts', 'refresh');
+            redirect('api/v1/companies/accounts', 'refresh');
         }
         if($this->input->post('source_id'))
         {
@@ -267,14 +267,14 @@ class Companies extends CI_Controller
             if($this->stripe_customer_library->update($stripe_customer_id,$data))
             {
                 $this->session->set_flashdata('message', 'Default payment option successfully updated');
-                redirect('companies/accounts', 'refresh');
+                redirect('api/v1/companies/accounts', 'refresh');
             } else {
                 $this->session->set_flashdata('error', ($this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : 'An unknown error occured'));
-                redirect('companies/accounts', 'refresh');
+                redirect('api/v1/companies/accounts', 'refresh');
             }
         } else {
             $this->session->set_flashdata('You must provide a payment option to remove');
-            redirect('companies/accounts', 'refresh');
+            redirect('api/v1/companies/accounts', 'refresh');
         }
     }
 

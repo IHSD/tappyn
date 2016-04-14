@@ -17,7 +17,7 @@ class Welcome extends CI_Controller
 		} else {
 			$this->session->set_flashdata('error', 'There was an error removing you from our mailing list');
 		}
-		redirect('contests/index', 'refresh');
+		redirect('api/v1/contests/index', 'refresh');
 	}
 
 	public function mailing_list()
