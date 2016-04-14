@@ -12,7 +12,7 @@ class App extends MY_Controller
         $this->load->model('contact');
 
         $this->form_validation->set_rules('contact', 'Customer Type', 'required');
-		$this->form_validation->set_rules('email', 'Email Address', 'required');
+		$this->form_validation->set_rules('email', 'Email Address', 'required|valid_email');
 		$this->form_validation->set_rules('details', 'Message', 'required');
 
         if($this->form_validation->run() === TRUE)
@@ -41,51 +41,30 @@ class App extends MY_Controller
         $this->response->respond();
     }
 
-    $this->load->library("mailer");
-    $this->load->model('contact');
-    $this->form_validation->set_rules('contact', 'Customer Type', 'required');
-    $this->form_validation->set_rules('email', 'Email Address', 'required');
-    $this->form_validation->set_rules('details', 'Message', 'required');
-    if($this->form_validation->run() == true)
-    {
-        // Pre process if necessaary
-        $customer = $this->input->post('contact');
-        $email = $this->input->post('email');
-        $message = $this->input->post('details');
-    }
-    if($this->form_validation->run() == true && $this->contact->create($customer, $email, $message))
-    {
-        $this->mailer
-            ->to('squad@tappyn.com')
-            ->from($email)
-            ->subject("New Contact Message Received")
-            ->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))
-            ->send();
-        $this->responder->message(
-            "Thank you for your message. We will contact you as soon as we can!"
-        )->respond();
-    } else {
-        $this->responder->fail("There was an error submitting your contact request. Please try again later")->code(500)->respond();
-    }
     public function mailing_list()
     {
         $this->load->model('subscriber');
         $sub = new Subscriber();
 
-        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[mailing_list.email]');
+        $this->form_validation->set_rules('email', 'Email', 'required|is_unique[mailing_list.email]|valid_email');
         if($this->form_validation->run() === true)
         {
             $sub->setData(array(SubscriberFields::EMAIL => $this->input->post('email')))
             if($sub->save())
             {
-                $this->responder->message(
+                $this->response->message(
                 "You have successfully been added to our mailing list"
                 )->respond();
                 Hook::trigger('new_mail_subscriber', array('email' => $this->input->post('email')));
                 return;
             }
+            else
+            {
+                $this->response->fail($sub->errors() ? $sub->errors() : "An unknown error occured")->code(500)->respond();
+                return;
+            }
         }
-        $this->responder->fail((validation_errors() ? validation_errors() : ($sub->errors() ? $sub->errors() : "There was an error adding you to our mailing list")))->code(500)->respond();
+        $this->response->fail((validation_errors() ? validation_errors() : ($sub->errors() ? $sub->errors() : "There was an error adding you to our mailing list")))->code(500)->respond();
 
     }
 
