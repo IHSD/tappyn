@@ -4,7 +4,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.grabDash = function(type){
 		return $http({
 			method : 'GET',
-			url : 'index.php/dashboard?type='+type,
+			url : 'api/v1/dashboard?type='+type,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.claimWinnings = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/payouts/claim/'+id,
+			url : 'api/v1/payouts/'+id+'/claim',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -24,7 +24,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies/accounts',
+			url : 'api/v1/companies/accounts',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -34,7 +34,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.payContest = function(id, obj){
 		return $http({
 			method : 'POST',
-			url : 'index.php/companies/payment/'+id,
+			url : 'api/v1/companies/payment/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -44,7 +44,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.voucherValid = function(id){
 		return $http({
 			method : 'POST',
-			url : 'index.php/vouchers/is_valid',
+			url : 'api/v1/vouchers',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
@@ -54,7 +54,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.grabTotals = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/users/stats',
+			url : 'api/v1/stats',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -63,7 +63,7 @@ tappyn.factory('dashFactory', function($http){
 	fact.grabUpvoted = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/users/upvoted',
+			url : 'api/v1/upvoted',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

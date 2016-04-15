@@ -3,6 +3,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
 		$scope.submissions = response.data.submissions;
+		contestModel.fire_google($scope.contest);
 		if($scope.contest.status == "ended"){
 			if($rootScope.user){
 				if($rootScope.user.id != $scope.contest.owner && !$rootScope.user.is_admin) $location.path('/ended/'+$routeParams.id);

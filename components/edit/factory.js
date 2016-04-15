@@ -4,7 +4,7 @@ tappyn.factory("editFactory", function($http){
 	fact.grabEdit = function(id){
 		return $http({
 			method : 'GET',
-			url : 'index.php/submissions/'+id,
+			url : 'api/v1/contests/'+id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory("editFactory", function($http){
 	fact.editContest = function(contest){
 		return $http({
 			method : 'POST',
-			url : 'index.php/contests/create/'+contest.id,
+			url : 'api/v1/contests/'+contest.id,
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},

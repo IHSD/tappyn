@@ -4,7 +4,7 @@ tappyn.factory("companiesFactory", function($http){
 	fact.grabCompanies = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies',
+			url : 'api/v1/companies',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,7 +14,7 @@ tappyn.factory("companiesFactory", function($http){
  	fact.grabMyCompanies = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/companies?followed=1',
+			url : 'api/v1/companies?followed=1',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}

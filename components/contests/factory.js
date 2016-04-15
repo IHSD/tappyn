@@ -4,7 +4,7 @@ tappyn.factory('contestsFactory', function($http){
 	fact.grabMyContests = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/contests/index/interesting',
+			url : 'api/v1/contests/interesting',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
@@ -14,28 +14,7 @@ tappyn.factory('contestsFactory', function($http){
 	fact.grabAllContests = function(){
 		return $http({
 			method : 'GET',
-			url : 'index.php/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-
-	fact.filterGrab = function(pass){
-		return $http({
-			method : 'GET',
-			url : 'index.php/contests?industry='+pass,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.grabCompanies = function(){
-		return $http({
-			method : 'GET',
-			url : 'index.php/companies',
+			url : 'api/v1/contests',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
