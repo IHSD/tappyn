@@ -90,7 +90,6 @@ class Contests extends CI_Controller
 
         if($type=='interesting')
         {
-
             $interests = $this->load->library('interest');
             $this->interest->setDatabase($this->db);
             $this->interest->setUser($this->ion_auth->user()->row()->id);
@@ -276,8 +275,8 @@ class Contests extends CI_Controller
                 'owner'             => $this->ion_auth->user()->row()->id,
                 'age'               => $age,
                 'industry'          => $this->input->post('industry'),
-                'start_time'        => $start_time,
-                'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
+                // 'start_time'        => $start_time,
+                // 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion'           => $this->input->post('emotion'),
                 'display_type'      => $this->input->post('display_type'),
                 'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30
@@ -288,22 +287,8 @@ class Contests extends CI_Controller
             if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
             if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
             if(!empty($images)) $data['additional_images'] = json_encode($images);
-            if(is_null($id))
-            {
-                $cid = $this->contest->create($data);
-            }
-            else
-            {
-                // Check that they own the contest
-                $contest = $this->contest->get($id);
-                if(!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id))
-                {
-                    $this->responder->fail("You do not own this contest brody")->code(403)->respond();
-                    return;
-                }
-                $cid = $this->contest->update($id, $data);
-                $update = TRUE;
-            }
+            $cid = $this->contest->create($data);
+
         }
 
         if($this->form_validation->run() == true && $cid)

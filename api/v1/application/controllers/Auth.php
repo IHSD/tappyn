@@ -554,7 +554,12 @@ class Auth extends CI_Controller {
 				// 	->subject('Account Successfully Created')
 				// 	->html($this->load->view('auth/email/registration', array(), true))
 				// 	->send();
-				$this->user->saveProfile($id, array('name' => $this->input->post('name'), 'logo_url' => $this->input->post('logo_url'), 'company_url' => $this->input->post('company_url')));
+				$this->user->saveProfile($id, array(
+					'name' => $this->input->post('name'),
+					'logo_url' => $this->input->post('logo_url'),
+					'company_url' => $this->input->post('company_url'),
+					'facebook_url' => $this->input->post('facebook_url'),
+					'twitter_handle' => $this->input->post('twitter_handle')));
 	            if($this->ion_auth->login($identity, $password))
 				{
 					$this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
