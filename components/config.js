@@ -633,7 +633,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	    });
 	}
 
-
+	$scope.fb_login = function(){
+		AppFact.fbLogin();
+	}
 });
 
 tappyn.factory("AppFact", function($http){
@@ -647,6 +649,15 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			'data' : $.param(object)
+		});
+	}
+	fact.fbLogin = function(){
+		return $http({
+			method : 'GET',
+			url : "api/v1/facebook",
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
 		});
 	}
 	fact.loggingOut = function(){

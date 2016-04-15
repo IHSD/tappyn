@@ -633,7 +633,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	    });
 	}
 
-
+	$scope.fb_login = function(){
+		AppFact.fbLogin();
+	}
 });
 
 tappyn.factory("AppFact", function($http){
@@ -647,6 +649,15 @@ tappyn.factory("AppFact", function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			'data' : $.param(object)
+		});
+	}
+	fact.fbLogin = function(){
+		return $http({
+			method : 'GET',
+			url : "api/v1/facebook",
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
 		});
 	}
 	fact.loggingOut = function(){
@@ -747,6 +758,58 @@ tappyn.factory("AppFact", function($http){
 			}
 		});
 	}
+	return fact;
+})
+tappyn.controller("companiesController", function($scope, $rootScope, companiesFactory){
+	$scope.grab_my = function(){
+		$scope.tab = "my";
+		companiesFactory.grabMyCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		companiesFactory.grabCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		});
+	}	
+
+	$scope.grab_companies();
+});
+tappyn.factory("companiesFactory", function($http){
+	var fact = {};
+
+	fact.grabCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/companies',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+ 	fact.grabMyCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/companies?followed=1',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
 	return fact;
 })
 tappyn.controller('comproController', function($scope, $rootScope, $routeParams, comproFactory){
@@ -872,58 +935,6 @@ tappyn.factory('comproFactory', function($http){
 		return $http({
 			method : 'POST',
 			url : 'api/v1/companies/'+id+'/unfollow',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
-tappyn.controller("companiesController", function($scope, $rootScope, companiesFactory){
-	$scope.grab_my = function(){
-		$scope.tab = "my";
-		companiesFactory.grabMyCompanies().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.companies = response.data.companies;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.grab_companies = function(){
-		$scope.tab = 'company';
-		companiesFactory.grabCompanies().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.companies = response.data.companies;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
-			else $scope.check_code(response.http_status_code);
-		});
-	}	
-
-	$scope.grab_companies();
-});
-tappyn.factory("companiesFactory", function($http){
-	var fact = {};
-
-	fact.grabCompanies = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/companies',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
- 	fact.grabMyCompanies = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/companies?followed=1',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
