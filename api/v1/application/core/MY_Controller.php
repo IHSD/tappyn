@@ -41,9 +41,5 @@ class MY_Controller extends CI_Controller
             }
         }
         Hook::trigger('hook_initialize');
-
-        $this->config->load('secrets', TRUE)
-        echo $this->config->item('stripe_api_key', 'secrets');
-        \Stripe\Stripe::setApiKey($this->config->item('stripe_api_key', 'secrets'));
     }
 }
