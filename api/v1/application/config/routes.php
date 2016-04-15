@@ -8,13 +8,13 @@ $route['default_controller']        = 'errors/no_route';
 $route['404_override']              = 'errors/show_404';
 $route['translate_uri_dashes']      = FALSE;
 $route['amazon/connect']            = 'amazon/connect';
-$route['contact_us']['post']        = 'welcome/contact_us';
+$route['contact']['post']        = 'welcome/contact_us';
 $route['mailing_list']['post']      = 'welcome/mailing_list';
 /*========================
   Authentication
 ========================*/
 $route['login']['post']                 = 'auth/login';
-$route['logout']['get']                 = 'auth/logout';
+$route['logout']['post']                 = 'auth/logout';
 $route['is_logged_in']['get']           = 'auth/is_logged_in';
 $route['facebook']['get']               = 'auth/facebook';
 $route['password']['post']              = 'auth/change_password';
@@ -48,6 +48,7 @@ $route['accounts/default_method']['post']   = 'accounts/default_method';
   Company Accounts
 ========================*/
 $route['companies']['get']                  = 'companies/index';
+$route['companies/dashboard']['get']        = 'companies/dashboard';
 $route['companies/(:num)']['get']           = 'companies/show/$1';
 $route['companies/(:num)/contests']['get']  = 'companies/contests/$1';
 $route['companies/accounts']                = 'companies/accounts';
