@@ -634,7 +634,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	$scope.fb_login = function(){
-		window.location = $location.host()+"/api/v1/facebook";
+		window.location = $location.protocol()+"://"+$location.host()+"/api/v1/facebook";
 	}
 });
 
