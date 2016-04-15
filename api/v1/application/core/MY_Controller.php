@@ -41,3 +41,5 @@ class MY_Controller extends CI_Controller
             }
         }
         Hook::trigger('hook_initialize');
+    }
+}
