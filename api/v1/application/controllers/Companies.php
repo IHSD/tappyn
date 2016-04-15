@@ -398,7 +398,9 @@ class Companies extends CI_Controller
         // Check if charge was succesful and handle accordingly
         if($charge !== FALSE)
         {
-            $this->contest->update($contest_id, array('paid' => 1));
+            $start_time = date('Y-m-d H:i:s');
+            $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $this->contest->update($contest_id, array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time));
 
             $this->responder->message(
                 "Your payment was successfully processed!"
