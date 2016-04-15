@@ -4,6 +4,6 @@
 
 <!-- Start Email Content -->
 
-<p>Congratulations, you're art of our mailing list!</p>
+<p>Congratulations, you're part of our mailing list!</p>
 
 <!-- End Email Content -->

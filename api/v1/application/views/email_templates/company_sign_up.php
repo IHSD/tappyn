@@ -9,7 +9,7 @@ foreach($requirements as $req)
     }
 }
 
-$query_string['redirect'] = '#/dashboard';
+$query_string['redirect'] = 'dashboard';
 
 ?>
 

@@ -9,7 +9,7 @@ foreach($requirements as $req)
     }
 }
 
-$query_string['redirect'] = '#/dashboard';
+$query_string['redirect'] = 'dashboard';
 
 ?>
 <?php $this->load->view('email_templates/header', array('query_string', $query_string)); ?>

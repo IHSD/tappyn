@@ -8,7 +8,7 @@ foreach($requirements as $req)
         throw new Exception("Email data missing {$req}");
     }
 }
-$query_string['redirect'] = '#/dashboard';
+$query_string['redirect'] = 'dashboard';
 
 ?>
 
