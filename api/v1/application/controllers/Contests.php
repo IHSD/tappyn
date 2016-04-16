@@ -388,6 +388,8 @@ class Contests extends CI_Controller
                 "A winner has been chosen!"
             )->respond();
             $this->user->attribute_points($submission->owner, $this->config->item('points_per_winning_submission'));
+            $this->mailer->queue($this->ion_auth->user()->row()->email, $this->ion_auth->user()->row()->id, 'post_contest_package', 'contest', $contest->id);
+
             $this->load->library('vote');
             $this->vote->dole_out_points($submission->id);
 
