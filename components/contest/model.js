@@ -48,6 +48,8 @@ tappyn.service("contestModel", function(){
 			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
 		}
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+
+		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
 	}
 

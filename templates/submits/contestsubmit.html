@@ -5,6 +5,7 @@
 	    <span ng-show='form_limit.text'>{{submission.text}}</span>
 	    <span ng-show='form_limit.line_1'>{{submission.link_explanation}}<br></span>
 	    <span ng-show='form_limit.line_2'>{{submission.text}}</span>
+	    <img style='max-width:100%' ng-src='{{submission.attachment}}'>
 	</div>
 	<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 </div>
