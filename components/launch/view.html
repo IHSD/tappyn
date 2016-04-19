@@ -364,7 +364,7 @@
 					<form class='form'>
 						<div class='form-group'>
 							<div class='row'>
-								<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
+								<div class='col-xs-12'><label>Pictures of product or service (up to 3) <img uib-tooltip="These images will provide a visual representation of your company to our users, they make a huge difference in boosting creativity and clarity" height='10px' width='10px' src='public/img/tooltip.png'></label></div>
 								<div class='col-sm-4 col-xs-12'>
 									<input ng-file-select='select_file($files, "pic1")' type='file'>
 									<img class='img-responsive' ng-if='contest.additional_image_1' ng-src='{{contest.additional_image_1}}'>
@@ -380,19 +380,19 @@
 							</div>
 						</div>
 						<div class='form-group'>
-							<label>Summary of product or service</label>
+							<label>Summary of product or service <img uib-tooltip="This short summary will be the first thing our users will see about your company." height='10px' width='10px' src='public/img/tooltip.png'></label>
 							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
 						</div>
 						<div class='form-group'>
-							<label class='control-label'>Describe in more detail what your product or service does and who it's for.</label>
+							<label class='control-label'>Describe in more detail what your product or service does and who it's for. <img uib-tooltip="Be as specific as possible to allow for the best submissions, our users will refer to this information while they create content to submit" height='10px' width='10px' src='public/img/tooltip.png'></label>
 							<textarea class='form-control' rows='4' ng-model='contest.audience' placeholder='i.e., We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.'></textarea>
 						</div>
 						<div class='form-group'>
-							<label class='control-label'>Describe what makes you different (and better) than your competition.</label>
+							<label class='control-label'>Describe what makes you different (and better) than your competition. <img uib-tooltip="Be as specific as possible to allow for the best submissions, our users will refer to this information while they create content to submit" height='10px' width='10px' src='public/img/tooltip.png'></label>
 							<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
 						</div>
 						<div class='personality-container'>
-							<label class='col-xs-12 text-left'>Ad Personality (optional)</label>
+							<label class='col-xs-12 text-left'>Ad Personality (optional) <img uib-tooltip="This provides the user a bit of context when it comes to the general feel of your ad. While not required, it makes a difference in conveying the personality you'd like in your ad." height='10px' width='10px' src='public/img/tooltip.png'></label>
 							<div class='col-xs-6 col-sm-2' ng-repeat='personality in personalities'>
 								<div class='text-center personality' ng-click='choose_personality(personality.type)' ng-class='{"personality-highlight" : personality.type == contest.emotion}'>
 									<img ng-src='{{personality.icon}}' uib-tooltip='{{personality.adjectives}}'  width='50px' height='50px'>
@@ -409,7 +409,7 @@
 				<h3 class='text-center'>Your Audience</h3>
 				<h4 class='text-center'>The preferred demographic for your submissions</h4>
 				<form class='form'>
-					<h5 class='text-center'>User Age</h5>
+					<h5>User Age <img uib-tooltip="The age group you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h5>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.age = 0'>
 						<label class="btn" ng-class='{"btn-oj" : contest.age == 0, "btn-outliner" : contest.age != 0}'>
 							<input type='radio' ng-model='contest.age' value='0'>All Ages
@@ -427,7 +427,7 @@
 							<input type='radio' ng-model='contest.age' value='4'> 45+
 						</label>
 					</div>
-					<h5 class='text-center'>User Gender</h5>
+					<h5>User Gender <img uib-tooltip="The gender you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h5>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
 							<input type='radio' ng-model='contest.gender' value='0'> All Genders
@@ -439,7 +439,7 @@
 							<input type='radio' ng-model='contest.gender' value='2'> Women
 						</label>
 					</div>
-					<h5 class='text-center'>User Interest</h5>
+					<h5>User Interest <img uib-tooltip="People who follow this interest will be shown your contest" height='10px' width='10px' src='public/img/tooltip.png'></h5>
 					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "fashion_beauty", "btn-outliner" : contest.industry != "fashion_beauty"}'>
 							<input type='radio' ng-model='contest.industry' value="fashion_beauty"> Fashion
