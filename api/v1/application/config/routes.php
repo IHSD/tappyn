@@ -10,6 +10,11 @@ $route['translate_uri_dashes']      = FALSE;
 $route['amazon/connect']            = 'amazon/connect';
 $route['contact']['post']        = 'welcome/contact_us';
 $route['mailing_list']['post']      = 'welcome/mailing_list';
+
+/*========================
+  Admin
+========================*/
+$route['admin/mailing/execute'] = 'admin/mailing/execute';
 /*========================
   Authentication
 ========================*/
