@@ -46,35 +46,6 @@ $config['email_program']['winner_announced']['query_string'] = array(
 $config['email_program']['winner_announced']['additional_data'] = array();
 
 /**
-* Weekly content email
-*
-* Send weekly with new contests and contests about to end (As of now, sent manually)
-*
-*/
-// $config['email_program']['weekly_content']['template'] = '/';
-// $config['email_program']['weekly_content']['subject'] = "%s's contest is about to end!";
-// $config['email_program']['weekly_content']['query_string'] = array(
-//                                                                 'utm_source' => 'newsletter',
-//                                                                 'utm_medium' => 'email',
-//                                                                 'utm_campaign' => 'weekly'
-//                                                             );
-// $config['email_program']['weekly_content']['additional_data'] = array();
-
-/**
-* More people to tip email
-*
-* Currently not beinf used
-*/
-// $config['email_program']['more_people_needed']['template'] = '/';
-// $config['email_program']['more_people_needed']['subject'] = "%s's contest is about to end!";
-// $config['email_program']['more_people_needed']['query_string'] = array(
-//                                                                 'utm_source' => 'newsletter',
-//                                                                 'utm_medium' => 'email',
-//                                                                 'utm_campaign' => '48hr'
-//                                                             );
-// $config['email_program']['more_people_needed']['additional_data'] = array();
-
-/**
 * Mailing list confirmation
 *
 * Sent to confirm that someone has subsribed to our mailing list
@@ -107,7 +78,7 @@ $config['email_program']['post_contest_package']['additional_data'] = array();
 */
 $config['email_program']['sign_up_conf']['template'] = 'email_templates/sign_up_conf';
 $config['email_program']['sign_up_conf']['from'] = 'squad@tappyn.com';
-$config['email_program']['sign_up_conf']['subject'] = "Registration successful";
+$config['email_program']['sign_up_conf']['subject'] = "Tappyn Account Confirmation";
 $config['email_program']['sign_up_conf']['query_string'] = array(
     'utm_source' => 'newsletter',
     'utm_medium' => 'email',
@@ -138,7 +109,7 @@ $config['email_program']['contest_completed']['additional_data'] = array();
 */
 $config['email_program']['submission_chosen']['template'] = 'email_templates/submission_chosen';
 $config['email_program']['submission_chosen']['from'] = 'squad@tappyn.com';
-$config['email_program']['submission_chosen']['subject'] = "Congratulations, youre submissions won!";
+$config['email_program']['submission_chosen']['subject'] = "Your submission won!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',

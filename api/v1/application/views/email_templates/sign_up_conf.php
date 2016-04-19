@@ -16,16 +16,21 @@ $query_string['redirect'] = 'auth/activate/'.$uid.'/'.$activation;
 
 <!-- Start Email Content -->
 
-<h2 style='text-align:center;margin:auto;width:50%'>Thank you for registering with us!</h2>
+<h2 style='text-align:center;margin:auto;width:50%'>Welcome on board, Captain.</h2>
 <br>
-<p style='text-align:justify;margin:auto;width:50%'>
-	Feel free to look around a bit. But in order to join the squad and start creating content, we need you to verify your email <?php echo anchor('analytics/click?'.http_build_query($query_string), 'here'); ?>.
-</p>
+<p style='text-align:justify;margin:auto;width:50%'>Now that you have signed up, its time to set sail!</p><br>
+<p style='text-align:justify;margin:auto;width:50%'>This isn't an adventure of pirates, sea monsters, or rum (well maybe some rum),</p><br>
+<p style='text-align:justify;margin:auto;width:50%'>but we can offer you the chance at some big treasure.</p><br>
+<p style='text-align:justify;margin:auto;width:50%'>No digging required</p><br><br>
+
+<p style-'text-align:justify;margin:auto;width:50%'>To get started:</p><br>
+<p style-'text-align:justify;margin:auto;width:50%'>1) Verify your email <?php echo anchor('analytics/click?'.http_build_query($query_string), 'here'); ?></p><br>
+<p style-'text-align:justify;margin:auto;width:50%'>2) Sign in to Tappyn</p><br>
+<p style-'text-align:justify;margin:auto;width:50%'>3) Hop on over to your personalized "See Contests" page</p><br>
+<p style-'text-align:justify;margin:auto;width:50%'>4) Start winnind big payouts for being creative!</p><br>
 <br>
-<p style='text-align:justify;margin:auto;width:50%'>
-	Good luck!
-</p>
+
 
 <!-- End Email Content -->
 
-<?php $this->load->view('email_templates/footer'); ?>
+<?php $this->load->view('email_templates/footer_austin'); ?>
