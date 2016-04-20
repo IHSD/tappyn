@@ -14,7 +14,7 @@
 				<img src='public/img/TappynFB6.jpg' style='width:30px;border-radius:25px;margin:0 5px 0 5px;'>	
 			</div>
 			<div ng-show='!by_email' style='margin-top:15px;'>
-		       <a ng-if='registration.type == "upvote"' href="api/v1/facebook">
+		       <a ng-if='registration.type == "upvote"' href ng-click='fb_login()'>
 	                <img height='30px' style='border-radius: 5px;' src="public/img/img-facebook.png">
 	            </a>
 	    	</div>
