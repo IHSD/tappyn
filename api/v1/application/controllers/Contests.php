@@ -157,6 +157,7 @@ class Contests extends CI_Controller
             $contest->votes = $this->vote->select('COUNT(*) as count')->where('contest_id', $contest->id)->fetch()->row()->count;
             $contest->submission_count = $this->contest->submissionsCount($contest->id);
             $contest->company = $this->user->profile($contest->owner);
+            unset($contest->company->stripe_customer_id);
         }
 
         usort($contests, function($a, $b)
