@@ -124,16 +124,20 @@
 							</form>
 							<div ng-show='form_limit.photo'>
 								<div ng-show='image_show == "edit"'>
-								 	<input type='file' id='fileInput' name="file" class="inputfile" />
+								 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
 									<label for="fileInput">Upload Your Photo</label>
+									<button ng-show='imagerino != ""' class='btn btn-oj pull-right' ng-click='preview_image()'>Preview</button>
+									<div class='col-xs-12'><p class='text-left'>*Make sure your image fills up the square, you can drag your image and zoom to accomplish this. You can preview the new image before submitting so you know exactly what you're submitting</p></div>
 								    <img id="upload_contest" ng-src='{{imagerino}}'>
-								    <button ng-show='imagerino != ""' class='btn btn-oj' ng-click='preview_image()'>Preview</button>
 								</div>
 								<div ng-show='image_show == "preview"'>
 								 	<img id='preview_image' ng-src='{{preview}}'>
 								 	<button class='btn btn-oj' ng-click='image_show = "edit"'>Edit Image</button>
 								</div>
 							</div>
+							<div class='text-right'>
+				        		<button class='btn btn-oj'  ng-click='submit_to(contest.id, submit)'>Submit</button>
+				      		</div>
 						    <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
 						        <div ng-if='!emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
 							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
@@ -143,15 +147,12 @@
 							    <div ng-if='emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
 							    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
 							    </div>
-							    <div ng-if='contest.display_type == "with_photo" && contest.platfor != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							    <div ng-if='contest.display_type == "with_photo" && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
 							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_image.png'>
 							        <img class='img-responsive' ng-if="contest.platform == 'instagram'" src='public/img/insta_image.png'>
 							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/twitter_image.jpg'>
 							    </div>
 							</div>
-						    <div class='text-right'>
-				        		<button class='btn btn-oj'  ng-click='submit_to(contest.id, submit)'>Submit</button>
-				      		</div>
 						</div>
 				   </div>
 				</div>
