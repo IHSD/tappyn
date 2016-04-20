@@ -28,7 +28,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	$scope.imagerino = '';
 	$scope.image_show = 'edit';
 	$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-		aspectRatio: 16 / 6,
+		aspectRatio: 1.91 / 1,
 	  	dragMode : 'move',
 	  	scaleable : false,
 	  	cropBoxResizable : false,

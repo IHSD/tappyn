@@ -34,7 +34,7 @@
 				var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
         </script>
 	</head>
-	<body ng-app='tappyn' ng-controller='ApplicationController'>
+	<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
 	    <div id="fb-root"></div>
 	    <div class='container-fluid'>
 	    	<div class='darken' ng-show="modal_up"></div>
@@ -49,7 +49,9 @@
 				<div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
 				<div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
 		    </div>
-		    <section class='innerpage' ng-view></section>
+		</div>
+		<section class='innerpage' ng-view></section>
+		<div class='container-fluid'>
 		    <div ng-include src="'templates/footer.html'"></div>
 		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
 		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></h2>
