@@ -27,15 +27,8 @@ class Votes extends CI_Controller {
      * Create a new vote
      * @return void
      */
-    public function create()
+    public function create($submission_id)
     {
-        if(!$this->input->post('submission_id') ||
-            !$this->input->post('contest_id'))
-        {
-            $this->responder->fail("What submission did you want to vote for?")->code(500)->respond();
-            return;
-        }
-
         if($this->ion_auth->user()->row()->active == 0)
         {
             $this->responder->fail(
@@ -44,7 +37,6 @@ class Votes extends CI_Controller {
             return;
         }
 
-        $submission_id = $this->input->post('submission_id');
         $submission = $this->submission->get($submission_id);
         if($submission->owner == $this->ion_auth->user()->row()->id)
         {
