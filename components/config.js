@@ -566,6 +566,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	/* column functions */
+	$scope.first_second = function(index){
+		return index%2 == 0;
+	}
+	$scope.second_second = function(index){
+		return index%2 == 1;
+	}
 	$scope.first_third = function(index){
 		return index%3 == 0;
 	}
