@@ -10,7 +10,7 @@ class Analytics extends CI_Controller
     public function open()
     {
         // Get and return our image file
-        $name = FCPATH.'public/img/TappynLogo2.png';
+        $name = FCPATH.'api/v1/public/img/TappynLogo2.png';
 
         $fp = fopen($name, 'rb');
         header("Content-Type: image/png");

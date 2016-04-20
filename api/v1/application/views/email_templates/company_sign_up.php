@@ -9,7 +9,7 @@ foreach($requirements as $req)
     }
 }
 
-$query_string['redirect'] = '#/dashboard';
+$query_string['redirect'] = 'dashboard';
 
 ?>
 
@@ -21,7 +21,7 @@ $query_string['redirect'] = '#/dashboard';
 
 <p>Congrats! Your Tappyn account has been successfully activated.</p>
 
-<p>1) Running an ad contest is easy. Simply head to your <?php echo anchor('analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and hit start new contest.</p>
+<p>1) Running an ad contest is easy. Simply head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and hit start new contest.</p>
 
 <p>2) Select which type of ad you'd like and who you plan on showing it to you</p>
 

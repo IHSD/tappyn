@@ -68,6 +68,7 @@ class Contest extends MY_Model
             {
                 $result->submission_count = $this->submissionsCount($result->id);
                 $result->company = $this->db->select('*')->from('profiles')->where('id', $result->owner)->limit(1)->get()->row();
+                unset($result->company->stripe_customer_id);
             }
             return $results;
         }
