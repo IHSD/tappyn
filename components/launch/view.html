@@ -123,14 +123,14 @@
 	</div>
 </div>
 <div class='container'>
-<div class='row content-padding'>	
+<div class='row' style='padding-top:10px;padding-bottom:10px;'>	
 	<div class=' col-xs-12'>
 		<div class='contest-box'>
 			<div class='row'>
 				<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-center'>	
 					<div ng-show='current.step == "package"'>
-						<h2>Assemble your package</h2>
-						<h4>Different packages lead to different kinds of submissions.</h4>
+						<h2>Assemble your contest</h2>
+						<h4>Different contests lead to different kinds of submissions.</h4>
 					</div>
 					<div ng-show='current.step == "detail"'>
 						<h2>Tell us about your business & audience</h2>
@@ -151,7 +151,7 @@
 	</div>
 </div>
 
-<div class='row content-padding'>
+<div class='row' style='padding-bottom: 15px;'>
 	<div ng-show='current.step == "package"' id='package'>
 		<div class='col-xs-12'>
 			<h3 class='text-center'>Where do you want to advertise?</h3>
@@ -297,7 +297,7 @@
 				</div>
 				<div class='col-xs-12 col-sm-4'>
 					<div ng-class='{"package-highlight" : contest.display_type == "with_photo"}' class='contest-box launch-page-hover' ng-click='select_display("with_photo")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text with Photo</h3>
+						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text & Photo</h3>
 						<div style='height:75px;color:#ff6c00'>
 							Our users will submit a photo and text as content
 						</div>
@@ -317,7 +317,7 @@
 			<div class='ad-location' ng-show='contest.platform == "instagram"'>
 				<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
 					<div ng-class='{"package-highlight" : contest.display_type == "with_photo"}' class='contest-box launch-page-hover' ng-click='select_display("with_photo")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text with Photo</h3>
+						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text & Photo</h3>
 						<div style='height:75px;color:#ff6c00'>
 							Our users will submit a photo and text as content
 						</div>
@@ -412,6 +412,17 @@
 					</div>
 					<h5>User Interest <img uib-tooltip="People who follow this interest will be shown your contest" height='10px' width='10px' src='public/img/tooltip.png'></h5>
 					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
+							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "finance_business", "btn-outliner" : contest.industry != "finance_business"}'>
+							<input type='radio' ng-model='contest.industry' value='finance_business'> Business
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "education", "btn-outliner" : contest.industry != "education"}'>
+							<input type='radio' ng-model='contest.industry' value='education'> Education
+						</label>
+					</div>
+					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "fashion_beauty", "btn-outliner" : contest.industry != "fashion_beauty"}'>
 							<input type='radio' ng-model='contest.industry' value="fashion_beauty"> Fashion
 						</label>
@@ -421,36 +432,27 @@
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "health_wellness", "btn-outliner" : contest.industry != "health_wellness"}'>
 							<input type='radio' ng-model='contest.industry' value='health_wellness'> Health & Fitness
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "social_network", "btn-outliner" : contest.industry != "social_network"}'>
-							<input type='radio' ng-model='contest.industry' value='social_network'> Social
-						</label>
 					</div>
 					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "finance_business", "btn-outliner" : contest.industry != "finance_business"}'>
-							<input type='radio' ng-model='contest.industry' value='finance_business'> Business
-						</label>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "home_garden", "btn-outliner" : contest.industry != "home_garden"}'>
 							<input type='radio' ng-model='contest.industry' value='home_garden'> Home & Garden
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "travel", "btn-outliner" : contest.industry != "travel"}'>
-							<input type='radio' ng-model='contest.industry' value='travel'> Travel
-						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
-							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
-						</label>
-					</div>
-					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "pets", "btn-outliner" : contest.industry != "pets"}'>
 							<input type='radio' ng-model='contest.industry' value='pets'> Pets
-						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "sports_outdoors", "btn-outliner" : contest.industry != "sports_outdoors"}'>
-							<input type='radio' ng-model='contest.industry' value="sports_outdoors">Sports & Outdoors 
 						</label>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "tech_science", "btn-outliner" : contest.industry != "tech_science"}'>
 							<input type='radio' ng-model='contest.industry' value='tech_science'> Science & Tech
 						</label>
-						<label class="btn" ng-class='{"btn-oj" : contest.industry == "education", "btn-outliner" : contest.industry != "education"}'>
-							<input type='radio' ng-model='contest.industry' value='education'> Education
+					</div>
+					<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "social_network", "btn-outliner" : contest.industry != "social_network"}'>
+							<input type='radio' ng-model='contest.industry' value='social_network'> Social & Gaming
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "sports_outdoors", "btn-outliner" : contest.industry != "sports_outdoors"}'>
+							<input type='radio' ng-model='contest.industry' value="sports_outdoors">Sports & Outdoors 
+						</label>
+						<label class="btn" ng-class='{"btn-oj" : contest.industry == "travel", "btn-outliner" : contest.industry != "travel"}'>
+							<input type='radio' ng-model='contest.industry' value='travel'> Travel
 						</label>
 					</div>
 				</form>
@@ -459,114 +461,137 @@
 	</div>
 	<div ng-show='current.step == "preview"'>
 		<div class='row'>
-			<div class='col-xs-12'>
-				<div class='panel' style='margin-bottom:0;'>
+			<div class='col-xs-12 col-sm-4'>
+				<div class='panel'>
 					<div class='panel-body'>
-						<div class='col-sm-4 col-xs-12' style='padding-top:5px;'>
-							<h3 style='margin-top:0px;'><img ng-if='!user.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-							<img ng-if='user.logo_url' style='height:auto;' width='50px' ng-src="{{user.logo_url}}">{{user.first_name}}</h3>
-							<div>
-				            	<button class='btn btn-sm btn-oj'>Brief</button>
-				            	<button class='btn btn-sm btn-default'>Submissions</button>
-				            </div>
+						<div class='col-xs-12 text-center' style='padding-top:5px;'>
+							<img ng-if='!user.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+							<img ng-if='user.logo_url' style='height:auto;' width='50px' ng-src="{{user.logo_url}}">
+							<h3 style='margin-top:0px;'>{{user.first_name}}</h3>
 						</div>
-						<div class='col-sm-4 col-xs-12'  style='padding-top:30px;'>
+						 <div class='col-xs-4 text-center'>
+							<h4><span class='glyphicon glyphicon-time'></span> 7 Days</h4>
+						</div>
+						<div class='col-xs-4 text-center'>
+							<h4><span class='glyphicon glyphicon-eye-open'></span> 0</h4>
+						</div>
+						<div class='col-xs-4 text-center'>
+							<h4>{{contest.platform | capitalize}}</h4>
+						</div>
+						<div class='col-xs-12'  style='padding-top:15px;padding-bottom: 15px;'>
 							<div style='width:100%'>
-				            	<uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>                
+				            	<uib-progressbar value='0' max='30' type="warning"></uib-progressbar>                
 				                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
 				            </div>
 				        </div>
-				        <div class='col-sm-2 col-xs-6 text-right'>
-				        	<h1 style='color:#ff6c00'>$50</h1>
-				        </div>
-				        <div class='col-sm-2 col-xs-6 text-right'>
-							<h4 style='margin:0px;margin-top:20px;'>
-				            	Ends 7 Days
-							</h4>
-							<h4>0 Views</h4>
-							<h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
-						</div>	
+						<div class='text-center'>
+			            	<button class='btn btn-oj'>Enter this contest</button>
+			            	<button class='btn btn-default'>View Submissions</button>
+			            </div>	
+					</div>
+				</div>
+				<div class='panel'>
+					<div class='panel-body'>
+						<div ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
+							<div class="col-xs-2"><button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button></div>
+							<div class='col-xs-8'><img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}"></div>
+							<div class='col-xs-2'><button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button></div>
+						</div>
+						<div class='row'>
+					        <div class='col-xs-12' style='margin-top:15px'>
+								<h4 class='text-center'>Target Market</h4>
+					    		<p>{{contest.audience}}</p>
+					    	</div>
+					    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
+							<div class='col-xs-12'>	        	
+								<h4 class='text-center'>What Makes Us Different</h4>
+					    		<p>{{contest.different}}</p>
+					    	</div>
+					    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.emotion'><hr style='border: 1px #ff6c00 solid'></div>
+					    	<div class='col-xs-12' ng-if='contest.emotion'>
+								<h4 class='text-center'>Company Voice</h4>
+					    		<div class='col-xs-12'>
+					    			<img ng-src='{{emotion_contest.icon}}' style='margin-right:5px;'  height='25px' width='25px'>{{emotion_contest.adj}} 
+					    		</div>
+					        </div>
+					    </div>
+					    <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
+							<div class='btn-group'>
+								<a ng-if='user.company_url' href='{{user.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+								<a ng-if='user.facebook_url' href='{{user.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+								</a>
+								<a ng-if='user.twitter_handle' href='https://twitter.com/{{user.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class='col-xs-12'> <hr style='border: 2px #ff6c00 solid'> </div>
-		<div class='col-xs-12 col-sm-8'>
-			<div class='panel'>
-				<div class='panel-body'>
-					<div class='text-center' style='margin-bottom:5px;' ng-init='indexer = 0'>
-						<div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.additional_images && contest.additional_images.length > 0'>
-							<button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button>
-							<img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}">
-							<button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button>
+			<div class='col-sm-8 col-xs-12'>
+				<div class='panel'>
+					<div class='panel-body'>
+						<div>
+							<form class='form'>
+					 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here 
+					 			<span class='pull-right' style='cursor:pointer;' ng-mouseenter='tips = true' ng-mouseleave='tips = false'>Need Help?</span></h4>	
+					 			<div class='col-xs-12 tip-section' ng-show='tips'>
+					 				<h4>What would make you click on this ad?</h4>
+								 	<h4>How have you personally experienced this problem?</h4>
+								 	<h4>What problem is this solving?</h4>
+					 			</div>
+					            <div ng-show='form_limit.headline' class='form-group'>
+						        	<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
+						        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
+						        </div>
+						        <div ng-show='form_limit.text' class='form-group'>
+						        	<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
+						        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
+						        </div>
+						        <div ng-show='form_limit.line_1' class='form-group'>
+						        <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+						        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
+						        </div>
+						        <div ng-show='form_limit.line_2' class='form-group'>
+						        	<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
+						        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
+						        </div>
+						        <div ng-show='form_limit.card_title' class='form-group'>
+						        	<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
+						        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
+						        </div>
+							</form>
+							<div ng-show='form_limit.photo'>
+								<div ng-show='image_show == "edit"'>
+								 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
+									<label for="fileInput">Upload Your Photo</label>
+									<button ng-show='imagerino != ""' class='btn btn-oj pull-right' ng-click='preview_image()'>Preview</button>
+									<div class='col-xs-12'><p class='text-left'>*Make sure your image fills up the square, you can drag your image and zoom to accomplish this. You can preview the new image before submitting so you know exactly what you're submitting</p></div>
+								</div>
+							</div>
+							<div class='text-right'>
+				        		<button class='btn btn-oj'>Submit</button>
+				      		</div>
+						    <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
+						        <div ng-if='!emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
+							    </div>
+							    <div ng-if='emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
+							    </div>
+							    <div ng-if='contest.display_type == "with_photo" && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_image.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'instagram'" src='public/img/insta_image.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/twitter_image.jpg'>
+							    </div>
+							</div>
 						</div>
-					</div>
-					<div class='row'>
-				        <div class='col-xs-12' style='margin-top:15px'>
-							<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Target Market</h4></div>
-				    		<div class='col-sm-9 col-xs-12'>
-				    			{{contest.audience}}
-				    		</div>
-				    	</div>
-						<div class='col-xs-12' style='margin-top:15px'>	        	
-							<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>What Makes Us Different</h4></div>
-				    		<div class='col-sm-9 col-xs-12'>
-				    			{{contest.different}}
-				    		</div>
-				    	</div>
-				    	<div class='col-xs-12' style='margin-top:15px' ng-if='contest.emotion'>
-							<div class='col-sm-3 col-xs-12'><h4 class='text-left' style='margin:0'>Ad Personality</h4></div>
-				    		<div class='col-sm-9 col-xs-12'>
-				    			<img ng-src='{{emotion_contest.icon}}' style='margin-right:5px;'  height='25px' width='25px'>{{emotion_contest.adj}} 
-				    		</div>
-				        </div>
-				    </div>
-			        <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
-			            <a ng-if='user.company_url' href='{{user.company_url}}' class='btn btn-oj'  target='_blank'>Website</a>
-			    	    <a ng-if='user.facebook_url' href='{{user.facebook_url}}' class='btn btn-oj'  target='_blank'>Facebook</a>
-			    	    <a ng-if='user.twitter_handle' href='{{user.twitter_handle}}' class='btn btn-oj'  target='_blank'>Twitter</a>
-			       	</div>
-			    </div>
-			</div>
-		</div>
-		<div class='col-sm-4 col-xs-12'>
-			<div class='panel'>
-				<div class='panel-body'>
-					<form class='form'>
-			 			<h4 style='margin:0px;margin-bottom:20px;'>Create your ad here</h4>	
-			            <div ng-show='form_limit.headline' class='form-group'>
-				        	<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
-				        	<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
-				        </div>
-				        <div ng-show='form_limit.text' class='form-group'>
-				        	<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
-				        	<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
-				        </div>
-				        <div ng-show='form_limit.line_1' class='form-group'>
-				        <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
-				        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
-				        </div>
-				        <div ng-show='form_limit.line_2' class='form-group'>
-				        	<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.description' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
-				        	<div class='input-count'><span ng-if='!submit.description'>0</span><span ng-if='submit.description'>{{submit.link_description.length}}</span> of {{form_limit.line_2.limit}} characters</div>
-				        </div>
-				        <div ng-show='form_limit.card_title' class='form-group'>
-				        	<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.description' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
-				        	<div class='input-count'><span ng-if='!submit.description'>0</span><span ng-if='submit.description'>{{submit.link_description.length}}</span> of {{form_limit.card_title.limit}} characters</div>
-				        </div>
-			       		<div class='text-right'>
-			        		<button class='btn btn-oj' type='submit'>Submit</button>
-			      		</div>
-					</form>
-			        <div ng-if='!emotion_contest && contest.platform != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-				        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
-				        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
-				        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
-				    </div>
-				    <div ng-if='emotion_contest' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-				    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
-				    </div>
-			   </div>
+				   </div>
+				</div>
 			</div>
 		</div>
 	</div>
