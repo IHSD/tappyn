@@ -47,7 +47,8 @@ tappyn.service("contestModel", function(){
 			layout.line_1 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
 			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
 		}
-		else if(contest.platform == "general" || contest.platform == "instagram") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
+		else if(contest.platform == "instagram") layout.text = {limit : 250, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
 
 		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
