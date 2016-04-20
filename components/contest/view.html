@@ -31,10 +31,10 @@
 			</div>
 			<div class='panel'>
 				<div class='panel-body'>
-					<div class='col-xs-12 text-center' ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
-						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button>
-						<img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}">
-						<button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button>
+					<div ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
+						<div class="col-xs-2"><button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button></div>
+						<div class='col-xs-8'><img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}"></div>
+						<div class='col-xs-2'><button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button></div>
 					</div>
 					<div class='row'>
 				        <div class='col-xs-12' style='margin-top:15px'>
@@ -134,19 +134,21 @@
 								 	<button class='btn btn-oj' ng-click='image_show = "edit"'>Edit Image</button>
 								</div>
 							</div>
-					        <div ng-if='!emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-						        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
-						        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
-						        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
-						    </div>
-						    <div ng-if='emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-						    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
-						    </div>
-						    <div ng-if='contest.display_type == "with_photo"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
-						        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_image.png'>
-						        <img class='img-responsive' ng-if="contest.platform == 'instagram'" src='public/img/insta_image.png'>
-						        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/twitter_image.jpg'>
-						    </div>
+						    <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
+						        <div ng-if='!emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/Twitter_submish.png'>
+							    </div>
+							    <div ng-if='emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							    	<img class='img-responsive' ng-src='{{emotion_contest.example}}'>
+							    </div>
+							    <div ng-if='contest.display_type == "with_photo" && contest.platfor != "general"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
+							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_image.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'instagram'" src='public/img/insta_image.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/twitter_image.jpg'>
+							    </div>
+							</div>
 						    <div class='text-right'>
 				        		<button class='btn btn-oj'  ng-click='submit_to(contest.id, submit)'>Submit</button>
 				      		</div>
