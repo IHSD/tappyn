@@ -207,11 +207,12 @@ class Users extends CI_Controller
 
     public function follow($cid)
     {
-        $check = $this->db->select('*')->from('follows')->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->limit(1)->get()->row()->count;
+        $this->db_test = $this->load->database('master', TRUE);
+        $check = $this->db_test->select('*')->from('follows')->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->limit(1)->get()->row()->count;
         if($check == 0)
         {
             // Attempt to follow
-            if($this->db->insert('follows', array(
+            if($this->db_test->insert('follows', array(
                 'follower' => $this->ion_auth->user()->row()->id,
                 'following' => $cid,
                 'created' => time()
@@ -231,7 +232,8 @@ class Users extends CI_Controller
 
     public function unfollow($cid)
     {
-        if($this->db->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->delete('follows'))
+        $this->db_test = $this->load->database('master', TRUE);
+        if($this->db_test->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->delete('follows'))
         {
             $this->responder->data()->message("You are no longer following this company!");
         }
