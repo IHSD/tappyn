@@ -42,6 +42,7 @@ class Companies extends CI_Controller
 
     public function show($cid = 0)
     {
+        $this->db_test = $this->load->database('master', TRUE);
         if(!$this->ion_auth->in_group(3, $cid))
         {
             $this->responder->fail(
@@ -61,15 +62,15 @@ class Companies extends CI_Controller
         }
 
         // get follow
-        $company->follows = $this->db->select('COUNT(*) as count')->from('follows')->where('following', $cid)->get()->row()->count;
-        $user_follows = $this->db->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
+        $company->follows = $this->db_test->select('COUNT(*) as count')->from('follows')->where('following', $cid)->get()->row()->count;
+        $user_follows = $this->db_test->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
         if($user_follows->num_rows() == 0)
         {
             $company->user_may_follow = TRUE;
         }
         else $company->user_may_follow = FALSE;
 
-        $company->requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array('company_id' => $cid, 'fulfilled' => 0))->get()->row()->count;
+        $company->requests = $this->db_test->select('COUNT(*) as count')->from('requests')->where(array('company_id' => $cid, 'fulfilled' => 0))->get()->row()->count;
         $this->responder->data(array(
             'company' => $company
         ))->respond();
