@@ -129,7 +129,7 @@
 									<label for="fileInput">Upload Your Photo</label>
 									<button ng-show='imagerino != ""' class='btn btn-oj pull-right' ng-click='preview_image()'>Preview</button>
 									<div class='col-xs-12'><p class='text-left'>*Make sure your image fills up the square, you can drag your image and zoom to accomplish this. You can preview the new image before submitting so you know exactly what you're submitting</p></div>
-								    <img id="upload_contest" src='public/img/your_photo.png'>
+								    <img id="upload_contest">
 								</div>
 								<div ng-show='image_show == "preview"'>
 								 	<img id='preview_image' ng-src='{{preview}}'>
