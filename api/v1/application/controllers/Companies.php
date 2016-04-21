@@ -59,33 +59,46 @@ class Companies extends CI_Controller
             )->code(500)->respond();
             return;
         }
-        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time >' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
-            'company_id' => $company->id,
-            'fulfilled' => 0
-        ))->get()->row()->count;
+
         $this->responder->data(array(
             'company' => $company
         ))->respond();
     }
 
+    public function contests($cid)
+    {
+        if(!$this->ion_auth->in_group(3, $cid))
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+
+        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time >' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
+            'company_id' => $cid,
+            'fulfilled' => 0
+        ))->get()->row()->count;
+        $this->responder->data(array('contests' => $company))->respond();
+    }
 
     public function dashboard()
     {
