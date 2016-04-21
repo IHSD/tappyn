@@ -75,29 +75,23 @@ class Companies extends CI_Controller
             return;
         }
 
-        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
+        $contests = $this->db->select('*')->from('contests')->where(array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1,
             'owner' => $cid
-        ))->get()->result();
-        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $cid
-        ))->get()->result();
-        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time >' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $cid
-        ))->get()->result();
-        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
-            'company_id' => $cid,
-            'fulfilled' => 0
-        ))->get()->row()->count;
-        $this->responder->data(array('contests' => $company))->respond();
+        ));
+        foreach($contests as $contest)
+        {
+            if($contest->stop_time > date('Y-m-d H:i:s'))
+            {
+                $contest->status = 'active';
+                $contest->link = 'contest';
+            } else {
+                $contest->status = 'ended';
+                $contest->link = 'ended';
+            }
+        }
+        $this->responder->data(array('contests' => $contests))->respond();
     }
 
     public function dashboard()
