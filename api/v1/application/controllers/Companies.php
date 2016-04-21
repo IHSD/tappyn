@@ -79,7 +79,7 @@ class Companies extends CI_Controller
             'start_time <' => date('Y-m-d H:i:s'),
             'paid' => 1,
             'owner' => $cid
-        ));
+        ))->get()->result();
         foreach($contests as $contest)
         {
             if($contest->stop_time > date('Y-m-d H:i:s'))
