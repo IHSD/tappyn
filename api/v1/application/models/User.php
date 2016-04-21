@@ -54,8 +54,8 @@ class User extends MY_Model
      */
     public function saveProfile($uid, $data)
     {
-        if(isset($data['company_url']) && (strpos('http://', $data['company_url']) === FALSE)) $data['company_url'] = 'http://'.$data['company_url'];
-        if(isset($data['facebook_url']) && (strpos('http://', $data['facebook_url']) === FALSE)) $data['facebook_url'] = 'http://'.$data['facebook_url'];
+        if(isset($data['company_url']) && $data['company_url'] !== '' && (strpos($data['company_url'], '://') === FALSE)) $data['company_url'] = 'http://'.$data['company_url'];
+        if(isset($data['facebook_url']) && $data['facebook_url'] !== '' && (strpos($data['facebook_url'], '://') === FALSE)) $data['facebook_url'] = 'http://'.$data['facebook_url'];
         $check = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
         if($check !== FALSE)
         {

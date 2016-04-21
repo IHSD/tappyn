@@ -42,6 +42,7 @@ class Companies extends CI_Controller
 
     public function show($cid = 0)
     {
+        $this->db_test = $this->load->database('master', TRUE);
         if(!$this->ion_auth->in_group(3, $cid))
         {
             $this->responder->fail(
@@ -59,33 +60,51 @@ class Companies extends CI_Controller
             )->code(500)->respond();
             return;
         }
-        $company->active_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->completed_contests = $this->db->selecT('*')->from('contests')->where(array(
-            'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->pending_contests = $this->db->select('*')->from('contests')->where(array(
-            'start_time >' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $company->id
-        ))->get()->result();
-        $company->contest_requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array(
-            'company_id' => $company->id,
-            'fulfilled' => 0
-        ))->get()->row()->count;
+
+        // get follow
+        $company->follows = $this->db_test->select('COUNT(*) as count')->from('follows')->where('following', $cid)->get()->row()->count;
+        $user_follows = $this->db_test->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
+        if($user_follows->num_rows() == 0)
+        {
+            $company->user_may_follow = TRUE;
+        }
+        else $company->user_may_follow = FALSE;
+
+        $company->requests = $this->db_test->select('COUNT(*) as count')->from('requests')->where(array('company_id' => $cid, 'fulfilled' => 0))->get()->row()->count;
         $this->responder->data(array(
             'company' => $company
         ))->respond();
     }
 
+    public function contests($cid)
+    {
+        if(!$this->ion_auth->in_group(3, $cid))
+        {
+            $this->responder->fail(
+                "That company does not exist"
+            )->code(500)->respond();
+            return;
+        }
+
+        $contests = $this->db->select('*')->from('contests')->where(array(
+            'start_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+            'owner' => $cid
+        ))->get()->result();
+        foreach($contests as $contest)
+        {
+            if($contest->stop_time > date('Y-m-d H:i:s'))
+            {
+                $contest->status = 'active';
+                $contest->link = 'contest';
+            } else {
+                $contest->status = 'ended';
+                $contest->link = 'ended';
+            }
+            $contest->submission_count = $this->db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $contest->id)->get()->row()->count;
+        }
+        $this->responder->data(array('contests' => $contests))->respond();
+    }
 
     public function dashboard()
     {
