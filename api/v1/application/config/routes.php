@@ -57,6 +57,7 @@ $route['companies/dashboard']['get']        = 'companies/dashboard';
 $route['companies/(:num)']['get']           = 'companies/show/$1';
 $route['companies/show/(:num)']['get']      = 'companies/show/$1';
 $route['companies/(:num)/contests']['get']  = 'companies/contests/$1';
+$route['companies/contests/(:num)']['get']  = 'companies/contests/$1';
 $route['companies/accounts']                = 'companies/accounts';
 $route['companies/remove_method']['post']   = 'companies/removeCard';
 $route['companies/payment/(:num)']['post']  = 'companies/payment/$1';
