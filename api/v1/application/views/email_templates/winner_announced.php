@@ -19,7 +19,7 @@ $query_string['redirect'] = 'dashboard';
 
 <h5><?php echo $company->name; ?>'s contest has ended</h5>
 
-<p>Unfortunately, your submission was'nt chosen. But remember, you get points for upvoting, and if you upvoted the winner, you got extra points</p>
+<p>Unfortunately, your submission wasn't chosen. But remember, you get points for upvoting, and if you upvoted the winner, you got extra points</p>
 
 <p>You can see who won <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?></p>
 <?php $query_string['redirect'] = 'contests'; ?>
