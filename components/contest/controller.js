@@ -25,7 +25,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		$scope.view = {brief : false, submissions : true};
 	}
 
-	$scope.imagerino = '';
 	$scope.image_show = 'edit';
 	$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
 		aspectRatio: 1.91 / 1,
@@ -35,6 +34,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	  	cropBoxMovable : false,
 	  	preview : '.img-preview'
 	});
+	$scope.cropper.reset();
+
 
 	$scope.upload_image = function(id, submission){
 		var canvas = $scope.cropper.getCroppedCanvas();
@@ -164,7 +165,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
       var reader = new FileReader();
       reader.onload = function (evt) {
         $scope.$apply(function($scope){
-          $scope.imagerino=evt.target.result;
           $scope.cropper.replace(evt.target.result);
         });
       };
