@@ -101,6 +101,7 @@ class Companies extends CI_Controller
                 $contest->status = 'ended';
                 $contest->link = 'ended';
             }
+            $contest->submission_count = $this->db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $contest->id)->get()->row()->count;
         }
         $this->responder->data(array('contests' => $contests))->respond();
     }
