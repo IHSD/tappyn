@@ -60,6 +60,16 @@ class Companies extends CI_Controller
             return;
         }
 
+        // get follow
+        $company->follows = $this->db->select('COUNT(*) as count')->from('follows')->where('following', $cid)->get()->row()->count;
+        $user_follows = $this->db->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
+        if($user_follows->num_rows() == 0)
+        {
+            $company->user_may_follow = TRUE;
+        }
+        else $company->user_may_follow = FALSE;
+
+        $company->requests = $this->db->select('COUNT(*) as count')->from('requests')->where(array('company_id' => $cid, 'fulfilled' => 0))->get()->row()->count;
         $this->responder->data(array(
             'company' => $company
         ))->respond();

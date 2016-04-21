@@ -204,4 +204,14 @@ class Users extends CI_Controller
         }
         $this->responder->data(array('submissions' => $subs))->respond();
     }
+
+    public function follow($cid)
+    {
+
+    }
+
+    public function unfollow()
+    {
+
+    }
 }
