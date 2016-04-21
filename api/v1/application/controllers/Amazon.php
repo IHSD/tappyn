@@ -28,7 +28,6 @@ class Amazon extends CI_Controller
                 {"bucket": "' . $this->bucket_name . '"},
                 ["starts-with", "$key", ""],
                 {"acl": "public-read"},
-                ["content-length-range", 0, 10485760],
                 ["starts-with", "$Content-Type", ""]
             ]
         }';
