@@ -30,4 +30,15 @@ class Analytics extends CI_Controller
                  ->update('mailing_queue');
         header("Location: ".base_url($this->input->get('redirect')));
     }
+
+    public function track()
+    {
+        $event = $this->input->get('ev');
+        $contest = $this->input->get('cid');
+        $this->db->where('id', $contest);
+        if($event == 'website_click')
+        {
+            $this->db->set('website_clicks', 'website_clicks + 1', FALSE);
+        }
+    }
 }
