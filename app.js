@@ -940,198 +940,6 @@ tappyn.factory("companiesFactory", function($http){
 
 	return fact;
 })
-tappyn.controller("editController", function($scope, $routeParams, editFactory){
-	$scope.logged_in();
-	if($routeParams.id){
-		editFactory.grabEdit($routeParams.id).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contest = response.data.contest;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.edit = function(contest){
-		editFactory.editContest(contest).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.amazon_connect('tappyn');
-	$scope.select_file = function($files, type){
-	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
-		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
-       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
-       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
-	    else {
-	    	var new_name = Date.now();
-		    var rando = Math.random() * (10000 - 1) + 1;
-		    namen = url + new_name.toString() + rando.toString();
-		}
-	    $upload.upload({
-	        url: url,
-	        method: 'POST',
-	        data : {
-	            key: new_name,
-	            acl: 'public-read',
-	            "Content-Type": file.type === null || file.type === '' ?
-	            'application/octet-stream' : file.type,
-	            AWSAccessKeyId: $rootScope.key.key,
-	            policy: $rootScope.key.policy,
-	            signature: $rootScope.key.signature
-	        },
-	        file: file,
-	    }).success(function (){
-	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
-	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
-	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
-	    });
-	}
-})
-tappyn.factory("editFactory", function($http){
-	var fact = {};
-
-	fact.grabEdit = function(id){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/contests/'+id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.editContest = function(contest){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/contests/'+contest.id,
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(contest)
-		});
-	}
-
-	return fact;
-})
-tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
-	if(!$rootScope.user || $rootScope.user.type == 'company'){
-		$scope.tab = "all";
-		contestsFactory.grabAllContests().success(function(response){
-			$scope.contests = response.data.contests;
-			if(!$rootScope.user){
-				$scope.contests_login = true;
-				$rootScope.modal_up = true;
-			}
-		});
-	}
-	else{
-		$scope.tab = "my";
-		contestsFactory.grabMyContests().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contests = response.data.contests;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "default");
-				$scope.adding_interests("first");
-			}
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.close_contests_login = function(){
-		$scope.contests_login = false;
-		$rootScope.modal_up = false;
-		$location.path('/home');
-	}
-
-	$scope.filter_industry = function(pass){
-		contestsFactory.filterGrab(pass).success(function(response){
-			$scope.contests = response.data.contests;
-		})
-	}
-	
-	$scope.grab_all = function(){
-		$scope.tab = 'all';
-		contestsFactory.grabAllContests().success(function(response){
-			$scope.contests = response.data.contests;
-		});
-	}
-
-	$scope.grab_my = function(){
-		$scope.tab = "my";
-		contestsFactory.grabMyContests().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contests = response.data.contests;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "default");
-				$scope.adding_interests();
-			}
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.grab_companies = function(){
-		$scope.tab = 'company';
-		contestsFactory.grabCompanies().success(function(response){
-			$scope.companies = response.data.companies;
-		});
-	}	
-
-	$scope.to_account = function(){
-		$scope.with_email = false;
-		$scope.have_account = true;
-		$scope.forgot = false;
-	}
-
-	$scope.email_regis = function(){
-		$scope.with_email = true;
-		$scope.have_account = false;
-		$scope.forgot = false;
-	}
-
-	$scope.forgotten = function(){
-		$scope.with_email = false;
-		$scope.have_account = false;
-		$scope.forgot = true;
-	}
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabMyContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/contests/interesting',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.grabAllContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
 tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
@@ -1159,7 +967,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		$scope.view = {brief : false, submissions : true};
 	}
 
-	$scope.imagerino = '';
 	$scope.image_show = 'edit';
 	$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
 		aspectRatio: 1.91 / 1,
@@ -1169,6 +976,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 	  	cropBoxMovable : false,
 	  	preview : '.img-preview'
 	});
+	$scope.cropper.reset();
+
 
 	$scope.upload_image = function(id, submission){
 		var canvas = $scope.cropper.getCroppedCanvas();
@@ -1298,7 +1107,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
       var reader = new FileReader();
       reader.onload = function (evt) {
         $scope.$apply(function($scope){
-          $scope.imagerino=evt.target.result;
           $scope.cropper.replace(evt.target.result);
         });
       };
@@ -1480,6 +1288,116 @@ tappyn.service("contestModel", function(){
 			}
 		}
 	}
+})
+tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
+	if(!$rootScope.user || $rootScope.user.type == 'company'){
+		$scope.tab = "all";
+		contestsFactory.grabAllContests().success(function(response){
+			$scope.contests = response.data.contests;
+			if(!$rootScope.user){
+				$scope.contests_login = true;
+				$rootScope.modal_up = true;
+			}
+		});
+	}
+	else{
+		$scope.tab = "my";
+		contestsFactory.grabMyContests().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contests = response.data.contests;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500){
+				$scope.set_alert(response.error, "default");
+				$scope.adding_interests("first");
+			}
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.close_contests_login = function(){
+		$scope.contests_login = false;
+		$rootScope.modal_up = false;
+		$location.path('/home');
+	}
+
+	$scope.filter_industry = function(pass){
+		contestsFactory.filterGrab(pass).success(function(response){
+			$scope.contests = response.data.contests;
+		})
+	}
+	
+	$scope.grab_all = function(){
+		$scope.tab = 'all';
+		contestsFactory.grabAllContests().success(function(response){
+			$scope.contests = response.data.contests;
+		});
+	}
+
+	$scope.grab_my = function(){
+		$scope.tab = "my";
+		contestsFactory.grabMyContests().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contests = response.data.contests;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500){
+				$scope.set_alert(response.error, "default");
+				$scope.adding_interests();
+			}
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		contestsFactory.grabCompanies().success(function(response){
+			$scope.companies = response.data.companies;
+		});
+	}	
+
+	$scope.to_account = function(){
+		$scope.with_email = false;
+		$scope.have_account = true;
+		$scope.forgot = false;
+	}
+
+	$scope.email_regis = function(){
+		$scope.with_email = true;
+		$scope.have_account = false;
+		$scope.forgot = false;
+	}
+
+	$scope.forgotten = function(){
+		$scope.with_email = false;
+		$scope.have_account = false;
+		$scope.forgot = true;
+	}
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabMyContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests/interesting',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabAllContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
 })
 tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
 	//on page load grab all
@@ -1737,6 +1655,88 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
+	return fact;
+})
+tappyn.controller("editController", function($scope, $routeParams, editFactory){
+	$scope.logged_in();
+	if($routeParams.id){
+		editFactory.grabEdit($routeParams.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contest = response.data.contest;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.edit = function(contest){
+		editFactory.editContest(contest).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.amazon_connect('tappyn');
+	$scope.select_file = function($files, type){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
+       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
+       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
+	    else {
+	    	var new_name = Date.now();
+		    var rando = Math.random() * (10000 - 1) + 1;
+		    namen = url + new_name.toString() + rando.toString();
+		}
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
+	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
+	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
+	    });
+	}
+})
+tappyn.factory("editFactory", function($http){
+	var fact = {};
+
+	fact.grabEdit = function(id){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.editContest = function(contest){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/contests/'+contest.id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(contest)
+		});
+	}
+
 	return fact;
 })
 tappyn.controller("endedController", function($scope, $location, $routeParams, endedFactory){
@@ -2239,191 +2239,6 @@ tappyn.service('launchModel', function(){
 		return layout;
 	}
 })
-tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
-	$scope.logged_in();
-	$scope.amazon_connect('tappyn');
-	$scope.states = profileModel.states;
-
-	$scope.select_file = function($files){
-	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
-	    var new_name = Date.now();
-	    $upload.upload({
-	        url: url,
-	        method: 'POST',
-	        data : {
-	            key: new_name,
-	            acl: 'public-read',
-	            "Content-Type": file.type === null || file.type === '' ?
-	            'application/octet-stream' : file.type,
-	            AWSAccessKeyId: $rootScope.key.key,
-	            policy: $rootScope.key.policy,
-	            signature: $rootScope.key.signature
-	        },
-	        file: file,
-	    }).success(function (){
-	       	$scope.profile.logo_url = url+new_name;
-	    });
-	}
-	//grab that funky fresh profile on load
-	profileFactory.grabProfile().success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success) $scope.profile = response.data.profile;	
-			else $scope.set_alert(response.message, "default");	 
-		}
-		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-		else $scope.check_code(response.http_status_code);
-	})
-
-	$scope.update_profile = function(profile){
-		profileFactory.updateProfile(profile).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");
-					$rootScope.user.first_name = $scope.profile.first_name;
-					$rootScope.user.last_name = $scope.profile.last_name;
-					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
-				}	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.change_pass = function(pass){
-		profileFactory.updatePass(pass).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.resend = function(){
-		profileFactory.resendVerification().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);	
-		})
-	}	
-});
-tappyn.factory('profileFactory', function($http){
-	var fact = {};
-
-	fact.grabProfile = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/profile',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.updateProfile = function(profile){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/profile',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(profile)
-		});
-	}
-
-	fact.updatePass = function(pass){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/password',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(pass)
-		});
-	}
-
-	fact.resendVerification = function(){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/resend_verification',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-	return fact;
-})
-tappyn.service("profileModel", function(){
-this.states = 
-{
-    "AL": "Alabama",
-    "AK": "Alaska",
-    "AS": "American Samoa",
-    "AZ": "Arizona",
-    "AR": "Arkansas",
-    "CA": "California",
-    "CO": "Colorado",
-    "CT": "Connecticut",
-    "DE": "Delaware",
-    "DC": "District Of Columbia",
-    "FM": "Federated States Of Micronesia",
-    "FL": "Florida",
-    "GA": "Georgia",
-    "GU": "Guam",
-    "HI": "Hawaii",
-    "ID": "Idaho",
-    "IL": "Illinois",
-    "IN": "Indiana",
-    "IA": "Iowa",
-    "KS": "Kansas",
-    "KY": "Kentucky",
-    "LA": "Louisiana",
-    "ME": "Maine",
-    "MH": "Marshall Islands",
-    "MD": "Maryland",
-    "MA": "Massachusetts",
-    "MI": "Michigan",
-    "MN": "Minnesota",
-    "MS": "Mississippi",
-    "MO": "Missouri",
-    "MT": "Montana",
-    "NE": "Nebraska",
-    "NV": "Nevada",
-    "NH": "New Hampshire",
-    "NJ": "New Jersey",
-    "NM": "New Mexico",
-    "NY": "New York",
-    "NC": "North Carolina",
-    "ND": "North Dakota",
-    "MP": "Northern Mariana Islands",
-    "OH": "Ohio",
-    "OK": "Oklahoma",
-    "OR": "Oregon",
-    "PW": "Palau",
-    "PA": "Pennsylvania",
-    "PR": "Puerto Rico",
-    "RI": "Rhode Island",
-    "SC": "South Carolina",
-    "SD": "South Dakota",
-    "TN": "Tennessee",
-    "TX": "Texas",
-    "UT": "Utah",
-    "VT": "Vermont",
-    "VI": "Virgin Islands",
-    "VA": "Virginia",
-    "WA": "Washington",
-    "WV": "West Virginia",
-    "WI": "Wisconsin",
-    "WY": "Wyoming"
-}
-
-});
 tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
 	$scope.logged_in();
 	$scope.countries = paymentModel.countries;
@@ -2616,67 +2431,191 @@ tappyn.service('paymentModel', function(){
         'US' : 'United States'
 	};
 })
-tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
-	
+tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
+	$scope.logged_in();
+	$scope.amazon_connect('tappyn');
+	$scope.states = profileModel.states;
 
-	topFactory.grabTops().success(function(response){
-		$scope.submissions = response.data.submissions;
+	$scope.select_file = function($files){
+	    var file = $files[0];
+	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var new_name = Date.now();
+	    $upload.upload({
+	        url: url,
+	        method: 'POST',
+	        data : {
+	            key: new_name,
+	            acl: 'public-read',
+	            "Content-Type": file.type === null || file.type === '' ?
+	            'application/octet-stream' : file.type,
+	            AWSAccessKeyId: $rootScope.key.key,
+	            policy: $rootScope.key.policy,
+	            signature: $rootScope.key.signature
+	        },
+	        file: file,
+	    }).success(function (){
+	       	$scope.profile.logo_url = url+new_name;
+	    });
+	}
+	//grab that funky fresh profile on load
+	profileFactory.grabProfile().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success) $scope.profile = response.data.profile;	
+			else $scope.set_alert(response.message, "default");	 
+		}
+		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+		else $scope.check_code(response.http_status_code);
 	})
 
-
-	$scope.upvote = function(submission){
-		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
-		else {	
-			topFactory.upvote(submission.contest_id,submission.id).success(function(response){
-				if(response.http_status_code == 200){
-					if(response.success){
-						$scope.set_alert(response.message, "default");
-						$scope.update_points(1);
-						submission.user_may_vote = false;
-						submission.votes++;
-					}	
-					else $scope.set_alert(response.message, "default");	 
-				}
-				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-				else $scope.check_code(response.http_status_code);
-			})
-		}
-	}
-
-	$scope.share = function(submission){
-		FB.ui({
-  			method: 'share',
-		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
-		}, function(response){
-			
-		});
-	}
-})
-tappyn.factory('topFactory', function($http){
-	var fact = {}
-
-	fact.grabTops = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/submissions/leaderboard',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
+	$scope.update_profile = function(profile){
+		profileFactory.updateProfile(profile).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");
+					$rootScope.user.first_name = $scope.profile.first_name;
+					$rootScope.user.last_name = $scope.profile.last_name;
+					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
+				}	
+				else $scope.set_alert(response.message, "default");	 
 			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
 		})
 	}
 
-	fact.upvote = function(contest, id){
+	$scope.change_pass = function(pass){
+		profileFactory.updatePass(pass).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.resend = function(){
+		profileFactory.resendVerification().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);	
+		})
+	}	
+});
+tappyn.factory('profileFactory', function($http){
+	var fact = {};
+
+	fact.grabProfile = function(){
 		return $http({
-			method : 'POST',
-			url : 'api/v1/submissions/'+id+'/vote',
+			method : 'GET',
+			url : 'api/v1/profile',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
 		});
 	}
 
+	fact.updateProfile = function(profile){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/profile',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(profile)
+		});
+	}
+
+	fact.updatePass = function(pass){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/password',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(pass)
+		});
+	}
+
+	fact.resendVerification = function(){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/resend_verification',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
 	return fact;
 })
+tappyn.service("profileModel", function(){
+this.states = 
+{
+    "AL": "Alabama",
+    "AK": "Alaska",
+    "AS": "American Samoa",
+    "AZ": "Arizona",
+    "AR": "Arkansas",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DE": "Delaware",
+    "DC": "District Of Columbia",
+    "FM": "Federated States Of Micronesia",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "GU": "Guam",
+    "HI": "Hawaii",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "IA": "Iowa",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "ME": "Maine",
+    "MH": "Marshall Islands",
+    "MD": "Maryland",
+    "MA": "Massachusetts",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MS": "Mississippi",
+    "MO": "Missouri",
+    "MT": "Montana",
+    "NE": "Nebraska",
+    "NV": "Nevada",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NY": "New York",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "MP": "Northern Mariana Islands",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PW": "Palau",
+    "PA": "Pennsylvania",
+    "PR": "Puerto Rico",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VT": "Vermont",
+    "VI": "Virgin Islands",
+    "VA": "Virginia",
+    "WA": "Washington",
+    "WV": "West Virginia",
+    "WI": "Wisconsin",
+    "WY": "Wyoming"
+}
+
+});
 tappyn.controller("resetController", function($scope, $routeParams, $location, resetFactory){
 	$scope.logged_in();
 	
@@ -2734,6 +2673,67 @@ tappyn.factory("resetFactory", function($http){
 			},
 			data : $.param(pass)
 		})
+	}
+
+	return fact;
+})
+tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
+	
+
+	topFactory.grabTops().success(function(response){
+		$scope.submissions = response.data.submissions;
+	})
+
+
+	$scope.upvote = function(submission){
+		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
+		else {	
+			topFactory.upvote(submission.contest_id,submission.id).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");
+						$scope.update_points(1);
+						submission.user_may_vote = false;
+						submission.votes++;
+					}	
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			})
+		}
+	}
+
+	$scope.share = function(submission){
+		FB.ui({
+  			method: 'share',
+		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
+		}, function(response){
+			
+		});
+	}
+})
+tappyn.factory('topFactory', function($http){
+	var fact = {}
+
+	fact.grabTops = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/submissions/leaderboard',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})
+	}
+
+	fact.upvote = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/submissions/'+id+'/vote',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
 	}
 
 	return fact;

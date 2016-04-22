@@ -41,7 +41,8 @@ class Contest extends MY_Model
         if($contest && $contest->num_rows() == 1)
         {
             $contest = $contest->row();
-            $contest->submission_count = $this->submissionsCount($contest->id);
+            $contest->submission_limit = (int) $contest->submission_limit; 
+            $contest->submission_count = (int) $this->submissionsCount($contest->id);
             $contest->company = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->limit(1)->get()->row();
             $contest->needs_winner = $this->needsWinner($contest->id);
             return $contest;

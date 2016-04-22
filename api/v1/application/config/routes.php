@@ -8,8 +8,9 @@ $route['default_controller']        = 'errors/no_route';
 $route['404_override']              = 'errors/show_404';
 $route['translate_uri_dashes']      = FALSE;
 $route['amazon/connect']            = 'amazon/connect';
-$route['contact']['post']        = 'welcome/contact_us';
+$route['contact']['post']           = 'welcome/contact_us';
 $route['mailing_list']['post']      = 'welcome/mailing_list';
+$route['auth/activate/(:any)']      = 'auth/activate/$1';
 
 /*========================
   Admin
@@ -110,7 +111,3 @@ $route['vouchers']                   = 'vouchers/is_valid';
  * Anything that does not match a defined route, we send to the 404 of our
  * error controller. TThis forces routes to match explicitly
  */
-$route['(:any)/(:any)/(:any)/(:any)']       = 'errors/show_404';
-$route['(:any)/(:any)/(:any)']              = 'errors/show_404';
-$route['(:any)/(:any)']                     = 'errors/show_404';
-$route['(:any)']                            = 'errors/show_404';

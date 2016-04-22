@@ -31,12 +31,18 @@
 			</div>
 			<div class='panel'>
 				<div class='panel-body'>
-					<div ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
-						<div class="col-xs-2"><button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button></div>
-						<div class='col-xs-8'><img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}"></div>
-						<div class='col-xs-2'><button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button></div>
-					</div>
 					<div class='row'>
+						<div class='col-xs-12 text-center' style='padding-top:10px;'>
+							<div class='btn-group'>
+								<a ng-if='contest.company.company_url' href='{{contest.company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
+								<a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+								</a>
+								<a ng-if='contest.company.twitter_handle' href='https://twitter.com/{{contest.company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+								</a>
+							</div>
+						</div>
 				        <div class='col-xs-12' style='margin-top:15px'>
 							<h4 class='text-center'>Target Market</h4>
 				    		<p>{{contest.audience}}</p>
@@ -46,6 +52,12 @@
 							<h4 class='text-center'>What Makes Us Different</h4>
 				    		<p>{{contest.different}}</p>
 				    	</div>
+				    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.additional_images.length > 0'><hr style='border: 1px #ff6c00 solid'></div>
+				    	<div class='col-xs-12' ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
+							<div class="col-xs-2"><button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button></div>
+							<div class='col-xs-8'><img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}"></div>
+							<div class='col-xs-2'><button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button></div>
+						</div>
 				    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.emotion'><hr style='border: 1px #ff6c00 solid'></div>
 				    	<div class='col-xs-12' ng-if='contest.emotion'>
 							<h4 class='text-center'>Company Voice</h4>
@@ -54,17 +66,6 @@
 				    		</div>
 				        </div>
 				    </div>
-				    <div class='col-xs-12 text-center' style='padding-bottom:20px;padding-top:20px;'>
-						<div class='btn-group'>
-							<a ng-if='contest.company.company_url' href='{{contest.company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
-							<a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
-								<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
-							</a>
-							<a ng-if='contest.company.twitter_handle' href='https://twitter.com/{{contest.company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
-								<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
-							</a>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -128,17 +129,16 @@
 									<label for="fileInput">Upload Your Photo</label>
 									<button ng-show='imagerino != ""' class='btn btn-oj pull-right' ng-click='preview_image()'>Preview</button>
 									<div class='col-xs-12'><p class='text-left'>*Make sure your image fills up the square, you can drag your image and zoom to accomplish this. You can preview the new image before submitting so you know exactly what you're submitting</p></div>
-								    <img id="upload_contest" ng-src='{{imagerino}}'>
+								    <img id="upload_contest">
 								</div>
 								<div ng-show='image_show == "preview"'>
 								 	<img id='preview_image' ng-src='{{preview}}'>
 								 	<button class='btn btn-oj' ng-click='image_show = "edit"'>Edit Image</button>
 								</div>
 							</div>
-							<div class='text-right'>
-				        		<button class='btn btn-oj'  ng-click='submit_to(contest.id, submit)'>Submit</button>
-				      		</div>
+							<button class='btn btn-oj col-xs-12 col-sm-8 col-sm-offset-2' style='margin-top:5px;margin-bottom:5px;'  ng-click='submit_to(contest.id, submit)'>Submit</button>
 						    <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
+						    	<h4 class='text-center' ng-if='contest.platform != "general"'>Example Ad</h4>
 						        <div ng-if='!emotion_contest && contest.display_type == "text_only"' class='img-example' style='border-radius:3px;border:1px #ff6c00 solid;'>
 							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_submish.png'>
 							        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
@@ -151,7 +151,7 @@
 							        <img class='img-responsive' ng-if="contest.platform == 'facebook'" src='public/img/fb_image.png'>
 							        <img class='img-responsive' ng-if="contest.platform == 'instagram'" src='public/img/insta_image.png'>
 							        <img class='img-responsive' ng-if="contest.platform == 'twitter'" src='public/img/twitter_image.jpg'>
-							         <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
+							        <img class='img-responsive' ng-if="contest.platform == 'google'" src='public/img/google_submish.png'>
 							    </div>
 							</div>
 						</div>
