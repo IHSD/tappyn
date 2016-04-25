@@ -10,7 +10,7 @@ class Analytics extends CI_Controller
     public function open()
     {
         // Get and return our image file
-        $name = FCPATH.'api/v1/public/img/TappynLogo2.png';
+        $name = base_url().'public/img/TappynLogo2.png';
 
         $fp = fopen($name, 'rb');
         header("Content-Type: image/png");
@@ -40,5 +40,15 @@ class Analytics extends CI_Controller
         {
             $this->db->set('website_clicks', 'website_clicks + 1', FALSE);
         }
+        else if($event == 'facebook_click')
+        {
+            $this->db->set('facebook_clicks', 'facebook_clicks + 1', FALSE);
+        }
+        else if($event == 'twitter_click')
+        {
+            $this->db->set('twitter_clicks', 'twitter_clicks + 1', FALSE);
+        }
+        else return;
+        $this->db->update('contests');
     }
 }
