@@ -153,6 +153,7 @@ class Submissions extends CI_Controller
         if($this->input->post('photo'))
         {
             $filename = hash('sha256', uniqid()).'.png';
+            $this->image->compress($this->input->post('photo'));
             if($this->image->upload($this->input->post('photo'), $filename))
             {
                 $attachment_url = "https://tappyn.s3.amazonaws.com/".$filename;
