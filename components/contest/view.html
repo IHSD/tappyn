@@ -17,9 +17,9 @@
 					<div class='col-xs-4 text-center'>
 						<h4 style='font-size:15;'>{{contest.platform | capitalize}}</h4>
 					</div>
-					<div class='col-xs-12'  style='padding-top:15px;padding-bottom: 15px;'>
+					<div class='col-xs-12'  style='padding-top:5px;padding-bottom: 5px;'>
 						<div style='width:100%'>
-			            	<uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>                
+			            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>     
 			                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
 			            </div>
 			        </div>	
@@ -115,14 +115,14 @@
 									<div class='col-xs-12 col-sm-9'>	
 									 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
 										<label for="fileInput">Upload Your Photo</label>
-										<img id="upload_contest">
+										<img id="upload_contest" src='public/img/your_photo.png'>
 									</div>
 								</div>
 						        <div ng-show='form_limit.text' class='form-group'>
 						        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
 						        	<div class='col-xs-12 col-sm-9'>
 						        		<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
-						        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div></div>
+						        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
 						        	</div>
 						        </div>
 						        <div ng-show='form_limit.line_1' class='form-group'>
@@ -197,7 +197,10 @@
 #upload_contest, #preview_image {
   max-width: 100%;
 }
-
+hr{
+	margin-top:5px;
+	margin-bottom: 5px;
+}
 .inputfile {
 	width: 0.1px;
 	height: 0.1px;
