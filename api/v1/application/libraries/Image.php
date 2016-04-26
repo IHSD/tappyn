@@ -52,7 +52,7 @@ class Image
         $filename = hash('sha256', uniqid());
         $tmpfile = FCPATH.$filename;
 
-        $im = imagecreatefromstring(base64_decode(str_replace($this->mime_types, '', $base64_data)));
+        $im = imagecreatefromstring(base64_decode(explode(',', $base64_data)[1]));
 
         $ox = imagesx($im);
         $oy = imagesy($im);
