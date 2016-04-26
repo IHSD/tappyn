@@ -13,6 +13,8 @@ class Submissions extends CI_Controller
         $this->load->model('user');
         $this->load->library('mailer');
         $this->load->library('vote');
+        $this->load->library('s3');
+        $this->load->library('image');
     }
 
     /**
@@ -147,8 +149,24 @@ class Submissions extends CI_Controller
             return;
         }
 
+        $attachment_url = NULL;
+        if($this->input->post('photo'))
+        {
+            $filename = hash('sha256', uniqid()).'.png';
+            $this->image->compress($this->input->post('photo'));
+            if($this->image->upload($this->input->post('photo'), $filename))
+            {
+                $attachment_url = "https://tappyn.s3.amazonaws.com/".$filename;
+            } else
+            {
+                $this->responder->fail(
+                "There was an error uploading your image"
+                )->code(500)->respond();
+                return;
+            }
+        }
 
-        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation'), $this->input->post('attachment_url')))
+        if($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation'), $attachment_url))
         {
             // If this submission would cap the contest, we set the contesst to end in 1 day!
             if(($contest->submission_count + 1) == $contest->submission_limit)
