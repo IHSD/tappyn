@@ -57,8 +57,8 @@ class Image
         $ox = imagesx($im);
         $oy = imagesy($im);
 
-        $nx = 300;
-        $ny = 150;//floor($oy * ($nx / $ox));
+        $nx = 600;
+        $ny = 300;//floor($oy * ($nx / $ox));
 
         $nm = imagecreatetruecolor($nx, $ny);
 
