@@ -80,7 +80,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
-       	dashFactory.payContest(($scope.adding_payment.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
+       	dashFactory.payContest($scope.adding_payment.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
