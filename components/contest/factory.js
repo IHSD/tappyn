@@ -43,5 +43,14 @@ tappyn.factory('contestFactory', function($http){
 		});
 	}
 
+	fact.track = function(event, id){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/analytics/track?ev='+event+'&cid='+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
 	return fact;
 })
