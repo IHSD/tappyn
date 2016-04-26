@@ -57,7 +57,6 @@ class S3
             $this->errors = $e->getMessage();
             return FALSE;
         }
-        error_log(json_encode($result));
         return TRUE;
     }
 
