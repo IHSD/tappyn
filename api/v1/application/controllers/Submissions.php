@@ -153,13 +153,9 @@ class Submissions extends CI_Controller
         if($this->input->post('photo'))
         {
 
-             $hash = hash('sha256', uniqid());
+             $filename = hash('sha256', uniqid());
+             $thumb = $this->image->compress($this->input->post('photo'));
 
-             $this->s3->upload($image_data, $hash);
-             $thumb = $this->image->compress($image_data);
-             $this->s3->upload($thumb, $hash.'_thumb');
-
-            $filename = hash('sha256', uniqid()).'.png';
             $thumb = $this->image->compress($this->input->post('photo'));
             if($this->image->upload($this->input->post('photo'), $filename) && $this->image->upload($thumb, $filename.'_thumb'))
             {
