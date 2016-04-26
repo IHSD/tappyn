@@ -27,6 +27,7 @@ class Submissions extends CI_Controller
         $submissions = $this->submission->where(array('contest_id' => $contest_id))->fetch()->result();
         foreach($submissions as $submission)
         {
+            if(is_null($submission->thumbnail_url)) $submission->thumbnail_url = FALSE;
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool)$this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
         }
@@ -231,6 +232,7 @@ class Submissions extends CI_Controller
             $submission->votes = (int)$this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool)$this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
             $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            if(is_null($submission->thumbnail_url)) $submission->thumbnail_url = FALSE;
             $submissions[] = $submission;
         }
         $this->responder->data(array(
