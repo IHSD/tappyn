@@ -156,6 +156,7 @@ class Crons extends CI_Controller
 
         foreach($subs as $sub)
         {
+            echo mime_content_type($sub->attachment);
             $filename = hash('sha256', uniqid());
             $image_data = 'data:image/png;base64,'.base64_encode(file_get_contents($sub->attachment));
             $thumb = $this->image->compress($image_data);
