@@ -34,7 +34,7 @@ tappyn.service("contestModel", function(){
 	this.parallel_submission = function(contest){
 		var layout = {};
 		if(contest.platform == "facebook"){
-			layout.text = {limit : 250, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
+			layout.text = {limit : 90, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
 			if(contest.objective != 'engagement') layout.headline = {limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
 		}
 		else if(contest.platform == "twitter"){
@@ -48,7 +48,7 @@ tappyn.service("contestModel", function(){
 			layout.line_2 = {limit : 35, placeholder : 'Simple explanation of why this audience should pick this company. Speak like a human.'};
 		}
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'Insert Headline Here. No such thing as dull products only dull writers.'};
-		else if(contest.platform == "instagram") layout.text = {limit : 250, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
+		else if(contest.platform == "instagram") layout.text = {limit : 90, placeholder : 'Simple explanation of why this audience should pick this specific company. Speak like a human.'};
 
 		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
