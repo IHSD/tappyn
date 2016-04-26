@@ -148,6 +148,24 @@ class Crons extends CI_Controller
         }
     }
 
+    public function thumbnail_images()
+    {
+        $this->load->library('image');
+        $this->load->library('s3');
+        $subs = $this->db->select('*')->from('submissions')->where(array('attachment IS NOT NULL' => NULL, 'thumbnail_url IS NULL' => NULL))->get()->result();
+
+        foreach($subs as $sub)
+        {
+            $filename = hash('sha256', uniqid());
+            $image_data = 'data:image/png;base64,'.base64_encode(file_get_contents($sub->attachment));
+            $thumb = $this->image->compress($image_data);
+            if($this->s3->upload($thumb, $filename))
+            {
+                $this->db->where('id', $sub->id)->set('thumbnail_url', 'https://tappyn.s3.amazonaws.com/'.$filename)->update('submissions');
+            }
+        }
+    }
+
     private function csv_to_array($filename='', $delimiter=',')
     {
     	if(!file_exists($filename) || !is_readable($filename))
