@@ -32,11 +32,11 @@
 					<div class='row'>
 						<div class='col-xs-12 text-center' style='padding-top:10px;'>
 							<div class='btn-group'>
-								<a ng-if='contest.company.company_url' href='{{contest.company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
-								<a ng-if='contest.company.facebook_url' href='{{contest.company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
+								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 								</a>
-								<a ng-if='contest.company.twitter_handle' href='https://twitter.com/{{contest.company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+								<a ng-if='contest.company.twitter_handle' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
 								</a>
 							</div>

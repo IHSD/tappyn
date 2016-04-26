@@ -1,4 +1,4 @@
-tappyn.controller('contestController', function($scope, $rootScope, $route, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
+tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -180,5 +180,24 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 
 	$scope.chooserino = function(){
 		var photo = angular.element(document.getElementById('upload_contest'));		
+	}
+
+	$scope.track_click = function(event, contest){
+		contestFactory.track(event, contest.id).success(function(response){
+
+		});
+
+		if(event == 'facebook_click'){
+			var win = window.open($filter('urlFilter')(contest.company.facebook_url), '_blank');
+  			win.focus();	
+		}
+		else if(event == 'website_click'){
+			var win = window.open($filter('urlFilter')(contest.company.company_url), '_blank');
+  			win.focus();
+		}
+		else if(event == 'twitter_click'){
+			var win = window.open("https://twitter.com/"+contest.company.twitter_handle, '_blank');
+  			win.focus();
+		}
 	}
 });

@@ -203,6 +203,9 @@
 							<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
 							<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
 							<td style='cursor:pointer' ng-click='predicate="shares";reverse=!reverse'>Shares</td>
+							<td style='cursor:pointer' ng-click='predicate="website_clicks";reverse=!reverse'>Site Clicks</td>
+							<td style='cursor:pointer' ng-click='predicate="facebok_clicks";reverse=!reverse'>Facebook Clicks</td>
+							<td style='cursor:pointer' ng-click='predicate="twitter_clicks";reverse=!reverse'>Twitter Clicks</td>
 						</tr>
 					</thead>
 					<tr ng-repeat='contest in dash.contests | orderBy : predicate : reverse'>
@@ -216,7 +219,7 @@
 		                        </ul>
 	                        </div>
 						</td>
-						<td>{{contest.id}} {{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
+						<td>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
 						<td>{{contest.status | capUnderscore}}</td>
 						<td>{{contest.start_time | dashDate}}</td>
 						<td>{{contest.stop_time | dashDate}}</td>
@@ -224,6 +227,9 @@
 						<td>{{contest.views | number}}</td>
 						<td>{{contest.votes | number}}</td>
 						<td>{{contest.shares | number}}</td>
+						<td>{{contest.website_clicks | number}}</td>
+						<td>{{contest.facebook_clicks | number}}</td>
+						<td>{{contest.twitter_clicks | number}}</td>
 					</tr>
 				</table>
 			</div>	
