@@ -58,15 +58,13 @@ class Image
         $oy = imagesy($im);
 
         $nx = 600;
-        $ny = 300;//floor($oy * ($nx / $ox));
+        $ny = 300;
 
         $nm = imagecreatetruecolor($nx, $ny);
 
         imagecopyresized($nm, $im, 0,0,0,0, $nx, $ny, $ox, $oy);
 
-        ob_start();
         imagejpeg($nm, $tmpfile);
-        ob_flush();
 
         $base64_image_data = base64_encode(file_get_contents($tmpfile));
         unlink($tmpfile);
