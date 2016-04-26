@@ -1,5 +1,6 @@
 <div class='col-xs-12' style='padding-bottom:10px;'>
-	<img style='max-width:100%' ng-src='{{submission.thumbnail_url}}'>
+	<img ng-if='submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.thumbnail_url}}'>
+		<img ng-if='!submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.attachment}}'>
 </div>
 <div class='col-xs-12 col-sm-9'>
 	<h3 ng-if='submission.headline'>{{submission.headline}}</h3>
