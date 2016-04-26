@@ -156,7 +156,7 @@ class Submissions extends CI_Controller
             $filename = hash('sha256', uniqid());
             $thumb = $this->image->compress($this->input->post('photo'));
 
-            if($this->image->upload($this->input->post('photo'), $filename) && $this->image->upload($thumb, $filename.'_thumb'))
+            if($this->image->upload($this->input->post('photo'), $filename.'.jpg') && $this->image->upload($thumb, $filename.'_thumb.jpg'))
             {
                 $attachment_url = "https://tappyn.s3.amazonaws.com/".$filename;
             } else

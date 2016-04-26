@@ -161,7 +161,7 @@ class Crons extends CI_Controller
             $thumb = $this->image->compress($image_data);
             if($this->s3->upload($thumb, $filename))
             {
-                $this->db->where('id', $sub->id)->set('thumbnail_url', 'https://tappyn.s3.amazonaws.com/'.$filename)->update('submissions');
+                $this->db->where('id', $sub->id)->set('thumbnail_url', 'https://tappyn.s3.amazonaws.com/'.$filename.'_thumb.jpg')->update('submissions');
             }
         }
     }

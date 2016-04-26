@@ -46,11 +46,12 @@ class S3
 
     public function upload($upload, $filename)
     {
+        $test = base64_decode(explode(',',$upload)[1]);
         try {
             $result = $this->s3->putObject([
                 'Bucket' => 'tappyn',
                 'Key'    => $filename,
-                'Body'   => fopen($upload, 'r'),
+                'Body'   => base64_decode(explode(',', $upload)[1]),
                 'ACL'    => "public-read"
             ]);
         } catch(Aws\Exception\S3Exception $e) {
