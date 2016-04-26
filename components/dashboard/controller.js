@@ -84,7 +84,6 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
        		if(res.http_status_code == 200){
 				if(res.success){
 					$scope.set_alert(res.message, "default");	
-					$scope.set_step("done");
 					$rootScope.modal_up = false;
 					$scope.adding_payment = false;
 					$scope.form_disabled = false;
