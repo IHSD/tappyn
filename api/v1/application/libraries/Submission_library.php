@@ -65,7 +65,8 @@ class Submission_library
             'headline' => $headline,
             'link_explanation' => $link_explanation,
             'text' => $text,
-            'attachment' => $attachment
+            'attachment' => $attachment,
+            'thumbnail_url' => $attachment.'_thumb'
         );
 
         $success = false;
