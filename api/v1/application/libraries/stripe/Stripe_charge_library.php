@@ -54,6 +54,7 @@ class stripe_charge_library
             $this->errors = $e->getMessage();
             return false;
         }
+        error_log("Charge successful. Attempting to save the charge to DB");
         $this->stripe_charge->save($charge, $this->ion_auth->user()->row()->id, $contest_id);
         return $charge;
 

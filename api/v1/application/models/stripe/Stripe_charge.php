@@ -15,6 +15,7 @@ class Stripe_charge extends CI_Model
 
     public function save($charge, $uid, $contest_id)
     {
+        error_log("Calling save()");
         return $this->db->insert('stripe_charges', array(
             'charge_id' => $charge->id,
             'contest_id' => $contest_id,
@@ -27,8 +28,10 @@ class Stripe_charge extends CI_Model
             'status' => $charge->status
         ));
     }
+
     public function create($customer_id, $amount, $description)
     {
+        error_log("Calling create()");
         try{
             $charge = \Stripe\Charge::create(array(
                 'amount'        => $amount,
@@ -46,6 +49,7 @@ class Stripe_charge extends CI_Model
 
     public function insert($charge)
     {
+        error_log("Calling insert()");
         $this->db->insert('stripe_charges', array(
 
         ));
