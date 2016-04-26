@@ -92,27 +92,25 @@ tappyn.controller('contestController', function($scope, $rootScope, $route, $rou
 		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
 		else{
 			if($scope.form_limit.photo){
-				$scope.upload_image(id, submission);
+				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
 			}
-			else{
-				contestFactory.submitTo(id, submission).success(function(response){
-					if(response.http_status_code == 200){
-						if(response.success){
-							$scope.set_alert(response.message, "default");	 
-							$scope.update_points(2);
-							ga('send', {
-							hitType: 'event',
-							eventCategory: 'Contest Submission',
-							eventAction: 'submission',
-							eventLabel: 'User Submission'});
-							$route.reload();
-						}
-						else $scope.set_alert(response.message, "default");	 
+			contestFactory.submitTo(id, submission).success(function(response){
+				if(response.http_status_code == 200){
+					if(response.success){
+						$scope.set_alert(response.message, "default");	 
+						$scope.update_points(2);
+						ga('send', {
+						hitType: 'event',
+						eventCategory: 'Contest Submission',
+						eventAction: 'submission',
+						eventLabel: 'User Submission'});
+						$route.reload();
 					}
-					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-					else $scope.check_code(response.http_status_code);
-				})
-			}
+					else $scope.set_alert(response.message, "default");	 
+				}
+				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+				else $scope.check_code(response.http_status_code);
+			})
 		}
 	}
 

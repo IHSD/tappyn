@@ -105,12 +105,3 @@ $route['payouts/(:num)/claim']              = 'payouts/claim/$1';
   Vouchers
 ========================*/
 $route['vouchers']                   = 'vouchers/is_valid';
-
-/**
- * Anything that does not match a defined route, we send to the 404 of our
- * error controller. TThis forces routes to match explicitly
- */
-$route['(:any)/(:any)/(:any)/(:any)']       = 'errors/show_404';
-$route['(:any)/(:any)/(:any)']              = 'errors/show_404';
-$route['(:any)/(:any)']                     = 'errors/show_404';
-$route['(:any)']                            = 'errors/show_404';
