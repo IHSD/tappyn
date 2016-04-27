@@ -71,6 +71,30 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		$rootScope.modal_up = false;
 	}
 
+	var stripeResponseHandler = function(status, response) {
+      if(response.error){
+      	var erroring = (response.error.message).toString();
+   		alert(response.error.message);
+        $scope.form_disabled = false;
+      } 
+      else{
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+       	dashFactory.payContest($scope.adding_payment.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.set_alert(res.message, "default");	
+					$rootScope.modal_up = false;
+					$scope.adding_payment = false;
+					$scope.form_disabled = false;
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
+      }
+    }
 
 	$scope.new_payment = function(){
 		if($scope.price == 0.00){
