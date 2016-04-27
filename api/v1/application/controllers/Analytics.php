@@ -9,14 +9,14 @@ class Analytics extends CI_Controller
 
     public function open()
     {
-        // Get and return our image file
-        $name = base_url().'public/img/TappynLogo2.png';
-
-        $fp = fopen($name, 'rb');
+    //    echo "OPEN";
+        // // Get and return our image file
+        $name = '/var/www/html/tappyn/public/img/TappynLogo2.png';
         header("Content-Type: image/png");
         header("Content-Length: " .filesize($name));
-        fpassthru($fp);
+        readfile($name);
 
+        // exit;
         // Track the open
         $this->db->where('id', $this->input->get('eid'))
                  ->set('opened', 'opened + 1', FALSE)
