@@ -145,6 +145,7 @@ class Mailing extends CI_Controller
                 break;
 
                 case 'contest_receipt':
+                    $this->load->library('stripe/stripe_charge_library');
                     $contest = $this->db->select('*')->from('contests')->where('id', $job->object_id)->get();
                     if(!$contest || $contest->num_rows() == 0)
                     {
