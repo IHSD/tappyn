@@ -40,7 +40,7 @@
                     </td>
 
                     <td style="padding: 5px;vertical-align: top;text-align: right;padding-bottom: 20px;">
-                        $ <?php echo $charge->amount / 100; ?>
+                        $ <?php echo number_format(($charge->amount / 100), 2); ?>
                     </td>
                 <?php else: ?>
                     <td style="padding: 5px;vertical-align: top;padding-bottom: 20px;">
@@ -52,7 +52,8 @@
                 <?php endif; ?>
             </tr>
 
-
+            contest:527
+            user:51
             <tr class="heading">
                 <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;">
                     Item
