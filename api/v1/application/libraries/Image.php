@@ -50,28 +50,28 @@ class Image
     public function compress($base64_data)
     {
         $filename = hash('sha256', uniqid());
-        $tmpfile = FCPATH.$filename;
+        if(strpos($base64_data, ',') !== FALSE) $base64_data = explode(',', $base64_data)[1];
 
-        $im = imagecreatefromstring(base64_decode(explode(',', $base64_data)[1]));
+        $im = imagecreatefromstring(base64_decode($base64_data));
 
         $ox = imagesx($im);
         $oy = imagesy($im);
 
         $nx = 600;
-        $ny = 300;//floor($oy * ($nx / $ox));
+        $ny = 300;
 
         $nm = imagecreatetruecolor($nx, $ny);
 
         imagecopyresized($nm, $im, 0,0,0,0, $nx, $ny, $ox, $oy);
 
+        // Catch our image in buffer
         ob_start();
-        imagejpeg($nm, $tmpfile);
-        ob_flush();
+        imagejpeg($nm);
+        $imageContents = ob_get_contents();
+        ob_end_clean();
+        $base64_image_data = base64_encode($imageContents);
 
-        $base64_image_data = base64_encode(file_get_contents($tmpfile));
-        unlink($tmpfile);
         imagedestroy($im);
-
         return 'data:image/jpeg;base64,'.$base64_image_data;
     }
 
