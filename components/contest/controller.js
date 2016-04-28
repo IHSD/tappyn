@@ -90,6 +90,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
 		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
+		else if($scope.form_limit.photo && !contestModel.checkImageSize($scope.cropper.getData(), $scope.contest)) $scope.set_alert("Your image is too small, please upload a larger image", "default");
 		else{
 			if($scope.form_limit.photo){
 				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
@@ -158,14 +159,14 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	}
 	$scope.hide_tips = function(){
 		$scope.tips = false;
-	} 
+	}
 
 	var handleFileSelect=function(evt) {
       var file=evt.currentTarget.files[0];
       var reader = new FileReader();
       reader.onload = function (evt) {
         $scope.$apply(function($scope){
-          $scope.cropper.replace(evt.target.result);
+           $scope.cropper.replace(evt.target.result);
            $scope.imagerino = evt.target.result;
         });
       };

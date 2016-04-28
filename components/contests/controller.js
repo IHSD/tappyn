@@ -3,10 +3,7 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
 		$scope.tab = "all";
 		contestsFactory.grabAllContests().success(function(response){
 			$scope.contests = response.data.contests;
-			if(!$rootScope.user){
-				$scope.contests_login = true;
-				$rootScope.modal_up = true;
-			}
+			if(!$rootScope.user) $scope.open_register("must", "");
 		});
 	}
 	else{
@@ -22,12 +19,6 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
 			}
 			else $scope.check_code(response.http_status_code);
 		})
-	}
-
-	$scope.close_contests_login = function(){
-		$scope.contests_login = false;
-		$rootScope.modal_up = false;
-		$location.path('/home');
 	}
 
 	$scope.filter_industry = function(pass){

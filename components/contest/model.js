@@ -54,6 +54,29 @@ tappyn.service("contestModel", function(){
 		return layout;
 	}
 
+	this.checkImageSize = function(size, contest){
+		console.log(size);
+		if(contest.platform == "facebook"){
+			if(size.width < 1200 || size.height < 630) return false;
+			else return true;
+		}
+		else if(contest.platform == "instagram"){
+			if(size.width < 600 || size.height < 315) return false;
+			else return true;
+		}
+		else if(contest.platform == 'twitter'){
+			if(contest.objective == "site_clicks_conversions"){	
+				if(size.width < 800 || size.height < 320) return false;
+				else return true;
+			}
+			else{
+				if(size.width < 600 || size.height < 315) return false;
+				else return true;
+			}
+		}
+		else return true;
+	}
+
 	this.fire_google = function(contest){
 		if(contest.gender == "0"){
 			switch(contest.min_age){

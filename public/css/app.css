@@ -2433,13 +2433,13 @@ nav .dropdown-menu{
 }
 .interest-overlay{
 	position:absolute;
-	top : 0;
-	left : 0;
-	bottom : 0;
-	right : 0;
 	background:#333;
-	opacity: .5;
+	opacity: .2;
 	cursor:pointer;
+	top:3;
+	right:3;
+	bottom:3;
+	left:3;
 }
 .interest-overlay:hover{
 	opacity:.7;
@@ -2448,31 +2448,42 @@ nav .dropdown-menu{
 }
 .interest-text{
 	position: absolute;
-	bottom:0;
+	bottom:3;
 	color:#fff;
 	font-size: 15px;
 	text-align: center;
-	background-color: rgba(0, 0, 0, 0.6);
-	width:100%;
 	margin:0;
-	padding-top:5px;
-	padding-bottom:10px;
+	padding:5px 3px 10px 3px;
+	cursor : pointer;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 .interest-check{
 	position:absolute;
 	top:2px;
 	left:5px;
 	color:#fff;
-	font-size:20px;
+	font-size:30px;
+	cursor: pointer;
 }
 .interest-heading{
 	font-weight: 300;
 	color:#ff5c00;
 }
+.interest-mobile{
+	width:47%;
+	position: relative;
+	float:left;
+}
+.interest-larger{
+	width:24%;
+	position: relative;
+	float:left;
+}
  .modal_scrolling{
  	width:100%;
     max-height:100%;
     overflow-y:auto;
+    overflox-x:hidden;
 }
 .login-highlight{
 	background : #ff5c00;
