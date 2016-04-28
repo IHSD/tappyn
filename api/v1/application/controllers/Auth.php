@@ -118,15 +118,14 @@ class Auth extends CI_Controller {
 		$this->email_activation = FALSE;
 		//$this->ion_auth->logout();
 	 	$route = $this->input->get('route');
-		error_log($route);
-		if($this->input->get('route')) $this->session->set_flashdata('route_to_redirect', $this->input->get('route'));
+
+		if($this->input->get('route')) $this->session->set_flashdata('route_to_redirect', ltrim(urldecode($this->input->get('route')), '/'));
 
 		$this->load->library('facebook_ion_auth');
 		if($this->facebook_ion_auth->login())
 		{
-			error_log($this->session->flashdata('route'));
 			// User has successfully logged in
-			if($route = $this->session->flashdata('route'))
+			if($route = $this->session->flashdata('route_to_redirect'))
 			{
 				redirect(urldecode($route), 'refresh');
 			} else {

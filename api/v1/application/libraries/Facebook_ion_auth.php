@@ -36,7 +36,6 @@ class Facebook_ion_auth {
 		$code = $this->CI->input->get('code');
 		// if is not set go make a facebook connection
 		if(!$code) {
-
 			// create a unique state
 	   		$this->CI->session->set_userdata('state', md5(uniqid(rand(), TRUE)));
 
@@ -49,7 +48,6 @@ class Facebook_ion_auth {
 	       	redirect($url_to_redirect);
 
 	   	} else {
-
 			$this->CI->email_activation = FALSE;
 
 	   		// check if session state is equal to the returned state
