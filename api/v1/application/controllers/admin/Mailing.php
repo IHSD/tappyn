@@ -167,7 +167,12 @@ class Mailing extends CI_Controller
                     if(!empty($charge))
                     {
                         $this->email_data['charge'] = $this->stripe_charge_library->retrieve($charge->charge_id);
-                        error_log(json_encode($this->email_data['charge']));
+                        if(!$this->email_data['charge'])
+                        {
+                            $this->error_out($job->id, '["Error fetching charge details from Stripe :: '.$this->stripe_charge_library->errors().'"]');
+                            $continue = false;
+                            continue;
+                        }
                     }
                     $this->email_data['company'] = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
                 break;
