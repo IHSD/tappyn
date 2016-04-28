@@ -70,8 +70,8 @@ class stripe_charge_library
         try {
             $charge = \Stripe\Charge::retrieve($charge_id);
         } catch(Exception $e) {
-            error_log(json_encode($this->errors));
             $this->errors = $e->getMessage();
+            error_log(json_encode($this->errors));
             return FALSE;
         }
         return $charge;
