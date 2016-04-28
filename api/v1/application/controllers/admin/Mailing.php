@@ -154,6 +154,19 @@ class Mailing extends CI_Controller
                     }
                     $contest = $contest->row();
                     $this->email_data['contest'] = $contest;
+                    $this->email_data['voucher'] = FALSE;
+                    $this->email_data['charge'] = FALSE;
+                    $voucher = $this->db->select('*')->from("voucher_uses")->where('contest_id', $contest->id)->get()->row();
+
+                    if(!empty($voucher))
+                    {
+                        $this->email_data['voucher'] = $this->db->select('*')->from('vouchers')->where('id', $voucher->voucher_id)->get()->row();
+                    }
+                    $charge = $this->db->select('*')->from('stripe_charges')->where('contest_id', $contest->id)->get()->row();
+                    if(!empty($charge))
+                    {
+                        $this->email_data['charge'] = ($charge = $this->stripe_charge_library->retrieve($charge->id) ? $charge : FALSE);
+                    }
                     $this->email_data['company'] = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
                 break;
 

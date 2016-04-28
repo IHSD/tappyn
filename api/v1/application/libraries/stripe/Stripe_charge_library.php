@@ -67,6 +67,12 @@ class stripe_charge_library
 
     public function retrieve($charge_id)
     {
-
+        try {
+            $charge = \Stripe\Charge::retrieve($charge_id);
+        } catch(Exception $e) {
+            $this->errors = $e->getMessage();
+            return FALSE;
+        }
+        return $charge;
     }
 }
