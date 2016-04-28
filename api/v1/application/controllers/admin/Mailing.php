@@ -166,7 +166,7 @@ class Mailing extends CI_Controller
                     $charge = $this->db->select('*')->from('stripe_charges')->where('contest_id', $contest->id)->get()->row();
                     if(!empty($charge))
                     {
-                        $this->email_data['charge'] = ($charge = $this->stripe_charge_library->retrieve($charge->charge_id) ? $charge : FALSE);
+                        $this->email_data['charge'] = $this->stripe_charge_library->retrieve($charge->charge_id;
                         error_log(json_encode($this->email_data['charge']));
                     }
                     $this->email_data['company'] = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
