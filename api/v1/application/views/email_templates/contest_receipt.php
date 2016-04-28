@@ -51,9 +51,6 @@
                     </td>
                 <?php endif; ?>
             </tr>
-
-            contest:527
-            user:51
             <tr class="heading">
                 <td style="padding: 5px;vertical-align: top;background: #eee;border-bottom: 1px solid #ddd;font-weight: bold;">
                     Item
