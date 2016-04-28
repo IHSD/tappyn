@@ -1,28 +1,32 @@
 <div class='container'>
 	<div class='row' style='padding-top:10px'>
-		<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
+		<div class='col-xs-12'>
 			<div class='panel'>
 				<div class='panel-body'>
-					<div class='col-xs-12 text-center' style='padding-top:5px;'>
-						<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-						<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
-						<h3 style='margin-top:0px;'>{{contest.company.name}}</h3>
+					<div class='col-xs-12 col-sm-4 text-center'>
+						<h3 style='margin-top:0px;'>
+							<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+							<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
+							{{contest.company.name}}
+						</h3>
 					</div>
-					 <div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span>{{contest.stop_time | untilFilter}}</h4>
-					</div>
-					<div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> {{contest.views}}</h4>
-					</div>
-					<div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'>{{contest.platform | capitalize}}</h4>
-					</div>
-					<div class='col-xs-12'  style='padding-top:5px;padding-bottom: 5px;'>
+					<div class='col-xs-12 col-sm-4'>
 						<div style='width:100%'>
 			            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>     
 			                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
 			            </div>
 			        </div>	
+					<div class='col-sm-4'>	
+						<div class='col-xs-4 text-center'>
+							<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> {{contest.stop_time | untilFilter}}</h4>
+						</div>
+						<div class='col-xs-4 text-center'>
+							<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> {{contest.views}}</h4>
+						</div>
+						<div class='col-xs-4 text-center'>
+							<h4 style='font-size:15;'>{{contest.platform | capitalize}}</h4>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -30,7 +34,7 @@
 			<div class='panel'>
 				<div class='panel-body'>
 					<div class='row'>
-						<div class='col-xs-12 text-center' style='padding-top:10px;'>
+						<div class='col-xs-12 text-center'>
 							<div class='btn-group'>
 								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
 								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
