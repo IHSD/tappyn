@@ -36,7 +36,7 @@
             <tr class="details">
                 <?php if($charge): ?>
                     <td style="padding: 5px;vertical-align: top;padding-bottom: 20px;">
-                        **********<?php echo $charge->source->last4; ?>
+                        <?php echo $charge->source->brand; ?> ending in <?php echo $charge->source->last4; ?>
                     </td>
 
                     <td style="padding: 5px;vertical-align: top;text-align: right;padding-bottom: 20px;">
