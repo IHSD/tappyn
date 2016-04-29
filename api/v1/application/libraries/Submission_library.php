@@ -65,9 +65,14 @@ class Submission_library
             'headline' => $headline,
             'link_explanation' => $link_explanation,
             'text' => $text,
-            'attachment' => $attachment.'.jpg',
-            'thumbnail_url' => $attachment.'_thumb.jpg'
+            'attachment' => NULL,
+            'thumbnail_url' => NULL
         );
+        if(!is_null($attachment))
+        {
+            $data['attachment'] = $attachment.'.jpg';
+            $data['thumbnail_url'] = $attachment.'_thumb.jpg';
+        }
 
         $success = false;
         // Generate / validate fields based on the platform type
