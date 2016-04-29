@@ -24,7 +24,7 @@ $route['is_logged_in']['get']           = 'auth/is_logged_in';
 $route['facebook']['get']               = 'auth/facebook';
 $route['password']['post']              = 'auth/change_password';
 $route['forgot_password']['post']       = 'auth/forgot_password';
-$route['reset_password']['post']        = 'auth/reset_password';
+$route['reset_password/(:any)']        = 'auth/reset_password/$1';
 $route['signup']['post']                = 'auth/create_user';
 
 /*========================
