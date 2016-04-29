@@ -65,8 +65,8 @@ class Submission_library
             'headline' => $headline,
             'link_explanation' => $link_explanation,
             'text' => $text,
-            'attachment' => $attachment,
-            'thumbnail_url' => $attachment.'_thumb'
+            'attachment' => $attachment.'.jpg',
+            'thumbnail_url' => $attachment.'_thumb.jpg'
         );
 
         $success = false;
@@ -85,7 +85,7 @@ class Submission_library
                 'link_explanation' => $this->input->post('link_explanation'),
                 'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
                 'contest' => $contest->title,
-                'company' => $contest->company->name,
+                //'company' => $contest->company->name,
                 'attachment_url' => $attachment,
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );

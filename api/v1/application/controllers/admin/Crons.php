@@ -157,11 +157,12 @@ class Crons extends CI_Controller
         foreach($subs as $sub)
         {
             $filename = hash('sha256', uniqid());
-            $image_data = 'data:image/png;base64,'.base64_encode(file_get_contents($sub->attachment));
+            $image_data = base64_encode(file_get_contents($sub->attachment));
             $thumb = $this->image->compress($image_data);
+            echo $thumb;
             if($this->s3->upload($thumb, $filename))
             {
-                $this->db->where('id', $sub->id)->set('thumbnail_url', 'https://tappyn.s3.amazonaws.com/'.$filename)->update('submissions');
+                $this->db->where('id', $sub->id)->set('thumbnail_url', 'https://tappyn.s3.amazonaws.com/'.$filename.'_thumb.jpg')->update('submissions');
             }
         }
     }
