@@ -1,48 +1,26 @@
 <div class='container'>
 	<div class='row' style='padding-top:10px'>
-		<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
+		<div class='col-xs-12 col-sm-5' style='padding-left:5px;padding-right:5px;'>
 			<div class='panel'>
-				<div class='panel-body'>
-					<div class='col-xs-12 text-center' style='padding-top:5px;'>
-						<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-						<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
-						<h3 style='margin-top:0px;'>{{contest.company.name}}</h3>
-					</div>
-					 <div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span>{{contest.stop_time | untilFilter}}</h4>
-					</div>
-					<div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> {{contest.views}}</h4>
-					</div>
-					<div class='col-xs-4 text-center'>
-						<h4 style='font-size:15;'>{{contest.platform | capitalize}}</h4>
-					</div>
-					<div class='col-xs-12'  style='padding-top:5px;padding-bottom: 5px;'>
-						<div style='width:100%'>
-			            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>     
-			                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
-			            </div>
-			        </div>	
-				</div>
-			</div>
-		</div>
-		<div class='col-xs-12 col-sm-5'>
-			<div class='panel'>
-				<div class='panel-body'>
+				<div class='panel-body' style='position:relative;padding:5px;'>
 					<div class='row'>
-						<div class='col-xs-12 text-center' style='padding-top:10px;'>
-							<div class='btn-group'>
-								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
-								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
-									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
-								</a>
-								<a ng-if='contest.company.twitter_handle' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
-									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
-								</a>
-							</div>
+						<div class='col-xs-12 text-center'>
+							<h3 style='margin-top:0px;'>
+								<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+								<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
+								{{contest.company.name}}
+							</h3>
 						</div>
-				        <div class='col-xs-12 text-center' style='margin-top:15px'>
-							<h4 class='text-center'>Target Market</h4>
+						<div class='col-sm-8 col-xs-12'>
+							<div style='width:100%'>
+				            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>     
+				                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
+				            </div>
+				        </div>	
+						<div class='col-sm-4 col-xs-12 text-center'><h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> {{contest.stop_time | untilFilter}} left</h4></div>
+						<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
+				        <div class='col-xs-12 text-center'>
+							<h4 class='text-center'>About Product / Service</h4>
 				    		<p>{{contest.audience}}</p>
 				    	</div>
 				    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
@@ -52,7 +30,7 @@
 				    	</div>
 				    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
 						<div class='col-xs-12 text-center'>	        	
-							<h4>Target Demographic</h4>
+							<h4>Target Audience</h4>
 				    		<p>{{contest.min_age}} - {{contest.max_age}} <span ng-switch on="contest.gender">
 								  <span ng-switch-when="1">Men</span>
 								  <span ng-switch-when="2">Women</span>
@@ -68,31 +46,44 @@
 						</div>
 				    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.emotion'><hr style='border: 1px #ff6c00 solid'></div>
 				    	<div class='col-xs-12' ng-if='contest.emotion'>
-							<h4 class='text-center'>Company Voice</h4>
+							<h4 class='text-center'>Ad Personality</h4>
 				    		<div class='col-xs-12'>
 				    			<img ng-src='{{emotion_contest.icon}}' style='margin-right:5px;'  height='25px' width='25px'>{{emotion_contest.adj}} 
 				    		</div>
 				        </div>
+				        <div class='col-xs-12 text-center'>
+							<div class='btn-group'>
+								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
+								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+								</a>
+								<a ng-if='contest.company.twitter_handle' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+								</a>
+							</div>
+						</div>
 				    </div>
 				</div>
 			</div>
 		</div>
 		<div class='row' style='padding-bottom:10px;'>
-			<div class='col-sm-7 col-xs-12'>
+			<div class='col-sm-7 col-xs-12' style='padding-left:5px;padding-right:5px;'>
 				<div class='panel'>
-					<div class='panel-body'>
+					<div class='panel-body' style='position:relative;padding:5px;'>
 						<div ng-show='(contest.submission_count >= contest.submission_limit) && user &&  !contest.user_has_submitted'>
-							<div class='alert alert-success text-center'>
+							<div class='alert alert-success text-center submish-panel'>
 								This contest has hit its submission limit, check out the submissions and vote for who you think will win!
 							</div>
 						</div>
 						<div ng-show='!user'>	
-							<div class='alert alert-danger text-center'>
+							<div class='submish-overlay'></div>
+							<div class='alert alert-danger text-center submish-panel'>
 								<a href ng-click='open_login("default", "")'>Sign in</a> to submit to this contest
 							</div>
 						</div>
 						<div ng-show='user && !user.is_active'>	
-							<div class='alert alert-danger text-center'>
+							<div class='submish-overlay'></div>
+							<div class='alert alert-danger text-center submish-panel'>
 								Only verified users can submit to contests, check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
 							</div>
 						</div>
@@ -101,75 +92,73 @@
 								You have already submitted to this contest, check out how your submission is doing!
 							</div>
 						</div>
-						<div ng-show='(contest.submission_count < contest.submission_limit) && user && user.is_active && !contest.user_has_submitted'>
-							<form class='form'>
-					            <div ng-show='form_limit.headline' class='form-group'>
-					            	<div class='col-xs-12 col-sm-3'>Headline <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-						        	<div class='col-xs-12 col-sm-9'>
-						        		<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
-						        		<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
-						        	</div>
-						        </div>
-						        <div ng-show='form_limit.photo' class='form-group'>
-						        	<div class='col-xs-12 col-sm-3'>Ad Image <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show people using the product instead of just the product, keep it simple, stand out from the crowd- you're competing against a newsfeed so grab people's attention!"></div>
-									<div class='col-xs-12 col-sm-9'>	
-									 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
-										<label for="fileInput">Upload Your Photo</label>
-										<img id="upload_contest" src='public/img/your_photo.png'>
-									</div>
+						<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
+				            <div ng-show='form_limit.headline' class='form-group'>
+				            	<div class='col-xs-12 col-sm-3'>Headline <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-9'>
+					        		<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
+					        		<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
+					        	</div>
+					        </div>
+					        <div ng-show='form_limit.photo' class='form-group'>
+					        	<div class='col-xs-12 col-sm-3'>Ad Image <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show people using the product instead of just the product, keep it simple, stand out from the crowd- you're competing against a newsfeed so grab people's attention!"></div>
+								<div class='col-xs-12 col-sm-9'>	
+								 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
+									<label for="fileInput">Upload Your Photo</label>
+									<img id="upload_contest" src='public/img/your_photo.png'>
 								</div>
-						        <div ng-show='form_limit.text' class='form-group'>
-						        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-						        	<div class='col-xs-12 col-sm-9'>
-						        		<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
-						        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
-						        	</div>
+							</div>
+					        <div ng-show='form_limit.text' class='form-group'>
+					        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-9'>
+					        		<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
+					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
+					        	</div>
+					        </div>
+					        <div ng-show='form_limit.line_1' class='form-group'>
+					        	<div class='col-xs-12 col-sm-3'>Line One <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-9'>
+						        	<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+						        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
 						        </div>
-						        <div ng-show='form_limit.line_1' class='form-group'>
-						        	<div class='col-xs-12 col-sm-3'>Line One <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-						        	<div class='col-xs-12 col-sm-9'>
-							        	<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
-							        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
-							        </div>
-							    </div>
-						        <div ng-show='form_limit.line_2' class='form-group'>
-						        	<div class='col-xs-12 col-sm-3'>Line Two <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-						        	<div class='col-xs-12 col-sm-9'>
-						        		<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
-						        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
-						        	</div>
-						        </div>
-						        <div ng-show='form_limit.card_title' class='form-group'>
-						        	<div class='col-xs-12 col-sm-3'>Card Title</div>
-						        	<div class='col-xs-12 col-sm-9'>
-						        		<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
-						        		<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
-						        	</div>
-						        </div>
-							</form>
-							<button class='btn btn-oj col-xs-12 col-sm-8 col-sm-offset-2' style='margin-top:5px;margin-bottom:5px;'  ng-click='submit_to(contest.id, submit)'>Submit</button>
-						</div>
+						    </div>
+					        <div ng-show='form_limit.line_2' class='form-group'>
+					        	<div class='col-xs-12 col-sm-3'>Line Two <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-9'>
+					        		<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
+					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
+					        	</div>
+					        </div>
+					        <div ng-show='form_limit.card_title' class='form-group'>
+					        	<div class='col-xs-12 col-sm-3'>Card Title</div>
+					        	<div class='col-xs-12 col-sm-9'>
+					        		<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
+					        		<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
+					        	</div>
+					        </div>
+					        <div class='text-center'><button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;'  ng-click='submit_to(contest.id, submit)'>Submit</button></div>
+						</form>
 				   </div>
 				</div>
 			</div>
 		</div>
 		<div class='row' style='padding-bottom:10px;'>
-			<div class='col-sm-4 hidden-xs'>
+			<div class='col-sm-4 hidden-xs' style='padding-left:5px;padding-right:5px;'>
 				<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
 					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		    	</div>
 		    </div>
-		    <div class='col-sm-4 hidden-xs'>
+		    <div class='col-sm-4 hidden-xs' style='padding-left:5px;padding-right:5px;'>
 				<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
 					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		    	</div>
 		    </div>
-		    <div class='col-sm-4 hidden-xs'>
+		    <div class='col-sm-4 hidden-xs' style='padding-left:5px;padding-right:5px;'>
 				<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
 					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		    	</div>
 		    </div>
-		    <div class='col-xs-12 visible-xs'>
+		    <div class='col-xs-12 visible-xs' style='padding-left:5px;padding-right:5px;'>
 		    	<div class="contest-box row" ng-repeat='submission in submissions'>
 					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		    	</div>

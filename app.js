@@ -640,7 +640,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	$scope.fb_login = function(){
-		window.location = $location.protocol()+"://"+$location.host()+"/api/v1/facebook";
+		var route = $location.path();		
+		if (route.charAt(0) == "/") route = route.substr(1);
+		window.location = $location.protocol()+"://"+$location.host()+"/api/v1/facebook?route="+route;
 	}
 });
 
@@ -940,6 +942,84 @@ tappyn.factory('comproFactory', function($http){
 
 	return fact;
 })
+tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
+
+	contestsFactory.grabAllContests().success(function(response){
+		$scope.contests = response.data.contests;
+	});
+
+	$scope.filter_industry = function(pass){
+		contestsFactory.filterGrab(pass).success(function(response){
+			$scope.contests = response.data.contests;
+		})
+	}
+	
+	$scope.grab_all = function(){
+		$scope.tab = 'all';
+		contestsFactory.grabAllContests().success(function(response){
+			$scope.contests = response.data.contests;
+		});
+	}
+
+	$scope.grab_my = function(){
+		$scope.tab = "my";
+		contestsFactory.grabMyContests().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.contests = response.data.contests;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500){
+				$scope.set_alert(response.error, "default");
+				$scope.adding_interests();
+			}
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	
+	$scope.to_account = function(){
+		$scope.with_email = false;
+		$scope.have_account = true;
+		$scope.forgot = false;
+	}
+
+	$scope.email_regis = function(){
+		$scope.with_email = true;
+		$scope.have_account = false;
+		$scope.forgot = false;
+	}
+
+	$scope.forgotten = function(){
+		$scope.with_email = false;
+		$scope.have_account = false;
+		$scope.forgot = true;
+	}
+})
+tappyn.factory('contestsFactory', function($http){
+	var fact = {};
+
+	fact.grabMyContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests/interesting',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.grabAllContests = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
@@ -1032,6 +1112,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
 		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
+		else if($scope.form_limit.photo && !contestModel.checkImageSize($scope.cropper.getData(), $scope.contest)) $scope.set_alert("Your image is too small, please upload a larger image", "default");
 		else{
 			if($scope.form_limit.photo){
 				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
@@ -1100,14 +1181,14 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	}
 	$scope.hide_tips = function(){
 		$scope.tips = false;
-	} 
+	}
 
 	var handleFileSelect=function(evt) {
       var file=evt.currentTarget.files[0];
       var reader = new FileReader();
       reader.onload = function (evt) {
         $scope.$apply(function($scope){
-          $scope.cropper.replace(evt.target.result);
+           $scope.cropper.replace(evt.target.result);
            $scope.imagerino = evt.target.result;
         });
       };
@@ -1255,6 +1336,29 @@ tappyn.service("contestModel", function(){
 		return layout;
 	}
 
+	this.checkImageSize = function(size, contest){
+		console.log(size);
+		if(contest.platform == "facebook"){
+			if(size.width < 1200 || size.height < 630) return false;
+			else return true;
+		}
+		else if(contest.platform == "instagram"){
+			if(size.width < 600 || size.height < 315) return false;
+			else return true;
+		}
+		else if(contest.platform == 'twitter'){
+			if(contest.objective == "site_clicks_conversions"){	
+				if(size.width < 800 || size.height < 320) return false;
+				else return true;
+			}
+			else{
+				if(size.width < 600 || size.height < 315) return false;
+				else return true;
+			}
+		}
+		else return true;
+	}
+
 	this.fire_google = function(contest){
 		if(contest.gender == "0"){
 			switch(contest.min_age){
@@ -1317,116 +1421,6 @@ tappyn.service("contestModel", function(){
 			}
 		}
 	}
-})
-tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
-	if(!$rootScope.user || $rootScope.user.type == 'company'){
-		$scope.tab = "all";
-		contestsFactory.grabAllContests().success(function(response){
-			$scope.contests = response.data.contests;
-			if(!$rootScope.user){
-				$scope.contests_login = true;
-				$rootScope.modal_up = true;
-			}
-		});
-	}
-	else{
-		$scope.tab = "my";
-		contestsFactory.grabMyContests().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contests = response.data.contests;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "default");
-				$scope.adding_interests("first");
-			}
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.close_contests_login = function(){
-		$scope.contests_login = false;
-		$rootScope.modal_up = false;
-		$location.path('/home');
-	}
-
-	$scope.filter_industry = function(pass){
-		contestsFactory.filterGrab(pass).success(function(response){
-			$scope.contests = response.data.contests;
-		})
-	}
-	
-	$scope.grab_all = function(){
-		$scope.tab = 'all';
-		contestsFactory.grabAllContests().success(function(response){
-			$scope.contests = response.data.contests;
-		});
-	}
-
-	$scope.grab_my = function(){
-		$scope.tab = "my";
-		contestsFactory.grabMyContests().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contests = response.data.contests;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "default");
-				$scope.adding_interests();
-			}
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.grab_companies = function(){
-		$scope.tab = 'company';
-		contestsFactory.grabCompanies().success(function(response){
-			$scope.companies = response.data.companies;
-		});
-	}	
-
-	$scope.to_account = function(){
-		$scope.with_email = false;
-		$scope.have_account = true;
-		$scope.forgot = false;
-	}
-
-	$scope.email_regis = function(){
-		$scope.with_email = true;
-		$scope.have_account = false;
-		$scope.forgot = false;
-	}
-
-	$scope.forgotten = function(){
-		$scope.with_email = false;
-		$scope.have_account = false;
-		$scope.forgot = true;
-	}
-})
-tappyn.factory('contestsFactory', function($http){
-	var fact = {};
-
-	fact.grabMyContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/contests/interesting',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	fact.grabAllContests = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/contests',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
 })
 tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
 	//on page load grab all
@@ -1710,7 +1704,7 @@ tappyn.factory('dashFactory', function($http){
 	}
 	return fact;
 })
-tappyn.controller("editController", function($scope, $routeParams, editFactory){
+tappyn.controller("editController", function($scope, $rootScope, $upload, $routeParams, editFactory){
 	$scope.logged_in();
 	if($routeParams.id){
 		editFactory.grabEdit($routeParams.id).success(function(response){
@@ -1738,19 +1732,14 @@ tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	$scope.select_file = function($files, type){
 	    var file = $files[0];
 	    var url = 'https://tappyn.s3.amazonaws.com/';
-		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
-       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
-       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
-	    else {
-	    	var new_name = Date.now();
-		    var rando = Math.random() * (10000 - 1) + 1;
-		    namen = url + new_name.toString() + rando.toString();
-		}
+    	var new_name = Date.now();
+	    var rando = Math.random() * (10000 - 1) + 1;
+	    var namen = new_name.toString() + rando.toString();
 	    $upload.upload({
 	        url: url,
 	        method: 'POST',
 	        data : {
-	            key: new_name,
+	            key: namen,
 	            acl: 'public-read',
 	            "Content-Type": file.type === null || file.type === '' ?
 	            'application/octet-stream' : file.type,
@@ -1760,9 +1749,18 @@ tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	        },
 	        file: file,
 	    }).success(function (){
-	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
-	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
-	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
+	       	if(type == "pic1"){
+	       		$scope.contest.additional_image_1 = url + namen;
+	       		$scope.contest.additional_images[0] = url + namen;
+	       	}
+	       	else if(type == 'pic2'){
+	       		$scope.contest.additional_image_2 = url + namen;
+	       		$scope.contest.additional_images[1] = url + namen;
+	       	}
+	       	else if(type == 'pic3'){
+	       		$scope.contest.additional_image_3 = url + namen;
+	       		$scope.contest.additional_images[2] = url + namen;
+	       	}
 	    });
 	}
 })
@@ -1948,6 +1946,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.to_detail = function(contest){
+		contest.display_type = "with_photo";
 		if(!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
 		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
 		else $scope.set_step("detail");
@@ -2732,11 +2731,21 @@ tappyn.factory("resetFactory", function($http){
 })
 tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
 	
+	$scope.view_live = function(){
+		topFactory.grabTops().success(function(response){
+			$scope.submissions = response.data.submissions;
+			$scope.tab = "live";
+		})
+	}
 
-	topFactory.grabTops().success(function(response){
-		$scope.submissions = response.data.submissions;
-	})
+	$scope.view_winners = function(){
+		topFactory.grabWinners().success(function(response){
+			$scope.submissions = response.data.submissions;
+			$scope.tab = "winner";
+		})
+	}
 
+	$scope.view_live();
 
 	$scope.upvote = function(submission){
 		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
@@ -2777,6 +2786,16 @@ tappyn.factory('topFactory', function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
 		})
+	}
+
+	fact.grabWinners = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/submissions/winners',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
 	}
 
 	fact.upvote = function(contest, id){

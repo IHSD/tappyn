@@ -129,8 +129,8 @@
 			<div class='row'>
 				<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-center'>	
 					<div ng-show='current.step == "package"'>
-						<h2>Assemble your contest</h2>
-						<h4>Different contests lead to different kinds of submissions.</h4>
+						<h2>Assemble your campaign</h2>
+						<h4>Help us drive the best submissions.</h4>
 					</div>
 					<div ng-show='current.step == "detail"'>
 						<h2>Tell us about your business & audience</h2>
@@ -156,25 +156,19 @@
 		<div class='col-xs-12'>
 			<h3 class='text-center'>Where do you want to advertise?</h3>
 			<h4 class='text-center'>Choose your platform</h4>
-			<div class='col-xs-12 col-sm-6 col-md-3' style='color:#ff6c00'>
+			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
 				<div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='contest-box launch-page-hover' ng-click='select_platform("facebook")'>
 					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Facebook</h3>
 					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/facebook_launch.png'></div>
 				</div>
 			</div>
-			<div class='col-xs-12 col-sm-6 col-md-3' style='color:#ff6c00'>
-				<div ng-class='{"package-highlight" : contest.platform == "google"}' class='contest-box launch-page-hover' ng-click='select_platform("google")'>
-					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Google</h3>
-					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/google_launch.png'></div>
-				</div>
-			</div>
-			<div class='col-xs-12 col-sm-6 col-md-3' style='color:#ff6c00'>
+			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
 				<div  ng-class='{"package-highlight" : contest.platform == "twitter"}'  class='contest-box launch-page-hover' ng-click='select_platform("twitter")'>
 					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Twitter</h3>
 					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/twitter_launch.png'></div>
 				</div>
 			</div>
-			<div class='col-xs-12 col-sm-6 col-md-3' style='color:#ff6c00'>
+			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
 				<div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='contest-box launch-page-hover' ng-click='select_platform("instagram")'>
 					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Instagram</h3>
 					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/insta_launch.png'></div>
@@ -214,44 +208,6 @@
 					</div>
 				</div>
 			</div>
-			<div ng-show='contest.platform=="google"' style='color:#ff6c00'>
-				<div class='col-xs-12 col-sm-3'>
-					<div ng-class='{"package-highlight" : contest.objective == "awareness"}' class='contest-box launch-page-hover' ng-click='select_objective("awareness")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Build Awareness</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/awareness_google.png'></div>
-						<div>
-							Get customers to see your ads. Introduce customers to what you offer.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-3'>
-					<div ng-class='{"package-highlight" : contest.objective == "consideration"}' class='contest-box launch-page-hover' ng-click='select_objective("consideration")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Influence Consideration</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/inc_consideration.png'></div>
-						<div>
-							Get customers to engage with your content and visit your site. Educate customers about your product or service. 
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-3'>
-					<div ng-class='{"package-highlight" : contest.objective == "drive_action"}' class='contest-box launch-page-hover' ng-click='select_objective("drive_action")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Drive Action</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/drive_action.png'></div>
-						<div>
-							Get customers to take action, buy on your website, visit your business or install your mobile app.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-3'>
-					<div ng-class='{"package-highlight" : contest.objective == "search_presence"}' class='contest-box launch-page-hover' ng-click='select_objective("search_presence")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Search Presence</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/search_launch.png'></div>
-						<div>
-							Reach customers searching for your specific product or service. Your ads will appear next to google search results. 
-						</div>
-					</div>
-				</div>
-			</div>
 			<div ng-show='contest.platform=="twitter"' style='color:#ff6c00'>
 				<div class='col-xs-12 col-sm-4'>
 					<div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("site_clicks_conversions")'>
@@ -281,49 +237,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class='col-xs-12 package-selection' id='display' ng-show='contest.objective'>
-			<hr style='border-color:#ff6c00'>
-			<h3 class='text-center'>Choose your Ad Layout</h3>
-			<h4 class='text-center'>How will your ad appear?</h4>
-			<div class='ad-location' ng-show='contest.platform == "facebook" || contest.platform == "twitter" || (contest.platform == "google" && contest.objective != "search_presence")'>
-				<div class='col-xs-12 col-sm-4 col-sm-offset-2'>
-					<div ng-class='{"package-highlight" : contest.display_type == "text_only"}' class='contest-box launch-page-hover' ng-click='select_display("text_only")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text Only</h3>
-						<div style='height:75px;color:#ff6c00'>
-							Our users will only submit text as content 
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.display_type == "with_photo"}' class='contest-box launch-page-hover' ng-click='select_display("with_photo")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text & Photo</h3>
-						<div style='height:75px;color:#ff6c00'>
-							Our users will submit a photo and text as content
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class='ad-location' ng-show='contest.platform == "google" && contest.objective == "search_presence"'>
-				<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
-					<div ng-class='{"package-highlight" : contest.display_type == "text_only"}' class='contest-box launch-page-hover' ng-click='select_display("text_only")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text Only</h3>
-						<div style='height:75px;color:#ff6c00'>
-							Our users will only submit text as content
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class='ad-location' ng-show='contest.platform == "instagram"'>
-				<div class='col-xs-12 col-sm-4 col-sm-offset-4'>
-					<div ng-class='{"package-highlight" : contest.display_type == "with_photo"}' class='contest-box launch-page-hover' ng-click='select_display("with_photo")'>
-						<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Text & Photo</h3>
-						<div style='height:75px;color:#ff6c00'>
-							Our users will submit a photo and text as content
-						</div>
-					</div>
-				</div>
-			</div>			
 		</div>
 	</div>
 	<div ng-show='current.step == "detail"'>

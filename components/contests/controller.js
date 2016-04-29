@@ -1,34 +1,8 @@
 tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
-	if(!$rootScope.user || $rootScope.user.type == 'company'){
-		$scope.tab = "all";
-		contestsFactory.grabAllContests().success(function(response){
-			$scope.contests = response.data.contests;
-			if(!$rootScope.user){
-				$scope.contests_login = true;
-				$rootScope.modal_up = true;
-			}
-		});
-	}
-	else{
-		$scope.tab = "my";
-		contestsFactory.grabMyContests().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.contests = response.data.contests;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500){
-				$scope.set_alert(response.error, "default");
-				$scope.adding_interests("first");
-			}
-			else $scope.check_code(response.http_status_code);
-		})
-	}
 
-	$scope.close_contests_login = function(){
-		$scope.contests_login = false;
-		$rootScope.modal_up = false;
-		$location.path('/home');
-	}
+	contestsFactory.grabAllContests().success(function(response){
+		$scope.contests = response.data.contests;
+	});
 
 	$scope.filter_industry = function(pass){
 		contestsFactory.filterGrab(pass).success(function(response){
@@ -58,13 +32,7 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
 		})
 	}
 
-	$scope.grab_companies = function(){
-		$scope.tab = 'company';
-		contestsFactory.grabCompanies().success(function(response){
-			$scope.companies = response.data.companies;
-		});
-	}	
-
+	
 	$scope.to_account = function(){
 		$scope.with_email = false;
 		$scope.have_account = true;
