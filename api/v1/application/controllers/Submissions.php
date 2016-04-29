@@ -279,6 +279,21 @@ class Submissions extends CI_Controller
         $this->db->update('submissions');
     }
 
+    public function winners()
+    {
+        $results = array();
+        $winners = $this->db->select('created_at, contest_id, amount, user_id, submission_id')->from('payouts')->limit(15)->order_by('created_at', 'desc')->get()->result();
+        foreach($winners as $winner)
+        {
+            $submission = array();
+            $submission['submission'] = $this->submission->get($winner->submission_id);
+            $submisison['owner'] = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
+            $submission['contest'] = $this->contest->get($winner->contest_id);
+            $results[] = $submission;
+        }
+        $this->responder->data($results)->respond();
+    }
+
     public function rate()
     {
         if(!$this->input->post("submission_id") || !$this->input->post('rating'))
