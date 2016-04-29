@@ -11,6 +11,16 @@ tappyn.factory('topFactory', function($http){
 		})
 	}
 
+	fact.grabWinners = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/submissions/winners',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
+	}
+
 	fact.upvote = function(contest, id){
 		return $http({
 			method : 'POST',
