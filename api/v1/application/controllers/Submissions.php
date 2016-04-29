@@ -296,14 +296,10 @@ class Submissions extends CI_Controller
         $winners = $this->db->select('created_at, contest_id, amount, user_id, submission_id')->from('payouts')->limit(15)->order_by('created_at', 'desc')->get()->result();
         foreach($winners as $winner)
         {
-            // We have the submission ID
+            // We have the submission I
             $submission = $this->submission->get($winner->submission_id);
-            $submission->owner = $this->db->select('first_name,last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
             $submission->contest = $this->contest->get($winner->contest_id);
-            $submission = array();
-            $submission = $this->submission->get($winner->submission_id);
-            $submisison->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
-            $submission->contest-> = $this->contest->get($winner->contest_id);
             $results[] = $submission;
         }
         $this->responder->data(array('submissions' => $results))->respond();
