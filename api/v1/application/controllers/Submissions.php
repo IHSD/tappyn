@@ -305,7 +305,7 @@ class Submissions extends CI_Controller
             $submission['contest'] = $this->contest->get($winner->contest_id);
             $results[] = $submission;
         }
-        $this->responder->data($results)->respond();
+        $this->responder->data(array('submissions' => $results))->respond();
     }
 
     public function rate()
