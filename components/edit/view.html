@@ -9,33 +9,17 @@
 						<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
 						<div class='col-sm-4 col-xs-12'>
 							<input ng-file-select='select_file($files, "pic1")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_image_1' src='{{contest.additional_image_1}}'>
+							<img class='img-responsive' ng-if='contest.additional_images[0]' ng-src='{{contest.additional_images[0]}}'>
 						</div>
 						<div class='col-sm-4 col-xs-12'>
 							<input ng-file-select='select_file($files, "pic2")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_image_2' src='{{contest.additional_image_2}}'>
+							<img class='img-responsive' ng-if='contest.additional_images[1]' ng-src='{{contest.additional_images[1]}}'>
 						</div>
 						<div class='col-sm-4 col-xs-12'>
 							<input ng-file-select='select_file($files, "pic3")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_image_3' src='{{contest.additional_image_3}}'>
+							<img class='img-responsive' ng-if='contest.additional_images[2]' ng-src='{{contest.additional_images[2]}}'>
 						</div>
 					</div>
-				</div>
-				<div class='form-group'>
-					<label>Industry</label>
-					<select class='form-control' ng-model='contest.industry'>
-						<option value=''>Choose an industry for ease of search</option>
-						<option value='pets'>Pets</option>
-						<option value='food_beverage'>Food & Beverage</option>
-						<option value='finance_business'>Finance & Business</option>
-						<option value='health_wellness'>Health & Wellness</option>
-						<option value='travel'>Travel</option>
-						<option value='social_network'>Social Network</option>
-						<option value='home_garden'>Home & Garden</option>
-						<option value='education'>Education</option>
-						<option value='art_entertainment'>Art & Entertainment</option>
-						<option value='fashion_beauty'>Fashion & Beauty</option>
-					</select>
 				</div>
 				<div class='form-group'>
 					<label>Summary of product or service</label>

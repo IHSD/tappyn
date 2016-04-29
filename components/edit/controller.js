@@ -1,4 +1,4 @@
-tappyn.controller("editController", function($scope, $routeParams, editFactory){
+tappyn.controller("editController", function($scope, $rootScope, $upload, $routeParams, editFactory){
 	$scope.logged_in();
 	if($routeParams.id){
 		editFactory.grabEdit($routeParams.id).success(function(response){
@@ -26,19 +26,14 @@ tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	$scope.select_file = function($files, type){
 	    var file = $files[0];
 	    var url = 'https://tappyn.s3.amazonaws.com/';
-		if($scope.contest.additional_image[0]) var namen = $scope.contest.additional_image[0];
-       	else if($scope.contest.additional_image[1]) var namen = $scope.contest.additional_image[1];
-       	else if($scope.contest.additional_image[2]) var namen = $scope.contest.additional_image[2];    
-	    else {
-	    	var new_name = Date.now();
-		    var rando = Math.random() * (10000 - 1) + 1;
-		    namen = url + new_name.toString() + rando.toString();
-		}
+    	var new_name = Date.now();
+	    var rando = Math.random() * (10000 - 1) + 1;
+	    var namen = new_name.toString() + rando.toString();
 	    $upload.upload({
 	        url: url,
 	        method: 'POST',
 	        data : {
-	            key: new_name,
+	            key: namen,
 	            acl: 'public-read',
 	            "Content-Type": file.type === null || file.type === '' ?
 	            'application/octet-stream' : file.type,
@@ -48,9 +43,18 @@ tappyn.controller("editController", function($scope, $routeParams, editFactory){
 	        },
 	        file: file,
 	    }).success(function (){
-	       	if(type == "pic1") $scope.contest.additional_image[0] = namen;
-	       	else if(type == 'pic2') $scope.contest.additional_image[1] = namen;
-	       	else if(type == 'pic3') $scope.contest.additional_image[2] = namen;
+	       	if(type == "pic1"){
+	       		$scope.contest.additional_image_1 = url + namen;
+	       		$scope.contest.additional_images[0] = url + namen;
+	       	}
+	       	else if(type == 'pic2'){
+	       		$scope.contest.additional_image_2 = url + namen;
+	       		$scope.contest.additional_images[1] = url + namen;
+	       	}
+	       	else if(type == 'pic3'){
+	       		$scope.contest.additional_image_3 = url + namen;
+	       		$scope.contest.additional_images[2] = url + namen;
+	       	}
 	    });
 	}
 })
