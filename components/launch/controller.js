@@ -102,6 +102,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	}
 
 	$scope.to_detail = function(contest){
+		contest.display_type = "with_photo";
 		if(!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
 		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
 		else $scope.set_step("detail");

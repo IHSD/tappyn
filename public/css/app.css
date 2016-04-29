@@ -2496,3 +2496,28 @@ nav .dropdown-menu{
 	width:33.3%;
 	float:left;
 }
+.submish-overlay{
+	position:absolute;
+	background:#333;
+	opacity: .5;
+	top:0;
+	right:0;
+	bottom:0;
+	left:0;
+	z-index:200;
+	border-radius:3px;
+}
+.submish-panel{
+	z-index:250;
+	position:absolute;
+	margin: 0 auto;
+	left:0;
+	right:0;
+	top:45%;
+}
+.submish-hovering{
+	cursor:pointer;
+}
+.submish-hovering:hover{
+	background:#eee;
+}

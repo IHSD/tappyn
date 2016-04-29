@@ -1,10 +1,20 @@
 tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
 	
+	$scope.view_live = function(){
+		topFactory.grabTops().success(function(response){
+			$scope.submissions = response.data.submissions;
+			$scope.tab = "live";
+		})
+	}
 
-	topFactory.grabTops().success(function(response){
-		$scope.submissions = response.data.submissions;
-	})
+	$scope.view_winners = function(){
+		topFactory.grabWinners().success(function(response){
+			$scope.submissions = response.data.submissions;
+			$scope.tab = "winner";
+		})
+	}
 
+	$scope.view_live();
 
 	$scope.upvote = function(submission){
 		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
