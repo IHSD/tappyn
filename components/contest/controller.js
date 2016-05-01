@@ -15,28 +15,15 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		}
 		else $scope.example = false;
 		$scope.form_limit = contestModel.parallel_submission($scope.contest);
-		if($scope.contest.platform == "instagram"){
-			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-				aspectRatio: 1 / 1,
-			  	dragMode : 'move',
-			  	scaleable : false,
-			  	cropBoxResizable : false,
-			  	cropBoxMovable : false,
-			  	minCropBoxWidth : 100,
-			  	preview : '.img-preview'
-			});
-		}
-		else{
-			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-				aspectRatio: 1.91 / 1,
-			  	dragMode : 'move',
-			  	scaleable : false,
-			  	cropBoxResizable : false,
-			  	cropBoxMovable : false,
-			  	minCropBoxWidth : 100,
-			  	preview : '.img-preview'
-			});
-		}
+		$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+			aspectRatio: 1.91 / 1,
+		  	dragMode : 'move',
+		  	scaleable : false,
+		  	cropBoxResizable : false,
+		  	cropBoxMovable : false,
+		  	minCropBoxWidth : 100,
+		  	preview : '.img-preview'
+		});
 	});
 
 	$scope.view = {brief : true, submissions : false};

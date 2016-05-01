@@ -6,8 +6,7 @@
 	</div>
 </div>
 <div class='col-xs-12' style='margin-bottom:10px;'>
-	<img ng-if='submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.thumbnail_url}}'>
-	<img ng-if='!submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.attachment}}'>
+	<img style='max-width:100%' ng-src='{{submission.attachment}}'>
 </div>
 <div class='col-xs-12'><h3 class='text-left' ng-show='submission.headline'>{{submission.headline}}</h3></div>
 <div class='col-xs-12'><h5 class='text-left'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5></div>
