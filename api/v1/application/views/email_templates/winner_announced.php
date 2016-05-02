@@ -22,7 +22,7 @@ $query_string['redirect'] = 'dashboard';
 <p>Unfortunately, your submission wasn't chosen. But remember, you get points for upvoting, and if you upvoted the winner, you got extra points</p>
 
 <p>You can see who won <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?></p>
-<?php $query_string['redirect'] = 'contests'; ?>
+<?php $query_string['redirect'] = 'contest/'.$contest->id; ?>
 <p>Or you can see some of our <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'new contests'); ?> and take another shot!</p>
 
 <!-- End Email Content -->
