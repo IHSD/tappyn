@@ -53,11 +53,11 @@
 				        </div>
 				        <div class='col-xs-12 text-center'>
 							<div class='btn-group'>
-								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
-								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+								<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
+								<a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 								</a>
-								<a ng-if='contest.company.twitter_handle' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+								<a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
 								</a>
 							</div>
@@ -94,14 +94,14 @@
 						</div>
 						<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
 				            <div ng-show='form_limit.headline' class='form-group'>
-				            	<div class='col-xs-12 col-sm-3'>Headline <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+				            	<div class='col-xs-12 col-sm-3'>Headline <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="The best headlines show supreme confidence in the product"></div>
 					        	<div class='col-xs-12 col-sm-9'>
 					        		<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
 					        		<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
 					        	</div>
 					        </div>
 					        <div ng-show='form_limit.photo' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Ad Image <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show people using the product instead of just the product, keep it simple, stand out from the crowd- you're competing against a newsfeed so grab people's attention!"></div>
+					        	<div class='col-xs-12 col-sm-3'>Ad Image <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="The best ads show people using the product in an original, authentic way!"></div>
 								<div class='col-xs-12 col-sm-9'>	
 								 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
 									<label for="fileInput">Upload Your Photo</label>
@@ -109,21 +109,21 @@
 								</div>
 							</div>
 					        <div ng-show='form_limit.text' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="The best ad text shows supreme confidence in the product"></div>
 					        	<div class='col-xs-12 col-sm-9'>
 					        		<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
 					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
 					        	</div>
 					        </div>
 					        <div ng-show='form_limit.line_1' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Line One <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-3'>Line One <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="The first line of your google ad"></div>
 					        	<div class='col-xs-12 col-sm-9'>
 						        	<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
 						        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
 						        </div>
 						    </div>
 					        <div ng-show='form_limit.line_2' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Line Two <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
+					        	<div class='col-xs-12 col-sm-3'>Line Two <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="The second line of your google ad"></div>
 					        	<div class='col-xs-12 col-sm-9'>
 					        		<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
 					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
@@ -183,8 +183,9 @@
 
 <style>
 /* Limit image width to avoid overflow the container */
-#upload_contest, #preview_image {
+#upload_contest, #preview_image, .cropper-container {
   max-width: 100%;
+  width:100%;
 }
 hr{
 	margin-top:5px;

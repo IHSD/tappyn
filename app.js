@@ -759,58 +759,6 @@ tappyn.factory("AppFact", function($http){
 	}
 	return fact;
 })
-tappyn.controller("companiesController", function($scope, $rootScope, companiesFactory){
-	$scope.grab_my = function(){
-		$scope.tab = "my";
-		companiesFactory.grabMyCompanies().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.companies = response.data.companies;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
-	$scope.grab_companies = function(){
-		$scope.tab = 'company';
-		companiesFactory.grabCompanies().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success) $scope.companies = response.data.companies;	
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
-			else $scope.check_code(response.http_status_code);
-		});
-	}	
-
-	$scope.grab_companies();
-});
-tappyn.factory("companiesFactory", function($http){
-	var fact = {};
-
-	fact.grabCompanies = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/companies',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
- 	fact.grabMyCompanies = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/companies?followed=1',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
-
-	return fact;
-})
 tappyn.controller('comproController', function($scope, $rootScope, $routeParams, comproFactory){
 	if($routeParams.id){
 		comproFactory.grabProfile($routeParams.id).success(function(response){
@@ -942,6 +890,58 @@ tappyn.factory('comproFactory', function($http){
 
 	return fact;
 })
+tappyn.controller("companiesController", function($scope, $rootScope, companiesFactory){
+	$scope.grab_my = function(){
+		$scope.tab = "my";
+		companiesFactory.grabMyCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.grab_companies = function(){
+		$scope.tab = 'company';
+		companiesFactory.grabCompanies().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success) $scope.companies = response.data.companies;	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "default");
+			else $scope.check_code(response.http_status_code);
+		});
+	}	
+
+	$scope.grab_companies();
+});
+tappyn.factory("companiesFactory", function($http){
+	var fact = {};
+
+	fact.grabCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/companies',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+ 	fact.grabMyCompanies = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/companies?followed=1',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	return fact;
+})
 tappyn.controller('contestsController', function($scope, $rootScope, $location, contestsFactory){
 
 	contestsFactory.grabAllContests().success(function(response){
@@ -1037,6 +1037,28 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		}
 		else $scope.example = false;
 		$scope.form_limit = contestModel.parallel_submission($scope.contest);
+		if($scope.contest.platform == "instagram"){
+			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+				aspectRatio: 1 / 1,
+			  	dragMode : 'move',
+			  	scaleable : false,
+			  	cropBoxResizable : false,
+			  	cropBoxMovable : false,
+			  	minCropBoxWidth : 100,
+			  	preview : '.img-preview'
+			});
+		}
+		else{
+			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+				aspectRatio: 1.91 / 1,
+			  	dragMode : 'move',
+			  	scaleable : false,
+			  	cropBoxResizable : false,
+			  	cropBoxMovable : false,
+			  	minCropBoxWidth : 100,
+			  	preview : '.img-preview'
+			});
+		}
 	});
 
 	$scope.view = {brief : true, submissions : false};
@@ -1048,18 +1070,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	}
 
 	$scope.imagerino = "";
-	$scope.image_show = 'edit';
-	$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-		aspectRatio: 1.91 / 1,
-	  	dragMode : 'move',
-	  	scaleable : false,
-	  	cropBoxResizable : false,
-	  	cropBoxMovable : false,
-	  	minCropBoxWidth : 100,
-	  	preview : '.img-preview'
-	});
-	$scope.cropper.reset();
-
 
 	$scope.upload_image = function(id, submission){
 		var canvas = $scope.cropper.getCroppedCanvas();
@@ -1112,7 +1122,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
 		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
-		else if($scope.form_limit.photo && !contestModel.checkImageSize($scope.cropper.getData(), $scope.contest)) $scope.set_alert("Your image is too small, please upload a larger image", "default");
 		else{
 			if($scope.form_limit.photo){
 				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
@@ -1284,32 +1293,7 @@ tappyn.service("contestModel", function(){
 	this.sift_images = function(contest, emotions){
 		for(var i = 0; i < emotions.length; i++){
 			if(contest.emotion == emotions[i].type){
-				if(contest.platform == "google"){
-					if(emotions[i].google != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].google};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/google_submish.png'};
-				}
-
-				if(contest.platform == 'facebook'){
-					if(emotions[i].facebook != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].facebook};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/fb_submish.png'};
-				}
-
-				if(contest.platform == 'twitter'){
-					if(emotions[i].twitter != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].twitter};
-					else return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : 'public/img/Twitter_submish.png'};
-				}
-
-				if(contest.platform == "general" && contest.display_type == "headline"){
-					if(emotions[i].general.headline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.headline};
-					else return null;
-				}
-
-				if(contest.platform == "general" && contest.display_type == "tagline"){
-					if(emotions[i].general.tagline != '') return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : emotions[i].general.tagline};
-					else return null;
-				}
-
-				if(contest.platform == "general" && contest.display_type == "copies") return null;
+				return {icon : emotions[i].icon, adj : emotions[i].adjectives, example : ''};
 			}
 		}
 	}
@@ -1842,6 +1826,198 @@ tappyn.factory('homeFactory', function($http){
 
 	return fact;
 });
+tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
+	$scope.logged_in();
+	$scope.countries = paymentModel.countries;
+	$scope.showing = "methods";
+	paymentFactory.grabDetails().success(function(response){
+		if(response.http_status_code == 200){
+			if(response.success){
+				if($rootScope.user.type == "member" && response.data.account == false){
+					$scope.detail = {first_name : $rootScope.user.first_name, last_name : $rootScope.user.last_name};
+					$scope.showing = 'details';
+				}
+				else if($rootScope.user.type == "member" && response.data.account){
+					var account = response.data.account;
+					$scope.detail = {first_name : account.legal_entity.first_name, 
+						last_name : account.legal_entity.last_name, 
+						dob_year : account.legal_entity.dob.year, 
+						dob_month : account.legal_entity.dob.month, 
+						dob_day : account.legal_entity.dob.day, 
+						city : account.legal_entity.address.city,
+						state : account.legal_entity.address.state,
+						postal_code : account.legal_entity.address.postal_code,
+						country : account.legal_entity.address.country,
+						address_line1 : account.legal_entity.address.line1,
+						address_line2 : account.legal_entity.address.line2};
+					$scope.showing = 'methods';
+					console.log(account);
+				}
+				$scope.account = response.data.account;
+			}
+			else $scope.set_alert(response.message, "default");	 
+		}
+		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+		else $scope.check_code(response.http_status_code);
+	})
+
+	$scope.verify_identity = function(detail){
+		paymentFactory.verifyIdentity(detail).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.account = response.data.account;
+					$scope.showing = 'methods';
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.toggle_view = function(view){
+		$scope.showing = view;
+	}
+
+	function stripeResponseHandler(status, response) {
+      var $form = $('#payment-form');
+
+      if (response.error) {
+        $scope.set_alert(response.error.message, "error");
+        $scope.form_disabled = false;
+      } else {
+        // response contains id and card, which contains additional card details
+        var token = response.id;
+       	paymentFactory.addPayment(token).success(function(res){
+       		if(res.http_status_code == 200){
+				if(res.success){
+					$scope.account = res.data.account;
+					$scope.set_alert(res.message, "default");
+					$rootScope.modal_up = false;
+					$scope.add_method = false;
+				}
+				else $scope.set_alert(res.message, "default");	 
+			}
+			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
+			else $scope.check_code(res.http_status_code);
+       	});
+      }
+    };
+	$scope.process_addition = function(){
+		// This identifies your website in the createToken call below
+		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+		var $form = $('#payment-form');
+
+        // Disable the submit button to prevent repeated clicks
+       $scope.form_disabled = true;
+
+		Stripe.card.createToken($form, stripeResponseHandler);
+	}
+
+	$scope.remove_method = function(means){
+		paymentFactory.removeMethod(means).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.account = response.data.account;
+					$scope.set_alert(response.message, "default");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+
+	$scope.open_add = function(){
+		$rootScope.modal_up = true;
+		$scope.add_method = true;
+	}
+
+	$scope.close_add = function(){
+		$rootScope.modal_up = false;
+		$scope.add_method = false;
+	}
+
+	$scope.set_default = function(means){
+		paymentFactory.setDefault(means).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.account = response.data.account;
+					$scope.set_alert(response.message, "default");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+});
+tappyn.factory("paymentFactory", function($http){
+	var fact = {};
+
+	fact.grabDetails = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/accounts/details',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
+	}
+
+	fact.verifyIdentity = function(details){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/accounts/details',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param(details)
+		})	
+	}
+
+	fact.addPayment = function(token){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/accounts/payment_methods',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({stripeToken : token})
+		})	
+	}
+
+	fact.removeMethod = function(id){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/accounts/remove_method',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({source_id : id})
+		})	
+	}
+
+	fact.setDefault = function(id){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/accounts/default_method',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({source_id : id})
+		})	
+	}
+	return fact;	
+})
+tappyn.service('paymentModel', function(){
+	this.countries = {
+        'CA' : 'Canada',
+        'GB' : 'United Kingdom',
+        'US' : 'United States'
+	};
+})
 tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
 	$scope.logged_in()
 	$scope.steps = {
@@ -2290,198 +2466,6 @@ tappyn.service('launchModel', function(){
 		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
 	}
-})
-tappyn.controller("paymentController", function($scope, $rootScope, $location, paymentFactory, paymentModel){
-	$scope.logged_in();
-	$scope.countries = paymentModel.countries;
-	$scope.showing = "methods";
-	paymentFactory.grabDetails().success(function(response){
-		if(response.http_status_code == 200){
-			if(response.success){
-				if($rootScope.user.type == "member" && response.data.account == false){
-					$scope.detail = {first_name : $rootScope.user.first_name, last_name : $rootScope.user.last_name};
-					$scope.showing = 'details';
-				}
-				else if($rootScope.user.type == "member" && response.data.account){
-					var account = response.data.account;
-					$scope.detail = {first_name : account.legal_entity.first_name, 
-						last_name : account.legal_entity.last_name, 
-						dob_year : account.legal_entity.dob.year, 
-						dob_month : account.legal_entity.dob.month, 
-						dob_day : account.legal_entity.dob.day, 
-						city : account.legal_entity.address.city,
-						state : account.legal_entity.address.state,
-						postal_code : account.legal_entity.address.postal_code,
-						country : account.legal_entity.address.country,
-						address_line1 : account.legal_entity.address.line1,
-						address_line2 : account.legal_entity.address.line2};
-					$scope.showing = 'methods';
-					console.log(account);
-				}
-				$scope.account = response.data.account;
-			}
-			else $scope.set_alert(response.message, "default");	 
-		}
-		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-		else $scope.check_code(response.http_status_code);
-	})
-
-	$scope.verify_identity = function(detail){
-		paymentFactory.verifyIdentity(detail).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.set_alert(response.message, "default");	
-					$scope.account = response.data.account;
-					$scope.showing = 'methods';
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		});
-	}
-
-	$scope.toggle_view = function(view){
-		$scope.showing = view;
-	}
-
-	function stripeResponseHandler(status, response) {
-      var $form = $('#payment-form');
-
-      if (response.error) {
-        $scope.set_alert(response.error.message, "error");
-        $scope.form_disabled = false;
-      } else {
-        // response contains id and card, which contains additional card details
-        var token = response.id;
-       	paymentFactory.addPayment(token).success(function(res){
-       		if(res.http_status_code == 200){
-				if(res.success){
-					$scope.account = res.data.account;
-					$scope.set_alert(res.message, "default");
-					$rootScope.modal_up = false;
-					$scope.add_method = false;
-				}
-				else $scope.set_alert(res.message, "default");	 
-			}
-			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
-			else $scope.check_code(res.http_status_code);
-       	});
-      }
-    };
-	$scope.process_addition = function(){
-		// This identifies your website in the createToken call below
-		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
-		var $form = $('#payment-form');
-
-        // Disable the submit button to prevent repeated clicks
-       $scope.form_disabled = true;
-
-		Stripe.card.createToken($form, stripeResponseHandler);
-	}
-
-	$scope.remove_method = function(means){
-		paymentFactory.removeMethod(means).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.account = response.data.account;
-					$scope.set_alert(response.message, "default");
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		});
-	}
-
-	$scope.open_add = function(){
-		$rootScope.modal_up = true;
-		$scope.add_method = true;
-	}
-
-	$scope.close_add = function(){
-		$rootScope.modal_up = false;
-		$scope.add_method = false;
-	}
-
-	$scope.set_default = function(means){
-		paymentFactory.setDefault(means).success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.account = response.data.account;
-					$scope.set_alert(response.message, "default");
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		});
-	}
-});
-tappyn.factory("paymentFactory", function($http){
-	var fact = {};
-
-	fact.grabDetails = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/accounts/details',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		})	
-	}
-
-	fact.verifyIdentity = function(details){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/accounts/details',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param(details)
-		})	
-	}
-
-	fact.addPayment = function(token){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/accounts/payment_methods',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({stripeToken : token})
-		})	
-	}
-
-	fact.removeMethod = function(id){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/accounts/remove_method',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({source_id : id})
-		})	
-	}
-
-	fact.setDefault = function(id){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/accounts/default_method',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			data : $.param({source_id : id})
-		})	
-	}
-	return fact;	
-})
-tappyn.service('paymentModel', function(){
-	this.countries = {
-        'CA' : 'Canada',
-        'GB' : 'United Kingdom',
-        'US' : 'United States'
-	};
 })
 tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel){
 	$scope.logged_in();

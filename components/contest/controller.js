@@ -15,6 +15,28 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		}
 		else $scope.example = false;
 		$scope.form_limit = contestModel.parallel_submission($scope.contest);
+		if($scope.contest.platform == "instagram"){
+			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+				aspectRatio: 1 / 1,
+			  	dragMode : 'move',
+			  	scaleable : false,
+			  	cropBoxResizable : false,
+			  	cropBoxMovable : false,
+			  	minCropBoxWidth : 100,
+			  	preview : '.img-preview'
+			});
+		}
+		else{
+			$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+				aspectRatio: 1.91 / 1,
+			  	dragMode : 'move',
+			  	scaleable : false,
+			  	cropBoxResizable : false,
+			  	cropBoxMovable : false,
+			  	minCropBoxWidth : 100,
+			  	preview : '.img-preview'
+			});
+		}
 	});
 
 	$scope.view = {brief : true, submissions : false};
@@ -26,18 +48,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	}
 
 	$scope.imagerino = "";
-	$scope.image_show = 'edit';
-	$scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-		aspectRatio: 1.91 / 1,
-	  	dragMode : 'move',
-	  	scaleable : false,
-	  	cropBoxResizable : false,
-	  	cropBoxMovable : false,
-	  	minCropBoxWidth : 100,
-	  	preview : '.img-preview'
-	});
-	$scope.cropper.reset();
-
 
 	$scope.upload_image = function(id, submission){
 		var canvas = $scope.cropper.getCroppedCanvas();
@@ -90,7 +100,6 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
 		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
-		else if($scope.form_limit.photo && !contestModel.checkImageSize($scope.cropper.getData(), $scope.contest)) $scope.set_alert("Your image is too small, please upload a larger image", "default");
 		else{
 			if($scope.form_limit.photo){
 				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
