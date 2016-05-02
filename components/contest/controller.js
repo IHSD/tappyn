@@ -1,4 +1,4 @@
-tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
+tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $anchorScroll, $routeParams, $upload, $location, emotions, contestFactory, contestModel){
 	$scope.emotions = emotions;
 	contestFactory.grabContest($routeParams.id).success(function(response){
 		$scope.contest = response.data.contest;
@@ -45,6 +45,13 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	}
 	$scope.view_submissions = function(){
 		$scope.view = {brief : false, submissions : true};
+	}
+
+	$scope.scroll_to_submish = function(){
+		var old = $location.hash();
+		$location.hash("submishes");
+		$anchorScroll();
+		$location.hash(old);
 	}
 
 	$scope.imagerino = "";
