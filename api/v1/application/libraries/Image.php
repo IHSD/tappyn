@@ -47,7 +47,7 @@ class Image
         return FALSE;
     }
 
-    public function compress($base64_data)
+    public function compress($base64_data, $height = NULL, $width = NULL)
     {
         $filename = hash('sha256', uniqid());
         if(strpos($base64_data, ',') !== FALSE) $base64_data = explode(',', $base64_data)[1];
@@ -57,8 +57,13 @@ class Image
         $ox = imagesx($im);
         $oy = imagesy($im);
 
-        $nx = 600;
-        $ny = 300;
+        $nx = is_null($width) ? 600 : (int) $width;
+        $ny = is_null($height) ? 300 : (int) $height;
+
+        if($nx == 0 || $ny == 0)
+        {
+            throw new Exception("Trying to compress image with no height / width requirements");
+        }
 
         $nm = imagecreatetruecolor($nx, $ny);
 

@@ -155,7 +155,12 @@ class Submissions extends CI_Controller
         {
 
             $filename = hash('sha256', uniqid());
-            $thumb = $this->image->compress($this->input->post('photo'));
+            if($contest->platform == 'instagram')
+            {
+                $thumb = $this->image->compress($this->input->post('photo'), 600, 600);
+            } else {
+                $thumb = $this->image->compress($this->input->post('photo'));
+            }
 
             if($this->image->upload($this->input->post('photo'), $filename.'.jpg') && $this->image->upload($thumb, $filename.'_thumb.jpg'))
             {
