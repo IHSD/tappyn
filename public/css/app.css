@@ -2404,7 +2404,20 @@ nav .dropdown-menu{
 #faqpayment .panel-body{
 	border : 1px solid #ff5c00;
 }
-
+.faqpayment .panel-heading{
+	border : 1px solid #ff5c00;
+	background: #fff;
+}
+.faqpayment .panel-heading:hover{
+	background:#eee;
+}
+.faqpayment .panel-body{
+	border : 1px solid #ff5c00;
+}
+.faqpayment .panel-title a{
+	color:#333;
+	font-weight: 500;
+}
 .dash-black {
 	color:#333;
 	cursor: pointer;

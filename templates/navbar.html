@@ -21,7 +21,6 @@
 	                    		</span>
 	                    	</a>
 	                    </li>
-	                    <li  uib-tooltip="Upvote submissions you think will win for points. Find out more about points in our FAQ" tooltip-placement='bottom'  ng-if='user && user.type == "member"' style='float:right;'>{{user.points}} Points</li>
 	                    <li ng-if='user' style='float:right;' uib-dropdown>
                             <a href uib-dropdown-toggle>{{user.first_name}}&nbsp;
                             <span ng-if='!user.is_active' uib-tooltip="Your account isn't verified, check your email to verify" tooltip-placement='bottom' class='glyphicon glyphicon-exclamation-sign' style='color:#f00;'></span>
