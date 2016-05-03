@@ -1,15 +1,24 @@
 tappyn.factory('homeFactory', function($http){
 	var fact = {};
 
-	fact.mailingList = function(email){
+	fact.contestGrab = function(){
 		return $http({
-			method : 'POST',
-			url : 'api/v1/mailing_list',
+			method : 'GET',
+			url : 'api/v1/contests',
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param({"email" : email})
+			}
 		});
+	}
+
+	fact.winnersGrab = function(){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/submissions/winners',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		})	
 	}
 
 	return fact;
