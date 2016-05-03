@@ -11,7 +11,7 @@
 	            <nav class='hidden-xs' id='top-scroll'>
 	                <ul>
 	                    <li><a href="/contests">See Contests</a></li>
-	                    <li><a href="/top">Top Tapps</a></li>
+	                    <li><a href="/winners">Winners</a></li>
 	                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">For Companies</a></li>
 	                    <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
 	                    	<a href>
@@ -53,7 +53,7 @@
 				            	<li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
 		                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>
 			                    <li><a href="/contests">See Contests</a></li>
-			                    <li><a href="/top">Top Tapps</a></li>
+			                    <li><a href="/winners">Winners</a></li>
 			                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">For Companies</a></li>
 			                    <li><a href="/faq">FAQ</a></li>
 			                    <li ng-hide='!user'><a href="/dashboard">Dashboard</a></li>

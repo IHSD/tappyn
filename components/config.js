@@ -28,7 +28,7 @@ tappyn.config(function($routeProvider, $locationProvider) {
 		templateUrl : 'components/comp_pro/view.html',
 		controller : 'comproController'
 	})
-	.when('/top', {
+	.when('/winners', {
 		templateUrl : 'components/top/view.html',
 		controller : 'topController'
 	})
