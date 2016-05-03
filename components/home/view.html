@@ -1,16 +1,17 @@
 <div class='container-fluid'>
 <!-- Hero Banner -->
     <section class="testimonials">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                <div class="hero-content">
-                    <div class='col-xs-12 col-sm-6'>
-                        <h1>Create and sell everyday <br> photos</h1>
-                    </div>
-                    <div class='col-xs-12 col-sm-6'><img class='img-responsive' src='public/img/Stack.png'></div>
-                    <div class='text-center col-xs-12'>
-                        <a class='btn btn-wj btn-lg hidden-xs' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href='/contests'><strong>Join Tappyn</strong></a>
-                        <a class='btn btn-wj btn-lg visible-xs' style='padding-left: 35px;padding-right: 35px' href='/contests'><strong>Join Tappyn</strong></a>
+        <div class='container'>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="hero-content">
+                        <div class='col-xs-12 col-sm-6'>
+                            <h1>Create and sell everyday <br> photos</h1>
+                        </div>
+                        <div class='text-center col-xs-12'>
+                            <a class='btn btn-wj btn-lg hidden-xs' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href='/contests'><strong>Join Tappyn</strong></a>
+                            <a class='btn btn-wj btn-lg visible-xs' style='padding-left: 35px;padding-right: 35px' href='/contests'><strong>Join Tappyn</strong></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,27 +61,29 @@
         </div>
     </section>
      <section class="how-it-works">
-        <div class="row">
-            <h3 class='text-center'>Don't take our word for it. Take theirs.</h3>
-            <div class='hidden-xs'>   
-                <div class='col-sm-3' ng-if='$index < 4' ng-repeat='submission in submissions'>
-                    <div class="contest-box row">
-                        <div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+        <div class='container'>
+            <div class="row">
+                <h3 class='text-center'>Don't take our word for it. Take theirs.</h3>
+                <div class='hidden-xs'>   
+                    <div class='col-sm-3' ng-if='$index < 4' ng-repeat='submission in submissions'>
+                        <div class="contest-box row">
+                            <div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-             <div class='visible-xs'>   
-                <div class='col-xs-12' ng-repeat='submission in submissions' ng-if='$index < 5'>
-                    <div class="contest-box row">
-                        <div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+                 <div class='visible-xs'>   
+                    <div class='col-xs-12' ng-repeat='submission in submissions' ng-if='$index < 5'>
+                        <div class="contest-box row">
+                            <div ng-include src="'templates/submits/toptapsubmit.html'"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <section class="love-raw">
-        <div class="row">
-            <div>
+        <div class="container">
+            <div class='row'>
                 <h2 style='color:#333;font-size:20;text-align:center;'>Join now, brands you love are waiting.</h2>
                 <h4 style='color:#333;font-size:17;text-align:center;'>Click on any campaign to get started!</h4>
                 <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
