@@ -63,7 +63,7 @@
         <div class="row">
             <h3 class='text-center'>Don't take our word for it. Take theirs.</h3>
             <div class='hidden-xs'>   
-                <div class='col-sm-2' ng-class='{"col-sm-offset-1" : $index == 0}' ng-if='$index < 5' ng-repeat='submission in submissions'>
+                <div class='col-sm-3' ng-if='$index < 4' ng-repeat='submission in submissions'>
                     <div class="contest-box row">
                         <div ng-include src="'templates/submits/toptapsubmit.html'"></div>
                     </div>
