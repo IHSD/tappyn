@@ -12,7 +12,7 @@
 						<button class='btn btn-default' ng-click='scroll_to_submish()'>View submissions</button>
 					</div>
 					<div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
-						<div style='width:100%'>
+						<div style='width:100%;padding-top:15px;'>
 			            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>     
 			                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
 			            </div>
@@ -129,7 +129,10 @@
 							</form>
 						</div>
 						<div class='col-xs-12 col-sm-5' style='margin:auto' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
-							<h4 class='text-center'>Preview</h4>
+							<div class='text-center' style='padding:20px; border-radius:5px; border:1px solid #333'>
+								Don't know where to start? <a href='/guide'>Check out our guide for some tips!</a>
+							</div>
+							<h4 class='text-center'>Ad Preview</h4>
 							<div class='submish-preview row'>
 								<div class='col-xs-12'><span style='color:#ff5c00;'>{{contest.company.name}}</span> &#8226; {{contest.platform | capitalize}}</div>
 								<div class='col-xs-12' style='margin-top:15px;'>
