@@ -11,7 +11,7 @@
 </p>
 
 <p style='text-align:center'>
-	<a style='text-align:center;display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size:18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo  base_url().'#/reset_pass/'. $forgotten_password_code;?>">
+	<a style='text-align:center;display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size:18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo  base_url().'reset_pass/'. $forgotten_password_code;?>">
         Reset My Password
     </a>
 </p>
