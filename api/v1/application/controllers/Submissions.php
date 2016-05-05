@@ -314,11 +314,11 @@ class Submissions extends CI_Controller
         $this->responder->data(array('submissions' => $results))->respond();
     }
 
-    public function rate()
+    public function rate($id = 0)
     {
-        if(!$this->input->post("submission_id") || !$this->input->post('rating'))
+        if($id == 0 || !$this->input->post('rating'))
         {
-            $this->responder->fail("You must provide a submission")->code(500)->respond();
+            $this->responder->fail("You must provide a submission and rating")->code(500)->respond();
             return;
         }
         $sid = $this->input->post('submission_id');
