@@ -83,7 +83,7 @@ class Contest extends MY_Model
 
     public function submissions($cid)
     {
-        $submissions = $this->db->select('*')->from('submissions')->where('contest_id', $cid)->order_by('created_at', 'desc')->get();
+        $submissions = $this->db->select('*')->from('submissions')->where('contest_id', $cid)->order_by('created_at', 'asc')->get();
         if(!$submissions)
         {
             return FALSE;
@@ -154,7 +154,7 @@ class Contest extends MY_Model
 
     public function create($data)
     {
-        if(!$data = $this->validate($data))
+        if(!$data)
         {
             return false;
         }
