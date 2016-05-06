@@ -485,7 +485,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					      activator: '#IntercomDefaultWidget'
 					   }
 					});
-					if($scope.signing_in.type != "company") $route.reload();
 					$scope.signing_in = {show : false, type : '', object : ''};
 					if($rootScope.user.type == 'member'){	
 						if(!$rootScope.user.age || !$rootScope.user.gender){

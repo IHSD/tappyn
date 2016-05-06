@@ -1,5 +1,5 @@
 <div class='wrapper'>
-	<div class='modal_actions col-xs-12 col-sm-10 col-sm-offset-1' ng-show='adding_payment'>
+	<div ng-show='adding_payment' class='modal_actions col-xs-12 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2'>
 		<div class='panel'>
 			<div class='panel-body'>
 				<div class='row'>
@@ -7,7 +7,19 @@
 						<h3 class='text-center'>Contest Payment</h3>
 						<div class='close_circle' ng-click='close_payment()'>X</div>
 					</div>
-					<div class='col-xs-12 col-sm-8' style='border-right:1px solid #ff5c00;'>
+					<div class='col-xs-12 col-sm-6' style='border-right:1px solid #ff5c00;'>
+						<h4 class='col-xs-12'><span class='pull-left'>{{contest.platform | capitalize}} Contest</span><span class='pull-right'>$99.99</span></h4>
+						<h4 class='col-xs-12'><span class='pull-left'>{{contest.objective | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>
+						<h4 class='col-xs-12'><span class='pull-left'>{{contest.display_type | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>	
+						<h4 class='col-xs-12' ng-if='reduction'><span class='pull-left'>Voucher Discount</span><span class='pull-right'>-{{reducton | currency}}</span></h4>
+						<div clas='col-xs-12'><hr style='border: 1px #ff6c00 solid'></div>
+						<h4 class='col-xs-12'><span class='pull-right'>Total <strong>{{price | currency}}</strong></span></h4>
+						<form class='form' ng-submit='use_voucher()'>
+							<div class='form-group'><input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'></div>
+							<button class='btn btn-oj col-xs-12' type='submit'>Check Voucher</button>
+						</form>
+					</div>
+					<div class='col-xs-12 col-sm-6 payment'>
 						<div ng-show='price != 0.00'>	
 							<div ng-show='!add_new'>	
 								<div ng-show='payments.length > 0'>
@@ -37,21 +49,16 @@
 									<button class='btn btn-oj' ng-click='add_new = false'>Use a saved method</button>
 								</div>
 								<form class='form' method="POST" id="payment-form">
-									<div class='col-xs-12'>
-									    <div class="form-group">
-									    	<label>Card Number</label>
+									<div style='padding:0;' class='col-xs-12'>
 									      	<input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number"/>
-									    </div>
 									</div>
-								    <div class='col-xs-12 col-sm-4'>
+								    <div style='padding:0;' class='col-xs-12 col-sm-4'>
 									  <div class="form-group">
-										    <label>CVC</label>
 										    <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc"/>
 									  </div>
 								    </div>
-								  	<div class='col-xs-12 col-sm-4'>
+								  	<div style='padding:0;' class='col-xs-12 col-sm-4'>
 								      <div class="form-group">
-								       		<label>Month Exp</label>
 								  	      	<select class='form-control' data-stripe="exp-month">
 									            <option value='01'>01</option>
 									            <option value='02'>02</option>
@@ -68,9 +75,8 @@
 								          </select>
 								      </div>
 								    </div>
-								    <div class='col-xs-12 col-sm-4'>
+								    <div style='padding:0;' class='col-xs-12 col-sm-4'>
 								    	<div class='form-group'>
-								        	<label>Year Exp</label>
 								  	    	<select class='form-control' data-stripe="exp-year">
 									             <option value='2016'>2016</option>
 									             <option value='2017'>2017</option>
@@ -105,20 +111,40 @@
 							<button class='btn btn-oj' ng-click='voucher_payment()'>Continue</button>
 						</div>
 					</div>
-					<div class='col-xs-12 col-sm-4'>
-						<h4 class='col-xs-12'><span class='pull-left'>{{contest.platform | capitalize}} Contest</span><span class='pull-right'>$99.99</span></h4>
-						<h4 class='col-xs-12'><span class='pull-left'>{{contest.objective | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>
-						<h4 class='col-xs-12'><span class='pull-left'>{{contest.display_type | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>	
-						<h4 class='col-xs-12' ng-if='reduction'><span class='pull-left'>Voucher Discount</span><span class='pull-right'>-{{reducton | currency}}</span></h4>
-						<div clas='col-xs-12'><hr style='border: 1px #ff6c00 solid'></div>
-						<h4 class='col-xs-12'><span class='pull-right'>Total <strong>{{price | currency}}</strong></span></h4>
-						<form class='form' ng-submit='use_voucher()'>
-							<div class='form-group'><input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'></div>
-							<button class='btn btn-oj col-xs-12' type='submit'>Check Voucher</button>
-						</form>
-					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+
+	<div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4' ng-show='company_login'>	
+		<div class='col-xs-12 text-center' style='background-color:#fff;border-radius:3px;padding:10px;'>
+			<div class='close_circle' ng-click='close_company_login()'>X</div>
+			<img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:5px;'>
+		    <div ng-show='!forgot'>
+		        <form class='form' ng-submit="launch_log_in(identity, password)">
+		            <div class='form-group'>
+		                <input class='form-control' ng-model='identity' placeholder='Email'>
+		            </div>
+		            <div class='form-group'>
+		                <input class='form-control' ng-model='password' placeholder='Password' type='password'>
+		            </div>
+		          
+		            <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Login</button>
+		            <div class='modal_link'>
+			            <a class='pull-right' ng-click='forgot = true'>Forgot Password?</a>
+			        </div>
+		        </form>
+		    </div>
+		    <form ng-show='forgot' class='form' ng-submit="forgot_pass(identity)">
+		        <h3 class='text-center'>Forgot Password</h3>
+		        <div class='form-group'>
+		            <input class='form-control' ng-model='identity' placeholder="Enter your email">
+		        </div>             
+		        <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Send me an email</button>
+		        <div class='modal_link'>
+			        <a class='pull-right' ng-click='forgot = false'>I remember it!</a>
+			    </div>
+		    </form>
 		</div>
 	</div>
 </div>
@@ -130,11 +156,11 @@
 				<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-center'>	
 					<div ng-show='current.step == "package"'>
 						<h2>Assemble your campaign</h2>
-						<h4>Help us drive the best submissions.</h4>
+						<h4>Different kinds of campaigns lead to different kinds of submissions.</h4>
 					</div>
 					<div ng-show='current.step == "detail"'>
-						<h2>Tell us about your business & audience</h2>
-						<h4>What do you do and who do you do it for?</h4>
+						<h2>Create your profile</h2>
+						<h4>This is what our users will see about you - you'll only have to do this once.</h4>
 					</div>
 					<div ng-show='current.step == "preview"'>
 						<h2>Campaign Preview</h2>
@@ -153,117 +179,91 @@
 
 <div class='row' style='padding-bottom: 15px;'>
 	<div ng-show='current.step == "package"' id='package'>
+		<div class='col-xs-12' ng-init='contest.platform = "facebook"'><h3 class='text-center'>Choose what type of ad you'd like.</h3></div>
+		<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+			<div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='contest-box launch-page-hover' ng-click='select_platform("facebook")'>
+				<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Facebook</h3>
+				<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/facebook_launch.png'></div>
+			</div>
+		</div>
+		<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+			<div  ng-class='{"package-highlight" : contest.platform == "twitter"}'  class='contest-box launch-page-hover' ng-click='select_platform("twitter")'>
+				<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Twitter</h3>
+				<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/twitter_launch.png'></div>
+			</div>
+		</div>
+		<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+			<div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='contest-box launch-page-hover' ng-click='select_platform("instagram")'>
+				<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Instagram</h3>
+				<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/insta_launch.png'></div>
+			</div>
+		</div>
+		<hr style='border-color:#ff6c00'>
+		<div class='col-xs-12'><h3 class='text-center'>Choose your ad objective.</h3></div>
+		<div ng-show='contest.platform=="facebook" || contest.platform == "instagram"' style='color:#ff6c00'>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='contest-box launch-page-hover' ng-click='select_objective("clicks_to_website")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Send People to Your Website</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' class='text-center' src='public/img/ctw_launch.png'></div>
+					<div>
+						Reach people who are likely to click on your ad and visit your website.
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("conversions")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Website Conversions</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/conversions_launch.png'></div>
+					<div>
+						Reach people in your audience who are likely to convert on your website.
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Boost your Posts</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/boost_launch.png'></div>
+					<div>
+						Increase engagement on your post and get people seeing, liking, commenting on and sharing your Page content.
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-show='contest.platform=="twitter"' style='color:#ff6c00'>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("site_clicks_conversions")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Website Clicks / Conversions</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/convert_twitter.png'></div>
+					<div>
+						Grow your site traffic, increase online purchases or connect with high quality leads.
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "followers"}' class='contest-box launch-page-hover' ng-click='select_objective("followers")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Gain Followers</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/followers_launch.png'></div>
+					<div>
+						Grow an interested audience with which you can engage with over time.
+					</div>
+				</div>
+			</div>
+			<div class='col-xs-12 col-sm-4'>
+				<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
+					<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Tweet Engagements</h3>
+					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/tweet_engage.png'></div>
+					<div>
+						Reach a large targeted group of people, place your best content in fromt of the audience that matters to you.
+					</div>
+				</div>
+			</div>
+		</div>
+		<hr style='border-color:#ff6c00'>
+		<div class='col-xs-12'><h3 class='text-center'>Choose your audience.</h3></div>
 		<div class='col-xs-12'>
-			<h3 class='text-center'>Where do you want to advertise?</h3>
-			<h4 class='text-center'>Choose your platform</h4>
-			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-				<div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='contest-box launch-page-hover' ng-click='select_platform("facebook")'>
-					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Facebook</h3>
-					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/facebook_launch.png'></div>
-				</div>
-			</div>
-			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-				<div  ng-class='{"package-highlight" : contest.platform == "twitter"}'  class='contest-box launch-page-hover' ng-click='select_platform("twitter")'>
-					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Twitter</h3>
-					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/twitter_launch.png'></div>
-				</div>
-			</div>
-			<div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-				<div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='contest-box launch-page-hover' ng-click='select_platform("instagram")'>
-					<h3 class='text-center' style='border-bottom:1px solid #ff6c00;padding-bottom:3px;'>Instagram</h3>
-					<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/insta_launch.png'></div>
-				</div>
-			</div>
-		</div>
-		<div class='col-xs-12 package-selection' id='objective' ng-show='contest.platform'>
-			<hr style='border-color:#ff6c00'>
-			<h3 class='text-center'>What do you want your ad to do?</h3>
-			<h4 class='text-center'>Choose your objective</h4>
-			<div ng-show='contest.platform=="facebook" || contest.platform == "instagram"' style='color:#ff6c00'>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='contest-box launch-page-hover' ng-click='select_objective("clicks_to_website")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Send People to Your Website</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' class='text-center' src='public/img/ctw_launch.png'></div>
-						<div>
-							Reach people who are likely to click on your ad and visit your website.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("conversions")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Increase Website Conversions</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/conversions_launch.png'></div>
-						<div>
-							Reach people in your audience who are likely to convert on your website.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Boost your Posts</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/boost_launch.png'></div>
-						<div>
-							Increase engagement on your post and get people seeing, liking, commenting on and sharing your Page content.
-						</div>
-					</div>
-				</div>
-			</div>
-			<div ng-show='contest.platform=="twitter"' style='color:#ff6c00'>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='contest-box launch-page-hover' ng-click='select_objective("site_clicks_conversions")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Website Clicks / Conversions</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/convert_twitter.png'></div>
-						<div>
-							Grow your site traffic, increase online purchases or connect with high quality leads.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "followers"}' class='contest-box launch-page-hover' ng-click='select_objective("followers")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Gain Followers</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/followers_launch.png'></div>
-						<div>
-							Grow an interested audience with which you can engage with over time.
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='contest-box launch-page-hover' ng-click='select_objective("engagement")'>
-						<h3 style='border-bottom:1px solid #ff6c00;padding-bottom:3px;' class='text-center'>Tweet Engagements</h3>
-						<div class='text-center'><img style='height:100px;padding-top:5px; padding-bottom:5px;' src='public/img/tweet_engage.png'></div>
-						<div>
-							Reach a large targeted group of people, place your best content in fromt of the audience that matters to you.
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div ng-show='current.step == "detail"'>
-		<div class='col-sm-8 col-xs-12' style='padding-left:5px; padding-right:5px'>
-			<div class='contest-box'>
-				<div class='row'>
-					<h3 class='text-center'>Your Business</h3>
-					<h4 class='text-center'>Help your audience get to know you for the best submissions possible</h4>
-					<form class='form'>
-						<div class='form-group'>
-							<label>Summary of product or service <img uib-tooltip="This short summary will be the first thing our users will see about your company." height='10px' width='10px' src='public/img/tooltip.png'></label>
-							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
-						</div>
-						<div class='form-group'>
-							<label class='control-label'>Describe what makes you different (and better) than your competition. <img uib-tooltip="Be as specific as possible to allow for the best submissions, our users will refer to this information while they create content to submit" height='10px' width='10px' src='public/img/tooltip.png'></label>
-							<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<div class='col-sm-4 col-xs-12' style='padding-left:5px; padding-right:5px'>
-			<div class='contest-box'>
-				<h3 class='text-center'>Your Audience</h3>
-				<h4 class='text-center'>The preferred demographic for your submissions</h4>
-				<form class='form'>
-					<h5>User Age <img uib-tooltip="The age group you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h5>
+			<div class='contest-box row'>
+				<div class='col-sm-4 col-xs-12'>
+					<h4 class='text-center'>Age <img uib-tooltip="The age group you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h4>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.age = 0'>
 						<label class="btn" ng-class='{"btn-oj" : contest.age == 0, "btn-outliner" : contest.age != 0}'>
 							<input type='radio' ng-model='contest.age' value='0'>All Ages
@@ -281,7 +281,25 @@
 							<input type='radio' ng-model='contest.age' value='4'> 45+
 						</label>
 					</div>
-					<h5>User Gender <img uib-tooltip="The gender you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h5>
+
+					<!--<div class='col-xs-5'>
+						<div class='form-group'>
+							<select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+								<option value=''>Min Age</option>	
+							</select>
+						</div>
+					</div>
+					<div class='col-xs-1'><h4 class='text-center'> - </h4></div>
+					<div class='col-xs-5'>
+						<div class='form-group'>
+							<select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+								<option value=''>Max Age</option>
+							</select>
+						</div>
+					</div> -->
+				</div>
+				<div class='col-sm-4 col-xs-12 text-center'>
+					<h4 ng-init='contest.gender = 0'>Gender <img uib-tooltip="The gender you'd like to target" height='10px' width='10px' src='public/img/tooltip.png'></h4>
 					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
 							<input type='radio' ng-model='contest.gender' value='0'> All Genders
@@ -293,7 +311,9 @@
 							<input type='radio' ng-model='contest.gender' value='2'> Women
 						</label>
 					</div>
-					<h5>User Interest <img uib-tooltip="People who follow this interest will be shown your contest" height='10px' width='10px' src='public/img/tooltip.png'></h5>
+				</div>
+				<div class='col-sm-4 col-xs-12 text-center'>
+					<h4>Interest  <img uib-tooltip="People who follow this interest will be shown your campaign" height='10px' width='10px' src='public/img/tooltip.png'></h4>
 					<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
 						<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
 							<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
@@ -338,76 +358,140 @@
 							<input type='radio' ng-model='contest.industry' value='travel'> Travel
 						</label>
 					</div>
-				</form>
+				</div>	
+			</div>	
+		</div>
+	</div>
+	<div ng-show='current.step == "detail"'>
+		<div class='col-sm-8 col-sm-offset-2 col-xs-12'>
+			<div class='contest-box'>
+				<div class='row'>
+					<h3 class='text-center'>Your Business</h3>
+					<h4 class='text-center'>Help your audience get to know you for the best submissions possible</h4>
+					<form class='form'>
+		        	<div class='col-xs-12'>
+			            <div class='form-group'>
+			                 <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email'>
+			            </div>
+			        </div>  
+			        <div class='col-xs-12'>
+			            <div class='form-group'>
+			            	<input class='form-control' ng-model='contest.password' placeholder='Password' type='password'>
+			            </div>
+			        </div>
+			        <div class='col-xs-12'>
+			        	<a class='text-center' style='color:#333' ng-click='open_company_login()'>Already have an account? Log in now!</a>
+			        </div>
+			        <div class='col-xs-12'>
+			            <div class='form-group'>
+			              	<input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text'>
+			            </div>
+		            </div>
+			        <div class='col-xs-12 col-sm-6'>
+			        	<div class='form-group'>
+			            	<label>Company Logo</label>
+			            	<input ng-file-select='select_logo($files, contest)' type='file'>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-6'>
+						<img class='img-responsive' ng-src='{{contest.logo_url}}'>	
+			        </div>
+			        <div class='col-xs-12'>
+			        	<div class='form-group'>
+			            	<input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text'>
+			            </div>
+			        </div>
+			        <div class='col-xs-12'>
+			        	<div class='form-group'>
+			            	<input class='form-control' ng-model='contest.facebook_url' placeholder='Company Facebook' type='text'>
+			            </div>
+			        </div>
+			         <div class='col-xs-12'>
+			        	<div class='form-group'>
+			            	<input class='form-control' ng-model='contest.twitter_handle' placeholder='Company Twitter Handle' type='text'>
+			            </div>
+			        </div>
+			        <div class='col-xs-12'>
+						<div class='form-group'>
+							<label>Summary of product or service <img uib-tooltip="This short summary will be the first thing our users will see about your company." height='10px' width='10px' src='public/img/tooltip.png'></label>
+							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
+						</div>
+					</div>
+					<div class='col-xs-12'>
+						<div class='form-group'>
+							<label class='control-label'>Describe what makes you different (and better) than your competition. <img uib-tooltip="Be as specific as possible to allow for the best submissions, our users will refer to this information while they create content to submit" height='10px' width='10px' src='public/img/tooltip.png'></label>
+							<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
+						</div>
+					</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div ng-show='current.step == "preview"'>
 		<div class='row'>
-			<div class='col-xs-12 col-sm-5' style='padding-left:5px;padding-right:5px;'>
+		<div class='col-xs-12' style='padding-top:10px;'>
+			<div class='panel'>
+				<div class='panel-body' style='position:relative;padding:5px;'>
+					<div class='col-xs-12 col-sm-4 text-center' style='padding-top:10px;'>
+						<h3 style='margin-top:0px;'>
+							<img style='height:auto;' width='50px' ng-src="{{contest.logo_url}}">
+							{{user.first_name}}
+						</h3>
+						<button class='btn btn-default'>View submissions</button>
+					</div>
+					<div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
+						<div style='width:100%;padding-top:15px;'>
+			            	<uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>     
+			                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
+			            </div>
+			        </div>	
+					<div class='col-sm-3 col-xs-12 text-right'>
+						<h2 style='color:#ff5c00;'>$50</h2>
+						<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>7 days left</span></h4>
+						<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>0 views</span></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class='row'>
+		<div class='col-xs-12 col-sm-4'>
 			<div class='panel'>
 				<div class='panel-body' style='position:relative;padding:5px;'>
 					<div class='row'>
-						<div class='col-xs-12 text-center'>
-							<h3 style='margin-top:0px;'>
-								<img ng-if='!user.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-								<img ng-if='user.logo_url' style='height:auto;' width='50px' ng-src="{{user.logo_url}}">
-								{{user.first_name}}
-							</h3>
-						</div>
-						<div class='col-sm-8 col-xs-12'>
-							<div style='width:100%'>
-				            	<uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>     
-				                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
-				            </div>
-				        </div>	
-						<div class='col-sm-4 col-xs-12 text-center'><h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> 7 days left</h4></div>
-						<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
 				        <div class='col-xs-12 text-center'>
 							<h4 class='text-center'>About Product / Service</h4>
-				    		<p>{{contest.audience}}</p>
+				    		<p class='text-left'>{{contest.summary}}</p>
 				    	</div>
 				    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
 						<div class='col-xs-12 text-center'>	        	
 							<h4 class='text-center'>What Makes Us Different</h4>
-				    		<p>{{contest.different}}</p>
+				    		<p class='text-left'>{{contest.different}}</p>
 				    	</div>
 				    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
 						<div class='col-xs-12 text-center'>	        	
 							<h4>Target Audience</h4>
-							<p><span ng-switch on='contest.age'>
+				    		<p class='text-left'><span ng-switch on='contest.age'>
 								<span ng-switch-when="0">18-45</span>
 								<span ng-switch-when="1">18-24</span>
 								<span ng-switch-when="2">25-34</span>
 								<span ng-switch-when="3">35-44</span>
 								<span ng-switch-when="4">45+</span>
-				    			 <span ng-switch on="contest.gender">
+								 <span ng-switch on="contest.gender">
 								  <span ng-switch-when="1"> Men</span>
 								  <span ng-switch-when="2"> Women</span>
 								  <span ng-switch-default> Men and Women</span>
 								</span>
-				    		</p>
+							</p>
 				    	</div>
-				    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.additional_images.length > 0'><hr style='border: 1px #ff6c00 solid'></div>
-				    	<div class='col-xs-12' ng-if='contest.additional_images && contest.additional_images.length > 0' style='margin-bottom:5px;' ng-init='indexer = 0'>
-							<div class="col-xs-2"><button class='btn btn-oj btn-sm' ng-disabled='indexer == 0' ng-click='indexer = indexer - 1'><</button></div>
-							<div class='col-xs-8'><img style='height:auto;' width='150px' ng-src="{{contest.additional_images[indexer]}}"></div>
-							<div class='col-xs-2'><button class='btn btn-oj btn-sm' ng-disabled='indexer == 2' ng-click='indexer = indexer + 1'>></button></div>
-						</div>
-				    	<div class='col-xs-6 col-xs-offset-3' ng-if='contest.emotion'><hr style='border: 1px #ff6c00 solid'></div>
-				    	<div class='col-xs-12' ng-if='contest.emotion'>
-							<h4 class='text-center'>Ad Personality</h4>
-				    		<div class='col-xs-12'>
-				    			<img ng-src='{{emotion_contest.icon}}' style='margin-right:5px;'  height='25px' width='25px'>{{emotion_contest.adj}} 
-				    		</div>
-				        </div>
 				        <div class='col-xs-12 text-center'>
 							<div class='btn-group'>
-								<a ng-if='contest.company.company_url' ng-click='track_click("website_click", contest)' class='btn btn-outliner'>Visit Website</a>
-								<a ng-if='contest.company.facebook_url'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+								<a ng-if='contest.company_url && contest.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> Visit Website</a>
+								<a ng-if='contest.facebook_url && contest.facebook_url != ""'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 								</a>
-								<a ng-if='contest.company.twitter_handle' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+								<a ng-if='contest.twitter_handle && contest.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
 								</a>
 							</div>
@@ -416,61 +500,23 @@
 				</div>
 			</div>
 		</div>
-		<div class='row' style='padding-bottom:10px;'>
-			<div class='col-sm-7 col-xs-12' style='padding-left:5px;padding-right:5px;'>
+		<div class='row'>
+			<div class='col-sm-8 col-xs-12'>
 				<div class='panel'>
 					<div class='panel-body' style='position:relative;padding:5px;'>
-						<form class='form'>
-				            <div ng-show='form_limit.headline' class='form-group'>
-				            	<div class='col-xs-12 col-sm-3'>Headline <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-					        	<div class='col-xs-12 col-sm-9'>
-					        		<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
-					        		<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
-					        	</div>
-					        </div>
-					        <div ng-show='form_limit.photo' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Ad Image <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show people using the product instead of just the product, keep it simple, stand out from the crowd- you're competing against a newsfeed so grab people's attention!"></div>
-								<div class='col-xs-12 col-sm-9'>	
-								 	<input type='file' id='fileInput' name="file" class="inputfile"  accept="image/*" />
-									<label for="fileInput">Upload Your Photo</label>
-									<img id="upload_contest" src='public/img/your_photo.png'>
-								</div>
+						<div>
+							<div class='alert alert-success text-center'>
+								This where your audience will enter their submissions
 							</div>
-					        <div ng-show='form_limit.text' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Ad Text <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-					        	<div class='col-xs-12 col-sm-9'>
-					        		<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
-					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
-					        	</div>
-					        </div>
-					        <div ng-show='form_limit.line_1' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Line One <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-					        	<div class='col-xs-12 col-sm-9'>
-						        	<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
-						        	<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
-						        </div>
-						    </div>
-					        <div ng-show='form_limit.line_2' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Line Two <img  height='15px' width='15px'  src='public/img/tooltip.png' uib-tooltip="Show supreme confidence in the product, embody passion and fun about the product, say more by saying less, and laser focus on the target audience"></div>
-					        	<div class='col-xs-12 col-sm-9'>
-					        		<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
-					        		<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
-					        	</div>
-					        </div>
-					        <div ng-show='form_limit.card_title' class='form-group'>
-					        	<div class='col-xs-12 col-sm-3'>Card Title</div>
-					        	<div class='col-xs-12 col-sm-9'>
-					        		<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
-					        		<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
-					        	</div>
-					        </div>
-					        <div class='text-center'><button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;'>Submit</button></div>
-						</form>
+						</div>
 				   </div>
 				</div>
 			</div>
 		</div>
+		<div class='row' style='padding-bottom:10px;' id='submishes'>
+			<h3 class='text-center'>This is where the submissions will pile up!</h3>
 		</div>
+	</div>
 	</div>
 	<div class='col-xs-12'>
 		<div class='container'>
@@ -508,6 +554,10 @@ fbq('track', 'PageView');
 
 
 <style>
+	.payment .form-control{
+		margin:0;
+		border-radius:0;
+	}
 	.payment-method-container {
 		padding-top: 20px;
 		padding-bottom: 20px;

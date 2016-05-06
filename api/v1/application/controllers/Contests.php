@@ -253,7 +253,6 @@ class Contests extends CI_Controller
             return;
         }
 
-        $this->form_validation->set_rules('audience', 'Audience Description', 'required');
         $this->form_validation->set_rules('different', 'How Your Different', 'required');
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
@@ -267,7 +266,6 @@ class Contests extends CI_Controller
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
-                'audience'          => $this->input->post('audience'),
                 'summary'           => $this->input->post('summary'),
                 'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),
@@ -432,8 +430,6 @@ class Contests extends CI_Controller
             $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
             return;
         }
-
-        $this->form_validation->set_rules('audience', 'Audience Description', 'required');
         $this->form_validation->set_rules('different', 'How Your Different', 'required');
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
@@ -447,7 +443,6 @@ class Contests extends CI_Controller
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
-                'audience'          => $this->input->post('audience'),
                 'summary'           => $this->input->post('summary'),
                 'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),

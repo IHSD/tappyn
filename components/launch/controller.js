@@ -1,4 +1,4 @@
-tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, emotions){
+tappyn.controller('launchController', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions){
 	$scope.logged_in()
 	$scope.steps = {
 		'package'		 : {step : 'package',  next : 'detail',  previous : 'none',    fill : 25},
@@ -11,36 +11,115 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.contest = {};
 	$scope.company = {};
 	$scope.save_method = false;
-
+	$scope.ages = launchModel.ages;
 	$scope.registering = false;
 
 	$scope.price = 99.99;
 
-	$scope.close_register = function(){
+
+	$scope.grab_profile = function(){
+		launchFactory.grabProfile().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.profile = response.data.profile;
+					$scope.contest.summary = $scope.profile.summary;
+					$scope.contest.different = $scope.profile.different;
+					$scope.contest.company_url = $scope.profile.company_url;
+					$scope.contest.facebook_url = $scope.profile.facebook_url;	
+					$scope.contest.twitter_handle = $scope.profile.twitter_handle;	
+					$scope.contest.logo_url = $scope.profile.logo_url;
+					$scope.set_step("preview");	
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.close_company_login = function(){
 		$rootScope.modal_up = false;
-		$scope.registering = false;
+		$scope.company_login = false;
+	}
+	$scope.open_company_login = function(){
+		$rootScope.modal_up = true;
+		$scope.company_login = true;
+	}
+
+	$scope.launch_log_in = function(email, pass){
+		AppFact.loggingIn(email, pass).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					window.Intercom('update', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at,
+					   widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }
+					});
+					$scope.grab_profile();
+					$scope.close_company_login();
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.launch_signup = function(email, pass, name, logo){
+		AppFact.signUp({identity : email, password : pass, name : name, logo_url : logo, group_id : 3}).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$rootScope.user = response.data;
+					sessionStorage.setItem("user", JSON.stringify(response.data));
+					window.Intercom('update', {
+					   app_id: 'qj6arzfj',
+					   email: $rootScope.user.email,
+					   user_id: $rootScope.user.id,
+					   created_at: $rootScope.user.created_at,
+					   widget: {
+					      activator: '#IntercomDefaultWidget'
+					   }
+					});
+					fbq('track', 'Lead');
+					ga('send', {
+						hitType: 'event',
+						eventCategory: 'User Signup',
+						eventAction: 'Signup',
+						eventLabel: 'New User Email'
+					});
+					$scope.set_step("preview");
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
 	}
 
 	$scope.set_step = function(step){
 		if(step == 'detail'){
-			if(!$scope.profile && $rootScope.user) $scope.grab_profile();
+			if($rootScope.user) $scope.grab_profile();
 			$scope.current = $scope.steps[step];
 		}
 		else if(step == 'preview'){
-			if(!$rootScope.user) $scope.open_register("company", '');
+			if(!$rootScope.user){
+				if(!$scope.contest.identity) $scope.set_alert("An email is required", "error");
+				else if(!$scope.contest.password) $scope.set_alert("A password is required", "error");
+				else if(!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
+				else if(!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
+				else $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url);
+			}
 			else if(!$scope.contest.summary || $scope.contest.summary == '')  $scope.set_alert("A summary of service or product is required", "error");
-			else if(!$scope.contest.industry || $scope.contest.industry == '')  $scope.set_alert("A user interest is required", "error");
-			else if(!$scope.contest.audience || $scope.contest.audience == '')  $scope.set_alert("A longer description is required", "error");
 			else if(!$scope.contest.different || $scope.contest.different == '')  $scope.set_alert("What makes you different is required", "error");
 			else{
-				$scope.emotion_contest = launchModel.sift_images($scope.contest, $scope.personalities);
 				$scope.form_limit = launchModel.parallel_submission($scope.contest);
 				$scope.current = $scope.steps[step];
-				$scope.contest.additional_images = [];
-				if($scope.contest.additional_image_1) $scope.contest.additional_images.push($scope.contest.additional_image_1);
-				if($scope.contest.additional_image_2) $scope.contest.additional_images.push($scope.contest.additional_image_2);
-				if($scope.contest.additional_image_3) $scope.contest.additional_images.push($scope.contest.additional_image_3);
-				if($scope.contest.additional_images.length < 1) $scope.contest.additional_images = null;
 			}
 		}
 		else $scope.current = $scope.steps[step];
@@ -50,20 +129,12 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.select_objective = function(objective){
 		$scope.contest.objective = objective;
 		$scope.contest.display_type = null;
-		var old = $location.hash();
-		$location.hash("display");
-		$anchorScroll();
-		$location.hash(old);
 	}
 
 	$scope.select_platform = function(platform){
 		$scope.contest.platform = platform;
 		$scope.contest.objective = null;
 		$scope.contest.display_type = null;
-		var old = $location.hash();
-		$location.hash("objective");
-		$anchorScroll();
-		$location.hash(old);
 	}
 
 	$scope.select_display = function(type){
@@ -73,23 +144,6 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.choose_personality = function(type){
 		$scope.contest.emotion = type;
 	}
-
-	$scope.grab_profile = function(){
-		launchFactory.grabProfile().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.profile = response.data;
-					if(!$scope.contest.summary || $scope.contest.summary == '') $scope.contest.summary = $scope.profile.summary;
-					else if(!$scope.contest.audience || $scope.contest.audience == '') $scope.contest.audience = $scope.profile.audience;
-					else if(!$scope.contest.different || $scope.contest.different == '') $scope.contest.different = $scope.profile.different;
-				}
-				else $scope.set_alert(response.message, "default");	 
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
 	$scope.grab_payments = function(){
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
@@ -105,6 +159,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		contest.display_type = "with_photo";
 		if(!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
 		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
+		else if(!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
 		else $scope.set_step("detail");
 	}
 
@@ -313,7 +368,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	        },
 	        file: file,
 	    }).success(function (){
-	       	if(type == "logo") $scope.company.logo_url = url+new_name;
+	       	if(type == "logo") $scope.contest.logo_url = url+new_name;
 	       	else if(type == "pic1") $scope.contest.additional_image_1 = url+new_name;
 	       	else if(type == 'pic2') $scope.contest.additional_image_2 = url+new_name;
 	       	else if(type == 'pic3') $scope.contest.additional_image_3 = url+new_name;
