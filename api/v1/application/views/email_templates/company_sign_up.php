@@ -29,8 +29,6 @@ $query_string['redirect'] = 'dashboard';
 
 <p>4) Choose your favorite submission at the end of the contest and leave with an ad guaranteed to relate to your audience.</p>
 
-<p>Got a question? I'm here to help(link to my e-mail) anytime </p>
+<p>Got a question? I'm <a href="mailto:alek@tappyn.com">here to help</a> anytime</p>
 
 <!-- End Email Content -->
-
-<?php $this->load->view('email_templates/footer'); ?>
