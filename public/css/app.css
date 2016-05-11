@@ -2533,3 +2533,9 @@ nav .dropdown-menu{
 .submish-hovering:hover{
 	background:#eee;
 }
+.submission-text{
+	font-family: 'Helvetica';
+}
+.submission-text h4{
+	font-size:14px;
+}

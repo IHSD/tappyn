@@ -1,3 +1,4 @@
+<div class='submission-text'>
 <div class='col-xs-12' style='padding-bottom:10px;'>
 	<img ng-if='submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.thumbnail_url}}'>
 		<img ng-if='!submission.thumbnail_url' style='max-width:100%' ng-src='{{submission.attachment}}'>
@@ -30,3 +31,4 @@
 </div>
 <!-- Generate a select as winner button if campaign is over and user owns contest -->
 <button ng-disabled='contest.status != "ended"' ng-if='contest.owner == user.id || user.is_admin' ng-click='choose_winner(submission.id)' class='btn btn-oj'>Choose Winner</button>
+</div>

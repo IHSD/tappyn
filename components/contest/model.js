@@ -10,7 +10,7 @@ tappyn.service("contestModel", function(){
 		var layout = {};
 		if(contest.platform == "facebook"){
 			layout.text = {limit : 90, placeholder : 'Why do you love this company?'};
-			if(contest.objective != 'engagement') layout.headline = {limit : 35, placeholder : 'What would grab your attention?'};
+			if(contest.objective == 'conversions' || contest.objective == "clicks_to_website") layout.headline = {limit : 35, placeholder : 'What would grab your attention?'};
 		}
 		else if(contest.platform == "twitter"){
 			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'Why do you love this company?'};

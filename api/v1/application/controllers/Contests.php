@@ -267,6 +267,7 @@ class Contests extends CI_Controller
             // Do some preliminary formatting
             $data = array(
                 'summary'           => $this->input->post('summary'),
+                'additional_info'   => $this->input->post('additional_info'),
                 'different'         => $this->input->post('different'),
                 'objective'         => $this->input->post('objective'),
                 'platform'          => $this->input->post('platform'),

@@ -50,6 +50,15 @@
 								</span>
 				    		</p>
 				    	</div>
+				    	<div ng-if='contest.additional_info'>
+						    <div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
+					    	<div class='col-xs-12 text-center'>	        	
+								<h4>Additional Info</h4>
+					    		<p class='text-left'>
+									{{contest.additional_info}}
+								</p>
+					    	</div>
+				        </div>
 				        <div class='col-xs-12 text-center'>
 							<div class='btn-group'>
 								<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> Visit Website</a>
@@ -135,7 +144,7 @@
 								<p style='margin:0;'>How to : <a href='/guide'>Create awesome content</a></p>
 							</div>
 							<h4 class='text-center'>Ad Preview</h4>
-							<div class='submish-preview row'>
+							<div class='submish-preview submission-text row'>
 								<div class='col-xs-12'><span style='color:#ff5c00;'>{{contest.company.name}}</span> &#8226; {{contest.platform | capitalize}}</div>
 								<div class='col-xs-12' style='margin-top:15px;'>
 									<div class="contest-content">
