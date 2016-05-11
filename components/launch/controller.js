@@ -160,6 +160,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		if(!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
 		else if(!contest.objective || contest.objective == '')  $scope.set_alert("You need to select an ad objective", "error");
 		else if(!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
+		else if(!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
 		else $scope.set_step("detail");
 	}
 
