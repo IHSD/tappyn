@@ -8,7 +8,7 @@
                         <h4>Find and connect with your audience to create your digital ads.</h4>
                         <p style="padding-left:20px;"><span class='glyphicon glyphicon-ok circle-it'></span> 3,245 ads created.</p>
                         <p style="padding-left:20px;"><span class='glyphicon glyphicon-ok  circle-it'></span> An ad you love or your money back.</p>
-                        <div class='text-center'><a class='btn btn-wj btn-lg' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
+                        <div class='text-center'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
                     </div>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                         <h3>Sell Smarter</h3>
                         <p class='text-left'>Instead of you guessing on what your audience wants, let them tell you. You sit back and watch as your click-through rate explodes.</p>
                     </div>
-                    <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
+                    <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
                 </div>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>30 Facebook Ads</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>$99</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>100% Money Back Guarantee</p>
-                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
+                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
                        
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                          <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>30 Instagram Ads</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>$99</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>100% Money Back Guarantee</p>
-                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
+                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
                        
                         </div>
                     </div>
@@ -119,7 +119,7 @@
                          <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>30 Twitter Ads</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>$99</p>
                         <p style='margin-bottom:5px;padding-left:20px;' class='text-left'>100% Money Back Guarantee</p>
-                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
+                        <div class='col-xs-12 text-center' style='margin-top:10px;'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px' href="/launch">Get Started Now</a></div>
 
                     </div>
                     </div>
@@ -168,7 +168,7 @@
 </div>
 
 <script>
-fbq('track', 'PageView');
+fbq('track', 'ViewContent');
 window.Intercom('update');
 
 $(".get_started").click(function(){
@@ -178,6 +178,7 @@ $(".get_started").click(function(){
         eventAction: 'Company Launch',
         eventLabel: 'Company clicked to launch'
     });
+    fbq('track', 'AddToCart');
 });
 </script>
 
