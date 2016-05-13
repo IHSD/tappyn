@@ -1,5 +1,4 @@
-tappyn.controller("editController", function($scope, $rootScope, $upload, $routeParams, editFactory){
-	$scope.logged_in();
+tappyn.controller("editController", function($scope, $rootScope, $location, $upload, $routeParams, editFactory){
 	if($routeParams.id){
 		editFactory.grabEdit($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
@@ -9,7 +8,7 @@ tappyn.controller("editController", function($scope, $rootScope, $upload, $route
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
 		})
-	}
+	}else $location.path('/home');
 
 	$scope.edit = function(contest){
 		editFactory.editContest(contest).success(function(response){
