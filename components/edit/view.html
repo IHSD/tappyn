@@ -1,39 +1,102 @@
 <div class='container'>
 <div class='row content-padding'>
 	<div class='col-sm-8 col-sm-offset-2 col-xs-12'>	
-		<div class='contest-box'>
+		<div class='contest-box row'>
 			<h3 class='text-center'>Edit Contest</h3>
 			<form class='form' ng-submit='edit(contest)'>
-				<div class='form-group'>
-					<div class='row'>
-						<div class='col-xs-12'><label>Pictures of product or service (up to 3)</label></div>
-						<div class='col-sm-4 col-xs-12'>
-							<input ng-file-select='select_file($files, "pic1")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_images[0]' ng-src='{{contest.additional_images[0]}}'>
+				<div class='col-xs-6'>
+					<h4 style='margin-top:10px;margin-bottom:2px;' ng-init='contest.min_age=18;contest.max_age=45' class='text-left'>Age</h4>
+					<div class='col-xs-5'>
+						<div class='form-group'>
+							<select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+								<option value=''>Min Age</option>	
+							</select>
 						</div>
-						<div class='col-sm-4 col-xs-12'>
-							<input ng-file-select='select_file($files, "pic2")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_images[1]' ng-src='{{contest.additional_images[1]}}'>
-						</div>
-						<div class='col-sm-4 col-xs-12'>
-							<input ng-file-select='select_file($files, "pic3")' type='file'>
-							<img class='img-responsive' ng-if='contest.additional_images[2]' ng-src='{{contest.additional_images[2]}}'>
+					</div>
+					<div class='col-xs-1'><h4 style='margin-top:10px;margin-bottom:2px;' class='text-center'> - </h4></div>
+					<div class='col-xs-5'>
+						<div class='form-group'>
+							<select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+								<option value=''>Max Age</option>
+							</select>
 						</div>
 					</div>
 				</div>
-				<div class='form-group'>
-					<label>Summary of product or service</label>
-					<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
+				<div class='col-xs-6'>
+					<h4 style='margin-top:10px;margin-bottom:2px;' ng-init='contest.gender = 0'>Gender</h4>
+					<div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
+							<label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+								<input type='radio' ng-model='contest.gender' value='0'> All Genders
+							</label>
+							<label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+								<input type='radio' ng-model='contest.gender' value='1'> Men
+							</label>
+							<label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+								<input type='radio' ng-model='contest.gender' value='2'> Women
+							</label>
+					</div>
 				</div>
-				<div class='form-group'>
-					<label class='control-label'>Describe in more detail what your product or service does and who it's for.</label>
-					<textarea class='form-control' rows='4' ng-model='contest.audience' placeholder='i.e., We sell anvils and other industrial goods to manufacturing companies and hobbyists all over the world.'></textarea>
-				</div>
-				<div class='form-group'>
-					<label class='control-label'>Describe what makes you different (and better) than your competition.</label>
-					<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
-				</div>
-					<div class='text-center'><button class='btn btn-oj' type='submit'>Edit</button></div>
+				<div class='col-xs-12'>
+							<h4 style='margin-top:10px;margin-bottom:2px;'>Interest</h4>
+							<div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
+									<input type='radio' ng-model='contest.industry' value='art_entertainment'> Art & Entertainment
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "finance_business", "btn-outliner" : contest.industry != "finance_business"}'>
+									<input type='radio' ng-model='contest.industry' value='finance_business'> Business
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "education", "btn-outliner" : contest.industry != "education"}'>
+									<input type='radio' ng-model='contest.industry' value='education'> Education
+								</label>
+							</div>
+							<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "fashion_beauty", "btn-outliner" : contest.industry != "fashion_beauty"}'>
+									<input type='radio' ng-model='contest.industry' value="fashion_beauty"> Fashion
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "food_beverage", "btn-outliner" : contest.industry != "food_beverage"}'>
+									<input type='radio' ng-model='contest.industry' value='food_beverage'> Food & Drink
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "health_wellness", "btn-outliner" : contest.industry != "health_wellness"}'>
+									<input type='radio' ng-model='contest.industry' value='health_wellness'> Health & Fitness
+								</label>
+							</div>
+							<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "home_garden", "btn-outliner" : contest.industry != "home_garden"}'>
+									<input type='radio' ng-model='contest.industry' value='home_garden'> Home & Garden
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "pets", "btn-outliner" : contest.industry != "pets"}'>
+									<input type='radio' ng-model='contest.industry' value='pets'> Pets
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "tech_science", "btn-outliner" : contest.industry != "tech_science"}'>
+									<input type='radio' ng-model='contest.industry' value='tech_science'> Science & Tech
+								</label>
+							</div>
+							<div class='btn-group-sm' data-toggle='buttons' style='padding-top:5px;'>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "social_network", "btn-outliner" : contest.industry != "social_network"}'>
+									<input type='radio' ng-model='contest.industry' value='social_network'> Social & Gaming
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "sports_outdoors", "btn-outliner" : contest.industry != "sports_outdoors"}'>
+									<input type='radio' ng-model='contest.industry' value="sports_outdoors">Sports & Outdoors 
+								</label>
+								<label class="btn" ng-class='{"btn-oj" : contest.industry == "travel", "btn-outliner" : contest.industry != "travel"}'>
+									<input type='radio' ng-model='contest.industry' value='travel'> Travel
+								</label>
+							</div>
+						</div>
+						<div class='col-xs-12'>
+							<h4 style='margin-top:10px;margin-bottom:2px;'>Creative Direction</h4>
+							<textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
+						</div>	
+						<div class='col-xs-12 form-group'>
+							<h4 style='margin-top:10px;margin-bottom:2px;'>Summary of product or service</h4>
+							<input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
+						</div>
+						<div class='col-xs-12 form-group'>
+							<h4 style='margin-top:10px;margin-bottom:2px;'>Describe what makes you different (and better) than your competition.</h4>
+							<textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
+						</div>
+	
+					<div class='col-xs-12 text-center'><button class='btn btn-oj' type='submit'>Edit</button></div>
 			</form>
 		</div>
 	</div>
