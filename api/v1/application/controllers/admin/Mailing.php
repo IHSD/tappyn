@@ -109,7 +109,6 @@ class Mailing extends CI_Controller
                     }
                     $contest = $contest->row();
                     $this->email_data['company'] = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
-
                     $this->email_data['contest'] = $contest;
                 break;
 
@@ -235,7 +234,7 @@ class Mailing extends CI_Controller
                          ->html($generated_html);
             if(!is_null($attachment))
             {
-                $tmp_file = tempnam(sys_get_temp_dir(), uniqid()).'.png';
+                $tmp_file = tempnam(sys_get_temp_dir(), uniqid()).'.jpg';
                 error_log($tmp_file);
                 // Download and create the file.
                 file_put_contents($tmp_file, file_get_contents($attachment));
@@ -257,6 +256,11 @@ class Mailing extends CI_Controller
                 unlink($tmp_file);
             }
         }
+    }
+
+    public function find_recently_closed_contests()
+    {
+
     }
 
     public function error_out($id, $error)
