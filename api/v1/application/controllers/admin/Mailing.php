@@ -235,7 +235,7 @@ class Mailing extends CI_Controller
                          ->html($generated_html);
             if(!is_null($attachment))
             {
-                $tmp_file = '';
+                $tmp_file = dirname(__FILE__).uniqid();
                 error_log($tmp_file);
                 // Download and create the file.
                 file_put_contents($tmp_file.'png', file_get_contents($attachment));
