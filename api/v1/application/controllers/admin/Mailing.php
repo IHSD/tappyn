@@ -235,12 +235,12 @@ class Mailing extends CI_Controller
                          ->html($generated_html);
             if(!is_null($attachment))
             {
-                $tmp_file = tempnam(sys_get_temp_dir(), uniqid());
+                $tmp_file = tempnam(sys_get_temp_dir(), uniqid()).'.png';
                 error_log($tmp_file);
                 // Download and create the file.
-                file_put_contents($tmp_file.'png', file_get_contents($attachment));
+                file_put_contents($tmp_file, file_get_contents($attachment));
                 // Tell SG were atttaching a file
-                $this->mailer->attach($tmp_file.'.png');
+                $this->mailer->attach($tmp_file);
             }
             if($this->mailer->send())
             {
@@ -254,7 +254,7 @@ class Mailing extends CI_Controller
             }
             if(!is_null($attachment))
             {
-                unlink($tmp_file.'.png');
+                unlink($tmp_file);
             }
         }
     }
