@@ -20,7 +20,7 @@ class Mailing extends CI_Controller
     public function execute()
     {
         $queue = $this->db->select('*')->from('mailing_queue')->where('processing', 0)->get()->result();
-
+        $attachment = NULL;
         foreach($queue as $job)
         {
             $this->db->where('id', $job->id)->update('mailing_queue', array('processing' => 1));
@@ -56,12 +56,15 @@ class Mailing extends CI_Controller
                         $continue = false;
                         continue;
                     }
+
                     $contest = $contest->row();
                     $contest->owner = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
-
+                    $submission = $this->db->select('*')->from('payouts')->join('submissions', 'payouts.submission_id = submissions.id', 'left')->where('payouts.contest_id', $contest->id)->get()->row();
                     // Set our subject and any additional data
                     $subject = sprintf($this->email_config[$job->email_type]['subject'], is_null($contest->owner->name) ? "This awesome" : $contest->owner->name.'s' );
                     $this->email_data['contest'] = $contest;
+                    $this->email_data['submission'] = $submission;
+                    if(!is_null($this->email_data['submission']->attachment)) $attachment = $this->email_data['submission']->attachment;
                 break;
 
                 case 'winner_announced':
@@ -106,7 +109,6 @@ class Mailing extends CI_Controller
                     }
                     $contest = $contest->row();
                     $this->email_data['company'] = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
-
                     $this->email_data['contest'] = $contest;
                 break;
 
@@ -230,6 +232,15 @@ class Mailing extends CI_Controller
                          ->from($this->email_config[$job->email_type]['from'])
                          ->subject($subject)
                          ->html($generated_html);
+            if(!is_null($attachment))
+            {
+                $tmp_file = tempnam(sys_get_temp_dir(), uniqid()).'.jpg';
+                error_log($tmp_file);
+                // Download and create the file.
+                file_put_contents($tmp_file, file_get_contents($attachment));
+                // Tell SG were atttaching a file
+                $this->mailer->attach($tmp_file);
+            }
             if($this->mailer->send())
             {
                 $this->db->where('id', $job->id)->update('mailing_queue', array(
@@ -240,7 +251,16 @@ class Mailing extends CI_Controller
                     'failure_reason' => $this->mailer->errors()
                 ));
             }
+            if(!is_null($attachment))
+            {
+                unlink($tmp_file);
+            }
         }
+    }
+
+    public function find_recently_closed_contests()
+    {
+
     }
 
     public function error_out($id, $error)

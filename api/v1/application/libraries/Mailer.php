@@ -8,6 +8,8 @@ class Mailer
     protected $subject;
     protected $html;
     protected $callback;
+    protected $file = FALSE;
+
     protected $errors = array();
 
     public function __construct()
@@ -47,6 +49,11 @@ class Mailer
         return $this;
     }
 
+    public function attach($file)
+    {
+        $this->file = $file;
+        return $this;
+    }
     public function id($to, $event)
     {
         $this->db->insert('emails', array('to' =>$to, 'event' => $event, 'created' => time()));
@@ -60,6 +67,10 @@ class Mailer
             ->setFrom($this->from)
             ->setSubject($this->subject)
             ->setHtml($this->html);
+        if($this->file)
+        {
+            $this->email->addAttachment($this->file);
+        }
         try{
             $this->handler->send($this->email);
         } catch(\SendGrid\Exception $e) {
@@ -67,6 +78,7 @@ class Mailer
             return FALSE;
         } finally {
             $this->email = new SendGrid\Email();
+            $this->file = FALSE;
         }
         return TRUE;
     }
