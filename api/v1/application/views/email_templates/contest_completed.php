@@ -25,6 +25,12 @@ $query_string['redirect'] = 'dashboard';
 <p style='text-align:center;margin:auto;min-width:450px;width:50%'>Writers in your contest have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
 Below!</p><br>
 
+<p style='text-align:center'>
+    <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'dashboard'; ?>">
+        Select Winner
+    </a>
+<p><br>
+
 <p style='text-align:center;margin:auto;min-width:450px;width:50%'>Please note that if you don’t select your winner soon, the submission with the most upvotes will be announced the winner.. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
 
 <!-- End Email Content -->
