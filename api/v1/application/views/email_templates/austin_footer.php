@@ -2,7 +2,7 @@
 
 
 <p style='margin:auto;width:50%;'>
-    Thanks fo using Tappyn,
+    Thanks for using Tappyn,
 </p>
 <br>
 <p style='margin:auto;width:50%;'>
