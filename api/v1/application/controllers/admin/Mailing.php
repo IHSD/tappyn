@@ -258,9 +258,22 @@ class Mailing extends CI_Controller
         }
     }
 
+    /**
+     * Run every hour, and find contests that have recently ended
+     * @return [type] [description]
+     */
     public function find_recently_closed_contests()
     {
-
+        $contests = $this->db->select('*')->from('contests')->where(array(
+            'DATE(stop_time)' => date('Y-m-d'),
+            'HOUR(stop_time)' => date('H', strtotime('-1 hour'))
+        ))->get();
+        error_log($contests->num_rows());
+        foreach($contests->result() as $contest)
+        {
+            $owner = $this->db->select('*')->from('users')->where('id', $contest->owner)->get()->row();
+            $this->mailer->queue($owner->email, $owner->id, 'contest_completed', 'contest', $contest->id);
+        }
     }
 
     public function error_out($id, $error)

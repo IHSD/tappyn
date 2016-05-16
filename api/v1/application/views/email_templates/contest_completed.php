@@ -16,14 +16,16 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<p>Hi <?php echo $company->name; ?>,</p>
+<p>Hi <?php echo $company->name; ?>,</p><br>
 
-<p>Congrats! Your contest has finished!.</p>
+<p>We hope you’re doing well!</p><br>
 
-<p>Its now time to select one fantastic submission to use in your next ad campaign!</p>
-<p>Please visit your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and pick your winner!</p>
-<p>You can choose the one with the most upvotes, or just the one that speaks to you the most.</p>
-<p>Let us know how the ad performs. We're alwaays trying to get companies the best content!</p>
+<p>This is a friendly reminder that your contest recently closed and it’s time to select your favorite submission as a winner.</p><br>
+
+<p>Writers in your contest have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
+Below!</p><br>
+
+<p>Please note that if you don’t select your winner soon, the submission with the most upvotes will be announced the winner.. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
 
 <!-- End Email Content -->
 
