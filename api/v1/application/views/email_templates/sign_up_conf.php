@@ -18,13 +18,13 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 
 <h2 style='text-align:center;margin:auto;width:50%'>Welcome on board</h2>
 <br>
-<p style='text-align:justify;margin:auto;width:50%'><strong>Congratulations on joining a community that's redefining the world of advertisements.</strong></p><br>
-<p style='text-align:justify;margin:auto;width:50%'><strong>Together, we create ads that people like you and me want to see,</strong></p><br>
-<p style='text-align:justify;margin:auto;width:50%'><strong>and we're earning big payouts while we do it.</strong></p><br>
+<p style='text-align:center;margin:auto;width:50%'><strong>Congratulations on joining a community that's redefining the world of advertisements.</strong></p><br>
+<p style='text-align:center;margin:auto;width:50%'><strong>Together, we create ads that people like you and me want to see,</strong></p><br>
+<p style='text-align:center;margin:auto;width:50%'><strong>and we're earning big payouts while we do it.</strong></p><br>
 <br>
 
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;width:75%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 <!-- Bordered box -->
 
 <h4 style='text-align:center;margin:auto;width:50%'>Tappyn Guidelines</h4>
@@ -37,7 +37,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <!-- End Bordered-box -->
 
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;width:75%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 <p style='text-align:justify;margin:auto;width:50%'>
 	Good luck!
 </p>
