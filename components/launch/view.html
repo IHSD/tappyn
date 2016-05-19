@@ -496,7 +496,7 @@
 					    	<div ng-if='contest.additional_info'>
 						    	<div class='col-xs-6 col-xs-offset-3'><hr style='border: 1px #ff6c00 solid'></div>
 						    	<div class='col-xs-12 text-center'>	        	
-									<h4>Creative Direction</h4>
+									<h4>What we're looking for</h4>
 						    		<p class='text-left'>
 										{{contest.additional_info}}
 									</p>
@@ -504,7 +504,7 @@
 					        </div>
 					        <div class='col-xs-12 text-center'>
 								<div class='btn-group'>
-									<a ng-if='contest.company_url && contest.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> Visit Website</a>
+									<a ng-if='contest.company_url && contest.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
 									<a ng-if='contest.facebook_url && contest.facebook_url != ""'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 										<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 									</a>
@@ -552,6 +552,7 @@
 					<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
 				</div>
 				<div ng-show='current.step == "preview"'>
+					<button class='btn btn-oj btn-lg pull-left' type='button' ng-click='set_step("package")'>Edit Campaign</button>
 					<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay & Launch</button>
 					<button class='btn btn-outliner btn-lg pull-right' style='margin-right: 5px;' type='button' ng-click='submit_contest(contest, false)'>Save</button>
 				</div>

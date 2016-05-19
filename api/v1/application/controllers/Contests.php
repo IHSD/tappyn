@@ -113,7 +113,7 @@ class Contests extends CI_Controller
         $this->pagination->initialize($config);
         $limit = $config['per_page'];
         $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
-        $contests = $this->contest->fetchAll($this->params, 'start_time', 'desc', $limit, $offset, $sql_interests);
+        $contests = $this->contest->fetchAll($this->params, 'start_time', 'asc', $limit, $offset, $sql_interests);
 
         if(($offset + $config['per_page']) < $config['total_rows'])
         {

@@ -328,15 +328,20 @@
 						</div>
 					</div>
 					<div class='col-xs-12 col-sm-6'>
-						<h4>Winner for contest {{winner.contest.platform | capitalize}} - {{winner.contest.objective | capUnderscore}}</h4>
+						<h4>{{winner.contest.platform | capitalize}} - {{winner.contest.objective | capUnderscore}} - {{winner.contest.min_age}} to {{winner.contest.max_age}} <span ng-switch on="winner.contest.gender">
+								  <span ng-switch-when="1">Men</span>
+								  <span ng-switch-when="2">Women</span>
+								  <span ng-switch-default>Men and Women</span>
+								</span>
+				    	</h4>
 						<h5>Ended {{contest.stop_time | dashDate}}</h5>
 						<div class='col-xs-12'>	
-							<a style='margin-bottom: 10px;' class='btn btn-oj pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
+							<a style='margin-bottom: 10px;' class='btn btn-oj col-xs-8 pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
 						</div>
 						<div class='col-xs-12' ng-switch on='winner.contest.platform'>
-							<a ng-switch-when='facebook' class='btn btn-oj pull-right' target='_blank' href='https://business.facebook.com'>Launch Facebook Campaign</a>
-							<a ng-switch-when='instagram' class='btn btn-oj pull-right' target='_blank' href='https://business.facebook.com'>Launch Instagram Campaign</a>
-							<a ng-switch-when='twitter' class='btn btn-oj pull-right' target='_blank' href='https://ads.twitter.com'>Launch Twitter Campaign</a>
+							<a ng-switch-when='facebook' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Facebook Campaign</a>
+							<a ng-switch-when='instagram' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Instagram Campaign</a>
+							<a ng-switch-when='twitter' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://ads.twitter.com'>Launch Twitter Campaign</a>
 						</div>
 					</div>
 					</div>

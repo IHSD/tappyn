@@ -61,7 +61,7 @@
 				        </div>
 				        <div class='col-xs-12 text-center'>
 							<div class='btn-group'>
-								<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> Visit Website</a>
+								<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
 								<a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""'  ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 								</a>
