@@ -21,6 +21,37 @@ tappyn.factory('dashFactory', function($http){
 		});
 	}
 
+	fact.grabSubmissions = function(id){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests/'+id,
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+
+	fact.chooseWinner = function(contest, id){
+		return $http({
+			method : 'POST',
+			url : 'api/v1/contests/'+contest+'/winner',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			},
+			data : $.param({submission : id})
+		});
+	}
+
+	fact.viewWinner = function(id){
+		return $http({
+			method : 'GET',
+			url : 'api/v1/contests/'+id+'/winner',
+			headers : {
+				'Content-type' : 'application/x-www-form-urlencoded'
+			}
+		});
+	}
+	
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',

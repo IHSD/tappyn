@@ -53,7 +53,7 @@ class Contest extends MY_Model
         return false;
     }
 
-    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'desc', $limit = 20, $offset = false, $interests = array())
+    public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'asc', $limit = 20, $offset = false, $interests = array())
     {
         $this->db->select('*')->from('contests');
         if(!empty($params)) $this->db->where($params);

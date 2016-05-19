@@ -121,25 +121,68 @@
 			</div>
 		</div>
 	</div>
+
+	<div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4' ng-show='confirm_winner.show'>
+		<div class='panel'>
+			<div class='panel-body'>
+				<div class='row'>
+					<div class='col-xs-12' style='border-bottom:1px solid #ff5c00;margin-bottom:5px;'>
+						<h3 class='text-left'>Award Winner</h3>
+						<div class='close_circle' ng-click='close_confirm()'>X</div>
+					</div>
+					<p class='text-left'>Are you sure you want to choose this submission by {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}. as your winning submission?</p>
+					<div class='col-xs-12 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
+					<div class='col-xs-12 text-left'>
+						<span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{confirm_winner.submission.contest.platform | capitalize}}
+					</div>
+					<div class='col-xs-12' style='margin-top:15px;'>
+						<div class="contest-content">
+							<h4 style='color:#333' ng-show='confirm_winner.submission.link_explanation'>{{confirm_winner.submission.link_explanation}}<br></h4>
+						    <h4 style='color:#333' ng-show='confirm_winner.submission.text'>{{confirm_winner.submission.text}}</h4>
+						</div>
+					</div>
+					<div class='col-xs-12' style='margin-bottom:10px;'>
+						<img style='max-width:100%' ng-src='{{confirm_winner.submission.attachment}}'>
+					</div>
+					<div class='col-xs-12'><h3 style='color:#ff5c00;' class='text-left' ng-show='confirm_winner.submission.headline'>{{confirm_winner.submission.headline}}</h3></div>
+					<div class='col-xs-12'><h5 class='text-left'>- {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}.</h5></div>
+					<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
+						{{confirm_winner.submission.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='confirm_winner.submission.votes != 1'>s</span>
+					</div>
+					</div>
+					<div class='col-xs-12' style='padding-top:5px;'>
+						<button ng-click='choose_winner(confirm_winner.submission.id)' class='btn btn-oj'>Confirm Winner</button>
+						<a style='color:#ff5c00;' ng-click='close_confirm()'>Cancel</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class='container'>
 <div class='row'>
-	<div class='row contest-box' style='margin-top:5px;'>
-		<div class='col-xs-12 col-sm-10 col-sm-offset-1 text-left' ng-if='user.type == "company"'>
+	<div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
+		<div class='col-xs-12' ng-if='user.type == "company"'>
 			<div class='col-xs-12'>
-				<a href='/launch' class='btn btn-oj pull-left'>Launch a Contest</a>
+				<a href='/launch' class='btn btn-oj pull-left'>Launch a Campaign</a>
 			</div>
 			<div class='col-xs-12'>
 				<h2 class='text-center'>{{user.first_name | capitalize}}</h2>
 			</div>
-			<div ng-click='grab_dash("all")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "all", "dash-black" : type != "all"}'>
+			<div ng-click='set_type_dash("")' class='col-xs-6 col-sm-2 col-sm-offset-1' ng-class='{"dash-oj" : type == "", "dash-black" : type != ""}'>
 				<h3 class='text-center'>All</h3>
 			</div>
-			<div ng-click='grab_dash("need_winner")' class='col-xs-6 col-sm-4 dash-bordered' ng-class='{"dash-oj" : type == "need_winner", "dash-black" : type != "need_winner"}'>
+			<div ng-click='set_type_dash("active")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "active", "dash-black" : type != "active"}'>
+				<h3 class='text-center'>Active</h3>
+			</div>
+			<div ng-click='set_type_dash("draft")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "draft", "dash-black" : type != "draft"}'>
+				<h3 class='text-center'>Drafts</h3>
+			</div>
+			<div ng-click='set_type_dash("needs_winner")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "needs_winner", "dash-black" : type != "needs_winner"}'>
 				<h3 class='text-center'>Need Winner</h3>
 			</div>
-			<div ng-click='grab_dash("completed")' class='col-xs-6 col-sm-4' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
+			<div ng-click='set_type_dash("completed")' class='col-xs-6 col-sm-2' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
 				<h3 class='text-center'>Completed</h3>
 			</div>
 		</div>
@@ -190,49 +233,115 @@
 			</div>	
 	    </div>
 		<div ng-if='user.type == "company"'>
-			<div class='col-xs-12'>
-				<table class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
-					<thead>
-						<tr>
-							<td>Actions</td>
-							<td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Contest</td>
-							<td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
-							<td style='cursor:pointer' ng-click='predicate="start_time";reverse=!reverse'>Start Time</td>
-							<td style='cursor:pointer' ng-click='predicate="stop_time";reverse=!reverse'>End Time</td>
-							<td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Submissions</td>
-							<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
-							<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
-							<td style='cursor:pointer' ng-click='predicate="shares";reverse=!reverse'>Shares</td>
-							<td style='cursor:pointer' ng-click='predicate="website_clicks";reverse=!reverse'>Site Clicks</td>
-							<td style='cursor:pointer' ng-click='predicate="facebok_clicks";reverse=!reverse'>Facebook Clicks</td>
-							<td style='cursor:pointer' ng-click='predicate="twitter_clicks";reverse=!reverse'>Twitter Clicks</td>
-						</tr>
-					</thead>
-					<tr ng-repeat='contest in dash.contests | orderBy : predicate : reverse'>
-						<td>
-							<div uib-dropdown>
-		                        <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
-		                        <ul uib-dropdown-menu role="menu">
-		                        	<li role='menuitem'><a href="/contest/{{contest.id}}">View Contest</a></li>
-		                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
-		                            <li role='menuitem'><a href="/edit/{{contest.id}}">Edit Contest</a></li>
-		                        </ul>
-	                        </div>
-						</td>
-						<td>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
-						<td>{{contest.status | capUnderscore}}</td>
-						<td>{{contest.start_time | dashDate}}</td>
-						<td>{{contest.stop_time | dashDate}}</td>
-						<td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
-						<td>{{contest.views | number}}</td>
-						<td>{{contest.votes | number}}</td>
-						<td>{{contest.shares | number}}</td>
-						<td>{{contest.website_clicks | number}}</td>
-						<td>{{contest.facebook_clicks | number}}</td>
-						<td>{{contest.twitter_clicks | number}}</td>
+			<table ng-show='view == "table"' class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
+				<thead>
+					<tr>
+						<td>Actions</td>
+						<td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Contest</td>
+						<td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
+						<td style='cursor:pointer' ng-click='predicate="start_time";reverse=!reverse'>Start Time</td>
+						<td style='cursor:pointer' ng-click='predicate="stop_time";reverse=!reverse'>End Time</td>
+						<td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Submissions</td>
+						<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
+						<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
+						<td style='cursor:pointer' ng-click='predicate="website_clicks";reverse=!reverse'>Site Clicks</td>
+						<td style='cursor:pointer' ng-click='predicate="facebok_clicks";reverse=!reverse'>Facebook Clicks</td>
+						<td style='cursor:pointer' ng-click='predicate="twitter_clicks";reverse=!reverse'>Twitter Clicks</td>
 					</tr>
-				</table>
-			</div>	
+				</thead>
+				<tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
+					<td>
+						<div uib-dropdown>
+	                        <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
+	                        <ul uib-dropdown-menu role="menu">
+	                        	<li role='menuitem'><a href="/contest/{{contest.id}}">View Contest</a></li>
+	                            <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Contest</a></li>
+	                            <li role='menuitem'><a href="/edit/{{contest.id}}">Edit Contest</a></li>
+	                            <li ng-if='contest.status == "needs_winner"' role='menuitem'><a ng-click='choosing_winner(contest)'>Choose winner</a></li>
+	                            <li ng-if='contest.status == "completed"' role='menuitem'><a ng-click='view_pcp(contest.id)'>View Winner</a></li>
+	                        </ul>
+                        </div>
+					</td>
+					<td>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
+					<td>{{contest.status | capUnderscore}}</td>
+					<td>
+						<span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
+						<span ng-if='contest.status == "draft"'>No start : Draft</span>
+					</td>
+					<td>
+						<span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
+						<span ng-if='contest.status == "draft"'>No stop : Draft</span>
+					</td>	
+					<td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+					<td>{{contest.views | number}}</td>
+					<td>{{contest.votes | number}}</td>
+					<td>{{contest.website_clicks | number}}</td>
+					<td>{{contest.facebook_clicks | number}}</td>
+					<td>{{contest.twitter_clicks | number}}</td>
+				</tr>
+			</table>
+			<div ng-show='view == "winner"'>
+				<div class='col-xs-12'><button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button></div>
+				<div class='col-xs-12'><h3 class='text-center'>Choose a winner</h3></div>
+				<div class='col-sm-4 hidden-xs'>
+					<div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+						<div ng-include src="'templates/submits/companysubmits.html'"></div>
+					</div>
+				</div>
+				<div class='col-sm-4 hidden-xs'>
+					<div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+						<div ng-include src="'templates/submits/companysubmits.html'"></div>
+					</div>
+				</div>
+				<div class='col-sm-4 hidden-xs'>
+					<div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+						<div ng-include src="'templates/submits/companysubmits.html'"></div>
+					</div>
+				</div>
+				<div class='col-xs-12 visible-xs'>
+					<div class="contest-box row" ng-repeat='submission in submissions'>
+						<div ng-include src="'templates/submits/companysubmits.html'"></div>
+					</div>
+				</div>
+			</div>
+			<div ng-show='view == "pcp"'>
+				<div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+					<button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
+					<div class='contest-box row'>
+					<div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
+						<div class='col-xs-12 text-left'>
+							<span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
+						</div>
+						<div class='col-xs-12' style='margin-top:15px;'>
+							<div class="contest-content">
+								<h4 style='color:#333' ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
+							    <h4 style='color:#333' ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
+							</div>
+						</div>
+						<div class='col-xs-12' style='margin-bottom:10px;'>
+							<img style='max-width:100%' ng-src='{{winner.winner.attachment}}'>
+						</div>
+						<div class='col-xs-12'><h3 style='color:#ff5c00;' class='text-left' ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3></div>
+						<div class='col-xs-12'><h5 class='text-left'>- {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5></div>
+						<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
+							{{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-6'>
+						<h4>Winner for contest {{winner.contest.platform | capitalize}} - {{winner.contest.objective | capUnderscore}}</h4>
+						<h5>Ended {{contest.stop_time | dashDate}}</h5>
+						<div class='col-xs-12'>	
+							<a style='margin-bottom: 10px;' class='btn btn-oj pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
+						</div>
+						<div class='col-xs-12' ng-switch on='winner.contest.platform'>
+							<a ng-switch-when='facebook' class='btn btn-oj pull-right' target='_blank' href='https://business.facebook.com'>Launch Facebook Campaign</a>
+							<a ng-switch-when='instagram' class='btn btn-oj pull-right' target='_blank' href='https://business.facebook.com'>Launch Instagram Campaign</a>
+							<a ng-switch-when='twitter' class='btn btn-oj pull-right' target='_blank' href='https://ads.twitter.com'>Launch Twitter Campaign</a>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

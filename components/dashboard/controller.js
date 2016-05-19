@@ -1,7 +1,8 @@
 tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
 	//on page load grab all
-	$scope.type = 'all';
+	$scope.type = '';
 	$scope.adding_payment = {show : false, id : ''};
+	$scope.confirm_winner = {show : false, submission : null};
 	dashFactory.grabDash($scope.type).success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.dash = response.data;
@@ -33,12 +34,82 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 				if(response.success) $scope.dash = response.data;
 			});
 		}
+		$scope.view = 'table';
+	}
+	$scope.view = "table";
+
+
+	$scope.set_type_dash = function(type){
+		$scope.type = type;
+	}
+
+	$scope.back_table = function(){
+		$scope.view = 'table';
+	}
+
+	/** start winner functions, functions for assembling the winner view, opening and closing the modal for 
+		confirmation and the actual choosing of a winner **/
+	$scope.choosing_winner = function(contest){
+		dashFactory.grabSubmissions(contest.id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.winner_contest = contest; //to pass with the chosen submission
+					$scope.submissions = response.data.submissions;
+					$scope.view = 'winner';
+				}
+				else alert(response.message);	 
+			}
+			else if(response.http_status_code == 500) alert(response.error);
+			else $scope.check_code(response.http_status_code);	
+		});
+	}
+
+	$scope.confirming_winner = function(submission){
+		$scope.confirm_winner = {show : true, submission : submission};
+		$rootScope.modal_up = true;
+	}
+
+	$scope.choose_winner = function(id){
+		dashFactory.chooseWinner($scope.winner_contest.id, id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.set_alert(response.message, "default");	
+					$scope.confirm_winner = {show : false, submission : null};
+					$rootScope.modal_up = false;
+					$scope.winner_contest.status = "completed";
+					$scope.view_pcp($scope.winner_contest.id);
+				}
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+
+	$scope.close_confirm = function(){
+		$scope.confirm_winner = {show : false, submission : null};
+		$rootScope.modal_up = false;
 	}
 
 	$scope.claim_winnings = function(id){
 		dashFactory.claimWinnings(id).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.set_alert(response.message, "default");	
+				else $scope.set_alert(response.message, "default");	 
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		});
+	}
+	/** end winner functions **/
+
+	$scope.view_pcp = function(id){
+		dashFactory.viewWinner(id).success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.winner = response.data;	
+					$scope.view = "pcp";
+				}
 				else $scope.set_alert(response.message, "default");	 
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
