@@ -2,11 +2,11 @@
 
 
 <p style='margin:auto;min-width:450px;width:50%;'>
-    Hit reply with feedback or questions,
+    Thanks for using Tappyn,
 </p>
 <br>
 <p style='margin:auto;min-width:450px;width:50%;'>
-    Alek
+    Austin
     <br>
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    Co-Founder - Tappyn <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>

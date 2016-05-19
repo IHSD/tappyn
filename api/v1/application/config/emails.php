@@ -95,8 +95,8 @@ $config['email_program']['mailing_list_conf']['additional_data'] = array();
 * Sent to confirm that someone has subsribed to our mailing list
 */
 $config['email_program']['post_contest_package']['template'] = 'email_templates/post_contest_package';
-$config['email_program']['post_contest_package']['from'] = 'squad@tappyn.com';
-$config['email_program']['post_contest_package']['subject'] = "Heres the submissions you chose";
+$config['email_program']['post_contest_package']['from'] = 'alek@tappyn.com';
+$config['email_program']['post_contest_package']['subject'] = "Here's your Tappyn Ad!";
 $config['email_program']['post_contest_package']['query_string'] = array();
 $config['email_program']['post_contest_package']['additional_data'] = array();
 
@@ -106,7 +106,7 @@ $config['email_program']['post_contest_package']['additional_data'] = array();
 * Confirmation that someones account has been created
 */
 $config['email_program']['sign_up_conf']['template'] = 'email_templates/sign_up_conf';
-$config['email_program']['sign_up_conf']['from'] = 'squad@tappyn.com';
+$config['email_program']['sign_up_conf']['from'] = 'austin@tappyn.com';
 $config['email_program']['sign_up_conf']['subject'] = "Registration successful";
 $config['email_program']['sign_up_conf']['query_string'] = array(
     'utm_source' => 'newsletter',
@@ -122,8 +122,8 @@ $config['email_program']['sign_up_conf']['additional_data'] = array();
 * Winner needs to be selected
 */
 $config['email_program']['contest_completed']['template'] = 'email_templates/contest_completed';
-$config['email_program']['contest_completed']['from'] = 'squad@tappyn.com';
-$config['email_program']['contest_completed']['subject'] = "Your contest has finished! Time to tap someone in!";
+$config['email_program']['contest_completed']['from'] = 'alek@tappyn.com';
+$config['email_program']['contest_completed']['subject'] = "Reminder: It’s time to select your favorite ad!";
 $config['email_program']['contest_completed']['query_string'] = array(
     'utm_source' => 'newsletter',
     'utm_medium' => 'email',
@@ -137,7 +137,7 @@ $config['email_program']['contest_completed']['additional_data'] = array();
 * Let a winner know that their submission has won
 */
 $config['email_program']['submission_chosen']['template'] = 'email_templates/submission_chosen';
-$config['email_program']['submission_chosen']['from'] = 'squad@tappyn.com';
+$config['email_program']['submission_chosen']['from'] = 'alek@tappyn.com';
 $config['email_program']['submission_chosen']['subject'] = "Congratulations, youre submissions won!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source' => 'transaction',
@@ -152,7 +152,7 @@ $config['email_program']['submission_chosen']['additional_data'] = array();
 * Sent 24 hours before a contest closes
 */
 $config['email_program']['company_sign_up_conf']['template'] = 'email_templates/company_sign_up';
-$config['email_program']['company_sign_up_conf']['from'] = 'squad@tappyn.com';
+$config['email_program']['company_sign_up_conf']['from'] = 'alek@tappyn.com';
 $config['email_program']['company_sign_up_conf']['subject'] = "Thank you for registering";
 $config['email_program']['company_sign_up_conf']['query_string'] = array(
     'utm_source' => 'transaction',
@@ -167,7 +167,7 @@ $config['email_program']['company_sign_up_conf']['additional_data'] = array();
 * Sent 24 hours before a contest closes
 */
 $config['email_program']['contest_receipt']['template'] = 'email_templates/contest_receipt';
-$config['email_program']['contest_receipt']['from'] = 'squad@tappyn.com';
+$config['email_program']['contest_receipt']['from'] = 'alek@tappyn.com';
 $config['email_program']['contest_receipt']['subject'] = "Receipt for your contest";
 $config['email_program']['contest_receipt']['query_string'] = array(
     'utm_source' => 'transaction',
@@ -182,7 +182,7 @@ $config['email_program']['contest_receipt']['additional_data'] = array();
 * Sent 24 hours before a contest closes
 */
 $config['email_program']['payout_receipt']['template'] = 'email_templates/payout_receipt';
-$config['email_program']['payout_receipt']['from'] = 'squad@tappyn.com';
+$config['email_program']['payout_receipt']['from'] = 'austin@tappyn.com';
 $config['email_program']['payout_receipt']['subject'] = "Your payout is on the way";
 $config['email_program']['payout_receipt']['query_string'] = array(
     'utm_source' => 'transaction',
