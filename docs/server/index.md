@@ -1,6 +1,6 @@
 ### Server Overview
 
-The tappyn application currently runs on a single LAMP server.
+The Tappyn application currently runs on a single LAMP server.
 
 * Ubuntu 14.04
 * Apache 2.4.7
@@ -9,7 +9,7 @@ The tappyn application currently runs on a single LAMP server.
 
 ### Front End
 
-The front end applicaiton is written in Angular.js. Each seciton is broken down to its
+The front end application is written in Angular.js. Each section is broken down to its
 respective components folder, and then compiled to app.js when deployed.
 
 ### Back End
@@ -41,7 +41,7 @@ send emails
 **NOTE If you want to send emails from the test server, you have to SSH in and manually execute the mailer cron process. This could be added as
 a cron job, as per the live server, but we didnt want to in the test environment.**
 
-## Envirnoment Variables
+## Environment Variables
 
 All environment variables we use are at the bottom of /etc/apache2/apache2.conf.
 The only one currently required is CI_ENV for the CodeIgniter application

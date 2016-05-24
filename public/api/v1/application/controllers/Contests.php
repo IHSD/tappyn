@@ -17,52 +17,6 @@ class Contests extends CI_Controller
     }
 
     /**
-     * Find the first 5 dates that a company may launch  contest in that industry.
-     *
-     * The default is only allowing 3 contests to start per day per given industry
-     *
-     * @return void
-     */
-    public function start_dates()
-    {
-        $dates = array();
-        $industry = $this->input->get('industry');
-
-        // Let's get the next 5 available dates
-        $i = 1;
-        while(count($dates) < 6)
-        {
-            $date = date('Y-m-d', strtotime("+{$i} days"));
-            $count = $this->db->select('COUNT(*) as count')->from('contests')->where(array('DATE(start_time)' => $date, 'paid' => 1, 'industry' => $industry))->get();
-            if(!$count)
-            {
-                $this->responder->fail("An unknown error occured")->code(500)->respond();
-                return;
-            }
-            if($count->row()->count < 3)
-            {
-                $dates[] = $date;
-            }
-            $i++;
-            if($i > 100)
-            {
-                $this->responder->fail("Some sort of error occured")->code(500)->respond();
-                return;
-            }
-        }
-        if(empty($dates))
-        {
-            $this->responder->fail("We were unable to find any dates to launch a contest for that industry")->code(500)->respond();
-            return;
-        } else {
-            $this->responder->data(array(
-                'dates' => $dates
-            ))->respond();
-            return;
-        }
-    }
-
-    /**
      * View all available contests
      * @return void
      */
