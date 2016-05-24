@@ -18,7 +18,8 @@
         "robmorgan/phinx": "^0.5.1",
         "ua-parser/uap-php": "^3.4",
         "fzaninotto/faker": "^1.5",
-        "aws/aws-sdk-php": "^3.18"
+        "aws/aws-sdk-php": "^3.18",
+		"deployer/deployer": "^3.3"
 	},
 	"require-dev": {
 		"mikey179/vfsStream": "1.1.*",

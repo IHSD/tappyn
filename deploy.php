@@ -9,26 +9,26 @@ require 'recipe/common.php';
 set('shared_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
 set('writeable_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
 set('repository', 'git@github.com:IHSD/tappyn.git');
-set('deploy_path', '/var/www/tappyn');
 
+env('deploy_path', '/var/www/tappyn');
 server("tappyn-live", "tappyn.com", 22)
     ->user('deploy')
-    //->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
-    ->identitfyFile()
+    ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
+    //->identifyFile()
     ->stage('production')
-    ->env('branch', 'master')
+    ->env('branch', 'master');
 
 server("tappyn-staging", 'test.tappyn.com', 22)
     ->user('deploy')
-    //->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
-    ->identityFile()
+    ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
+    //->identityFile()
     ->stage('staging')
     ->env('branch', 'master');
 
 
 // Copy our production configuration to our new release directory
 task('deploy:config', function() {
-    run('cp {{deploy_path}}/shared/config/production/* {{release_path}}/public/api/v1/application/config/production');
+    run('cp {{deploy_path}}/shared/config/v1/production/* {{release_path}}/public/api/v1/application/config/production');
     run('cp {{deploy_path}}/shared/config/phinx.yml {{release_path}}/phinx.yml');
     run('cp {{deploy_path}}/shared/config/config.js {{release_path}}/public/config.js');
 })->desc('Adding configuration');
