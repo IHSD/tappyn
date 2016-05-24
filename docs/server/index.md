@@ -32,6 +32,15 @@ planned for migrating to a remote instance, but hadn't done yet. To do so is fai
 3. Update public/api/v1/application/config/{{env}}/database.php with new credentials.
 4. Also update phinx.yml so migrations can communicate with new server
 
+## Staging
+
+We currently have a staging environment set up at test.tappyn.com. To deploy to it, simply use vendor/bin/dep deploy staging. It defaults
+to pulling the develop branch. It uses test keys for Stripe payments so they can be functionally validated, and uses its own SendGrid API key to
+send emails
+
+**NOTE If you want to send emails from the test server, you have to SSH in and manually execute the mailer cron process. This could be added as
+a cron job, as per the live server, but we didnt want to in the test environment.**
+
 ## Envirnoment Variables
 
 All environment variables we use are at the bottom of /etc/apache2/apache2.conf.
