@@ -8,13 +8,10 @@ application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
 
-api/*/application/config/database.php
-api/*/application/config/secrets.php
-api/*/application/config/config.php
-api/*/application/config/facebook_ion_auth.php
-api/*/application/logs
-api/*/application/phinx.yml
-api/*/application/cache
+public/api/*/application/config/*/*.php
+public/api/*/application/logs
+public/api/*/application/phinx.yml
+public/api/*/application/cache
 
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
@@ -24,6 +21,10 @@ api/*/application/vendor/
 application/vendor/*
 application/phinx.yml
 application/tests/build/*
+
+phinx.yml
+
+node_modules
 
 repo.php
 vendor/*
