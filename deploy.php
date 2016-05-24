@@ -15,6 +15,7 @@ server("tappyn-live", "tappyn.com", 22)
     ->user('deploy')
     ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
     //->identifyFile()
+    ->env('environment', 'production')
     ->stage('production')
     ->env('branch', 'master');
 
@@ -23,12 +24,13 @@ server("tappyn-staging", 'test.tappyn.com', 22)
     ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
     //->identityFile()
     ->stage('staging')
+    ->env('environment', 'testing')
     ->env('branch', 'master');
 
 
 // Copy our production configuration to our new release directory
 task('deploy:config', function() {
-    run('cp {{deploy_path}}/shared/config/v1/production/* {{release_path}}/public/api/v1/application/config/production');
+    run('cp {{deploy_path}}/shared/config/v1/{{environment}}/* {{release_path}}/public/api/v1/application/config/{{environment}}');
     run('cp {{deploy_path}}/shared/config/phinx.yml {{release_path}}/phinx.yml');
     run('cp {{deploy_path}}/shared/config/config.js {{release_path}}/public/config.js');
 })->desc('Adding configuration');
