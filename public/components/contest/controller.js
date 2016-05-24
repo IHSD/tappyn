@@ -58,7 +58,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 
 	$scope.upload_image = function(id, submission){
 		var canvas = $scope.cropper.getCroppedCanvas();
-		var url = 'https://tappyn.s3.amazonaws.com/';
+		var url = APP_ENV.amazon_aws_url;
 	    var new_name = Date.now();
 	    var rando = Math.random() * (10000 - 1) + 1;
 	    new_name = new_name.toString() + rando.toString();
@@ -82,7 +82,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	       		contestFactory.submitTo(id, submission).success(function(response){
 					if(response.http_status_code == 200){
 						if(response.success){
-							$scope.set_alert(response.message, "default");	 
+							$scope.set_alert(response.message, "default");
 							$scope.update_points(2);
 							ga('send', {
 							hitType: 'event',
@@ -91,7 +91,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 							eventLabel: 'User Submission'});
 							$route.reload();
 						}
-						else $scope.set_alert(response.message, "default");	 
+						else $scope.set_alert(response.message, "default");
 					}
 					else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 					else $scope.check_code(response.http_status_code);
@@ -114,7 +114,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 			contestFactory.submitTo(id, submission).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
-						$scope.set_alert(response.message, "default");	 
+						$scope.set_alert(response.message, "default");
 						$scope.update_points(2);
 						ga('send', {
 						hitType: 'event',
@@ -123,7 +123,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 						eventLabel: 'User Submission'});
 						$route.reload();
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
@@ -134,8 +134,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 	$scope.choose_winner = function(id){
 		contestFactory.chooseWinner($scope.contest.id, id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -144,7 +144,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 
 	$scope.upvote = function(submission){
 		if(!$rootScope.user) $scope.open_register("upvote", {contest : $scope.contest.id, submission : submission.id});
-		else {	
+		else {
 			contestFactory.upvote($scope.contest.id,submission.id).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
@@ -152,8 +152,8 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 						$scope.update_points(1);
 						submission.user_may_vote = false;
 						submission.votes++;
-					}	
-					else $scope.set_alert(response.message, "default");	 
+					}
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
@@ -166,7 +166,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
   			method: 'share',
 		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
 		}, function(response){
-			
+
 		});
 	}
 
@@ -196,7 +196,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
     }
 
 	$scope.chooserino = function(){
-		var photo = angular.element(document.getElementById('upload_contest'));		
+		var photo = angular.element(document.getElementById('upload_contest'));
 	}
 
 	$scope.track_click = function(event, contest){
@@ -206,7 +206,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 
 		if(event == 'facebook_click'){
 			var win = window.open($filter('urlFilter')(contest.company.facebook_url), '_blank');
-  			win.focus();	
+  			win.focus();
 		}
 		else if(event == 'website_click'){
 			var win = window.open($filter('urlFilter')(contest.company.company_url), '_blank');

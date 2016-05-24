@@ -106,7 +106,7 @@ tappyn.filter('dashDate', function() {
 		date = moment(date).format("lll");
 		return date;
 	};
-}); 
+});
 
 tappyn.filter('capitalize', function() {
   return function(input) {
@@ -171,7 +171,7 @@ tappyn.constant('emotions', [
 
 
 tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact){
-	$rootScope.modal_up = false;		
+	$rootScope.modal_up = false;
 	$scope.signing_in = {show : false, type : '', object : ''};
 	$scope.registration = {show : false, type : '', object : ''};
 	$scope.step = 1;
@@ -210,10 +210,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		$scope.checked_amount = 0
 		for(var i = 0; i < $scope.interests.length; i++){
 			if($rootScope.user.interests.indexOf($scope.interests[i].id) > -1){
-				$scope.interests[i].checked = true; 
+				$scope.interests[i].checked = true;
 				$scope.checked_amount++;
 			}
-			else $scope.interests[i].checked = false; 
+			else $scope.interests[i].checked = false;
 		}
 	}
 
@@ -223,7 +223,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		$scope.check_interests();
 	}
 
-	$scope.close_interests = function(){ 
+	$scope.close_interests = function(){
 		$scope.add_interest = {show :false, type : ''};
 		$rootScope.modal_up = false;
 		$route.reload();
@@ -238,10 +238,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 						if(response.http_status_code == 200){
 							if(response.success){
 								$rootScope.user.interests.splice($rootScope.user.interests.indexOf(id), 1);
-								interest.checked = false;	
+								interest.checked = false;
 								$scope.checked_amount--;
 							}
-							else $scope.set_alert(response.message, "default");	 
+							else $scope.set_alert(response.message, "default");
 						}
 						else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 						else $scope.check_code(response.http_status_code);
@@ -254,9 +254,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 								if(response.success){
 									$rootScope.user.interests.push(id);
 									interest.checked = true;
-									$scope.checked_amount++;	
+									$scope.checked_amount++;
 								}
-								else $scope.set_alert(response.message, "default");	 
+								else $scope.set_alert(response.message, "default");
 							}
 							else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 							else $scope.check_code(response.http_status_code);
@@ -302,7 +302,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		if(response.http_status_code == 200){
 			$rootScope.user = response.data;
 			sessionStorage.setItem("user", JSON.stringify(response.data));
-			if($rootScope.user.type == 'member'){	
+			if($rootScope.user.type == 'member'){
 				if(!$rootScope.user.age || !$rootScope.user.gender){
 					$rootScope.modal_up = true;
 					$scope.add_age = true;
@@ -311,20 +311,20 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		}
 		if($rootScope.user){
 			window.Intercom('boot', {
-			   app_id: 'qj6arzfj',
+			   app_id: APP_ENV.intercom_app_id,
 			   email: $rootScope.user.email,
 			   user_id: $rootScope.user.id,
 			   created_at: $rootScope.user.created_at,
 			   widget: {
-			      activator: '#IntercomDefaultWidget'
+			      activator: APP_ENV.intercom_default_widget
 			   }
 			});
 		}
 		else{
 			window.Intercom('boot', {
-				 app_id: 'qj6arzfj',
+				 app_id: APP_ENV.intercom_app_id,
 				 widget: {
-				 	activator: '#IntercomDefaultWidget'
+				 	activator: APP_ENV.intercom_default_widget
 				 }
 			})
 		}
@@ -351,14 +351,14 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			AppFact.agegen(age, gen).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
-						$scope.set_alert(response.message, "default");	
+						$scope.set_alert(response.message, "default");
 						$rootScope.user.age = age;
 						$rootScope.user.gender = gen;
 						sessionStorage.setItem("user", JSON.stringify($rootScope.user));
 						$rootScope.modal_up = false;
 						$scope.add_age = false;
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
@@ -430,7 +430,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 			if(response.http_status_code == 200){
 				if(response.success){
 					$scope.notifications = response.data.notifications;
-				}	
+				}
 			}
 		});
 	}
@@ -443,7 +443,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		AppFact.readNotification(notification).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.notifications.splice(index, 1);
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -454,7 +454,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		AppFact.readAll().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.notifications = [];
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -462,8 +462,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 	/** example response
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -477,23 +477,23 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					$rootScope.modal_up = false;
 					window.Intercom('update', {
-					   app_id: 'qj6arzfj',
+					   app_id: APP_ENV.intercom_app_id,
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
 					   created_at: $rootScope.user.created_at,
 					   widget: {
-					      activator: '#IntercomDefaultWidget'
+					      activator: APP_ENV.intercom_default_widget
 					   }
 					});
 					$scope.signing_in = {show : false, type : '', object : ''};
-					if($rootScope.user.type == 'member'){	
+					if($rootScope.user.type == 'member'){
 						if(!$rootScope.user.age || !$rootScope.user.gender){
 							$rootScope.modal_up = true;
 							$scope.add_age = true;
 						}
 					}
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -520,12 +520,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					$rootScope.modal_up = false;
 					$scope.step = 1;
 					window.Intercom('update', {
-					   app_id: 'qj6arzfj',
+					   app_id: APP_ENV.intercom_app_id,
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
 					   created_at: $rootScope.user.created_at,
 					   widget: {
-					      activator: '#IntercomDefaultWidget'
+					      activator: APP_ENV.intercom_default_widget
 					   }
 					});
 					fbq('track', 'Lead');
@@ -538,7 +538,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 					if($scope.registration.type != "company") $route.reload();
 					$scope.registration = {show : false, type : '', object : ''};
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -548,8 +548,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.contact = function(issue){
 		AppFact.contactUs(issue).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	 
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -559,8 +559,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.forgot_pass = function(email){
 		AppFact.forgotPass(email).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -609,17 +609,17 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	$scope.fourth_six = function(index){
 		return index%6 == 3;
 	}
-	$scope.fifth_six = function(index){	
+	$scope.fifth_six = function(index){
 		return index%6 == 4;
 	}
-	$scope.sixth_six = function(index){	
+	$scope.sixth_six = function(index){
 		return index%6 == 5;
 	}
 
 	$scope.amazon_connect('tappyn');
 	$scope.select_logo = function($files, register){
 	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var url = APP_ENV.amazon_aws_url;
 	    var new_name = Date.now();
 	    var rando = Math.random() * (10000 - 1) + 1;
 	    new_name = new_name.toString() + rando.toString();
@@ -642,7 +642,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 
 	$scope.fb_login = function(){
-		var route = $location.path();		
+		var route = $location.path();
 		if (route.charAt(0) == "/") route = route.substr(1);
 		window.location = $location.protocol()+"://"+$location.host()+"/api/v1/facebook?route="+route;
 	}
@@ -651,7 +651,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 tappyn.factory("AppFact", function($http){
 	var fact = {};
 	fact.loggingIn = function(email, pass){
-		var object = {'identity' : email, 'password' : pass}; 
+		var object = {'identity' : email, 'password' : pass};
 		return $http({
 			method : 'POST',
 			url : 'api/v1/login',
@@ -684,14 +684,14 @@ tappyn.factory("AppFact", function($http){
 			url : 'api/v1/contact',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			'data' : $.param(issue)
-		});	
+		});
 	}
 	fact.isLoggedIn = function(){
 		return $http({
 			method : 'GET',
 			url : 'api/v1/is_logged_in',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'}
-		});	
+		});
 	}
 	fact.forgotPass = function(email){
 		return $http({
@@ -699,7 +699,7 @@ tappyn.factory("AppFact", function($http){
 			url : 'api/v1/forgot_password',
 			headers : {'Content-type' : 'application/x-www-form-urlencoded'},
 			data : $.param({identity : email})
-		});	
+		});
 	}
 	fact.aws_key = function(bucket){
         return $http({

@@ -41,7 +41,7 @@ task('deploy:vendor', function() {
 
 // Gulp our JS/CSS files
 task('deploy:build', function() {
-    run('cd {{release_path}} && gulp build --env=prod');
+    run('cd {{release_path}} &&  npm run build');
 })->desc("Compiling JS/CSS");
 
 // Run database migrations. This depends on both config and vendor

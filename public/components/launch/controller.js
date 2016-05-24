@@ -7,7 +7,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
 	$scope.current = $scope.steps['package'];
-	$scope.personalities = emotions; 
+	$scope.personalities = emotions;
 	$scope.contest = {};
 	$scope.company = {};
 	$scope.save_method = false;
@@ -25,13 +25,13 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					$scope.contest.summary = $scope.profile.summary;
 					$scope.contest.different = $scope.profile.different;
 					$scope.contest.company_url = $scope.profile.company_url;
-					$scope.contest.facebook_url = $scope.profile.facebook_url;	
-					$scope.contest.twitter_handle = $scope.profile.twitter_handle;	
+					$scope.contest.facebook_url = $scope.profile.facebook_url;
+					$scope.contest.twitter_handle = $scope.profile.twitter_handle;
 					$scope.contest.logo_url = $scope.profile.logo_url;
 					if(!$scope.contest.summary || !$scope.contest.different) $scope.set_step("detail");
-					else $scope.set_step("preview");	
+					else $scope.set_step("preview");
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -54,18 +54,18 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					window.Intercom('update', {
-					   app_id: 'qj6arzfj',
+					   app_id: APP_ENV.intercom_app_id,
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
 					   created_at: $rootScope.user.created_at,
 					   widget: {
-					      activator: '#IntercomDefaultWidget'
+					      activator: APP_ENV.intercom_default_widget
 					   }
 					});
 					$scope.grab_profile();
 					$scope.close_company_login();
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -79,12 +79,12 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					$rootScope.user = response.data;
 					sessionStorage.setItem("user", JSON.stringify(response.data));
 					window.Intercom('update', {
-					   app_id: 'qj6arzfj',
+					   app_id: APP_ENV.intercom_app_id,
 					   email: $rootScope.user.email,
 					   user_id: $rootScope.user.id,
 					   created_at: $rootScope.user.created_at,
 					   widget: {
-					      activator: '#IntercomDefaultWidget'
+					      activator: APP_ENV.intercom_default_widget
 					   }
 					});
 					fbq('track', 'Lead');
@@ -96,7 +96,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					});
 					$scope.set_step("preview");
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -142,7 +142,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 
 	$scope.select_display = function(type){
 		$scope.contest.display_type = type;
-	}	
+	}
 
 	$scope.choose_personality = function(type){
 		$scope.contest.emotion = type;
@@ -151,7 +151,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		launchFactory.grabDetails().success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.payments = response.data.customer.sources.data;
-				else $scope.add_new = true; 
+				else $scope.add_new = true;
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -192,12 +192,12 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 							fbq('track', 'AddToWishlist');
 						}
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
-			});	
-		}	
+			});
+		}
 		else{
 			launchFactory.submission(contest).success(function(response){
 				if(response.http_status_code == 200){
@@ -210,11 +210,11 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 							fbq('track', 'AddToWishlist');
 						}
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
-			});	
+			});
 		}
 	}
 	var stripeResponseHandler = function(status, response) {
@@ -222,21 +222,21 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
       	var erroring = (response.error.message).toString();
    		alert(response.error.message);
         $scope.form_disabled = false;
-      } 
+      }
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
        	launchFactory.payContest($scope.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
-					$scope.set_alert(res.message, "default");	
+					$scope.set_alert(res.message, "default");
 					$scope.set_step("done");
 					$rootScope.modal_up = false;
 					$scope.adding_payment = false;
 					$scope.form_disabled = false;
 					fbq('track', 'Purchase', {value: '99.00', currency: 'USD'});
 				}
-				else $scope.set_alert(res.message, "default");	 
+				else $scope.set_alert(res.message, "default");
 			}
 			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 			else $scope.check_code(res.http_status_code);
@@ -252,21 +252,21 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 				launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
 		       	});
 			}
 		}
-		else{	
+		else{
 			// This identifies your website in the createToken call below
-			Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+			Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
 			var $form = $('#payment-form');
 
 	        // Disable the submit button to prevent repeated clicks
@@ -283,30 +283,30 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 				launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
 		       	});
 			}
-		}	
+		}
 		else{
 			if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
 			else{
 				launchFactory.payContest($scope.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$scope.set_step("done");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
@@ -324,7 +324,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						$scope.price = res.data.price;
 						$scope.reduction = res.data.discount;
 					}
-					else $scope.set_alert(res.message, "default");	 
+					else $scope.set_alert(res.message, "default");
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 				else $scope.check_code(res.http_status_code);
@@ -338,12 +338,12 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			launchFactory.payContest($scope.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
-						$scope.set_alert(res.message, "default");	
+						$scope.set_alert(res.message, "default");
 						$scope.set_step("done");
 						$rootScope.modal_up = false;
 						$scope.adding_payment = false;
 					}
-					else $scope.set_alert(res.message, "default");	 
+					else $scope.set_alert(res.message, "default");
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 				else $scope.check_code(res.http_status_code);
@@ -358,7 +358,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.amazon_connect('tappyn');
 	$scope.select_file = function($files, type){
 	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var url = APP_ENV.amazon_aws_url;
 	    var new_name = Date.now();
 	    var rando = Math.random() * (10000 - 1) + 1;
 	    new_name = new_name.toString() + rando.toString();

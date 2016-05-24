@@ -2,8 +2,8 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
 	if($routeParams.id){
 		editFactory.grabEdit($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.contest = response.data.contest;	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.contest = response.data.contest;
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -13,8 +13,8 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
 	$scope.edit = function(contest){
 		editFactory.editContest(contest).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -26,7 +26,7 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
 	$scope.amazon_connect('tappyn');
 	$scope.select_file = function($files, type){
 	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var url = APP_ENV.amazon_aws_url;
     	var new_name = Date.now();
 	    var rando = Math.random() * (10000 - 1) + 1;
 	    var namen = new_name.toString() + rando.toString();

@@ -5,7 +5,7 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 
 	$scope.select_file = function($files){
 	    var file = $files[0];
-	    var url = 'https://tappyn.s3.amazonaws.com/';
+	    var url = APP_ENV.amazon_aws_url;
 	    var new_name = Date.now();
 	    $upload.upload({
 	        url: url,
@@ -27,8 +27,8 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 	//grab that funky fresh profile on load
 	profileFactory.grabProfile().success(function(response){
 		if(response.http_status_code == 200){
-			if(response.success) $scope.profile = response.data.profile;	
-			else $scope.set_alert(response.message, "default");	 
+			if(response.success) $scope.profile = response.data.profile;
+			else $scope.set_alert(response.message, "default");
 		}
 		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 		else $scope.check_code(response.http_status_code);
@@ -42,8 +42,8 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 					$rootScope.user.first_name = $scope.profile.first_name;
 					$rootScope.user.last_name = $scope.profile.last_name;
 					sessionStorage.setItem("user", JSON.stringify($rootScope.user));
-				}	
-				else $scope.set_alert(response.message, "default");	 
+				}
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -53,8 +53,8 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 	$scope.change_pass = function(pass){
 		profileFactory.updatePass(pass).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -64,11 +64,11 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
 	$scope.resend = function(){
 		profileFactory.resendVerification().success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);	
+			else $scope.check_code(response.http_status_code);
 		})
-	}	
+	}
 });

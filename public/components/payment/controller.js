@@ -11,11 +11,11 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 				}
 				else if($rootScope.user.type == "member" && response.data.account){
 					var account = response.data.account;
-					$scope.detail = {first_name : account.legal_entity.first_name, 
-						last_name : account.legal_entity.last_name, 
-						dob_year : account.legal_entity.dob.year, 
-						dob_month : account.legal_entity.dob.month, 
-						dob_day : account.legal_entity.dob.day, 
+					$scope.detail = {first_name : account.legal_entity.first_name,
+						last_name : account.legal_entity.last_name,
+						dob_year : account.legal_entity.dob.year,
+						dob_month : account.legal_entity.dob.month,
+						dob_day : account.legal_entity.dob.day,
 						city : account.legal_entity.address.city,
 						state : account.legal_entity.address.state,
 						postal_code : account.legal_entity.address.postal_code,
@@ -27,7 +27,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 				}
 				$scope.account = response.data.account;
 			}
-			else $scope.set_alert(response.message, "default");	 
+			else $scope.set_alert(response.message, "default");
 		}
 		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 		else $scope.check_code(response.http_status_code);
@@ -37,11 +37,11 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 		paymentFactory.verifyIdentity(detail).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.set_alert(response.message, "default");	
+					$scope.set_alert(response.message, "default");
 					$scope.account = response.data.account;
 					$scope.showing = 'methods';
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -69,7 +69,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 					$rootScope.modal_up = false;
 					$scope.add_method = false;
 				}
-				else $scope.set_alert(res.message, "default");	 
+				else $scope.set_alert(res.message, "default");
 			}
 			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 			else $scope.check_code(res.http_status_code);
@@ -78,7 +78,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
     };
 	$scope.process_addition = function(){
 		// This identifies your website in the createToken call below
-		Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+		Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
 		var $form = $('#payment-form');
 
         // Disable the submit button to prevent repeated clicks
@@ -94,7 +94,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 					$scope.account = response.data.account;
 					$scope.set_alert(response.message, "default");
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -118,7 +118,7 @@ tappyn.controller("paymentController", function($scope, $rootScope, $location, p
 					$scope.account = response.data.account;
 					$scope.set_alert(response.message, "default");
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);

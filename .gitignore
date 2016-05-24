@@ -22,6 +22,9 @@ application/vendor/*
 application/phinx.yml
 application/tests/build/*
 
+public/app.js
+public/config.js
+
 phinx.yml
 
 node_modules

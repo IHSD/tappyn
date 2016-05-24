@@ -6,7 +6,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 	dashFactory.grabDash($scope.type).success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.dash = response.data;
-			else alert(response.message);	 
+			else alert(response.message);
 		}
 		else if(response.http_status_code == 500) alert(response.error);
 		else $scope.check_code(response.http_status_code);
@@ -14,7 +14,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 	dashFactory.grabTotals().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.totals = response.data;
-			else alert(response.message);	 
+			else alert(response.message);
 		}
 		else if(response.http_status_code == 500) alert(response.error);
 		else $scope.check_code(response.http_status_code);
@@ -28,7 +28,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 			dashFactory.grabUpvoted().success(function(response){
 				if(response.success) $scope.dash = response.data;
 			});
-		}	
+		}
 		else{
 			dashFactory.grabDash(type).success(function(response){
 				if(response.success) $scope.dash = response.data;
@@ -47,7 +47,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		$scope.view = 'table';
 	}
 
-	/** start winner functions, functions for assembling the winner view, opening and closing the modal for 
+	/** start winner functions, functions for assembling the winner view, opening and closing the modal for
 		confirmation and the actual choosing of a winner **/
 	$scope.choosing_winner = function(contest){
 		dashFactory.grabSubmissions(contest.id).success(function(response){
@@ -57,10 +57,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 					$scope.submissions = response.data.submissions;
 					$scope.view = 'winner';
 				}
-				else alert(response.message);	 
+				else alert(response.message);
 			}
 			else if(response.http_status_code == 500) alert(response.error);
-			else $scope.check_code(response.http_status_code);	
+			else $scope.check_code(response.http_status_code);
 		});
 	}
 
@@ -73,13 +73,13 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		dashFactory.chooseWinner($scope.winner_contest.id, id).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.set_alert(response.message, "default");	
+					$scope.set_alert(response.message, "default");
 					$scope.confirm_winner = {show : false, submission : null};
 					$rootScope.modal_up = false;
 					$scope.winner_contest.status = "completed";
 					$scope.view_pcp($scope.winner_contest.id);
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -94,8 +94,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 	$scope.claim_winnings = function(id){
 		dashFactory.claimWinnings(id).success(function(response){
 			if(response.http_status_code == 200){
-				if(response.success) $scope.set_alert(response.message, "default");	
-				else $scope.set_alert(response.message, "default");	 
+				if(response.success) $scope.set_alert(response.message, "default");
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -107,10 +107,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		dashFactory.viewWinner(id).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success){
-					$scope.winner = response.data;	
+					$scope.winner = response.data;
 					$scope.view = "pcp";
 				}
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -126,7 +126,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 			if(response.http_status_code == 200){
 				$scope.adding_payment = {show : true, contest : contest};
 				$rootScope.modal_up = true;
-				if(response.success){ 
+				if(response.success){
 					$scope.payments = response.data.customer.sources.data;
 					$scope.add_new = false;
 				}
@@ -147,19 +147,19 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
       	var erroring = (response.error.message).toString();
    		alert(response.error.message);
         $scope.form_disabled = false;
-      } 
+      }
       else{
         // response contains id and card, which contains additional card details
         var token = response.id;
        	dashFactory.payContest($scope.adding_payment.contest.id, {stripe_token : token, save_method : $scope.save_method, voucher_code : $scope.voucher_code}).success(function(res){
        		if(res.http_status_code == 200){
 				if(res.success){
-					$scope.set_alert(res.message, "default");	
+					$scope.set_alert(res.message, "default");
 					$rootScope.modal_up = false;
 					$scope.adding_payment = false;
 					$scope.form_disabled = false;
 				}
-				else $scope.set_alert(res.message, "default");	 
+				else $scope.set_alert(res.message, "default");
 			}
 			else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 			else $scope.check_code(res.http_status_code);
@@ -174,12 +174,12 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 				dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 							$route.reload();
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
@@ -188,7 +188,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		}
 		else{	
 			// This identifies your website in the createToken call below
-			Stripe.setPublishableKey("pk_live_ipFoSG1UY45RGNkCpLVUaSBx");
+			Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
 			var $form = $('#payment-form');
 
 	        // Disable the submit button to prevent repeated clicks
@@ -205,30 +205,30 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 				dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 							$route.reload();
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
 		       	});
 			}
-		}	
+		}
 		else{
 			if(!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
 			else{
 				dashFactory.payContest($scope.adding_payment.contest.id, {source_id : $scope.passing_method, voucher_code : $scope.voucher_code}).success(function(res){
 		       		if(res.http_status_code == 200){
 						if(res.success){
-							$scope.set_alert(res.message, "default");	
+							$scope.set_alert(res.message, "default");
 							$rootScope.modal_up = false;
 							$scope.adding_payment = false;
 							$route.reload();
 						}
-						else $scope.set_alert(res.message, "default");	 
+						else $scope.set_alert(res.message, "default");
 					}
 					else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 					else $scope.check_code(res.http_status_code);
@@ -246,7 +246,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 						$scope.price = res.data.price;
 						$scope.reduction = res.data.discount;
 					}
-					else $scope.set_alert(res.message, "default");	 
+					else $scope.set_alert(res.message, "default");
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 				else $scope.check_code(res.http_status_code);
@@ -260,12 +260,12 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 			dashFactory.payContest($scope.adding_payment.contest.id, {voucher_code : $scope.voucher_code}).success(function(res){
 	       		if(res.http_status_code == 200){
 					if(res.success){
-						$scope.set_alert(res.message, "default");	
+						$scope.set_alert(res.message, "default");
 						$rootScope.modal_up = false;
 						$scope.adding_payment = false;
 						$route.reload();
 					}
-					else $scope.set_alert(res.message, "default");	 
+					else $scope.set_alert(res.message, "default");
 				}
 				else if(res.http_status_code == 500) $scope.set_alert(res.error, "error");
 				else $scope.check_code(res.http_status_code);
