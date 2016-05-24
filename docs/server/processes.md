@@ -16,7 +16,7 @@ The other two are for our current mailing system. Here's a rundown of how we are
 1. Event occurs, such as sign-up, contest payment, etc.
 2. We insert the event details and recipient into tappyn.mailing_queue.
 3. Every minute, the `admin mailing execute` process takes unsent emails, processes them
-   based on the process, and creates the emails through SendGrid.
+   based on the script, and creates the emails through SendGrid.
 4. If successful, we update the table with the current 'sent_at' time.
 5. If there was an error, we also update accordingly.
 
