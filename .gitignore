@@ -23,6 +23,7 @@ application/phinx.yml
 application/tests/build/*
 
 public/app.js
+public/app.min.js
 public/config.js
 
 phinx.yml
