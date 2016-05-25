@@ -1,5 +1,20 @@
 #!/bin/bash
 
+#=================================
+# Importing database backups
+#=================================
+# Arguments:
+#   -u | --user          Database User
+#   -p | --password      Password
+#   -d | --database      Which database to backup
+#   -b | --backup        Which backup we want to restore
+#
+# Based on the backup supplied, we check to see if it already exists on the server.
+# If it does not, we yank it from S3 using the configured s3cmd tool. Once we have
+# the backup stored locally, we iterate through each existent table and
+# upload the sql file into MySQL.
+
+
 for i in "$@"
 do
 case $i in
