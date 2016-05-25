@@ -46,6 +46,13 @@ if(!isset($contest) ||
         </td>
     </tr>
     <?php endif; ?>
+    <?php if(!is_null($thumbnail_url)): ?>
+        <tr>
+            <td>
+                <img src="<?php echo $thumbnail_url; ?>">
+            </td>
+        </tr>
+    <?php endif; ?>
     <tr>
         <td>
             <p style='max-width:600px;text-align:justify;'>
