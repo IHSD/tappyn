@@ -19,8 +19,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Welcome on board</h2>
 <br>
 <p style='text-align:center;margin:auto;min-width:450px;width:50%'><strong>Congratulations on joining a community that's redefining the world of advertisements.</strong></p><br>
-<p style='text-align:center;margin:auto;min-width:450px;width:50%'><strong>Together, we create ads that people like you and me want to see,</strong></p><br>
-<p style='text-align:center;margin:auto;min-width:450px;width:50%'><strong>and we're earning big payouts while we do it.</strong></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%'><strong>Together, we create ads that people like you and me want to see, and we're winning money while we do it.</strong></p><br>
 <br>
 
 <!-- Orange header -->
