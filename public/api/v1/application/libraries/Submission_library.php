@@ -82,6 +82,7 @@ class Submission_library
             return false;
         }
 
+        $company = $this->ion_auth->user($contest->owner)->row();
         if($id = $this->submission->create($data))
         {
             $email_data = array(
@@ -89,9 +90,9 @@ class Submission_library
                 'text' => $this->input->post('text'),
                 'link_explanation' => $this->input->post('link_explanation'),
                 'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
-                'contest' => $contest->title,
-                //'company' => $contest->company->name,
+                'company' => $company->name,
                 'attachment_url' => $attachment,
+                'thumbnail_url' => $thumbnail_url,
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );
 
