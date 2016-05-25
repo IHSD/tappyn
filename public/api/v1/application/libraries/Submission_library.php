@@ -82,7 +82,7 @@ class Submission_library
             return false;
         }
 
-        $company = $this->ion_auth->user($contest->owner)->row();
+        $company = $this->user->profile($contest->owner);
         if($id = $this->submission->create($data))
         {
             $email_data = array(
@@ -95,8 +95,6 @@ class Submission_library
                 'thumbnail_url' => $data['thumbnail_url'],
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );
-
-            error_log(json_encode($email_data));
 
             $this->mailer->to($this->ion_auth->user()->row()->email)
                          ->from('squad@tappyn.com')
