@@ -289,5 +289,4 @@ switch (ENVIRONMENT)
  *
  * And away we go...
  */
-error_log("Loading application");
 require_once BASEPATH.'core/CodeIgniter.php';
