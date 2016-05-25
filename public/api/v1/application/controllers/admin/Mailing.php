@@ -20,11 +20,10 @@ class Mailing extends CI_Controller
     public function execute()
     {
         $queue = $this->db->select('*')->from('mailing_queue')->where('processing', 0)->get()->result();
-        $attachment = NULL;
         foreach($queue as $job)
         {
+            $attachment = NULL;
             $this->db->where('id', $job->id)->update('mailing_queue', array('processing' => 1));
-
             $subject = FALSE;
             $continue = true;
             // First lets get any associated data with this email
