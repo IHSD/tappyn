@@ -34,7 +34,7 @@ if(!isset($contest) ||
 <p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the info you submitted to us:</p><br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
-<h4 style='text-align:center'><?php echo $contest. ' by ' . $company; ?></h4>
+<h4 style='text-align:center'><?php echo $company; ?></h4>
 
 <table style='max-width:500px' align='center'>
     <?php if(isset($headline)): ?>
