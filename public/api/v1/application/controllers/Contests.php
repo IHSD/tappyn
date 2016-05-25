@@ -6,6 +6,7 @@ class Contests extends CI_Controller
 
     public function __construct()
     {
+        error_log("Constructing controller");
         parent::__construct();
         $this->load->model('contest');
         $this->load->model('submission');
@@ -131,6 +132,7 @@ class Contests extends CI_Controller
      */
     public function show($cid)
     {
+        error_log("Getting contest");
         $contest = $this->contest->get($cid);
 
         if(!$contest)

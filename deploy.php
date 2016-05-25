@@ -2,10 +2,18 @@
 
 require 'recipe/common.php';
 
+if(!file_exists('.deploy_args.php'))
+{
+    echo "Could not ifnd file .deploy_args.php";
+} else {
+    require '.deploy_args.php';
+    echo "Deploying with public key located in {$public_key_file}\n";
+}
 /**
  * Set our shared and writeable directories. This is where all the log, cache and
  * release shared files should be placed
  */
+
 set('shared_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
 set('writeable_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
 set('repository', 'git@github.com:IHSD/tappyn.git');
@@ -13,7 +21,7 @@ set('repository', 'git@github.com:IHSD/tappyn.git');
 env('deploy_path', '/var/www/tappyn');
 server("tappyn-live", "tappyn.com", 22)
     ->user('deploy')
-    ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
+    ->identityFile($public_key_file, $private_key_file)
     //->identifyFile()
     ->env('environment', 'production')
     ->stage('production')
@@ -21,7 +29,7 @@ server("tappyn-live", "tappyn.com", 22)
 
 server("tappyn-staging", 'test.tappyn.com', 22)
     ->user('deploy')
-    ->identityFile("~/.ssh/id_rsa.pub", "~/.ssh/id_rsa")
+    ->identityFile($public_key_file, $private_key_file)
     //->identityFile()
     ->stage('staging')
     ->env('environment', 'testing')
