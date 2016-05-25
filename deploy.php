@@ -58,7 +58,6 @@ task('deploy:build', function() {
 
 task('deploy:post_update', function() {
     run('chmod +x {{release_path}}/bin/backup.sh');
-    run('chown -R deploy:www-data {{deploy_path}}');
 })->desc("Setting up backup process");
 
 // Run database migrations. This depends on both config and vendor
