@@ -10,7 +10,7 @@ case $i in
     DATABASE="${i#*=}"
 
     ;;
-    --u=*|--user=*)
+    -u=*|--user=*)
     USER="${i#*=}"
 
     ;;
