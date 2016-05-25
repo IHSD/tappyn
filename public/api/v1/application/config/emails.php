@@ -37,7 +37,7 @@ $config['email_program']['contest_closing']['additional_data'] = array();
 */
 $config['email_program']['winner_announced']['template'] = 'email_templates/winner_announced';
 $config['email_program']['winner_announced']['from'] = 'squad@tappyn.com';
-$config['email_program']['winner_announced']['subject'] = "%s's has chosen a winner!";
+$config['email_program']['winner_announced']['subject'] = "%s has chosen a winner!";
 $config['email_program']['winner_announced']['query_string'] = array(
     'utm_source' => 'newsletter',
     'utm_medium' => 'email',
