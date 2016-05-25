@@ -92,9 +92,11 @@ class Submission_library
                 'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
                 'company' => $company->name,
                 'attachment_url' => $attachment,
-                'thumbnail_url' => $thumbnail_url,
+                'thumbnail_url' => $data['thumbnail_url'],
                 'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
             );
+
+            error_log(json_encode($email_data));
 
             $this->mailer->to($this->ion_auth->user()->row()->email)
                          ->from('squad@tappyn.com')
