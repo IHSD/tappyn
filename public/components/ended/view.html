@@ -10,7 +10,7 @@
 					</div>
 					<div class='col-sm-4 col-xs-12'  style='padding-top:30px;'>
 						<div style='width:100%'>
-			            	<uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>                
+			            	<uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>
 			                <p class="progress-meter-text text-center" style='margin:0px;'>{{contest.submission_count | number}} of 50 entries total</p>
 			            </div>
 			        </div>
@@ -23,7 +23,7 @@
 						</h4>
 						<h4>{{contest.views}} Views</h4>
 						<h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
@@ -40,10 +40,11 @@
 		</div>
 		<div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.payout'>
 			<div class="contest-box row">
-				<h2 class='text-center'>Congratulations to {{winner.first_name}} {{winner.last_name | firstChar}}</h2>
+				<h2 class='text-center'>Congratulations to {{winner.first_name}} {{winner.last_name | firstChar}}!</h2>
 				<div class='col-xs-12'>
 					<h3>{{winner.headline}}</h3>
 					<div class="contest-content">
+						<img ng-src="{{winner.attachment}}" class="img-responsive">
 					    <span>{{winner.text}}</span>
 					</div>
 				</div>
@@ -58,7 +59,7 @@
 	               	</h5>
 	            </div>
 	    	</div>
-		</div>	
+		</div>
 	</div>
 </div>
 </div>
