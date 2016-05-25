@@ -17,13 +17,18 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h5><?php echo $company->name; ?>'s contest has ended</h5>
+<h5 style='text-align:center'><?php echo $company->name; ?>'s contest has ended</h5>
 
-<p>Unfortunately, your submission wasn't chosen. But remember, you get points for upvoting, and if you upvoted the winner, you got extra points</p>
+<p style='text-align:center;margin:auto;width:600px'>They loved all of the submissions, but there was just one that edged out the rest.</p>
 
-<p>You can see who won <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?></p>
 <?php $query_string['redirect'] = 'contest/'.$contest->id; ?>
-<p>Or you can see some of our <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'new contests'); ?> and take another shot!</p>
+<p style='text-align:center;margin:auto;width:600px'>See the winning submission <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?></p>
+
+<?php $query_string['redirect'] = 'guide'; ?>
+<p style='text-align:center;margin:auto;width:600px'>Wondering why your submission wasn't chosen? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?></p>
+
+<?php $query_string['redirect'] = 'contests'; ?>
+<p style='text-align:center;margin:auto;width:600px'>Or you can see some of our <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'new contests'); ?></p>
 
 <!-- End Email Content -->
 
