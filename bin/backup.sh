@@ -23,7 +23,7 @@ echo DATABASE = ${DATABASE}
 echo PASSWORD = ${PASSWORD}
 echo USER = ${USER}
 # Set required variables
-bucket="s3://${DATABASE}"
+bucket="s3://${DATABASE}/backups"
 stamp=`date +%s`
 tmp_dir="/tmp/mysql/dumps/$stamp"
 mkdir $tmp_dir
