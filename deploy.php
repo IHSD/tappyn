@@ -56,6 +56,10 @@ task('deploy:build', function() {
     run('cd {{release_path}} &&  npm run build');
 })->desc("Compiling JS/CSS");
 
+task('deploy:post_update', function() {
+    run ('chmod +x {{release_path}}/bin/backup.sh');
+})
+
 // Run database migrations. This depends on both config and vendor
 task('deploy:migrate', function() {
     run('cd {{release_path}} && php vendor/bin/phinx migrate');
@@ -65,6 +69,7 @@ task('deploy', [
     'deploy:prepare',
     'deploy:release',
     'deploy:update_code',
+    'deploy:post_update',
     'deploy:config',
     'deploy:vendor',
     'deploy:build',
