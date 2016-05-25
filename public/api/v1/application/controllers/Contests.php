@@ -215,7 +215,7 @@ class Contests extends CI_Controller
 
         if($this->form_validation->run() == true)
         {
-            $this->config->load('upvote', TRUE);
+            $this->config->load('upvote');
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
             $age = $this->input->post('age');
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
@@ -234,7 +234,7 @@ class Contests extends CI_Controller
                 'emotion'           => $this->input->post('emotion'),
                 'display_type'      => $this->input->post('display_type'),
                 'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
-                'prize'             => $this->config->item('default_payout_per_contest', 'upvote')
+                'prize'             => $this->config->item('default_payout_per_contest')
             );
 
             $images = array();
