@@ -30,8 +30,7 @@ if(!isset($contest) ||
 <h3 style='text-align:center'>You just Tapped In</h3>
 
 <p style='text-align:center;margin:auto;width:600px'>Great news - your submission to Tappyn has been confirmed. Yup - it's go time.</p><br>
-<p style='text-align:center;margin:auto;width:600px'>For new users, prepare yourself for a Joseph Campbell style Hero's Journey.</p><br>
-<p style='text-align:center;margin:auto;width:600px'>For seasoned users, let's ride once again into Dylan Thomas's 'that good night'.</p><br>
+
 <p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the info you submitted to us:</p><br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
@@ -66,12 +65,14 @@ if(!isset($contest) ||
 <p>
 
 <!-- Begin footer -->
-<p style='margin:auto;width:600px;'>
-    Hit reply with feedback or questions,
+<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+    Feel free to hit me up with feedback or questions!
 </p>
 <br>
-<p style='margin:auto;width:600px;'>
-    Alek
+<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+    -Austin
+    <br>
+    Co-Founder Tappyn
     <br>
     <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>

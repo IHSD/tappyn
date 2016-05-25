@@ -17,11 +17,11 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h4>Congratulations, you're submission won</h4>
+<h4 style='text-align:center'>Congratulations, you're submission won!</h4>
 
-<h5><?php echo $company->name; ?> chose your submission, so you're getting $50!</h5>
+<h5 style='text-align:center'><?php echo $company->name; ?> chose your submission, and is sending $85 your way!</h5>
 
-<p>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and just click claim! If you haven't yet,
+<p style='text-align:center;margin:auto;width:600px'>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and just click claim! If you haven't yet,
     you'll need to set up an account, which takes only seconds. Not a bad hourly wage!</p>
 
 <!-- End Email Content -->

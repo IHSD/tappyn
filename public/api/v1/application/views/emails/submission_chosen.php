@@ -31,12 +31,14 @@ if(!isset($company))
 <br>
 
 <!-- Begin footer -->
-<p style='margin:auto;width:600px;'>
-    Hit reply with feedback or questions,
+<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+    Feel free to hit me up with feedback or questions!
 </p>
 <br>
-<p style='margin:auto;width:600px;'>
-    Alek
+<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+    Austin
+    <br>
+    Co-Founder Tappyn
     <br>
     <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>
