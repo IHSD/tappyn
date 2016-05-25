@@ -57,8 +57,8 @@ task('deploy:build', function() {
 })->desc("Compiling JS/CSS");
 
 task('deploy:post_update', function() {
-    run ('chmod +x {{release_path}}/bin/backup.sh');
-})
+    run('chmod +x {{release_path}}/bin/backup.sh');
+})->desc("Setting up backup process");
 
 // Run database migrations. This depends on both config and vendor
 task('deploy:migrate', function() {
