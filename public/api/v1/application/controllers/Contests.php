@@ -231,8 +231,6 @@ class Contests extends CI_Controller
                 'min_age'           => $this->input->post('min_age'),
                 'max_age'           => $this->input->post('max_age'),
                 'industry'          => $this->input->post('industry'),
-                // 'start_time'        => $start_time,
-                // 'stop_time'         => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion'           => $this->input->post('emotion'),
                 'display_type'      => $this->input->post('display_type'),
                 'submission_limit'  => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
@@ -244,6 +242,7 @@ class Contests extends CI_Controller
             if($this->input->post('additional_image_2')); $images[] = $this->input->post('additional_image_2');
             if($this->input->post('additional_image_3')); $images[] = $this->input->post('additional_image_3');
             if(!empty($images)) $data['additional_images'] = json_encode($images);
+            error_log(json_encode($data));
             $cid = $this->contest->create($data);
         }
 
