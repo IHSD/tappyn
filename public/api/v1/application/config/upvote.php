@@ -39,3 +39,9 @@ $config['points_per_upvote_winning'] = 5;
  * Points for your submission winning
  */
 $config['points_per_winning_submission'] = 10;
+/**
+ * Default payout for contests
+ *
+ * Specified as float
+ */
+$config['default_payout_per_contest'] = 85.00;
