@@ -221,6 +221,7 @@ class Mailing extends CI_Controller
                 $this->error_out($job->id, '["Template missing from requested location"]');
                 continue;
             }
+            error_log($generated_html);
             // Clean up before we try and send the email
             $this->email_data = array();
 
