@@ -17,7 +17,7 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h4 style='text-align:center'>Congratulations, you're submission won!</h4>
+<h4 style='text-align:center'>Congratulations, your submission won!</h4>
 
 <h5 style='text-align:center'><?php echo $company->name; ?> chose your submission, and is sending $85 your way!</h5>
 
