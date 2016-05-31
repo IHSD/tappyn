@@ -18,7 +18,7 @@ if(!file_exists('.deploy_args.php'))
 
 set('shared_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
 set('writeable_dirs', ['public/api/v1/application/cache', 'public/api/v1/application/logs']);
-set('repository', 'git@github.com:IHSD/tappyn.git');
+set('repository', 'git@github.com:amatthi/tappyn.git');
 
 env('deploy_path', '/var/www/tappyn');
 server("tappyn-live", "tappyn.com", 22)
