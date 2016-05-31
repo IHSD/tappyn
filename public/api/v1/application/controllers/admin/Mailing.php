@@ -12,8 +12,8 @@ class Mailing extends CI_Controller
             die('Invalid request');
         }
         $this->load->library('mailer');
-        $this->config->load('emails', TRUE);
-        $this->email_config = $this->config->item('email_program', 'emails');
+        $this->config->load('emails');
+        $this->email_config = $this->config->item('email_program');
 
     }
 
