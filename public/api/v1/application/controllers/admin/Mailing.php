@@ -14,7 +14,6 @@ class Mailing extends CI_Controller
         $this->load->library('mailer');
         $this->config->load('emails');
         $this->email_config = $this->config->item('email_program');
-
     }
 
     public function execute()
@@ -29,7 +28,6 @@ class Mailing extends CI_Controller
             // First lets get any associated data with this email
             switch($job->email_type)
             {
-                error_log("Processing {$job->email_type}");
                 case 'contest_closing':
                     // Get data for the email
                     $contest = $this->db->select('*')->from('contests')->where('id', $job->object_id)->limit(1)->get();
@@ -222,7 +220,6 @@ class Mailing extends CI_Controller
                 $this->error_out($job->id, '["Template missing from requested location"]');
                 continue;
             }
-            error_log($generated_html);
             // Clean up before we try and send the email
             $this->email_data = array();
 
