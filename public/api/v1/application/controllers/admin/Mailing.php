@@ -29,6 +29,7 @@ class Mailing extends CI_Controller
             // First lets get any associated data with this email
             switch($job->email_type)
             {
+                error_log("Processing {$job->email_type}");
                 case 'contest_closing':
                     // Get data for the email
                     $contest = $this->db->select('*')->from('contests')->where('id', $job->object_id)->limit(1)->get();
