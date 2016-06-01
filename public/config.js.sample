@@ -1,0 +1,9 @@
+var APP_ENV = {
+    'site_ur'                   : 'http://localhost/',
+    'facebook_redirect_url'     : 'http://localhost/api/v1/auth/access_token',
+    'facebook_client_id'        : '',
+    'intercom_app_id'           : '',
+    'intercom_default_widget'   : '',
+    'amazon_aws_url'            : 'https://tappyn.s3.amazonaws.com/',
+    'stripe_api_publishable_key': 'pk_test_vJpWdu1dw3v38i3MPtZdTIan'
+};
