@@ -6,9 +6,10 @@
 </p>
 <br>
 <p style='text-align:left;margin:auto;width:600px'>
-  -Austin
+  -Alek
   <br>
   Co-Founder Tappyn
     <br>
+  (678)-367-1060
     <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>

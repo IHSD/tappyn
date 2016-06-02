@@ -4,9 +4,9 @@
     <img align='center' height='75' src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
 </p>
 
-<h3 style='text-align:center'>Forgot your password?</h3>
+<h3 style='text-align:center;margin:auto;min-width:450px;width:50%'>Forgot your password?</h3>
 
-<p style='text-align:center'>
+<p style='text-align:left;margin:auto;width:600px'>
     Somebody requested to reset your password. If that was you, click the link below to continue.
 </p>
 
@@ -16,6 +16,10 @@
     </a>
 </p>
 
-<p style='text-align:center'>
-	If, by chance, you didn't request this action, click <a href="#">here</a> to notify us immediately. We'll take care of the rest!
+<p style='text-align:left;margin:auto;width:600px'>
+	If you didn't request this action, click <a href="#">here</a> to notify us immediately. We'll take care of the rest!
 </p>
+
+<!-- End Email Content -->
+
+<?php $this->load->view('email_templates/austin_footer'); ?>

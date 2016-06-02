@@ -153,7 +153,7 @@ $config['email_program']['submission_chosen']['additional_data'] = array();
 */
 $config['email_program']['company_sign_up_conf']['template'] = 'email_templates/company_sign_up';
 $config['email_program']['company_sign_up_conf']['from'] = 'alek@tappyn.com';
-$config['email_program']['company_sign_up_conf']['subject'] = "Thank you for registering";
+$config['email_program']['company_sign_up_conf']['subject'] = "Woot! You’re ready to get started.";
 $config['email_program']['company_sign_up_conf']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',

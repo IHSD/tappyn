@@ -22,10 +22,8 @@ $query_string['redirect'] = 'dashboard';
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
-<p style='text-align:left;margin:auto;width:600px'>They loved all of the submissions, but there was just one that edged out the rest.</p>
-
 <?php $query_string['redirect'] = 'contest/'.$contest->id; ?>
-<p style='text-align:left;margin:auto;width:600px'>See the winning submission <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
+<p style='text-align:left;margin:auto;width:600px'>They loved all of the submissions, but there was just one that edged out the rest. See the winning submission <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'guide'; ?>
 <p style='text-align:left;margin:auto;width:600px'>Wondering why your submission wasn't chosen? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
@@ -38,4 +36,4 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- End Email Content -->
 
-<?php $this->load->view('email_templates/footer'); ?>
+<?php $this->load->view('email_templates/austin_footer'); ?>

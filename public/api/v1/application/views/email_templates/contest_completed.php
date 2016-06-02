@@ -20,9 +20,9 @@ $query_string['redirect'] = 'dashboard';
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We hope you’re doing well!</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed and it’s time to select your favorite submission as a winner.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed, and it’s time to select your favorite submission as a winner.</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Writers in your contest have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
 Below!</p><br>
 
 <p style='text-align:center'>
@@ -31,7 +31,7 @@ Below!</p><br>
     </a>
 <p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t select your winner soon, the submission with the most upvotes will be announced the winner.. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t select your winner within 3 days of your campaign closing, the submission with the most upvotes will be announced the winner. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
 
 <!-- End Email Content -->
 

@@ -15,14 +15,15 @@ foreach($requirements as $req)
 
 <!-- Start Email Content -->
 
-<p>Thanks for using Tappyn and congrats on picking an amazing ad!
+<p>Thanks for using Tappyn, and congrats on picking an amazing user generated ad!
     Your audience is going to love it!</p>
 
 <p><strong>Details</strong></p>
 <p><strong>Platform :</strong> <?php echo $contest->platform; ?></p>
 <p><strong>Objective :</strong> <?php echo $contest->objective; ?></p>
+<p><strong>Target Audience :>/strong> <?php echo $contest->audience; ?></p>
 <br>
-<p><strong>Creative</strong></p>
+<p><strong>Ad Creative</strong></p>
 <?php if(!is_null($submission->headline) && !$submission->headline == ''): ?>
     <p><strong>Headline :</strong> <?php echo $submission->headline; ?></p>
 <?php endif; ?>
