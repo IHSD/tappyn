@@ -203,7 +203,7 @@ class Contests extends CI_Controller
         $update = FALSE;
         if(!$this->ion_auth->logged_in() || !$this->ion_auth->in_group(3))
         {
-            $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
+            $this->responder->fail("You need to be logged in as a company to create campaigns.")->code(403)->respond();
             return;
         }
 
@@ -330,7 +330,7 @@ class Contests extends CI_Controller
         $payout = $this->payout->exists(array('contest_id' => $cid));
         if($payout)
         {
-            $this->responder->fail("A submission has already been chosen as the winner")->code(500)->respond();
+            $this->responder->fail("An ad has already been chosen as the winner.")->code(500)->respond();
             return;
         }
         // Attempt to create the payouts
@@ -466,13 +466,13 @@ class Contests extends CI_Controller
     {
         if(is_null($id))
         {
-            $this->responder->fail("You must provide a contest to delete")->code(500)->respond();
+            $this->responder->fail("You must provide a campaign to delete")->code(500)->respond();
             return;
         }
 
         if($this->contest->delete($id))
         {
-            $this->responder->data()->message("Contest successfully deleted")->respond();
+            $this->responder->data()->message("Campaign successfully deleted")->respond();
         }
         else
         {

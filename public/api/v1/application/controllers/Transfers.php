@@ -8,7 +8,7 @@ class Transfers extends CI_Controller
         if(!$this->ion_auth->logged_in())
         {
             $this->responder->fail(array(
-                'error' => "You must be logged in to access this area"
+                'error' => "You must be logged in to access this area."
             ))->code(401)->respond();
             return;
         }
@@ -28,7 +28,7 @@ class Transfers extends CI_Controller
             ))->respond();
         } else {
             $this->responder->fail(
-                ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'There was an error fetching your transfers'))
+                ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'There was an error fetching your transfers.'))
             )->code(500)->respond();
         }
     }

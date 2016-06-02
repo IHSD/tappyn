@@ -112,7 +112,7 @@
                                 <th>Votes</th>
                             </tr>
                             <?php if(count($contest->submissions) < 1): ?>
-                                <div class='alert alert-warning'>This contest does not currently have any submissions</div>
+                                <div class='alert alert-warning'>This campaign does not currently have any ads submitted yet.</div>
                             <?php else: ?>
                                 <?php foreach($contest->submissions as $submission): ?>
                                     <tr>

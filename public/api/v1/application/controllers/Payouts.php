@@ -10,7 +10,7 @@ class Payouts extends CI_Controller
         $this->load->library('stripe/stripe_transfer_library');
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail("You must be logged in to access this area")->code(401)->respond();
+            $this->responder->fail("You must be logged in to access this area.")->code(401)->respond();
             exit();
         }
     }
@@ -35,7 +35,7 @@ class Payouts extends CI_Controller
                 'payout' => $payout
             ))->respond();
         } else {
-            $this->responder->fail("We couldnt find the payout you were looking for")->code(500)->respond();
+            $this->responder->fail("We couldn't find the payout you were looking for.")->code(500)->respond();
         }
     }
 
@@ -49,13 +49,13 @@ class Payouts extends CI_Controller
         $payout = $this->payout->get($id);
         if(!$payout)
         {
-            $this->responder->fail("That payout does not exist")->code(500)->respond();
+            $this->responder->fail("That payout does not exist.")->code(500)->respond();
             return;
         }
         // And that it hasnt been claimed
         if($payout->claimed == 1)
         {
-            $this->responder->fail("That payout has already been claimed"
+            $this->responder->fail("That payout has already been claimed."
             )->code(500)->respond();
             return;
         }
@@ -63,21 +63,21 @@ class Payouts extends CI_Controller
         $stripe_account = $this->db->select('*')->where('user_id', $this->ion_auth->user()->row()->id)->limit(1)->get('stripe_accounts');
         if(!$stripe_account || $stripe_account->num_rows() == 0)
         {
-            $this->responder->fail("You need to set up your account first"
+            $this->responder->fail("You need to set up your account first."
             )->code(500)->respond();
             return;
         }
         $account = $this->stripe_account_library->get($stripe_account->row()->account_id);
         if(!$account)
         {
-            $this->responder->fail("You need to set up your account first"
+            $this->responder->fail("You need to set up your account first."
             )->code(500)->respond();
             return;
         }
         // check that transfers are enabled
         if(!$account->transfers_enabled)
         {
-            $this->responder->fail("You still need to set up some account details"
+            $this->responder->fail("You still need to set up some account details."
             )->code(500)->respond();
             return;
         }
@@ -86,7 +86,7 @@ class Payouts extends CI_Controller
         {
             $this->payout->update($payout->id, array('pending' => 0, 'claimed' => 1, 'transfer_id' => $transfer->id, 'account_id' => $account->id));
             $this->responder
-                ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}. Please allow 3-5 business days for funds to be available")
+                ->message("Transfer {$transfer->id} successfully created for {$transfer->amount}. Please allow 3-5 business days for funds to be available.")
                 ->data(array('payout' => $this->payout->get($id)))
                 ->respond();
                 $this->analytics->track(array(

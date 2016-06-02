@@ -7,7 +7,7 @@ class Users extends CI_Controller
         parent::__construct();
         if(!$this->ion_auth->logged_in())
         {
-            $this->responder->fail("You must be logged in to access this area")->code(401)->respond();
+            $this->responder->fail("You must be logged in to access this area.")->code(401)->respond();
             exit();
         }
         $this->load->model('user');
@@ -88,7 +88,7 @@ class Users extends CI_Controller
                 )
             )->respond();
         } else {
-            $this->responder->fail('There was an error fetching your dashboard')->code(500)->respond();
+            $this->responder->fail('There was an error fetching your dashboard.')->code(500)->respond();
         }
     }
 
@@ -122,7 +122,7 @@ class Users extends CI_Controller
                 if(empty($data)) {
                     $this->responder
                         ->message(
-                            'Profile was successfully updated'
+                            'Your profile was successfully updated.'
                         )
                         ->data(array(
                             'profile' => $this->user->profile($this->ion_auth->user()->row()->id)
@@ -133,14 +133,14 @@ class Users extends CI_Controller
                 if(!$this->user->saveProfile($this->ion_auth->user()->row()->id, $data))
                 {
                     $this->responder
-                        ->fail("There was an error updating your profile")
+                        ->fail("There was an error updating your profile.")
                         ->code(500)
                         ->respond();
                     return;
                 } else {
                     $this->responder
                         ->message(
-                            'Profile was successfully updated'
+                            'Profile was successfully updated.'
                         )
                         ->data(array(
                             'profile' => $this->user->profile($this->ion_auth->user()->row()->id)

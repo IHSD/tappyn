@@ -113,7 +113,7 @@ class Submissions extends CI_Controller
         if(!$this->ion_auth->logged_in())
         {
             $this->responder->fail(
-                "You must be logged in to create submissions"
+                "You must be logged in to start creating ads."
             )->code(401)->respond();
             return;
         }
@@ -121,7 +121,7 @@ class Submissions extends CI_Controller
         if($this->ion_auth->in_group(3))
         {
             $this->responder->fail(
-                "Only creators are allowed to submit to contests"
+                "Only members of Tappyn are allowed to submit to contests."
             )->code(403)->respond();
             return;
         }
@@ -129,7 +129,7 @@ class Submissions extends CI_Controller
         if($this->ion_auth->user()->row()->active == 0)
         {
             $this->responder->fail(
-                "Your account has not been verified yet"
+                "Your account has not been verified yet."
             )->code(500)->respond();
             return;
         }
@@ -137,7 +137,7 @@ class Submissions extends CI_Controller
         if(!$this->contest->mayUserSubmit($uid, $contest_id))
         {
             $this->responder->fail(
-                "Unfortunately, you are not eligible for this contest!"
+                "Unfortunately, you are not eligible for this campaign!"
             )->code(500)->respond();
             return;
         }
@@ -145,7 +145,7 @@ class Submissions extends CI_Controller
         if(!$contest)
         {
             $this->responder->fail(
-                "That contest does not exist!"
+                "That campaign does not exist!"
             )->code(500)->respond();
             return;
         }
@@ -168,7 +168,7 @@ class Submissions extends CI_Controller
             } else
             {
                 $this->responder->fail(
-                "There was an error uploading your image"
+                "There was an error uploading your image."
                 )->code(500)->respond();
                 return;
             }
@@ -183,7 +183,7 @@ class Submissions extends CI_Controller
             }
 
             $this->responder->message(
-                "You're submission has succesfully been created"
+                "Your ad has succesfully been created!"
             )->respond();
             $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
             $this->analytics->track(array(
@@ -215,7 +215,7 @@ class Submissions extends CI_Controller
         // We dont have any active contests, so ets just exit out with success
         if(empty($contests))
         {
-            $this->responder->message("There currently aren't any active contests")->respond();
+            $this->responder->message("There currently aren't any active contests.")->respond();
             return;
         }
         foreach($contests as $contest)
@@ -332,14 +332,14 @@ class Submissions extends CI_Controller
         $contest = $this->contest->get($submission->contest_id);
         if(!$contest || $contest->owner !== $this->ion_auth->user()->row()->id)
         {
-            $this->responder->fail("That contest doesnt exist, or you dont have permission")->code(500)->respond();
+            $this->responder->fail("That campaign doesn't exist, or you don't have permission.")->code(500)->respond();
             return;
         }
         if($this->db->where('id', $sid)->update('submissions', array('rating' => $rating)))
         {
             $this->responder->respond();
         } else {
-            $this->responder->fail("There was an error rating your submission")->code(500)->respond();
+            $this->responder->fail("There was an error rating your ad.")->code(500)->respond();
         }
     }
 }

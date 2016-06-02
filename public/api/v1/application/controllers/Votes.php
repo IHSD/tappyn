@@ -40,7 +40,7 @@ class Votes extends CI_Controller {
         $submission = $this->submission->get($submission_id);
         if($submission->owner == $this->ion_auth->user()->row()->id)
         {
-            $this->responder->fail("You cant vote for your own submission")->code(500)->respond();
+            $this->responder->fail("You can't vote for your own ad!")->code(500)->respond();
             return;
         }
         $contest = $this->contest->get($submission->contest_id);
