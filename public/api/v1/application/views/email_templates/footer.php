@@ -1,11 +1,11 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed'); ?>
 
 
-<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+<p style='text-align:left;margin:auto;width:600px'>
     Feel free to hit me up with any feedback or questions!
 </p>
 <br>
-<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+<p style='text-align:left;margin:auto;width:600px'>
   -Austin
   <br>
   Co-Founder Tappyn
