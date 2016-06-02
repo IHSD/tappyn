@@ -134,15 +134,22 @@ class Mailing extends CI_Controller
                 break;
 
                 case 'submission_chosen':
-                    $company = $this->db->select('*')->from('profiles')->where('id', $job->object_id)->get();
-                    if(!$company || $company->num_rows() == 0)
+                    $contest = $this->db->select('*')->from('contests')->where('id', $job->object_id)->get();
+                    if(!$contest || $contest->num_rows() == 0)
                     {
-                        $this->error_out($job->id, '["Invalid company supplied"]');
+                        $this->error_out($job->id, '["Invalid contest supplied"]');
                         $continue = false;
                         continue;
                     }
-                    $this->email_data['company'] = $company->row();
+                    $contest = $contest->row();
+                    $contest->owner = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $subject = sprintf($this->email_config[$job->email_type]['subject'], is_null($contest->owner->name) ? "They " : $contest->owner->name);
+                    $this->email_data['contest'] = $contest;
+                    $this->email_data['company'] = $contest->owner;
                 break;
+
+
+
 
                 case 'contest_receipt':
                     $this->load->library('stripe/stripe_charge_library');
