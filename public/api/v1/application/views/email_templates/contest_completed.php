@@ -23,7 +23,7 @@ $query_string['redirect'] = 'dashboard';
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed, and it’s time to select your favorite submission as a winner.</p><br>
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
-Below!</p><br>
+below!</p><br>
 
 <p style='text-align:center'>
     <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'dashboard'; ?>">
@@ -45,5 +45,6 @@ Below!</p><br>
   Co-Founder Tappyn
     <br>
   (678)-367-1060
+    <br>
     <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>

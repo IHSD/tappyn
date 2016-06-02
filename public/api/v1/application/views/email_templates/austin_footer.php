@@ -8,5 +8,7 @@
 <p style='text-align:left;margin:auto;width:600px'>
     -Austin
     <br>
-    Co-Founder - Tappyn <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    Co-Founder Tappyn
+    <br>
+    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
 </p>

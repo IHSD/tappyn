@@ -17,7 +17,7 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Congratulations, your advertisement won!</h2>
+<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Congratulations!</h2>
 <br>
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
