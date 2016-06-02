@@ -7,6 +7,10 @@
 body{
 	font-family: 'Lato', sans-serif;
 }
+small {
+	color: #8E8E8E;
+	font-size: 100%;
+}
 #nav-icon4 {
   width: 31px;
   height: 31px;
@@ -1395,7 +1399,7 @@ footer {
 /*** Submissions **/
 .submission-box {
 	position: relative;
-	
+
 }
 .orange-ad-view h4 {
 	color: #ff5e00;
@@ -1896,7 +1900,7 @@ footer {
     box-shadow: none !important;
 }
 .submissions-page-mobile{
- 	min-height:350px; 
+ 	min-height:350px;
  	max-height:350px;
 	}
 }
@@ -2182,10 +2186,32 @@ nav .dropdown-menu{
 .modal_actions{
     z-index:100000000 !important;
     position:fixed;
-    top:5%;
-    height:70%; 
+    height: 100%;
     opacity: 1;
+		transform-style: preserve-3d;
 }
+.modal_inner {
+	padding: 40px 70px;
+	background-color: #fff;
+	border-radius: 3px;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	max-height: 90%;
+	overflow-y: scroll;
+}
+.modal_inner .logo img {
+	max-width: 100px;
+}
+.modal_inner .btn {
+	margin-bottom: 10px;
+}
+.modal_inner .btn.btn-link {
+	color: #ff5c00;
+	font-size: 20px;
+	text-decoration: underline;
+}
+
 .modal_actions.ng-hide-add.ng-hide-add-active,
 .modal_actions.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
@@ -2217,13 +2243,14 @@ nav .dropdown-menu{
 .close_circle{
 	background:#aaa;
 	border-radius: 25px;
-	font-size:14;
+	font-size:14px;
 	color:#fff;
 	height:20px;
+	line-height:18px;
 	width:20px;
 	position:absolute;
-	right:3;
-	top:3;
+	right:15px;
+	top:15px;
 	cursor: pointer;
 	text-align:center;
 }
@@ -2329,13 +2356,13 @@ nav .dropdown-menu{
     margin-bottom: 5px;
     padding: 15px 5px 5px 5px;
     border-radius: 5px;
-    border:1px solid transparent; 
+    border:1px solid transparent;
 }
 .personality:hover{
 	background: #eee;
 }
 .personality-highlight{
-	border:1px solid #ff5c00; 
+	border:1px solid #ff5c00;
 }
 
 .modal_note{
@@ -2358,7 +2385,7 @@ nav .dropdown-menu{
        transition:all linear 0.5s;
 }
 .notif-tab-left{
-	border-width : 1px 0px 1px 1px; 
+	border-width : 1px 0px 1px 1px;
 	border-style : solid;
 	border-color : #ff5c00;
 	border-top-left-radius: 25px;

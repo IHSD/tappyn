@@ -406,8 +406,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 		$scope.signing_in = {show : false, type : '', object : ''};
 	}
 
-	$scope.open_register = function(type, obj){
+	$scope.open_register = function(type, obj, group_id){
 		$scope.registration = {show : true, type : type, object : obj};
+		$scope.registrar = {show : true, group_id : group_id};
 		$rootScope.modal_up = true;
 	}
 
