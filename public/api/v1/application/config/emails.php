@@ -138,7 +138,7 @@ $config['email_program']['contest_completed']['additional_data'] = array();
 */
 $config['email_program']['submission_chosen']['template'] = 'email_templates/submission_chosen';
 $config['email_program']['submission_chosen']['from'] = 'austin@tappyn.com';
-$config['email_program']['submission_chosen']['subject'] = "Congratulations, your submission won!";
+$config['email_program']['submission_chosen']['subject'] = "Congratulations, your ad won on Tappyn!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',

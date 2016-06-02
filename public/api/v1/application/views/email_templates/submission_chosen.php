@@ -17,13 +17,21 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h4 style='text-align:center'>Congratulations, your submission won!</h4>
+<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Congratulations, your submission won!</h2>
+<br>
+<!-- Orange header -->
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
-<h5 style='text-align:center'><?php echo $company->name; ?> chose your submission, and is sending $85 your way!</h5>
-
-<p style='text-align:center;margin:auto;width:600px'>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?> and just click claim! If you haven't yet,
-    you'll need to set up an account, which takes only seconds. Not a bad hourly wage!</p>
-
+<p style='text-align:left;margin:auto;width:600px'><?php echo $company->name; ?> has picked your awesome ad as the winner for their contest, and they are sending $85 your way.</p>
+<br>
+<p style='text-align:left;margin:auto;width:600px'>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and claim the payout for your ad. If you haven't yet,
+    you'll need to set up your payout information, which takes only seconds. </p>
+<br>
+<?php $query_string['redirect'] = 'contests'; ?>
+<p style='text-align:left;margin:auto;width:600px'>Congrats again on killing it, and keep up your winning reign by checking out our other campaigns <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>. </p>
+<br>
 <!-- End Email Content -->
+<!-- Orange header -->
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
 <?php $this->load->view('email_templates/footer'); ?>

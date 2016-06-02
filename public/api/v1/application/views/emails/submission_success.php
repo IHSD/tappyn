@@ -25,13 +25,13 @@ if(!isset($contest) ||
     <img align='center' height='75' src="<?php echo base_url().'public/img/TappynLogo2.png'; ?>">
 </p>
 
-<h2 style='text-align:center'>Boom. You're confirmed.</h2>
+<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Boom. You're confirmed.</h2>
 
-<h3 style='text-align:center'>You just Tapped In</h3>
+<h3 style='text-align:center;margin:auto;min-width:450px;width:50%'>You just Tapped In</h3>
 
-<p style='text-align:center;margin:auto;width:600px'>Great news - your submission to Tappyn has been confirmed. Yup - it's go time.</p><br>
+<p style='text-align:center;margin:auto;width:600px'>Great news - your ad to Tappyn has been confirmed. Yup - it's go time.</p><br>
 
-<p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the info you submitted to us:</p><br>
+<p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the ad you submitted to us:</p><br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
 <h4 style='text-align:center'><?php echo $company; ?></h4>
@@ -64,7 +64,7 @@ if(!isset($contest) ||
 <br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #FF5E00'></p>
-<p style='text-align:center'>To keep up with your contests, your upvotes, and of course, the <strong>$$$</strong> in your account: <br></p>
+<p style='text-align:left;margin:auto;width:600px'>To keep up with your ads, your up-votes, and of course, the <strong>$$$</strong> in your account: <br></p>
 <p style='text-align:center'>
     <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'#/dashboard'; ?>">
         Visit Your Dashboard
@@ -72,11 +72,11 @@ if(!isset($contest) ||
 <p>
 
 <!-- Begin footer -->
-<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+<p style='text-align:left;margin:auto;width:600px'>
     Feel free to hit me up with feedback or questions!
 </p>
 <br>
-<p style='text-align:left;margin:auto;min-width:450px;width:50%;'>
+<p style='text-align:left;margin:auto;width:600px'>
     -Austin
     <br>
     Co-Founder Tappyn
