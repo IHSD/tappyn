@@ -168,7 +168,7 @@ $config['email_program']['company_sign_up_conf']['additional_data'] = array();
 */
 $config['email_program']['contest_receipt']['template'] = 'email_templates/contest_receipt';
 $config['email_program']['contest_receipt']['from'] = 'alek@tappyn.com';
-$config['email_program']['contest_receipt']['subject'] = "Receipt for your contest";
+$config['email_program']['contest_receipt']['subject'] = "Receipt for your campaign";
 $config['email_program']['contest_receipt']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',
@@ -183,7 +183,7 @@ $config['email_program']['contest_receipt']['additional_data'] = array();
 */
 $config['email_program']['payout_receipt']['template'] = 'email_templates/payout_receipt';
 $config['email_program']['payout_receipt']['from'] = 'austin@tappyn.com';
-$config['email_program']['payout_receipt']['subject'] = "Your payout is on the way";
+$config['email_program']['payout_receipt']['subject'] = "Your payout is on the way!";
 $config['email_program']['payout_receipt']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',
