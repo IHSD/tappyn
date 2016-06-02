@@ -21,7 +21,7 @@ foreach($requirements as $req)
 <p><strong>Details</strong></p>
 <p><strong>Platform :</strong> <?php echo $contest->platform; ?></p>
 <p><strong>Objective :</strong> <?php echo $contest->objective; ?></p>
-<p><strong>Target Audience :>/strong> <?php echo $contest->audience; ?></p>
+<p><strong>Target Audience :</strong> <?php echo $contest->audience; ?></p>
 <br>
 <p><strong>Ad Creative</strong></p>
 <?php if(!is_null($submission->headline) && !$submission->headline == ''): ?>
@@ -41,4 +41,16 @@ foreach($requirements as $req)
 
 <!-- End Email Content -->
 
-<?php $this->load->view('email_templates/footer'); ?>
+<p>
+    Feel free to hit me up with any feedback or questions!
+</p>
+<br>
+<p>
+  -Alek
+  <br>
+  Co-Founder Tappyn
+    <br>
+  (678)-367-1060
+  <br>
+    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+</p>

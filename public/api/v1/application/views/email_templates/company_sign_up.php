@@ -30,7 +30,8 @@ $query_string['redirect'] = 'dashboard';
 <p>4) Choose your favorite advertisement at the end of the contest, and leave with an ad guaranteed to relate to your audience.</p>
 
 <p>Got a question? I’m <a href="mailto:alek@tappyn.com">here to help</a>, and answer any questions. My cell is below - feel free to call me with any questions or concerns.</p>
-<p style='text-align:left;margin:auto;width:600px'>
+
+<p>
     -Alek
     <br>
     Co-Founder Tappyn
