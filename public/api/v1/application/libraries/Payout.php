@@ -48,7 +48,7 @@ class Payout
             'claimed' => 0,
             'pending' => 1,
             'user_id' => $submission->owner,
-            'amount' => $contest->prize
+            'amount' => $contest->prize * 100
         );
         return $this->db->insert('payouts', $insert_data);
     }
