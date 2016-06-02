@@ -21,7 +21,7 @@ $config['email_program'] = array();
 * Sent 24 hours before a contest closes
 */
 $config['email_program']['contest_closing']['template'] = 'email_templates/contest_closing';
-$config['email_program']['contest_closing']['from'] = 'squad@tappyn.com';
+$config['email_program']['contest_closing']['from'] = 'austin@tappyn.com';
 $config['email_program']['contest_closing']['subject'] = "%s contest is about to end!";
 $config['email_program']['contest_closing']['query_string'] = array(
     'utm_source' => 'newsletter',
@@ -80,7 +80,7 @@ $config['email_program']['winner_announced']['additional_data'] = array();
 * Sent to confirm that someone has subsribed to our mailing list
 */
 $config['email_program']['mailing_list_conf']['template'] = 'email_templates/mailing_list_conf';
-$config['email_program']['mailing_list_conf']['from'] = 'squad@tappyn.com';
+$config['email_program']['mailing_list_conf']['from'] = 'austin@tappyn.com';
 $config['email_program']['mailing_list_conf']['subject'] = "Mailing List successful";
 $config['email_program']['mailing_list_conf']['query_string'] = array(
     'utm_source' => 'newsletter',
@@ -137,8 +137,8 @@ $config['email_program']['contest_completed']['additional_data'] = array();
 * Let a winner know that their submission has won
 */
 $config['email_program']['submission_chosen']['template'] = 'email_templates/submission_chosen';
-$config['email_program']['submission_chosen']['from'] = 'alek@tappyn.com';
-$config['email_program']['submission_chosen']['subject'] = "Congratulations, youre submissions won!";
+$config['email_program']['submission_chosen']['from'] = 'austin@tappyn.com';
+$config['email_program']['submission_chosen']['subject'] = "Congratulations, your submission won!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source' => 'transaction',
     'utm_medium' => 'email',
