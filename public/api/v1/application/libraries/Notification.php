@@ -54,7 +54,7 @@ class Notification
                     if(!$votes || $votes->num_rows() == 0) continue;
                     $votes = $votes->row();
                     $not->type = 'submission_received_vote';
-                    $not->message = "Your ad {$cname} has received {$votes->count} votes!";
+                    $not->message = "Your ad {$cname} has received {$votes->count} vote(s)!";
                     $not->destination = "#/contest/{$contest->id}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
