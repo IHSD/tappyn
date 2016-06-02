@@ -54,7 +54,7 @@ class Notification
                     if(!$votes || $votes->num_rows() == 0) continue;
                     $votes = $votes->row();
                     $not->type = 'submission_received_vote';
-                    $not->message = "Your submission {$cname} has received {$votes->count} votes!";
+                    $not->message = "Your ad {$cname} has received {$votes->count} votes!";
                     $not->destination = "#/contest/{$contest->id}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
@@ -67,7 +67,7 @@ class Notification
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     $not->type = 'winner_chosen';
-                    $not->message = "A winner has been chosen for {$cname}'s contest!";
+                    $not->message = "A winner has been chosen for {$cname}'s campaign!";
                     $not->destination = "#/contest/{$contest->id}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
@@ -80,7 +80,7 @@ class Notification
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     $not->type = 'new_contest_launched';
-                    $not->message = "{$cname} just launched a contest you may be interested in!";
+                    $not->message = "{$cname} just launched a campaign you may be interested in!";
                     $not->desination = "#/contest/{$contest->id}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
@@ -95,7 +95,7 @@ class Notification
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     $not->type = 'submission_chosen';
-                    $not->message = "Congratulations! Your submission {$cname} won!";
+                    $not->message = "Congratulations! Your ad {$cname} won!";
                     $not->destination = "#/dashboard?type=winning";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
@@ -110,7 +110,7 @@ class Notification
                     $company = $this->db->select('name')->from('profiles')->where('id', $contest->owner)->get()->row();
                     $cname = $this->parse($company);
                     $not->type = 'submission_confirmed';
-                    $not->message = "Your submission {$cname} has been accepted";
+                    $not->message = "Your ad {$cname} has been accepted";
                     $not->destination = "#/contest/{$contest->id}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
@@ -122,7 +122,7 @@ class Notification
                     $cid = $notification->object_id;
                     $submissions = $this->db->select('COUNT(*) as count')->from('contests')->where('contest_id', $cid)->get()->row()->count;
                     $not->type = 'submission_created';
-                    $not->message = "Your contest has gotten {$submissions} submissions!";
+                    $not->message = "Your campaign has gotten {$submissions} submissions!";
                     $not->destination = "#/contest/{$cid}";
                     $not->object_type = $notification->object_type;
                     $not->object_id = $notification->object_id;
