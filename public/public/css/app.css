@@ -236,10 +236,9 @@ header .btn-login {
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
-	background: url(img-banner.jpg) no-repeat 50% 0;
-	background-size: cover;
-	height: 300px;
-	position: relative;
+	background: #ff843e;
+	padding: 35px 0;
+	background-size: 30%, auto;
 }
 .hero-banner2 {
 	height: 380px;
