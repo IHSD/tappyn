@@ -359,9 +359,53 @@ header .btn-login {
 	left: 15px;
 	padding: 0 12px 0 10px;
 	font-weight: bold;
+
 }
 .contest-image .contest-share span {
 	margin-right: 5px;
+}
+.contest-image .contest-share-socials {
+	position: absolute;
+	white-space: nowrap;
+	left: 0;
+	/*top: 48px;*/
+	top: 100%;
+	display: none;
+}
+.contest-image .addthis_sharing_toolbox {
+	margin-top: 10px;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+	box-shadow: 0 1px 5px 0 rgba(0,0,0,0.25);
+	-webkit-transform: translateZ(0);
+	background: #fff;
+	padding: 10px;
+}
+.contest-image .addthis_sharing_toolbox:before {
+	content: "";
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+	border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid white;
+	top: -7px;
+	left: 10px;
+}
+.contest-image .at-share-btn {
+	border-radius: 50%;
+	max-width: 30px !important;
+	max-height: 30px !important;
+}
+.contest-image .at-icon-wrapper {
+	line-height: 30px !important;
+  height: 30px !important;
+  width: 30px !important;
+	padding: 5px;
+}
+.contest-image .contest-share:hover .contest-share-socials {
+	display: block;
 }
 .contest-image .contest-upvotes-action {
 	position: absolute;
@@ -396,6 +440,7 @@ header .btn-login {
 .contest-image:hover .contest-share {
 	display: block;
 }
+
 .contest-entry h3 {
 	font-weight: bold;
 	margin: 0 0 10px 0;
