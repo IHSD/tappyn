@@ -1644,8 +1644,8 @@ footer {
 	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/herobanner.jpg');
   background-size:cover;
   background-color: #EEEEEE;
-  height:380px;
-	overflow: visible;
+  height:400px;
+	overflow: hidden;
 }
 .testimonials h2 {
 	color:#fff;
