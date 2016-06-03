@@ -9,7 +9,7 @@
 							<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
 							{{contest.company.name}}
 						</h3>
-						<button class='btn btn-default' ng-click='scroll_to_submish()'>View submissions</button>
+						<button class='btn btn-default' ng-click='scroll_to_submish()'>View Current Ads</button>
 					</div>
 					<div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
 						<div style='width:100%;padding-top:15px;'>
@@ -80,7 +80,7 @@
 					<div class='panel-body' style='position:relative;padding:5px;'>
 						<div ng-show='(contest.submission_count >= contest.submission_limit) && user &&  !contest.user_has_submitted'>
 							<div class='alert alert-success text-center'>
-								This contest has hit its submission limit, but check out the submissions, and vote for who you think will win!
+								This campaign has hit its cap of 30 ads, but check out the ads that other members of Tappyn have created, and vote for who you think will win!
 							</div>
 						</div>
 						<div ng-show='!user'>
@@ -92,12 +92,12 @@
 						<div ng-show='user && !user.is_active'>
 							<div class='submish-overlay'></div>
 							<div class='alert alert-danger text-center submish-panel'>
-								Only verified users can submit to contests. Check your email to verify your account, or go to your <a href='#/profile'>profile</a> to resend the email!
+								Only verified members of Tappyn can submit to campaigns. Check your email to verify your account, or go to your <a href='#/profile'>profile</a> to re-send the email!
 							</div>
 						</div>
 						<div ng-show='user && user.is_active && contest.user_has_submitted'>
 							<div class='alert alert-success text-center'>
-								You have already submitted to this contest. Check out how your submission is doing!
+								You have already created an ad for this campaign. Check out how your ad is doing!
 							</div>
 						</div>
 						<div class='col-sm-7 col-xs-12'>
@@ -141,7 +141,7 @@
 						<div class='col-xs-12 col-sm-5' style='margin:auto' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
 							<div class='text-center' style='width:150px;padding:10px; border-radius:5px; border:1px solid #333'>
 								<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
-								<p style='margin:0;'><a href='/guide'>Read this</a> before creating your submission!</p>
+								<p style='margin:0;'><a href='/guide'>Read this</a> before creating your ad!</p>
 							</div>
 							<h4 class='text-center'>Ad Preview</h4>
 							<div class='submish-preview submission-text row'>
@@ -227,7 +227,7 @@
 					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 		    	</div>
 		    </div>
-			<h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This contest has no submissions yet. You could be the first!</h3>
+			<h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
 		</div>
 	</div>
 </div>
