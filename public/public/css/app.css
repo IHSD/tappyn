@@ -239,6 +239,7 @@ header .btn-login {
 	background: #ff843e;
 	padding: 35px 0;
 	background-size: 30%, auto;
+	overflow:hidden;
 }
 .hero-banner2 {
 	height: 380px;
