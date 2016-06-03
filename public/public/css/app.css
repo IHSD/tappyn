@@ -1645,7 +1645,7 @@ footer {
   background-size:cover;
   background-color: #EEEEEE;
   height:380px;
-	overflow: hidden;
+	overflow: visible;
 }
 .testimonials h2 {
 	color:#fff;
