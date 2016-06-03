@@ -1395,7 +1395,7 @@ footer {
 /*** Submissions **/
 .submission-box {
 	position: relative;
-	
+
 }
 .orange-ad-view h4 {
 	color: #ff5e00;
@@ -1641,9 +1641,10 @@ footer {
 }
 /** Testimonials **/
 .testimonials {
-	background: #ff843e;
-	padding: 35px 0;
-	background-size: 30%, auto;
+	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/Home+Page+Photo.png');
+  background-size:cover;
+  background-color: #EEEEEE;
+  height:300px;
 	overflow: hidden;
 }
 .testimonials h2 {
@@ -1896,7 +1897,7 @@ footer {
     box-shadow: none !important;
 }
 .submissions-page-mobile{
- 	min-height:350px; 
+ 	min-height:350px;
  	max-height:350px;
 	}
 }
@@ -2183,7 +2184,7 @@ nav .dropdown-menu{
     z-index:100000000 !important;
     position:fixed;
     top:5%;
-    height:70%; 
+    height:70%;
     opacity: 1;
 }
 .modal_actions.ng-hide-add.ng-hide-add-active,
@@ -2329,13 +2330,13 @@ nav .dropdown-menu{
     margin-bottom: 5px;
     padding: 15px 5px 5px 5px;
     border-radius: 5px;
-    border:1px solid transparent; 
+    border:1px solid transparent;
 }
 .personality:hover{
 	background: #eee;
 }
 .personality-highlight{
-	border:1px solid #ff5c00; 
+	border:1px solid #ff5c00;
 }
 
 .modal_note{
@@ -2358,7 +2359,7 @@ nav .dropdown-menu{
        transition:all linear 0.5s;
 }
 .notif-tab-left{
-	border-width : 1px 0px 1px 1px; 
+	border-width : 1px 0px 1px 1px;
 	border-style : solid;
 	border-color : #ff5c00;
 	border-top-left-radius: 25px;
