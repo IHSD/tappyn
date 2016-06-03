@@ -1641,10 +1641,10 @@ footer {
 }
 /** Testimonials **/
 .testimonials {
-	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/Home+Page+Photo.png');
+	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/herobanner.jpg');
   background-size:cover;
   background-color: #EEEEEE;
-  height:300px;
+  height:380px;
 	overflow: hidden;
 }
 .testimonials h2 {
