@@ -266,10 +266,19 @@ header .btn-login {
 	font-size:37;
 }
 .hero-content h1 {
-	font-weight: 500;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
 	font-size: 43;
 	color:#fff;
 }
+
+.hero-content h3 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	font-size: 24;
+	color:#fff;
+}
+
 .hero-content .btn-banner {
 	font-size: 18px;
 	line-height: 50px;
