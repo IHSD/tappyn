@@ -268,14 +268,14 @@ header .btn-login {
 .hero-content h1 {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	font-size: 43;
+	font-size: 50;
 	color:#fff;
 }
 
 .hero-content h3 {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 100;
-	font-size: 24;
+	font-size: 28;
 	color:#fff;
 }
 
@@ -445,7 +445,7 @@ header .btn-login {
 .love-raw {
 	text-align: center;
 	padding:  15px 0;
-	background: #CCC;
+	background: #ECECEC;
 }
 .love-raw h3 {
 	color: #8899AA;
