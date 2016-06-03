@@ -1,13 +1,14 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-// Add to header of your file
 use FacebookAds\Api;
 use FacebookAds\Object\Ad;
 use FacebookAds\Object\AdCreative;
+use FacebookAds\Object\AdImage;
 use FacebookAds\Object\AdSet;
 use FacebookAds\Object\Campaign;
 use FacebookAds\Object\Fields\AdCreativeFields;
 use FacebookAds\Object\Fields\AdFields;
+use FacebookAds\Object\Fields\AdImageFields;
 use FacebookAds\Object\Fields\AdSetFields;
 use FacebookAds\Object\Fields\CampaignFields;
 use FacebookAds\Object\Fields\ObjectStorySpecFields;
@@ -19,88 +20,59 @@ use FacebookAds\Object\TargetingSpecs;
 use FacebookAds\Object\Values\AdObjectives;
 use FacebookAds\Object\Values\BillingEvents;
 use FacebookAds\Object\Values\OptimizationGoals;
-use Facebook\Exceptions\FacebookResponseException;
-use Facebook\Exceptions\FacebookSDKException;
-use Facebook\Facebook;
 
-// Add after echo "You are logged in "
-
-// Initialize a new Session and instantiate an Api object
-
-// Add to header of your file
-
-class Test extends MY_Controller
+class Ad_lib
 {
+    private $data;
     public function __construct()
     {
-        parent::__construct();
-        $this->load->library('interest');
-        $this->interest->setDatabase($this->db);
-    }
-
-    public function testarooni($id)
-    {
+        $this->load->model('ad_model');
         $this->load->model('contest');
-        $this->contest->get($id);
-        var_dump($this->contest->_data);
+        $this->load->model('submission');
     }
 
-    public function path()
+    public function __get($var)
     {
-        $start_time = (new \DateTime(""))->format(DateTime::ISO8601);
-        $end_time = (new \DateTime("+1 day"))->modify("+1 seconds")->format(DateTime::ISO8601);
-        var_dump($start_time, $end_time, __DIR__);
+        return get_instance()->$var;
     }
 
-    public function ad()
+    public function check_unsend()
     {
-        $this->load->library('ad_lib');
-        $this->ad_lib->check_unsend();
+        $params = array(
+            'stop_time >' => date('Y-m-d H:i:s', strtotime('-3 day')),
+            'stop_time <' => date('Y-m-d H:i:s'),
+            'paid' => 1,
+        );
+        $contests = $this->contest->fetchAll($params);
+        foreach ($contests as $contest) {
+            $submissions = $this->contest->submissions($contest->id);
+            if ($submissions) {
+                $this->facebook_ad($contest, $submissions);
+            }
+            break;
+        }
+        //var_dump($contests);
     }
-    public function index()
+
+    private function facebook_ad($contest, $submissions)
     {
         $bi = 'act_502815969898232';
         $i = '1018237411624257';
         $s = 'd4b026673315e0be1d6123c53cf34aa2';
         $img_hash = 'e8819ada075057d7071d73d519671dfc'; // test
         $fan_id = '446303965572597';
+        $token = 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD';
 
-        $fb = new Facebook([
-            'app_id' => $i,
-            'app_secret' => $s,
-        ]);
+        try {
 
-        $helper = $fb->getRedirectLoginHelper();
-
-        if (!isset($_SESSION['facebook_access_token'])) {
-            $_SESSION['facebook_access_token'] = null;
-        }
-
-        if (!$_SESSION['facebook_access_token']) {
-            $helper = $fb->getRedirectLoginHelper();
-            try {
-                $_SESSION['facebook_access_token'] = (string) $helper->getAccessToken();
-            } catch (FacebookResponseException $e) {
-                // When Graph returns an error
-                echo 'Graph returned an error: ' . $e->getMessage();
-                exit;
-            } catch (FacebookSDKException $e) {
-                // When validation fails or other local issues
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                exit;
-            }
-        }
-
-        if ($_SESSION['facebook_access_token']) {
-            //echo "You are logged in!";
             Api::init(
                 $i, // App ID
                 $s,
-                $_SESSION['facebook_access_token']// Your user access token
+                $token // Your user access token
             );
             $campaign = new Campaign(null, $bi);
             $campaign->setData(array(
-                CampaignFields::NAME => 'my test' . date('H:i:s'),
+                CampaignFields::NAME => 'api contest:' . $contest->id,
                 CampaignFields::OBJECTIVE => AdObjectives::LINK_CLICKS,
             ));
 
@@ -119,7 +91,7 @@ class Test extends MY_Controller
 
             $adset = new AdSet(null, $bi);
             $adset->setData(array(
-                AdSetFields::NAME => 'My Ad Set' . date('H i s'),
+                AdSetFields::NAME => 'api contest:' . $contest->id,
                 AdSetFields::OPTIMIZATION_GOAL => OptimizationGoals::REACH,
                 AdSetFields::BILLING_EVENT => BillingEvents::IMPRESSIONS,
                 AdSetFields::BID_AMOUNT => 2,
@@ -133,13 +105,28 @@ class Test extends MY_Controller
                 AdSet::STATUS_PARAM_NAME => AdSet::STATUS_PAUSED,
             ));
             //sleep(1);
-            for ($i = 0; $i < 1; $i++) {
+            foreach ($submissions as $submission) {
+                $img = 'forad.jpg';
+                $ch = curl_init($submission->attachment);
+                $fp = fopen($img, 'c');
+                curl_setopt($ch, CURLOPT_FILE, $fp);
+                curl_setopt($ch, CURLOPT_HEADER, 0);
+                curl_exec($ch);
+                curl_close($ch);
+                fclose($fp);
+                $image = new AdImage(null, $bi);
+                $image->{AdImageFields::FILENAME} = $img;
+
+                $image->create();
+                unlink($img);
+                echo 'Image Hash: ' . $image->{AdImageFields::HASH} . PHP_EOL;
+
                 $link_data = new LinkData();
                 $link_data->setData(array(
-                    LinkDataFields::MESSAGE => 'try it out' . $i,
-                    LinkDataFields::LINK => 'http://google.com',
+                    LinkDataFields::MESSAGE => $submission->text,
+                    LinkDataFields::LINK => 'https://tappyn.com/contest/' . $contest->id,
                     LinkDataFields::CAPTION => 'My caption',
-                    LinkDataFields::IMAGE_HASH => $img_hash,
+                    LinkDataFields::IMAGE_HASH => $image->{AdImageFields::HASH},
                 ));
 
                 $object_story_spec = new ObjectStorySpec();
@@ -150,7 +137,7 @@ class Test extends MY_Controller
 
                 $creative = new AdCreative(null, $bi);
                 $creative->setData(array(
-                    AdCreativeFields::NAME => 'Sample Creative',
+                    AdCreativeFields::NAME => 'Submission ' . $submission->id,
                     AdCreativeFields::OBJECT_STORY_SPEC => $object_story_spec,
                 ));
 
@@ -161,7 +148,7 @@ class Test extends MY_Controller
                 // Please note that the ad creative is not created independently, rather its
                 // data structure is appended to the ad group
                 $data = array(
-                    AdFields::NAME => $i . 'My Ad' . date('H i s'),
+                    AdFields::NAME => 'Submission ' . $submission->id,
                     AdFields::ADSET_ID => $adset->id,
                     AdFields::CREATIVE => array(
                         'creative_id' => $creative->id,
@@ -174,53 +161,15 @@ class Test extends MY_Controller
                     Ad::STATUS_PARAM_NAME => Ad::STATUS_PAUSED,
                 ));
                 sleep(1);
+                break;
             }
 
-            //var_dump($creative);
-        } else {
-            $permissions = ['ads_management'];
-            $loginUrl = $helper->getLoginUrl('http://tappyn.local/api/v1/test/', $permissions);
-            echo '<a href="' . $loginUrl . '">Log in with Facebook</a>';
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
+
+        //var_dump($creative);
 
     }
 
-    // public function fetch()
-    // {
-    //     if($this->interest->create('asdfasaadfasdasdf', "asdfaasdfaasdfdfaasdf", 12))
-    //     {
-    //
-    //     } else {
-    //
-    //     }
-    //     redirect('test/tree', 'refresh');
-    // }
-    //
-    // public function reset()
-    // {
-    //     $this->db->query('DELETE FROM interests; ALTER TABLE interests AUTO_INCREMENT = 1');
-    // }
-    //
-    // public function delete($id)
-    // {
-    //     if($this->interest->delete($id))
-    //     {
-    //
-    //     } else {
-    //
-    //     }
-    //     redirect('test/tree', 'refresh');
-    // }
-    //
-    // public function tree()
-    // {
-    //     echo json_encode($this->interest->tree());
-    // }
-    //
-    // public function auth()
-    // {
-    //     var_dump($this->config->item('email_activation', 'ion_auth'));
-    //     $this->config->set_item('email_activation', FALSE);
-    //     var_dump($this->config->item('email_activation'));
-    // }
 }
