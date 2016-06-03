@@ -1650,19 +1650,19 @@ footer {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .testimonials {
-    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-2.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/herobanner.jpg) no-repeat center center;
     background-size: cover;
   }
 }
 @media (min-width: 1025px) and (max-width: 1500px) {
   .testimonials {
-    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-3.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/herobanner.jpg) no-repeat center center;
     background-size: cover;
   }
 }
 @media (min-width: 1501px) {
   .testimonials {
-    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-4.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/herobanner.jpg) no-repeat center center;
     background-size: cover;
   }
 }
