@@ -261,6 +261,7 @@ header .btn-login {
 	top:15;
 }
 .hero-content h2 {
+	font-family: 'Roboto', sans-serif;
 	color: #fff;
 	font-weight: 300;
 	font-size:37;
@@ -462,9 +463,10 @@ header .btn-login {
 	background: #CCC;
 }
 .raw-info h2 {
+	font-family: 'Roboto', sans-serif;
 	color: #333;
 	line-height: 28px;
-	font-weight: 300;
+	font-weight: 100;
 	text-align: center;
 	margin:  0 0 50px;
 	font-size: 28px;
@@ -1633,8 +1635,9 @@ footer {
 	background: #fff;
 }
 .some-info h2 {
+	font-family: 'Roboto', sans-serif;
 	margin:  0 0 8px;
-	font-weight: 400;
+	font-weight: 100;
 	color: #ff5e00;
 	font-size: 30px;
 	line-height: 30px;
@@ -1677,8 +1680,9 @@ footer {
 }
 
 .testimonials h2 {
+	font-family: 'Roboto', sans-serif;
 	color:#fff;
-	font-weight: 500;
+	font-weight: 100;
 	font-size:30;
 }
 .testimonial-img img {
@@ -1938,6 +1942,8 @@ footer {
 		font-size: 34px;
 	}
 	.hero-content h2 {
+		font-family: 'Roboto', sans-serif;
+		font-weight: 100;
 		font-size:29px;
 	}
 	.signup-link {
