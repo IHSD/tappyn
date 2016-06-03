@@ -1647,17 +1647,25 @@ footer {
   height:400px;
 	overflow: hidden;
 }
-/* Large desktop */
-    @media (min-width: 1200px) { ... }
 
-    /* Portrait tablet to landscape and desktop */
-    @media (min-width: 768px) and (max-width: 979px) { ... }
-
-    /* Landscape phone to portrait tablet */
-    @media (max-width: 767px) { ... }
-
-    /* Landscape phones and down */
-    @media (max-width: 480px) { ... }
+@media (min-width: 641px) and (max-width: 1024px) {
+  .testimonials {
+    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-2.jpg) no-repeat center center;
+    background-size: cover;
+  }
+}
+@media (min-width: 1025px) and (max-width: 1500px) {
+  .testimonials {
+    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-3.jpg) no-repeat center center;
+    background-size: cover;
+  }
+}
+@media (min-width: 1501px) {
+  .testimonials {
+    background: url(https://dl.dropboxusercontent.com/u/24098368/responsive-hero-bg-4.jpg) no-repeat center center;
+    background-size: cover;
+  }
+}
 
 .testimonials h2 {
 	color:#fff;
