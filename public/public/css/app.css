@@ -245,7 +245,7 @@ li {
     display: block;
 }
 
-li:before {
+li.value-list:before {
     /*Using a Bootstrap glyphicon as the bullet point*/
     content: "\e067";
     font-family: 'Glyphicons Halflings';
