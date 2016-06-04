@@ -235,12 +235,12 @@ header .btn-login {
 	line-height: 14px;
 }
 
-/**
-ul{
+
+ul {
     display:table;
 		margin:0 auto;
 }
-**/
+
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
 	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg');
