@@ -39,12 +39,21 @@ class Ad_lib
     public function check_unsend()
     {
         $params = array(
-            'stop_time >' => date('Y-m-d H:i:s', strtotime('-3 day')),
-            'stop_time <' => date('Y-m-d H:i:s'),
+            'start_time <' => date('Y-m-d H:i:s'),
+            'stop_time >' => date('Y-m-d H:i:s'),
             'paid' => 1,
         );
         $contests = $this->contest->fetchAll($params);
         foreach ($contests as $contest) {
+            if ($contest->submission_count < $contest->submission_limit) {
+                //continue;
+            }
+
+            $done = $this->ad_model->select_by_contest_id($contest->id);
+            //var_dump($done);
+            if ($done->num_rows() > 0) {
+                continue;
+            }
             $submissions = $this->contest->submissions($contest->id);
             if ($submissions) {
                 $this->facebook_ad($contest, $submissions);
@@ -62,6 +71,7 @@ class Ad_lib
         $img_hash = 'e8819ada075057d7071d73d519671dfc'; // test
         $fan_id = '446303965572597';
         $token = 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD';
+        $result = array();
 
         try {
 
@@ -119,13 +129,13 @@ class Ad_lib
 
                 $image->create();
                 unlink($img);
-                echo 'Image Hash: ' . $image->{AdImageFields::HASH} . PHP_EOL;
+                //echo 'Image Hash: ' . $image->{AdImageFields::HASH} . PHP_EOL;
 
                 $link_data = new LinkData();
                 $link_data->setData(array(
                     LinkDataFields::MESSAGE => $submission->text,
                     LinkDataFields::LINK => 'https://tappyn.com/contest/' . $contest->id,
-                    LinkDataFields::CAPTION => 'My caption',
+                    LinkDataFields::CAPTION => '',
                     LinkDataFields::IMAGE_HASH => $image->{AdImageFields::HASH},
                 ));
 
@@ -161,7 +171,25 @@ class Ad_lib
                     Ad::STATUS_PARAM_NAME => Ad::STATUS_PAUSED,
                 ));
                 sleep(1);
-                break;
+                // break;
+                $content = array(
+                    'campaign' => $campaign->id,
+                    'adset' => $adset->id,
+                    'img_hash' => $image->{AdImageFields::HASH},
+                    'creative' => $creative->id,
+                    'ad' => $ad->id,
+                );
+                $result[] = array(
+                    'contest_id' => $contest->id,
+                    'submission_id' => $submission->id,
+                    'platform' => 'facebook',
+                    'get_id' => $ad->id,
+                    'content' => serialize($content),
+                );
+
+            }
+            if ($this->db->insert_batch('ads', $result)) {
+                echo 'contest ' . $contest->id . ' auto add success';
             }
 
         } catch (Exception $e) {

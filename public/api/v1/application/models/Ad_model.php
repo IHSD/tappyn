@@ -2,13 +2,11 @@
 
 class Ad_model extends MY_Model
 {
-    public $table = 'ads';
-    public $order_by;
-    public $order_dir;
     protected $errors = false;
     public function __construct()
     {
         parent::__construct();
+        $this->talbe = 'ads';
     }
 
     public function create($contest_id, $submission_id, $platform)
@@ -18,5 +16,10 @@ class Ad_model extends MY_Model
             'submission_id' => $submission_id,
             'platform' => $platform,
         ));
+    }
+
+    public function select_by_contest_id($contest_id)
+    {
+        return $this->db->select("*")->from("ads")->where('contest_id', $contest_id)->get();
     }
 }
