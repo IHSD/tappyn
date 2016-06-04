@@ -239,6 +239,7 @@ header .btn-login {
 ul {
     display:table;
 		margin:0 auto;
+		font-size: 16px;
 }
 
 /*** Hero Banner CSS Starts Here ***/
