@@ -236,10 +236,11 @@ header .btn-login {
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
-	background: #ff843e;
-	padding: 35px 0;
-	background-size: 30%, auto;
-	overflow:hidden;
+	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/companyhome.jpg');
+  background-size:cover;
+  background-color: #EEEEEE;
+  height:400px;
+	overflow: hidden;
 }
 .hero-banner2 {
 	height: 380px;
