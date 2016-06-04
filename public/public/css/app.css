@@ -241,8 +241,6 @@ header .btn-login {
   background-color: #EEEEEE;
   height:400px;
 	overflow: hidden;
-	width: auto;
-  max-width: 100%;
 	background-position: left
 }
 
