@@ -236,7 +236,7 @@ header .btn-login {
 }
 
 ul{
-    display:table; margin:0;
+    display:table; margin:0 auto;
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
