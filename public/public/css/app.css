@@ -249,11 +249,11 @@ li.value-list:before {
     /*Using a Bootstrap glyphicon as the bullet point*/
     content: "\e067";
     font-family: 'Glyphicons Halflings';
-    font-size: 9px;
+    font-size: 12px;
     float: left;
     margin-top: 4px;
     margin-left: -17px;
-    color: #CCCCCC;
+    color: ##333;
 }
 
 /*** Hero Banner CSS Starts Here ***/
