@@ -235,8 +235,8 @@ header .btn-login {
 	line-height: 14px;
 }
 
-ul{ 
-    display:table; margin:0 auto;
+ul{
+    display:table; margin:0;
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
