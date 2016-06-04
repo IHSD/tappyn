@@ -40,7 +40,24 @@
 				s.src='https://widget.intercom.io/widget/qj6arzfj';
 				var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
         </script>
-				
+				<script>
+				$('.carousel[data-type="multi"] .item').each(function(){
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+
+  for (var i=0;i<2;i++) {
+    next=next.next();
+    if (!next.length) {
+    	next = $(this).siblings(':first');
+  	}
+
+    next.children(':first-child').clone().appendTo($(this));
+  }
+});
+</script>
 	</head>
 	<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
 	    <div id="fb-root"></div>
