@@ -2214,12 +2214,18 @@ nav .dropdown-menu{
 	font-size: 20px;
 	text-decoration: underline;
 }
-
 .modal_actions.ng-hide-add.ng-hide-add-active,
 .modal_actions.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition:all linear 0.5;
        transition:all linear 0.5s;
 }
+.interests-flexbox {
+	flex-direction: row;
+}
+.interests-flexbox img {
+	width: 25%;
+}
+
 .tip-section{
 	border:1px solid #ff5c00;
 	border-radius: 5px;

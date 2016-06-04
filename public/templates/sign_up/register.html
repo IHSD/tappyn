@@ -48,16 +48,39 @@
 							<input type='radio' ng-model='registrar.gender' value='female'>Female</label>
 					</div>
 					<input type='hidden' value='2' ng-model='registrar.group_id'>
+				</div>
+				<div ng-show='step == 3'>
+					<h3>Follow up to 3 topics</h3>
+					<h4>Then we'll build a custom home feed for you</h4>
+					<div class='interests-flexbox'>
+						<img src='public/img/interests/Business.jpg' alt=''>
+						<img src='public/img/interests/Entertainment.jpg' alt='Entertainment'>
+						<img src='public/img/interests/Family_and_Relatinoships.jpg' alt='Family and Relatinoships'>
+						<img src='public/img/interests/Fashion_and_Shopping.jpg' alt='Fashion and Shopping'>
+						<img src='public/img/interests/Fitness_and_Wellness.jpg' alt='Fitness and Wellness'>
+						<img src='public/img/interests/Food_and_Drink.jpg' alt='Food and Drink'>
+						<img src='public/img/interests/Hobbies.jpg' alt='Hobbies'>
+						<img src='public/img/interests/Sports_and_Outdoors.jpg' alt='Sports and Outdoors'>
+						<img src='public/img/interests/Technology.png' alt='Technology'>
+					</div>
+
 					<div class='col-xs-12'>
 						<button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
 					</div>
 				</div>
+
 				<div data-toggle="buttons" class="col-xs-12">
 					<label class='btn btn-oj col-xs-12' ng-hide='step != "1"'>
 						<input type='radio' value='2' ng-model='step'>Sign Up
 					</label>
 					<label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
+						<input type='radio' value='3' ng-model='step'>Next
+					</label>
+					<label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
 						<input type='radio' value='1' ng-model='step'>Back
+					</label>
+					<label class='btn btn-oj col-xs-12' ng-show='step == "3"'>
+						<input type='radio' value='2' ng-model='step'>Back
 					</label>
 				</div>
 			</form>
