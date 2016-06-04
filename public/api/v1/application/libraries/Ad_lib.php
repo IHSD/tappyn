@@ -52,11 +52,11 @@ class Ad_lib
             $done = $this->ad_model->select_by_contest_id($contest->id);
             //var_dump($done);
             if ($done->num_rows() > 0) {
-                continue;
+                //continue;
             }
             $submissions = $this->contest->submissions($contest->id);
             if ($submissions) {
-                $this->facebook_ad($contest, $submissions);
+                $this->instagram_ad($contest, $submissions);
             }
             break;
         }
@@ -154,8 +154,10 @@ class Ad_lib
                     ObjectStorySpecFields::PAGE_ID => $fan_id,
                     ObjectStorySpecFields::LINK_DATA => $link_data,
                 ));
-                if(){
-
+                if ($ad_type == 'instagram') {
+                    $object_story_spec->setData(array(
+                        ObjectStorySpecFields::INSTAGRAM_ACTOR_ID => $ig_id,
+                    ));
                 }
 
                 $creative = new AdCreative(null, $bi);
@@ -183,8 +185,7 @@ class Ad_lib
                 $ad->create(array(
                     Ad::STATUS_PARAM_NAME => Ad::STATUS_PAUSED,
                 ));
-                sleep(1);
-                // break;
+
                 $content = array(
                     'campaign' => $campaign->id,
                     'adset' => $adset->id,
@@ -199,6 +200,9 @@ class Ad_lib
                     'get_id' => $ad->id,
                     'content' => serialize($content),
                 );
+
+                sleep(1);
+                break;
 
             }
             if ($this->db->insert_batch('ads', $result)) {

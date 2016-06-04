@@ -28,6 +28,6 @@ class AddCtrToSubmissions extends AbstractMigration
     public function change()
     {
         $submissions = $this->table('submissions');
-        $submissions->addColumn('ctr', 'string', array('limit' => 11, 'null' => true, 'default' => null))->update();
+        $submissions->addColumn('ctr', 'string', array('limit' => 11, 'null' => true))->update();
     }
 }
