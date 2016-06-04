@@ -215,6 +215,9 @@ header nav ul li .btn:hover {
 	color : #fff;
 	border:1px solid transparent;
 }
+.radio .btn:focus, .radio .btn:active {
+	box-shadow: none;
+}
 .btn:focus, .btn.focus{
 	color:#fff;
 }
