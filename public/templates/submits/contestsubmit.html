@@ -4,7 +4,8 @@
 
 <div class='contest-company text-left'>
   <div class='avatar'>
-    <img src='public/img/community1.jpg' alt=''>
+		<img ng-if='!submission.contest.company.logo_url' src="favicon.ico">
+    <img ng-if='submission.contest.company.logo_url' src="{{submission.contest.company.logo_url}}">
   </div>
   <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
 </div>
@@ -19,7 +20,7 @@
 </div>
 <div class='contest-winner text-left'>
   <div class='avatar'>
-    <img src='public/img/community1.jpg' alt=''>
+    <img src='public/img/avatar.png' alt=''>
   </div>
   <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
   <span class='contest-ctr'>1.09%</span>
