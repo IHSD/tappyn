@@ -38,7 +38,7 @@ class Submissions extends CI_Controller
 
             // only ower show ad reach
             if (!$this->ion_auth->logged_in() || $this->ion_auth->user()->row()->id != $contest->owner) {
-                unset($submission->ad_reach);
+                unset($submission->ctr);
             }
 
             $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;

@@ -63,13 +63,19 @@ class Ad_lib
         //var_dump($contests);
     }
 
-    private function facebook_ad($contest, $submissions)
+    private function instagram_ad($contest, $submissions)
+    {
+        $this->facebook_ad($contest, $submissions, 'instagram');
+    }
+
+    private function facebook_ad($contest, $submissions, $ad_type = 'facebook')
     {
         $bi = 'act_502815969898232';
         $i = '1018237411624257';
         $s = 'd4b026673315e0be1d6123c53cf34aa2';
         $img_hash = 'e8819ada075057d7071d73d519671dfc'; // test
         $fan_id = '446303965572597';
+        $ig_id = '1027980790609615';
         $token = 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD';
         $result = array();
 
@@ -82,7 +88,7 @@ class Ad_lib
             );
             $campaign = new Campaign(null, $bi);
             $campaign->setData(array(
-                CampaignFields::NAME => 'api contest:' . $contest->id,
+                CampaignFields::NAME => 'api contest:' . $contest->id . ' ' . $ad_type,
                 CampaignFields::OBJECTIVE => AdObjectives::LINK_CLICKS,
             ));
 
@@ -96,6 +102,10 @@ class Ad_lib
             array(
                 'countries' => array('US'),
             );
+            if ($ad_type == 'instagram') {
+                $targeting->{TargetingSpecsFields::PAGE_TYPES} = array('instagramstream');
+            }
+
             $start_time = (new \DateTime(""))->format(DateTime::ISO8601);
             $end_time = (new \DateTime("+1 day"))->modify("+1 seconds")->format(DateTime::ISO8601);
 
@@ -135,7 +145,7 @@ class Ad_lib
                 $link_data->setData(array(
                     LinkDataFields::MESSAGE => $submission->text,
                     LinkDataFields::LINK => 'https://tappyn.com/contest/' . $contest->id,
-                    LinkDataFields::CAPTION => '',
+                    LinkDataFields::CAPTION => 'https://tappyn.com/',
                     LinkDataFields::IMAGE_HASH => $image->{AdImageFields::HASH},
                 ));
 
@@ -144,6 +154,9 @@ class Ad_lib
                     ObjectStorySpecFields::PAGE_ID => $fan_id,
                     ObjectStorySpecFields::LINK_DATA => $link_data,
                 ));
+                if(){
+
+                }
 
                 $creative = new AdCreative(null, $bi);
                 $creative->setData(array(
