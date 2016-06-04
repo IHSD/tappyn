@@ -239,8 +239,6 @@
 						<td>Actions</td>
 						<td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign</td>
 						<td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
-						<td style='cursor:pointer' ng-click='predicate="start_time";reverse=!reverse'>Start Time</td>
-						<td style='cursor:pointer' ng-click='predicate="stop_time";reverse=!reverse'>End Time</td>
 						<td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads</td>
 						<td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
 						<td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
@@ -262,16 +260,16 @@
 	                        </ul>
                         </div>
 					</td>
-					<td>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</td>
+					<td>
+						<a href='/contest/{{contest.id}}' style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a><br>
+						<small>
+							<span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
+							<span ng-if='contest.status == "draft"'>No start : Draft</span> -
+							<span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
+							<span ng-if='contest.status == "draft"'>No stop : Draft</span>
+						</small>
+					</td>
 					<td>{{contest.status | capUnderscore}}</td>
-					<td>
-						<span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
-						<span ng-if='contest.status == "draft"'>No start : Draft</span>
-					</td>
-					<td>
-						<span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
-						<span ng-if='contest.status == "draft"'>No stop : Draft</span>
-					</td>
 					<td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
 					<td>{{contest.views | number}}</td>
 					<td>{{contest.votes | number}}</td>
