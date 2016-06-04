@@ -40,6 +40,19 @@
 				s.src='https://widget.intercom.io/widget/qj6arzfj';
 				var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
         </script>
+				<script>
+				$(document).ready(function() {
+					$('#myCarousel').carousel({
+					interval: 10000
+					})
+
+				    $('#myCarousel').on('slid.bs.carousel', function() {
+				    	//alert("slid");
+					});
+
+
+				});
+				</script>
 	</head>
 	<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
 	    <div id="fb-root"></div>
