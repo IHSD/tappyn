@@ -236,30 +236,31 @@ header .btn-login {
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
-	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg');
-  background-size:contain;
+	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg');
+  background-size:cover;
   background-color: #EEEEEE;
   height:400px;
 	overflow: hidden;
 	width: auto;
   max-width: 100%;
+	background-position: left;
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .testimonials {
-    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg') no-repeat;
+    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
     background-size: cover;
   }
 }
 @media (min-width: 1025px) and (max-width: 1500px) {
   .testimonials {
-    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg') no-repeat;
+    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
     background-size: cover;
   }
 }
 @media (min-width: 1501px) {
   .testimonials {
-    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg') no-repeat;
+    background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
     background-size: cover;
   }
 }
