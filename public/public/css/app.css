@@ -236,8 +236,8 @@ header .btn-login {
 }
 /*** Hero Banner CSS Starts Here ***/
 .hero-banner {
-	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg');
-  background-size:cover;
+	background-image:url('https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg') no-repeat;
+  background-size:contain;
   background-color: #EEEEEE;
   height:400px;
 	overflow: hidden;
