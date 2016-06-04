@@ -247,19 +247,19 @@ header .btn-login {
 
 @media (min-width: 641px) and (max-width: 1024px) {
   .testimonials {
-    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat;
     background-size: cover;
   }
 }
 @media (min-width: 1025px) and (max-width: 1500px) {
   .testimonials {
-    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat;
     background-size: cover;
   }
 }
 @media (min-width: 1501px) {
   .testimonials {
-    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat center center;
+    background: url(https://s3-us-west-2.amazonaws.com/tappyn/cphome1.jpg) no-repeat;
     background-size: cover;
   }
 }
