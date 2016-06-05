@@ -8,7 +8,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 		'preview' 		 : {step : 'preview',   next : 'payment', previous : 'package', fill : 75},
 		'done'		 	 : {step : 'done',     next : 'none',    previous : 'none',    fill : 100}
 	}
-	$scope.current = $scope.steps['tp-audience'];
+	$scope.current = $scope.steps['tp-platform'];
 	$scope.personalities = emotions;
 	$scope.contest = {};
 	$scope.company = {};
