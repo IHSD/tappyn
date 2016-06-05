@@ -17,8 +17,10 @@ tappyn.config(function($routeProvider, $locationProvider) {
 		controller : 'dashController'
 	})
 	.when('/launch', {
-		templateUrl : 'components/launch/view.html',
-		controller : 'launchController'
+		// templateUrl : 'components/launch/view.html',
+		// controller : 'launchController'
+		templateUrl : 'components/launch/view-new.html',
+		controller : 'launchControllerNew'
 	})
 	.when('/profile', {
 		templateUrl : 'components/profile/view.html',

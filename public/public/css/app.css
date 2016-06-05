@@ -7,6 +7,11 @@
 body{
 	font-family: 'Roboto', sans-serif;
 }
+hr {
+	border: 0;
+	margin: 40px 10px !important;
+	border-top: 2px solid #e6e6e6;
+}
 #nav-icon4 {
   width: 31px;
   height: 31px;
@@ -189,6 +194,16 @@ header nav ul li .btn:hover {
 	background: #eee;
 	color:#ff5c00;
 }
+.btn-secondary {
+	background: #fff;
+	color: #ff5c00;
+	border: 2px solid #ff5c00;
+	font-weight:  400;
+}
+.btn-secondary:hover{
+	background: #eee;
+	color:#ff5c00;
+}
 .btn-wj {
 	background: #ff5c00;
 	color: #fff;
@@ -227,8 +242,43 @@ header nav ul li .btn:hover {
 	padding-top:20px;
 	padding-bottom:20px;
 }
+.progress {
+	position: relative;
+	box-shadow: none;
+	height: 6px;
+	background-color: #e6e6e6;
+  overflow: visible;
+	margin: 0;
+	position: relative;
+	bottom: -43px;
+}
+.progress:before {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	border: 3px solid #fff;
+	border-radius: 999px;
+	background-color: #ff5e00;
+	left: -6px;
+	top: -6px;
+	z-index: 99;
+}
+.progress-bar-warning:before {
+	content: '';
+	position: absolute;
+	width: 18px;
+	height: 18px;
+	border: 3px solid #fff;
+	border-radius: 999px;
+	background-color: #ff5e00;
+	right: -6px;
+	top: -6px;
+}
 .progress-bar-warning {
-    background-color: #ff5e00;
+  background-color: #ff5e00;
+	position: relative;
+	box-shadow: none;
 }
 header .btn-login {
 	font-size: 14px;
@@ -340,10 +390,10 @@ header .btn-login {
 	background: #fff;
 	position: relative;
 	margin:  0 0 20px;
-	padding:  10px;
+	padding: 20px 30px;
 	border: 1px solid #E0E0E0;
 	border-radius: 4px;
-    word-wrap:break-word;
+  word-wrap: break-word;
 }
 .submission-owner-title {
     text-align:right;
@@ -629,7 +679,8 @@ footer {
  }
  .innerpage {
  	min-height:100%;
- 	background-color: #EBEEF0;
+ 	/*background-color: #EBEEF0;*/
+ 	background-color: #F8F8F8;
  }
  /** Your Work **/
  .inner-title {
@@ -2163,6 +2214,16 @@ nav .dropdown-menu{
 .launch-page-hover:hover{
 	cursor:pointer;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.launch-page-box-icon {
+	max-height: 110px;
+	padding: 5px 0;
+}
+.launch-page-box-title {
+	border-bottom: 1px solid #ff6c00;
+	padding-bottom: 20px;
+	margin-bottom: 20px !important;
+	line-height: 26px !important;
 }
 
 .alerter{
