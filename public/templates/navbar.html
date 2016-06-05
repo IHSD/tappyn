@@ -51,9 +51,9 @@
 				            <ul uib-dropdown-menu role='menu'>
 				            	<li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
 		                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "")'>Sign Up</a></li>
-			                    <li><a href="/contests">Live Campaigns</a></li>
-			                    <li><a href="/winners">Recent Winners</a></li>
-			                    <li ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
+			                    <li><a href="/contests">Discover</a></li>
+			                    <li><a href="/winners">Most Popular</a></li>
+			                    <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
 			                    <li><a href="/faq">FAQ</a></li>
 			                    <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
                                 <li ng-hide='!user && user.type == "company"'><a href="/payment">Payment</a></li>
