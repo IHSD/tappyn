@@ -15,6 +15,7 @@ class Submissions extends CI_Controller
         $this->load->library('vote');
         $this->load->library('s3');
         $this->load->library('image');
+
     }
 
     /**
