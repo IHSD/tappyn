@@ -1,5 +1,14 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
+// Add to header of your file
+use FacebookAds\Object\Ad;
+
+// Add after echo "You are logged in "
+
+// Initialize a new Session and instantiate an Api object
+
+// Add to header of your file
+
 class Test extends MY_Controller
 {
     public function __construct()
@@ -16,6 +25,19 @@ class Test extends MY_Controller
         var_dump($this->contest->_data);
     }
 
+    public function path()
+    {
+        $start_time = (new \DateTime(""))->format(DateTime::ISO8601);
+        $end_time = (new \DateTime("+1 day"))->modify("+1 seconds")->format(DateTime::ISO8601);
+        var_dump($start_time, $end_time, __DIR__);
+    }
+
+    public function ad()
+    {
+        $this->load->library('ad_lib');
+        $this->ad_lib->graph_ctr();
+        $this->ad_lib->check_unsend();
+    }
     public function index()
     {
 
