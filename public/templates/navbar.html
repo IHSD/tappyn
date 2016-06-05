@@ -12,8 +12,7 @@
 	                <ul>
 	                    <li><a href="/contests">Discover</a></li>
 	                    <li><a href="/winners">Most Popular</a></li>
-	                    <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
-	                    <li><a href="/faq">FAQ</a></li>
+
 	                    <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
 	                    	<a href>
 	                    		<span class='notifications-container'>
@@ -33,6 +32,7 @@
 	                            <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
                             </ul>
 	                    </li>
+                        <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
 	                </ul>
@@ -55,7 +55,6 @@
 			                    <li><a href="/contests">Discover</a></li>
 			                    <li><a href="/winners">Most Popular</a></li>
 			                    <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
-			                    <li><a href="/faq">FAQ</a></li>
 			                    <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
                                 <li ng-hide='!user && user.type == "company"'><a href="/payment">Payment</a></li>
 	                            <li ng-hide='!user'><a href="/profile">My Profile</a></li>
