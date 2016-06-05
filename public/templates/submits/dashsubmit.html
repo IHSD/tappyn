@@ -17,5 +17,8 @@
         <img src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{user.first_name}} {{user.last_name | firstChar}}.</h5>
-		<div class='pull-right'><button ng-if='submission.payout' ng-click='claim_winnings(submission.payout.id)' class='btn btn-oj'>Claim Winnings</button></div>
+		<span class='contest-reward'>${{submission.contest.prize}}</span>
+</div>
+<div class='text-center contest-winner-select' ng-if='submission.payout'>
+    <button ng-click='claim_winnings(submission.payout.id)' class='btn btn-oj'>Claim Winnings</button></div>
 </div>
