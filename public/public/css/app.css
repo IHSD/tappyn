@@ -1728,6 +1728,10 @@ footer {
     padding:5px;
 }
 
+.borderlist:hover {
+  border: 1px solid #ff5c00;
+}
+
 .share-contest ul {
     list-style: none;
     padding: 0;
