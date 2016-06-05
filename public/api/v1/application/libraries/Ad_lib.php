@@ -23,7 +23,14 @@ use FacebookAds\Object\Values\OptimizationGoals;
 
 class Ad_lib
 {
-    private $data;
+    private $fb_setting = array(
+        'bussiness_id' => 'act_502815969898232',
+        'app_id' => '1018237411624257',
+        'app_secret' => 'd4b026673315e0be1d6123c53cf34aa2',
+        'fan_id' => '446303965572597',
+        'ig_id' => '1027980790609615',
+        'token' => 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD',
+    );
     public function __construct()
     {
         $this->load->model('ad_model');
@@ -36,6 +43,39 @@ class Ad_lib
         return get_instance()->$var;
     }
 
+    public function graph_ctr()
+    {
+        try {
+            $ungraphs = $this->ad_model->get_ungraph();
+            foreach ($ungraphs as $ungraph) {
+                if ($ungraph->platform == 'facebook' || $ungraph->platform == 'instagram') {
+                    $this->graph_facebook($ungraph);
+                }
+            }
+        } catch (Exception $e) {
+            echo 'Exception:' . $e->getMessage();
+        }
+    }
+
+    private function graph_facebook($ad_model)
+    {
+        $ad_id = $ad_model->get_id;
+        $url = 'https://graph.facebook.com/v2.6/' . $ad_id . '/insights?fields=ctr&access_token=' . $this->fb_setting['token'];
+        $done = 99;
+        $ctr = '0.00';
+        $tmp = file_get_contents($url);
+        if ($tmp) {
+            $result = json_decode($tmp, true);
+            $done = 2;
+            if ($result && $result['data']['ctr']) {
+                $ctr = round($result['data']['ctr'], 2);
+                $done = 1;
+            }
+        }
+        $this->submission->update($ad_model->submission_id, array('ctr' => $ctr));
+        $this->ad_model->update($ad_model->id, array('done' => $done));
+    }
+
     public function check_unsend()
     {
         $params = array(
@@ -46,21 +86,38 @@ class Ad_lib
         $contests = $this->contest->fetchAll($params);
         foreach ($contests as $contest) {
             if ($contest->submission_count < $contest->submission_limit) {
-                //continue;
+                continue;
             }
 
             $done = $this->ad_model->select_by_contest_id($contest->id);
             //var_dump($done);
             if ($done->num_rows() > 0) {
-                //continue;
+                continue;
             }
+
+            $method_name = $contest->platform . '_ad';
             $submissions = $this->contest->submissions($contest->id);
-            if ($submissions) {
-                $this->instagram_ad($contest, $submissions);
+            if ($submissions && method_exists($this, $method_name)) {
+                $this->$method_name($contest, $submissions);
+                //$this->twitter_ad($contest, $submissions);
             }
             break;
         }
         //var_dump($contests);
+    }
+
+    private function twitter_ad($contest, $submissions)
+    {
+        echo 'twitter';
+    }
+
+    private function facebook_api_init()
+    {
+        Api::init(
+            $this->fb_setting['app_id'], // App ID
+            $this->fb_setting['app_secret'],
+            $this->fb_setting['token']// Your user access token
+        );
     }
 
     private function instagram_ad($contest, $submissions)
@@ -70,23 +127,11 @@ class Ad_lib
 
     private function facebook_ad($contest, $submissions, $ad_type = 'facebook')
     {
-        $bi = 'act_502815969898232';
-        $i = '1018237411624257';
-        $s = 'd4b026673315e0be1d6123c53cf34aa2';
-        $img_hash = 'e8819ada075057d7071d73d519671dfc'; // test
-        $fan_id = '446303965572597';
-        $ig_id = '1027980790609615';
-        $token = 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD';
         $result = array();
 
         try {
-
-            Api::init(
-                $i, // App ID
-                $s,
-                $token // Your user access token
-            );
-            $campaign = new Campaign(null, $bi);
+            $this->facebook_api_init();
+            $campaign = new Campaign(null, $this->fb_setting['bussiness_id']);
             $campaign->setData(array(
                 CampaignFields::NAME => 'api contest:' . $contest->id . ' ' . $ad_type,
                 CampaignFields::OBJECTIVE => AdObjectives::LINK_CLICKS,
@@ -107,9 +152,10 @@ class Ad_lib
             }
 
             $start_time = (new \DateTime(""))->format(DateTime::ISO8601);
-            $end_time = (new \DateTime("+1 day"))->modify("+1 seconds")->format(DateTime::ISO8601);
+            $end_date_time = (new \DateTime("+1 day"))->modify("+1 seconds");
+            $end_time = $end_date_time->format(DateTime::ISO8601);
 
-            $adset = new AdSet(null, $bi);
+            $adset = new AdSet(null, $this->fb_setting['bussiness_id']);
             $adset->setData(array(
                 AdSetFields::NAME => 'api contest:' . $contest->id,
                 AdSetFields::OPTIMIZATION_GOAL => OptimizationGoals::REACH,
@@ -134,7 +180,7 @@ class Ad_lib
                 curl_exec($ch);
                 curl_close($ch);
                 fclose($fp);
-                $image = new AdImage(null, $bi);
+                $image = new AdImage(null, $this->fb_setting['bussiness_id']);
                 $image->{AdImageFields::FILENAME} = $img;
 
                 $image->create();
@@ -151,16 +197,16 @@ class Ad_lib
 
                 $object_story_spec = new ObjectStorySpec();
                 $object_story_spec->setData(array(
-                    ObjectStorySpecFields::PAGE_ID => $fan_id,
+                    ObjectStorySpecFields::PAGE_ID => $this->fb_setting['fan_id'],
                     ObjectStorySpecFields::LINK_DATA => $link_data,
                 ));
                 if ($ad_type == 'instagram') {
                     $object_story_spec->setData(array(
-                        ObjectStorySpecFields::INSTAGRAM_ACTOR_ID => $ig_id,
+                        ObjectStorySpecFields::INSTAGRAM_ACTOR_ID => $this->fb_setting['ig_id'],
                     ));
                 }
 
-                $creative = new AdCreative(null, $bi);
+                $creative = new AdCreative(null, $this->fb_setting['bussiness_id']);
                 $creative->setData(array(
                     AdCreativeFields::NAME => 'Submission ' . $submission->id,
                     AdCreativeFields::OBJECT_STORY_SPEC => $object_story_spec,
@@ -180,7 +226,7 @@ class Ad_lib
                     ),
                 );
 
-                $ad = new Ad(null, $bi);
+                $ad = new Ad(null, $this->fb_setting['bussiness_id']);
                 $ad->setData($data);
                 $ad->create(array(
                     Ad::STATUS_PARAM_NAME => Ad::STATUS_PAUSED,
@@ -196,9 +242,10 @@ class Ad_lib
                 $result[] = array(
                     'contest_id' => $contest->id,
                     'submission_id' => $submission->id,
-                    'platform' => 'facebook',
+                    'platform' => $ad_type,
                     'get_id' => $ad->id,
                     'content' => serialize($content),
+                    'end_time' => $end_date_time->getTimestamp(),
                 );
 
                 sleep(1);
