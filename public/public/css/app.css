@@ -29,6 +29,11 @@ body{
     max-height: 100%;
     max-width: 100%;
 }
+
+.question-img img {
+		border-radius: 20px;
+}
+
 #nav-icon4 span {
   display: block;
   position: absolute;
