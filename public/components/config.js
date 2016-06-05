@@ -418,6 +418,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 	}
 	$scope.login_to_register = function(){
 		$scope.registration = {show : true, type : $scope.signing_in.type, object : $scope.signing_in.object};
+		$scope.registrar = {show : true, group_id : 2};
 		$scope.signing_in = {show :false, type : '', object : ''};
 	}
 	$scope.register_to_login = function(){

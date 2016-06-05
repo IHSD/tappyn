@@ -1,15 +1,15 @@
 <div class='wrapper'>
 	<div class='modal_actions col-xs-12 col-sm-10 col-sm-offset-1' ng-show='adding_payment.show'>
-		<div class='panel'>
+		<div class='panel modal_inner'>
 			<div class='panel-body'>
+				<div class='close_circle' ng-click='close_payment()'>X</div>
 				<div class='row'>
 					<div class='col-xs-12' style='border-bottom:1px solid #ff5c00;'>
 						<h3 class='text-center'>Contest Payment</h3>
-						<div class='close_circle' ng-click='close_payment()'>X</div>
 					</div>
 					<div class='col-xs-12 col-sm-8' style='border-right:1px solid #ff5c00;'>
-						<div ng-show='price != 0.00'>	
-							<div ng-show='!add_new'>	
+						<div ng-show='price != 0.00'>
+							<div ng-show='!add_new'>
 								<div ng-show='payments.length > 0'>
 									<div class='payment-method-container'>
 										<div class='row'>
@@ -108,7 +108,7 @@
 					<div class='col-xs-12 col-sm-4'>
 						<h4 class='col-xs-12'><span class='pull-left'>{{adding_payment.contest.platform | capitalize}} Contest</span><span class='pull-right'>$99.99</span></h4>
 						<h4 class='col-xs-12'><span class='pull-left'>{{adding_payment.contest.objective | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>
-						<h4 class='col-xs-12'><span class='pull-left'>{{adding_payment.contest.display_type | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>	
+						<h4 class='col-xs-12'><span class='pull-left'>{{adding_payment.contest.display_type | capUnderscore}}</span><span class='pull-right'>$0.00</span></h4>
 						<h4 class='col-xs-12' ng-if='reduction'><span class='pull-left'>Voucher Discount</span><span class='pull-right'>-{{reducton | currency}}</span></h4>
 						<div clas='col-xs-12'><hr style='border: 1px #ff6c00 solid'></div>
 						<h4 class='col-xs-12'><span class='pull-right'>Total <strong>{{price | currency}}</strong></span></h4>
@@ -123,12 +123,12 @@
 	</div>
 
 	<div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4' ng-show='confirm_winner.show'>
-		<div class='panel'>
-			<div class='panel-body'>
+		<div class='panel modal_inner'>
+			<div class='panel-body '>
+				<div class='close_circle' ng-click='close_confirm()'>X</div>
 				<div class='row'>
 					<div class='col-xs-12' style='border-bottom:1px solid #ff5c00;margin-bottom:5px;'>
 						<h3 class='text-left'>Award Winner</h3>
-						<div class='close_circle' ng-click='close_confirm()'>X</div>
 					</div>
 					<p class='text-left'>Are you sure you want to choose this submission by {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}. as your winning submission?</p>
 					<div class='col-xs-12 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
@@ -186,7 +186,7 @@
 				<h3 class='text-center'>Completed</h3>
 			</div>
 		</div>
-		<div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"'>	
+		<div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"'>
 			<div class='col-xs-12'>
 				<a class='btn btn-outliner pull-right'><span class='glyphicon glyphicon-cog glyph-lg'></span></a>
 				<a href='/profile' class='btn btn-oj pull-right' style='margin-right:5px;'>Edit Profile</a>
@@ -203,7 +203,7 @@
 				<h3 class='text-center'>{{totals.upvotes}}</h3>
 				<h3 class='text-center'>Upvotes</h3>
 			</div>
-			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>	
+			<div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>
 				<h3 class='text-center'>{{totals.won}}</h3>
 				<h3 class='text-center'>Wins</h3>
 			</div>
@@ -230,7 +230,7 @@
 				<div class="contest-box row" ng-repeat='submission in dash.submissions'>
 					<div ng-include src="'templates/submits/dashsubmit.html'"></div>
 				</div>
-			</div>	
+			</div>
 	    </div>
 		<div ng-if='user.type == "company"'>
 			<table ng-show='view == "table"' class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
@@ -271,7 +271,7 @@
 					<td>
 						<span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
 						<span ng-if='contest.status == "draft"'>No stop : Draft</span>
-					</td>	
+					</td>
 					<td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
 					<td>{{contest.views | number}}</td>
 					<td>{{contest.votes | number}}</td>
@@ -335,7 +335,7 @@
 								</span>
 				    	</h4>
 						<h5>Ended {{contest.stop_time | dashDate}}</h5>
-						<div class='col-xs-12'>	
+						<div class='col-xs-12'>
 							<a style='margin-bottom: 10px;' class='btn btn-oj col-xs-8 pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
 						</div>
 						<div class='col-xs-12' ng-switch on='winner.contest.platform'>
