@@ -551,7 +551,7 @@ header .btn-login {
     cursor: default;
 }
 
-.contest-upvotes:hover {
+.contest-upvotes:not(.disable-click):hover {
     color: #717171;
 }
 
@@ -2849,29 +2849,6 @@ nav .dropdown-menu {
         position:absolute;
         top:0;
     }
-
-.close_circle {
-    background: #aaa;
-    border-radius: 25px;
-    font-size: 14;
-    color: #fff;
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    right: 3;
-    top: 3;
-    cursor: pointer;
-    text-align: center;
-}
-
-.package-highlight {
-    border: 2px solid #ff6c00;
-}
-
-.wrapper {
-    position: absolute;
-    top: 0;
-}
 
 .content-panel {
     background-color: #fff;

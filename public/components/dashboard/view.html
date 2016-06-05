@@ -132,6 +132,7 @@
 					</div>
 					<p class='text-left'>Are you sure you want to choose this ad by {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}. as your winning submission?</p>
 
+					<div class="contest-box">
 					<div class='contest-image'>
 					  <img ng-src='{{confirm_winner.submission.attachment}}'>
 					</div>
@@ -151,11 +152,12 @@
 					    <img src='public/img/avatar.png' alt=''>
 					  </div>
 					  <h5 class='winner-name'> {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}.</h5>
-					  <span class='contest-ctr' ng-show='confirm_winner.submission.ctr'>{{confirm_winner.submission.ctr}} %</span>
+					  <span class='contest-ctr' ng-show='confirm_winner.submission.ctr'>{{confirm_winner.submission.ctr}}%</span>
 					</div>
 					<div class='text-center contest-winner-select'>
 						<button ng-click='choose_winner(confirm_winner.submission.id)' class='btn btn-oj'>Confirm Winner</button>
 						<a style='color:#ff5c00;' ng-click='close_confirm()'>Cancel</a>
+					</div>
 					</div>
 
 				</div>
