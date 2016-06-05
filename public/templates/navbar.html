@@ -32,7 +32,8 @@
 	                            <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
                             </ul>
 	                    </li>
-                        <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
+                        <a class="btn btn-wj btn-lg hidden-xs" ng-hide='user.type == "member" && !user.is_admin'style="padding:10px 16px;display:inline;font-size:14px;padding-left: 30px;padding-right: 30px" href="/for_companies"><strong>Launch Campaign</strong></a>
+                        
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
                         <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
 	                </ul>
