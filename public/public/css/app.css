@@ -154,7 +154,6 @@ header nav ul li a{
 
 header nav ul li a:hover{
 	color:#ff5e00;
-	padding-bottom:10px;
 	border-bottom:1px solid #ff5e00;
 }
 header nav ul li.login-li {
