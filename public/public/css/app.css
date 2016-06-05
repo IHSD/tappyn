@@ -190,7 +190,7 @@ header nav ul li {
 }
 
 header nav ul li .btn:hover {
-    color: #fff;
+    color: #ff5c00;
 }
 
 .btn-oj {
@@ -1730,6 +1730,7 @@ footer {
 
 .borderlist:hover {
   border: 1px solid #ff5c00;
+
 }
 
 .share-contest ul {
