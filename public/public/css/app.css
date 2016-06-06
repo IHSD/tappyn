@@ -654,6 +654,7 @@ li.value-list:before {
     position: relative;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		border-radius: 50%;
 }
 
@@ -668,6 +669,10 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
 =======
     border-radius: 50%;
     >>>>>>> staging
@@ -3291,9 +3296,6 @@ nav .dropdown-menu {
     border-radius: 5px;
 }
 
-.login-highlight a {
-    color: #fff;
-}
 
 .login-links {
     width: 33.3%;
