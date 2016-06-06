@@ -8,7 +8,12 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    padding-top: 75px;
+		padding-top: 75px;
+}
+
+small {
+    color: #8E8E8E;
+    font-size: 100%;
 }
 
 #nav-icon4 {
@@ -191,7 +196,7 @@ header nav ul li {
 >>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
     display: inline-block;
     font-size: 16px;
-    font-weight: bold;
+		font-weight: bold;
     padding: 0 26px;
 <<<<<<< HEAD
 >>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
@@ -249,6 +254,11 @@ header nav ul li .btn:hover {
     background: #ff5c00;
     color: #fff;
     border: 1px solid transparent;
+}
+
+.radio .btn:focus,
+.radio .btn:active {
+    box-shadow: none;
 }
 
 .btn:focus,
@@ -362,7 +372,7 @@ li.value-list:before {
     font-family: 'Roboto', sans-serif;
     color: #fff;
     font-weight: 300;
-    font-size: 37;
+    font-size: 37px;
 }
 
 .hero-content h1 {
@@ -453,10 +463,12 @@ li.value-list:before {
     background: #fff;
     position: relative;
     margin: 0 0 20px;
-    padding: 10px;
     border: 1px solid #E0E0E0;
-    border-radius: 4px;
     word-wrap: break-word;
+    -webkit-box-shadow: 0 0px 5px -2px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0px 5px -2px rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+    overflow: hidden;
 }
 
 .submission-owner-title {
@@ -674,8 +686,20 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
-    border-radius: 50%;
-    >>>>>>> staging
+		border-radius: 50%;
+}
+
+.contest-reward,
+.contest-ctr {
+    font-size: 34px;
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+.contest-winner-select {
+    border-top: 1px solid #E7E7E7;
+    padding: 20px 0;
 }
 
 .contest-box .price {
@@ -716,20 +740,20 @@ li.value-list:before {
     width: 0;
 }
 
-.contest-box h3 {
+
+/*.contest-box h3 {
     font-size: 22px;
     font-weight: 300;
-    margin: 0 0 12px;
-    line-height: 22px;
+    margin:  0 0 12px;
+    line-height:  22px;
     color: #FF5E00;
 }
-
 .contest-box h4 {
     font-weight: 300;
-    margin: 0 0 12px;
-    line-height: 22px;
+    margin:  0 0 12px;
+    line-height:  22px;
     color: #FF5E00;
-}
+}*/
 
 .contest-box h1 {
     font-size: 2em;
@@ -790,14 +814,15 @@ li.value-list:before {
 .love-raw {
     text-align: center;
     padding: 15px 0;
-    background: #ECECEC;
+    background: #E7E7E7;
 }
 
-.love-raw h3 {
+
+/*.love-raw h3 {
     color: #8899AA;
-    font-size: 20px;
+    font-size:  20px;
     font-weight: 300;
-}
+}*/
 
 .love-raw .features-box {
     margin: 0 0 45px;
@@ -1721,14 +1746,16 @@ footer {
     z-index: 2;
 }
 
-.borderlist {
+.borderlist
+{
     border: 1px solid #333;
     border-radius: 3px;
-    padding: 5px;
+    padding:5px;
 }
 
 .borderlist:hover {
-    border: 1px solid #ff5c00;
+  border: 1px solid #ff5c00;
+
 }
 
 .share-contest ul {
@@ -2341,13 +2368,6 @@ footer {
     }
 }
 
-.borderlist {
-    border: 1px solid #333;
-    border-radius: 3px;
-    padding: 5px;
-    width: 120px;
-}
-
 .testimonials h2 {
     font-family: 'Roboto', sans-serif;
     color: #fff;
@@ -2647,6 +2667,41 @@ footer {
         display: block;
         text-align: center;
     }
+}
+
+@media screen and (max-width: 550px) {
+    .hero-banner2 {
+        height: 500px;
+    }
+    .hero-content h1 {
+        font-size: 34px;
+    }
+    .hero-content h2 {
+        font-size: 29px;
+    }
+    .signup-link {
+        width: 100%;
+    }
+    .see-submissions {
+        text-align: center;
+        overflow: hidden;
+        float: none;
+    }
+    .footer-nav {
+        text-align: center;
+    }
+    .tabs-box .tabs-title > a {
+        min-width: 85px;
+    }
+    .socials {
+        float: none;
+        text-align: center;
+    }
+    .copyrights {
+        float: none;
+        display: block;
+        text-align: center;
+    }
     .footer-nav li,
     .socials li {
         float: none;
@@ -2695,45 +2750,6 @@ footer {
 
 .text-left {
     text-align: left;
-}
-
-.contest-price {
-    position: absolute;
-    width: 50px;
-    height: 35px;
-    font-size: 16px;
-    line-height: 35px;
-    text-align: center;
-    right: 0px;
-    background: #FF5E00;
-    color: #fff;
-    top: 0;
-    z-index: 20;
-    border-top-right-radius: 5px;
-}
-
-.contest-price:before {
-    border-left: 1.5em solid transparent;
-    border-top: 1.75em solid #FF5E00;
-    content: "";
-    height: 0;
-    z-index: 1;
-    top: 0;
-    position: absolute;
-    left: -20px;
-    width: 0;
-}
-
-.contest-price:after {
-    border-left: 1.5em solid transparent;
-    border-bottom: 1.75em solid #FF5E00;
-    content: "";
-    height: 0;
-    z-index: 1;
-    bottom: 0;
-    position: absolute;
-    left: -20px;
-    width: 0;
 }
 
 .home-industry {
@@ -2926,15 +2942,48 @@ nav .dropdown-menu {
 .modal_actions {
     z-index: 100000000 !important;
     position: fixed;
-    top: 5%;
-    height: 70%;
+    height: 100%;
     opacity: 1;
+    transform-style: preserve-3d;
+}
+
+.modal_inner {
+    padding: 40px 70px;
+    background-color: #fff;
+    border-radius: 3px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    max-height: 90%;
+    overflow-y: scroll;
+}
+
+.modal_inner .logo img {
+    max-width: 100px;
+}
+
+.modal_inner .btn {
+    margin-bottom: 10px;
+}
+
+.modal_inner .btn.btn-link {
+    color: #ff5c00;
+    font-size: 20px;
+    text-decoration: underline;
 }
 
 .modal_actions.ng-hide-add.ng-hide-add-active,
 .modal_actions.ng-hide-remove.ng-hide-remove-active {
     -webkit-transition: all linear 0.5;
     transition: all linear 0.5s;
+}
+
+.interests-flexbox {
+    flex-direction: row;
+}
+
+.interests-flexbox img {
+    width: 25%;
 }
 
 .tip-section {
@@ -2968,13 +3017,14 @@ nav .dropdown-menu {
 .close_circle {
     background: #aaa;
     border-radius: 25px;
-    font-size: 14;
+    font-size: 14px;
     color: #fff;
     height: 20px;
+    line-height: 18px;
     width: 20px;
     position: absolute;
-    right: 3;
-    top: 3;
+    right: 15px;
+    top: 15px;
     cursor: pointer;
     text-align: center;
 }
@@ -3204,6 +3254,28 @@ nav .dropdown-menu {
     font-weight: 500;
 }
 
+#faqpayment .panel-body {
+    border: 1px solid #ff5c00;
+}
+
+.faqpayment .panel-heading {
+    border: 1px solid #ff5c00;
+    background: #fff;
+}
+
+.faqpayment .panel-heading:hover {
+    background: #eee;
+}
+
+.faqpayment .panel-body {
+    border: 1px solid #ff5c00;
+}
+
+.faqpayment .panel-title a {
+    color: #333;
+    font-weight: 500;
+}
+
 .dash-black {
     color: #333;
     cursor: pointer;
@@ -3345,3 +3417,69 @@ nav .dropdown-menu {
     font-size: 14px;
     text-align: left;
 }
+
+
+/*.masonry-layout {
+    display: -ms-flexbox;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.masonry-item {
+    width: 33.3%;
+  transition: .8s opacity;
+}
+@supports not (flex-wrap: wrap) {
+  .masonry-layout { display: block; }
+  .masonry-item {
+  display: inline-block;
+  vertical-align: top;
+  }
+}*/
+
+
+/*can remove once new submission layout is done*/
+
+.contest-price {
+    position: absolute;
+    width: 50px;
+    height: 35px;
+    font-size: 16px;
+    line-height: 35px;
+    text-align: center;
+    right: 0px;
+    background: #FF5E00;
+    color: #fff;
+    top: 0;
+    z-index: 20;
+    border-top-right-radius: 5px;
+}
+
+.contest-price:before {
+    border-left: 1.5em solid transparent;
+    border-top: 1.75em solid #FF5E00;
+    content: "";
+    height: 0;
+    z-index: 1;
+    top: 0;
+    position: absolute;
+    left: -20px;
+    width: 0;
+}
+
+.contest-price:after {
+    border-left: 1.5em solid transparent;
+    border-bottom: 1.75em solid #FF5E00;
+    content: "";
+    height: 0;
+    z-index: 1;
+    bottom: 0;
+    position: absolute;
+    left: -20px;
+    width: 0;
+}
+
+
+/*can remove once new submission layout is done*/
