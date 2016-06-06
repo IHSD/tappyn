@@ -89,7 +89,7 @@ switch (ENVIRONMENT) {
         exit(1); // EXIT_ERROR
 }
 
-if ($_COOKIE['onion_test'] == 'show_php_error') {
+if (isset($_COOKIE['onion_test']) && $_COOKIE['onion_test'] == 'show_php_error') {
     error_reporting(-1);
     ini_set('display_errors', 1);
 }
