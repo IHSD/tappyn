@@ -2225,6 +2225,12 @@ nav .dropdown-menu{
 	margin-bottom: 20px !important;
 	line-height: 26px !important;
 }
+.launch-page-flexbox {
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+}
 
 .alerter{
 	height:75px;
