@@ -164,8 +164,9 @@ header nav ul li.login-li {
 }
 header nav ul li {
 	display: inline-block;
-	font-size: 14px;
+	font-size: 16px;
 	padding:  0 26px;
+	font-weight: bold;
 }
 header nav ul li .btn:hover {
 	color: #fff;
