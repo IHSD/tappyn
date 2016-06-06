@@ -1,5 +1,25 @@
 <div class='contest-image'>
     <img ng-src='{{submission.attachment}}'>
+    <div class='contest-upvotes-action' ng-click='upvote(submission)'><span class='glyphicon glyphicon-heart'></span></div>
+    <div class="contest-share">
+        <span class='glyphicon glyphicon-send'></span> Send
+        <div class="contest-share-socials">
+            <div class='addthis_sharing_toolbox' data-url='https://tappyn.com/contest/{{contest.id}}' data-title='{{submission.headline == "" ? submission.text : submission.headline}}' data-description='{{submission.headline == "" ? "from " + contest.company.name : submission.text}}' data-media='{{submission.attachment}}'></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+    <script type="text/javascript">
+    var addthis_config = addthis_config || {};
+    addthis_config.data_track_addressbar = false;
+    addthis_config.data_track_clickback = false;
+    addthis_share = {
+        passthrough: {
+            twitter: {
+                via: "TheRealTappyn"
+            }
+        }
+    }
+    </script>
 </div>
 <div class='contest-company text-left'>
     <div class='avatar'>
@@ -19,8 +39,8 @@
 </div>
 <div class='contest-winner text-left'>
     <div class='avatar'>
-        <img src='public/img/avatar.png' alt=''>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
-    <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
+    <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <span class='contest-ctr ' ng-show='submission.ctr '>{{submission.ctr}}%</span>
 </div>

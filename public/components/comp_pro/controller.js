@@ -3,35 +3,35 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 		comproFactory.grabProfile($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.company = response.data.company;
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
-		});	
+		});
 		comproFactory.grabContests($routeParams.id).success(function(response){
 			if(response.http_status_code == 200){
 				if(response.success) $scope.contests = response.data.contests;
-				else $scope.set_alert(response.message, "default");	 
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
-		});	
+		});
 	}
 
 	$scope.follow = function(){
 		if(!$rootScope.user){
 			$scope.set_alert("Please make an account to follow companies!", "default");
-			$scope.open_register("default", "");
-		}	
+			$scope.open_register("default", "", "2");
+		}
 		else{
 			comproFactory.followCompany($routeParams.id).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
-						$scope.set_alert("You're following "+$scope.company.name, "default");	
+						$scope.set_alert("You're following "+$scope.company.name, "default");
 						$scope.company.follows++;
 						$scope.company.user_may_follow = false;
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
@@ -46,8 +46,8 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 					$scope.set_alert("You unfollowed "+$scope.company.name, "default");
 					$scope.company.follows--;
 					$scope.company.user_may_follow = true;
-				}	
-				else $scope.set_alert(response.message, "default");	 
+				}
+				else $scope.set_alert(response.message, "default");
 			}
 			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 			else $scope.check_code(response.http_status_code);
@@ -63,10 +63,10 @@ tappyn.controller('comproController', function($scope, $rootScope, $routeParams,
 			comproFactory.requestContest($routeParams.id).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
-						$scope.set_alert(response.message, "default");	
+						$scope.set_alert(response.message, "default");
 						$scope.company.contest_requests++;
 					}
-					else $scope.set_alert(response.message, "default");	 
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);

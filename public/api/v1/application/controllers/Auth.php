@@ -443,12 +443,13 @@ class Auth extends CI_Controller
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
         $this->data['identity_column'] = $identity_column;
+        $first_validation = $this->input->post('first_validation');
 
         // validate form input
         if ($this->input->post('group_id') == 1) {
             die('Invalid request');
         }
-        if ($this->input->post('group_id') == 2) {
+        if ($this->input->post('group_id') == 2 && !$first_validation) {
             $this->form_validation->set_rules('age', 'Age', 'required');
             $this->form_validation->set_rules('gender', 'Gender', 'required');
         } else {
@@ -465,6 +466,10 @@ class Auth extends CI_Controller
         }
 
         if ($this->form_validation->run() == true) {
+            if ($first_validation) {
+                $this->responder->data(array('first_validation_return' => 'ok'))->respond();
+                return;
+            }
             $email = strtolower($this->input->post('identity'));
             $identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');

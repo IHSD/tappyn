@@ -1,171 +1,165 @@
 <div class='modal_actions col-xs-12 col-sm-4 col-sm-offset-4'>
-	<div class='modal_inner col-xs-12 text-center'>
-		<div class="logo">
-			<img src="public/img/beta_logo.png">
-		</div>
-		<div ng-hide='registration.type == "must"' class='close_circle' ng-click='close_register()'>x</div>
-
-		<div ng-show='registrar.group_id == "2"'>
-			<form class='form' ng-submit='sign_up(registrar)'>
-				<div class='row' ng-show='step == 1'>
-					<h3>Create an Account</h3>
-					<div class='col-xs-12'>
-						<a href ng-click='fb_login()' id='fb-login'>
-							<img class='img-responsive' height='45px' style='border-radius: 5px; margin-bottom: 10px;' src="public/img/img-facebook.png">
-						</a>
-					</div>
-					<div class='col-xs-12'>
-						<p class='text-center'>OR</p>
-					</div>
-					<div class='col-xs-12'>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
-						</div>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
-						</div>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
-						</div>
-					</div>
-				</div>
-				<div class='row' ng-show='step == 2'>
-					<h3>Looking good! Just a few more details...</h3>
-					<div class='col-xs-9'>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
-						</div>
-					</div>
-					<div class='col-xs-3'>
-						<div class='form-group'>
-							<input ng-model='registrar.age' class='form-control' placeholder='Age' type='text'>
-						</div>
-					</div>
-					<div class='col-xs-12 radio'>
-						<label class='btn'>
-							<input type='radio' value='male' ng-model='registrar.gender'>Male</label>
-						<label class='btn'>
-							<input type='radio' ng-model='registrar.gender' value='female'>Female</label>
-					</div>
-					<input type='hidden' value='2' ng-model='registrar.group_id'>
-					<div class='col-xs-12'>
-						<button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
-					</div>
-				</div>
-				<!-- <div class='row' ng-show='step == 3'>
-					<h3>Follow up to 3 topics</h3>
-					<h4>Then we'll build a custom home feed for you</h4>
-					<div class='interests'>
-						<img src='public/img/interests/Business.jpg' alt=''>
-						<img src='public/img/interests/Entertainment.jpg' alt='Entertainment'>
-						<img src='public/img/interests/Family_and_Relatinoships.jpg' alt='Family and Relatinoships'>
-						<img src='public/img/interests/Fashion_and_Shopping.jpg' alt='Fashion and Shopping'>
-						<img src='public/img/interests/Fitness_and_Wellness.jpg' alt='Fitness and Wellness'>
-						<img src='public/img/interests/Food_and_Drink.jpg' alt='Food and Drink'>
-						<img src='public/img/interests/Hobbies.jpg' alt='Hobbies'>
-						<img src='public/img/interests/Sports_and_Outdoors.jpg' alt='Sports and Outdoors'>
-						<img src='public/img/interests/Technology.png' alt='Technology'>
-					</div>
-				</div> -->
-
-				<div data-toggle="buttons" class="col-xs-12">
-					<label class='btn btn-oj col-xs-12' ng-hide='step != "1"'>
-						<input type='radio' value='2' ng-model='step'>Sign Up
-					</label>
-					<!-- <label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
-						<input type='radio' value='3' ng-model='step'>Next
-					</label> -->
-					<label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
-						<input type='radio' value='1' ng-model='step'>Back
-					</label>
-					<label class='btn btn-oj col-xs-12' ng-show='step == "3"'>
-						<input type='radio' value='2' ng-model='step'>Back
-					</label>
-				</div>
-			</form>
-		</div>
-
-		<div ng-show='registrar.group_id == "3"'>
-			<h3>Create an Account</h3>
-			<form class='form' ng-submit='sign_up(registrar)'>
-				<div class='col-xs-12'>
-					<div class='form-group'>
-						<input class='form-control' ng-model='registrar.name' placeholder='Company Name' type='text'>
-					</div>
-				</div>
-				<div class='col-xs-12'>
-					<div class='form-group'>
-						<input class='form-control' ng-model='registrar.identity' placeholder='Company Email' type='email'>
-					</div>
-				</div>
-				<div class='col-xs-12'>
-					<div class='form-group'>
-						<input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
-					</div>
-					<div class='form-group'>
-						<input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
-					</div>
-				</div>
-				<div class='hidden-xs'>
-					<h5 class='text-center'>The following fields are optional, but recommended. They can always be provided later in your profile</h5>
-					<div class='col-xs-12 col-sm-6'>
-						<div class='form-group'>
-							<label>Company Logo</label>
-							<input ng-file-select='select_logo($files, registrar)' type='file'>
-						</div>
-					</div>
-					<div class='col-xs-12 col-sm-6'>
-						<img class='img-responsive' ng-src='{{registrar.logo_url}}'>
-					</div>
-					<div class='col-xs-12'>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.company_url' placeholder='Company Website' type='text'>
-						</div>
-					</div>
-					<div class='col-xs-12'>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.facebook_url' placeholder='Company Facebook' type='text'>
-						</div>
-					</div>
-					<div class='col-xs-12'>
-						<div class='form-group'>
-							<input class='form-control' ng-model='registrar.twitter_handle' placeholder='Company Twitter Handle' type='text'>
-						</div>
-					</div>
-				</div>
-				<div class='col-xs-12'>
-					<input type='hidden' value='3' ng-model='registrar.group_id'>
-					<button id='sign-up' type='submit' class='col-xs-12 btn btn-oj'>Sign Up</button>
-				</div>
-			</form>
-		</div>
-
-		<div ng-show='registration.type == "default" || registration.type == "must"' class='col-xs-12 text-center'>
-			<p><small>By creating an account, you agreed to Tappyn's Privacy Policy.</small></p>
-			<div class="btn-group" data-toggle="buttons">
-				<label class='btn btn-link' ng-show='registrar.group_id == "3"'>
-					<input type='radio' value='2' ng-model='registrar.group_id'>Sign Up as a User
-				</label>
-				<label class='btn btn-link' ng-show='registrar.group_id == "2"'>
-					<input type='radio' value='3' ng-model='registrar.group_id'>Sign Up as a Business
-				</label>
-			</div>
-		</div>
-
-		<div class='modal_link text-center col-xs-12'>
-			<span style='color:#333'>Already have an account?</span> <a ng-click='register_to_login()'>Log in</a>
-		</div>
-
-	</div>
+    <div class='modal_inner col-xs-12 text-center'>
+        <div class="logo">
+            <img src="public/img/beta_logo.png">
+        </div>
+        <div ng-hide='registration.type == "must"' class='close_circle' ng-click='close_register()'>x</div>
+        <div ng-show='registrar.group_id == "2"'>
+            <form class='form' ng-submit='sign_up(registrar)'>
+                <div class='row' ng-show='registrar.step== 1'>
+                    <h3>Create an Account</h3>
+                    <div class='col-xs-12'>
+                        <a href ng-click='fb_login()' id='fb-login'>
+                            <img class='img-responsive' height='45px' style='border-radius: 5px; margin-bottom: 10px;' src="public/img/img-facebook.png">
+                        </a>
+                    </div>
+                    <div class='col-xs-12'>
+                        <p class='text-center'>OR</p>
+                    </div>
+                    <div class='col-xs-12'>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
+                        </div>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+                        </div>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
+                        </div>
+                    </div>
+                </div>
+                <div class='row' ng-show='registrar.step == 2'>
+                    <h3>Looking good! Just a few more details...</h3>
+                    <div class='col-xs-9'>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
+                        </div>
+                    </div>
+                    <div class='col-xs-3'>
+                        <div class='form-group'>
+                            <input ng-model='registrar.age' class='form-control' placeholder='Age' type='number'>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 radio'>
+                        <label class='btn'>
+                            <input type='radio' value='male' ng-model='registrar.gender'>Male</label>
+                        <label class='btn'>
+                            <input type='radio' ng-model='registrar.gender' value='female'>Female</label>
+                    </div>
+                    <input type='hidden' value='2' ng-model='registrar.group_id'>
+                    <div class='col-xs-12'>
+                        <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
+                    </div>
+                </div>
+                <!-- <div class='row' ng-show='step == 3'>
+                    <h3>Follow up to 3 topics</h3>
+                    <h4>Then we'll build a custom home feed for you</h4>
+                    <div class='interests'>
+                        <img src='public/img/interests/Business.jpg' alt=''>
+                        <img src='public/img/interests/Entertainment.jpg' alt='Entertainment'>
+                        <img src='public/img/interests/Family_and_Relatinoships.jpg' alt='Family and Relatinoships'>
+                        <img src='public/img/interests/Fashion_and_Shopping.jpg' alt='Fashion and Shopping'>
+                        <img src='public/img/interests/Fitness_and_Wellness.jpg' alt='Fitness and Wellness'>
+                        <img src='public/img/interests/Food_and_Drink.jpg' alt='Food and Drink'>
+                        <img src='public/img/interests/Hobbies.jpg' alt='Hobbies'>
+                        <img src='public/img/interests/Sports_and_Outdoors.jpg' alt='Sports and Outdoors'>
+                        <img src='public/img/interests/Technology.png' alt='Technology'>
+                    </div>
+                </div> -->
+                <div data-toggle="buttons" class="col-xs-12">
+                    <label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'">
+                        <input type="radio" name="reg" ng-click="sign_up_validation(registrar)">Sign Up
+                    </label>
+                    <!-- <label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
+                        <input type='radio' value='3' ng-model='step'>Next
+                    </label> -->
+                    <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
+                        <input type='radio' name="reg" value='1' ng-model='registrar.step'>Back
+                    </label>
+                    <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "3"'>
+                        <input type='radio' name="reg" value='2' ng-model='registrar.step'>Back
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div ng-show='registrar.group_id == "3"'>
+            <h3>Create an Account</h3>
+            <form class='form' ng-submit='sign_up(registrar)'>
+                <div class='col-xs-12'>
+                    <div class='form-group'>
+                        <input class='form-control' ng-model='registrar.name' placeholder='Company Name' type='text'>
+                    </div>
+                </div>
+                <div class='col-xs-12'>
+                    <div class='form-group'>
+                        <input class='form-control' ng-model='registrar.identity' placeholder='Company Email' type='email'>
+                    </div>
+                </div>
+                <div class='col-xs-12'>
+                    <div class='form-group'>
+                        <input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
+                    </div>
+                    <div class='form-group'>
+                        <input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
+                    </div>
+                </div>
+                <div class='hidden-xs'>
+                    <h5 class='text-center'>The following fields are optional, but recommended. They can always be provided later in your profile</h5>
+                    <div class='col-xs-12 col-sm-6'>
+                        <div class='form-group'>
+                            <label>Company Logo</label>
+                            <input ng-file-select='select_logo($files, registrar)' type='file'>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 col-sm-6'>
+                        <img class='img-responsive' ng-src='{{registrar.logo_url}}'>
+                    </div>
+                    <div class='col-xs-12'>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.company_url' placeholder='Company Website' type='text'>
+                        </div>
+                    </div>
+                    <div class='col-xs-12'>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.facebook_url' placeholder='Company Facebook' type='text'>
+                        </div>
+                    </div>
+                    <div class='col-xs-12'>
+                        <div class='form-group'>
+                            <input class='form-control' ng-model='registrar.twitter_handle' placeholder='Company Twitter Handle' type='text'>
+                        </div>
+                    </div>
+                </div>
+                <div class='col-xs-12'>
+                    <input type='hidden' value='3' ng-model='registrar.group_id'>
+                    <button id='sign-up' type='submit' class='col-xs-12 btn btn-oj'>Sign Up</button>
+                </div>
+            </form>
+        </div>
+        <div ng-show='registration.type == "default" || registration.type == "must"' class='col-xs-12 text-center'>
+            <p><small>By creating an account, you agreed to Tappyn's Privacy Policy.</small></p>
+            <div class="btn-group" data-toggle="buttons">
+                <label class='btn btn-link' ng-show='registrar.group_id == "3"'>
+                    <input type='radio' value='2' ng-model='registrar.group_id'>Sign Up as a User
+                </label>
+                <label class='btn btn-link' ng-show='registrar.group_id == "2"'>
+                    <input type='radio' value='3' ng-model='registrar.group_id'>Sign Up as a Business
+                </label>
+            </div>
+        </div>
+        <div class='modal_link text-center col-xs-12'>
+            <span style='color:#333'>Already have an account?</span> <a ng-click='register_to_login()'>Log in</a>
+        </div>
+    </div>
 </div>
 <script>
-	$("#fb-login").click(function() {
-		fbq('track', 'Lead');
-		ga('send', {
-			hitType: 'event',
-			eventCategory: 'User Signup',
-			eventAction: 'Signup',
-			eventLabel: 'New User Facebook'
-		});
-	});
+$("#fb-login").click(function() {
+    fbq('track', 'Lead');
+    ga('send', {
+        hitType: 'event',
+        eventCategory: 'User Signup',
+        eventAction: 'Signup',
+        eventLabel: 'New User Facebook'
+    });
+});
 </script>

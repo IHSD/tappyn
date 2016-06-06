@@ -14,6 +14,7 @@ class Contests extends CI_Controller
         $this->load->model('user');
         $this->load->library('vote');
         $this->load->library('interest');
+
     }
 
     /**

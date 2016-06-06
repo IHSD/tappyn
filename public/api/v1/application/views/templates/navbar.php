@@ -55,7 +55,7 @@
 	            </nav>
 	        </div>
 	</header>
-    <div class='container-fluid'>
+    <div class='container-fluid navbar-fixed-top'>
         <div class='alert alert-warning'>
             This Administration Panel has been deprecated. Please start using the <a href="https://admin.tappyn.com">new panel going forward!</a>
         </div>
