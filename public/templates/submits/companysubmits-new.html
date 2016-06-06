@@ -14,7 +14,7 @@
 </div>
 <div class='contest-winner text-left'>
     <div class='avatar'>
-        <img src='public/img/avatar.png' alt=''>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
