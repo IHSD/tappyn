@@ -8,6 +8,7 @@ class Submission_library
     {
         $this->load->model('submission');
         $this->load->model('contest');
+
     }
 
     public function __get($var)
@@ -20,41 +21,35 @@ class Submission_library
      * @param  array $data Fields required for creation
      * @return boolean
      */
-    public function create($cid, $headline = NULL, $text = NULL, $link_explanation = NULL, $attachment = NULL)
+    public function create($cid, $headline = null, $text = null, $link_explanation = null, $attachment = null)
     {
-        if(!$this->ion_auth->logged_in())
-        {
+        if (!$this->ion_auth->logged_in()) {
             $this->errors = "You must be logged in to create submissions";
             return false;
         }
 
-        if($this->ion_auth->in_group(3))
-        {
+        if ($this->ion_auth->in_group(3)) {
             $this->errors = "Only creators are allower to submit to contests";
             return false;
         }
 
         // Get the contest, and then dynamically change form validation rules, based on the type of the contest
         $contest = $this->contest->get($cid);
-        if(!$contest)
-        {
+        if (!$contest) {
             $this->errors = "We couldnt find the contest you were looking for";
             return false;
         }
 
-        if($contest->submission_count >= 50)
-        {
+        if ($contest->submission_count >= 50) {
             $this->errors = "We're sorry but this contest has reached its submission limit";
             return false;
         }
 
-        if($contest->stop_time < date('Y-m-d H:i:s'))
-        {
+        if ($contest->stop_time < date('Y-m-d H:i:s')) {
             $this->errors = "We're sorry but this contest has already ended";
             return false;
         }
-        if(!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id))
-        {
+        if (!$this->submission_library->userCanSubmit($this->ion_auth->user()->row()->id, $contest->id)) {
             $this->errors = "You have already submitted to this contest";
             return false;
         }
@@ -65,26 +60,23 @@ class Submission_library
             'headline' => $headline,
             'link_explanation' => $link_explanation,
             'text' => $text,
-            'attachment' => NULL,
-            'thumbnail_url' => NULL
+            'attachment' => null,
+            'thumbnail_url' => null,
         );
-        if(!is_null($attachment))
-        {
-            $data['attachment'] = $attachment.'.jpg';
-            $data['thumbnail_url'] = $attachment.'_thumb.jpg';
+        if (!is_null($attachment)) {
+            $data['attachment'] = $attachment . '.jpg';
+            $data['thumbnail_url'] = $attachment . '_thumb.jpg';
         }
 
         $success = false;
         // Generate / validate fields based on the platform type
-        if(!$this->userCanSubmit($data['owner'], $data['contest_id']))
-        {
+        if (!$this->userCanSubmit($data['owner'], $data['contest_id'])) {
             $this->error = 'You have already put in a submission for that contest';
             return false;
         }
 
         $company = $this->user->profile($contest->owner);
-        if($id = $this->submission->create($data))
-        {
+        if ($id = $this->submission->create($data)) {
             $email_data = array(
                 'headline' => $this->input->post('headline'),
                 'text' => $this->input->post('text'),
@@ -93,17 +85,17 @@ class Submission_library
                 'company' => $company->name,
                 'attachment_url' => $attachment,
                 'thumbnail_url' => $data['thumbnail_url'],
-                'eid'    => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful')
+                'eid' => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful'),
             );
 
             $this->mailer->to($this->ion_auth->user()->row()->email)
-                         ->from('squad@tappyn.com')
-                         ->subject("Your submission was created!")
-                         ->html($this->load->view('emails/submission_success', $email_data, TRUE))
-                         ->send();
+                ->from('squad@tappyn.com')
+                ->subject("Your submission was created!")
+                ->html($this->load->view('emails/submission_success', $email_data, true))
+                ->send();
             return $id;
         }
-        return FALSE;
+        return false;
     }
 
     /**
@@ -115,11 +107,10 @@ class Submission_library
     public function userCanSubmit($uid, $contest_id)
     {
         $check = $this->db->select('*')->from('submissions')->where(array('contest_id' => $contest_id, 'owner' => $uid))->limit(1)->get();
-        if($check && $check->num_rows() > 0)
-        {
-            return FALSE;
+        if ($check && $check->num_rows() > 0) {
+            return false;
         }
-        return TRUE;
+        return true;
     }
 
     public function errors()

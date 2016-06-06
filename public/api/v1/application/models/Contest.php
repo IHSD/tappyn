@@ -5,7 +5,6 @@ class Contest extends MY_Model
     protected $errors = false;
     protected $messages = false;
 
-
     public function __construct()
     {
         parent::__construct();
@@ -15,31 +14,29 @@ class Contest extends MY_Model
         $this->order_dir = 'desc';
     }
 
-    public function log_impression($cid, $uid = NULL)
+    public function log_impression($cid, $uid = null)
     {
         $this->db->insert('impressions', array(
             'contest_id' => $cid,
             'ip_address' => $_SERVER['REMOTE_ADDR'],
             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-            'user_id'    => $uid
+            'user_id' => $uid,
         ));
     }
 
     public function views($cid)
     {
         $views = $this->db->select("COUNT(*) as count")->from('impressions')->where('contest_id', $cid)->get();
-        if($views !== FALSE)
-        {
+        if ($views !== false) {
             return $views->row()->count;
         }
-        return FALSE;
+        return false;
     }
 
     public function get($id)
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
-        if($contest && $contest->num_rows() == 1)
-        {
+        if ($contest && $contest->num_rows() == 1) {
             $contest = $contest->row();
             $contest->submission_limit = (int) $contest->submission_limit;
             $contest->submission_count = (int) $this->submissionsCount($contest->id);
@@ -56,28 +53,30 @@ class Contest extends MY_Model
     public function fetchAll($params = array(), $sort_by = 'start_time', $sort_order = 'asc', $limit = 20, $offset = false, $interests = array())
     {
         $this->db->select('*')->from('contests');
-        if(!empty($params)) $this->db->where($params);
-        if(!empty($interests)) $this->db->where_in('industry', $interests);
+        if (!empty($params)) {
+            $this->db->where($params);
+        }
+
+        if (!empty($interests)) {
+            $this->db->where_in('industry', $interests);
+        }
+
         $this->db->order_by($sort_by, $sort_order);
-        if($offset) {
+        if ($offset) {
             $this->db->limit($limit, $offset);
         } else {
             $this->db->limit($limit);
         }
         $contests = $this->db->get();
-        if($contests && $contests->num_rows() > 0)
-        {
+        if ($contests && $contests->num_rows() > 0) {
             $results = $contests->result();
-            foreach($results as $result)
-            {
+            foreach ($results as $result) {
                 $result->submission_count = $this->submissionsCount($result->id);
                 $result->company = $this->db->select('*')->from('profiles')->where('id', $result->owner)->limit(1)->get()->row();
                 unset($result->company->stripe_customer_id);
             }
             return $results;
-        }
-        else if($contests && $contests->num_rows() == 0)
-        {
+        } else if ($contests && $contests->num_rows() == 0) {
             return array();
         }
         return false;
@@ -86,13 +85,11 @@ class Contest extends MY_Model
     public function submissions($cid)
     {
         $submissions = $this->db->select('*')->from('submissions')->where('contest_id', $cid)->order_by('created_at', 'asc')->get();
-        if(!$submissions)
-        {
-            return FALSE;
+        if (!$submissions) {
+            return false;
         }
         $submissions = $submissions->result();
-        foreach($submissions as $submission)
-        {
+        foreach ($submissions as $submission) {
             $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
         }
         return $submissions;
@@ -101,8 +98,7 @@ class Contest extends MY_Model
     public function submissionsCount($contest_id)
     {
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $contest_id)->get();
-        if($count !== FALSE)
-        {
+        if ($count !== false) {
             return $count->row()->count;
         }
         return false;
@@ -111,11 +107,10 @@ class Contest extends MY_Model
     public function hasUserSubmitted($uid, $cid)
     {
         $check = $this->db->select('*')->from('submissions')->where(array('owner' => $uid, 'contest_id' => $cid))->get();
-        if($check)
-        {
+        if ($check) {
             return $check->num_rows() > 0;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
@@ -125,60 +120,60 @@ class Contest extends MY_Model
         $contest = $this->contest->get($cid);
         // This contest has no age / gender restrictions
         $profile = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get()->row();
-        if($contest->gender == 0 && $contest->min_age == 18 && $contest->max_age == 65)
-        {
-            return TRUE;
+        if ($contest->gender == 0 && $contest->min_age == 18 && $contest->max_age == 65) {
+            return true;
         }
 
-        if($this->userIsGender($contest->gender, $profile->gender) && $this->userInAgeRange($contest->min_age, $contest->max_age, $profile->age))
-        {
-            return TRUE;
+        if ($this->userIsGender($contest->gender, $profile->gender) && $this->userInAgeRange($contest->min_age, $contest->max_age, $profile->age)) {
+            return true;
         }
-        return TRUE;
+        return true;
     }
 
     public function userIsGender($gender_req, $gender_sup)
     {
-        if($gender_req == 0 || ($gender_req == $gender_sup)) return TRUE;
-        return FALSE;
+        if ($gender_req == 0 || ($gender_req == $gender_sup)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function userInAgeRange($min, $max, $age)
     {
-        if($age > 45) $age = 45;
+        if ($age > 45) {
+            $age = 45;
+        }
+
         // There are no age requirementss
-        if($min == 18 && $max == 45)
-        {
-            return TRUE;
+        if ($min == 18 && $max == 45) {
+            return true;
         }
         return ($min <= $age && $age <= $max);
     }
 
     public function create($data)
     {
-        if(!$data)
-        {
+        if (!$data) {
             return false;
         }
 
-        if($this->db->insert('contests', $data))
-        {
+        if ($this->db->insert('contests', $data)) {
             $this->messages = 'Contest successfully created';
             return $this->db->insert_id();
         }
         $this->errors = "There was an error creating your contest";
-        error_log("Failed creating contest::".$this->db->error()['message']);
-        return FALSE;
+        error_log("Failed creating contest::" . $this->db->error()['message']);
+        return false;
     }
 
     public function needsWinner($cid)
     {
         $check = $this->db->select('*')->from('payouts')->where('contest_id', $cid)->limit(1)->get();
-        if($check && $check->num_rows() == 0)
-        {
-            return TRUE;
+        if ($check && $check->num_rows() == 0) {
+            return true;
         }
-        return FALSE;
+        return false;
     }
 
     public function update($id, $data)
@@ -198,8 +193,7 @@ class Contest extends MY_Model
 
     public function validate($data)
     {
-        switch($data['age'])
-        {
+        switch ($data['age']) {
             case 0:
                 $data['min_age'] = 18;
                 $data['max_age'] = 45;
@@ -228,15 +222,13 @@ class Contest extends MY_Model
     public function delete($id)
     {
         $contest = $this->get($id);
-        if(!$contest)
-        {
+        if (!$contest) {
             $this->errors = "That contest does not exist";
             return false;
         }
-        if($contest->owner !== $this->ion_auth->user()->row()->id)
-        {
+        if ($contest->owner !== $this->ion_auth->user()->row()->id) {
             $this->errors = "You dont own that contest brody";
-            return FALSE;
+            return false;
         }
         return $this->db->where('id', $id)->delete('contests');
     }

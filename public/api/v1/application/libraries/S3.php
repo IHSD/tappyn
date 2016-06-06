@@ -12,14 +12,22 @@ class S3
     {
         $this->load->config('secrets');
         $this->aws_access_key_id = $this->config->item('aws_access_key_id');
-        $this->aws_secret_key  = $this->config->item('aws_secret_key');
+        $this->aws_secret_key = $this->config->item('aws_secret_key');
+        if (!$this->aws_access_key_id) {
+            $this->aws_access_key_id = 'AKIAIKTBSRSNTPRV6TNA';
+        }
+
+        if (!$this->aws_secret_key) {
+            $this->aws_secret_key = 'llY3REgQi7endDJcSMwhOX2gC3W8DUlDZupjtzVR';
+        }
+
         $this->s3 = new S3Client([
             'version' => 'latest',
             'region' => 'us-west-2',
             'credentials' => [
                 'key' => $this->aws_access_key_id,
-                'secret' => $this->aws_secret_key
-            ]
+                'secret' => $this->aws_secret_key,
+            ],
         ]);
     }
 
@@ -33,12 +41,12 @@ class S3
         try {
             $result = $this->s3->putObject([
                 'Bucket' => 'tappyn',
-                'Key'    => 'testPhoto.png',
-                'Body'   => fopen($this->input->post('photo'), 'r'),
-                'ACL'    => "public-read"
+                'Key' => 'testPhoto.png',
+                'Body' => fopen($this->input->post('photo'), 'r'),
+                'ACL' => "public-read",
             ]);
-        } catch(Aws\Exception\S3Exception $e) {
-            die("There was an error uploading the file. ".$e->getMessage());
+        } catch (Aws\Exception\S3Exception $e) {
+            die("There was an error uploading the file. " . $e->getMessage());
         }
         echo "File upload successful";
         error_log(json_encode($result));
@@ -46,19 +54,19 @@ class S3
 
     public function upload($upload, $filename)
     {
-        $test = base64_decode(explode(',',$upload)[1]);
+        $test = base64_decode(explode(',', $upload)[1]);
         try {
             $result = $this->s3->putObject([
                 'Bucket' => 'tappyn',
-                'Key'    => $filename,
-                'Body'   => base64_decode(explode(',', $upload)[1]),
-                'ACL'    => "public-read"
+                'Key' => $filename,
+                'Body' => base64_decode(explode(',', $upload)[1]),
+                'ACL' => "public-read",
             ]);
-        } catch(Aws\Exception\S3Exception $e) {
+        } catch (Aws\Exception\S3Exception $e) {
             $this->errors = $e->getMessage();
-            return FALSE;
+            return false;
         }
-        return TRUE;
+        return true;
     }
 
     public function connect()
@@ -86,8 +94,8 @@ class S3
         $signature = $this->hex2b64($hash);
 
         $token = array('policy' => $policy,
-                       'signature' => $signature,
-                       'key' => $this->aws_access_key_id);
+            'signature' => $signature,
+            'key' => $this->aws_access_key_id);
 
         return $token;
     }
@@ -99,20 +107,23 @@ class S3
 
     private function hmacsha1($key, $data)
     {
-       $blocksize = 64;
-       $hashfunc = 'sha1';
-       if(strlen($key) > $blocksize)
-           $key = pack('H*', $hashfunc($key));
-       $key = str_pad($key, $blocksize, chr(0x00));
-       $ipad = str_repeat(chr(0x36), $blocksize);
-       $opad = str_repeat(chr(0x5c), $blocksize);
-       $hmac = pack('H*', $hashfunc(($key ^ $opad).pack('H*', $hashfunc(($key ^ $ipad).$data))));
-       return bin2hex($hmac);
+        $blocksize = 64;
+        $hashfunc = 'sha1';
+        if (strlen($key) > $blocksize) {
+            $key = pack('H*', $hashfunc($key));
+        }
+
+        $key = str_pad($key, $blocksize, chr(0x00));
+        $ipad = str_repeat(chr(0x36), $blocksize);
+        $opad = str_repeat(chr(0x5c), $blocksize);
+        $hmac = pack('H*', $hashfunc(($key ^ $opad) . pack('H*', $hashfunc(($key ^ $ipad) . $data))));
+        return bin2hex($hmac);
     }
 
-    private function hex2b64($str) {
+    private function hex2b64($str)
+    {
         $raw = '';
-        for($i=0; $i < strlen($str); $i+=2) {
+        for ($i = 0; $i < strlen($str); $i += 2) {
             $raw .= chr(hexdec(substr($str, $i, 2)));
         }
         return base64_encode($raw);
