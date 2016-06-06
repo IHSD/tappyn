@@ -181,16 +181,22 @@ header nav ul li.login-li {
 
 header nav ul li {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	display: inline-block;
 	font-size: 16px;
 	padding:  0 26px;
 	font-weight: bold;
 =======
+=======
+>>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
     padding: 0 26px;
+<<<<<<< HEAD
 >>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+>>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 }
 
 header nav ul li .btn:hover {
@@ -482,12 +488,21 @@ li.value-list:before {
     left: 15px;
     padding: 0 12px 0 10px;
     font-weight: bold;
+<<<<<<< HEAD
 }
 
 .contest-image .contest-share span {
     margin-right: 5px;
 }
 
+=======
+}
+
+.contest-image .contest-share span {
+    margin-right: 5px;
+}
+
+>>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 .contest-image .contest-share-socials {
     position: absolute;
     white-space: nowrap;
@@ -2033,6 +2048,7 @@ footer {
     left: 0;
     width: 100%;
     padding: 15px;
+<<<<<<< HEAD
 }
 
 .submission-box:hover .winner-box {
@@ -2041,6 +2057,16 @@ footer {
     bottom: 0;
 }
 
+=======
+}
+
+.submission-box:hover .winner-box {
+    opacity: 1;
+    visibility: visible;
+    bottom: 0;
+}
+
+>>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 .winner-box a {
     padding: 0;
     height: 30px;
@@ -3273,9 +3299,6 @@ nav .dropdown-menu {
     border-radius: 5px;
 }
 
-.login-highlight a {
-    color: #fff;
-}
 
 .login-links {
     width: 33.3%;
