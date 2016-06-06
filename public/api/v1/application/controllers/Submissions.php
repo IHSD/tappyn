@@ -57,6 +57,7 @@ class Submissions extends CI_Controller
          */
         $usub = false;
         foreach ($submissions as $key => $submission) {
+            $submissions[$key]->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
             $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
             if ($this->ion_auth->logged_in()) {
                 if ($submission->owner == $this->ion_auth->user()->row()->id) {
@@ -300,6 +301,7 @@ class Submissions extends CI_Controller
             // We have the submission I
             $submission = $this->submission->get($winner->submission_id);
             $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
+            $submission->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $winner->user_id)->limit(1)->get()->row()->avatar_url;
             $submission->contest = $this->contest->get($winner->contest_id);
             $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool) $this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;

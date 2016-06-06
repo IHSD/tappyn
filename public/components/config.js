@@ -226,7 +226,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $rootScope.modal_up = false;
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
-    $scope.registrant_step = 1;
 
 
     $scope.industries = {
@@ -448,7 +447,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.open_register = function(type, obj, group_id) {
         $scope.registration = { show: true, type: type, object: obj };
-        $scope.registrar = { show: true, group_id: group_id };
+        $scope.registrar = { show: true, group_id: group_id, step: 1 };
         $rootScope.modal_up = true;
     }
 
@@ -501,12 +500,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             });
         }
         /** example response
-        		if(response.http_status_code == 200){
-        			if(response.success) $scope.set_alert(response.message, "default");
-        			else $scope.set_alert(response.message, "default");
-        		}
-        		else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-        		else $scope.check_code(response.http_status_code);
+                if(response.http_status_code == 200){
+                    if(response.success) $scope.set_alert(response.message, "default");
+                    else $scope.set_alert(response.message, "default");
+                }
+                else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+                else $scope.check_code(response.http_status_code);
         **/
 
     $scope.log_in = function(email, pass) {
@@ -552,7 +551,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             if (response.http_status_code == 200) {
                 if (response.success) {
                     if (response.data && response.data.first_validation_return == 'ok') {
-                        $scope.registrant_step = 2;
+                        registrant.step = 2;
                     }
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -571,7 +570,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     $rootScope.user = response.data;
                     sessionStorage.setItem("user", JSON.stringify(response.data));
                     $rootScope.modal_up = false;
-                    $scope.registrant_step = 1;
+                    registrant.step = 1;
                     window.Intercom('update', {
                         app_id: APP_ENV.intercom_app_id,
                         email: $rootScope.user.email,

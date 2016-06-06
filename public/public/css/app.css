@@ -650,13 +650,10 @@ li.value-list:before {
 }
 
 .contest-winner .avatar {
-    border-radius: 50%;
     width: 55px;
     height: 55px;
-    overflow: hidden;
     float: left;
     margin-right: 20px;
-    /*margin-bottom: 10px;*/
 }
 
 .contest-company .avatar img,
@@ -667,6 +664,7 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
+		border-radius: 50%;
 }
 
 .contest-reward,

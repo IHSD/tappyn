@@ -14,11 +14,12 @@
 </div>
 <div class='contest-winner text-left'>
     <div class='avatar'>
-        <img src='public/img/avatar.png' alt=''>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{user.first_name}} {{user.last_name | firstChar}}.</h5>
-		<span class='contest-reward'>${{submission.contest.prize}}</span>
+    <span class='contest-reward'>${{submission.contest.prize}}</span>
 </div>
 <div class='text-center contest-winner-select' ng-if='submission.payout'>
-    <button ng-click='claim_winnings(submission.payout.id)' class='btn btn-oj'>Claim Winnings</button></div>
+    <button ng-click='claim_winnings(submission.payout.id)' class='btn btn-oj'>Claim Winnings</button>
+</div>
 </div>
