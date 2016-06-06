@@ -581,15 +581,18 @@ li.value-list:before {
 }
 
 .contest-entry h3 {
-    font-weight: bold;
+    font-weight: 300;
+		font-family: sans-serif;
     margin: 0 0 10px 0;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 130%;
     color: #444;
 }
 
 .contest-entry h4 {
     margin: 0 0 10px 0;
+		font-family: sans-serif;
+		font-weight: 100;
     font-size: 14px;
     line-height: 130%;
     color: #333;
@@ -661,6 +664,12 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
 		border-radius: 50%;
 }
 
@@ -675,6 +684,21 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
+<<<<<<< HEAD
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+>>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
 }
 
 .contest-box .price {
@@ -3338,9 +3362,6 @@ nav .dropdown-menu {
     border-radius: 5px;
 }
 
-.login-highlight a {
-    color: #fff;
-}
 
 .login-links {
     width: 33.3%;
