@@ -185,23 +185,10 @@ header nav ul li.login-li {
 }
 
 header nav ul li {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	display: inline-block;
 	font-size: 16px;
 	padding:  0 26px;
 	font-weight: bold;
-=======
-=======
->>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
-    display: inline-block;
-    font-size: 16px;
-		font-weight: bold;
-    padding: 0 26px;
-<<<<<<< HEAD
->>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
-=======
->>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 }
 
 header nav ul li .btn:hover {
@@ -500,21 +487,11 @@ li.value-list:before {
     left: 15px;
     padding: 0 12px 0 10px;
     font-weight: bold;
-<<<<<<< HEAD
 }
 
 .contest-image .contest-share span {
     margin-right: 5px;
 }
-
-=======
-}
-
-.contest-image .contest-share span {
-    margin-right: 5px;
-}
-
->>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 .contest-image .contest-share-socials {
     position: absolute;
     white-space: nowrap;
@@ -603,13 +580,8 @@ li.value-list:before {
 }
 
 .contest-entry h3 {
-<<<<<<< HEAD
 		font-family: sans-serif;
     font-weight: 300;
-=======
-    font-weight: 300;
-		font-family: sans-serif;
->>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
     margin: 0 0 10px 0;
     font-size: 18px;
     line-height: 130%;
@@ -620,8 +592,6 @@ li.value-list:before {
 		font-family: sans-serif;
 		font-weight: 100;
     margin: 0 0 10px 0;
-		font-family: sans-serif;
-		font-weight: 100;
     font-size: 14px;
     line-height: 130%;
     color: #333;
@@ -693,15 +663,6 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
->>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
 		border-radius: 50%;
 }
 
@@ -716,24 +677,7 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
     border-radius: 50%;
-    >>>>>>> staging
->>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
-=======
-    border-radius: 50%;
-    >>>>>>> staging
->>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
-=======
-    border-radius: 50%;
-    >>>>>>> staging
->>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
-=======
->>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
->>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
 }
 
 .contest-box .price {
@@ -2112,7 +2056,6 @@ footer {
     left: 0;
     width: 100%;
     padding: 15px;
-<<<<<<< HEAD
 }
 
 .submission-box:hover .winner-box {
@@ -2120,17 +2063,6 @@ footer {
     visibility: visible;
     bottom: 0;
 }
-
-=======
-}
-
-.submission-box:hover .winner-box {
-    opacity: 1;
-    visibility: visible;
-    bottom: 0;
-}
-
->>>>>>> 183ad2365f41abc322fdee8a55569e707f946a1a
 .winner-box a {
     padding: 0;
     height: 30px;
