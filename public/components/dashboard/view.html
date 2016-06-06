@@ -171,9 +171,10 @@
 <div class='container'>
     <div class='row'>
         <div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
+
             <div class='col-xs-12' ng-if='user.type == "company"'>
                 <div class='col-xs-12'>
-                    <a href='/launch' class='btn btn-oj pull-left'>Launch a Campaign</a>
+                  <img class='img-responsve' ng-src='{{company.logo_url}}' style='margin-bottom:10px;'>
                 </div>
                 <div class='col-xs-12'>
                     <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
