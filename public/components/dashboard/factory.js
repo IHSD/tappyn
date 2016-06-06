@@ -11,15 +11,6 @@ tappyn.factory('dashFactory', function($http){
 		});
 	}
 
-	fact.grabProfile = function(){
-		return $http({
-			method : 'GET',
-			url : 'api/v1/profile',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			}
-		});
-	}
 
 	fact.claimWinnings = function(id){
 		return $http({

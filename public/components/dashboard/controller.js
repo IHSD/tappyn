@@ -12,14 +12,6 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		else $scope.check_code(response.http_status_code);
 	});
 
-	profileFactory.grabProfile().success(function(response) {
-			if (response.http_status_code == 200) {
-					if (response.success) $scope.profile = response.data.profile;
-					else $scope.set_alert(response.message, "default");
-			} else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-	})
-
 	dashFactory.grabTotals().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.totals = response.data;
