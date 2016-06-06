@@ -173,10 +173,7 @@
         <div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
             <div class='col-xs-12' ng-if='user.type == "company"'>
                 <div class='col-xs-12'>
-                  <div class="company-img text-center" style='margin-top:10px;'>
-                      <img ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
-                      <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
-                  </div>
+                    <img class='img-responsive' ng-if='profile.logo_url' src='{{profile.logo_url}}'>
 
                 </div>
                 <div class='col-xs-12'>
