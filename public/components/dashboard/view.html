@@ -171,10 +171,11 @@
 <div class='container'>
     <div class='row'>
         <div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
+            <img class="img-responsive ng-scope" ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
             <div class='col-xs-12' ng-if='user.type == "company"'>
                 <div class='col-xs-12'>
 
-                  <img class="img-responsive ng-scope" ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
+
 
                 </div>
                 <div class='col-xs-12'>
