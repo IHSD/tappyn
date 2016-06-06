@@ -13,19 +13,6 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		else $scope.check_code(response.http_status_code);
 	});
 
-	$scope.grab_profile = function(){
-		dashFactory.grabProfile().success(function(response){
-			if(response.http_status_code == 200){
-				if(response.success){
-					$scope.contest.logo_url = $scope.profile.logo_url;
-				}
-				else $scope.set_alert(response.message, "default");
-			}
-			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
-			else $scope.check_code(response.http_status_code);
-		})
-	}
-
 	dashFactory.grabTotals().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.totals = response.data;
@@ -62,30 +49,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		$scope.view = 'table';
 	}
 
-	$scope.amazon_connect('tappyn');
-	$scope.select_file = function($files, type){
-			var file = $files[0];
-			var url = APP_ENV.amazon_aws_url;
-			var new_name = Date.now();
-			var rando = Math.random() * (10000 - 1) + 1;
-			new_name = new_name.toString() + rando.toString();
-			$upload.upload({
-					url: url,
-					method: 'POST',
-					data : {
-							key: new_name,
-							acl: 'public-read',
-							"Content-Type": file.type === null || file.type === '' ?
-							'application/octet-stream' : file.type,
-							AWSAccessKeyId: $rootScope.key.key,
-							policy: $rootScope.key.policy,
-							signature: $rootScope.key.signature
-					},
-					file: file,
-			}).success(function (){
-					if(type == "logo") $scope.contest.logo_url = url+new_name;
-				});
-		}
+
+
 	/** start winner functions, functions for assembling the winner view, opening and closing the modal for
 		confirmation and the actual choosing of a winner **/
 	$scope.choosing_winner = function(contest){
