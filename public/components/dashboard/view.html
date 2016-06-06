@@ -171,12 +171,10 @@
 <div class='container'>
     <div class='row'>
         <div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
-            <img src="{{contest.company.logo_url}}">
+
             <div class='col-xs-12' ng-if='user.type == "company"'>
                 <div class='col-xs-12'>
-
-
-
+                  <img class='img-responsve' ng-src='{{company.logo_url}}' style='margin-bottom:10px;'>
                 </div>
                 <div class='col-xs-12'>
                     <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
