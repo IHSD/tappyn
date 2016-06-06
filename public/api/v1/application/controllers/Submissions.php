@@ -57,7 +57,7 @@ class Submissions extends CI_Controller
          */
         $usub = false;
         foreach ($submissions as $key => $submission) {
-            $submissions[$key]->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
+            // $submissions[$key]->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
             $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
             if ($this->ion_auth->logged_in()) {
                 if ($submission->owner == $this->ion_auth->user()->row()->id) {
