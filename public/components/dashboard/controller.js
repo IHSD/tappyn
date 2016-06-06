@@ -47,31 +47,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		$scope.view = 'table';
 	}
 
-	$scope.select_file = function($files, upload_field_to) {
-					var file = $files[0];
-					var url = APP_ENV.amazon_aws_url;
-					var new_name = Date.now();
-					upload_field_to = (typeof upload_field_to == 'undefined') ? 'logo_url' : upload_field_to;
-					$upload.upload({
-							url: url,
-							method: 'POST',
-							data: {
-									key: new_name,
-									acl: 'public-read',
-									"Content-Type": file.type === null || file.type === '' ?
-											'application/octet-stream' : file.type,
-									AWSAccessKeyId: $rootScope.key.key,
-									policy: $rootScope.key.policy,
-									signature: $rootScope.key.signature
-							},
-							file: file,
-					}).success(function() {
-							if (upload_field_to == 'avatar_url') {
-									$scope.profile.avatar_url = url + new_name;
-							} else {
-									$scope.profile.logo_url = url + new_name;
-							}
-					});
+
 
 	/** start winner functions, functions for assembling the winner view, opening and closing the modal for
 		confirmation and the actual choosing of a winner **/
