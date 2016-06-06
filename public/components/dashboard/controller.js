@@ -1,5 +1,5 @@
 tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
-	
+
 	//on page load grab all
 	$scope.type = '';
 	$scope.adding_payment = {show : false, id : ''};
@@ -13,6 +13,19 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		else $scope.check_code(response.http_status_code);
 	});
 
+	$scope.grab_profile = function(){
+		dashFactory.grabProfile().success(function(response){
+			if(response.http_status_code == 200){
+				if(response.success){
+					$scope.contest.logo_url = $scope.profile.logo_url;
+				}
+				else $scope.set_alert(response.message, "default");
+			}
+			else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+			else $scope.check_code(response.http_status_code);
+		})
+	}
+	
 	dashFactory.grabTotals().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.totals = response.data;
