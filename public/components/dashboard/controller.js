@@ -1,5 +1,5 @@
-tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory,){
-
+tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
+	
 	//on page load grab all
 	$scope.type = '';
 	$scope.adding_payment = {show : false, id : ''};
