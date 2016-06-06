@@ -653,6 +653,7 @@ li.value-list:before {
     transform: translateY(-50%) translateX(-50%);
     position: relative;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		border-radius: 50%;
 }
 
@@ -667,6 +668,10 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
 =======
     border-radius: 50%;
     >>>>>>> staging
