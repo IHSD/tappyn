@@ -603,8 +603,13 @@ li.value-list:before {
 }
 
 .contest-entry h3 {
+<<<<<<< HEAD
 		font-family: sans-serif;
     font-weight: 300;
+=======
+    font-weight: 300;
+		font-family: sans-serif;
+>>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
     margin: 0 0 10px 0;
     font-size: 18px;
     line-height: 130%;
@@ -615,6 +620,8 @@ li.value-list:before {
 		font-family: sans-serif;
 		font-weight: 100;
     margin: 0 0 10px 0;
+		font-family: sans-serif;
+		font-weight: 100;
     font-size: 14px;
     line-height: 130%;
     color: #333;
@@ -686,6 +693,15 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
+>>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
 		border-radius: 50%;
 }
 
@@ -700,6 +716,24 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+    border-radius: 50%;
+    >>>>>>> staging
+>>>>>>> 0b230016d80df7bad349655eb9e7742fa2fbdb4e
+=======
+>>>>>>> 7e98ae9d53eb949041643b26a75eac4910d1f892
+>>>>>>> a33bebd85ff3532e8c883933ae71b51e23afe9e5
 }
 
 .contest-box .price {

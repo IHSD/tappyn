@@ -560,6 +560,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.sign_up = function(registrant) {
+        if (registrant.group_id == 2 && registrant.step == 1) {
+            return $scope.sign_up_validation(registrant);
+        }
         registrant.first_validation = '';
         if ($scope.registration.type == "contest" || $scope.registration.type == "upvote") registrant.group_id = 2;
         else if ($scope.registration.type == "company") registrant.group_id = 3;
