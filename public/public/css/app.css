@@ -3066,6 +3066,51 @@ nav .dropdown-menu {
     transition: all linear 0.5s;
 }
 
+.payment_modal {
+	max-width: 100%;
+	width: 400px;
+	border-radius: 3px;
+	position: relative;
+	left: 50%;
+	top: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	max-height: 90%;
+	overflow-y: scroll;
+}
+.payment-empty-card {
+	display: flex;
+  justify-content: space-around;
+  align-content: space-between;
+  flex-wrap: wrap;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	overflow: hidden;
+}
+.payment-empty-card input.form-control,
+.payment-empty-card select.form-control {
+	border: 0;
+	outline: 0!important;
+	border-radius: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.1) !important;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.1) !important;
+	-webkit-appearance: none;
+  -webkit-border-radius: 0px;
+}
+.payment-empty-card > .card-group:first-child {
+	flex-grow: 3;
+	width: 100%;
+}
+.payment-empty-card > .card-group:not(:first-child) {
+	flex-grow: 1;
+}
+.modal_top {
+	background-color: #EBEEF0;
+	padding: 20px 40px;
+}
+.modal_bot {
+	background-color: white;
+	padding: 40px;
+}
 .interests-flexbox {
     flex-direction: row;
 }
