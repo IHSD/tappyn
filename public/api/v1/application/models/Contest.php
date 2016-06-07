@@ -45,6 +45,8 @@ class Contest extends MY_Model
             $contest->max_age = (int) $contest->max_age;
             unset($contest->company->stripe_customer_id);
             $contest->needs_winner = $this->needsWinner($contest->id);
+            $contest->location = explode(',', $contest->location);
+            $contest->industry = explode(',', $contest->industry);
             return $contest;
         }
         return false;
