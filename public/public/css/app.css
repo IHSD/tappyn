@@ -2938,6 +2938,9 @@ nav .dropdown-menu {
   color: #999;
 	margin: 10px 0;
 }
+.launch-preview p {
+	margin: 15px 0;
+}
 
 .alerter {
     /*height: 75px;*/
@@ -2971,9 +2974,11 @@ nav .dropdown-menu {
 }
 
 .default-alerter {
-    background-color: #333;
-    opacity: .8;
-    color: #fff;
+		background: #3699DB;
+		color: white;
+		-webkit-box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.22);
+		box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.22);
+		border-radius: 6px;
 }
 
 .error-alerter {

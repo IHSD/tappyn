@@ -400,6 +400,7 @@
                             <option value='art_entertainment'>Art & Entertainment</option>
                             <option value='finance_business'>Business</option>
                             <option value='education'>Education</option>
+                            <option value='fashion_beauty'>Fashion</option>
                         </select>
                         <div class='btn-group-sm' data-toggle="buttons" style='padding-top: 5px;'>
                             <label class="btn" ng-class='{"btn-oj" : contest.industry == "art_entertainment", "btn-outliner" : contest.industry != "art_entertainment"}'>
@@ -562,69 +563,89 @@
                 </div>
             </div>
             <div class='row'>
-                <div class='col-xs-12 col-sm-4'>
-                    <div class='launch-page-box'>
+                <div class='col-xs-12'>
+                    <div class='launch-page-box launch-preview'>
                         <div class='row'>
-                            <div class='col-xs-12 text-center'>
-                                <h4 class='text-center'>About Product / Service</h4>
-                                <p class='text-left'>{{contest.summary}}</p>
-                            </div>
-                            <div class='col-xs-6 col-xs-offset-3'>
-                                <hr>
-                            </div>
-                            <div class='col-xs-12 text-center'>
-                                <h4 class='text-center'>What Makes Us Different</h4>
-                                <p class='text-left'>{{contest.different}}</p>
-                            </div>
-                            <div class='col-xs-6 col-xs-offset-3'>
-                                <hr>
-                            </div>
-                            <div class='col-xs-12 text-center'>
-                                <h4>Target Interest</h4>
-                                <!--  TODO for Onion -->
-                                <p class='text-left'>Interest 1, Interest 2</p>
-                                <!--  TODO for Onion -->
-                            </div>
-                            <div class='col-xs-6 col-xs-offset-3'>
-                                <hr>
-                            </div>
-                            <div class='col-xs-12 text-center'>
-                                <h4>Target Audience</h4>
-                                <p class='text-left'><span ng-switch on='contest.age'>
-                                      <span ng-switch-when="0">18-45</span>
-                                    <span ng-switch-when="1">18-24</span>
-                                    <span ng-switch-when="2">25-34</span>
-                                    <span ng-switch-when="3">35-44</span>
-                                    <span ng-switch-when="4">45+</span>
-                                    <span ng-switch on="contest.gender">
-                                        <span ng-switch-when="1"> Men</span>
-                                    <span ng-switch-when="2"> Women</span>
-                                    <span ng-switch-default> Men and Women</span>
-                                    </span>
-                                </p>
-                            </div>
-                            <div class='col-xs-6 col-xs-offset-3'>
-                                <hr>
-                            </div>
-                            <div class='col-xs-12 text-center'>
-                                <h4>Target Location</h4>
-                                <!--  TODO for Onion -->
-                                <p class='text-left'>Everyone in this location.</p>
-                                <p class='text-left'>California, Rhode Island</p>
-                                <!--  TODO for Onion -->
-                            </div>
-                            <div class='col-xs-6 col-xs-offset-3'>
-                                <hr>
-                            </div>
-                            <div class='col-xs-12 text-center'>
-                                <h4>What we're looking for</h4>
-                                <!--  TODO for Onion -->
-                                <p class='text-left'>People who live in this location</p>
-                                <!--  TODO for Onion -->
-                                <p class='text-left' ng-if='contest.additional_info'>
-                                    {{contest.additional_info}}
-                                </p>
-                            </div>
+                          <h3 class='col-sm-3'>About Product / Service</h3>
+                          <div class="col-sm-9">
+                            <p>{{contest.summary}} asdfsdaf</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>What Makes Us Different</h3>
+                          <div class="col-sm-9">
+                            <p>{{contest.different}}</p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>Target Interest</h3>
+                          <div class="col-sm-9">
+                            <!--  TODO for Onion -->
+                            <p>Interest 1, Interest 2</p>
+                            <!--  TODO for Onion -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>Target Audience</h3>
+                          <div class="col-sm-9">
+                            <!--  TODO for Onion: not working -->
+                            <p>
+                              <span ng-switch on='contest.age'>
+                              <span ng-switch-when="0">18-45</span>
+                              <span ng-switch-when="1">18-24</span>
+                              <span ng-switch-when="2">25-34</span>
+                              <span ng-switch-when="3">35-44</span>
+                              <span ng-switch-when="4">45+</span>
+                              <span ng-switch on="contest.gender">
+                                <span ng-switch-when="1"> Men</span>
+                                <span ng-switch-when="2"> Women</span>
+                                <span ng-switch-default> Men and Women</span>
+                              </span>
+                            </p>
+                            <!--  TODO for Onion: not working -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>Target Location</h3>
+                          <div class="col-sm-9">
+                            <!--  TODO for Onion -->
+                            <p>Everyone in this location.</p>
+                            <p>California, Rhode Island</p>
+                            <!--  TODO for Onion -->
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>What we're looking for</h3>
+                          <div class="col-sm-9">
+                            <!--  TODO for Onion -->
+                            <p>People who live in this location</p>
+                            <!--  TODO for Onion -->
+                            <p ng-if='contest.additional_info'>
+                                {{contest.additional_info}}
+                            </p>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                          <h3 class='col-sm-3'>Branding Links</h3>
+                          <div class="col-sm-9">
+                            <!--  TODO for Onion -->
+                            <h4>Company Website</h4>
+                            <p>http://123.com</p>
+                            <h4>Facebook</h4>
+                            <p>{{contest.social_facebook}}</p>
+                            <h4>Twitter</h4>
+                            <p>{{contest.social_twitter}}</p>
+                            <!--  TODO for Onion -->
+                          </div>
+                        </div>
+                        <hr>
+
                             <div class='col-xs-12 text-center'>
                                 <div class='btn-group'>
                                     <a ng-if='contest.company_url && contest.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
@@ -638,20 +659,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class='row'>
-                    <div class='col-sm-8 col-xs-12'>
-                        <div class='launch-page-box'>
-                            <div>
-                                <div class='alert alert-success text-center'>
-                                    This where your audience will enter their submissions
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='row' style='padding-bottom:10px;' id='submishes'>
-                    <h3 class='text-center'>This is where the submissions will be shown.</h3>
                 </div>
             </div>
         </div>
@@ -712,7 +719,8 @@ $(".location-selection").select2({
     placeholder: "Add Locations"
 });
 $(".interest-selection").select2({
-    placeholder: "Add interests"
+    placeholder: "Add interests",
+    maximumSelectionLength: 3
 });
 </script>
 <style>
