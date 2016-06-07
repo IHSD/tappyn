@@ -135,7 +135,7 @@
 						        		<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
 						        		<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
 						        </div>
-						        <div class='text-center'><button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;'  ng-click='submit_to(contest.id, submit)'>Submit</button></div>
+						        <div class='text-center'><button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;'  ng-click='submit_to(contest.id, submit)'>Create</button></div>
 							</form>
 						</div>
 						<div class='col-xs-12 col-sm-5' style='margin:auto' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
