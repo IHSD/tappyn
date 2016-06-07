@@ -1,15 +1,14 @@
 tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions) {
     $scope.logged_in()
     $scope.steps = {
-        'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 10 },
-        'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 15 },
-        'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 20 },
-        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
-        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
+        'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
+        'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
+        'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
+        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 66.8 },
+        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
         'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
     }
-    $scope.current = $scope.steps['tp-platform'];
-    // $scope.current = $scope.steps['preview'];
+    $scope.current = $scope.steps['preview'];
     $scope.personalities = emotions;
     $scope.contest = {};
     $scope.company = {};

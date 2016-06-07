@@ -169,8 +169,7 @@
             </div>
             <div ng-show='current.step == "detail"'>
                 <h2>Tell us more about you.</h2>
-                <h4>Fill out our brief so our creators know more about your business. </h4>
-                <!-- You'll only have to do this once. -->
+                <h4>Fill out our brief so our creators know more about your business. You'll only have to do this once.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
                 <h2>Campaign Preview</h2>
@@ -539,26 +538,25 @@
         <div ng-show='current.step == "preview"'>
             <div class='row'>
                 <div class='col-xs-12' style='padding-top:10px;'>
-                    <div class='panel'>
-                        <div class='panel-body' style='position:relative;padding:5px;'>
-                            <div class='col-xs-12 col-sm-4 text-center' style='padding-top:10px;'>
-                                <h3 style='margin-top:0px;'>
-								<img style='height:auto;' width='50px' ng-src="{{contest.logo_url}}">
-								{{user.first_name}}
-							</h3>
-                                <button class='btn btn-default'>View submissions</button>
+                    <div class='launch-page-box'>
+                        <div class='col-xs-12 col-sm-4 text-center' style='padding-top:10px;'>
+                            <h3 style='margin-top:0px;'>
+                              <img ng-if='!contest.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+                  						<img ng-if='contest.logo_url' style='height:auto;' width='50px' ng-src="{{contest.logo_url}}">
+                              {{user.first_name}}
+                            </h3>
+                            <button class='btn btn-default disabled'>View submissions</button>
+                        </div>
+                        <div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
+                            <div style='width:100%;padding-top:15px;'>
+                                <uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>
+                                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
                             </div>
-                            <div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
-                                <div style='width:100%;padding-top:15px;'>
-                                    <uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>
-                                    <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
-                                </div>
-                            </div>
-                            <div class='col-sm-3 col-xs-12 text-right'>
-                                <h2 style='color:#ff5c00;'>$50</h2>
-                                <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>7 days left</span></h4>
-                                <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>0 views</span></h4>
-                            </div>
+                        </div>
+                        <div class='col-sm-3 col-xs-12 text-right'>
+                            <h2 style='color:#ff5c00;'>$50</h2>
+                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>7 days left</span></h4>
+                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>0 views</span></h4>
                         </div>
                     </div>
                 </div>
@@ -572,14 +570,23 @@
                                 <p class='text-left'>{{contest.summary}}</p>
                             </div>
                             <div class='col-xs-6 col-xs-offset-3'>
-                                <hr style='border: 1px #ff6c00 solid'>
+                                <hr>
                             </div>
                             <div class='col-xs-12 text-center'>
                                 <h4 class='text-center'>What Makes Us Different</h4>
                                 <p class='text-left'>{{contest.different}}</p>
                             </div>
                             <div class='col-xs-6 col-xs-offset-3'>
-                                <hr style='border: 1px #ff6c00 solid'>
+                                <hr>
+                            </div>
+                            <div class='col-xs-12 text-center'>
+                                <h4>Target Interest</h4>
+                                <!--  TODO for Onion -->
+                                <p class='text-left'>Interest 1, Interest 2</p>
+                                <!--  TODO for Onion -->
+                            </div>
+                            <div class='col-xs-6 col-xs-offset-3'>
+                                <hr>
                             </div>
                             <div class='col-xs-12 text-center'>
                                 <h4>Target Audience</h4>
@@ -596,16 +603,27 @@
                                     </span>
                                 </p>
                             </div>
-                            <div ng-if='contest.additional_info'>
-                                <div class='col-xs-6 col-xs-offset-3'>
-                                    <hr style='border: 1px #ff6c00 solid'>
-                                </div>
-                                <div class='col-xs-12 text-center'>
-                                    <h4>What we're looking for</h4>
-                                    <p class='text-left'>
-                                        {{contest.additional_info}}
-                                    </p>
-                                </div>
+                            <div class='col-xs-6 col-xs-offset-3'>
+                                <hr>
+                            </div>
+                            <div class='col-xs-12 text-center'>
+                                <h4>Target Location</h4>
+                                <!--  TODO for Onion -->
+                                <p class='text-left'>Everyone in this location.</p>
+                                <p class='text-left'>California, Rhode Island</p>
+                                <!--  TODO for Onion -->
+                            </div>
+                            <div class='col-xs-6 col-xs-offset-3'>
+                                <hr>
+                            </div>
+                            <div class='col-xs-12 text-center'>
+                                <h4>What we're looking for</h4>
+                                <!--  TODO for Onion -->
+                                <p class='text-left'>People who live in this location</p>
+                                <!--  TODO for Onion -->
+                                <p class='text-left' ng-if='contest.additional_info'>
+                                    {{contest.additional_info}}
+                                </p>
                             </div>
                             <div class='col-xs-12 text-center'>
                                 <div class='btn-group'>
