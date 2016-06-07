@@ -45,7 +45,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select select2 ng-model="contest.location" class='form-control location-selection' multiple="multiple">
+                            <select ng-model="contest.location" class='form-control location-selection' multiple="multiple">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -53,7 +53,7 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             <label class='control-label'>Interest</label>
-                            <select select2 class='form-control interest-selection' ng-model='contest.industry' multiple="multiple">
+                            <select class='form-control interest-selection' ng-model='contest.industry' multiple="multiple">
                                 <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -134,10 +134,13 @@
     </div>
 </div>
 <script type="text/javascript">
-$(".location-selection").select2({
-    placeholder: "Add Locations"
-});
-$(".interest-selection").select2({
-    placeholder: "Add interests"
+$(function() {
+    $(".location-selection").select2({
+        placeholder: "Add Locations"
+    });
+    $(".interest-selection").select2({
+        placeholder: "Add interests",
+        maximumSelectionLength: 3
+    });
 });
 </script>
