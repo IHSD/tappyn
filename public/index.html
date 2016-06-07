@@ -61,7 +61,7 @@
 		</div>
 		<section class='innerpage' ng-view></section>
 		<div class='container-fluid'>
-		    <div ng-include src="'templates/footer.html'"></div>
+		    <div ng-include src="'templates/footer.html'" ng-hide='currentView == "/launch"'></div>
 		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
 		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></h2>
 		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>

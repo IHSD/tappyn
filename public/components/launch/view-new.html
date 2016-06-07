@@ -183,7 +183,7 @@
         </div>
     </div>
 </div>
-<div class='container'>
+<div class='container' style='padding-bottom: 120px;'>
     <div class='row'>
         <div ng-show='current.step == "tp-platform"' id='tp-platform'>
             <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
@@ -655,50 +655,55 @@
                 </div>
             </div>
         </div>
-        <div class='col-xs-12'>
-            <div class='launch-page-box row' style='padding-bottom: 10px;'>
-                <div ng-show='current.step == "tp-platform"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-objective")'>Continue</button>
-                </div>
-                <div ng-show='current.step == "tp-objective"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-audience")'>Continue</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")' style='margin-right: 10px;'>Back</button>
-                </div>
-                <div ng-show='current.step == "tp-audience"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-objective")' style='margin-right: 10px;'>Back</button>
-                </div>
-                <div ng-show='current.step == "detail"'>
-                  <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-audience")' style='margin-right: 10px;'>Back</button>
-                </div>
-                <div ng-show='current.step == "preview"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay & Launch</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")' style='margin-right: 10px;'>Edit Campaign</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' style='margin-right: 10px;' type='button' ng-click='submit_contest(contest, false)'>Save</button>
-                </div>
-                <div ng-show='current.step == "done"'>
-                    <div class='col-xs-12 col-sm-4'>
-                        <div class='text-center'><a class='btn btn-lg btn-oj' href='/contest/{{contest.id}}'>See Your Contest Now</a></div>
-                    </div>
-                    <div class='col-xs-12 col-sm-4'>
-                        <div class='text-center'><a class='btn btn-lg btn-oj' ng-click='reload()'>Launch Another Contest</a></div>
-                    </div>
-                    <div class='col-xs-12 col-sm-4'>
-                        <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
-                    </div>
-                </div>
-                <div class='text-left' ng-hide='current.step == "done"'>
-                    <h4 class='text-left' style='color:#333'>
-						<span class='glyphicon glyphicon-ok circle-it-oj'></span>
-						<span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span><br>
-						<span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
-					</h4>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
+
+<div class='launch-page-overlaybox launch-page-box'>
+  <div class="container">
+    <div class='row'>
+        <div ng-show='current.step == "tp-platform"'>
+            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-objective")'>Continue</button>
+        </div>
+        <div ng-show='current.step == "tp-objective"'>
+            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-audience")'>Continue</button>
+            <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")'>Back</button>
+        </div>
+        <div ng-show='current.step == "tp-audience"'>
+            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
+            <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-objective")'>Back</button>
+        </div>
+        <div ng-show='current.step == "detail"'>
+          <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
+            <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-audience")'>Back</button>
+        </div>
+        <div ng-show='current.step == "preview"'>
+            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay & Launch</button>
+            <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")'>Edit Campaign</button>
+            <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)'>Save</button>
+        </div>
+        <div ng-show='current.step == "done"'>
+            <div class='col-xs-12 col-sm-4'>
+                <div class='text-center'><a class='btn btn-lg btn-oj' href='/contest/{{contest.id}}'>See Your Contest Now</a></div>
+            </div>
+            <div class='col-xs-12 col-sm-4'>
+                <div class='text-center'><a class='btn btn-lg btn-oj' ng-click='reload()'>Launch Another Contest</a></div>
+            </div>
+            <div class='col-xs-12 col-sm-4'>
+                <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
+            </div>
+        </div>
+        <div class='text-left' ng-hide='current.step == "done"'>
+            <h4 class='text-left' style='color:#333'>
+    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
+    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span><br>
+    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
+  </h4>
+        </div>
+    </div>
+    </div>
+</div>
+
 <script>
 fbq('track', 'PageView');
 </script>

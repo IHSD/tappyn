@@ -2898,6 +2898,20 @@ nav .dropdown-menu {
     border-radius: 6px;
     overflow: hidden;
 }
+.launch-page-overlaybox {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+}
+.launch-page-overlaybox.launch-page-box {
+	margin: 0;
+	border-radius: 0;
+}
+.launch-page-overlaybox.launch-page-box .btn {
+	margin: 10px;
+}
 
 .launch-page-hover:hover {
     cursor: pointer;
