@@ -472,16 +472,13 @@
                         <div class='row'>
                             <h3 class='col-sm-3'>Target Interest</h3>
                             <div class="col-sm-9">
-                                <!--  TODO for Onion -->
                                 <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
-                                <!--  TODO for Onion -->
                             </div>
                         </div>
                         <hr>
                         <div class='row'>
                             <h3 class='col-sm-3'>Target Audience</h3>
                             <div class="col-sm-9">
-                                <!--  TODO for Onion: not working -->
                                 <p>
                                     <span>{{contest.min_age}}-{{contest.max_age}}</span>
                                     <span ng-switch on="contest.gender">
@@ -490,26 +487,21 @@
                                     <span ng-switch-default> Men and Women</span>
                                     </span>
                                 </p>
-                                <!--  TODO for Onion: not working -->
                             </div>
                         </div>
                         <hr>
                         <div class='row'>
                             <h3 class='col-sm-3'>Target Location</h3>
                             <div class="col-sm-9">
-                                <!--  TODO for Onion -->
                                 <p>{{contest.location_box.text}}</p>
                                 <p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
-                                <!--  TODO for Onion -->
                             </div>
                         </div>
                         <hr>
                         <div class='row'>
                             <h3 class='col-sm-3'>What we're looking for</h3>
                             <div class="col-sm-9">
-                                <!--  TODO for Onion -->
                                 <p>{{additional_info_boxes[contest.additional_info_box]}}</p>
-                                <!--  TODO for Onion -->
                                 <p ng-if='contest.additional_info'>
                                     {{contest.additional_info}}
                                 </p>
