@@ -151,7 +151,12 @@ $(".get_started").click(function(){
     });
     fbq('track', 'AddToCart');
 });
+</script>
 
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
 $('.carousel[data-type="multi"] .item').each(function(){
   var next = $(this).next();
   if (!next.length) {
@@ -168,7 +173,6 @@ $('.carousel[data-type="multi"] .item').each(function(){
     next.children(':first-child').clone().appendTo($(this));
   }
 });
-
 </script>
 
 <style>
