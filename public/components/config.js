@@ -229,6 +229,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
 
+    $scope.$on('$routeChangeSuccess', function() {
+        $scope.currentView = $location.path();
+    });
 
     $scope.industries = {
         'pets': 'Pets',
