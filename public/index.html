@@ -1,91 +1,136 @@
 <html>
-	<head>
-        <title>Tappyn</title>
-        <meta charset="utf-8" />
-        <base href="/">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
-        <meta http-equiv="EXPIRES" content="0">
-        <meta name="viewport" content="width=device-width" />
-        <meta name="google-site-verification" content="Nicm6LMk6VhobCEdojlT_G8V1qkzFdereqvwdyjrn5Y" />
-				<link href='https://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
-				<link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link rel="icon" type="image/png" href="public/img/favicon.png">
-        <link href="public/css/bootstrap.min.css" rel="stylesheet">
-		<link href="public/css/app.css" rel="stylesheet">
-		<script src="config.js" type='text/javascript'></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
-		<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js'></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    	<script src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-sanitize.js'></script>
-		<script src="public/js/vendor/ui-bootstrap-tpls-0.14.3.min.js"></script>
-		<link  href="public/css/cropper.min.css" rel="stylesheet">
-		<script src="public/js/vendor/cropper.min.js"></script>
-		<script src="public/js/vendor/canvas-to-blob.min.js"></script>
-	    <script src="public/js/vendor/moment.min.js"></script>
-	    <script src='public/js/vendor/angular-file-upload.min.js'></script>
-        <script src="public/js/vendor/facebook.js" type='text/javascript'></script>
-        <script src="public/js/vendor/google_analytics.js" type='text/javascript'></script>
-        <script src="public/js/vendor/lucky_orange.js" type='text/javascript'></script>
-        <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js" type='text/javascript'></script>
-        <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-				<link rel="shortcut icon" href="https://tappyn.com/favicon.ico" type="image/x-icon">
-				<link rel="icon" href="https://tappyn.com/favicon.ico" type="image/x-icon">
-		<!-- This is a comment @ 11:15 -->
-        <script>
 
-        	(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;
-				s.src='https://widget.intercom.io/widget/qj6arzfj';
-				var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()
-        </script>
-	</head>
-	<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
-	    <div id="fb-root"></div>
-	    <div class='container-fluid navbar-fixed-top'>
-	    	<div class='darken' ng-show="modal_up"></div>
-		    <div ng-include src="'templates/navbar.html'"></div>
-		    <div class='wrapper'>
-		    	<div ng-show='signing_in.show' ng-include src="'templates/signin.html'"></div>
-		    	<div ng-show='registration.show'>
-		    		<div ng-show='registration.type == "default" || registration.type == "company" || registration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
-		    		<div ng-show='registration.type == "upvote"' ng-include src="'templates/sign_up/upvote_register.html'"></div>
-		    	</div>
-		    	<div ng-include src="'templates/notifications.html'"></div>
-				<div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
-				<div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
-		    </div>
-		</div>
-		<section class='innerpage' ng-view></section>
-		<div class='container-fluid'>
-		    <div ng-include src="'templates/footer.html'"></div>
-		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
-		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></h2>
-		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></p>
-		    </div>
-		</div>
-    	<script src="app.js"></script>
+<head>
+    <title>Tappyn</title>
+    <meta charset="utf-8" />
+    <base href="/">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+    <meta http-equiv="EXPIRES" content="0">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="google-site-verification" content="Nicm6LMk6VhobCEdojlT_G8V1qkzFdereqvwdyjrn5Y" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="icon" type="image/png" href="public/img/favicon.png">
+    <link href="public/css/bootstrap.min.css" rel="stylesheet">
+    <link href="public/css/app.css" rel="stylesheet">
+    <link href="public/css/app-dev.css" rel="stylesheet">
+    <script src="config.js" type='text/javascript'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-animate.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-sanitize.js'></script>
+    <script src="public/js/vendor/ui-bootstrap-tpls-0.14.3.min.js"></script>
+    <link href="public/css/cropper.min.css" rel="stylesheet">
+    <script src="public/js/vendor/cropper.min.js"></script>
+    <script src="public/js/vendor/canvas-to-blob.min.js"></script>
+    <script src="public/js/vendor/moment.min.js"></script>
+    <script src='public/js/vendor/angular-file-upload.min.js'></script>
+    <script src="public/js/vendor/facebook.js" type='text/javascript'></script>
+    <script src="public/js/vendor/google_analytics.js" type='text/javascript'></script>
+    <script src="public/js/vendor/lucky_orange.js" type='text/javascript'></script>
+    <script src="https://cdn.rawgit.com/nnattawat/flip/v1.0.19/dist/jquery.flip.min.js" type='text/javascript'></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <link rel="shortcut icon" href="https://tappyn.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://tappyn.com/favicon.ico" type="image/x-icon">
+    <!-- This is a comment @ 11:15 -->
+    <script>
+    (function() {
+        var w = window;
+        var ic = w.Intercom;
+        if (typeof ic === "function") {
+            ic('reattach_activator');
+            ic('update', intercomSettings);
+        } else {
+            var d = document;
+            var i = function() {
+                i.c(arguments)
+            };
+            i.q = [];
+            i.c = function(args) {
+                i.q.push(args)
+            };
+            w.Intercom = i;
 
-		        <script>
-		            !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-		            n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
-		            n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
-		            t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
-		            document,'script','//connect.facebook.net/en_US/fbevents.js');
+            function l() {
+                var s = d.createElement('script');
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = 'https://widget.intercom.io/widget/qj6arzfj';
+                var x = d.getElementsByTagName('script')[0];
+                x.parentNode.insertBefore(s, x);
+            }
+            if (w.attachEvent) {
+                w.attachEvent('onload', l);
+            } else {
+                w.addEventListener('load', l, false);
+            }
+        }
+    })()
+    </script>
+</head>
 
-		            fbq('init', '1019195258103569');
-		        </script>
-		        <noscript><img height="1" width="1" style="display:none"
-		            src="https://www.facebook.com/tr?id=1019195258103569&ev=PageView&noscript=1"
-		        /></noscript>
-		<!-- End Facebook Pixel Code -->
-		            <script>(function(d, s, id) {
-		              var js, fjs = d.getElementsByTagName(s)[0];
-		              if (d.getElementById(id)) return;
-		              js = d.createElement(s); js.id = id;
-		              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1685501671707146";
-		              fjs.parentNode.insertBefore(js, fjs);
-		            }(document, 'script', 'facebook-jssdk'));</script>
-	</body>
+<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
+    <div id="fb-root"></div>
+    <div class='container-fluid navbar-fixed-top'>
+        <div class='darken' ng-show="modal_up"></div>
+        <div ng-include src="'templates/navbar.html'"></div>
+        <div class='wrapper'>
+            <div ng-show='signing_in.show' ng-include src="'templates/signin.html'"></div>
+            <div ng-show='registration.show'>
+                <div ng-show='registration.type == "default" || registration.type == "company" || registration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
+                <div ng-show='registration.type == "upvote"' ng-include src="'templates/sign_up/upvote_register.html'"></div>
+            </div>
+            <div ng-include src="'templates/notifications.html'"></div>
+            <div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
+            <div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
+        </div>
+    </div>
+    <section class='innerpage' ng-view></section>
+    <div class='container-fluid'>
+        <div ng-include src="'templates/footer.html'"></div>
+        <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
+            <h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></h2>
+            <p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+    <script>
+    ! function(f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function() {
+            n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = '2.0';
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s)
+    }(window,
+        document, 'script', '//connect.facebook.net/en_US/fbevents.js');
+
+    fbq('init', '1019195258103569');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1019195258103569&ev=PageView&noscript=1" /></noscript>
+    <!-- End Facebook Pixel Code -->
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1685501671707146";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+</body>
+
 </html>
