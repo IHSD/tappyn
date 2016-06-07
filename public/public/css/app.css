@@ -2231,6 +2231,11 @@ nav .dropdown-menu{
 	justify-content: space-around;
 	align-items: stretch;
 }
+.launch-page-message {
+	font-size: 14px;
+  color: #999;
+	margin: 10px 0;
+}
 
 .alerter{
 	height:75px;
