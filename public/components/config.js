@@ -19,8 +19,8 @@ tappyn.config(function($routeProvider, $locationProvider) {
         .when('/launch', {
             // templateUrl: 'components/launch/view.html',
             // controller: 'launchController'
-            templateUrl : 'components/launch/view-new.html',
-        		controller : 'launchControllerNew'
+            templateUrl: 'components/launch/view-new.html',
+            controller: 'launchControllerNew'
         })
         .when('/profile', {
             templateUrl: 'components/profile/view.html',
@@ -257,7 +257,75 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         { id: '13', text: 'Sports & Outdoors', picture: 'public/img/sport_interest.png', checked: false },
         { id: '8', text: 'Education', picture: 'public/img/education_interest.png', checked: false },
         { id: '11', text: 'Tech & Science', picture: 'public/img/tech_interest.png', checked: false }
-    ]
+    ];
+
+    $scope.location_boxes = [
+        { id: '1', text: 'Everyone in this location' },
+        { id: '2', text: 'People who live in this location' },
+        { id: '3', text: 'People recently in this location' },
+        { id: '4', text: 'People traveling in this location' },
+    ];
+
+    $scope.additional_info_boxes = {
+        '1': 'Photos of poeple using your product in different situations.',
+        '2': 'Photos of situations where people need your product.',
+        '3': ' Photos of situations after people have used your product.',
+    };
+
+    $scope.locations = {
+        "AL": "Alabama",
+        "AK": "Alaska",
+        "AZ": "Arizona",
+        "AR": "Arkansas",
+        "CA": "California",
+        "CO": "Colorado",
+        "CT": "Connecticut",
+        "DE": "Delaware",
+        "DC": "District Of Columbia",
+        "FL": "Florida",
+        "GA": "Georgia",
+        "HI": "Hawaii",
+        "ID": "Idaho",
+        "IL": "Illinois",
+        "IN": "Indiana",
+        "IA": "Iowa",
+        "KS": "Kansas",
+        "KY": "Kentucky",
+        "LA": "Louisiana",
+        "ME": "Maine",
+        "MD": "Maryland",
+        "MA": "Massachusetts",
+        "MI": "Michigan",
+        "MN": "Minnesota",
+        "MS": "Mississippi",
+        "MO": "Missouri",
+        "MT": "Montana",
+        "NE": "Nebraska",
+        "NV": "Nevada",
+        "NH": "New Hampshire",
+        "NJ": "New Jersey",
+        "NM": "New Mexico",
+        "NY": "New York",
+        "NC": "North Carolina",
+        "ND": "North Dakota",
+        "OH": "Ohio",
+        "OK": "Oklahoma",
+        "OR": "Oregon",
+        "PA": "Pennsylvania",
+        "RI": "Rhode Island",
+        "SC": "South Carolina",
+        "SD": "South Dakota",
+        "TN": "Tennessee",
+        "TX": "Texas",
+        "UT": "Utah",
+        "VT": "Vermont",
+        "VA": "Virginia",
+        "WA": "Washington",
+        "WV": "West Virginia",
+        "WI": "Wisconsin",
+        "WY": "Wyoming",
+    };
+
 
     $scope.checked_amount = 0;
     $scope.check_interests = function() {
@@ -813,4 +881,35 @@ tappyn.factory("AppFact", function($http) {
         });
     }
     return fact;
-})
+});
+
+tappyn.directive('select2', function() {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: {},
+        link: function(scope, element, attr, ngModel) {
+            //console.log(ngModel);
+            //$this becomes element
+
+            element.select2({
+                //options removed for clarity
+            });
+
+            element.on('change', function() {
+                // console.log('on change event');
+                var val = $(this).val();
+                scope.$apply(function() {
+                    //will cause the ng-model to be updated.
+                    ngModel.$setViewValue(val);
+                });
+            });
+            ngModel.$render = function() {
+                //if this is called, the model was changed outside of select, and we need to set the value
+                //not sure what the select2 api is, but something like:
+                element.value = ngModel.$viewValue;
+            }
+
+        }
+    }
+});

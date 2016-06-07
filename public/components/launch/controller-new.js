@@ -8,7 +8,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
         'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
     }
-    $scope.current = $scope.steps['preview'];
+    $scope.current = $scope.steps['tp-platform'];
     $scope.personalities = emotions;
     $scope.contest = {};
     $scope.company = {};
@@ -366,5 +366,24 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.reload = function() {
         $route.reload();
+    }
+
+    $scope.track_click = function(event, contest) {
+        if (event == 'facebook_click') {
+            var win = window.open($scope.urlFilter(contest.facebook_url), '_blank');
+            win.focus();
+        } else if (event == 'website_click') {
+            var win = window.open($scope.urlFilter(contest.company_url), '_blank');
+            win.focus();
+        } else if (event == 'twitter_click') {
+            var win = window.open("https://twitter.com/" + contest.twitter_handle, '_blank');
+            win.focus();
+        }
+    }
+
+    $scope.urlFilter = function(url) {
+        if (/^(https?:\/\/)/.exec(url)) {
+            return url
+        } else return 'http://' + url;
     }
 });
