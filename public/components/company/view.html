@@ -41,26 +41,27 @@
         </section>
         <section class="love-raw">
            <div class='container'>
-             <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
-<div class="carousel-inner">
-  <div class="item active">
-    <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="https://s3-us-west-2.amazonaws.com/tappyn/example1.jpg" class="img-responsive"></a></div>
-  </div>
-  <div class="item">
-    <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="https://s3-us-west-2.amazonaws.com/tappyn/example8.jpg" class="img-responsive"></a></div>
-  </div>
-  <div class="item">
-    <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="https://s3-us-west-2.amazonaws.com/tappyn/example3.jpg" class="img-responsive"></a></div>
-  </div>
-  <div class="item">
-    <div class="col-md-3 col-sm-6 col-xs-12"><a href="#"><img src="https://s3-us-west-2.amazonaws.com/tappyn/example5.jpg" class="img-responsive"></a></div>
-  </div>
-</div>
-<a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-<a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-</div>
+               <div class="row">
+                <h2 style='font-size:25;font-weight:bold;margin-bottom:20px;' class='text-left'>Connect with potential customers.<br/>See incredible results.</h2>
+                <div class="container">
+                    <div class='features-box'>
+                      <div class='col-sm-3'>
+                          <img class='img-responsive' src="https://s3-us-west-2.amazonaws.com/tappyn/example1.jpg">
+                      </div>
+                      <div class='col-sm-3'>
+                          <img class='img-responsive' src="https://s3-us-west-2.amazonaws.com/tappyn/example8.jpg">
+                      </div>
+                      <div class='col-sm-3'>
+                          <img class='img-responsive' src="https://s3-us-west-2.amazonaws.com/tappyn/example3.jpg">
+                      </div>
+                      <div class='col-sm-3'>
+                          <img class='img-responsive' src="https://s3-us-west-2.amazonaws.com/tappyn/example5.jpg">
+                      </div>
+                    </div>
+                </div>
                 <div class='col-xs-12 text-center'><a class='btn btn-wj btn-lg get_started' style='padding-left: 50px;padding-right: 50px;margin-top:-40px;' href="/launch">Get Started Now</a></div>
             </div>
+          </div>
         </section>
         <section class="how-it-works" style='padding-bottom:20px;'>
           <div class='row content-padding'>
@@ -152,29 +153,6 @@ $(".get_started").click(function(){
     fbq('track', 'AddToCart');
 });
 </script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-
-$('.carousel[data-type="multi"] .item').each(function(){
-  var next = $(this).next();
-  if (!next.length) {
-    next = $(this).siblings(':first');
-  }
-  next.children(':first-child').clone().appendTo($(this));
-
-  for (var i=0;i<2;i++) {
-    next=next.next();
-    if (!next.length) {
-    	next = $(this).siblings(':first');
-  	}
-
-    next.children(':first-child').clone().appendTo($(this));
-  }
-});
-});
-</script>
 
 <style>
 .circle-it{
@@ -191,31 +169,6 @@ $('.carousel[data-type="multi"] .item').each(function(){
     background:#CCC;
     border-radius:6px;
     padding:15px;
-}
-
-.carousel-control 			 { width:  4%; }
-.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
-
-@media (max-width: 767px) {
-	.carousel-inner .active.left { left: -100%; }
-	.carousel-inner .next        { left:  100%; }
-	.carousel-inner .prev		 { left: -100%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-
-}
-@media (min-width: 767px) and (max-width: 992px ) {
-	.carousel-inner .active.left { left: -50%; }
-	.carousel-inner .next        { left:  50%; }
-	.carousel-inner .prev		 { left: -50%; }
-	.active > div { display:none; }
-	.active > div:first-child { display:block; }
-	.active > div:first-child + div { display:block; }
-}
-@media (min-width: 992px ) {
-	.carousel-inner .active.left { left: -25%; }
-	.carousel-inner .next        { left:  25%; }
-	.carousel-inner .prev		 { left: -25%; }
 }
 
 
