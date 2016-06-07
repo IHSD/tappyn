@@ -342,7 +342,7 @@
                     <label class='text-left col-sm-3 control-label'>Interest</label>
                     <div class="col-sm-9 form-group">
                         <h4><strong>People who follow this interest will be shown your campaign</strong></h4>
-                        <select select2 class='form-control interest-selection' ng-model='contest.industry' multiple="multiple">
+                        <select class='form-control interest-selection' ng-model='contest.industry' multiple="multiple">
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
                     </div>
@@ -591,12 +591,14 @@
 fbq('track', 'PageView');
 </script>
 <script type="text/javascript">
-$(".location-selection").select2({
-    placeholder: "Add Locations"
-});
-$(".interest-selection").select2({
-    placeholder: "Add interests",
-    maximumSelectionLength: 2
+$(function() {
+    $(".location-selection").select2({
+        placeholder: "Add Locations"
+    });
+    $(".interest-selection").select2({
+        placeholder: "Add interests",
+        maximumSelectionLength: 3
+    });
 });
 </script>
 <style>
