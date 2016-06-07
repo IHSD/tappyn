@@ -142,5 +142,8 @@ $(function() {
         placeholder: "Add interests",
         maximumSelectionLength: 3
     });
+    setTimeout(function() {
+        $("select").trigger("change");
+    }, 2000);
 });
 </script>
