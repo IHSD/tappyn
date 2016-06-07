@@ -62,8 +62,8 @@
 		<section class='innerpage' ng-view></section>
 		<div class='container-fluid'>
 		    <div ng-include src="'templates/footer.html'" ng-hide='currentView == "/launch"'></div>
-		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
-		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></h2>
+		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error", "launch-error" : currentView == "/launch"}'>
+		    	<p class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>
 		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>
 		    </div>
 		</div>
