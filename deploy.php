@@ -2,8 +2,7 @@
 
 require 'recipe/common.php';
 
-if(!file_exists('.deploy_args.php'))
-{
+if (!file_exists('.deploy_args.php')) {
     echo "No .deploy_args.php file found, using defaults\n";
     $public_key_file = '~/.ssh/id_rsa';
     echo "Deploying with public key located in {$public_key_file} as default\n";
@@ -35,33 +34,32 @@ server("tappyn-staging", 'test.tappyn.com', 22)
     //->identityFile()
     ->stage('staging')
     ->env('environment', 'testing')
-    ->env('branch', 'master');
-
+    ->env('branch', 'staging');
 
 // Copy our production configuration to our new release directory
-task('deploy:config', function() {
+task('deploy:config', function () {
     run('cp {{deploy_path}}/shared/config/v1/{{environment}}/* {{release_path}}/public/api/v1/application/config/{{environment}}');
     run('cp {{deploy_path}}/shared/config/phinx.yml {{release_path}}/phinx.yml');
     run('cp {{deploy_path}}/shared/config/config.js {{release_path}}/public/config.js');
 })->desc('Adding configuration');
 
 // Install any vendor requirements
-task('deploy:vendor', function() {
+task('deploy:vendor', function () {
     run('cd {{release_path}} && composer install --no-dev');
     run('cd {{release_path}} && npm install');
 })->desc('Installing dependenies');
 
 // Gulp our JS/CSS files
-task('deploy:build', function() {
+task('deploy:build', function () {
     run('cd {{release_path}} &&  npm run build');
 })->desc("Compiling JS/CSS");
 
-task('deploy:post_update', function() {
+task('deploy:post_update', function () {
     run('chmod +x {{release_path}}/bin/backup.sh');
 })->desc("Setting up backup process");
 
 // Run database migrations. This depends on both config and vendor
-task('deploy:migrate', function() {
+task('deploy:migrate', function () {
     run('cd {{release_path}} && php vendor/bin/phinx migrate');
 })->desc("Running migrations");
 
@@ -75,7 +73,7 @@ task('deploy', [
     'deploy:build',
     'deploy:migrate',
     'deploy:symlink',
-    'cleanup'
+    'cleanup',
 ])->desc('Deploy your project');
 
 after('deploy', 'success');

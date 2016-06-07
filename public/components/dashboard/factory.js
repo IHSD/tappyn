@@ -11,6 +11,7 @@ tappyn.factory('dashFactory', function($http){
 		});
 	}
 
+
 	fact.claimWinnings = function(id){
 		return $http({
 			method : 'GET',
@@ -20,6 +21,8 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
+
+
 
 	fact.grabSubmissions = function(id){
 		return $http({
@@ -51,7 +54,7 @@ tappyn.factory('dashFactory', function($http){
 			}
 		});
 	}
-	
+
 	fact.grabDetails = function(){
 		return $http({
 			method : 'GET',
@@ -59,7 +62,7 @@ tappyn.factory('dashFactory', function($http){
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
-		})	
+		})
 	}
 
 	fact.payContest = function(id, obj){
@@ -69,8 +72,8 @@ tappyn.factory('dashFactory', function($http){
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
-			data : $.param(obj) 
-		})	
+			data : $.param(obj)
+		})
 	}
 	fact.voucherValid = function(id){
 		return $http({
@@ -79,8 +82,8 @@ tappyn.factory('dashFactory', function($http){
 			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
-			data : $.param({voucher_code : id}) 
-		})	
+			data : $.param({voucher_code : id})
+		})
 	}
 	fact.grabTotals = function(){
 		return $http({

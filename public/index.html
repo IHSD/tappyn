@@ -45,7 +45,7 @@
 	</head>
 	<body style='background:#EBEEF0;' ng-app='tappyn' ng-controller='ApplicationController'>
 	    <div id="fb-root"></div>
-	    <div class='container-fluid'>
+	    <div class='container-fluid navbar-fixed-top'>
 	    	<div class='darken' ng-show="modal_up"></div>
 		    <div ng-include src="'templates/navbar.html'"></div>
 		    <div class='wrapper'>
@@ -63,8 +63,8 @@
 		<div class='container-fluid'>
 		    <div ng-include src="'templates/footer.html'"></div>
 		    <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error"}'>
-		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></h2>
-		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>X</span></p>
+		    	<h2 class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></h2>
+		    	<p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>
 		    </div>
 		</div>
     	<script src="app.js"></script>

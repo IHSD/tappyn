@@ -1,4 +1,5 @@
 tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory){
+
 	//on page load grab all
 	$scope.type = '';
 	$scope.adding_payment = {show : false, id : ''};
@@ -11,6 +12,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		else if(response.http_status_code == 500) alert(response.error);
 		else $scope.check_code(response.http_status_code);
 	});
+
 	dashFactory.grabTotals().success(function(response){
 		if(response.http_status_code == 200){
 			if(response.success) $scope.totals = response.data;
@@ -46,6 +48,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 	$scope.back_table = function(){
 		$scope.view = 'table';
 	}
+
+
 
 	/** start winner functions, functions for assembling the winner view, opening and closing the modal for
 		confirmation and the actual choosing of a winner **/
@@ -186,7 +190,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		       	});
 			}
 		}
-		else{	
+		else{
 			// This identifies your website in the createToken call below
 			Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
 			var $form = $('#payment-form');
