@@ -1,0 +1,4 @@
+.contest-company .avatar img,
+.contest-winner .avatar img {
+    max-height: 100%;
+}
