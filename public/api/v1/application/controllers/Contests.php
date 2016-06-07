@@ -394,6 +394,8 @@ class Contests extends CI_Controller
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
             // Do some preliminary formatting
             $data = array(
+                'additional_box' => $this->input->post('additional_box'),
+                'location_box' => $this->input->post('location_box'),
                 'summary' => $this->input->post('summary'),
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
