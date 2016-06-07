@@ -211,8 +211,24 @@ class Contests extends CI_Controller
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
             $age = $this->input->post('age');
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
+            $location = $this->input->post('location');
+            if (is_array($location)) {
+                $location = implode(',', $location);
+            }
+            $industry = $this->input->post('industry');
+            if (is_array($industry)) {
+                $industry = array_slice($industry, 0, 3);
+                $industry = implode(',', $industry);
+            }
+            $location_box = $this->input->post('location_box');
+            if (is_array($location_box)) {
+                $location_box = $location_box['id'];
+            }
             // Do some preliminary formatting
             $data = array(
+                'location' => $location,
+                'additional_info_box' => $this->input->post('additional_info_box'),
+                'location_box' => $location_box,
                 'summary' => $this->input->post('summary'),
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
@@ -222,7 +238,7 @@ class Contests extends CI_Controller
                 'owner' => $this->ion_auth->user()->row()->id,
                 'min_age' => $this->input->post('min_age'),
                 'max_age' => $this->input->post('max_age'),
-                'industry' => $this->input->post('industry'),
+                'industry' => $industry,
                 'emotion' => $this->input->post('emotion'),
                 'display_type' => $this->input->post('display_type'),
                 'submission_limit' => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
@@ -392,8 +408,24 @@ class Contests extends CI_Controller
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
             $age = $this->input->post('age');
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
+            $location = $this->input->post('location');
+            if (is_array($location)) {
+                $location = implode(',', $location);
+            }
+            $industry = $this->input->post('industry');
+            if (is_array($industry)) {
+                $industry = array_slice($industry, 0, 3);
+                $industry = implode(',', $industry);
+            }
+            $location_box = $this->input->post('location_box');
+            if (is_array($location_box)) {
+                $location_box = $location_box['id'];
+            }
             // Do some preliminary formatting
             $data = array(
+                'location' => $location,
+                'additional_info_box' => $this->input->post('additional_info_box'),
+                'location_box' => $location_box,
                 'summary' => $this->input->post('summary'),
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
@@ -403,7 +435,7 @@ class Contests extends CI_Controller
                 'owner' => $this->ion_auth->user()->row()->id,
                 'min_age' => $this->input->post('min_age'),
                 'max_age' => $this->input->post('max_age'),
-                'industry' => $this->input->post('industry'),
+                'industry' => $industry,
                 'start_time' => $start_time,
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion' => $this->input->post('emotion'),

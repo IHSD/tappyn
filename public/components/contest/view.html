@@ -1,27 +1,25 @@
 <div class='container-fluid'>
 	<div class='row'>
-		<div class='col-xs-12' style='padding-top:10px;'>
-			<div class='panel'>
-				<div class='panel-body' style='position:relative;padding:5px;'>
-					<div class='col-xs-12 col-sm-4 text-center' style='padding-top:10px;'>
-						<h3 style='margin-top:0px;'>
-							<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-							<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
-							{{contest.company.name}}
-						</h3>
-						<button class='btn btn-default' ng-click='scroll_to_submish()'>View Current Ads</button>
-					</div>
-					<div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
-						<div style='width:100%;padding-top:15px;'>
-			            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>
-			                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
-			            </div>
-			        </div>
-					<div class='col-sm-3 col-xs-12 text-right'>
-						<h2 style='color:#ff5c00;'>${{contest.prize}}</h2>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
-						<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
-					</div>
+		<div class='col-xs-12' style='padding-top:20px;'>
+			<div class='launch-page-box'>
+				<div class='col-xs-12 col-sm-4 text-center' style='padding-top:10px;'>
+					<h3 style='margin-top:0px;'>
+						<img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+						<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
+						{{contest.company.name}}
+					</h3>
+					<button class='btn btn-default' ng-click='scroll_to_submish()'>View Current Ads</button>
+				</div>
+				<div class='col-sm-5 col-xs-12' style='padding-top:10px;'>
+					<div style='width:100%;padding-top:15px;'>
+						            	<uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>
+						                <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
+						            </div>
+						        </div>
+				<div class='col-sm-3 col-xs-12 text-right'>
+					<h2 style='color:#ff5c00;'>${{contest.prize}}</h2>
+					<h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
+					<h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
 				</div>
 			</div>
 		</div>
