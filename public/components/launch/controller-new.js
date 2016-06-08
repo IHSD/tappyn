@@ -16,6 +16,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.ages = launchModel.ages;
     $scope.registering = false;
 
+    $scope.reduction = 0;
     $scope.price = 99.99;
 
 
