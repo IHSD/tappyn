@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div class='row'>
-			<div class='col-sm-8 col-xs-12'>
+			<div class='col-sm-5 col-xs-12'>
 				<div class='panel'>
 					<div class='panel-body' style='position:relative;padding:5px;'>
 						<div ng-show='(contest.submission_count >= contest.submission_limit) && user &&  !contest.user_has_submitted'>
@@ -98,7 +98,7 @@
 								You have already created an ad for this campaign. Check out how your ad is doing!
 							</div>
 						</div>
-						<div class='col-sm-7 col-xs-12'>
+						<div class='col-xs-12'>
 							<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
 								<div ng-show='form_limit.text' class='form-group'>
 						        	<label class='control-label'>Ad Text</label>
@@ -141,46 +141,87 @@
 								<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
 								<p style='margin:0;'><a href='/guide'>Read this</a> before creating your ad!</p>
 							</div>
-							<h4 class='text-center'>Ad Preview</h4>
-							<div class='submish-preview submission-text row'>
-								<div class='col-xs-12'><span style='color:#ff5c00;'>{{contest.company.name}}</span> &#8226; {{contest.platform | capitalize}}</div>
-								<div class='col-xs-12' style='margin-top:15px;'>
-									<div class="contest-content">
-										<h4 style='color:#333' ng-show='form_limit.line_1 || form_limit.card_title'>
-									    	<span ng-if='submit.text.length == 0 && form_limit.line_1'>Your first line will go here</span>
-									    	<span ng-if='submit.text.length == 0 && form_limit.card_title'>Your card title will go here</span>
-									    	<span ng-if='submit.text.length > 0'>{{submit.link_explanation}}</span>
-									    </h4>
-									    <h4 style='color:#333' ng-show='form_limit.text || form_limit.line_2'>
-									    	<span ng-if='submit.text.length == 0 && form_limit.line_2'>Your second line will go here</span>
-									    	<span ng-if='submit.text.length == 0 && form_limit.text'>Your Ad Text</span>
-									    	<span ng-if='submit.text.length > 0'>{{submit.text}}</span>
-									    </h4>
-									</div>
-								</div>
-								<div class='col-xs-12' style='margin-bottom:10px;overflow:hidden'>
-									<div class="docs-preview">
-	          							<div class="img-preview preview-lg"></div>
-	          						</div>
-								</div>
-								<div class='col-xs-12'>
-									<h3 class='text-left' ng-show='form_limit.headline'>
-										<span ng-if='submit.headline.length == 0'>Your Headline</span>
-									    <span ng-if='submit.headline.length > 0'>{{submit.headline}}</span>
-									</h3>
-								</div>
-								<div class='col-xs-12'><h5 class='text-left'>- Your Name</h5></div>
-								<div class='col-xs-12' style='border-top:solid #333 1px;padding:0;'>
-									<div class='col-xs-6 text-center submish-hovering' style='border-right:1px solid #333;padding:3 0 3 0;'>
-										0 <span class='glyphicon glyphicon-thumbs-up'></span> Upvotes</span>
-									</div>
-									<div class='col-xs-6 text-center submish-hovering' style='padding:3 0 3 0;'>
-										<span class='glyphicon glyphicon-share-alt'></span> Share
-									</div>
-								</div>
-							</div>
 						</div>
 				   </div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3">
+				<div class="contest-box">
+				<div class='contest-image'>
+				  <img ng-src='{{submission.attachment}}'>
+					<div class="docs-preview">
+						<div class="img-preview preview-lg"></div>
+					</div>
+				</div>
+
+				<div class='contest-company text-left'>
+				  <div class='avatar'>
+				    <img ng-if='!contest.company.logo_url' src="favicon.ico">
+				    <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
+				  </div>
+				  <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
+				</div>
+				<div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
+				  <h3 ng-if='submit.text.length == 0 && form_limit.card_title'>Headline will be shown here</h3>
+				  <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
+				  <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your first line will be shown here</h4>
+				  <div class='contest-upvotes disable-click'>
+				    <span class='glyphicon glyphicon-heart'></span> 0
+				  </div>
+				</div>
+				<div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
+				  <h3 ng-if='submit.text.length == 0 && form_limit.text'>Your Ad Text</h3>
+				  <h4 ng-if='submit.text.length == 0 && form_limit.line_2'>Your second line will be shown here<br></h4>
+				  <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
+				  <div class='contest-upvotes disable-click'>
+				    <span class='glyphicon glyphicon-heart'></span> 0
+				  </div>
+				</div>
+				<div class='contest-winner text-left'>
+				  <div class='avatar'>
+				    <img src='public/img/avatar.png' alt=''>
+				  </div>
+				  <h5 class='winner-name'> You Name</h5>
+				  <span class='contest-reward'>${{contest.prize}}</span>
+				</div>
+				</div>
+			</div>
+
+			<div class='submish-preview submission-text row col-xs-12 col-sm-3'>
+				<div class='col-xs-12'><span style='color:#ff5c00;'>{{contest.company.name}}</span> &#8226; {{contest.platform | capitalize}}</div>
+				<div class='col-xs-12' style='margin-top:15px;'>
+					<div class="contest-content">
+						<h4 style='color:#333' ng-show='form_limit.line_1 || form_limit.card_title'>
+								<span ng-if='submit.text.length == 0 && form_limit.line_1'>Your first line will go here</span>
+								<span ng-if='submit.text.length == 0 && form_limit.card_title'>Your card title will go here</span>
+								<span ng-if='submit.text.length > 0'>{{submit.link_explanation}}</span>
+							</h4>
+							<h4 style='color:#333' ng-show='form_limit.text || form_limit.line_2'>
+								<span ng-if='submit.text.length == 0 && form_limit.line_2'>Your second line will go here</span>
+								<span ng-if='submit.text.length == 0 && form_limit.text'>Your Ad Text</span>
+								<span ng-if='submit.text.length > 0'>{{submit.text}}</span>
+							</h4>
+					</div>
+				</div>
+				<div class='col-xs-12' style='margin-bottom:10px;overflow:hidden'>
+					<div class="docs-preview">
+									<div class="img-preview preview-lg"></div>
+								</div>
+				</div>
+				<div class='col-xs-12'>
+					<h3 class='text-left' ng-show='form_limit.headline'>
+						<span ng-if='submit.headline.length == 0'>Your Headline</span>
+							<span ng-if='submit.headline.length > 0'>{{submit.headline}}</span>
+					</h3>
+				</div>
+				<div class='col-xs-12'><h5 class='text-left'>- Your Name</h5></div>
+				<div class='col-xs-12' style='border-top:solid #333 1px;padding:0;'>
+					<div class='col-xs-6 text-center submish-hovering' style='border-right:1px solid #333;padding:3 0 3 0;'>
+						0 <span class='glyphicon glyphicon-thumbs-up'></span> Upvotes</span>
+					</div>
+					<div class='col-xs-6 text-center submish-hovering' style='padding:3 0 3 0;'>
+						<span class='glyphicon glyphicon-share-alt'></span> Share
+					</div>
 				</div>
 			</div>
 		</div>
@@ -249,10 +290,6 @@
   max-width: 100%;
   width:100%;
 }
-.img-preview {
-  width: 100%;
-  text-align: center;
-}
 .submish-preview{
 	border:1px solid #333;
 	border-radius:5px;
@@ -260,9 +297,12 @@
 	margin: 0 auto;
 }
 .img-preview {
+	width: 100%;
+	text-align: center;
   margin-right: 10px;
   margin-bottom: 10px;
   overflow: hidden;
+
 }
 
 .img-preview > img {
