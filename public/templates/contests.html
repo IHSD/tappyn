@@ -1,31 +1,31 @@
- <a href="/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
-<div class="submission-box">
-    <div class="ad-company-info">
-        <div>
-            <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;' >{{contest.company.name}}</h5>
-            <span class='contest-price'>
+<a href="/contest/{{contest.id}}" style='cursor:pointer;text-decoration:none;'>
+    <div class="submission-box">
+        <div class="ad-company-info">
+            <div>
+                <h5 class='text-left' style='text-align:left;line-height:10px;padding-bottom:10px;'>{{contest.company.name}}</h5>
+                <span class='contest-price'>
                 ${{contest.prize}}
             </span>
-        </div>
-        <div class="company-img text-center" style='margin-top:10px;'>
-            <img ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
-            <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
-        </div>
-        <div style='width: 100%;'>
-            <div class='contest-audience'>
-              	<span ng-if='contest.summary'>{{contest.summary}}</span>
             </div>
-        </div>
-        <div>
-            <h5 class='text-left' style='margin-left:5px;'>
+            <div class="company-img text-center" style='margin-top:10px;'>
+                <img ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
+                <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
+            </div>
+            <div style='width: 100%;'>
+                <div class='contest-audience'>
+                    <span ng-if='contest.summary'>{{contest.summary}}</span>
+                </div>
+            </div>
+            <div>
+                <h5 class='text-left' style='margin-left:5px;'>
                 <div ng-if='contest.display_type == "with_photo"'><span style='color:ff5c00;' class='glyphicon glyphicon-camera'></span> Text & Photo Contest</div>
                 <div ng-if='contest.display_type == "text_only"'><span style='color:ff5c00;' class='glyphicon glyphicon-font'></span> Text Contest</div>
             </h5>
-            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{contest.industry}}.png' width='20px' height='20px'>{{industries[contest.industry]}}</h5>
-            <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
-            <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>
-            <p uib-tooltip="Number of ads" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
+                <h5 ng-repeat="_industry in contest.industry" class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{_industry}}.png' width='20px' height='20px'>{{industries[_industry]}}</h5>
+                <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
+                <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>
+                <p uib-tooltip="Number of ads" class="progress-meter-text" style='margin:0px;'>{{contest.submission_count}}/{{contest.submission_limit}}</p>
+            </div>
         </div>
     </div>
-</div>
 </a>
