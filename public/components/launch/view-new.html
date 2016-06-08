@@ -170,7 +170,14 @@
                 <h2>All Finished</h2>
                 <h4>Congratulations on making the best decision for your company since casual Friday!</h4>
             </div>
-            <uib-progressbar value='current.fill' max='100' type="warning"></uib-progressbar>
+            <uib-progress>
+              <uib-bar value='steps["tp-platform"].fill' type='{{ current.fill >= steps["tp-platform"].fill ? "warning" : "success" }}'></uib-bar>
+              <uib-bar value='steps["tp-objective"].fill' type='{{ current.fill >= steps["tp-objective"].fill ? "warning" : "success" }}'></uib-bar>
+              <uib-bar value='steps["tp-audience"].fill' type='{{ current.fill >= steps["tp-audience"].fill ? "warning" : "success" }}'></uib-bar>
+              <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
+              <uib-bar value='steps["preview"].fill' type='{{ current.fill >= steps["preview"].fill ? "warning" : "success" }}'></uib-bar>
+              <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
+            </uib-progress>
         </div>
     </div>
 </div>
@@ -508,7 +515,6 @@
                         <div class='row'>
                             <h3 class='col-sm-3'>Branding Links</h3>
                             <div class="col-sm-9">
-                                <!--  TODO for Onion -->
                                 <div ng-hide="!contest.company_url">
                                     <h4>Company Website</h4>
                                     <p>{{contest.company_url | urlFilter}}</p>
@@ -521,7 +527,6 @@
                                     <h4>Twitter</h4>
                                     <p>https://twitter.com/{{contest.twitter_handle}}</p>
                                 </div>
-                                <!--  TODO for Onion -->
                             </div>
                         </div>
                         <hr>
