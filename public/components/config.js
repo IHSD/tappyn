@@ -332,6 +332,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                 if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || !$rootScope.user.interests.length < 3) {
                     $rootScope.modal_up = true;
                     $scope.add_age = true;
+                    $scope.up_age = $rootScope.user.age;
+                    $scope.up_gen = $rootScope.user.gender;
+                    $scope.up_interest = $rootScope.user.interests;
                 }
             }
         }
