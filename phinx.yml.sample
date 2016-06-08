@@ -1,5 +1,5 @@
 paths:
-    migrations: data/migrations
+    migrations: migrations
     seeds: data/seeds
 
 environments:
