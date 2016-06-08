@@ -4,7 +4,8 @@ require 'recipe/common.php';
 
 if (!file_exists('.deploy_args.php')) {
     echo "No .deploy_args.php file found, using defaults\n";
-    $public_key_file = '~/.ssh/id_rsa';
+    $public_key_file = '~/.ssh/id_rsa.pub';
+    $private_key_file = '~/.ssh/id_rsa';
     echo "Deploying with public key located in {$public_key_file} as default\n";
 } else {
     require '.deploy_args.php';

@@ -40,7 +40,7 @@ class Vote {
         {
             $count = $this->userVotesPerContest($uid, $cid);
             if($count >= $this->config->item('upvotes_per_contest')) {
-                $this->errors = "You have already voted the max of {$this->config->item('upvotes_per_contest')} times in this contest";
+                $this->errors = "You have already liked the max of {$this->config->item('upvotes_per_contest')} ads in this campaign.";
                 return FALSE;
             }
         }
@@ -58,7 +58,7 @@ class Vote {
         $check = $this->db->select('*')->from('votes')->where(array('user_id' => $uid, 'submission_id' => $sid))->limit(1)->get();
         if($check->num_rows() == 1)
         {
-            $this->errors = "You have already voted for this submission";
+            $this->errors = "You have already liked this ad.";
             return FALSE;
         }
 
