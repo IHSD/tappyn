@@ -40,7 +40,7 @@ tappyn.factory('tappyn_var', function() {
     ];
 
     items.additional_info_boxes = {
-        '1': 'Photos of poeple using your product in different situations.',
+        '1': 'Photos of people who have downloaded your app and are using it in different situations.',
         '2': 'Photos of situations where people need your product.',
         '3': ' Photos of situations after people have used your product.',
     };
