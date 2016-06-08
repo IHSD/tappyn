@@ -17,8 +17,10 @@ tappyn.config(function($routeProvider, $locationProvider) {
             controller: 'dashController'
         })
         .when('/launch', {
-            templateUrl: 'components/launch/view.html',
-            controller: 'launchController'
+            // templateUrl: 'components/launch/view.html',
+            // controller: 'launchController'
+            templateUrl: 'components/launch/view-new.html',
+            controller: 'launchControllerNew'
         })
         .when('/profile', {
             templateUrl: 'components/profile/view.html',
@@ -222,40 +224,20 @@ tappyn.constant('emotions', [{
 }]);
 
 
-tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact) {
+tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact, tappyn_var) {
     $rootScope.modal_up = false;
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
 
+    $scope.$on('$routeChangeSuccess', function() {
+        $scope.currentView = $location.path();
+    });
 
-    $scope.industries = {
-        'pets': 'Pets',
-        'food_beverage': 'Food & Drink',
-        'finance_business': 'Business & Finance',
-        'health_wellness': 'Health & Fitness',
-        'travel': 'Travel',
-        'social_network': 'Social & Gaming',
-        'home_garden': 'Home & Garden',
-        'education': 'Education',
-        'art_entertainment': 'Art & Entertainment',
-        'fashion_beauty': 'Fashion & Beauty',
-        'sports_outdoors': 'Sports & Outdoors',
-        'tech_science': 'Tech & Science'
-    }
-    $scope.interests = [
-        { id: '10', text: 'Fashion & Beauty', picture: 'public/img/fashion_interest.png', checked: false },
-        { id: '2', text: 'Food & Drink', picture: 'public/img/food_interest.png', checked: false },
-        { id: '4', text: 'Health & Fitness', picture: 'public/img/health_interest.png', checked: false },
-        { id: '6', text: 'Social & Gaming', picture: 'public/img/social_interest.png', checked: false },
-        { id: '3', text: 'Business & Finance', picture: 'public/img/business_interest.png', checked: false },
-        { id: '7', text: 'Home & Garden', picture: 'public/img/home_interest.png', checked: false },
-        { id: '5', text: 'Travel', picture: 'public/img/travel_interest.png', checked: false },
-        { id: '9', text: 'Art & Music', picture: 'public/img/art_interest.png', checked: false },
-        { id: '12', text: 'Pets', picture: 'public/img/pets_interest.png', checked: false },
-        { id: '13', text: 'Sports & Outdoors', picture: 'public/img/sport_interest.png', checked: false },
-        { id: '8', text: 'Education', picture: 'public/img/education_interest.png', checked: false },
-        { id: '11', text: 'Tech & Science', picture: 'public/img/tech_interest.png', checked: false }
-    ]
+    $scope.industries = tappyn_var.get('industries');
+    $scope.interests = tappyn_var.get('interests');
+    $scope.location_boxes = tappyn_var.get('location_boxes');
+    $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
+    $scope.locations = tappyn_var.get('locations');
 
     $scope.checked_amount = 0;
     $scope.check_interests = function() {
@@ -811,4 +793,35 @@ tappyn.factory("AppFact", function($http) {
         });
     }
     return fact;
-})
+});
+
+tappyn.directive('select2', function() {
+    return {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: {},
+        link: function(scope, element, attr, ngModel) {
+            //console.log(ngModel);
+            //$this becomes element
+
+            element.select2({
+                //options removed for clarity
+            });
+
+            element.on('change', function() {
+                // console.log('on change event');
+                var val = $(this).val();
+                scope.$apply(function() {
+                    //will cause the ng-model to be updated.
+                    ngModel.$setViewValue(val);
+                });
+            });
+            ngModel.$render = function() {
+                //if this is called, the model was changed outside of select, and we need to set the value
+                //not sure what the select2 api is, but something like:
+                element.value = ngModel.$viewValue;
+            }
+
+        }
+    }
+});
