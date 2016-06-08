@@ -286,14 +286,22 @@ header nav ul li .btn:hover {
 .progress {
 	position: relative;
 	box-shadow: none;
-	height: 6px;
+	height: 20px;
 	background-color: #e6e6e6;
-  overflow: visible;
+  overflow: hidden;;
 	margin: 0;
-	position: relative;
-	bottom: -43px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
-.progress:before {
+.progress.tp-progress-steps {
+  overflow: visible;
+  height: 6px;
+  bottom: -43px;
+  border-radius: 0;
+  box-shadow: none;
+}
+.progress.tp-progress-steps:before {
 	content: '';
 	position: absolute;
 	width: 18px;
@@ -305,7 +313,7 @@ header nav ul li .btn:hover {
 	top: -6px;
 	z-index: 999;
 }
-.progress:after {
+.progress.tp-progress-steps:after {
 	content: '';
 	position: absolute;
 	width: 18px;
@@ -317,32 +325,32 @@ header nav ul li .btn:hover {
 	top: -6px;
 	z-index: 992;
 }
-.progress .progress-bar:first-child {
+.progress.tp-progress-steps .progress-bar:first-child {
   z-index: 998;
 }
-.progress .progress-bar:nth-child(2) {
+.progress.tp-progress-steps .progress-bar:nth-child(2) {
   z-index: 997;
 }
-.progress .progress-bar:nth-child(3) {
+.progress.tp-progress-steps .progress-bar:nth-child(3) {
   z-index: 996;
 }
-.progress .progress-bar:nth-child(4) {
+.progress.tp-progress-steps .progress-bar:nth-child(4) {
   z-index: 995;
 }
-.progress .progress-bar:nth-child(5) {
+.progress.tp-progress-steps .progress-bar:nth-child(5) {
   z-index: 994;
 }
-.progress .progress-bar:nth-child(6) {
+.progress.tp-progress-steps .progress-bar:nth-child(6) {
   z-index: 993;
 }
-.progress-bar {
+.tp-progress-steps .progress-bar {
   position: absolute;
 }
-.progress-bar-success {
+.tp-progress-steps .progress-bar-success {
   background-color: #e6e6e6;
 	box-shadow: none;
 }
-.progress-bar-success:before {
+.tp-progress-steps .progress-bar-success:before {
 	content: '';
 	position: absolute;
 	width: 18px;
@@ -353,7 +361,7 @@ header nav ul li .btn:hover {
 	right: -6px;
 	top: -6px;
 }
-.progress-bar-warning:before {
+.tp-progress-steps .progress-bar-warning:before {
 	content: '';
 	position: absolute;
 	width: 18px;
