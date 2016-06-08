@@ -549,6 +549,7 @@
             <div ng-show='current.step == "detail"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-audience")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
             </div>
             <div ng-show='current.step == "preview"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='submit_contest(contest, true)'>Pay & Launch</button>
