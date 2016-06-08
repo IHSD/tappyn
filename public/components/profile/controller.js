@@ -1,7 +1,8 @@
-tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel) {
+tappyn.controller('profileController', function($scope, $rootScope, $upload, profileFactory, profileModel, tappyn_var) {
     $scope.logged_in();
     $scope.amazon_connect('tappyn');
     $scope.states = profileModel.states;
+    $scope.industries = tappyn_var.get('industries');
 
     $scope.select_file = function($files, upload_field_to) {
             var file = $files[0];

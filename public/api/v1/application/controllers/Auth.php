@@ -33,16 +33,8 @@ class Auth extends CI_Controller
             $this->notification->setUser($uid);
             $user = $this->ion_auth->ajax_user();
             $this->load->library('interest');
-            $this->interest->setDatabase($this->db);
-            $this->interest->setUser($uid);
             $profile = $this->user->profile($uid);
-            $user['interests'] = array();
-            $interests = $this->interest->tree()->children;
-            foreach ($interests as $interest) {
-                if ($interest->followed_by_user) {
-                    $user['interests'][] = $interest->id;
-                }
-            }
+            $user['interests'] = $this->interest->get_user_interests($uid);
             $user['age'] = $profile->age;
             $user['gender'] = $profile->gender;
             $user['notifications'] = $this->notification->count();
@@ -444,14 +436,20 @@ class Auth extends CI_Controller
         $identity_column = $this->config->item('identity', 'ion_auth');
         $this->data['identity_column'] = $identity_column;
         $first_validation = $this->input->post('first_validation');
+        $interests = $this->input->post('interests');
 
         // validate form input
         if ($this->input->post('group_id') == 1) {
             die('Invalid request');
         }
         if ($this->input->post('group_id') == 2 && !$first_validation) {
+            $this->load->library('interest');
             $this->form_validation->set_rules('age', 'Age', 'required');
             $this->form_validation->set_rules('gender', 'Gender', 'required');
+            if ($this->interest->add_user_interests('check_interests', $interests) === false) {
+                $this->responder->fail("At least three interests.")->code(500)->respond();
+                return;
+            }
         } else {
             $this->email_activation = false;
         }

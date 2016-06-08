@@ -329,7 +329,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             $rootScope.user = response.data;
             sessionStorage.setItem("user", JSON.stringify(response.data));
             if ($rootScope.user.type == 'member') {
-                if (!$rootScope.user.age || !$rootScope.user.gender) {
+                if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || !$rootScope.user.interests.length < 3) {
                     $rootScope.modal_up = true;
                     $scope.add_age = true;
                 }
@@ -369,11 +369,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         });
     }
 
-    $scope.save_agegen = function(age, gen) {
+    $scope.save_agegen = function(age, gen, interest) {
         if (!age) $scope.set_alert("Please provide your age", "error");
         else if (!gen) $scope.set_alert("Please provide your gender", "error");
         else {
-            AppFact.agegen(age, gen).success(function(response) {
+            AppFact.agegen(age, gen, interest).success(function(response) {
                 if (response.http_status_code == 200) {
                     if (response.success) {
                         $scope.set_alert(response.message, "default");
@@ -764,14 +764,14 @@ tappyn.factory("AppFact", function($http) {
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
         })
     }
-    fact.agegen = function(age, gen) {
+    fact.agegen = function(age, gen, interest) {
         return $http({
             method: 'POST',
             url: 'api/v1/profile',
             headers: {
                 'Content-type': 'application/x-www-form-urlencoded'
             },
-            data: $.param({ age: age, gender: gen })
+            data: $.param({ age: age, gender: gen, interests: interest })
         });
     }
     fact.followInterest = function(id) {

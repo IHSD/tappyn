@@ -46,6 +46,11 @@
                         <label class='btn'>
                             <input type='radio' ng-model='registrar.gender' value='female'>Female</label>
                     </div>
+                    <div class='col-xs-12'>
+                        <select class=' interest-selection' ng-model='registrar.interests' multiple="multiple">
+                            <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
+                        </select>
+                    </div>
                     <input type='hidden' value='2' ng-model='registrar.group_id'>
                     <div class='col-xs-12'>
                         <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
@@ -160,6 +165,11 @@ $("#fb-login").click(function() {
         eventCategory: 'User Signup',
         eventAction: 'Signup',
         eventLabel: 'New User Facebook'
+    });
+});
+$(function() {
+    $(".interest-selection").select2({
+        placeholder: "Add interests"
     });
 });
 </script>
