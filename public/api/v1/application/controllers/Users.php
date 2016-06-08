@@ -88,12 +88,19 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-
+        $this->load->library('interest');
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->ion_auth->in_group(2)) {
                 // Can the user change theyre age / gender / location?
                 $data = array();
                 $uid = $this->ion_auth->user()->row()->id;
+                if ($this->interest->add_user_interests($uid, $this->input->post('interests')) === false) {
+                    $this->responder
+                        ->fail("At least three interests.")
+                        ->code(500)
+                        ->respond();
+                    return;
+                }
 
                 if ($this->user->canEditAge($uid) && $this->input->post('age')) {
                     $data['age'] = $this->input->post('age');
@@ -171,10 +178,12 @@ class Users extends CI_Controller
                 }
             }
         } else {
-            $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+            $uid = $this->ion_auth->user()->row()->id;
+            $profile = $this->user->profile($uid);
             $profile->first_name = $this->ion_auth->user()->row()->first_name;
             $profile->last_name = $this->ion_auth->user()->row()->last_name;
             $profile->company_name = $profile->name;
+            $profile->interests = $this->interest->get_user_interests($uid);
             $this->responder->data(array(
                 'profile' => $profile,
             ))->respond();

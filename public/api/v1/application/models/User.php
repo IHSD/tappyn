@@ -1,4 +1,4 @@
-<?php  defined("BASEPATH") or exit("No direct script access allowed");
+<?php defined("BASEPATH") or exit("No direct script access allowed");
 
 class User extends MY_Model
 {
@@ -24,11 +24,10 @@ class User extends MY_Model
     public function profile($uid)
     {
         $profile = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
-        if($profile !== FALSE)
-        {
+        if ($profile !== false) {
             return $profile->row();
         }
-        return FALSE;
+        return false;
     }
 
     public function canEditAge($uid)
@@ -54,42 +53,41 @@ class User extends MY_Model
      */
     public function saveProfile($uid, $data)
     {
-        if(isset($data['company_url']) && $data['company_url'] !== '' && (strpos($data['company_url'], '://') === FALSE)) $data['company_url'] = 'http://'.$data['company_url'];
-        if(isset($data['facebook_url']) && $data['facebook_url'] !== '' && (strpos($data['facebook_url'], '://') === FALSE)) $data['facebook_url'] = 'http://'.$data['facebook_url'];
+        if (isset($data['company_url']) && $data['company_url'] !== '' && (strpos($data['company_url'], '://') === false)) {
+            $data['company_url'] = 'http://' . $data['company_url'];
+        }
+
+        if (isset($data['facebook_url']) && $data['facebook_url'] !== '' && (strpos($data['facebook_url'], '://') === false)) {
+            $data['facebook_url'] = 'http://' . $data['facebook_url'];
+        }
+
         $check = $this->db->select('*')->from('profiles')->where('id', $uid)->limit(1)->get();
-        if($check !== FALSE)
-        {
-            if($check->num_rows() > 0)
-            {
+        if ($check !== false) {
+            if ($check->num_rows() > 0) {
                 // Update
-                if($this->db->where('id', $uid)->update('profiles', $data))
-                {
-                    return TRUE;
+                if ($this->db->where('id', $uid)->update('profiles', $data)) {
+                    return true;
                 } else {
                     error_log($this->db->error()['message']);
                     $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
-            }
-            else
-            {
+            } else {
                 $data['id'] = $uid;
-                if($this->db->insert('profiles', $data))
-                {
-                    return TRUE;
+                if ($this->db->insert('profiles', $data)) {
+                    return true;
                 } else {
                     error_log($this->db->error()['message']);
                     $this->errors = "An unexpected error occured {$this->db->error()['code']}";
                 }
             }
         }
-        return FALSE;
+        return false;
     }
 
     public function account($uid)
     {
         $account = $this->db->select('*')->from('stripe_accounts')->where('user_id', $uid)->limit(1)->get();
-        if($account && $account->num_rows() == 1)
-        {
+        if ($account && $account->num_rows() == 1) {
             return $account->row()->account_id;
         }
         return false;
@@ -98,26 +96,24 @@ class User extends MY_Model
     public function accountDetails($aid)
     {
         $account = $this->db->select('*')->from('stripe_accounts')->where('account_id', $aid)->get();
-        if($account && $account->num_rows() > 0)
-        {
+        if ($account && $account->num_rows() > 0) {
             return $account->row();
         }
-        return FALSE;
+        return false;
     }
     public function submissonCount($uid)
     {
         $count = $this->db->select('COUNT(*) as count')->from('submissions')->where(array('owner' => $uid))->get();
-        if($count)
-        {
+        if ($count) {
             return $count->row()->count;
         }
-        return FALSE;
+        return false;
     }
 
     public function attribute_points($id, $amount)
     {
-        $points = (int)$amount;
-        $current_points = (int)$this->ion_auth->user()->row()->points;
+        $points = (int) $amount;
+        $current_points = (int) $this->ion_auth->user()->row()->points;
         $check = $this->db->where('id', $id)->update('users', array('points' => ($points + $current_points)));
         return $check;
     }
@@ -126,8 +122,7 @@ class User extends MY_Model
     {
         $res = array();
         $follows = $this->db->select('*')->from('follows')->where('follower', $id)->get()->result();
-        foreach($follows as $follow)
-        {
+        foreach ($follows as $follow) {
             $res[] = $follow->following;
         }
         return $res;
@@ -142,8 +137,13 @@ class User extends MY_Model
     public function count($where = array(), $like = array())
     {
         $this->db->select("COUNT(*) as count")->from('users');
-        if(!empty($where)) $this->db->where($where);
-        if(!empty($like)) $this->db->like($like);
+        if (!empty($where)) {
+            $this->db->where($where);
+        }
+
+        if (!empty($like)) {
+            $this->db->like($like);
+        }
 
         return (int) $this->db->get()->row()->count;
     }

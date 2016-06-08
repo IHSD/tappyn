@@ -88,6 +88,14 @@
                             </div>
                             <div class='col-sm-12'>
                                 <div class='form-group'>
+                                    <label>Interest</label>
+                                    <select class='form-control interest-selection' ng-model='profile.interests' multiple="multiple">
+                                        <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class='col-sm-12'>
+                                <div class='form-group'>
                                     <label>Your Profile Picture</label>
                                     <input type='file' ng-file-select='select_file($files,"avatar_url")'>
                                     <img class='img-responsive' ng-if='profile.avatar_url' src='{{profile.avatar_url}}'>
@@ -130,4 +138,14 @@
         </div>
         <script>
         fbq('track', 'PageView');
+        </script>
+        <script type="text/javascript">
+        $(function() {
+            $(".interest-selection").select2({
+                placeholder: "Add interests"
+            });
+            setTimeout(function() {
+                $(".interest-selection").trigger('change');
+            }, 1000);
+        });
         </script>
