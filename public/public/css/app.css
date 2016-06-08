@@ -416,22 +416,30 @@ li.value-list:before {
     background-position: left
 }
 
+@media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       .hero-banner {
+           background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+           background-size: cover;
+       }
+    }
+
 @media (min-width: 641px) and (max-width: 1024px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
@@ -2416,23 +2424,31 @@ footer {
     overflow: hidden;
 }
 
+@media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       .hero-banner {
+           background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+           background-size: cover;
+       }
+    }
+
 @media (min-width: 641px) and (max-width: 1024px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
