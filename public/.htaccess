@@ -4,8 +4,3 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [L]
 </IfModule>
-
-# 1 WEEK
-<FilesMatch "\.(jpg|jpeg|png|gif|swf)$">
-Header set Cache-Control "max-age=604800, public"
-</FilesMatch>
