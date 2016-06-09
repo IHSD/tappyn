@@ -84,7 +84,7 @@
 					<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
 						<div ng-show='form_limit.photo' class='form-group'>
 							<h4 class='control-label'><strong>Image</strong></h4>
-							<img id="upload_contest" src='https://s3-us-west-2.amazonaws.com/tappyn/painting.jpg'>
+							<img id="upload_contest" src='public/img/placeholder.png'>
 							<div class='col-xs-12 text-center'>
 								<input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
 								<label for="fileInput" style='font-size: 14px;margin-top: 20px;'>Upload Your Photo</label>
@@ -130,7 +130,7 @@
 					<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
 				</div>
 				<div style='padding: 20px 20px 10px 70px;'>
-					<p><a href='/guide'>How to:<br>Make an Awesome Ad</a></p>
+					<p><strong><a href='/guide'>How to:<br>Make an Awesome Ad</a></strong></p>
 				</div>
 			</div>
 			<div class="contest-box">
