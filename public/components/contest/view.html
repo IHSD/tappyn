@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class='row'>
-		<div class='col-xs-12 col-sm-5'>
+		<div class='col-xs-12 col-md-5'>
 			<div class='launch-page-box launch-preview'>
 				<div class="col-xs-12">
 					<h3 style='margin-bottom: 0;'>About</h3>
@@ -55,7 +55,7 @@
 				</div>
 			</div>
 		</div>
-		<div class='col-sm-4 col-xs-12'>
+		<div class='col-md-4 col-xs-12'>
 			<div class='launch-page-box'>
 				<div ng-show='(contest.submission_count >= contest.submission_limit) && user &&  !contest.user_has_submitted'>
 					<div class='alert alert-success text-center'>
@@ -123,10 +123,14 @@
 
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-3">
+		<div class="col-xs-12 col-md-3">
 			<div class="contest-box" ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
-				<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
-				<p style='margin:0;'><a href='/guide'>Read this</a> before creating your ad!</p>
+				<div style='float:left;padding:30px 10px 10px 30px;'>
+					<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
+				</div>
+				<div style='padding: 20px 20px 10px 70px;'>
+					<p><a href='/guide'>How to:<br>Make an Awesome Ad</a></p>
+				</div>
 			</div>
 			<div class="contest-box">
 				<div class='contest-image'>
@@ -163,7 +167,6 @@
 						<img src='public/img/avatar.png' alt=''>
 					</div>
 					<h5 class='winner-name'>You Name</h5>
-					<span class='contest-reward'>${{contest.prize}}</span>
 				</div>
 			</div>
 		</div>
