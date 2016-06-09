@@ -5,16 +5,8 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [L]
 </IfModule>
 
-## EXPIRES CACHING ##
-<IfModule mod_expires.c>
-ExpiresActive On
-# Image Expire
-ExpiresByType image/jpg "access plus 1 month"
-ExpiresByType image/jpeg "access plus 1 month"
-ExpiresByType image/gif "access plus 1 month"
-ExpiresByType image/png "access plus 1 month"
-ExpiresByType image/svg "access plus 1 month"
-# Favicon Expire
-ExpiresByType image/x-icon "access plus 1 month"
-</IfModule>
-## EXPIRES CACHING ##
+# Set the cache-control max-age
+# 1 month
+<FilesMatch ".(ico|jpg|jpeg|png|gif|svg|x-ico)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
