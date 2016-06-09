@@ -46,18 +46,15 @@
                         <label class='btn'>
                             <input type='radio' ng-model='registrar.gender' value='female'>Female</label>
                     </div>
-                    <!-- <div class='col-xs-12'>
+                    <div class='col-xs-12'>
                         <select class=' interest-selection' ng-model='registrar.interests' multiple="multiple">
                             <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
                         </select>
-                    </div> -->
-                    <input type='hidden' value='2' ng-model='registrar.group_id'>
-                    <div class='col-xs-12'>
-                        <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
+                    <input type='hidden' value='2' ng-model='registrar.group_id'>
                 </div>
-                <!-- <div class='row' ng-show='step == 3'>
-                    <h3>Follow up to 3 topics</h3>
+                <div class='row' ng-show='registrar.step == 3'>
+                    <h3>Follow at least 3 topics</h3>
                     <h4>Then we'll build a custom home feed for you</h4>
                     <div class='interests'>
                         <img src='public/img/interests/Business.jpg' alt=''>
@@ -70,14 +67,17 @@
                         <img src='public/img/interests/Sports_and_Outdoors.jpg' alt='Sports and Outdoors'>
                         <img src='public/img/interests/Technology.png' alt='Technology'>
                     </div>
-                </div> -->
+                    <div class='col-xs-12'>
+                      <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
+                    </div>
+                </div>
                 <div data-toggle="buttons" class="col-xs-12">
                     <label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'">
                         <input type="radio" name="reg" ng-click="sign_up_validation(registrar)">Sign Up
                     </label>
-                    <!-- <label class='btn btn-oj col-xs-12' ng-show='step == "2"'>
-                        <input type='radio' value='3' ng-model='step'>Next
-                    </label> -->
+                    <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
+                        <input type='radio' name="reg" value='3' ng-model='registrar.step'>Next
+                    </label>
                     <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
                         <input type='radio' name="reg" value='1' ng-model='registrar.step'>Back
                     </label>
