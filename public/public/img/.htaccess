@@ -5,8 +5,13 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [L]
 </IfModule>
 
-# Set the cache-control max-age
-# 1 month
-<FilesMatch ".(ico|jpg|jpeg|png|gif|svg|x-ico)$">
-Header set Cache-Control "max-age=2592000, public"
-</FilesMatch>
+<IfModule mod_headers.c>
+Header set Connection keep-alive
+
+# Cache-control headers
+
+    # 2 WEEKS
+    <filesMatch "\.(ico|pdf|jpg|jpeg|png|gif)$">
+        Header set Cache-Control "max-age=2592000, public"
+    </filesMatch>
+</IfModule>
