@@ -329,12 +329,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             $rootScope.user = response.data;
             sessionStorage.setItem("user", JSON.stringify(response.data));
             if ($rootScope.user.type == 'member') {
-                if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || !$rootScope.user.interests.length < 3) {
+                if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || $rootScope.user.interests.length < 3) {
                     $rootScope.modal_up = true;
                     $scope.add_age = true;
                     $scope.up_age = $rootScope.user.age;
                     $scope.up_gen = $rootScope.user.gender;
                     $scope.up_interest = $rootScope.user.interests;
+                    console.log($rootScope.user);
                 }
             }
         }
@@ -432,7 +433,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.open_register = function(type, obj, group_id) {
         $scope.registration = { show: true, type: type, object: obj };
-        $scope.registrar = { show: true, group_id: group_id, step: 1 };
+        $scope.registrar = { show: true, group_id: group_id, step: 1, interests: [] };
         $rootScope.modal_up = true;
     }
 
@@ -530,13 +531,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         });
     }
 
-    $scope.sign_up_validation = function(registrant) {
-        registrant.first_validation = '1';
+    $scope.sign_up_validation = function(registrant, step) {
+        registrant.first_validation = (step) ? step : '1';
         AppFact.signUp(registrant).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     if (response.data && response.data.first_validation_return == 'ok') {
-                        registrant.step = 2;
+                        registrant.step++;
                     }
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -548,7 +549,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         if (registrant.group_id == 2 && registrant.step == 1) {
             return $scope.sign_up_validation(registrant);
         }
-        registrant.first_validation = '';
+        registrant.first_validation = 99;
         if ($scope.registration.type == "contest" || $scope.registration.type == "upvote") registrant.group_id = 2;
         else if ($scope.registration.type == "company") registrant.group_id = 3;
 
@@ -681,6 +682,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         var route = $location.path();
         if (route.charAt(0) == "/") route = route.substr(1);
         window.location = $location.protocol() + "://" + $location.host() + "/api/v1/facebook?route=" + route;
+    }
+
+    $scope.add_interest_image = function(interest) {
+        var index = $.inArray(interest, $scope.registrar.interests);
+        if (index == -1) {
+            $scope.registrar.interests.push(interest);
+        } else {
+            $scope.registrar.interests.splice(index, 1);
+        }
     }
 });
 

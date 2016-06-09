@@ -46,37 +46,26 @@
                         <label class='btn'>
                             <input type='radio' ng-model='registrar.gender' value='female'>Female</label>
                     </div>
-                    <div class='col-xs-12'>
-                        <select class=' interest-selection' ng-model='registrar.interests' multiple="multiple">
-                            <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
-                        </select>
-                    </div>
                     <input type='hidden' value='2' ng-model='registrar.group_id'>
                 </div>
                 <div class='row' ng-show='registrar.step == 3'>
                     <h3>Follow at least 3 topics</h3>
                     <h4>Then we'll build a custom home feed for you</h4>
-                    <div class='interests'>
-                        <img src='public/img/interests/Business.jpg' alt=''>
-                        <img src='public/img/interests/Entertainment.jpg' alt='Entertainment'>
-                        <img src='public/img/interests/Family_and_Relatinoships.jpg' alt='Family and Relatinoships'>
-                        <img src='public/img/interests/Fashion_and_Shopping.jpg' alt='Fashion and Shopping'>
-                        <img src='public/img/interests/Fitness_and_Wellness.jpg' alt='Fitness and Wellness'>
-                        <img src='public/img/interests/Food_and_Drink.jpg' alt='Food and Drink'>
-                        <img src='public/img/interests/Hobbies.jpg' alt='Hobbies'>
-                        <img src='public/img/interests/Sports_and_Outdoors.jpg' alt='Sports and Outdoors'>
-                        <img src='public/img/interests/Technology.png' alt='Technology'>
+                    <div class='interests col-xs-12'>
+                        <div class="col-xs-2" ng-repeat="(key,value) in industries">
+                            <img class="interest-img" ng-class="{'interest-img-checked':registrar.interests.indexOf(key) != -1}" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
+                        </div>
                     </div>
                     <div class='col-xs-12'>
-                      <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
+                        <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
                 </div>
                 <div data-toggle="buttons" class="col-xs-12">
                     <label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'">
-                        <input type="radio" name="reg" ng-click="sign_up_validation(registrar)">Sign Up
+                        <input type="radio" name="reg" ng-click="sign_up_validation(registrar,'1')">Sign Up
                     </label>
                     <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
-                        <input type='radio' name="reg" value='3' ng-model='registrar.step'>Next
+                        <input type='radio' name="reg" ng-click="sign_up_validation(registrar,'2')">Next
                     </label>
                     <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
                         <input type='radio' name="reg" value='1' ng-model='registrar.step'>Back

@@ -442,14 +442,18 @@ class Auth extends CI_Controller
         if ($this->input->post('group_id') == 1) {
             die('Invalid request');
         }
-        if ($this->input->post('group_id') == 2 && !$first_validation) {
-            $this->load->library('interest');
-            $this->form_validation->set_rules('age', 'Age', 'required');
-            $this->form_validation->set_rules('gender', 'Gender', 'required');
-            // if ($this->interest->add_user_interests('check_interests', $interests) === false) {
-            //     $this->responder->fail("At least three interests.")->code(500)->respond();
-            //     return;
-            // }
+        if ($this->input->post('group_id') == 2) {
+            if ($first_validation > 1) {
+                $this->form_validation->set_rules('age', 'Age', 'required');
+                $this->form_validation->set_rules('gender', 'Gender', 'required');
+            }
+            if ($first_validation > 2) {
+                $this->load->library('interest');
+                if ($this->interest->add_user_interests('check_interests', $interests) === false) {
+                    $this->responder->fail("At least three interests.")->code(500)->respond();
+                    return;
+                }
+            }
         } else {
             $this->email_activation = false;
         }
@@ -464,7 +468,7 @@ class Auth extends CI_Controller
         }
 
         if ($this->form_validation->run() == true) {
-            if ($first_validation) {
+            if ($first_validation != 99) {
                 $this->responder->data(array('first_validation_return' => 'ok'))->respond();
                 return;
             }
@@ -511,6 +515,7 @@ class Auth extends CI_Controller
                 }
                 return;
             } else {
+                $this->interest->add_user_interests($id, $interests);
                 if ($this->ion_auth->login($identity, $password)) {
                     $this->responder->data($this->ion_auth->ajax_user())->message("Account successfully created. Check your email for verification")->respond();
                 } else {

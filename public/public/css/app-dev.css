@@ -2,3 +2,11 @@
 .contest-winner .avatar img {
     max-height: 100%;
 }
+
+.interests .interest-img {
+    max-width: 40px;
+}
+
+.interests .interest-img-checked {
+    opacity: 0.5;
+}
