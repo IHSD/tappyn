@@ -4,21 +4,3 @@
 <IfModule !authz_core_module>
 	Deny from all
 </IfModule>
-
-# BEGIN EXPIRES
-<IfModule mod_expires.c>
-    ExpiresActive On
-    ExpiresDefault "access plus 1 second"
-    ExpiresByType image/gif "access plus 1 month"
-    ExpiresByType image/png "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 1 month"
-    ExpiresByType application/x-icon "access plus 1 year"
-  <IfModule mod_headers.c>
-       Header unset ETag
-       Header unset Pragma
-       Header unset Last-Modified
-       Header append Cache-Control "public, no-transform, must-revalidate"
-       Header set Last-modified "Tue, 1 Oct 2014 10:10:10 GMT"
-  </IfModule>
-</IfModule>
-# END EXPIRES
