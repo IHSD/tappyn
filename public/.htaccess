@@ -5,9 +5,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [L]
 </IfModule>
 
-<ifmodule mod_expires.c>
-<Filesmatch "\.(jpg|jpeg|png|gif|swf|ico)$">
-    ExpiresActive on
-    ExpiresDefault "access plus 1 month"
-</Filesmatch>
-</ifmodule>
+<# 1 Month for all your static assets
+ <filesMatch ".(ico|pdf|flv|jpg|jpeg|png|gif)$">
+ Header set Cache-Control "max-age=2592000, public"
+ </filesMatch>
