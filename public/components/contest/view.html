@@ -25,72 +25,37 @@
 		</div>
 	</div>
 	<div class='row'>
-		<div class='col-xs-12 col-sm-12'>
+		<div class='col-xs-12 col-sm-5'>
 			<div class='launch-page-box launch-preview'>
+				<div class="col-xs-12">
+					<h3 style='margin-bottom: 0;'>About</h3>
+					<p>{{contest.summary}}</p>
+					<h3 style='margin-bottom: 0;'>How We're Different</h3>
+					<p>{{contest.different}}</p>
+					<h3 style='margin-bottom: 0;'>What we're looking for</h3>
+					<p>{{additional_info_boxes[contest.additional_info_box]}}</p>
+					<p ng-if='contest.additional_info'>
+						{{contest.additional_info}}
+					</p>
 					<div class='row'>
-						<div class="col-sm-6">
-							<div class="row">
-								<h3 class='col-xs-12' style='margin-bottom: 0;'>About Product / Service</h3>
-								<div class="col-xs-12">
-										<p>{{contest.summary}}</p>
-								</div>
-							</div>
-							<div class='row'>
-								<h3 class='col-xs-12' style='margin-bottom: 0;'>What Makes Us Different</h3>
-								<div class="col-xs-12">
-									<p>{{contest.different}}</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="col-xs-12">
-								<h3 style='margin-bottom: 0;'>What we're looking for</h3>
-								<p>{{additional_info_boxes[contest.additional_info_box]}}</p>
-								<p ng-if='contest.additional_info'>
-									{{contest.additional_info}}
-								</p>
-							</div>
-							<div class="col-sm-4 col-xs-12">
-								<h3 style='margin-bottom: 0;'>Target Interest</h3>
-								<p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
-							</div>
-							<div class="col-sm-4 col-xs-12">
-								<h3 style='margin-bottom: 0;'>Target Audience</h3>
-								<p>
-									<span>{{contest.min_age}}-{{contest.max_age}}</span>
-									<span ng-switch on="contest.gender">
-										<span ng-switch-when="1"> Men</span>
-										<span ng-switch-when="2"> Women</span>
-										<span ng-switch-default> Men and Women</span>
-									</span>
-								</p>
-							</div>
-							<div class="col-sm-4 col-xs-12" ng-hide='{{!contest.location_box.text}}'>
-								<h3 style='margin-bottom: 0;'>Target Location</h3>
-								<p>{{contest.location_box.text}}</p>
-								<p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
+						<div class="col-md-12 col-xs-12 text-center">
+							<div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
+								<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
+								<a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"'
+												ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+								</a>
+								<a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"'
+												ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+									<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+								</a>
 							</div>
 						</div>
 					</div>
-
-					<div class='row'>
-							<div class="col-md-12 col-xs-12 text-center">
-								<div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
-									<a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
-									<a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"'
-													ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
-										<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
-									</a>
-									<a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"'
-													ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
-										<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
-									</a>
-								</div>
-							</div>
-					</div>
+				</div>
 			</div>
 		</div>
-		<div class='col-sm-9 col-xs-12'>
+		<div class='col-sm-4 col-xs-12'>
 			<div class='launch-page-box'>
 				<div ng-show='(contest.submission_count >= contest.submission_limit) && user &&  !contest.user_has_submitted'>
 					<div class='alert alert-success text-center'>
@@ -116,63 +81,53 @@
 				</div>
 				<div class='col-xs-12'>
 					<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
-					<div class="row">
-						<div class="col-sm-6">
-							<div ng-show='form_limit.text' class='form-group'>
-								<h4 class='control-label'><strong>Ad Text</strong></h4>
-								<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
-								<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
-							</div>
-							<div ng-show='form_limit.line_1' class='form-group'>
-								<label class='control-label'>Line One</label>
-								<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
-								<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
-							</div>
-							<div ng-show='form_limit.line_2' class='form-group'>
-								<label class='control-label'>Line Two</label>
-								<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
-								<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
-							</div>
-							<div ng-show='form_limit.card_title' class='form-group'>
-								<label class='control-label'>Card Title</label>
-								<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
-								<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
-							</div>
-							<div ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
-								<div class='text-center' style='width:150px;padding:10px; border-radius:5px; border:1px solid #333;margin:0 auto;'>
-									<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
-									<p style='margin:0;'><a href='/guide'>Read this</a> before creating your ad!</p>
-								</div>
+						<div ng-show='form_limit.photo' class='form-group'>
+							<h4 class='control-label'><strong>Image</strong></h4>
+							<img id="upload_contest" src='https://s3-us-west-2.amazonaws.com/tappyn/painting.jpg'>
+							<div class='col-xs-12 text-center'>
+								<input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
+								<label for="fileInput" style='font-size: 14px;margin-top: 20px;'>Upload Your Photo</label>
 							</div>
 						</div>
-						<div class="col-sm-6">
-							<div ng-show='form_limit.photo' class='form-group'>
-								<h4 class='control-label'><strong>Image</strong></h4>
-								<img id="upload_contest" src='https://s3-us-west-2.amazonaws.com/tappyn/painting.jpg'>
-								<div class='col-xs-12 text-center'>
-									<input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
-									<label for="fileInput" style='font-size: 14px;margin-top: 20px;'>Upload Your Photo</label>
-								</div>
-							</div>
-							<div ng-show='form_limit.headline' class='form-group'>
-								<h4 class='control-label'><strong>Headline</strong></h4>
-								<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
-								<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
-							</div>
-							<div class='text-center'>
-								<button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;' ng-click='submit_to(contest.id, submit)'>Submit</button>
-							</div>
+						<div ng-show='form_limit.headline' class='form-group'>
+							<h4 class='control-label'><strong>Headline</strong></h4>
+							<input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
+							<div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
 						</div>
-					</div>
+						<div ng-show='form_limit.text' class='form-group'>
+							<h4 class='control-label'><strong>Ad Text</strong></h4>
+							<textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
+							<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
+						</div>
+						<div ng-show='form_limit.line_1' class='form-group'>
+							<label class='control-label'>Line One</label>
+							<input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+							<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
+						</div>
+						<div ng-show='form_limit.line_2' class='form-group'>
+							<label class='control-label'>Line Two</label>
+							<input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
+							<div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
+						</div>
+						<div ng-show='form_limit.card_title' class='form-group'>
+							<label class='control-label'>Card Title</label>
+							<input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
+							<div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
+						</div>
 
-
-
+						<div class='text-center'>
+							<button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;' ng-click='submit_to(contest.id, submit)'>Submit</button>
+						</div>
 					</form>
 				</div>
 
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-3">
+			<div class="contest-box" ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
+				<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
+				<p style='margin:0;'><a href='/guide'>Read this</a> before creating your ad!</p>
+			</div>
 			<div class="contest-box">
 				<div class='contest-image'>
 					<div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
@@ -215,48 +170,48 @@
 
 	</div>
 	<div class='row' style='padding-bottom:10px;' id='submishes'>
-			<div class='col-md-3 visible-md visible-lg'>
-				<div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
+		<div class='col-md-3 visible-md visible-lg'>
+			<div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
 			</div>
-			<div class='col-md-3 visible-md visible-lg'>
-				<div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-md-3 visible-md visible-lg'>
-				<div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-md-3 visible-md visible-lg'>
-				<div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-sm-4 visible-sm'>
-				<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-sm-4 visible-sm'>
-				<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-sm-4 visible-sm'>
-				<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<div class='col-xs-12 visible-xs'>
-				<div class="contest-box row" ng-repeat='submission in submissions'>
-					<div ng-include src="'templates/submits/contestsubmit.html'"></div>
-				</div>
-			</div>
-			<h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
 		</div>
+		<div class='col-md-3 visible-md visible-lg'>
+			<div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-md-3 visible-md visible-lg'>
+			<div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-md-3 visible-md visible-lg'>
+			<div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-sm-4 visible-sm'>
+			<div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-sm-4 visible-sm'>
+			<div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-sm-4 visible-sm'>
+			<div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<div class='col-xs-12 visible-xs'>
+			<div class="contest-box row" ng-repeat='submission in submissions'>
+				<div ng-include src="'templates/submits/contestsubmit.html'"></div>
+			</div>
+		</div>
+		<h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
+	</div>
 </div>
 
 
@@ -290,7 +245,7 @@
 		overflow: hidden;
 	}
 
-	.img-preview > img {
+	.img-preview> img {
 		max-width: 100%;
 	}
 
@@ -299,12 +254,15 @@
 		padding-top: 25px;
 		height: 0;
 	}
+
 	.docs-preview.preview-fb {
 		padding-bottom: 52.35%;
 	}
+
 	.docs-preview.preview-ig {
 		padding-bottom: 100%;
 	}
+
 	.docs-preview .img-preview {
 		position: absolute;
 		top: 0;
