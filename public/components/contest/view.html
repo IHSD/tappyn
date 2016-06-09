@@ -84,11 +84,16 @@
 					<form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
 						<div ng-show='form_limit.photo' class='form-group'>
 							<h4 class='control-label'><strong>Image</strong></h4>
-							<img id="upload_contest" src='public/img/placeholder.png'>
-							<div class='col-xs-12 text-center'>
-								<input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
-								<label for="fileInput" style='font-size: 14px;margin-top: 20px;'>Upload Your Photo</label>
+							<div ng-hide='!cropper_box'>
+								<img id="upload_contest" src='public/img/placeholder.png'>
 							</div>
+							<input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
+							<label for="fileInput" style='font-size: 14px;margin-top: 20px;border: 2px dashed #ccc;background-color: white;color:#aaa;text-align:center;margin: 10px 0;padding:20px; width: 100%;' ng-click='show_cropper()' ng-show='!cropper_box'>
+								<span style='font-weight:bold;color:#ff6c00;'>Choose from your computer</span><br>
+								<span>This is the main image of your project. Make it count!</span><br>
+								<span>JPG, PGN, BMP &#8226; 50MB file limit</span><br>
+								<span>At least 102 pixels &#8226; 16:9 aspect ratio</span>
+							</label>
 						</div>
 						<div ng-show='form_limit.headline' class='form-group'>
 							<h4 class='control-label'><strong>Headline</strong></h4>
@@ -130,7 +135,7 @@
 					<img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
 				</div>
 				<div style='padding: 20px 20px 10px 70px;'>
-					<p><strong><a href='/guide'>How to:<br>Make an Awesome Ad</a></strong></p>
+					<p><strong><a href='/guide' style='color:#ff6c00;'>How to:<br>Make an Awesome Ad</a></strong></p>
 				</div>
 			</div>
 			<div class="contest-box">
