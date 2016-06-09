@@ -446,10 +446,10 @@ class Auth extends CI_Controller
             $this->load->library('interest');
             $this->form_validation->set_rules('age', 'Age', 'required');
             $this->form_validation->set_rules('gender', 'Gender', 'required');
-            if ($this->interest->add_user_interests('check_interests', $interests) === false) {
-                $this->responder->fail("At least three interests.")->code(500)->respond();
-                return;
-            }
+            // if ($this->interest->add_user_interests('check_interests', $interests) === false) {
+            //     $this->responder->fail("At least three interests.")->code(500)->respond();
+            //     return;
+            // }
         } else {
             $this->email_activation = false;
         }
