@@ -30,54 +30,45 @@
 					<div class='row'>
 						<div class="col-sm-6">
 							<div class="row">
-								<h3 class='col-md-4 col-xs-12'>About Product / Service</h3>
-								<div class="col-md-8 col-xs-12">
+								<h3 class='col-xs-12' style='margin-bottom: 0;'>About Product / Service</h3>
+								<div class="col-xs-12">
 										<p>{{contest.summary}}</p>
 								</div>
 							</div>
 							<div class='row'>
-								<h3 class='col-md-4 col-xs-12'>What Makes Us Different</h3>
-								<div class="col-md-8 col-xs-12">
+								<h3 class='col-xs-12' style='margin-bottom: 0;'>What Makes Us Different</h3>
+								<div class="col-xs-12">
 									<p>{{contest.different}}</p>
 								</div>
 							</div>
 						</div>
 						<div class="col-sm-6">
-							<div class='row'>
-									<h3 class='col-md-4 col-xs-12'>What we're looking for</h3>
-									<div class="col-md-8 col-xs-12">
-											<p>{{additional_info_boxes[contest.additional_info_box]}}</p>
-											<p ng-if='contest.additional_info'>
-													{{contest.additional_info}}
-											</p>
-									</div>
+							<div class="col-xs-12">
+								<h3 style='margin-bottom: 0;'>What we're looking for</h3>
+								<p>{{additional_info_boxes[contest.additional_info_box]}}</p>
+								<p ng-if='contest.additional_info'>
+									{{contest.additional_info}}
+								</p>
 							</div>
-							<div class='row'>
-								<h3 class='col-md-4 col-xs-12'>Target Interest</h3>
-								<div class="col-md-8 col-xs-12">
-									<p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
-								</div>
+							<div class="col-sm-4 col-xs-12">
+								<h3 style='margin-bottom: 0;'>Target Interest</h3>
+								<p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
 							</div>
-							<div class='row'>
-								<h3 class='col-md-4 col-xs-12'>Target Audience</h3>
-								<div class="col-md-8 col-xs-12">
-									<p>
-										<span>{{contest.min_age}}-{{contest.max_age}}</span>
-										<span ng-switch on="contest.gender">
-											<span ng-switch-when="1"> Men</span>
-											<span ng-switch-when="2"> Women</span>
-											<span ng-switch-default> Men and Women</span>
-										</span>
-									</p>
-								</div>
+							<div class="col-sm-4 col-xs-12">
+								<h3 style='margin-bottom: 0;'>Target Audience</h3>
+								<p>
+									<span>{{contest.min_age}}-{{contest.max_age}}</span>
+									<span ng-switch on="contest.gender">
+										<span ng-switch-when="1"> Men</span>
+										<span ng-switch-when="2"> Women</span>
+										<span ng-switch-default> Men and Women</span>
+									</span>
+								</p>
 							</div>
-							<div class='row' ng-hide='{{!contest.location_box.text}}'>
-								<h3 class='col-md-4 col-xs-12'>Target Location</h3>
-								<div class="col-md-8 col-xs-12">
-									<p>{{contest.location_box.text}}</p>
-									<p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
-								</div>
-								<hr>
+							<div class="col-sm-4 col-xs-12" ng-hide='{{!contest.location_box.text}}'>
+								<h3 style='margin-bottom: 0;'>Target Location</h3>
+								<p>{{contest.location_box.text}}</p>
+								<p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
 							</div>
 						</div>
 					</div>
