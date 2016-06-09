@@ -2997,6 +2997,13 @@ nav .dropdown-menu {
 .launch-preview p {
 	margin: 15px 0;
 }
+@media (min-width: 768px) {
+  .launch-page-box .vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 
 .alerter {
     /*height: 75px;*/
