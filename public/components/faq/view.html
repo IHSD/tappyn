@@ -455,6 +455,13 @@ $(".nav a").on("click", function(){
 });
 </script>
 <script>
+$('.nav-tabs li a').click( function(e) {
+
+history.pushState( null, null, $(this).attr('href') );
+
+});
+</script>
+<script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
