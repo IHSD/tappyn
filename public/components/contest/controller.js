@@ -39,6 +39,10 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		}
 	});
 
+	$scope.show_cropper = function() {
+		$scope.cropper_box = true;
+	}
+
 	$scope.view = {brief : true, submissions : false};
 	$scope.view_brief = function(){
 		$scope.view = {brief : true, submissions : false};

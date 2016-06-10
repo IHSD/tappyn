@@ -416,22 +416,30 @@ li.value-list:before {
     background-position: left
 }
 
+@media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       .hero-banner {
+           background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+           background-size: cover;
+       }
+    }
+
 @media (min-width: 641px) and (max-width: 1024px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
-    .testimonials {
+    .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
         background-size: cover;
     }
@@ -780,7 +788,6 @@ li.value-list:before {
 .contest-winner-select {
     border-top: 1px solid #E7E7E7;
     padding: 20px 0;
-    border-radius: 50%;
 }
 
 .contest-box .price {
@@ -2416,23 +2423,31 @@ footer {
     overflow: hidden;
 }
 
+@media only screen and (max-device-width:480px){
+       /* styles for mobile browsers smaller than 480px; (iPhone) */
+       .hero-banner {
+           background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+           background-size: cover;
+       }
+    }
+
 @media (min-width: 641px) and (max-width: 1024px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .testimonials {
-        background: url(https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg) no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
         background-size: cover;
     }
 }
@@ -2998,6 +3013,13 @@ nav .dropdown-menu {
 .launch-preview p {
 	margin: 15px 0;
 }
+@media (min-width: 768px) {
+  .launch-page-box .vertical-center {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
 
 .alerter {
     /*height: 75px;*/
@@ -3093,14 +3115,22 @@ nav .dropdown-menu {
 }
 
 .modal_inner {
-    padding: 40px 70px;
+    padding: 30px 40px;
     background-color: #fff;
     border-radius: 3px;
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    /*top: 50%;
+    transform: translateY(-50%);*/
+    left: 50%;
+  	top: 50%;
+  	transform: translateY(-50%) translateX(-50%);
     max-height: 90%;
     overflow-y: scroll;
+}
+@media (min-width:768px) {
+  .modal_inner {
+    padding: 40px 70px;
+  }
 }
 
 .modal_inner .logo img {
