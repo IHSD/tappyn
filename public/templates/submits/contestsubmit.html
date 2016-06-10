@@ -41,5 +41,6 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <h3 class='text-center' style='margin-bottom:0px;'>{{totals.submissions}}</h3>
     <span class='contest-ctr ' ng-show='submission.ctr '>{{submission.ctr}}%</span>
 </div>
