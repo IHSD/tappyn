@@ -1,8 +1,9 @@
 <div class='container'>
   <div class='row content-padding'>
-    <ul class="col-xs-12 col-sm-2 list-style-form-nav col-sm-offset-1" ng-show='user.type=="member"'>
-      <li><a href="#basics" class='scrolling'>Account Basics</a></li>
-      <li><a href="#mprofile" class='scrolling'>Profile</a></li>
+    <ul class="col-xs-12 col-sm-2 list-style-form-nav col-sm-offset-1">
+      <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
+      <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
+      <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
       <!-- <li>Notifications</li>
       <li>Payout</li> -->
     </ul>
@@ -39,7 +40,7 @@
         </ul>
       </form>
 
-      <form class='form' ng-show='user.type == "company"' ng-submit='update_profile(profile)'>
+      <form class='form' ng-if='user.type == "company"' ng-submit='update_profile(profile)'>
         <ul class='list-style-form form-horizontal' id='cprofile'>
           <li class='section-title'>
             <h2>Profile</h2>
@@ -106,7 +107,7 @@
         </ul>
       </form>
 
-      <form class='form' ng-submit='update_profile(profile)' ng-show='user.type=="member"'>
+      <form class='form' ng-submit='update_profile(profile)' ng-if='user.type=="member"'>
         <ul class='list-style-form form-horizontal' id='mprofile'>
           <li class='section-title'>
             <h2>Profile</h2>
@@ -191,18 +192,8 @@
         slideMenu = $(".list-style-form-nav"),
         topMenu = $(".navbar-fixed-top"),
         topMenuHeight = topMenu.outerHeight() + 15,
-        // All list items
         menuItems = slideMenu.find('a');
-      // Anchors corresponding to menu items
-      scrollItems = menuItems.map(function() {
-        // var item = $($(this.hash));
-        var item = $($(this).attr("href"));
-        if (item.length) {
-          return item;
-        }
-      });
-      console.log(menuItems)
-      menuItems.click(function(e) {
+      $("a.scrolling").click(function(e) {
         var href = $(this).attr("href"),
           offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
         $('html, body').stop().animate({
@@ -210,28 +201,15 @@
         }, 300);
         e.preventDefault();
       });
-      // Bind to scroll
-      $(window).scroll(function() {
-        // Get container scroll position
-        var fromTop = $(this).scrollTop() + topMenuHeight + 100;
-
-        // Get id of current scroll item
-        var cur = scrollItems.map(function() {
-          if ($(this).offset().top < fromTop)
-            return this;
+      $(window).on('scroll', function() {
+        $('.list-style-form').each(function() {
+          if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
+            var id = $(this).attr('id');
+            console.log(id)
+            $('.list-style-form-nav a').parent().removeClass('active');
+            $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
+          }
         });
-        // Get the id of the current element
-        cur = cur[cur.length - 1];
-        var id = cur && cur.length ? cur[0].id : "";
-        console.log(id)
-
-        if (lastId !== id) {
-          lastId = id;
-          // Set/remove active class
-          menuItems
-            .parent().removeClass("active")
-            .end().filter("[href='#" + id + "']").parent().addClass("active");
-        }
       });
     });
   </script>
