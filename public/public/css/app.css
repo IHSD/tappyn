@@ -2333,66 +2333,41 @@ footer {
 }
 /*** TAB FAQ ***/
 
-/* tab color */
 body {
- font-family: 'Roboto';
-  font-size: 14px;
+  padding : 10px ;
+
 }
 
-.nav-tabs>li>a {
-  background-color: #FFF;
-  border-color: #808080; /*50%*/
-  color:#808080;
+#exTab1 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
 
-/* active tab color */
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-  color: #fff;
-  background-color: #86B645;
-  border: 1px solid #86B645;
+#exTab2 h3 {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
 
-/* hover tab color */
-.nav-tabs>li>a:hover {
-  border-color: #808080;
-  background-color: #C9DEAE;
+/* remove border radius for the tab */
+
+#exTab1 .nav-pills > li > a {
+  border-radius: 0;
 }
 
-.nav-tabs > li, .nav-pills > li {
-    float:none;
-    display:inline-block;
-    *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
+/* change border radius for the tab , apply corners on top*/
+
+#exTab3 .nav-pills > li > a {
+  border-radius: 4px 4px 0 0 ;
 }
 
-/* center tabs */
-.nav-tabs, .nav-pills {
-    text-align:center;
+#exTab3 .tab-content {
+  color : white;
+  background-color: #428bca;
+  padding : 5px 15px;
 }
 
-/* line below tabs */
-.nav-tabs {
-    border-bottom: 2px solid #808080;
-}
-
-/* center logo */
-.img-center {
-  margin:0 auto;
-  padding: 15px;
-}
-
-.col-md-6 {
-  padding: 15px;
-  /*border-style: solid;*/
-}
-
-.new-row {
-  clear: left;
-}
-
-.no-title-col {
-  padding-top: 30px;
-}
 
 /*** User account ***/
 
