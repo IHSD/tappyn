@@ -506,6 +506,7 @@ class Auth extends CI_Controller
                     'name' => $this->input->post('name'),
                     'logo_url' => $this->input->post('logo_url'),
                     'company_url' => $this->input->post('company_url'),
+                    'company_email' => $this->input->post('identity'),
                     'facebook_url' => $this->input->post('facebook_url'),
                     'twitter_handle' => $this->input->post('twitter_handle')));
                 if ($this->ion_auth->login($identity, $password)) {

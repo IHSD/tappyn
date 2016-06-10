@@ -335,7 +335,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     $scope.up_age = $rootScope.user.age;
                     $scope.up_gen = $rootScope.user.gender;
                     $scope.up_interest = $rootScope.user.interests;
-                    console.log($rootScope.user);
                 }
             }
         }
@@ -684,12 +683,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         window.location = $location.protocol() + "://" + $location.host() + "/api/v1/facebook?route=" + route;
     }
 
-    $scope.add_interest_image = function(interest) {
-        var index = $.inArray(interest, $scope.registrar.interests);
+    $scope.add_interest_image = function(interest, to_array) {
+        to_array = (to_array) ? to_array : $scope.registrar.interests;
+        var index = $.inArray(interest, to_array);
         if (index == -1) {
-            $scope.registrar.interests.push(interest);
+            to_array.push(interest);
         } else {
-            $scope.registrar.interests.splice(index, 1);
+            to_array.splice(index, 1);
         }
     }
 });

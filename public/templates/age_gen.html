@@ -15,12 +15,12 @@
             <div class='interests-flexbox col-xs-12'>
                 <div ng-repeat="(key,value) in industries" ng-class="{'interest-img-checked':up_interest.indexOf(key) != -1}">
                     <span class="glyphicon glyphicon-ok" ng-if='up_interest.indexOf(key) != -1'></span>
-                    <img class="interest-img" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
+                    <img class="interest-img" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key,up_interest)">
                 </div>
             </div>
             <div class='col-xs-12'>
-            <button class='btn btn-oj col-xs-12' type='submit'>Submit</button>
-          </div>
+                <button class='btn btn-oj col-xs-12' type='submit'>Submit</button>
+            </div>
         </form>
     </div>
 </div>
