@@ -1,5 +1,5 @@
 <div class='modal_actions col-xs-12'>
-    <div class='modal_inner col-xs-12 col-sm-7 text-center' ng-class='{"col-md-8 col-lg-8" : registrar.group_id == "2" && registrar.step == 3, "col-md-5 col-lg-4" : registrar.step != 3}'>
+    <div class='modal_inner col-xs-12 text-center' ng-class='{"col-sm-9 col-md-9 col-lg-7" : registrar.group_id == "2" && registrar.step == 3, "col-sm-7 col-md-5 col-lg-4" : registrar.step != 3}'>
         <div class="logo">
             <img src="public/img/beta_logo.png" width='120' style='margin-bottom:5px;'>
         </div>
@@ -68,10 +68,10 @@
                     <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
                         <input type='radio' name="reg" ng-click="sign_up_validation(registrar,'2')">Next
                     </label>
-                    <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
+                    <label class='btn btn-oj col-xs-12 btn-secondary' ng-show='registrar.step == "2"'>
                         <input type='radio' name="reg" value='1' ng-model='registrar.step'>Back
                     </label>
-                    <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "3"'>
+                    <label class='btn btn-oj col-xs-12 btn-secondary' ng-show='registrar.step == "3"'>
                         <input type='radio' name="reg" value='2' ng-model='registrar.step'>Back
                     </label>
                 </div>
