@@ -451,6 +451,12 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script>
+     $('.nav-pills a').click(function (e) {
+       e.preventDefault()
+       $(this).tab('show')
+     })
+  </script>
 <script>
 $(document).ready(function(){
     $(".nav-pills a").click(function(){
@@ -458,11 +464,7 @@ $(document).ready(function(){
     });
 });
 </script>
-<script type="text/javascript">
-    jQuery(document).ready(function ($) {
-        $('.nav-pills').tab();
-    });
-    </script>
+
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
