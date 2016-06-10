@@ -7,7 +7,6 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
         if ($rootScope.user && $rootScope.user.interests && all_contests) {
             for (var i = all_contests.length - 1; i >= 0; i--) {
                 for (var j = all_contests[i].industry.length - 1; j >= 0; j--) {
-                    console.log(all_contests[i].industry[j], $rootScope.user.interests);
                     if ($.inArray(all_contests[i].industry[j], $rootScope.user.interests) != -1) {
                         filter.push(all_contests[i]);
                         break;
