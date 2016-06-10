@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="text-align:center;"><h1>Frequently Asked Questions</h1></div>
 	<div class="col-xs-12 content-padding">
 		<div id="exTab1" class="container">
 <ul class="nav nav-pills">
@@ -448,7 +448,12 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
+<script>
+$(".nav a").on("click", function(){
+   $(".nav").find(".active").removeClass("active");
+   $(this).parent().addClass("active");
+});
+</script>
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
