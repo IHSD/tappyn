@@ -1,19 +1,17 @@
-<link class="" href="http://fonts.googleapis.com/css?family=Roboto:400,700,500italic,500" rel="stylesheet" type="text/css">
-<div class="container">
-    <div class="tabbable">
-        <div class="row">
-            <ul class="nav nav-tabs">
-                <li class="active"><a class="" href="#tab1" data-toggle="tab">Partners</a>
-                </li>
-                <li><a class="" href="#tab4" data-toggle="tab">Here is Tab4</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
-                    <div class="col-md-6">
-                         <div class='container'>
-  <div class='row contest-box content-padding' style='margin-top:15px;'>
-    <div class='col-xs-12' style='border-bottom:1px solid #333; margin-bottom:10px;'><h2 class='text-center'>For Members</h2></div>
+<
+<div class="container"><h1>Bootstrap  tab panel example (using nav-pills)  </h1></div>
+<div id="exTab1" class="container">
+<ul  class="nav nav-pills">
+			<li class="active">
+        <a  href="#1a" data-toggle="tab">Partners</a>
+			</li>
+			<li><a href="#2a" data-toggle="tab">Businesses</a>
+			</li>
+		</ul>
+
+			<div class="tab-content clearfix">
+			  <div class="tab-pane active" id="1a">
+          <div class='col-xs-12' style='border-bottom:1px solid #333; margin-bottom:10px;'><h2 class='text-center'>For Members</h2></div>
         <uib-accordion class='faqpayment col-sm-4 col-sm-offset-4 col-xs-12'>
             <uib-accordion-group heading="What is Tappyn?">
               	Tappyn pays you create short photo ads that only require an original photo and less than 2 minutes of your time to make. Each campaign works like a 7 day contest that pays out $85 to its winner, and only 29 other entires are allowed per campaign. Whether you're here to earn extra money, get your work recognized, or just having fun, Tappyn's community is changing how the world views advertisements.
@@ -100,17 +98,11 @@
                 Yup, everyone's submissions are viewable in that campaign's submission feed. There's no need to be shy though. All types of creativity is encouraged here at Tappyn, and chances are that other users are going to love what you create!
                 </uib-accordion-group>
             </uib-accordion>
+        </div>
           </div>
-      </div>
-  </div>
-
-                    </div>
-
-                </div>
-              </div>
-                <div class="tab-pane" id="tab4">
-                    <div class="col-md-6">
-                        <div class='row contest-box content-padding'>
+				</div>
+				<div class="tab-pane" id="2a">
+          <div class='row contest-box content-padding'>
         <div class='col-xs-12' style='border-bottom:1px solid #333; margin-bottom:10px;'><h2 class='text-center'>For Businesses</h2></div>
         <div class='col-sm-4 col-xs-12'>
           <h4 style='color:#333' class='text-center'>How Campaigns Work</h4>
@@ -159,16 +151,16 @@
         </div>
   </div>
 </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- end tabbable -->
+				</div>
 
-<!-- end main container -->
+  </div>
 
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 <script>
 fbq('track', 'PageView');
