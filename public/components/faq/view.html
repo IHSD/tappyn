@@ -302,9 +302,7 @@
           </div>
 				</div>
 				<div class="tab-pane" id="2a">
-          <div class="row content-padding">
-        <div class="col-xs-12" style="border-bottom:1px solid #333; margin-bottom:10px;"><h2 class="text-center">For Businesses</h2></div>
-        <div class="col-sm-4 col-xs-12">
+              <div class="col-xs-12">
           <h4 style="color:#333" class="text-center">How Campaigns Work</h4>
           <uib-accordion class="faqpayment"><div class="panel-group" ng-transclude="">
               <div class="panel panel-default" heading="What is Tappyn?">
@@ -457,14 +455,11 @@ window.Intercom('update');
 </script>
 
 <style>
-body {
-  padding : 10px ;
-
-}
 
 #exTab1 .tab-content {
   color : white;
-  background-color: #428bca;
+  background-color: #fff;
+  border-radius: 6px;
   padding : 5px 15px;
 }
 
@@ -474,10 +469,18 @@ body {
   padding : 5px 15px;
 }
 
+.nav-pills>li.active>a {
+  background-color: #fff;
+}
+
+.nav-pills>li.active>a:hover {
+  background-color: #fff;
+}
+
 /* remove border radius for the tab */
 
 #exTab1 .nav-pills > li > a {
-  border-radius: 0;
+  border-radius: 0px;
 }
 
 /* change border radius for the tab , apply corners on top*/
