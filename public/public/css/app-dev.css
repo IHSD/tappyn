@@ -49,18 +49,26 @@
 }
 
 /* edit profile */
-
+.list-style-form-nav li.active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+.list-style-form-nav li.active a {
+  color: #555;
+}
+.list-style-form-nav li a {
+  color: #999;
+  display: block;
+}
 .list-style-form-nav li {
     border-bottom: 1px solid #dfdfdf;
     cursor: pointer;
     min-height: 18px;
     padding: 14px 20px 10px;
-    color: #999;
 }
 .list-style-form-nav li:first-child {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    background-color: #f0f0f0;
 }
 .list-style-form-nav {
     background: #fff;

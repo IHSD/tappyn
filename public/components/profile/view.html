@@ -1,18 +1,17 @@
 <div class='container'>
   <div class='row content-padding'>
-    <ul class="col-xs-12 col-sm-2 list-style-form-nav col-sm-offset-1">
-      <li>Account Basics</li>
-      <li ng-show='user.type == "company"'>Profile</li>
-      <li ng-show='user.type=="member"'>Profile</li>
+    <ul class="col-xs-12 col-sm-2 list-style-form-nav col-sm-offset-1" ng-show='user.type=="member"'>
+      <li><a href="#basics" class='scrolling'>Account Basics</a></li>
+      <li><a href="#mprofile" class='scrolling'>Profile</a></li>
       <!-- <li>Notifications</li>
       <li>Payout</li> -->
-
     </ul>
+
     <div class='col-xs-12 col-sm-7 col-sm-offset-4'>
       <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
 
       <form class='form' ng-submit='change_pass(pass)'>
-        <ul class='list-style-form form-horizontal'>
+        <ul class='list-style-form form-horizontal' id='basics'>
           <li class='section-title'>
             <h2>Account Basics</h2>
           </li>
@@ -41,7 +40,7 @@
       </form>
 
       <form class='form' ng-show='user.type == "company"' ng-submit='update_profile(profile)'>
-        <ul class='list-style-form form-horizontal'>
+        <ul class='list-style-form form-horizontal' id='cprofile'>
           <li class='section-title'>
             <h2>Profile</h2>
           </li>
@@ -107,8 +106,8 @@
         </ul>
       </form>
 
-      <form class='form' ng-submit='update_profile(profile)'>
-        <ul class='list-style-form form-horizontal' ng-show='user.type=="member"'>
+      <form class='form' ng-submit='update_profile(profile)' ng-show='user.type=="member"'>
+        <ul class='list-style-form form-horizontal' id='mprofile'>
           <li class='section-title'>
             <h2>Profile</h2>
           </li>
@@ -184,5 +183,55 @@
       setTimeout(function() {
         $(".interest-selection").trigger('change');
       }, 1000);
+    });
+  </script>
+  <script>
+    $(function() {
+      var lastId,
+        slideMenu = $(".list-style-form-nav"),
+        topMenu = $(".navbar-fixed-top"),
+        topMenuHeight = topMenu.outerHeight() + 15,
+        // All list items
+        menuItems = slideMenu.find('a');
+      // Anchors corresponding to menu items
+      scrollItems = menuItems.map(function() {
+        // var item = $($(this.hash));
+        var item = $($(this).attr("href"));
+        if (item.length) {
+          return item;
+        }
+      });
+      console.log(menuItems)
+      menuItems.click(function(e) {
+        var href = $(this).attr("href"),
+          offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
+        $('html, body').stop().animate({
+          scrollTop: offsetTop
+        }, 300);
+        e.preventDefault();
+      });
+      // Bind to scroll
+      $(window).scroll(function() {
+        // Get container scroll position
+        var fromTop = $(this).scrollTop() + topMenuHeight + 100;
+
+        // Get id of current scroll item
+        var cur = scrollItems.map(function() {
+          if ($(this).offset().top < fromTop)
+            return this;
+        });
+        // Get the id of the current element
+        cur = cur[cur.length - 1];
+        var id = cur && cur.length ? cur[0].id : "";
+        console.log(id)
+
+        if (lastId !== id) {
+          lastId = id;
+          // Set/remove active class
+          menuItems
+            .parent().removeClass("active")
+            .end().filter("[href='#" + id + "']").parent().addClass("active");
+        }
+      });
     });
   </script>
