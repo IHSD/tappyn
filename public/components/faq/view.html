@@ -51,7 +51,8 @@
             </span></div>
   </div>
 </div>
-        </div></uib-accordion>
+        </div>
+      </uib-accordion>
       </div>
       <div class="col-xs-12">
           <div class=" col-sm-4 col-xs-12">
@@ -166,7 +167,8 @@
                 </span></div>
   </div>
 </div>
-            </div></uib-accordion>
+            </div>
+          </uib-accordion>
         </div>
 
         <div class="col-sm-4 col-xs-12">
@@ -456,12 +458,28 @@ $(document).ready(function(){
     });
 });
 </script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $('.nav-tabs').tab();
+    });
+    </script>
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
 
 <style>
+
+.nav-pills>li.active>a{
+  color:#333;
+  }
+
+  .nav-pills>li.active>a:hover {
+    color: #333;
+
+  }
+
 .tab-pane:after {
     content: '';
     clear: both;
