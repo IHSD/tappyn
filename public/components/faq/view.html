@@ -448,20 +448,17 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<script>
-$(".nav a").on("click", function(){
-   $(".nav").find(".active").removeClass("active");
-   $(this).parent().addClass("active");
-});
-</script>
+
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
 
 <style>
-.nav {
-  overflow:hidden;
+.tab-pane:after {
+    content: '';
+    clear: both;
+    display: table;
 }
 
 #exTab1 .tab-content {
