@@ -1,7 +1,9 @@
+<IfModule mod_headers.c>
 <FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif)$">
 Header set Cache-Control "public"
 Header set Expires "Sat, 15 Apr 2017 20:00:00 GMT"
 </FilesMatch>
+</IfModule>
 
 # these are pretty far-future expires headers
 # they assume you control versioning with cachebusting query params like
