@@ -10,3 +10,16 @@
 .interests .interest-img-checked {
     opacity: 0.5;
 }
+.interests-flexbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.interests-flexbox > div {
+    width: 25%;
+}
+.interests-flexbox img {
+    max-width: 100%;
+    height: auto;
+}

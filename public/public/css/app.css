@@ -3168,13 +3168,6 @@ nav .dropdown-menu {
 	background-color: white;
 	padding: 40px;
 }
-.interests-flexbox {
-    flex-direction: row;
-}
-
-.interests-flexbox img {
-    width: 25%;
-}
 
 .tip-section {
     border: 1px solid #ff5c00;

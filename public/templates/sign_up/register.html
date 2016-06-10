@@ -51,8 +51,8 @@
                 <div class='row' ng-show='registrar.step == 3'>
                     <h3>Follow at least 3 topics</h3>
                     <h4>Then we'll build a custom home feed for you</h4>
-                    <div class='interests col-xs-12'>
-                        <div class="col-xs-2" ng-repeat="(key,value) in industries">
+                    <div class='interests-flexbox col-xs-12'>
+                        <div ng-repeat="(key,value) in industries">
                             <img class="interest-img" ng-class="{'interest-img-checked':registrar.interests.indexOf(key) != -1}" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
                         </div>
                     </div>
