@@ -1,5 +1,5 @@
 <div class='modal_actions col-xs-12'>
-    <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
+    <div class='modal_inner col-xs-12 col-sm-7 text-center' ng-class='{"col-md-8 col-lg-8" : registrar.group_id == "2" && registrar.step == 3, "col-md-5 col-lg-4" : registrar.step != 3}'>
         <div class="logo">
             <img src="public/img/beta_logo.png" width='120' style='margin-bottom:5px;'>
         </div>
@@ -52,8 +52,9 @@
                     <h3>Follow at least 3 topics</h3>
                     <h4>Then we'll build a custom home feed for you</h4>
                     <div class='interests-flexbox col-xs-12'>
-                        <div ng-repeat="(key,value) in industries">
-                            <img class="interest-img" ng-class="{'interest-img-checked':registrar.interests.indexOf(key) != -1}" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
+                        <div ng-repeat="(key,value) in industries" ng-class="{'interest-img-checked':registrar.interests.indexOf(key) != -1}">
+                            <span class="glyphicon glyphicon-ok" ng-if='registrar.interests.indexOf(key) != -1'></span>
+                            <img class="interest-img" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
                         </div>
                     </div>
                     <div class='col-xs-12'>
