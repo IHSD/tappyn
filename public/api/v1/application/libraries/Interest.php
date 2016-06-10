@@ -3,18 +3,18 @@
 class Interest
 {
     public $data = array(
-        'pets' => array('id' => '1', 'text' => 'Pets', 'slug' => 'pets'),
-        'food_beverage' => array('id' => '2', 'text' => 'Food & Drink', 'slug' => 'food_beverage'),
-        'finance_business' => array('id' => '3', 'text' => 'Business & Finance', 'slug' => 'finance_business'),
-        'health_wellness' => array('id' => '4', 'text' => 'Health & Fitness', 'slug' => 'health_wellness'),
-        'travel' => array('id' => '5', 'text' => 'Travel', 'slug' => 'travel'),
-        'social_network' => array('id' => '6', 'text' => 'Social & Gaming', 'slug' => 'social_network'),
-        'home_garden' => array('id' => '7', 'text' => 'Home & Garden', 'slug' => 'home_garden'),
-        'education' => array('id' => '8', 'text' => 'Education', 'slug' => 'education'),
-        'art_entertainment' => array('id' => '9', 'text' => 'Art & Entertainment', 'slug' => 'art_entertainment'),
-        'fashion_beauty' => array('id' => '10', 'text' => 'Fashion & Beauty', 'slug' => 'fashion_beauty'),
-        'sports_outdoors' => array('id' => '11', 'text' => 'Sports & Outdoors', 'slug' => 'sports_outdoors'),
-        'tech_science' => array('id' => '12', 'text' => 'Tech & Scienc', 'slug' => 'tech_science'),
+        'business' => array('id' => '1', 'text' => 'Business', 'slug' => 'business'),
+        'entertainment' => array('id' => '2', 'text' => 'Entertainment', 'slug' => 'entertainment'),
+        'family_relationships' => array('id' => '3', 'text' => 'Family & Relationships', 'slug' => 'family_relationships'),
+        'fitness_wellness' => array('id' => '4', 'text' => 'Fitness and Wellness', 'slug' => 'fitness_wellness'),
+        'food_drink' => array('id' => '5', 'text' => 'Food and Drink', 'slug' => 'food_drink'),
+        'hobbies' => array('id' => '6', 'text' => 'Hobbies', 'slug' => 'hobbies'),
+        'shopping_fashion' => array('id' => '7', 'text' => 'Shopping and Fashion', 'slug' => 'shopping_fashion'),
+        'sports_outdoors' => array('id' => '8', 'text' => 'Sports & Outdoors', 'slug' => 'sports_outdoors'),
+        'technology' => array('id' => '9', 'text' => 'Technology', 'slug' => 'technology'),
+        'pets' => array('id' => '10', 'text' => 'Pets', 'slug' => 'pets'),
+        'travel' => array('id' => '11', 'text' => 'Travel', 'slug' => 'travel'),
+        'education' => array('id' => '12', 'text' => 'Education', 'slug' => 'education'),
     );
     public $id_data = array();
 

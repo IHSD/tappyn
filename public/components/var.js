@@ -3,21 +3,20 @@ tappyn.factory('tappyn_var', function() {
     var itemsService = {};
 
     items.industries = {
-        'pets': 'Pets',
-        'food_beverage': 'Food & Drink',
-        'finance_business': 'Business & Finance',
-        'health_wellness': 'Health & Fitness',
-        'travel': 'Travel',
-        'social_network': 'Social & Gaming',
-        'home_garden': 'Home & Garden',
-        'education': 'Education',
-        'art_entertainment': 'Art & Entertainment',
-        'fashion_beauty': 'Fashion & Beauty',
+        'business': 'Business',
+        'entertainment': 'Entertainment',
+        'family_relationships': 'Family & Relationships',
+        'fitness_wellness': 'Fitness and Wellness',
+        'food_drink': 'Food and Drink',
+        'hobbies': 'Hobbies',
+        'shopping_fashion': 'Shopping and Fashion',
         'sports_outdoors': 'Sports & Outdoors',
-        'tech_science': 'Tech & Science'
+        'technology': 'Technology',
+        'pets': 'Pets',
+        'travel': 'Travel',
+        'education': 'Education',
     };
-
-    items.interests = [
+    /*items.interests = [
         { id: '10', text: 'Fashion & Beauty', picture: 'public/img/fashion_interest.png', checked: false },
         { id: '2', text: 'Food & Drink', picture: 'public/img/food_interest.png', checked: false },
         { id: '4', text: 'Health & Fitness', picture: 'public/img/health_interest.png', checked: false },
@@ -30,7 +29,7 @@ tappyn.factory('tappyn_var', function() {
         { id: '13', text: 'Sports & Outdoors', picture: 'public/img/sport_interest.png', checked: false },
         { id: '8', text: 'Education', picture: 'public/img/education_interest.png', checked: false },
         { id: '11', text: 'Tech & Science', picture: 'public/img/tech_interest.png', checked: false }
-    ];
+    ];*/
 
     items.location_boxes = [
         { id: '1', text: 'Everyone in this location' },
