@@ -45,7 +45,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <select ng-model="contest.location" class='form-control location-selection' multiple="multiple">
+                            <select ng-model="contest.location" class='form-control location-selection-edit-view' multiple="multiple">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -89,15 +89,9 @@
 </div>
 <script type="text/javascript">
 $(function() {
-    $(".location-selection").select2({
+    $(".location-selection-edit-view").select2({
         placeholder: "Add Locations"
     });
-    $(".interest-selection").select2({
-        placeholder: "Add interests",
-        maximumSelectionLength: 3
-    });
-    setTimeout(function() {
-        $("select").trigger("change");
-    }, 2000);
+
 });
 </script>
