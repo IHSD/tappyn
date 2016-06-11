@@ -203,7 +203,6 @@
         $('.list-style-form').each(function() {
           if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
             var id = $(this).attr('id');
-            console.log(id)
             $('.list-style-form-nav a').parent().removeClass('active');
             $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
           }
