@@ -1,14 +1,12 @@
 <div class='container'>
   <div class='row content-padding'>
-    <ul class="col-xs-12 col-sm-2 list-style-form-nav col-sm-offset-1">
+    <ul class="list-style-form-nav">
       <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
       <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
       <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
-      <!-- <li>Notifications</li>
-      <li>Payout</li> -->
     </ul>
 
-    <div class='col-xs-12 col-sm-7 col-sm-offset-4'>
+    <div class='col-sm-12 col-md-7 list-style-form-wrap'>
       <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
 
       <form class='form' ng-submit='change_pass(pass)'>
