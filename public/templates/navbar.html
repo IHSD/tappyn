@@ -44,8 +44,9 @@
                 <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
                     <a href>
                         <span class='notifications-container'>
-	                				<span class='glyphicon glyphicon-envelope glyph-lg'></span>
-                        <span class='notifications_count' ng-if='user.notifications > 0'><strong>{{user.notifications}}</strong></span>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()' style="color:#333;"></span>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
+                          <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                         </span>
                     </a>
                 </li>
