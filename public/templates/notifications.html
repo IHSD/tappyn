@@ -20,7 +20,7 @@
 
 	<div class="noti-scroll">
 
-	<div class='alert alert-warning notification text-center' style='margin:0;' ng-if='notifications.length==0'>You're all caught up!</div>
+	<div class='alert alert-warning notification text-center' style='margin:0;' ng-if='notifications.length==0'>No new notifications!</div>
 	<div class='notification' ng-repeat='notification in notifications | filter : {section : tab_filter}' ng-if='notifications.length > 0'>
 		<div class='noti-type' ng-switch on='notification.type'>
 			<span ng-switch-when='submission_received_vote' class='glyphicon glyphicon-thumbs-up glyphicon-oj glyph-lg'></span>
