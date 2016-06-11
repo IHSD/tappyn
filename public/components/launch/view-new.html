@@ -340,7 +340,7 @@
                     <label class='text-left col-sm-3 control-label'>Interest</label>
                     <div class="col-sm-9 form-group">
                         <h4><strong>People who follow this interest will be shown your campaign</strong></h4>
-                        <select class='form-control interest-selection' ng-model='contest.industry' multiple="multiple">
+                        <select class='form-control interest-selection' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
                     </div>
