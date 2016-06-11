@@ -9,7 +9,8 @@
     <div class="col-xs-11">
         <nav class='hidden-xs' id='top-scroll'>
             <ul>
-                <li><a href="/contests">Discover</a></li>
+                <li ng-hide='user.type == "company"'><a href="/contests">Discover</a></li>
+                <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/winners">Most Popular</a></li>
                 <li ng-if='user' style='float:right;'>
                     <a href>
