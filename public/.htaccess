@@ -1,13 +1,44 @@
-<IfModule mod_headers.c>
-<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif)$">
-Header set Cache-Control "public"
-Header set Expires "Sat, 15 Apr 2017 20:00:00 GMT"
-</FilesMatch>
-</IfModule>
-
 <IfModule mod_rewrite.c>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [L]
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | ETags                                                              |
+# ----------------------------------------------------------------------
+
+# Remove `ETags` as resources are sent with far-future expires headers.
+#
+# https://developer.yahoo.com/performance/rules.html#etags
+# https://tools.ietf.org/html/rfc7232#section-2.3
+
+# `FileETag None` doesn't work in all cases.
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+
+FileETag None
+
+<IfModule mod_headers.c>
+# 1 YEAR
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+Header set Cache-Control "max-age=29030400, public"
+</FilesMatch>
+
+# 1 WEEK
+<FilesMatch "\.(jpg|jpeg|png|gif|swf|svg)$">
+Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
+
+# 1 HOUR
+<FilesMatch "\.(txt|xml|js|css|html)$">
+Header set Cache-Control "max-age=3600"
+</FilesMatch>
+
+# NEVER CACHE
+<FilesMatch "\.(htm|php|cgi|pl)$">
+Header set Cache-Control "max-age=0, private, no-store, no-cache, must-revalidate"
+</FilesMatch>
 </IfModule>
