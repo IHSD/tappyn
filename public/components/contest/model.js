@@ -9,21 +9,21 @@ tappyn.service("contestModel", function(){
 	this.parallel_submission = function(contest){
 		var layout = {};
 		if(contest.platform == "facebook"){
-			layout.text = {limit : 90, placeholder : 'Why do you love this company?'};
+			layout.text = {limit : 90, placeholder : 'What promise is most likely to make you buy this brand?'};
 			if(contest.objective == 'conversions' || contest.objective == "clicks_to_website") layout.headline = {limit : 35, placeholder : 'What would grab your attention?'};
 		}
 		else if(contest.platform == "twitter"){
-			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'Why do you love this company?'};
-			else layout.text = {limit : 140, placeholder : 'Why do you love this company?'};
-			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'Why do you love this company?'}
+			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'What promise is most likely to make you buy this brand?'};
+			else layout.text = {limit : 140, placeholder : 'What promise is most likely to make you buy this brand?'};
+			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'What promise is most likely to make you buy this brand?'}
 		}
 		else if(contest.platform == "google"){
 			layout.headline = {limit : 25, placeholder : 'What would grab your attention?'};
-			layout.line_1 = {limit : 35, placeholder : 'Why do you love this company?'};
-			layout.line_2 = {limit : 35, placeholder : 'Why do you love this company?'};
+			layout.line_1 = {limit : 35, placeholder : 'What promise is most likely to make you buy this brand?'};
+			layout.line_2 = {limit : 35, placeholder : 'What promise is most likely to make you buy this brand?'};
 		}
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'What would grab your attention?'};
-		else if(contest.platform == "instagram") layout.text = {limit : 90, placeholder : 'Why do you love this company?'};
+		else if(contest.platform == "instagram") layout.text = {limit : 90, placeholder : 'What promise is most likely to make you buy this brand?'};
 
 		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
@@ -40,7 +40,7 @@ tappyn.service("contestModel", function(){
 			else return true;
 		}
 		else if(contest.platform == 'twitter'){
-			if(contest.objective == "site_clicks_conversions"){	
+			if(contest.objective == "site_clicks_conversions"){
 				if(size.width < 800 || size.height < 320) return false;
 				else return true;
 			}
@@ -55,19 +55,19 @@ tappyn.service("contestModel", function(){
 	this.fire_google = function(contest){
 		if(contest.gender == "0"){
 			switch(contest.min_age){
-				case "18" : 
+				case "18" :
 					ga('set', 'contentGroup11', '<18-24 All Gender Contest>');
 					ga('send', 'pageview');
 				break;
-				case "25" : 
+				case "25" :
 					ga('set', 'contentGroup12', '<25-34 All Gender Contest>');
 					ga('send', 'pageview');
 				break;
-				case "35" : 
+				case "35" :
 					ga('set', 'contentGroup13', '<35-44 All Gender Contest>');
 					ga('send', 'pageview');
 				break;
-				case "45" : 
+				case "45" :
 					ga('set', 'contentGroup14', '<45+ All Gender Contest>');
 					ga('send', 'pageview');
 				break;
@@ -75,19 +75,19 @@ tappyn.service("contestModel", function(){
 		}
 		else if(contest.gender == "1"){
 			switch(contest.max_age){
-				case "18" : 
+				case "18" :
 					ga('set', 'contentGroup7', '<18-24 Male Contest>');
 					ga('send', 'pageview');
 				break;
-				case "25" : 
+				case "25" :
 					ga('set', 'contentGroup8', '<25-34 Male Contest>');
 					ga('send', 'pageview');
 				break;
-				case "35" : 
+				case "35" :
 					ga('set', 'contentGroup9', '<35-44 Male Contest>');
 					ga('send', 'pageview');
 				break;
-				case "45" : 
+				case "45" :
 					ga('set', 'contentGroup10', '<45+ Male Contest>');
 					ga('send', 'pageview');
 				break;
@@ -95,19 +95,19 @@ tappyn.service("contestModel", function(){
 		}
 		else if(contest.gender == "2"){
 			switch(contest.max_age){
-				case "18" : 
+				case "18" :
 					ga('set', 'contentGroup3', '<18-24 Female Contest>');
 					ga('send', 'pageview');
 				break;
-				case "25" : 
+				case "25" :
 					ga('set', 'contentGroup4', '<25-34 Female Contest>');
 					ga('send', 'pageview');
 				break;
-				case "35" : 
+				case "35" :
 					ga('set', 'contentGroup5', '<35-44 Female Contest>');
 					ga('send', 'pageview');
 				break;
-				case "45" : 
+				case "45" :
 					ga('set', 'contentGroup6', '<45+ Female Contest>');
 					ga('send', 'pageview');
 				break;
