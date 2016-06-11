@@ -179,7 +179,7 @@ header nav ul li a {
 
 header nav ul li a:hover {
     color: #ff5e00;
-    border-bottom: 1px solid #ff5e00;
+    /**border-bottom: 1px solid #ff5e00;**/
 }
 
 header nav ul li.login-li {
@@ -395,7 +395,7 @@ li {
 
 li.value-list:before {
     /*Using a Bootstrap glyphicon as the bullet point*/
-    content: "\e067";
+    content: "\e111";
     font-family: 'Glyphicons Halflings';
     font-size: 12px;
     float: left;
