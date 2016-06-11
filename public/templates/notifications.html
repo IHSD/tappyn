@@ -2,15 +2,15 @@
 	<div class="notif-top">
 		<div class="notif-tab-wrap">
 			<div class='notif-tab notif-tab-left' ng-init='tab_filter = "account"' ng-click='tab_filter = "account"' ng-class='{"notif-active" : tab_filter == "account"}'>
-				Account
+				Payouts
 				<span class='notifications_count' ng-if='(notifications | filter : section == "account").length > 0'><strong>{{(notifications | filter : section == "account").length}}</strong></span>
 			</div>
 			<div class='notif-tab' ng-click='tab_filter = "votes"' ng-class='{"notif-active" : tab_filter == "votes"}'>
-				Votes
+				Ads
 				<span class='notifications_count' ng-if='(notifications | filter : section == "votes").length > 0'><strong>{{(notifications | filter : section == "votes").length}}</strong></span>
 			</div>
 			<div class='notif-tab notif-tab-right' ng-click='tab_filter = "contests"' ng-class='{"notif-active" : tab_filter == "contests"}'>
-				Contests
+				Campaigns
 				<span class='notifications_count' ng-if='(notifications | filter : section == "contests").length > 0'><strong>{{(notifications | filter : section == "contests").length}}</strong></span>
 			</div>
 		</div>
