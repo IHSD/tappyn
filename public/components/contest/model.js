@@ -9,21 +9,21 @@ tappyn.service("contestModel", function(){
 	this.parallel_submission = function(contest){
 		var layout = {};
 		if(contest.platform == "facebook"){
-			layout.text = {limit : 90, placeholder : 'What promise is most likely to make you buy this brand?'};
+			layout.text = {limit : 90, placeholder : 'What would make me pick this company?'};
 			if(contest.objective == 'conversions' || contest.objective == "clicks_to_website") layout.headline = {limit : 35, placeholder : 'What would grab your attention?'};
 		}
 		else if(contest.platform == "twitter"){
-			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'What promise is most likely to make you buy this brand?'};
-			else layout.text = {limit : 140, placeholder : 'What promise is most likely to make you buy this brand?'};
-			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'What promise is most likely to make you buy this brand?'}
+			if(contest.display_type == 'with_photo') layout.text = {limit : 116, placeholder : 'What would make me pick this company?'};
+			else layout.text = {limit : 140, placeholder : 'What would make me pick this company?'};
+			if(contest.objective == "site_clicks_conversions") layout.card_title = {limit : 70, placeholder : 'What would make me pick this company?'}
 		}
 		else if(contest.platform == "google"){
 			layout.headline = {limit : 25, placeholder : 'What would grab your attention?'};
-			layout.line_1 = {limit : 35, placeholder : 'What promise is most likely to make you buy this brand?'};
-			layout.line_2 = {limit : 35, placeholder : 'What promise is most likely to make you buy this brand?'};
+			layout.line_1 = {limit : 35, placeholder : 'What would make me pick this company?'};
+			layout.line_2 = {limit : 35, placeholder : 'What would make me pick this company?'};
 		}
 		else if(contest.platform == "general") layout.headline ={limit : 35, placeholder : 'What would grab your attention?'};
-		else if(contest.platform == "instagram") layout.text = {limit : 90, placeholder : 'What promise is most likely to make you buy this brand?'};
+		else if(contest.platform == "instagram") layout.text = {limit : 90, placeholder : 'What would make me pick this company?'};
 
 		if(contest.display_type == "with_photo") layout.photo = true;
 		return layout;
