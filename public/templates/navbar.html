@@ -16,8 +16,8 @@
                 <li ng-if='user' style='float:right;'>
                     <a href>
                         <span class='notifications-container'>
-	                    			<span class='glyphicon glyphicon-envelope glyph-lg' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
-                            <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
+	                    			<span class='glyphicon glyphicon-envelope glyph-lg' ng-click='toggle_notifications()' style="color:#333;"></span>
+                            <span class='notifications_count' ng-if='user.notifications > 0' style="color:#ff5c00;" ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                             <span ng-include src="'templates/notifications.html'"></span>
                         </span>
                     </a>
