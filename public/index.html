@@ -85,7 +85,6 @@
                 <div ng-show='registration.type == "default" || registration.type == "company" || registration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
                 <div ng-show='registration.type == "upvote"' ng-include src="'templates/sign_up/upvote_register.html'"></div>
             </div>
-            <div ng-include src="'templates/notifications.html'"></div>
             <div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
             <div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
         </div>
@@ -99,7 +98,6 @@
               <div ng-show='registration.type == "default" || registration.type == "company" || registration.type == "must"' ng-include src="'templates/sign_up/register.html'"></div>
               <div ng-show='registration.type == "upvote"' ng-include src="'templates/sign_up/upvote_register.html'"></div>
           </div>
-          <div ng-include src="'templates/notifications.html'"></div>
           <div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
           <div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
       </div>
@@ -147,7 +145,7 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     </script>
-    
+
 </body>
 
 </html>

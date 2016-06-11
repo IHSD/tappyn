@@ -447,8 +447,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.registration = { show: false, type: '', object: '' };
     }
 
-    $scope.open_notifications = function() {
-        $scope.notification_show = true;
+    $scope.notification_show = false;
+    $scope.toggle_notifications = function() {
+        $scope.notification_show = $scope.notification_show === false ? true: false;
         AppFact.grabNotifications().success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
@@ -456,11 +457,21 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                 }
             }
         });
-    }
+    };
+    // $scope.open_notifications = function() {
+    //     $scope.notification_show = true;
+    //     AppFact.grabNotifications().success(function(response) {
+    //         if (response.http_status_code == 200) {
+    //             if (response.success) {
+    //                 $scope.notifications = response.data.notifications;
+    //             }
+    //         }
+    //     });
+    // }
 
-    $scope.close_notifications = function() {
-        $scope.notification_show = false;
-    }
+    // $scope.close_notifications = function() {
+    //     $scope.notification_show = false;
+    // }
 
     $scope.read_notification = function(notification, index) {
         AppFact.readNotification(notification).success(function(response) {
