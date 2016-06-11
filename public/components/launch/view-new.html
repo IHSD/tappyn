@@ -171,12 +171,12 @@
                 <h4>Congratulations on making the best decision for your company since casual Friday!</h4>
             </div>
             <uib-progress class='tp-progress-steps'>
-              <uib-bar value='steps["tp-platform"].fill' type='{{ current.fill >= steps["tp-platform"].fill ? "warning" : "success" }}'></uib-bar>
-              <uib-bar value='steps["tp-objective"].fill' type='{{ current.fill >= steps["tp-objective"].fill ? "warning" : "success" }}'></uib-bar>
-              <uib-bar value='steps["tp-audience"].fill' type='{{ current.fill >= steps["tp-audience"].fill ? "warning" : "success" }}'></uib-bar>
-              <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
-              <uib-bar value='steps["preview"].fill' type='{{ current.fill >= steps["preview"].fill ? "warning" : "success" }}'></uib-bar>
-              <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
+                <uib-bar value='steps["tp-platform"].fill' type='{{ current.fill >= steps["tp-platform"].fill ? "warning" : "success" }}'></uib-bar>
+                <uib-bar value='steps["tp-objective"].fill' type='{{ current.fill >= steps["tp-objective"].fill ? "warning" : "success" }}'></uib-bar>
+                <uib-bar value='steps["tp-audience"].fill' type='{{ current.fill >= steps["tp-audience"].fill ? "warning" : "success" }}'></uib-bar>
+                <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
+                <uib-bar value='steps["preview"].fill' type='{{ current.fill >= steps["preview"].fill ? "warning" : "success" }}'></uib-bar>
+                <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
             </uib-progress>
         </div>
     </div>
@@ -293,7 +293,7 @@
                         </div>
                         <div class='form-group'>
                             <h4><strong>The locations you'd like to target</strong></h4>
-                            <select select2 ng-model="contest.location" class='form-control location-selection' multiple="multiple">
+                            <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -340,7 +340,7 @@
                     <label class='text-left col-sm-3 control-label'>Interest</label>
                     <div class="col-sm-9 form-group">
                         <h4><strong>People who follow this interest will be shown your campaign</strong></h4>
-                        <select class='form-control interest-selection' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                        <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
                     </div>
@@ -587,10 +587,10 @@ fbq('track', 'PageView');
 </script>
 <script type="text/javascript">
 $(function() {
-    $(".location-selection").select2({
+    $(".location-selection-launch-view").select2({
         placeholder: "Add Locations"
     });
-    $(".interest-selection").select2({
+    $(".interest-selection-launch-view").select2({
         placeholder: "Add interests",
         maximumSelectionLength: 3
     });

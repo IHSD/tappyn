@@ -1,212 +1,205 @@
 <div class='container'>
-  <div class='row content-padding'>
-    <ul class="list-style-form-nav">
-      <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
-      <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
-      <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
-    </ul>
-
-    <div class='col-sm-12 col-md-7 list-style-form-wrap'>
-      <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
-
-      <form class='form' ng-submit='change_pass(pass)'>
-        <ul class='list-style-form form-horizontal' id='basics'>
-          <li class='section-title'>
-            <h2>Account Basics</h2>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Old Password</label>
-            <div class='col-sm-8'>
-              <input type='password' class='form-control' placeholder='Old Password' ng-model='pass.old'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>New Password</label>
-            <div class='col-sm-8'>
-              <input type='password' class='form-control' placeholder='New Password' ng-model='pass.new'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Confirm New Password</label>
-            <div class='col-sm-8'>
-              <input type='password' class='form-control' placeholder='Confirm New Password' ng-model='pass.new_confirm'>
-            </div>
-          </li>
-          <li class='text-right'>
-            <button class='btn btn-oj' type='submit'>Change Your Password</button>
-          </li>
+    <div class='row content-padding'>
+        <ul class="list-style-form-nav">
+            <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
+            <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
+            <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
         </ul>
-      </form>
-
-      <form class='form' ng-if='user.type == "company"' ng-submit='update_profile(profile)'>
-        <ul class='list-style-form form-horizontal' id='cprofile'>
-          <li class='section-title'>
-            <h2>Profile</h2>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Name</label>
-            <div class="col-sm-8">
-              <input class='form-control' ng-model='profile.company_name' placeholder='Company Name' type='text'>
+        <div class='col-sm-12 col-md-7 list-style-form-wrap'>
+            <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
+            <form class='form' ng-submit='change_pass(pass)'>
+                <ul class='list-style-form form-horizontal' id='basics'>
+                    <li class='section-title'>
+                        <h2>Account Basics</h2>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Old Password</label>
+                        <div class='col-sm-8'>
+                            <input type='password' class='form-control' placeholder='Old Password' ng-model='pass.old'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>New Password</label>
+                        <div class='col-sm-8'>
+                            <input type='password' class='form-control' placeholder='New Password' ng-model='pass.new'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Confirm New Password</label>
+                        <div class='col-sm-8'>
+                            <input type='password' class='form-control' placeholder='Confirm New Password' ng-model='pass.new_confirm'>
+                        </div>
+                    </li>
+                    <li class='text-right'>
+                        <button class='btn btn-oj' type='submit'>Change Your Password</button>
+                    </li>
+                </ul>
+            </form>
+            <form class='form' ng-if='user.type == "company"' ng-submit='update_profile(profile)'>
+                <ul class='list-style-form form-horizontal' id='cprofile'>
+                    <li class='section-title'>
+                        <h2>Profile</h2>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Name</label>
+                        <div class="col-sm-8">
+                            <input class='form-control' ng-model='profile.company_name' placeholder='Company Name' type='text'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Email</label>
+                        <div class="col-sm-8">
+                            <input class='form-control' ng-model='profile.company_email' placeholder='Company Email' type='text'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Summary</label>
+                        <div class="col-sm-8">
+                            <textarea class='form-control' ng-model='profile.summary' placeholder='Company summary' type='text'></textarea>
+                            <p>{{profile.summary.length}} of 180 characters</p>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Description</label>
+                        <div class="col-sm-8">
+                            <textarea class='form-control' ng-model='profile.mission' placeholder='Company description' type='text'></textarea>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>How Your Company is Different</label>
+                        <div class="col-sm-8">
+                            <textarea class='form-control' ng-model='profile.different' placeholder='Additional Info' type='text'></textarea>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Logo</label>
+                        <div class="col-sm-8">
+                            <input type='file' ng-file-select='select_file($files)'>
+                            <img class='img-responsive' ng-if='profile.logo_url' src='{{profile.logo_url}}' style='max-width: 120px;height: auto;margin-top: 10px;'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Website</label>
+                        <div class="col-sm-8">
+                            <input class='form-control' ng-model='profile.company_url' placeholder='Company Website' type='text'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Facebook Page</label>
+                        <div class="col-sm-8">
+                            <input class='form-control' ng-model='profile.facebook_url' placeholder='Facebook Page' type='text'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Company Twitter Handle</label>
+                        <div class="col-sm-8">
+                            <input class='form-control' ng-model='profile.twitter_handle' placeholder='Your Twitter Handle' type='text'>
+                        </div>
+                    </li>
+                    <li class='text-right'>
+                        <button class='btn btn-oj' type='submit'>Update Your Info</button>
+                    </li>
+                </ul>
+            </form>
+            <form class='form' ng-submit='update_profile(profile)' ng-if='user.type=="member"'>
+                <ul class='list-style-form form-horizontal' id='mprofile'>
+                    <li class='section-title'>
+                        <h2>Profile</h2>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Name</label>
+                        <div class="col-sm-8">
+                            <div class='col-xs-6' style='padding-left:0;'>
+                                <input class='form-control' ng-model='profile.first_name' placeholder='First Name' type='text'>
+                            </div>
+                            <div class='col-xs-6' style='padding-right:0;'>
+                                <input class='form-control' ng-model='profile.last_name' placeholder='Last Name' type='text'>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Age</label>
+                        <div class='col-sm-8'>
+                            <input class='form-control' ng-model='profile.age' placeholder="Age" type='text'>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Gender</label>
+                        <div class='col-sm-8 radio'>
+                            <label class='btn'>
+                                <input type='radio' ng-model='profile.gender' value='1'>Male</label>
+                            <label class='btn'>
+                                <input type='radio' ng-model='profile.gender' value='2'>Female</label>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>State</label>
+                        <div class='col-sm-8'>
+                            <select class='form-control' ng-model='profile.state'>
+                                <option value=''>State</option>
+                                <option value='{{key}}' ng-repeat='(key, value) in states'>{{value}}</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Interest</label>
+                        <div class='col-sm-8'>
+                            <select class='form-control interest-selection-profile-view' ng-model='profile.interests' multiple="multiple">
+                                <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <label class='col-sm-4 control-label' style='text-align: left;'>Profile Picture</label>
+                        <div class='col-sm-8'>
+                            <input type='file' ng-file-select='select_file($files,"avatar_url")'>
+                            <img class='img-responsive' ng-if='profile.avatar_url' src='{{profile.avatar_url}}' style='max-width: 120px;height: auto;margin-top: 10px;'>
+                        </div>
+                    </li>
+                    <li class='text-right'>
+                        <button class='btn btn-oj' type='submit'>Update Your Info</button>
+                    </li>
+                </ul>
+            </form>
+            <div>
             </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Email</label>
-            <div class="col-sm-8">
-              <input class='form-control' ng-model='profile.company_email' placeholder='Company Email' type='text'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Summary</label>
-            <div class="col-sm-8">
-              <textarea class='form-control' ng-model='profile.summary' placeholder='Company summary' type='text'></textarea>
-              <p>{{profile.summary.length}} of 180 characters</p>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Description</label>
-            <div class="col-sm-8">
-              <textarea class='form-control' ng-model='profile.mission' placeholder='Company description' type='text'></textarea>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>How Your Company is Different</label>
-            <div class="col-sm-8">
-              <textarea class='form-control' ng-model='profile.different' placeholder='Additional Info' type='text'></textarea>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Logo</label>
-            <div class="col-sm-8">
-              <input type='file' ng-file-select='select_file($files)'>
-              <img class='img-responsive' ng-if='profile.logo_url' src='{{profile.logo_url}}' style='max-width: 120px;height: auto;margin-top: 10px;'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Website</label>
-            <div class="col-sm-8">
-              <input class='form-control' ng-model='profile.company_url' placeholder='Company Website' type='text'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Facebook Page</label>
-            <div class="col-sm-8">
-              <input class='form-control' ng-model='profile.facebook_url' placeholder='Facebook Page' type='text'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Company Twitter Handle</label>
-            <div class="col-sm-8">
-              <input class='form-control' ng-model='profile.twitter_handle' placeholder='Your Twitter Handle' type='text'>
-            </div>
-          </li>
-          <li class='text-right'>
-            <button class='btn btn-oj' type='submit'>Update Your Info</button>
-          </li>
-        </ul>
-      </form>
-
-      <form class='form' ng-submit='update_profile(profile)' ng-if='user.type=="member"'>
-        <ul class='list-style-form form-horizontal' id='mprofile'>
-          <li class='section-title'>
-            <h2>Profile</h2>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Name</label>
-            <div class="col-sm-8">
-              <div class='col-xs-6' style='padding-left:0;'>
-                <input class='form-control' ng-model='profile.first_name' placeholder='First Name' type='text'>
-              </div>
-              <div class='col-xs-6' style='padding-right:0;'>
-                <input class='form-control' ng-model='profile.last_name' placeholder='Last Name' type='text'>
-              </div>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Age</label>
-            <div class='col-sm-8'>
-              <input class='form-control' ng-model='profile.age' placeholder="Age" type='text'>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Gender</label>
-            <div class='col-sm-8 radio'>
-              <label class='btn'>
-                <input type='radio' ng-model='profile.gender' value='1'>Male</label>
-              <label class='btn'>
-                <input type='radio' ng-model='profile.gender' value='2'>Female</label>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>State</label>
-            <div class='col-sm-8'>
-              <select class='form-control' ng-model='profile.state'>
-                <option value=''>State</option>
-                <option value='{{key}}' ng-repeat='(key, value) in states'>{{value}}</option>
-              </select>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Interest</label>
-            <div class='col-sm-8'>
-              <select class='form-control interest-selection' ng-model='profile.interests' multiple="multiple">
-                <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
-              </select>
-            </div>
-          </li>
-          <li>
-            <label class='col-sm-4 control-label' style='text-align: left;'>Profile Picture</label>
-            <div class='col-sm-8'>
-              <input type='file' ng-file-select='select_file($files,"avatar_url")'>
-              <img class='img-responsive' ng-if='profile.avatar_url' src='{{profile.avatar_url}}' style='max-width: 120px;height: auto;margin-top: 10px;'>
-            </div>
-          </li>
-          <li class='text-right'>
-            <button class='btn btn-oj' type='submit'>Update Your Info</button>
-          </li>
-        </ul>
-      </form>
-
-
-      <div>
-      </div>
+        </div>
     </div>
-  </div>
-  <script>
+    <script>
     fbq('track', 'PageView');
-  </script>
-  <script type="text/javascript">
+    </script>
+    <script type="text/javascript">
     $(function() {
-      $(".interest-selection").select2({
-        placeholder: "Add interests"
-      });
-      setTimeout(function() {
-        $(".interest-selection").trigger('change');
-      }, 1000);
+        setTimeout(function() {
+            $(".interest-selection-profile-view").select2({
+                placeholder: "Add interests"
+            });
+        }, 1000);
     });
-  </script>
-  <script>
+    </script>
+    <script>
     $(function() {
-      var lastId,
-        slideMenu = $(".list-style-form-nav"),
-        topMenu = $(".navbar-fixed-top"),
-        topMenuHeight = topMenu.outerHeight() + 15,
-        menuItems = slideMenu.find('a');
-      $("a.scrolling").click(function(e) {
-        var href = $(this).attr("href"),
-          offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
-        $('html, body').stop().animate({
-          scrollTop: offsetTop
-        }, 300);
-        e.preventDefault();
-      });
-      $(window).on('scroll', function() {
-        $('.list-style-form').each(function() {
-          if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
-            var id = $(this).attr('id');
-            $('.list-style-form-nav a').parent().removeClass('active');
-            $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
-          }
+        var lastId,
+            slideMenu = $(".list-style-form-nav"),
+            topMenu = $(".navbar-fixed-top"),
+            topMenuHeight = topMenu.outerHeight() + 15,
+            menuItems = slideMenu.find('a');
+        $("a.scrolling").click(function(e) {
+            var href = $(this).attr("href"),
+                offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
+            $('html, body').stop().animate({
+                scrollTop: offsetTop
+            }, 300);
+            e.preventDefault();
         });
-      });
+        $(window).on('scroll', function() {
+            $('.list-style-form').each(function() {
+                if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
+                    var id = $(this).attr('id');
+                    $('.list-style-form-nav a').parent().removeClass('active');
+                    $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
+                }
+            });
+        });
     });
-  </script>
+    </script>
