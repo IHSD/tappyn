@@ -63,7 +63,7 @@
                         <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
                 </div>
-                <center><div data-toggle="buttons" class="col-xs-12" style='max-width:60%;'>
+                <center><div data-toggle="buttons" class="col-xs-6 col-xs-offset-3" style='max-width:60%;'>
                     <label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'">
                         <input type="radio" name="reg" ng-click="sign_up_validation(registrar,'1')">Sign Up
                     </label>
@@ -133,7 +133,7 @@
                 </div>
             </form>
         </div>
-        <div ng-show='registration.type == "default" || registration.type == "must"' class='col-xs-12 text-center'>
+        <div ng-show='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-6 col-xs-offset-3 text-center">
             <p><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
             <div class="btn-group" data-toggle="buttons">
                 <label class='btn btn-link' ng-show='registrar.group_id == "3"'>

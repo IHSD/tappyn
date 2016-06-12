@@ -3126,7 +3126,7 @@ nav .dropdown-menu {
     left: 50%;
   	top: 50%;
   	transform: translateY(-50%) translateX(-50%);
-    max-height: 90%;
+    max-height: 100%;
     overflow-y: scroll;
     min-width:50%;
 }
