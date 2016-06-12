@@ -3,21 +3,27 @@
 		<div ng-hide='signing_in.type == "must"'  class='close_circle' ng-click='close_login()'>x</div>
 		<img src="public/img/beta_logo.png" width='120' style='margin-bottom:20px;'>
 	    <div ng-show='!forgot'>
+				<div class="col-xs-10 col-xs-offset-1">
 	        <div src="public/img/TappynLogo2.png" width='120' style='margin-bottom:5px;'>
 	            <a href ng-click='fb_login()'>
 	                <img class='img-responsive' height='45px' style='border-radius: 5px;' src="public/img/img-facebook.png">
 	            </a>
 	        </div>
+				</div>
 					<div class='col-xs-12'>
 						<p class='text-center'>OR</p>
 					</div>
 	        <form class='form' ng-submit="log_in(identity, password)">
-	            <div class='form-group'>
+	            <center>
+								<div class='form-group' style='5px;max-width:60%;'>
 	                <input class='form-control' ng-model='identity' placeholder='Email'>
-	            </div>
-	            <div class='form-group'>
+	              </div>
+						  </center>
+	            <center>
+								<div class='form-group' style='max-width:60%;'>
 	                <input class='form-control' ng-model='password' placeholder='Password' type='password'>
 	            </div>
+						 </center>
 
 	            <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Login</button>
 	            <div class='modal_link'>
