@@ -11,7 +11,7 @@
                     <h4>Join Tappyn (for free!) to explore and create short ads.</h4>
                     <div class='col-xs-12'>
                         <a href ng-click='fb_login()' id='fb-login'>
-                            <img class='img-responsive' height='45px' style='border-radius: 5px; margin-bottom: 10px;max-width: 70%;' src="public/img/img-facebook.png">
+                            <center><img class='img-responsive' height='45px' style='border-radius: 5px; margin-bottom: 10px;max-width: 70%;' src="public/img/img-facebook.png"></center>
                         </a>
                         <p style="font-size:12px;">We'll <i>never</i> spam your friends or post on your behalf.</p>
                     </div>
@@ -22,10 +22,10 @@
                         <center><div class='form-group' style='margin-bottom:5px;max-width:60%;'>
                             <input class='form-control' ng-model='registrar.identity' placeholder='Email' type='email'>
                         </div></center>
-                        <center><div class='form-group'>
+                        <center><div class='form-group' style='margin-bottom:5px;max-width:60%;'>
                             <input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
                         </div></center>
-                        <center><div class='form-group'>
+                        <center><div class='form-group' style='margin-bottom:5px;max-width:60%;'>
                             <input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
                         </div></center>
                     </div>
@@ -63,10 +63,10 @@
                         <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
                 </div>
-                <div data-toggle="buttons" class="col-xs-12">
-                    <center><label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'" style="max-width:70%;">
+                <center><div data-toggle="buttons" class="col-xs-12" style='max-width:60%;'>
+                    <label class="btn btn-oj col-xs-12" ng-hide="registrar.step != '1'">
                         <input type="radio" name="reg" ng-click="sign_up_validation(registrar,'1')">Sign Up
-                    </label></center>
+                    </label>
                     <label class='btn btn-oj col-xs-12' ng-show='registrar.step == "2"'>
                         <input type='radio' name="reg" ng-click="sign_up_validation(registrar,'2')">Next
                     </label>
@@ -76,7 +76,7 @@
                     <label class='btn btn-oj col-xs-12 btn-secondary' ng-show='registrar.step == "3"'>
                         <input type='radio' name="reg" value='2' ng-model='registrar.step'>Back
                     </label>
-                </div>
+                </div></center>
             </form>
         </div>
         <div ng-show='registrar.group_id == "3"'>
