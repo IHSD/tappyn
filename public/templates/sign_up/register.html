@@ -138,7 +138,7 @@
                 </div>
                 <div class='col-xs-12'>
                     <input type='hidden' value='3' ng-model='registrar.group_id'>
-                    <button id='sign-up' type='submit' class='col-xs-12 btn btn-oj'>Sign Up</button>
+                    <button id='sign-up' type='submit' class='col-xs-6 col-xs-offset-3 btn btn-oj' style='max-width:60%;'>Sign Up</button>
                 </div>
             </form>
         </div>
@@ -147,7 +147,7 @@
             <p><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
           </div>
             <div class="btn-group col-xs-12" data-toggle="buttons" style="display:inline;">
-                <label class='btn btn-link' ng-show='registrar.group_id == "3"'>
+                <label class='btn btn-link' ng-show='registrar.group_id == "3"' style="white-space:normal;font-size:16px;float:none;">
                     <input type='radio' value='2' ng-model='registrar.group_id'>Sign Up as a User</label>
                 <label class='btn btn-link' ng-show='registrar.group_id == "2"' style="white-space:normal;font-size:16px;float:none;">
                     <input type='radio' value='3' ng-model='registrar.group_id'>Sign Up as a Business</label>
