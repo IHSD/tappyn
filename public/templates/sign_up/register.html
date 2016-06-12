@@ -32,8 +32,8 @@
                 </div>
                 <div class='row' ng-show='registrar.step == 2'>
                     <h3>Looking good! Just a few more details...</h3>
-                    <div class='col-xs-8'>
-                        <div class='form-group' style='margin-bottom:5px;max-width:60%;'>
+                    <div class='col-xs-6 col-xs-offset-1'>
+                        <div class='form-group' style='margin-bottom:5px;'>
                             <input class='form-control' ng-model='registrar.name' placeholder='Full Name' type='text'>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                             <img class="interest-img" ng-src='public/img/interests/{{key}}.jpg' alt='{{value}}' ng-click="add_interest_image(key)">
                         </div>
                     </div>
-                    <div class='col-xs-12'>
+                    <div class="col-xs-6 col-xs-offset-3">
                         <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
                 </div>
@@ -133,9 +133,9 @@
                 </div>
             </form>
         </div>
-        <div ng-show='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-6 col-xs-offset-3 text-center">
+        <div ng-show='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-12 text-center">
             <p><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
-            <div class="btn-group col-xs-12" data-toggle="buttons" style="display:inline;">
+            <div class="btn-group col-xs-8 col-xs-offset-2" data-toggle="buttons" style="display:inline;">
                 <label class='btn btn-link' ng-show='registrar.group_id == "3"'>
                     <input type='radio' value='2' ng-model='registrar.group_id'>Sign Up as a User
                 </label>
