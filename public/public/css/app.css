@@ -3128,6 +3128,7 @@ nav .dropdown-menu {
   	transform: translateY(-50%) translateX(-50%);
     max-height: 90%;
     overflow-y: scroll;
+    min-width:50%;
 }
 @media (min-width:768px) {
   .modal_inner {
@@ -3137,6 +3138,8 @@ nav .dropdown-menu {
 
 .modal_inner .logo img {
     max-width: 120px;
+    margin-top: -30px;
+    margin-bottom: -15px;
 }
 
 .modal_inner .btn {
