@@ -8,8 +8,9 @@
                             <h1 style='font-size:50;margin-bottom:35px;margin-top:50px;'>Make ads more authentic.</h1>
                             <h3 style='color:#fff;'>Join the first creative marketplace<br>with absolutely 0% fees.</h3>
                                <div class='text-left'>
-                            <a class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href='/contests'><strong>Join Tappyn</strong></a>
-
+                            <a ng-hide='user.type != "member"' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href='/contests'><strong>Join Tappyn</strong></a>
+                            <a ng-show='!user' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' ng-click='open_register("default", "", "2")'><strong>Join Tappyn</strong></a>
+                            <a ng-show='user.type == "company"' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href="/dashboard"><strong>Join Tappyn</strong></a>
                         </div>
                     </div>
                 </div>
