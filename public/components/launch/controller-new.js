@@ -72,7 +72,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.launch_signup = function(email, pass, name, logo, cpass) {
-        AppFact.signUp({ identity: email, password: pass, confirm_password: cpass, name: name, logo_url: logo, group_id: 3 }).success(function(response) {
+        AppFact.signUp({ identity: email, password: pass, confirm_password: cpass, name: name, logo_url: logo, group_id: 3, first_validation: 99 }).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $rootScope.user = response.data;
