@@ -65,7 +65,11 @@
                         </div>
                     </div>
                 </div>
-                <div class='col-xs-12 text-center' style='margin-top:15px;'><a href='/contests' class='btn btn-oj btn-lg'>Get Started Now</a></div>
+                <div class='col-xs-12 text-center'>
+                  <a ng-hide='user.type != "member"' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href='/contests'><strong>Get Started Now</strong></a>
+                  <a ng-show='!user' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' ng-click='open_register("default", "", "2")'><strong>Get Started Now</strong></a>
+                  <a ng-show='user.type == "company"' class='btn btn-wj btn-lg' style='margin-top:15px;padding-left: 50px;padding-right: 50px' href="/dashboard"><strong>Get Started Now</strong></a>
+                </div>
             </div>
         </div>
     </section>
