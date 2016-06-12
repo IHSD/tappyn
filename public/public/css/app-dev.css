@@ -52,7 +52,7 @@
     /*position: fixed;*/
     background: #fff;
     color: #333;
-    z-index: 100000000 !important;
+    /**z-index: 100000000 !important;**/
     top: 30px;
     right: -10px;
     opacity: 1;
