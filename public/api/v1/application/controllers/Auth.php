@@ -436,6 +436,7 @@ class Auth extends CI_Controller
         $identity_column = $this->config->item('identity', 'ion_auth');
         $this->data['identity_column'] = $identity_column;
         $first_validation = $this->input->post('first_validation');
+        $first_validation = ($first_validation) ? $first_validation : 99;
         $interests = $this->input->post('interests');
 
         // validate form input
