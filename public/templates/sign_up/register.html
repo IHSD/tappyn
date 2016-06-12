@@ -150,13 +150,13 @@
                 <label class='btn btn-link' ng-show='registrar.group_id == "3"' style="white-space:normal;font-size:16px;float:none;">
                     <input type='radio' value='2' ng-model='registrar.group_id'>Sign Up as a User</label>
                 <label class='btn btn-link' ng-show='registrar.group_id == "2"' style="white-space:normal;font-size:16px;float:none;">
-                    <input type='radio' value='3' ng-model='registrar.group_id'>Sign Up as a Business</label>
+                    <input type='radio' value='3' ng-show='registrar.step== 1' ng-model='registrar.group_id'>Sign Up as a Business</label>
             </div>
         </div>
         <div class='modal_link text-center col-xs-12'>
             <span style='color:#333'>Already have an account?</span> <a ng-click='register_to_login()'>Log in</a>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12" ng-show='registrar.step== 1'>
           <h4 style="font-weight:bold;">Over 1,000 everday people create with Tappyn.</h4>
         </div>
     </div>
