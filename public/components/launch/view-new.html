@@ -349,40 +349,13 @@
                 <div class='row'>
                     <label class='text-left col-sm-3 control-label'>Tone of Voice</label>
                     <div class="col-sm-9">
-                        <div class="form-group">
+                        <div class="form-group" ng-init="contest.tone_of_voice_box = []">
                             <h4><strong>Helping us understand which tone of voice you prefer:</strong></h4>
-                            <!-- TODO for Onion, please remove this once done -->
-                            <div class="checkbox">
+                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type="checkbox">  Humour
+                                    <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
                                 </label>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">  Humble
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">  Scientific
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">  Casual
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">  Inspiring
-                                </label>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">  Adventurous
-                                </label>
-                            </div>
-
                         </div>
                         <div class="form-group">
                             <h4><strong>Please provide a few more details:</strong></h4>
@@ -392,13 +365,12 @@
                     </div>
                 </div>
                 <hr>
-                <!-- TODO for Onion, please remove this once done -->
                 <div class='row'>
                     <label class='text-left col-sm-3 control-label'>Photo Upload</label>
                     <div class="col-sm-9">
-                        <div class="form-group">
+                        <div class="form-group" ng-init="contest.attachment = ''">
                             <h4><strong>Please upload the photo you'd like us to create the copy for</strong></h4>
-                            <input type='file'>
+                            <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
                         </div>
                     </div>
                 </div>
@@ -551,14 +523,12 @@
                             </div>
                         </div>
                         <hr>
-                        <!-- TODO for Onion, please remove this once done -->
                         <div class='row'>
                             <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
                             <div class="col-sm-9 col-xs-12">
-                                <p>photo here</p>
+                                <p><img ng-src="{{contest.attachment}}"></p>
                             </div>
                         </div>
-                        <!-- TODO for Onion, please remove this once done -->
                         <hr>
                         <div class='row'>
                             <h3 class='col-sm-3 col-xs-12'>Branding Links</h3>

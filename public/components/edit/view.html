@@ -39,18 +39,19 @@
                         </div>
                     </div>
                     <!-- TODO for Onion, please remove this once done -->
-                    <div class="col-xs-12">
+                    <div class="col-xs-12" ng-if="contest.use_attachment == 1">
                         <label class='control-label'>Photo Upload</label>
                         <div class="form-group">
-                            <input type='file'>
+                            <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
+                            <img class="contest-img-edit" ng-src="{{contest.attachment}}">
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <label class='control-label'>Creative Direction</label>
+                        <label class='control-label'>Tone of Voice</label>
                         <div class="form-group">
-                            <div class="radio" ng-repeat="(_key,_value) in additional_info_boxes">
+                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type="radio" name="direction" ng-value="_key" ng-model="contest.additional_info_box"> {{_value}}
+                                    <input type="checkbox" ng-checked="contest.tone_of_voice_box.indexOf(key) != -1" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
                                 </label>
                             </div>
                         </div>

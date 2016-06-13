@@ -98,6 +98,15 @@ tappyn.factory('tappyn_var', function() {
         "WY": "Wyoming",
     };
 
+    items.tone_of_voice_boxes = {
+        'humour': 'Humour',
+        'humble': 'Humble',
+        'scientific': 'scientific',
+        'casual': 'Casual',
+        'inspiring': 'Inspiring',
+        'adventurous': 'Adventurous',
+    }
+
     itemsService.get = function(name) {
         if (items[name]) {
             return items[name];
