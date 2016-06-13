@@ -1,7 +1,6 @@
 tappyn.service("profileModel", function(){
 this.states =
 {
-    "ALL":"All"
     "AL": "Alabama",
     "AK": "Alaska",
     "AS": "American Samoa",

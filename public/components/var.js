@@ -45,7 +45,7 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.locations = {
-        "ALL":"All"
+       "All": "All States",
         "AL": "Alabama",
         "AK": "Alaska",
         "AZ": "Arizona",
