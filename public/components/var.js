@@ -99,12 +99,12 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.tone_of_voice_boxes = {
-        'humour': 'Humour',
-        'humble': 'Humble',
-        'scientific': 'scientific',
-        'casual': 'Casual',
-        'inspiring': 'Inspiring',
-        'adventurous': 'Adventurous',
+        'humour': 'Use Humour',
+        'humble': 'Be Humble',
+        'scientific': 'Be Scientific',
+        'casual': 'Be Casual',
+        'inspiring': 'Be Inspiring',
+        'adventurous': 'Be Adventurous',
     }
 
     itemsService.get = function(name) {
