@@ -238,6 +238,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.location_boxes = tappyn_var.get('location_boxes');
     $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
     $scope.locations = tappyn_var.get('locations');
+    $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
 
     $scope.checked_amount = 0;
     $scope.check_interests = function() {
@@ -452,7 +453,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.notification_show = false;
     $scope.toggle_notifications = function() {
-        $scope.notification_show = $scope.notification_show === false ? true: false;
+        $scope.notification_show = $scope.notification_show === false ? true : false;
         AppFact.grabNotifications().success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
@@ -685,6 +686,30 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             file: file,
         }).success(function() {
             register.logo_url = url + new_name;
+        });
+    }
+
+    $scope.upload_file_to_amazon = function($files, url_to, sub) {
+        var file = $files[0];
+        var url = APP_ENV.amazon_aws_url;
+        var new_name = Date.now();
+        var rando = Math.random() * (10000 - 1) + 1;
+        new_name = new_name.toString() + rando.toString();
+        $upload.upload({
+            url: url,
+            method: 'POST',
+            data: {
+                key: new_name,
+                acl: 'public-read',
+                "Content-Type": file.type === null || file.type === '' ?
+                    'application/octet-stream' : file.type,
+                AWSAccessKeyId: $rootScope.key.key,
+                policy: $rootScope.key.policy,
+                signature: $rootScope.key.signature
+            },
+            file: file,
+        }).success(function() {
+            url_to[sub] = url + new_name;
         });
     }
 

@@ -347,13 +347,13 @@
                 </div>
                 <hr>
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Creative Direction</label>
+                    <label class='text-left col-sm-3 control-label'>Tone of Voice</label>
                     <div class="col-sm-9">
-                        <div class="form-group">
-                            <h4><strong>Please select one of the following:</strong></h4>
-                            <div class="radio" ng-repeat="(_key,_value) in additional_info_boxes">
+                        <div class="form-group" ng-init="contest.tone_of_voice_box = []">
+                            <h4><strong>Helping us understand which tone of voice you prefer:</strong></h4>
+                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type="radio" name="direction" ng-value="_key" ng-model="contest.additional_info_box"> {{_value}}
+                                    <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
                                 </label>
                             </div>
                         </div>
@@ -361,6 +361,16 @@
                             <h4><strong>Please provide a few more details:</strong></h4>
                             <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
                             <p class='launch-page-message'><strong>Tip:</strong> A short description of what type of photo you'd like will go a long way in receiving the best submissions possible.</p>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class='row'>
+                    <label class='text-left col-sm-3 control-label'>Photo Upload</label>
+                    <div class="col-sm-9">
+                        <div class="form-group" ng-init="contest.attachment = ''">
+                            <h4><strong>Please upload the photo you'd like us to create the copy for</strong></h4>
+                            <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
                         </div>
                     </div>
                 </div>
@@ -510,6 +520,13 @@
                                 <p ng-if='contest.additional_info'>
                                     {{contest.additional_info}}
                                 </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
+                            <div class="col-sm-9 col-xs-12">
+                                <p><img ng-src="{{contest.attachment}}"></p>
                             </div>
                         </div>
                         <hr>
