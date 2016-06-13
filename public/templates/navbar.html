@@ -9,14 +9,15 @@
     <div class="col-xs-11">
         <nav class='hidden-xs' id='top-scroll'>
             <ul>
-                <li ng-hide='user.type != "member"'><a href="/contests">Discover</a></li>
-                <li ng-show='!user'><a ng-click='open_register("default", "", "2")'>Discover</a></li>
+                <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Discover</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Discover</a></li>
                 <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
                 <li><a href="/winners">Most Popular</a></li>
                 <li ng-if='user' style='float:right;'>
                     <a href>
                         <span class='notifications-container'>
-	                    			<span class='glyphicon glyphicon-envelope glyph-lg' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
+                            <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
+	                    			<span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
                             <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                             <span ng-include src="'templates/notifications.html'"></span>
                         </span>
@@ -43,8 +44,9 @@
                 <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
                     <a href>
                         <span class='notifications-container'>
-	                				<span class='glyphicon glyphicon-envelope glyph-lg'></span>
-                        <span class='notifications_count' ng-if='user.notifications > 0'><strong>{{user.notifications}}</strong></span>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
+                          <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                         </span>
                     </a>
                 </li>
@@ -53,7 +55,7 @@
                     <ul uib-dropdown-menu role='menu'>
                         <li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
                         <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
-                        <li><a href="/contests">Discover</a></li>
+                        <li style='cursor:pointer'><a href="/contests">Discover</a></li>
                         <li><a href="/winners">Most Popular</a></li>
                         <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
                         <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
@@ -66,3 +68,15 @@
         </nav>
     </div>
 </header>
+
+<style>
+
+.glyph-lg:hover {
+  color: #ff5c00;
+}
+
+.glyphicon-comment {
+  color: #333;
+}
+
+</style>
