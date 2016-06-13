@@ -17,10 +17,12 @@
                 </div>
             </div>
             <div>
+                <!--
                 <h5 class='text-left' style='margin-left:5px;'>
                 <div ng-if='contest.display_type == "with_photo"'><span style='color:ff5c00;' class='glyphicon glyphicon-camera'></span> Text & Photo Contest</div>
                 <div ng-if='contest.display_type == "text_only"'><span style='color:ff5c00;' class='glyphicon glyphicon-font'></span> Text Contest</div>
-            </h5>
+                </h5>
+                -->
                 <h5 ng-repeat="_industry in contest.industry" class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' ng-src='public/img/{{_industry}}.png' width='20px' height='20px'>{{industries[_industry]}}</h5>
                 <h5 class='text-left' style='margin-left:5px;'><img style='margin-right:5px;' class='pull-left' src="public/img/icon-second.svg" height='20px' width='20px'>{{contest.stop_time | untilFilter}} Left</h5>
                 <uib-progressbar value='contest.submission_count' max='contest.submission_limit' type="warning" style='margin-bottom:0;'></uib-progressbar>
