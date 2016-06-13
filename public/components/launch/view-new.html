@@ -303,7 +303,7 @@
                 <div class='row'>
                     <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 control-label'>Age</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>The age group you'd like to target</strong></h4>
+                        <h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>
                         <div class='pull-left'>
                             <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
                                 <option value=''>Min Age</option>
@@ -321,7 +321,7 @@
                 <div class='row'>
                     <label ng-init='contest.gender = 0' class='text-left col-sm-3 control-label'>Gender</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>The gender you'd like to target</strong></h4>
+                        <h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
                             <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
@@ -339,7 +339,7 @@
                 <div class='row'>
                     <label class='text-left col-sm-3 control-label'>Interest</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>People who follow this interest will be shown your campaign</strong></h4>
+                        <h4><strong>Define your audience by including interests</strong></h4>
                         <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
@@ -350,7 +350,7 @@
                     <label class='text-left col-sm-3 control-label'>Tone of Voice</label>
                     <div class="col-sm-9">
                         <div class="form-group" ng-init="contest.tone_of_voice_box = []">
-                            <h4><strong>Helping us understand which tone of voice you prefer:</strong></h4>
+                            <h4><strong>Select a tone of voice that represents your brand:</strong></h4>
                             <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
                                     <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
@@ -359,8 +359,7 @@
                         </div>
                         <div class="form-group">
                             <h4><strong>Please provide a few more details:</strong></h4>
-                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
-                            <p class='launch-page-message'><strong>Tip:</strong> A short description of what type of photo you'd like will go a long way in receiving the best submissions possible.</p>
+                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="A short description of what type of copy you'd like will go a long way."></textarea>
                         </div>
                     </div>
                 </div>
@@ -369,7 +368,7 @@
                     <label class='text-left col-sm-3 control-label'>Photo Upload</label>
                     <div class="col-sm-9">
                         <div class="form-group" ng-init="contest.attachment = ''">
-                            <h4><strong>Please upload the photo you'd like us to create the copy for</strong></h4>
+                            <h4><strong>Upload the photo you would like to include in your ad</strong></h4>
                             <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
                         </div>
                     </div>
