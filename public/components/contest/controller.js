@@ -14,7 +14,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
         } else $scope.example = false;
         $scope.form_limit = contestModel.parallel_submission($scope.contest);
         if ($scope.contest.use_attachment == 1) {
-
+            $scope.cropper_box = true;
         } else if ($scope.contest.platform == "instagram") {
             $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
                 aspectRatio: 1 / 1,
