@@ -33,8 +33,8 @@
                     <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>How We're Different</h3>
                     <p>{{contest.different}}</p>
-                    <h3 style='margin-bottom: 0;'>Type of photo to create.</h3>
-                    <p>{{additional_info_boxes[contest.additional_info_box]}}</p>
+                    <h3 style='margin-bottom: 0;'>Copy Direction</h3>
+                    <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
                     <p ng-if='contest.additional_info'>
                         {{contest.additional_info}}
                     </p>
@@ -141,7 +141,7 @@
                 <div class='contest-image'>
                     <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
                         <div class="img-preview">
-                            <img ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
+                            <img class="contest-img-preview" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
                         </div>
                     </div>
                 </div>

@@ -514,9 +514,9 @@
                         </div>
                         <hr>
                         <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>What we're looking for</h3>
+                            <h3 class='col-sm-3 col-xs-12'>Copy Direction</h3>
                             <div class="col-sm-9 col-xs-12">
-                                <p>{{additional_info_boxes[contest.additional_info_box]}}</p>
+                                <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
                                 <p ng-if='contest.additional_info'>
                                     {{contest.additional_info}}
                                 </p>
@@ -592,9 +592,10 @@
             <div class='text-left' ng-hide='current.step == "done"'>
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span><br>
-    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
-  </h4>
+                                    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span>
+                                    <br>
+                                    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
+                                    </h4>
             </div>
         </div>
     </div>
