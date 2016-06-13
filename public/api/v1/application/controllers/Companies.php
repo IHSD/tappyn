@@ -317,7 +317,7 @@ class Companies extends CI_Controller
         }
         // Initialize the control variables
         $charge = FALSE;
-        $amount = 9900;
+        $amount = 4900;
 
         if(!$contest_id)
         {

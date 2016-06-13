@@ -17,7 +17,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.registering = false;
 
     $scope.reduction = 0;
-    $scope.price = 99.99;
+    $scope.price = 49.99;
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {

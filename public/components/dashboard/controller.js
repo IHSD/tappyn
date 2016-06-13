@@ -21,7 +21,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 		else if(response.http_status_code == 500) alert(response.error);
 		else $scope.check_code(response.http_status_code);
 	})
-	$scope.price = 99.99;
+	$scope.price = 49.99;
 
 	$scope.grab_dash = function(type){
 		$scope.type = type;
