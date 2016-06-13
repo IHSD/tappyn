@@ -292,7 +292,7 @@
                             </select>
                         </div>
                         <div class='form-group'>
-                            <h4><strong>The locations you'd like to target</strong></h4>
+                            <h4><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>
                             <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
@@ -303,7 +303,7 @@
                 <div class='row'>
                     <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 control-label'>Age</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>The age group you'd like to target</strong></h4>
+                        <h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>
                         <div class='pull-left'>
                             <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
                                 <option value=''>Min Age</option>
@@ -321,7 +321,7 @@
                 <div class='row'>
                     <label ng-init='contest.gender = 0' class='text-left col-sm-3 control-label'>Gender</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>The gender you'd like to target</strong></h4>
+                        <h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
                             <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
@@ -339,7 +339,7 @@
                 <div class='row'>
                     <label class='text-left col-sm-3 control-label'>Interest</label>
                     <div class="col-sm-9 form-group">
-                        <h4><strong>People who follow this interest will be shown your campaign</strong></h4>
+                        <h4><strong>Define your audience by including interests</strong></h4>
                         <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
@@ -347,20 +347,29 @@
                 </div>
                 <hr>
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Creative Direction</label>
+                    <label class='text-left col-sm-3 control-label'>Tone of Voice</label>
                     <div class="col-sm-9">
-                        <div class="form-group">
-                            <h4><strong>Please select one of the following:</strong></h4>
-                            <div class="radio" ng-repeat="(_key,_value) in additional_info_boxes">
+                        <div class="form-group" ng-init="contest.tone_of_voice_box = []">
+                            <h4><strong>Select a tone of voice that represents your brand:</strong></h4>
+                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type="radio" name="direction" ng-value="_key" ng-model="contest.additional_info_box"> {{_value}}
+                                    <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <h4><strong>Please provide a few more details:</strong></h4>
-                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
-                            <p class='launch-page-message'><strong>Tip:</strong> A short description of what type of photo you'd like will go a long way in receiving the best submissions possible.</p>
+                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="A short description of what type of copy you'd like will go a long way."></textarea>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class='row'>
+                    <label class='text-left col-sm-3 control-label'>Photo Upload</label>
+                    <div class="col-sm-9">
+                        <div class="form-group" ng-init="contest.attachment = ''">
+                            <h4><strong>Upload the photo you would like to include in your ad</strong></h4>
+                            <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
                         </div>
                     </div>
                 </div>
@@ -419,12 +428,12 @@
                         <div class="form-group">
                             <h4><strong>Summary of product or service</strong></h4>
                             <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
-                            <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company.</p>
+                            <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                         </div>
                         <div class="form-group">
                             <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
                             <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'>
-                            <p class='launch-page-message'><strong>Tip:</strong> Be as specific as possible to allow for the best submissions, our users will refer to this information while they create content to submit</p>
+                            <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
                         </div>
                     </div>
                 </div>
@@ -504,12 +513,19 @@
                         </div>
                         <hr>
                         <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>What we're looking for</h3>
+                            <h3 class='col-sm-3 col-xs-12'>Copy Direction</h3>
                             <div class="col-sm-9 col-xs-12">
-                                <p>{{additional_info_boxes[contest.additional_info_box]}}</p>
+                                <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
                                 <p ng-if='contest.additional_info'>
                                     {{contest.additional_info}}
                                 </p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class='row'>
+                            <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
+                            <div class="col-sm-9 col-xs-12">
+                                <p><img ng-src="{{contest.attachment}}"></p>
                             </div>
                         </div>
                         <hr>
@@ -575,9 +591,10 @@
             <div class='text-left' ng-hide='current.step == "done"'>
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span><br>
-    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
-  </h4>
+                                    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span>
+                                    <br>
+                                    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
+                                    </h4>
             </div>
         </div>
     </div>

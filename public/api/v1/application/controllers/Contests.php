@@ -181,6 +181,9 @@ class Contests extends CI_Controller
             $winner->last_name = $this->ion_auth->user($owner)->row()->last_name;
             $winner->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
             $contest->payout = true;
+            if ($contest->use_attachment == 1) {
+                $winner->attachment = $contest->attachment;
+            }
             $this->responder->data(array('contest' => $contest, 'winner' => $winner))->respond();
         } else {
             $contest->payout = false;
@@ -204,6 +207,7 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
+        $this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
         if ($this->form_validation->run() == true) {
@@ -224,8 +228,16 @@ class Contests extends CI_Controller
             if (is_array($location_box)) {
                 $location_box = $location_box['id'];
             }
+            $tone_of_voice_box = $this->input->post('tone_of_voice_box');
+            if (is_array($tone_of_voice_box)) {
+                $tone_of_voice_box = implode(',', $tone_of_voice_box);
+            }
             // Do some preliminary formatting
             $data = array(
+                'tone_of_voice_box' => $tone_of_voice_box,
+                'use_attachment' => 1,
+                'attachment' => $this->input->post('attachment'),
+
                 'location' => $location,
                 'additional_info_box' => $this->input->post('additional_info_box'),
                 'location_box' => $location_box,
@@ -402,30 +414,24 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
+        $this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
         if ($this->form_validation->run() == true) {
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
             $age = $this->input->post('age');
             $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
-            $location = $this->input->post('location');
-            if (is_array($location)) {
-                $location = implode(',', $location);
+            $tone_of_voice_box = $this->input->post('tone_of_voice_box');
+            if (is_array($tone_of_voice_box)) {
+                $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
-            $industry = $this->input->post('industry');
-            if (is_array($industry)) {
-                $industry = array_slice($industry, 0, 3);
-                $industry = implode(',', $industry);
-            }
-            $location_box = $this->input->post('location_box');
-            if (is_array($location_box)) {
-                $location_box = $location_box['id'];
-            }
+
             // Do some preliminary formatting
             $data = array(
-                'location' => $location,
+                'tone_of_voice_box' => $tone_of_voice_box,
+                'attachment' => $this->input->post('attachment'),
+
                 'additional_info_box' => $this->input->post('additional_info_box'),
-                'location_box' => $location_box,
                 'summary' => $this->input->post('summary'),
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
@@ -435,7 +441,6 @@ class Contests extends CI_Controller
                 'owner' => $this->ion_auth->user()->row()->id,
                 'min_age' => $this->input->post('min_age'),
                 'max_age' => $this->input->post('max_age'),
-                'industry' => $industry,
                 'start_time' => $start_time,
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'emotion' => $this->input->post('emotion'),

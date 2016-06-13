@@ -62,7 +62,7 @@
 <table style='text-align:left;margin:auto;width:600px'>
     <tr>
         <td>Price</td>
-        <td>$99.99</td>
+        <td>$49.99</td>
     </tr>
     <?php if($voucher): ?>
         <?php
@@ -110,7 +110,7 @@
                         echo '$'.$amount / 100;
                     ?>
                 <?php else: ?>
-                    $99.99
+                    $49.99
                 <?php endif; ?>
             </td>
         </tr>

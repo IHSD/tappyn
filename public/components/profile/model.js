@@ -1,5 +1,5 @@
 tappyn.service("profileModel", function(){
-this.states = 
+this.states =
 {
     "AL": "Alabama",
     "AK": "Alaska",

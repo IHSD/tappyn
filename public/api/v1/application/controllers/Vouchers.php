@@ -30,7 +30,7 @@ class Vouchers extends CI_Controller
         $vid = $voucher->id;
         if($this->vouchers_library->is_valid($vid))
         {
-            $price = 99.99;
+            $price = 49.99;
 
             if($voucher->discount_type == 'amount')
             {

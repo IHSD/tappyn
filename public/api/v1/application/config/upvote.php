@@ -44,4 +44,4 @@ $config['points_per_winning_submission'] = 10;
  *
  * Specified as float
  */
-$config['default_payout_per_contest'] = 85.00;
+$config['default_payout_per_contest'] = 50;

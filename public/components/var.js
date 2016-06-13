@@ -45,6 +45,7 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.locations = {
+       "All": "All States",
         "AL": "Alabama",
         "AK": "Alaska",
         "AZ": "Arizona",
@@ -97,6 +98,15 @@ tappyn.factory('tappyn_var', function() {
         "WI": "Wisconsin",
         "WY": "Wyoming",
     };
+
+    items.tone_of_voice_boxes = {
+        'humour': 'Use Humour',
+        'humble': 'Be Humble',
+        'scientific': 'Be Scientific',
+        'casual': 'Be Casual',
+        'inspiring': 'Be Inspiring',
+        'adventurous': 'Be Adventurous',
+    }
 
     itemsService.get = function(name) {
         if (items[name]) {

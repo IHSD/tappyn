@@ -1,4 +1,4 @@
-tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions) {
+tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions, tappyn_var) {
     $scope.logged_in()
     $scope.steps = {
         'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
@@ -17,8 +17,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.registering = false;
 
     $scope.reduction = 0;
-    $scope.price = 99.99;
-
+    $scope.price = 49.99;
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -165,7 +164,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
         else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
-        else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
+        else if (!contest.attachment) $scope.set_alert("Please upload the photo", "error");
+        //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
 

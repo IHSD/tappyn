@@ -14,7 +14,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 	$scope.ages = launchModel.ages;
 	$scope.registering = false;
 
-	$scope.price = 99.99;
+	$scope.price = 49.99;
 
 
 	$scope.grab_profile = function(){

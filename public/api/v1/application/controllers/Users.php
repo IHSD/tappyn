@@ -70,6 +70,9 @@ class Users extends CI_Controller
                 $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
                 $submission->contest = $this->contest->get($submission->contest_id);
                 $submission->company = $this->user->profile($submission->owner)->name;
+                if ($submission->contest->use_attachment == 1) {
+                    $submission->attachment = $submission->contest->attachment;
+                }
             }
             $this->responder->data(
                 array(
@@ -213,6 +216,9 @@ class Users extends CI_Controller
             $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
             $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->contest = $this->contest->get($submission->contest_id);
+            if ($submission->contest->use_attachment == 1) {
+                $submission->attachment = $submission->contest->attachment;
+            }
         }
         $this->responder->data(array('submissions' => $subs))->respond();
     }
