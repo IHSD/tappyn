@@ -110,7 +110,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
 		else if($scope.form_limit.line_1 && submission.link_explanation.length < 1) $scope.set_alert("Line 1 is required", "error");
 		else if($scope.form_limit.line_2 && submission.text.length < 1) $scope.set_alert("Line 2 is required", "error");
 		else if($scope.form_limit.card_title && submission.link_explanation.length < 1) $scope.set_alert("A card title is required", "error");
-		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this contest", "error");
+		else if($scope.form_limit.photo && $scope.imagerino == "") $scope.set_alert("An uploaded image is required for this campaign", "error");
 		else{
 			if($scope.form_limit.photo){
 				submission.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
