@@ -34,7 +34,7 @@
                     <h3 style='margin-bottom: 0;'>How We're Different</h3>
                     <p>{{contest.different}}</p>
                     <h3 style='margin-bottom: 0;'>Copy Tone Of Voice</h3>
-                    <p ng-if='contest.tone_of_voice_box'><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
+                    <p ng-if='contest.tone_of_voice_box.length > 0'><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
                     <p ng-if='contest.additional_info'>
                         {{contest.additional_info}}
                     </p>
