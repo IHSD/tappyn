@@ -357,16 +357,16 @@
                     </div>
                       <div class='row'>
                           <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">What You're Looking For</label>
-                            <div class="col-sm-9 col-sm-offset-4">
+                            <div class="col-sm-4">
                         <div class="form-group">
                             <h4 style="font-size:14px;"><strong>Please provide a few more details:</strong></h4>
-                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="A short description of what type of copy you'd like will go a long way."></textarea>
+                            <textarea class='form-control' style="width:380px;"ng-model='contest.additional_info' placeholder="A short description of what type of copy you'd like will go a long way."></textarea>
                         </div>
                       </div>
                     </div>
                 <div class='row'>
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
-                    <div class="col-sm-9 col-sm-offset-4">
+                    <div class="col-sm-4">
                         <div class="form-group" ng-init="contest.attachment = ''">
                             <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
