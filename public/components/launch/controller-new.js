@@ -18,6 +18,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.reduction = 0;
     $scope.price = 49.99;
+    $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 
@@ -409,6 +410,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             });
         };
         reader.readAsDataURL(file);
+        $scope.new_img = true;
     }
 
     $scope.get_test = function() {

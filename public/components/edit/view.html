@@ -43,7 +43,9 @@
                         <label class='control-label'>Ad Creative</label>
                         <div class="form-group">
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                            <img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}">
+                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                <div class="img-preview"><img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12">
