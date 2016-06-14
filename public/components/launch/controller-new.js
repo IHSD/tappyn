@@ -108,8 +108,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         } else if (step == 'tp-audience') {
             if (!$scope.contest.objective) $scope.set_alert("Please select an objective.", "error");
             else {
+                var setting = $scope.platform_image_settings[$scope.contest.platform];
+
                 $scope.current = $scope.steps[step];
-                $scope.cropper.setAspectRatio($scope.platform_image_settings[$scope.contest.platform]['aspect_ratio']);
+                $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+                $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
             }
         }
         // else if(step == 'tp-audience'){
