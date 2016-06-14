@@ -5,6 +5,7 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
                 if (response.success) {
                     $scope.contest = response.data.contest;
                     $scope.contest.location_box = tappyn_var.id_to_obj('location_boxes', $scope.contest.location_box);
+                    $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
@@ -16,8 +17,13 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
     $scope.location_boxes = tappyn_var.get('location_boxes');
     $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
     $scope.locations = tappyn_var.get('locations');
+    $scope.cropper = {};
+    $scope.new_img = false;
 
     $scope.edit = function(contest) {
+        if ($scope.new_img == true) {
+            contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+        }
         editFactory.editContest(contest).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) $scope.set_alert(response.message, "default");
@@ -61,5 +67,32 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
                 $scope.contest.additional_images[2] = url + namen;
             }
         });
+    }
+
+
+    $scope.image_cropper = function(evt) {
+        if ($scope.cropper && typeof $scope.cropper.destroy == 'function') {
+            $scope.cropper.destroy();
+        }
+        var setting = $scope.platform_image_settings[$scope.contest.platform];
+        $scope.cropper = new Cropper(document.getElementById('contest-img-edit'), {
+            aspectRatio: setting['aspect_ratio'],
+            dragMode: 'move',
+            scaleable: false,
+            cropBoxResizable: false,
+            cropBoxMovable: false,
+            minCropBoxWidth: setting['min_width'],
+            minCropBoxHeight: setting['min_height'],
+        });
+        $scope.new_img = true;
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
+                $scope.cropper.replace(evt.target.result);
+                $scope.imagerino = evt.target.result;
+            });
+        };
+        reader.readAsDataURL(file);
     }
 })

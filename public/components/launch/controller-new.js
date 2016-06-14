@@ -18,6 +18,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.reduction = 0;
     $scope.price = 49.99;
+    $scope.new_img = false;
+
+    $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -105,7 +108,14 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             else $scope.current = $scope.steps[step];
         } else if (step == 'tp-audience') {
             if (!$scope.contest.objective) $scope.set_alert("Please select an objective.", "error");
-            else $scope.current = $scope.steps[step];
+            else {
+                var setting = $scope.platform_image_settings[$scope.contest.platform];
+
+                $scope.current = $scope.steps[step];
+                $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+                $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
+            }
         }
         // else if(step == 'tp-audience'){
         // }
@@ -125,6 +135,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             else {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
+                $scope.contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
                 fbq('track', 'CompleteRegistration');
             }
         } else $scope.current = $scope.steps[step];
@@ -164,7 +175,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
         else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
-        else if (!contest.attachment) $scope.set_alert("Please upload the photo", "error");
+        else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
         //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
@@ -183,6 +194,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
 
     $scope.submit_contest = function(contest, pay) {
+        contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
         if (contest.id) {
             launchFactory.update(contest).success(function(response) {
                 if (response.http_status_code == 200) {
@@ -387,4 +399,39 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             return url
         } else return 'http://' + url;
     }
+
+    $scope.image_cropper = function(evt) {
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
+                $scope.cropper.replace(evt.target.result);
+                $scope.imagerino = evt.target.result;
+            });
+        };
+        reader.readAsDataURL(file);
+        $scope.new_img = true;
+    }
+
+    $scope.get_test = function() {
+        console.log($scope.cropper, $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg'));
+    }
+
+    $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+        aspectRatio: 1 / 1,
+        dragMode: 'move',
+        scaleable: false,
+        cropBoxResizable: false,
+        cropBoxMovable: false,
+    });
+});
+
+tappyn.directive('customOnChange', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var onChangeFunc = scope.$eval(attrs.customOnChange);
+            element.bind('change', onChangeFunc);
+        }
+    };
 });

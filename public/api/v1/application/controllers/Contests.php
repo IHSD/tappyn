@@ -14,6 +14,8 @@ class Contests extends CI_Controller
         $this->load->model('user');
         $this->load->library('vote');
         $this->load->library('interest');
+        $this->load->library('s3');
+        $this->load->library('image');
 
     }
 
@@ -207,8 +209,30 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
-        $this->form_validation->set_rules('attachment', 'Photo', 'required');
+        //$this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
+        $platform = $this->input->post('platform');
+        if ($this->input->post('photo')) {
+
+            $filename = hash('sha256', uniqid());
+            if ($platform == 'instagram') {
+                $thumb = $this->image->compress($this->input->post('photo'), 1080, 1080);
+            } else if ($platform == 'twitter') {
+                $thumb = $this->image->compress($this->input->post('photo'), 335, 600);
+            } else {
+                // facebook
+                $thumb = $this->image->compress($this->input->post('photo'), 628, 1200);
+            }
+
+            if ($this->image->upload($thumb, $filename . '.jpg')) {
+                $attachment_url = "https://tappyn.s3.amazonaws.com/" . $filename . '.jpg';
+            } else {
+                $this->responder->fail(
+                    "There was an error uploading your image."
+                )->code(500)->respond();
+                return;
+            }
+        }
 
         if ($this->form_validation->run() == true) {
             $this->config->load('upvote');
@@ -236,7 +260,7 @@ class Contests extends CI_Controller
             $data = array(
                 'tone_of_voice_box' => $tone_of_voice_box,
                 'use_attachment' => 1,
-                'attachment' => $this->input->post('attachment'),
+                'attachment' => $attachment_url,
 
                 'location' => $location,
                 'additional_info_box' => $this->input->post('additional_info_box'),
@@ -245,7 +269,7 @@ class Contests extends CI_Controller
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
                 'objective' => $this->input->post('objective'),
-                'platform' => $this->input->post('platform'),
+                'platform' => $platform,
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
                 'min_age' => $this->input->post('min_age'),
@@ -410,12 +434,42 @@ class Contests extends CI_Controller
             $this->responder->fail("You need to be logged in as a company to create contests")->code(403)->respond();
             return;
         }
+        // Check that they own the contest
+        $contest = $this->contest->get($id);
+        if (!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id)) {
+            $this->responder->fail("You do not own this contest brody")->code(403)->respond();
+            return;
+        }
         $this->form_validation->set_rules('different', 'How Your Different', 'required');
         $this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
-        $this->form_validation->set_rules('attachment', 'Photo', 'required');
+        //$this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
+
+        $platform = $contest->platform;
+        $attachment_url = $contest->attachment;
+        if ($this->input->post('photo')) {
+
+            $filename = hash('sha256', uniqid());
+            if ($platform == 'instagram') {
+                $thumb = $this->image->compress($this->input->post('photo'), 1080, 1080);
+            } else if ($platform == 'twitter') {
+                $thumb = $this->image->compress($this->input->post('photo'), 335, 600);
+            } else {
+                // facebook
+                $thumb = $this->image->compress($this->input->post('photo'), 628, 1200);
+            }
+
+            if ($this->image->upload($thumb, $filename . '.jpg')) {
+                $attachment_url = "https://tappyn.s3.amazonaws.com/" . $filename . '.jpg';
+            } else {
+                $this->responder->fail(
+                    "There was an error uploading your image."
+                )->code(500)->respond();
+                return;
+            }
+        }
 
         if ($this->form_validation->run() == true) {
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
@@ -429,14 +483,14 @@ class Contests extends CI_Controller
             // Do some preliminary formatting
             $data = array(
                 'tone_of_voice_box' => $tone_of_voice_box,
-                'attachment' => $this->input->post('attachment'),
+                'attachment' => $attachment_url,
 
                 'additional_info_box' => $this->input->post('additional_info_box'),
                 'summary' => $this->input->post('summary'),
                 'additional_info' => $this->input->post('additional_info'),
                 'different' => $this->input->post('different'),
                 'objective' => $this->input->post('objective'),
-                'platform' => $this->input->post('platform'),
+                //'platform' => $this->input->post('platform'),
                 'gender' => $this->input->post('gender'),
                 'owner' => $this->ion_auth->user()->row()->id,
                 'min_age' => $this->input->post('min_age'),
@@ -457,13 +511,6 @@ class Contests extends CI_Controller
             $images[] = $this->input->post('additional_image_3');
             if (!empty($images)) {
                 $data['additional_images'] = json_encode($images);
-            }
-
-            // Check that they own the contest
-            $contest = $this->contest->get($id);
-            if (!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id)) {
-                $this->responder->fail("You do not own this contest brody")->code(403)->respond();
-                return;
             }
             $cid = $this->contest->update($id, $data);
         }

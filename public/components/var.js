@@ -45,7 +45,7 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.locations = {
-       "All": "All States",
+        "All": "All States",
         "AL": "Alabama",
         "AK": "Alaska",
         "AZ": "Arizona",
@@ -107,6 +107,25 @@ tappyn.factory('tappyn_var', function() {
         'inspiring': 'Be Inspiring',
         'adventurous': 'Be Adventurous',
     }
+
+    items.platform_image_settings = {
+        'facebook': {
+            'aspect_ratio': 1.91 / 1,
+            'min_width': 1200,
+            'min_height': 628,
+        },
+        'instagram': {
+            'aspect_ratio': 1 / 1,
+            'min_width': 1080,
+            'min_height': 1080,
+        },
+        'twitter': {
+            'aspect_ratio': 2 / 1,
+            'min_width': 600,
+            'min_height': 335,
+        }
+
+    };
 
     itemsService.get = function(name) {
         if (items[name]) {

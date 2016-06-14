@@ -10,7 +10,8 @@ tappyn.service("contestModel", function() {
         var layout = {};
         if (contest.platform == "facebook") {
             layout.text = { limit: 90, placeholder: 'What would make me pick this company?' };
-            if (contest.objective == 'conversions' || contest.objective == "clicks_to_website") layout.headline = { limit: 35, placeholder: 'The most attention grabbing headline you can think of.' };
+            //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website") 
+            layout.headline = { limit: 35, placeholder: 'The most attention grabbing headline you can think of.' };
         } else if (contest.platform == "twitter") {
             if (contest.display_type == 'with_photo') layout.text = { limit: 116, placeholder: 'What would make me pick this company?' };
             else layout.text = { limit: 140, placeholder: 'What would make me pick this company?' };
