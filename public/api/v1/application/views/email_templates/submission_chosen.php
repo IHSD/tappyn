@@ -22,7 +22,7 @@ $query_string['redirect'] = 'dashboard';
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
-<p style='text-align:left;margin:auto;width:600px'><?php echo $company->name; ?> has picked your awesome ad as the winner for their contest, and they are sending $85 your way.</p>
+<p style='text-align:left;margin:auto;width:600px'><?php echo $company->name; ?> has picked your awesome ad for their campaign, and they are sending $50 your way.</p>
 <br>
 <p style='text-align:left;margin:auto;width:600px'>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and claim the payout for your ad. If you haven't yet,
     you'll need to set up your payout information, which takes only seconds. </p>

@@ -22,11 +22,11 @@ if(!isset($company))
 
 <h2 style='text-align:center'>BOOM. WHAM. LIFT OFF.</h2>
 
-<p style='text-align:center;margin:auto;width:600px'>Your submission just won the contest for <?php echo $company; ?></p><br>
+<p style='text-align:center;margin:auto;width:600px'>Your ad was just chosen for the campaign by <?php echo $company; ?></p><br>
 <p style='text-align:center;margin:auto;width:600px'>We don't know what you're drinking, but send some to our PO Box.</p><br>
 <p style='text-align:center;margin:auto;width:600px'>Unlesss it's peach vodka. Then keep it far, far away from our mailbox.</p><br><br>
 <p style='text-align:center;margin:auto;width:600px'>
-    Collect your winnings <a href="<?php echo base_url().'#/dashboard'; ?>">here</a>
+    Collect your payment <a href="<?php echo base_url().'#/dashboard'; ?>">here</a>
 </p>
 <br>
 
