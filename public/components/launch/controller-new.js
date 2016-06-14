@@ -8,7 +8,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
         'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
     }
-    $scope.current = $scope.steps['tp-platform'];
+    $scope.current = $scope.steps['tp-audience'];
     $scope.personalities = emotions;
     $scope.contest = {};
     $scope.company = {};
@@ -387,4 +387,36 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             return url
         } else return 'http://' + url;
     }
+
+    $scope.image_cropper = function(evt) {
+        var file = evt.currentTarget.files[0];
+        var reader = new FileReader();
+        reader.onload = function(evt) {
+            $scope.$apply(function($scope) {
+                $scope.cropper.replace(evt.target.result);
+                $scope.imagerino = evt.target.result;
+            });
+        };
+        reader.readAsDataURL(file);
+    }
+
+    $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+        aspectRatio: 1 / 1,
+        dragMode: 'move',
+        scaleable: false,
+        cropBoxResizable: false,
+        cropBoxMovable: false,
+        minCropBoxWidth: 100,
+        preview: '.img-preview'
+    });
+});
+
+tappyn.directive('customOnChange', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            var onChangeFunc = scope.$eval(attrs.customOnChange);
+            element.bind('change', onChangeFunc);
+        }
+    };
 });
