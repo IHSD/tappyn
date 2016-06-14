@@ -343,7 +343,7 @@
                     </div>
                 </div>
                 <div class='row'>
-                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone of Voice</label>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone Of Voice</label>
                     <div class="col-sm-4">
                         <div class="form-group" ng-init="contest.tone_of_voice_box = []">
                             <h4 style="font-size:14px;"><strong>Select a tone of voice that represents your brand:</strong></h4>
@@ -353,6 +353,9 @@
                                 </label>
                             </div>
                         </div>
+                      </div>
+                      <div class='row'>
+                          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">What You're Looking For</label>
                         <div class="form-group">
                             <h4 style="font-size:14px;"><strong>Please provide a few more details:</strong></h4>
                             <textarea class='form-control' ng-model='contest.additional_info' placeholder="A short description of what type of copy you'd like will go a long way."></textarea>
@@ -514,9 +517,15 @@
                         </div>
                         <hr>
                         <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Copy Direction</h3>
+                            <h3 class='col-sm-3 col-xs-12'>Tone Of Voice</h3>
                             <div class="col-sm-9 col-xs-12">
                                 <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
+                              </div>
+                            </div>
+                            <hr>
+                          <div class='row'>
+                                    <h3 class='col-sm-3 col-xs-12'>Copy Direction</h3>
+                                    <div class="col-sm-9 col-xs-12">
                                 <p ng-if='contest.additional_info'>
                                     {{contest.additional_info}}
                                 </p>
