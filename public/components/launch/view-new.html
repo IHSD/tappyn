@@ -368,17 +368,12 @@
                     <label class='text-left col-sm-3 control-label'>Ad Creative</label>
                     <div class="col-sm-9">
                         <div class="form-group" ng-init="contest.attachment = ''">
-                            <h4><strong>Upload the photo you would like to include in your ad</strong></h4>
+                            <h4><strong ng-click="get_test()">Upload the photo you would like to include in your ad</strong></h4>
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                         </div>
                         <div class="row form-group">
                             <div class="col-sm-6">
-                                <img id="upload_contest" src='public/img/placeholder.png'>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}, "preview-tw" : contest.platform == "twitter"'>
-                                    <div class="img-preview"></div>
-                                </div>
+                                <img ng-show="contest.photo" id="upload_contest">
                             </div>
                         </div>
                     </div>
@@ -535,7 +530,11 @@
                         <div class='row'>
                             <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
                             <div class="col-sm-9 col-xs-12">
-                                <p><img ng-src="{{contest.attachment}}"></p>
+                                <p>
+                                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                        <div class="img-preview"><img ng-src="{{contest.photo}}"></div>
+                                    </div>
+                                </p>
                             </div>
                         </div>
                         <hr>
@@ -655,7 +654,6 @@ $(function() {
     right: 20px;
     top: 50%;
 }
-
 
 hr {
     margin-top: 5px;

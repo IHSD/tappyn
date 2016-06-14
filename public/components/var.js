@@ -45,7 +45,7 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.locations = {
-       "All": "All States",
+        "All": "All States",
         "AL": "Alabama",
         "AK": "Alaska",
         "AZ": "Arizona",
@@ -107,6 +107,19 @@ tappyn.factory('tappyn_var', function() {
         'inspiring': 'Be Inspiring',
         'adventurous': 'Be Adventurous',
     }
+
+    items.platform_image_settings = {
+        'facebook': {
+            'aspect_ratio': 1.91 / 1,
+        },
+        'instagram': {
+            'aspect_ratio': 1 / 1,
+        },
+        'twitter': {
+            'aspect_ratio': 2 / 1,
+        }
+
+    };
 
     itemsService.get = function(name) {
         if (items[name]) {
