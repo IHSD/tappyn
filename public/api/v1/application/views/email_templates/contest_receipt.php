@@ -67,7 +67,7 @@
                 </td>
 
                 <td style="padding: 5px;vertical-align: top;text-align: right;border-bottom: 1px solid #eee;">
-                    $99.00
+                    $49.99
                 </td>
             </tr>
 
@@ -76,7 +76,7 @@
                 <td style="padding: 5px;vertical-align: top;"></td>
 
                 <td style="padding: 5px;vertical-align: top;text-align: right;border-top: 2px solid #eee;font-weight: bold;">
-                   Total: $99.00
+                   Total: $49.99
                 </td>
             </tr>
             <?php else: ?>
@@ -84,13 +84,13 @@
                 if($voucher->discount_type == 'percentage')
                 {
                      $percentage = round($voucher->value / 100, 2);
-                     $discount = round(99.00 * $value, 2);
-                     $new_price = 99.00 - $discount;
+                     $discount = round(49.99 * $value, 2);
+                     $new_price = 49.99 - $discount;
                 }
                 else if($voucher->discount_type == 'amount')
                 {
                     $discount = round($voucher->value, 2);
-                    $new_price = 99.00 - $discount;
+                    $new_price = 49.99 - $discount;
                 }
                 if($new_price < 0) $new_price = 00.00;
                 ?>
