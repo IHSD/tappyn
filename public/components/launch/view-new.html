@@ -284,7 +284,7 @@
         <div ng-show='current.step == "tp-audience"' id='tp-audience'>
             <div class='form-horizontal'>
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' style="padding-top:0px;">Locations</label>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:1px;">Locations</label>
                     <div class="col-sm-4">
                         <div class='form-group'>
                             <h4 style="font-size:14px;"><strong>The audience and locations engagement</strong></h4>
@@ -301,7 +301,7 @@
                 </div>
 
                 <div class='row'>
-                    <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 control-label' style="padding-top:0px;">Age</label>
+                    <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Age</label>
                     <div class="col-sm-4 form-group">
                         <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
                         <div class='pull-left'>
@@ -319,7 +319,7 @@
                 </div>
 
                 <div class='row'>
-                    <label ng-init='contest.gender = 0' class='text-left col-sm-3 control-label' style="padding-top:0px;">Gender</label>
+                    <label ng-init='contest.gender = 0' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:15px;">Gender</label>
                     <div class="col-sm-4 form-group" style="margin-top:10px;">
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
@@ -337,7 +337,7 @@
                 </div>
 
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' style="padding-top:0px;">Interest</label>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Interest</label>
                     <div class="col-sm-4 form-group">
                         <h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>
                         <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
@@ -347,7 +347,7 @@
                 </div>
 
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' style="padding-top:0px;">Copy Tone of Voice</label>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone of Voice</label>
                     <div class="col-sm-4">
                         <div class="form-group" ng-init="contest.tone_of_voice_box = []">
                             <h4 style="font-size:14px;"><strong>Select a tone of voice that represents your brand:</strong></h4>
@@ -365,7 +365,7 @@
                 </div>
 
                 <div class='row'>
-                    <label class='text-left col-sm-3 control-label' style="padding-top:0px;">Ad Creative</label>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
                     <div class="col-sm-9">
                         <div class="form-group" ng-init="contest.attachment = ''">
                             <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
@@ -699,7 +699,7 @@ hr {
 
 .control-label {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
     text-align: right !important;
 }
 </style>
