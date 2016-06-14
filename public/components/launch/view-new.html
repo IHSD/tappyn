@@ -285,7 +285,7 @@
             <div class='form-horizontal'>
                 <div class='row'>
                     <label class='text-left col-sm-3 control-label'>Locations</label>
-                    <div class="col-sm-9">
+                    <div class="col-sm-4">
                         <div class='form-group'>
                             <h4><strong>The audience and locations engagement</strong></h4>
                             <select ng-model="contest.location_box" ng-init="contest.location_box = location_boxes[0]" ng-options="item as item.text for item in location_boxes track by item.id" class='form-control'>
@@ -293,7 +293,7 @@
                         </div>
                         <div class='form-group'>
                             <h4><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>
-                            <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple">
+                            <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:400px;">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -700,6 +700,6 @@ hr {
 .control-label {
     font-weight: bold;
     font-size: 24px;
-    text-align: left !important;
+    text-align: right !important;
 }
 </style>
