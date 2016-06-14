@@ -13,7 +13,7 @@
                 <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Discover</a></li>
                 <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
                 <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/winners">Most Popular</a></li>
-                <li ng-show='user' style='cursor:pointer'><a href="/winners">Most Popular</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a href="/winners">Most Popular</a></li>
                 <li ng-if='user' style='float:right;'>
                     <a href>
                         <span class='notifications-container'>
