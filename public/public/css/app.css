@@ -764,6 +764,8 @@ li.value-list:before {
     height: 55px;
     float: left;
     margin-right: 20px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
 .contest-company .avatar img,
@@ -774,7 +776,11 @@ li.value-list:before {
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
-		border-radius: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: cover;
 }
 
 .contest-reward,
