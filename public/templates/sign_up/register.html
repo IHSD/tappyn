@@ -13,7 +13,6 @@
                         <a href ng-click='fb_login()' id='fb-login'>
                             <center><img class='img-responsive' height='45px' style='border-radius: 5px; margin-bottom: 10px;max-width: 100%;' src="public/img/img-facebook.png"></center>
                         </a>
-                        <p style="font-size:12px;">We'll <i>never</i> spam your friends or post on your behalf.</p>
                     </div>
                     <br>
                     <div class='col-xs-12'>
@@ -22,9 +21,6 @@
                         </div></center>
                         <center><div class='form-group' style='margin-bottom:5px;max-width:60%;'>
                             <input class='form-control' ng-model='registrar.password' placeholder='Password' type='password'>
-                        </div></center>
-                        <center><div class='form-group' style='margin-bottom:5px;max-width:60%;'>
-                            <input class='form-control' ng-model='registrar.confirm_password' placeholder='Confirm Password' type='password'>
                         </div></center>
                     </div>
                 </div>
@@ -142,7 +138,7 @@
         </div>
         <div ng-show='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-12 text-center">
           <div class="col-xs-12 col-md-6 col-md-offset-3" ng-show='registrar.step== 1'>
-            <p><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
+            <p style="font-size:12px;"><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
           </div>
             <div class="btn-group col-xs-12" data-toggle="buttons" style="display:inline;">
                 <label class='btn btn-link' ng-show='registrar.group_id == "3" && registrar.step== 1' style="white-space:normal;font-size:16px;float:none;">
@@ -153,9 +149,6 @@
         </div>
         <div class='modal_link text-center col-xs-12'>
             <span style='color:#333'>Already have an account?</span> <a ng-click='register_to_login()'>Log in</a>
-        </div>
-        <div class="col-xs-12" ng-show='registrar.step== 1'>
-          <h4 style="font-weight:bold;">Over 1,000 everday people create with Tappyn.</h4>
         </div>
     </div>
 </div>
