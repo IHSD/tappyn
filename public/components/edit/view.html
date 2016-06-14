@@ -42,8 +42,8 @@
                     <div class="col-xs-12" ng-if="contest.use_attachment == 1">
                         <label class='control-label'>Ad Creative</label>
                         <div class="form-group">
-                            <input ng-file-select="upload_file_to_amazon($files, contest,'attachment')" type="file">
-                            <img class="contest-img-edit" ng-src="{{contest.attachment}}">
+                            <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                            <img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}">
                         </div>
                     </div>
                     <div class="col-xs-12">

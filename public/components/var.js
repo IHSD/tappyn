@@ -111,12 +111,18 @@ tappyn.factory('tappyn_var', function() {
     items.platform_image_settings = {
         'facebook': {
             'aspect_ratio': 1.91 / 1,
+            'min_width': 1200,
+            'min_height': 628,
         },
         'instagram': {
             'aspect_ratio': 1 / 1,
+            'min_width': 1080,
+            'min_height': 1080,
         },
         'twitter': {
             'aspect_ratio': 2 / 1,
+            'min_width': 600,
+            'min_height': 335,
         }
 
     };
