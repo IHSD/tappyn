@@ -370,8 +370,8 @@
                             <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                         </div>
-                        <div class="row form-group">
-                            <div class="col-sm-6">
+                        <div class="row form-group" ng-show="new_img">
+                            <div class="col-sm-12">
                                 <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
                                     <img ng-show="contest.photo" id="upload_contest">
                                 </div>
