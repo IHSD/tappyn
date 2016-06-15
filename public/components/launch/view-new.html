@@ -353,16 +353,16 @@
                                 </label>
                             </div>
                         </div>
-                      </div>
                     </div>
-                      <div class='row'>
-                          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
-                            <div class="col-sm-4">
+                </div>
+                <div class='row'>
+                    <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
+                    <div class="col-sm-4">
                         <div class="form-group">
-                            <textarea class='form-control' style="width:380px;"ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
+                            <textarea class='form-control' style="width:380px;" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
                         </div>
-                      </div>
                     </div>
+                </div>
                 <div class='row'>
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
                     <div class="col-sm-4">
@@ -371,9 +371,10 @@
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                         </div>
                         <div class="row form-group">
-                          <div class="row form-group">
                             <div class="col-sm-6">
-                                <img ng-show="contest.photo" id="upload_contest">
+                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                    <img ng-show="contest.photo" id="upload_contest">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -381,182 +382,181 @@
             </div>
         </div>
     </div>
-        <div ng-show='current.step == "detail"'>
-            <div class='form-forizontal'>
-                <div class="row" ng-show='!user'>
-                    <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
-                    <div class="col-sm-9">
-                        <div class="form-group">
-                            <a class='text-center pull-right' style='color:#333' ng-click='open_company_login()'>Already have an account? Log in now!</a>
-                            <h4><strong>Create New Business Account</strong></h4>
-                            <h5><strong>Company Email</strong></h5>
-                            <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Password</strong></h5>
-                            <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Confirm Password</strong></h5>
-                            <input class='form-control' ng-model='contest.confirm_password' placeholder='Confirm Password' type='password' style="max-width:50%;">
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Company Name</strong></h5>
-                            <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Company Logo</strong></h5>
-                            <input ng-file-select='select_logo($files, contest)' type='file'>
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Company Website</strong></h5>
-                            <input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text' style="max-width:50%;">
-                        </div>
+    <div ng-show='current.step == "detail"'>
+        <div class='form-forizontal'>
+            <div class="row" ng-show='!user'>
+                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <a class='text-center pull-right' style='color:#333' ng-click='open_company_login()'>Already have an account? Log in now!</a>
+                        <h4><strong>Create New Business Account</strong></h4>
+                        <h5><strong>Company Email</strong></h5>
+                        <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Password</strong></h5>
+                        <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Confirm Password</strong></h5>
+                        <input class='form-control' ng-model='contest.confirm_password' placeholder='Confirm Password' type='password' style="max-width:50%;">
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Company Name</strong></h5>
+                        <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Company Logo</strong></h5>
+                        <input ng-file-select='select_logo($files, contest)' type='file'>
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Company Website</strong></h5>
+                        <input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text' style="max-width:50%;">
                     </div>
                 </div>
-                <div class="row" ng-show='!user'>
-                    <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Social</label>
-                    <div class="col-sm-9">
-                        <div class="form-group">
-                            <h5><strong>Company Facebook (optional)</strong></h5>
-                            <input class='form-control' ng-model='contest.facebook_url' placeholder='Company Facebook (optional)' type='text' style="max-width:50%;">
-                        </div>
-                        <div class="form-group">
-                            <h5><strong>Company Twitter (optional)</strong></h5>
-                            <input class='form-control' ng-model='contest.twitter_handle' placeholder='Company Twitter (optional)' type='text' style="max-width:50%;">
-                        </div>
+            </div>
+            <div class="row" ng-show='!user'>
+                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Social</label>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <h5><strong>Company Facebook (optional)</strong></h5>
+                        <input class='form-control' ng-model='contest.facebook_url' placeholder='Company Facebook (optional)' type='text' style="max-width:50%;">
+                    </div>
+                    <div class="form-group">
+                        <h5><strong>Company Twitter (optional)</strong></h5>
+                        <input class='form-control' ng-model='contest.twitter_handle' placeholder='Company Twitter (optional)' type='text' style="max-width:50%;">
                     </div>
                 </div>
-                <div class="row">
-                    <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
-                    <div class="col-sm-9">
-                        <div class="form-group">
-                            <h4><strong>Summary of product or service</strong></h4>
-                            <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here' style="max-width:70%;">
-                            <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
-                        </div>
-                        <div class="form-group">
-                            <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
-                            <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;">
-                            <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
-                        </div>
+            </div>
+            <div class="row">
+                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <h4><strong>Summary of product or service</strong></h4>
+                        <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here' style="max-width:70%;">
+                        <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
+                    </div>
+                    <div class="form-group">
+                        <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
+                        <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;">
+                        <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div ng-show='current.step == "preview"'>
-            <div class='row'>
-                <div class='col-xs-12' style='padding-top:10px;'>
-                    <div class='launch-page-box'>
-                        <div class='col-xs-12 col-sm-4 text-center vertical-center'>
-                            <h3 style='margin-top:0px;'>
+    </div>
+    <div ng-show='current.step == "preview"'>
+        <div class='row'>
+            <div class='col-xs-12' style='padding-top:10px;'>
+                <div class='launch-page-box'>
+                    <div class='col-xs-12 col-sm-4 text-center vertical-center'>
+                        <h3 style='margin-top:0px;'>
                               <img ng-if='!contest.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
                                         <img ng-if='contest.logo_url' style='height:auto;' width='50px' ng-src="{{contest.logo_url}}">
                               {{user.first_name}}
                             </h3>
-                            <button class='btn btn-default disabled'>View submissions</button>
+                        <button class='btn btn-default disabled'>View submissions</button>
+                    </div>
+                    <div class='col-sm-5 col-xs-12 vertical-center col-sm-offset-4' style='padding-top:10px;'>
+                        <div style='width:100%;padding-top:15px;'>
+                            <uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>
+                            <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
                         </div>
-                        <div class='col-sm-5 col-xs-12 vertical-center col-sm-offset-4' style='padding-top:10px;'>
-                            <div style='width:100%;padding-top:15px;'>
-                                <uib-progressbar style='margin-bottom:5px;' value='0' max='30' type="warning"></uib-progressbar>
-                                <p class="progress-meter-text text-center" style='margin:0px;'>30 of 30 entries remaining</p>
-                            </div>
-                        </div>
-                        <div class='col-sm-3 col-xs-12 text-right col-sm-offset-9'>
-                            <!--<h2 style='color:#ff5c00;margin-top: 10px;'>{{price | currency}}</h2>-->
-                            <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
-                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>7 days left</span></h4>
-                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>0 views</span></h4>
-                        </div>
+                    </div>
+                    <div class='col-sm-3 col-xs-12 text-right col-sm-offset-9'>
+                        <!--<h2 style='color:#ff5c00;margin-top: 10px;'>{{price | currency}}</h2>-->
+                        <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
+                        <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>7 days left</span></h4>
+                        <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>0 views</span></h4>
                     </div>
                 </div>
             </div>
-            <div class='row'>
-                <div class='col-xs-12'>
-                    <div class='launch-page-box launch-preview'>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>About Product / Service</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.summary}}</p>
-                            </div>
+        </div>
+        <div class='row'>
+            <div class='col-xs-12'>
+                <div class='launch-page-box launch-preview'>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>About Product / Service</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.summary}}</p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>What Makes Us Different</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.different}}</p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>What Makes Us Different</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.different}}</p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Target Interest</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Target Interest</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}, </span></p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Target Audience</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>
-                                    <span>{{contest.min_age}}-{{contest.max_age}}</span>
-                                    <span ng-switch on="contest.gender">
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Target Audience</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>
+                                <span>{{contest.min_age}}-{{contest.max_age}}</span>
+                                <span ng-switch on="contest.gender">
                                     <span ng-switch-when="1"> Men</span>
-                                    <span ng-switch-when="2"> Women</span>
-                                    <span ng-switch-default> Men and Women</span>
-                                    </span>
-                                </p>
-                            </div>
+                                <span ng-switch-when="2"> Women</span>
+                                <span ng-switch-default> Men and Women</span>
+                                </span>
+                            </p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Target Location</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.location_box.text}}</p>
-                                <p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Target Location</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.location_box.text}}</p>
+                            <p><span ng-repeat="_location in contest.location">{{locations[_location]}}, </span></p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Tone Of Voice</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
-                              </div>
-                            </div>
-                            <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>What We're Looking For</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.additional_info}}</p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Tone Of Voice</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}} , </span></p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>
-                                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                        <div class="img-preview"><img ng-src="{{contest.photo}}"></div>
-                                    </div>
-                                </p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>What We're Looking For</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.additional_info}}</p>
                         </div>
-                        <hr>
-                        <div class='row'>
-                            <h3 class='col-sm-3 col-xs-12'>Branding Links</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <div ng-hide="!contest.company_url">
-                                    <h4>Company Website</h4>
-                                    <p>{{contest.company_url | urlFilter}}</p>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Ad Photo</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>
+                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                    <div class="img-preview"><img ng-src="{{contest.photo}}"></div>
                                 </div>
-                                <div ng-hide="!contest.facebook_url">
-                                    <h4>Facebook</h4>
-                                    <p>{{contest.facebook_url | urlFilter}}</p>
-                                </div>
-                                <div ng-hide="!contest.twitter_handle">
-                                    <h4>Twitter</h4>
-                                    <p>https://twitter.com/{{contest.twitter_handle}}</p>
-                                </div>
+                            </p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class='row'>
+                        <h3 class='col-sm-3 col-xs-12'>Branding Links</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <div ng-hide="!contest.company_url">
+                                <h4>Company Website</h4>
+                                <p>{{contest.company_url | urlFilter}}</p>
+                            </div>
+                            <div ng-hide="!contest.facebook_url">
+                                <h4>Facebook</h4>
+                                <p>{{contest.facebook_url | urlFilter}}</p>
+                            </div>
+                            <div ng-hide="!contest.twitter_handle">
+                                <h4>Twitter</h4>
+                                <p>https://twitter.com/{{contest.twitter_handle}}</p>
                             </div>
                         </div>
                     </div>
@@ -564,6 +564,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 </div>
 <div class='launch-page-overlaybox launch-page-box'>
