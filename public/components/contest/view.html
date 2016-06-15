@@ -33,12 +33,15 @@
                     <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>How We're Different</h3>
                     <p>{{contest.different}}</p>
+								</div>
+								<div class="col-xs-12" style="border:2px solid #FF5C00;border-radius:6px;">
                     <h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
 										<h3 style='margin-bottom: 0;'>What We're Looking For</h3>
                     <p ng-if='contest.additional_info'>
                         {{contest.additional_info}}
                     </p>
+									</div>
                     <div class='row'>
                         <div class="col-md-12 col-xs-12 text-center">
                             <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
