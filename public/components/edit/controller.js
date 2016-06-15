@@ -81,8 +81,6 @@ tappyn.controller("editController", function($scope, $rootScope, $location, $upl
             scaleable: false,
             cropBoxResizable: false,
             cropBoxMovable: false,
-            minCropBoxWidth: setting['min_width'],
-            minCropBoxHeight: setting['min_height'],
         });
         $scope.new_img = true;
         var file = evt.currentTarget.files[0];
