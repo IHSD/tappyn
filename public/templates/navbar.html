@@ -9,10 +9,13 @@
     <div class="col-xs-11">
         <nav class='hidden-xs' id='top-scroll'>
             <ul>
-                <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Discover</a></li>
-                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Discover</a></li>
+                <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Create</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create</a></li>
+                <li ng-hide='user.type != "company"' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Purchase</a></li>
                 <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
                 <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/winners">Most Popular</a></li>
+                <li ng-hide='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Most Popular</a></li>
                 <li ng-if='user' style='float:right;'>
                     <a href>
                         <span class='notifications-container'>
@@ -57,7 +60,7 @@
                         <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
                         <li style='cursor:pointer'><a href="/contests">Discover</a></li>
                         <li><a href="/winners">Most Popular</a></li>
-                        <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/for_companies">Launch Campaign</a></li>
+                        <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/launch">Launch Campaign</a></li>
                         <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
                         <li ng-hide='!user && user.type == "company"'><a href="/payment">Payment</a></li>
                         <li ng-hide='!user'><a href="/profile">My Profile</a></li>
