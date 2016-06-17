@@ -71,12 +71,10 @@ $('#myModal').on('hide.bs.modal', function () {
    $('.container').removeClass('blur');
 })
 </script>
-
 <style>
 .blur {
     -webkit-filter: blur(5px) grayscale(20%);
 }
-
 .modal-backdrop {
   background-color: #fff;
   opacity: 0.5;
@@ -85,6 +83,17 @@ $('#myModal').on('hide.bs.modal', function () {
 .modal-content {
   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
   box-shadow: 0 1px 5px rgba(0,0,0,.5);
+}
+.modal-header {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.modal-body {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
 }
 .modal-content {
   background-color: #f4f7f9;
@@ -98,5 +107,10 @@ $('#myModal').on('hide.bs.modal', function () {
 }
 .modal-footer {
    border-top: none;
+   border-left: 1px solid #ccc;
+   border-bottom: 1px solid #ccc;
+   border-right: 1px solid #ccc;
+   border-bottom-left-radius: 6px;
+   border-bottom-right-radius: 6px;
 }
 </style>
