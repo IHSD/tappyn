@@ -530,12 +530,7 @@ header nav ul li .btn:hover {
     border-width: 6px 0 6px 6px;
     border-left-color: #000;
 }
-/* Show the tooltip when hovering */
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after {
-    display: block;
-    z-index: 50;
-}
+
 
 header .btn-login {
     font-size: 14px;
