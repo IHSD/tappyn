@@ -65,6 +65,10 @@
 $(document).ready(function() {
 $('#openBtn').click(function(){
 	$('#myModal').modal({show:true})
-});
+
+$('#myModal').modal('hide');
+$('body').removeClass('modal-open');
+$('.modal-backdrop').remove();
+  });
   });
 </script>
