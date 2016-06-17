@@ -70,27 +70,9 @@ $('#myModal').on('show.bs.modal', function () {
 $('#myModal').on('hide.bs.modal', function () {
    $('.container').removeClass('blur');
 })
-
-    $("a#glink").click(function(){
-    $("#myModal").modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
-    });
-
 </script>
 
 <style>
-@import url('http://fonts.googleapis.com/css?family=Open+Sans:200,300');
-.topp {
-  margin-left: -45px;
-  margin-bottom: -5px;
-  font-size:60px;
-}
-
-a:link, a:visited {
-	color:#eee;
-}
-
 .blur {
     -webkit-filter: blur(5px) grayscale(50%);
 }
