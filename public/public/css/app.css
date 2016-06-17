@@ -499,11 +499,7 @@ header nav ul li .btn:hover {
     border-style: solid;
 }
 
-[data-tooltip-position="top"]:after {
-    bottom: 100%;
-    border-width: 6px 6px 0;
-    border-top-color: #000;
-}
+
 
 /* Show the tooltip when hovering */
 [data-tooltip]:hover:before,
