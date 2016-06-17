@@ -41,8 +41,8 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModal" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-    <span data-toggle="modal" href="#myModal" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span data-toggle="modal" data-target="#myModal" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span data-toggle="modal" data-target="#myModal" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
 <div class="modal" id="myModal">
 	<div class="modal-dialog">
       <div class="modal-content">
@@ -60,10 +60,3 @@
 </div>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script>
-$(document).ready(function() {
-$('#openBtn').click(function(){
-	$('#myModal').modal({show:true})
-});
-  });
-</script>
