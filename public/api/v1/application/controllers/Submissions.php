@@ -38,9 +38,10 @@ class Submissions extends CI_Controller
             }
 
             // only ower show ad reach
-            if (!$this->ion_auth->logged_in() || $this->ion_auth->user()->row()->id != $contest->owner) {
+            /**if (!$this->ion_auth->logged_in() || $this->ion_auth->user()->row()->id != $contest->owner) {
                 unset($submission->ctr);
             }
+            **/
 
             if ($contest->use_attachment == 1) {
                 $submission->attachment = $contest->attachment;
