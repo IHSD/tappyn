@@ -43,12 +43,12 @@
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span data-toggle="modal" data-target="#myModal" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     <span data-toggle="modal" data-target="#myModal" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-<div class="modal" id="myModal">
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">>
 	<div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title text-center">This is your ad's CTR.</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title text-center" id="myModalLabel">This is your ad's CTR.</h4>
         </div>
         <div class="modal-body text-center">
           <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
