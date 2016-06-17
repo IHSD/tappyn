@@ -51,9 +51,11 @@
           <h4 class="modal-title text-center">This is your ad's CTR.</h4>
         </div>
         <div class="modal-body text-center">
-          <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br><a href="/faq">Learn More</a></p>
+          <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
         </div>
-
+        <div class="modal-footer">
+        <a href="/faq">Learn More</a>
+      </div>
       </div>
     </div>
 </div>
@@ -62,8 +64,8 @@
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
 $(document).ready(function() {
-  $('#myModal').modal('hide');
-  $('body').removeClass('modal-open');
-  $('.modal-backdrop').remove();
+$('#openBtn').click(function(){
+	$('#myModal').modal({show:true})
+});
   });
 </script>
