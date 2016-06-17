@@ -37,6 +37,12 @@ hr {
 	border-top: 2px solid #CCC;
 }
 
+.fade {
+    opacity: 0;
+    -webkit-transition: opacity .15s linear;
+    transition: opacity .15s linear;
+}
+
 /*-------------------------------*/
 /*    Carousel Fade Transition   */
 /*-------------------------------*/
