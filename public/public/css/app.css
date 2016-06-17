@@ -471,22 +471,7 @@ header nav ul li .btn:hover {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-[data-tooltip-position="top"]:before {
-    bottom: 100%;
-    margin-bottom: 6px;
-}
-[data-tooltip-position="right"]:before {
-    left: 100%;
-    margin-left: 6px;
-}
-[data-tooltip-position="bottom"]:before {
-    top: 100%;
-    margin-top: 6px;
-}
-[data-tooltip-position="left"]:before {
-    right: 100%;
-    margin-right: 6px;
-}
+
 
 /* Tooltip arrow styling/placement */
 [data-tooltip]:after {
@@ -499,14 +484,6 @@ header nav ul li .btn:hover {
     border-style: solid;
 }
 
-
-
-/* Show the tooltip when hovering */
-[data-tooltip]:hover:before,
-[data-tooltip]:hover:after {
-    display: block;
-    z-index: 50;
-}
 
 header .btn-login {
     font-size: 14px;
