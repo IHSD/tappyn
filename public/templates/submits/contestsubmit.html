@@ -72,7 +72,7 @@ $('#myModal').on('hide.bs.modal', function () {
 })
 
     $("a#glink").click(function(){
-    $('#myModal').modal('hide')
+    $("#myModal").modal('hide').on('hidden.bs.modal', functionThatEndsUpDestroyingTheDOM);
     $('body').removeClass('modal-open');
     $('.modal-backdrop').remove();
     });
