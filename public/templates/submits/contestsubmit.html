@@ -53,7 +53,7 @@
         <div class="modal-body text-center">
           <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
         </div>
-        <div class="modal-footer-new">
+        <div class="modal-footer">
         <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
       </div>
       </div>
@@ -94,6 +94,9 @@ $('#myModalnew').on('hide.bs.modal', function () {
 .modal-body {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 .modal-content {
   background-color: #f4f7f9;
@@ -105,11 +108,8 @@ $('#myModalnew').on('hide.bs.modal', function () {
 .modal-dialog {
   color: #526880;
 }
-.modal-footer-new {
+.modal-footer {
    border-top: none;
-   border-left: 1px solid #ccc;
-   border-bottom: 1px solid #ccc;
-   border-right: 1px solid #ccc;
    border-bottom-left-radius: 6px;
    border-bottom-right-radius: 6px;
 }
