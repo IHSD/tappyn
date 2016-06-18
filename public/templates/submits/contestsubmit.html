@@ -41,14 +41,14 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModal" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-    <span data-toggle="modal" href="#myModal" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+<div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
 	<div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title text-center" id="myModalLabel">This is your ad's CTR.</h4>
+          <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
         </div>
         <div class="modal-body text-center">
           <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
@@ -63,11 +63,11 @@
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
-$('#myModal').on('show.bs.modal', function () {
+$('#myModalnew').on('show.bs.modal', function () {
    $('.container').addClass('blur');
 })
 
-$('#myModal').on('hide.bs.modal', function () {
+$('#myModalnew').on('hide.bs.modal', function () {
    $('.container').removeClass('blur');
 })
 </script>
