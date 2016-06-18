@@ -190,7 +190,7 @@
               </div>
 					</div>
 				</div>
-		
+
             <div class="contest-box">
                 <div class='contest-image'>
                     <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
@@ -305,7 +305,7 @@ list-style-type:none;
 font-family: 'Glyphicons Halflings';
 content: "\e067";
 position: absolute;
-left: 20px;
+left: -5px;
 }
 .check:nth-of-type(2) ul li{ /* second well;*/
 list-style-type:none;
@@ -314,7 +314,7 @@ list-style-type:none;
 font-family: 'Glyphicons Halflings';
 content: "\e014";
 position: absolute;
-left: 20px;
+left: -5px;
 }
 a.hoverclass:hover {
     color: #FF5C00;
@@ -372,6 +372,9 @@ hr {
 .modal-body {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
 .modal-content {
   background-color: #f4f7f9;
@@ -385,9 +388,6 @@ hr {
 }
 .modal-footer {
    border-top: none;
-   border-left: 1px solid #ccc;
-   border-bottom: 1px solid #ccc;
-   border-right: 1px solid #ccc;
    border-bottom-left-radius: 6px;
    border-bottom-right-radius: 6px;
 }
