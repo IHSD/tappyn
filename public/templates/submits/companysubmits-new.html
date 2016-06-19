@@ -17,7 +17,7 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span class='contest-ctr' ng-show='submission.ctr' cursor="default;">{{submission.ctr}}%</span>
+    <span class='contest-ctr' ng-show='submission.ctr' style="cursor:default;">{{submission.ctr}}%</span>
 </div>
 <div class='text-center contest-winner-select'>
     <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button>
