@@ -166,40 +166,40 @@
         </div>
     </div>
     <script>
-    fbq('track', 'PageView');
+        fbq('track', 'PageView');
     </script>
     <script type="text/javascript">
-    $(function() {
-        setTimeout(function() {
-            $(".interest-selection-profile-view").select2({
-                placeholder: "Add interests"
-            });
-        }, 1000);
-    });
+        $(function() {
+            setTimeout(function() {
+                $(".interest-selection-profile-view").select2({
+                    placeholder: "Add interests"
+                });
+            }, 1000);
+        });
     </script>
     <script>
-    $(function() {
-        var lastId,
-            slideMenu = $(".list-style-form-nav"),
-            topMenu = $(".navbar-fixed-top"),
-            topMenuHeight = topMenu.outerHeight() + 15,
-            menuItems = slideMenu.find('a');
-        $("a.scrolling").click(function(e) {
-            var href = $(this).attr("href"),
-                offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
-            $('html, body').stop().animate({
-                scrollTop: offsetTop
-            }, 300);
-            e.preventDefault();
-        });
-        $(window).on('scroll', function() {
-            $('.list-style-form').each(function() {
-                if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
-                    var id = $(this).attr('id');
-                    $('.list-style-form-nav a').parent().removeClass('active');
-                    $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
-                }
+        $(function() {
+            var lastId,
+                slideMenu = $(".list-style-form-nav"),
+                topMenu = $(".navbar-fixed-top"),
+                topMenuHeight = topMenu.outerHeight() + 15,
+                menuItems = slideMenu.find('a');
+            $("a.scrolling").click(function(e) {
+                var href = $(this).attr("href"),
+                    offsetTop = href === "#" ? 0 : $(href).offset().top - topMenuHeight;
+                $('html, body').stop().animate({
+                    scrollTop: offsetTop
+                }, 300);
+                e.preventDefault();
+            });
+            $(window).on('scroll', function() {
+                $('.list-style-form').each(function() {
+                    if ($(window).scrollTop() >= $(this).offset().top - topMenuHeight) {
+                        var id = $(this).attr('id');
+                        $('.list-style-form-nav a').parent().removeClass('active');
+                        $('.list-style-form-nav a[href="#' + id + '"]').parent().addClass('active');
+                    }
+                });
             });
         });
-    });
     </script>

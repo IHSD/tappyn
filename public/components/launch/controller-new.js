@@ -1,12 +1,42 @@
 tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions, tappyn_var) {
     $scope.logged_in()
     $scope.steps = {
-        'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
-        'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
-        'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
-        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 66.8 },
-        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
-        'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
+        'tp-platform': {
+            step: 'tp-platform',
+            next: 'tp-objective',
+            previous: 'none',
+            fill: 16.7
+        },
+        'tp-objective': {
+            step: 'tp-objective',
+            next: 'tp-audience',
+            previous: 'tp-platform',
+            fill: 33.4
+        },
+        'tp-audience': {
+            step: 'tp-audience',
+            next: 'detail',
+            previous: 'tp-objective',
+            fill: 50.1
+        },
+        'detail': {
+            step: 'detail',
+            next: 'payment',
+            previous: 'tp-audience',
+            fill: 66.8
+        },
+        'preview': {
+            step: 'preview',
+            next: 'payment',
+            previous: 'package',
+            fill: 83.5
+        },
+        'done': {
+            step: 'done',
+            next: 'none',
+            previous: 'none',
+            fill: 100
+        }
     }
     $scope.current = $scope.steps['tp-platform'];
     $scope.personalities = emotions;
@@ -74,7 +104,15 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.launch_signup = function(email, pass, name, logo, cpass) {
-        AppFact.signUp({ identity: email, password: pass, confirm_password: cpass, name: name, logo_url: logo, group_id: 3, first_validation: 99 }).success(function(response) {
+        AppFact.signUp({
+            identity: email,
+            password: pass,
+            confirm_password: cpass,
+            name: name,
+            logo_url: logo,
+            group_id: 3,
+            first_validation: 99
+        }).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $rootScope.user = response.data;
@@ -113,7 +151,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
                 $scope.current = $scope.steps[step];
                 $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-                $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+                $scope.cropper.setCropBoxData({
+                    width: setting['min_width'],
+                    height: setting['min_height']
+                });
 
             }
         }
@@ -234,7 +275,11 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         } else {
             // response contains id and card, which contains additional card details
             var token = response.id;
-            launchFactory.payContest($scope.contest.id, { stripe_token: token, save_method: $scope.save_method, voucher_code: $scope.voucher_code }).success(function(res) {
+            launchFactory.payContest($scope.contest.id, {
+                stripe_token: token,
+                save_method: $scope.save_method,
+                voucher_code: $scope.voucher_code
+            }).success(function(res) {
                 if (res.http_status_code == 200) {
                     if (res.success) {
                         $scope.set_alert(res.message, "default");
@@ -242,7 +287,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         $rootScope.modal_up = false;
                         $scope.adding_payment = false;
                         $scope.form_disabled = false;
-                        fbq('track', 'Purchase', { value: '99.00', currency: 'USD' });
+                        fbq('track', 'Purchase', {
+                            value: '99.00',
+                            currency: 'USD'
+                        });
                     } else $scope.set_alert(res.message, "default");
                 } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
                 else $scope.check_code(res.http_status_code);
@@ -255,7 +303,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         if ($scope.price == 0.00) {
             if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
             else {
-                launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
+                launchFactory.payContest($scope.contest.id, {
+                    voucher_code: $scope.voucher_code
+                }).success(function(res) {
                     if (res.http_status_code == 200) {
                         if (res.success) {
                             $scope.set_alert(res.message, "default");
@@ -283,7 +333,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         if ($scope.price == 0.00) {
             if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
             else {
-                launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
+                launchFactory.payContest($scope.contest.id, {
+                    voucher_code: $scope.voucher_code
+                }).success(function(res) {
                     if (res.http_status_code == 200) {
                         if (res.success) {
                             $scope.set_alert(res.message, "default");
@@ -298,7 +350,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         } else {
             if (!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
             else {
-                launchFactory.payContest($scope.contest.id, { source_id: $scope.passing_method, voucher_code: $scope.voucher_code }).success(function(res) {
+                launchFactory.payContest($scope.contest.id, {
+                    source_id: $scope.passing_method,
+                    voucher_code: $scope.voucher_code
+                }).success(function(res) {
                     if (res.http_status_code == 200) {
                         if (res.success) {
                             $scope.set_alert(res.message, "default");
@@ -331,7 +386,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.voucher_payment = function() {
         if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
         else {
-            launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
+            launchFactory.payContest($scope.contest.id, {
+                voucher_code: $scope.voucher_code
+            }).success(function(res) {
                 if (res.http_status_code == 200) {
                     if (res.success) {
                         $scope.set_alert(res.message, "default");
