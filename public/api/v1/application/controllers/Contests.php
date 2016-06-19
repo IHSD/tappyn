@@ -256,8 +256,15 @@ class Contests extends CI_Controller
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
+
+            $start_time = date('Y-m-d H:i:s');
+            $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
             // Do some preliminary formatting
             $data = array(
+                'paid' => 1,
+                'start_time' => $start_time,
+                'stop_time' => $stop_time,
+
                 'tone_of_voice_box' => $tone_of_voice_box,
                 'use_attachment' => 1,
                 'attachment' => $attachment_url,
