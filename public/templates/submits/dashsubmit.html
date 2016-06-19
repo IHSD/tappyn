@@ -50,9 +50,7 @@ $('#myModaldash').on('show.bs.modal', function () {
 
 $('#myModaldash').on('hide.bs.modal', function () {
     $('.container').removeClass('blur');
-    $('#myModaldash').modal('hide');
-    $('body').removeClass('modal-open');
-    $('.modal-backdrop').remove();
+
 })
 </script>
 <style>
@@ -98,8 +96,4 @@ $('#myModaldash').on('hide.bs.modal', function () {
    border-bottom-right-radius: 6px;
 }
 
-.modal-backdrop.in {
-  opacity:0 !important;
-
-}
 </style>
