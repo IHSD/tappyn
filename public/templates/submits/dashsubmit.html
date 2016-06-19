@@ -49,6 +49,8 @@ $('#myModaldash').on('show.bs.modal', function () {
 })
 
 $('#myModaldash').on('hide.bs.modal', function () {
+    $(this).before($('.modal-backdrop'));
+    $(this).css("z-index", parseInt($('.modal-backdrop').css('z-index')) + 1);
     $('.container').removeClass('blur');
 
 })
