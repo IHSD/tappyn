@@ -28,10 +28,10 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span href="#" id="openBtn" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-    <span href="#" id="openBtn" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
 <div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -48,13 +48,17 @@
 </div>
 </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.1/angular.min.js"></script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
 <script>
-$('#openBtn').click(function(){
-	$('#myModalnew').modal({show:true})
-});
+$('#myModalnew').on('show.bs.modal', function () {
+   $('.container').addClass('blur');
+})
+
+$('#myModalnew').on('hide.bs.modal', function () {
+   $('.container').removeClass('blur');
+})
 </script>
 <script type="text/javascript">
 var addthis_config = addthis_config || {};
