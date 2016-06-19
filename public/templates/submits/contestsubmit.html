@@ -31,6 +31,7 @@
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    </div>
 <div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
 	<div class="modal-dialog">
       <div class="modal-content">
@@ -46,7 +47,6 @@
       </div>
       </div>
     </div>
-</div>
 </div>
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
