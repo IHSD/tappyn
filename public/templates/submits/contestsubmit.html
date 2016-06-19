@@ -7,6 +7,19 @@
             <div class='addthis_sharing_toolbox' data-url='https://tappyn.com/contest/{{contest.id}}' data-title='{{submission.headline == "" ? submission.text : submission.headline}}' data-description='{{submission.headline == "" ? "from " + contest.company.name : submission.text}}' data-media='{{submission.attachment}}'></div>
         </div>
     </div>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+    <script type="text/javascript">
+    var addthis_config = addthis_config || {};
+    addthis_config.data_track_addressbar = false;
+    addthis_config.data_track_clickback = false;
+    addthis_share = {
+        passthrough: {
+            twitter: {
+                via: "TheRealTappyn"
+            }
+        }
+    }
+    </script>
 </div>
 <div class='contest-company text-left'>
     <div class='avatar'>
@@ -28,8 +41,8 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
     </div>
     <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle:"modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-    <span data-toggle:"modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
 <div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
 	<div class="modal-dialog">
       <div class="modal-content">
@@ -47,9 +60,8 @@
     </div>
 </div>
 </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
 $('#myModalnew').on('show.bs.modal', function () {
    $('.container').addClass('blur');
@@ -58,18 +70,6 @@ $('#myModalnew').on('show.bs.modal', function () {
 $('#myModalnew').on('hide.bs.modal', function () {
    $('.container').removeClass('blur');
 })
-</script>
-<script type="text/javascript">
-var addthis_config = addthis_config || {};
-addthis_config.data_track_addressbar = false;
-addthis_config.data_track_clickback = false;
-addthis_share = {
-    passthrough: {
-        twitter: {
-            via: "TheRealTappyn"
-        }
-    }
-}
 </script>
 <style>
 .blur {
