@@ -17,19 +17,19 @@ $query_string['redirect'] = 'dashboard';
 
 <!-- Start Email Content -->
 
-<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'><?php echo $company->name; ?>'s contest has ended</h2>
+<h2 style='text-align:center;margin:auto;min-width:450px;width:50%'><?php echo $company->name; ?>'s campaign has ended</h2>
 <br>
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
 <?php $query_string['redirect'] = 'contest/'.$contest->id; ?>
-<p style='text-align:left;margin:auto;width:600px'>They loved all of the submissions, but there was just one that edged out the rest. See the winning submission <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
+<p style='text-align:left;margin:auto;width:600px'>See all of the purchased ads <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'guide'; ?>
-<p style='text-align:left;margin:auto;width:600px'>Wondering why your submission wasn't chosen? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
+<p style='text-align:left;margin:auto;width:600px'>Wondering why your ad wasn't Tapped? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'contests'; ?>
-<p style='text-align:left;margin:auto;width:600px'>Or you can see some of our <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'new contests'); ?>.<br/></p>
+<p style='text-align:left;margin:auto;width:600px'>Or you can see some of our <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'new campaigns'); ?>.<br/></p>
 <br>
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>

@@ -20,18 +20,18 @@ $query_string['redirect'] = 'dashboard';
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We hope you’re doing well!</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed, and it’s time to select your favorite submission as a winner.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed, and it’s time to Tapp your favorite ads.</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have won. If you have questions, let us know. If you’re ready, select the winner
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have been chosen. If you have questions, let us know. If you’re ready, select your favorite ads
 below!</p><br>
 
 <p style='text-align:center'>
     <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'dashboard'; ?>">
-        Select Winner
+        Tapp Ads
     </a>
 <p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t select your winner within 3 days of your campaign closing, the submission with the most upvotes will be announced the winner. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t choose at least one ad within 3 days of your campaign closing, the submission with the highest CTR will be announced the winner. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
 
 <!-- End Email Content -->
 
