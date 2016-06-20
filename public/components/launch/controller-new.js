@@ -138,6 +138,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 $scope.contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
                 fbq('track', 'CompleteRegistration');
             }
+        } else if (step == 'done') {
+            $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2");
+            $scope.current = $scope.steps[step];
         } else $scope.current = $scope.steps[step];
         $scope.to_top();
     }
@@ -216,7 +219,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         $scope.contest.id = response.data.id;
                         if (pay) $scope.open_payment();
                         else {
-                            $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+                            //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                             $scope.set_step('done');
                             fbq('track', 'AddToWishlist');
                         }

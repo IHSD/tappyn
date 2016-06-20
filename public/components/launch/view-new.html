@@ -563,44 +563,16 @@
         </div>
     </div>
     <div ng-show='current.step == "done"'>
-      <div class="row">
-        <div class='col-xs-12 text-center' style='padding-top:10px;'>
-          <h3>We're now transferring you to your account dashboard.</h3>
-          <h4>Get your customers who knows you best to create!</h4>
-          <div class="addthis_toolbox" addthis:url="https://tappyn.com/contest/{{contest.id}}" addthis:title="{{user.first_name}}" addthis:url="{{user.logo_url}}" addthis:description="Join the campaign contest on Tappyn!">
-            <a class="addthis_button_facebook">Share via Facebook</a>
-            <a class="addthis_button_email">Share via Email</a>
-          </div>
-          <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2"></script>
-          <style>
-          .addthis_toolbox {
-            margin-top: 40px;
-          }
-          .addthis_button_facebook .at-icon-wrapper, .addthis_button_email .at-icon-wrapper {
-            display: none;
-          }
-          .addthis_button_facebook {
-            background-color: #3b5998;
-            color: white;
-            padding: 10px 30px;
-            font-size: 18px;
-          }
-          .addthis_button_facebook:hover, .addthis_button_email:hover {
-            color: white;
-            text-decoration: none;
-          }
-          .addthis_button_email {
-            background-color: #848484;
-            color: white;
-            padding: 10px 30px;
-            font-size: 18px;
-          }
-          .addthis_button_facebook, .addthis_button_email {
-            margin: 0 10px;
-          }
-          </style>
+        <div class="row">
+            <div class='col-xs-12 text-center' style='padding-top:10px;'>
+                <h3>We're now transferring you to your account dashboard.</h3>
+                <h4>Get your customers who knows you best to create!</h4>
+                <div class="addthis_toolbox" addthis:url="https://tappyn.com/contest/{{contest.id}}" addthis:title="{{user.first_name}}" addthis:description="Join the campaign contest on Tappyn!">
+                    <a class="addthis_button_facebook">Share via Facebook</a>
+                    <a class="addthis_button_email">Share via Email</a>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
 </div>
 </div>
@@ -630,13 +602,10 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")'>Edit Campaign</button>
             </div>
             <div ng-show='current.step == "done"'>
-                <div class='col-xs-12 col-sm-4'>
+                <div class='col-xs-12 col-sm-6'>
                     <div class='text-center'><a class='btn btn-lg btn-oj' href='/contest/{{contest.id}}'>See Your Campaign Now</a></div>
                 </div>
-                <div class='col-xs-12 col-sm-4'>
-                    <div class='text-center'><a class='btn btn-lg btn-oj' ng-click='reload()'>Launch Another Campaign</a></div>
-                </div>
-                <div class='col-xs-12 col-sm-4'>
+                <div class='col-xs-12 col-sm-6'>
                     <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
                 </div>
             </div>
@@ -742,5 +711,40 @@ hr {
     font-weight: bold;
     font-size: 20px;
     text-align: right !important;
+}
+</style>
+<style>
+.addthis_toolbox {
+    margin-top: 40px;
+}
+
+.addthis_button_facebook .at-icon-wrapper,
+.addthis_button_email .at-icon-wrapper {
+    display: none;
+}
+
+.addthis_button_facebook {
+    background-color: #3b5998;
+    color: white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.addthis_button_facebook:hover,
+.addthis_button_email:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.addthis_button_email {
+    background-color: #848484;
+    color: white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.addthis_button_facebook,
+.addthis_button_email {
+    margin: 0 10px;
 }
 </style>
