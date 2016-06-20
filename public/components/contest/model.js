@@ -2,60 +2,26 @@ tappyn.service("contestModel", function() {
     this.sift_images = function(contest, emotions) {
         for (var i = 0; i < emotions.length; i++) {
             if (contest.emotion == emotions[i].type) {
-                return {
-                    icon: emotions[i].icon,
-                    adj: emotions[i].adjectives,
-                    example: ''
-                };
+                return { icon: emotions[i].icon, adj: emotions[i].adjectives, example: '' };
             }
         }
     }
     this.parallel_submission = function(contest) {
         var layout = {};
         if (contest.platform == "facebook") {
-            layout.text = {
-                limit: 90,
-                placeholder: 'What would make me pick this company?'
-            };
-            //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website")
-            layout.headline = {
-                limit: 35,
-                placeholder: 'The most attention grabbing headline you can think of.'
-            };
+            layout.text = { limit: 90, placeholder: 'What would make me pick this company?' };
+            //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website") 
+            layout.headline = { limit: 35, placeholder: 'The most attention grabbing headline you can think of.' };
         } else if (contest.platform == "twitter") {
-            if (contest.display_type == 'with_photo') layout.text = {
-                limit: 116,
-                placeholder: 'What would make me pick this company?'
-            };
-            else layout.text = {
-                limit: 140,
-                placeholder: 'What would make me pick this company?'
-            };
-            if (contest.objective == "site_clicks_conversions") layout.card_title = {
-                limit: 70,
-                placeholder: 'What would make me pick this company?'
-            }
+            if (contest.display_type == 'with_photo') layout.text = { limit: 116, placeholder: 'What would make me pick this company?' };
+            else layout.text = { limit: 140, placeholder: 'What would make me pick this company?' };
+            if (contest.objective == "site_clicks_conversions") layout.card_title = { limit: 70, placeholder: 'What would make me pick this company?' }
         } else if (contest.platform == "google") {
-            layout.headline = {
-                limit: 25,
-                placeholder: 'The most attention grabbing headline you can think of.'
-            };
-            layout.line_1 = {
-                limit: 35,
-                placeholder: 'What would make me pick this company?'
-            };
-            layout.line_2 = {
-                limit: 35,
-                placeholder: 'What would make me pick this company?'
-            };
-        } else if (contest.platform == "general") layout.headline = {
-            limit: 35,
-            placeholder: 'The most attention grabbing headline you can think of.'
-        };
-        else if (contest.platform == "instagram") layout.text = {
-            limit: 90,
-            placeholder: 'What would make me pick this company?'
-        };
+            layout.headline = { limit: 25, placeholder: 'The most attention grabbing headline you can think of.' };
+            layout.line_1 = { limit: 35, placeholder: 'What would make me pick this company?' };
+            layout.line_2 = { limit: 35, placeholder: 'What would make me pick this company?' };
+        } else if (contest.platform == "general") layout.headline = { limit: 35, placeholder: 'The most attention grabbing headline you can think of.' };
+        else if (contest.platform == "instagram") layout.text = { limit: 90, placeholder: 'What would make me pick this company?' };
 
         if (contest.use_attachment == 1) layout.photo = false;
         else if (contest.display_type == "with_photo") layout.photo = true;

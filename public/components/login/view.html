@@ -1,5 +1,6 @@
+
 <div class="col-xs-12 col-sm-4 col-sm-offset-4 content-padding">
-    <div ng-show='!forgot'>
+    <div  ng-show='!forgot'>
         <h3 class='text-center'>Login</h3>
         <div>
             <a href="index.php/auth/facebook">
@@ -14,7 +15,7 @@
             <div class='form-group'>
                 <input class='form-control' ng-model='password' placeholder='Password' type='password'>
             </div>
-
+          
             <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Login</button>
             <a href='#/register'>Don't have an account? Sign up here!</a>
             <a class='pull-right' ng-click='forgot = true'>Forgot Password?</a>
@@ -24,7 +25,7 @@
         <h3 class='text-center'>Forgot Password</h3>
         <div class='form-group'>
             <input class='form-control' ng-model='identity' placeholder="Enter your email">
-        </div>
+        </div>             
         <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Send me an email</button>
         <a href='#/register'>Don't have an account? Sign up here!</a>
         <a class='pull-right' ng-click='forgot = false'>I remember it!</a>
@@ -32,5 +33,5 @@
 </div>
 
 <script>
-    fbq('track', 'PageView');
+fbq('track', 'PageView');
 </script>

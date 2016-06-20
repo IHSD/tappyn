@@ -33,32 +33,30 @@
                     <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>How We're Different</h3>
                     <p>{{contest.different}}</p>
-                </div>
-                <div class="col-xs-12" style="border:1px solid #FF5C00;border-radius:6px;">
+								</div>
+								<div class="col-xs-12" style="border:1px solid #FF5C00;border-radius:6px;">
                     <h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
-                    <h3 style='margin-bottom: 0;'>What We're Looking For</h3>
+										<h3 style='margin-bottom: 0;'>What We're Looking For</h3>
                     <p ng-if='contest.additional_info'>
                         {{contest.additional_info}}
                     </p>
-                </div>
-                <div class='row'>
-                    <div class="col-md-12 col-xs-12 text-center">
-                        <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
-                            <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
-                            <a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"'
-                                ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
-                                <img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
-                            </a>
-                            <a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"'
-                                ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
-                                <img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
-                            </a>
+									</div>
+                    <div class='row'>
+                        <div class="col-md-12 col-xs-12 text-center">
+                            <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
+                                <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
+                                <a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+                                    <img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
+                                </a>
+                                <a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+                                    <img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class='col-md-4 col-xs-12'>
             <div class='launch-page-box'>
@@ -141,57 +139,57 @@
                 </div>
                 <div style='padding: 20px 20px 10px 70px;'>
                     <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;"><br>Write a high performing copy.</a></strong></p>
-                </div>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title text-center" id="myModalLabel">Quick Reference Guide</h4>
-                            </div>
-                            <div class="modal-body row">
-                                <div class="container-fluid bd-example-row">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="col-xs-6">
-                                                <h4 class="col-xs-12 text-center">Do</h4>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <h4 class="col-xs-12 text-center">Don't</h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="check col-xs-6">
-                                                <ul class="col-xs-12">
-                                                    <li>Carefully read "What we're looking for".</li>
-                                                    <li>Draw from your personal experiences</li>
-                                                    <li>Talk like you're talking to a friend.</li>
-                                                    <li>Use specific references.</li>
-                                                    <li>Be original.</li>
-                                                    <li>Proofread!</li>
-                                                </ul>
-                                            </div>
-                                            <div class="check col-xs-6">
-                                                <ul class="col-xs-12">
-                                                    <li>Don't use exclamation points!</li>
-                                                    <li>Don't use CAPS lock.</li>
-                                                    <li>Don't sound like a salesman.</li>
-                                                    <li>Don't focus on rhyming or puns.</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">Our complete copywriting guide</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+									</div>
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+								      <div class="modal-content">
+								        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+								          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								          <h4 class="modal-title text-center" id="myModalLabel">Quick Reference Guide</h4>
+								        </div>
+												<div class="modal-body row">
+													<div class="container-fluid bd-example-row">
+          									<div class="row">
+            									<div class="col-xs-12">
+              									<div class="col-xs-6">
+            											<h4 class="col-xs-12 text-center">Do</h4>
+              									</div>
+              									<div class="col-xs-6">
+            											<h4 class="col-xs-12 text-center">Don't</h4>
+              									</div>
+            									</div>
+          									</div>
+          								<div class="row">
+          									<div class="col-xs-12">
+  														<div class="check col-xs-6">
+																	<ul class="col-xs-12">
+              											<li>Carefully read "What we're looking for".</li>
+              											<li>Draw from your personal experiences</li>
+              											<li>Talk like you're talking to a friend.</li>
+              											<li>Use specific references.</li>
+              											<li>Be original.</li>
+              											<li>Proofread!</li>
+            											</ul>
+            								  </div>
+            		 						  <div class="check col-xs-6">
+            										<ul class="col-xs-12">
+              										<li>Don't use exclamation points!</li>
+              										<li>Don't use CAPS lock.</li>
+              										<li>Don't sound like a salesman.</li>
+              										<li>Don't focus on rhyming or puns.</li>
+																</ul>
+          										</div>
+            								</div>
+          								</div>
+													<div class="modal-footer">
+								        		<button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">Our complete copywriting guide</button>
+										  	</div>
+								      </div>
+								    </div>
+								</div>
+              </div>
+					</div>
+				</div>
 
             <div class="contest-box">
                 <div class='contest-image'>
@@ -233,7 +231,7 @@
             </div>
         </div>
     </div>
-    <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
+	<hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
     <div class='row' style='padding-bottom:10px;' id='submishes'>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
@@ -281,129 +279,116 @@
 <script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
-    $('#myModal').on('show.bs.modal', function() {
-        $('.container').addClass('blur');
-    })
+$('#myModal').on('show.bs.modal', function () {
+   $('.container').addClass('blur');
+})
 
-    $('#myModal').on('hide.bs.modal', function() {
-        $('.container').removeClass('blur');
-    })
+$('#myModal').on('hide.bs.modal', function () {
+   $('.container').removeClass('blur');
+})
 </script>
 <script>
-    fbq('track', 'ViewContent');
+fbq('track', 'ViewContent');
 
-    $("#sign-up").click(function() {
-        fbq('track', 'Lead');
-    });
-    $("#fb-login").click(function() {
-        fbq('track', 'Lead');
-    });
+$("#sign-up").click(function() {
+    fbq('track', 'Lead');
+});
+$("#fb-login").click(function() {
+    fbq('track', 'Lead');
+});
 </script>
 <style>
-    .check:nth-of-type(1) ul li {
-        /* first well;*/
-        list-style-type: none;
-    }
+.check:nth-of-type(1) ul li{ /* first well;*/
+list-style-type:none;
+}
+.check:nth-of-type(1) ul li:before{
+font-family: 'Glyphicons Halflings';
+content: "\e067";
+position: absolute;
+left: -5px;
+}
+.check:nth-of-type(2) ul li{ /* second well;*/
+list-style-type:none;
+}
+.check:nth-of-type(2) ul li:before{
+font-family: 'Glyphicons Halflings';
+content: "\e014";
+position: absolute;
+left: -5px;
+}
+a.hoverclass:hover {
+    color: #FF5C00;
+}
+/* Limit image width to avoid overflow the container */
 
-    .check:nth-of-type(1) ul li:before {
-        font-family: 'Glyphicons Halflings';
-        content: "\e067";
-        position: absolute;
-        left: -5px;
-    }
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
-    .check:nth-of-type(2) ul li {
-        /* second well;*/
-        list-style-type: none;
-    }
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
 
-    .check:nth-of-type(2) ul li:before {
-        font-family: 'Glyphicons Halflings';
-        content: "\e014";
-        position: absolute;
-        left: -5px;
-    }
+.inputfile+ label {
+    font-size: 1.25em;
+    font-weight: 500;
+    color: white;
+    background-color: #ff5c00;
+    display: inline-block;
+    cursor: pointer;
+    padding: 7px 14px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
 
-    a.hoverclass:hover {
-        color: #FF5C00;
-    }
-    /* Limit image width to avoid overflow the container */
-
-    hr {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-
-    .inputfile+ label {
-        font-size: 1.25em;
-        font-weight: 500;
-        color: white;
-        background-color: #ff5c00;
-        display: inline-block;
-        cursor: pointer;
-        padding: 7px 14px;
-        border-radius: 5px;
-        border: 1px solid transparent;
-    }
-
-    .inputfile+ label:hover {
-        background-color: red;
-    }
-
-    .blur {
-        -webkit-filter: blur(5px) grayscale(20%);
-    }
-
-    .modal-backdrop {
-        background-color: #fff;
-        opacity: 0.5;
-    }
-
-    @media (min-width: 768px) .modal-content {
-        -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
-        box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
-    }
-
-    .modal-header {
-        border-left: 1px solid #ccc;
-        border-top: 1px solid #ccc;
-        border-right: 1px solid #ccc;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-    }
-
-    .modal-body {
-        border-left: 1px solid #ccc;
-        border-right: 1px solid #ccc;
-        border-bottom: 1px solid #ccc;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-    }
-
-    .modal-content {
-        background-color: #f4f7f9;
-        border: 0;
-        border-radius: 2px;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .modal-dialog {
-        color: #526880;
-    }
-
-    .modal-footer {
-        border-top: none;
-        border-bottom-left-radius: 6px;
-        border-bottom-right-radius: 6px;
-    }
+.inputfile+ label:hover {
+    background-color: red;
+}
+.blur {
+    -webkit-filter: blur(5px) grayscale(20%);
+}
+.modal-backdrop {
+  background-color: #fff;
+  opacity: 0.5;
+}
+@media (min-width: 768px)
+.modal-content {
+  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
+  box-shadow: 0 1px 5px rgba(0,0,0,.5);
+}
+.modal-header {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+.modal-body {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+.modal-content {
+  background-color: #f4f7f9;
+  border: 0;
+  border-radius: 2px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.modal-dialog {
+  color: #526880;
+}
+.modal-footer {
+   border-top: none;
+   border-bottom-left-radius: 6px;
+   border-bottom-right-radius: 6px;
+}
 </style>

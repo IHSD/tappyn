@@ -20,43 +20,39 @@
 
 	<div class="noti-scroll">
 
-		<div class='alert alert-warning notification text-center' style='margin:0;' ng-if='notifications.length==0'>No new notifications!</div>
-		<div class='notification' ng-repeat='notification in notifications | filter : {section : tab_filter}' ng-if='notifications.length > 0'>
-			<div class='noti-type' ng-switch on='notification.type'>
-				<span ng-switch-when='submission_received_vote' class='glyphicon glyphicon-thumbs-up glyphicon-oj glyph-lg'></span>
-				<span ng-switch-when='new_contest_launched' class='glyphicon glyphicon-fire glyphicon-oj glyph-lg'></span>
-				<span ng-switch-when='submission_confirmed' class='glyphicon glyphicon-check glyphicon-oj glyph-lg'></span>
-				<span ng-switch-when='submission_chosen' class='glyphicon glyphicon-usd glyphicon-oj glyph-lg'></span>
-				<span ng-switch-when='winner_chosen' class='glyphicon glyphicon-off glyphicon-oj glyph-lg'></span>
-				<span ng-switch-default class='glyphicon glyphicon-info-sign glyphicon-oj glyph-lg'></span>
-			</div>
-			<div class='noti-content' ng-bind-html="notification.message"></div>
-			<span class='glyphicon glyphicon-remove glyphicon-oj remove-glyph cursor' class='pull-right' ng-click='read_notification(notification, $index)'></span>
+	<div class='alert alert-warning notification text-center' style='margin:0;' ng-if='notifications.length==0'>No new notifications!</div>
+	<div class='notification' ng-repeat='notification in notifications | filter : {section : tab_filter}' ng-if='notifications.length > 0'>
+		<div class='noti-type' ng-switch on='notification.type'>
+			<span ng-switch-when='submission_received_vote' class='glyphicon glyphicon-thumbs-up glyphicon-oj glyph-lg'></span>
+			<span ng-switch-when='new_contest_launched' class='glyphicon glyphicon-fire glyphicon-oj glyph-lg'></span>
+			<span ng-switch-when='submission_confirmed' class='glyphicon glyphicon-check glyphicon-oj glyph-lg'></span>
+			<span ng-switch-when='submission_chosen' class='glyphicon glyphicon-usd glyphicon-oj glyph-lg'></span>
+			<span ng-switch-when='winner_chosen' class='glyphicon glyphicon-off glyphicon-oj glyph-lg'></span>
+			<span ng-switch-default class='glyphicon glyphicon-info-sign glyphicon-oj glyph-lg'></span>
 		</div>
-
+		<div class='noti-content' ng-bind-html="notification.message"></div>
+		<span class='glyphicon glyphicon-remove glyphicon-oj remove-glyph cursor' class='pull-right' ng-click='read_notification(notification, $index)'></span>
 	</div>
+
+</div>
 </div>
 
 <style>
-	.remove-glyph {
-		position: absolute;
-		top: 10px;
-		right: 10px;
-	}
-
-	.glyphicon-oj {
-		color: #717171;
-	}
-
-	.glyph-lg {
-		font-size: 1.4em;
-	}
-
-	.cursor {
-		cursor: pointer;
-	}
-
-	.a-label {
-		font-size: 0.7em;
-	}
+.remove-glyph {
+	position: absolute;
+	top:10px;
+	right: 10px;
+}
+.glyphicon-oj {
+	color: #717171;
+}
+.glyph-lg {
+	font-size:1.4em;
+}
+.cursor {
+	cursor:pointer;
+}
+.a-label {
+	font-size: 0.7em;
+}
 </style>

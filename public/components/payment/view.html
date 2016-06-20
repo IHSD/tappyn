@@ -1,232 +1,228 @@
 <div class='wrapper'>
 	<div class='modal_actions col-xs-12' ng-show='add_method'>
 		<div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4'>
-			<h3 class='text-center'>Add Payout</h3>
-			<div class='close_circle' ng-click='close_add()'>x</div>
-			<form class='form' id="payment-form" ng-submit='process_addition(this)' S>
-				<span class="payment-errors"></span>
-				<div class='col-xs-12'>
-					<div class="form-group">
-						<label>Debit Card Number</label>
-						<input class='form-control' type="text" size="20" placeholder='Debit Card Number' data-stripe="number" />
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class="form-group">
-						<label>CVC</label>
-						<input class='form-control' type="text" size="4" placeholder='CVC' data-stripe="cvc" />
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class="form-group">
-						<label>Month Exp</label>
-						<select class='form-control' data-stripe="exp-month">
-							<option value='01'>01</option>
-							<option value='02'>02</option>
-							<option value='03'>03</option>
-							<option value='04'>04</option>
-							<option value='05'>05</option>
-							<option value='06'>06</option>
-							<option value='07'>07</option>
-							<option value='08'>08</option>
-							<option value='09'>09</option>
-							<option value='10'>10</option>
-							<option value='11'>11</option>
-							<option value='12'>12</option>
-						</select>
-					</div>
-				</div>
-				<div class='col-xs-12 col-sm-4'>
-					<div class='form-group'>
-						<label>Year Exp</label>
-						<select class='form-control' data-stripe="exp-year">
-							<option value='2016'>2016</option>
-							<option value='2017'>2017</option>
-							<option value='2018'>2018</option>
-							<option value='2019'>2019</option>
-							<option value='2020'>2020</option>
-							<option value='2021'>2021</option>
-							<option value='2022'>2022</option>
-							<option value='2023'>2023</option>
-							<option value='2024'>2024</option>
-							<option value='2025'>2025</option>
-							<option value='2026'>2026</option>
-							<option value='2027'>2027</option>
-						</select>
-					</div>
-				</div>
-				<input type='hidden' data-stripe='currency' value='usd' />
+		<h3 class='text-center'>Add Payout</h3>
+		<div class='close_circle' ng-click='close_add()'>x</div>
+		<form class='form' id="payment-form" ng-submit='process_addition(this)'S>
+			<span class="payment-errors"></span>
+			<div class='col-xs-12'>
+			    <div class="form-group">
+			    	<label>Debit Card Number</label>
+			      	<input class='form-control' type="text" size="20" placeholder='Debit Card Number' data-stripe="number"/>
+			    </div>
+			</div>
+		    <div class='col-xs-12 col-sm-4'>
+			  <div class="form-group">
+				    <label>CVC</label>
+				    <input class='form-control' type="text" size="4" placeholder='CVC' data-stripe="cvc"/>
+			  </div>
+		    </div>
+		  	<div class='col-xs-12 col-sm-4'>
+		      <div class="form-group">
+		       		<label>Month Exp</label>
+		  	      	<select class='form-control' data-stripe="exp-month">
+			            <option value='01'>01</option>
+			            <option value='02'>02</option>
+			            <option value='03'>03</option>
+			            <option value='04'>04</option>
+			            <option value='05'>05</option>
+			            <option value='06'>06</option>
+			            <option value='07'>07</option>
+			            <option value='08'>08</option>
+			            <option value='09'>09</option>
+			            <option value='10'>10</option>
+			            <option value='11'>11</option>
+			            <option value='12'>12</option>
+		          </select>
+		      </div>
+		    </div>
+		    <div class='col-xs-12 col-sm-4'>
+		    	<div class='form-group'>
+		        	<label>Year Exp</label>
+		  	    	<select class='form-control' data-stripe="exp-year">
+		             <option value='2016'>2016</option>
+		             <option value='2017'>2017</option>
+		             <option value='2018'>2018</option>
+		             <option value='2019'>2019</option>
+		             <option value='2020'>2020</option>
+		             <option value='2021'>2021</option>
+		             <option value='2022'>2022</option>
+		             <option value='2023'>2023</option>
+		             <option value='2024'>2024</option>
+		             <option value='2025'>2025</option>
+		             <option value='2026'>2026</option>
+		             <option value='2027'>2027</option>
+		        	</select>
+		  	  	</div>
+		  	</div>
+			<input type='hidden' data-stripe='currency' value='usd'/>
 
-				<div class='col-xs-12 text-center'>
-					<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Submit</button>
-				</div>
-			</form>
+			<div class='col-xs-12 text-center'>
+				<button class='btn btn-oj' type='submit' ng-disabled='form_disabled'>Submit</button>
+			</div>
+		</form>
 		</div>
 	</div>
 </div>
 <div class='container'>
 
-	<div class='row content-padding'>
-		<div class='col-xs-12 col-sm-6 col-sm-offset-2'>
-			<div class='panel'>
-				<div class='panel-body'>
-					<h3 class='text-center'>Payouts</h3>
-					<hr>
-					<ul class="nav nav-tabs">
-						<li role="presentation" style='cursor:pointer' ng-class="{'active' : showing == 'details'}"><a ng-click="toggle_view('details')">Personal Information</a></li>
-						<li role="presentation" style='cursor:pointer' ng-class="{'active' : showing == 'methods'}"><a ng-click="toggle_view('methods')">Payout Methods</a></li>
-						<li role="presentation" style='cursor:pointer'><a>History</a></li>
-					</ul>
-					<div ng-show='showing == "details"'>
-						<form class='form' ng-submit='verify_identity(detail)'>
-							<div class='col-xs-12'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('country') > -1}">
-									<label>Country</label>
-									<select class='form-control' ng-model='detail.country'>
-										<option value=''>Choose your country</option>
-										<option ng-repeat='(key, value) in countries' value='{{key}}'>{{value}}</option>
-									</select>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-6'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.first_name') > -1}">
-									<label>First Name</label>
-									<input class='form-control' ng-model='detail.first_name' placeholder='First Name' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-6'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.last_name') > -1}">
-									<label>Last Name</label>
-									<input class='form-control' ng-model='detail.last_name' placeholder='Last Name' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-4'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.year') > -1}">
-									<label>Birth Year</label>
-									<input type='text' placeholder='ex. 1995' class='form-control' ng-model='detail.dob_year'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-4'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.month') > -1}">
-									<label>Birth Month</label>
-									<input type='text' placeholder='ex. 06' class='form-control' ng-model='detail.dob_month'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-4'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.day') > -1}">
-									<label>Birth Day</label>
-									<input type='text' placeholder='ex. 21' class='form-control' ng-model='detail.dob_day'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-12'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.line1') > -1}">
-									<label>Address Line 1</label>
-									<input class='form-control' ng-model='detail.address_line1' placeholder='Address' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-12'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.line1') > -1}">
-									<label>Address Line 2</label>
-									<input class='form-control' ng-model='detail.address_line2' placeholder='Address' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-5'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.city') > -1}">
-									<label>City</label>
-									<input class='form-control' ng-model='detail.city' placeholder='City' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-3'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.state') > -1}">
-									<label>State / Province</label>
-									<input class='form-control' ng-model='detail.state' placeholder='State' type='text'>
-								</div>
-							</div>
-							<div class='col-xs-12 col-sm-4'>
-								<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.postal_code') > -1}">
-									<label>Postal Code</label>
-									<input class='form-control' ng-model='detail.postal_code' placeholder='Postal' type='text'>
-								</div>
-							</div>
-							<!-- <div class='col-xs-12 col-sm-4 col-sm-offset-4'>
+<div class='row content-padding'>
+	<div class='col-xs-12 col-sm-6 col-sm-offset-2'>
+		<div class='panel'>
+			<div class='panel-body'>
+			<h3 class='text-center'>Payouts</h3><hr>
+			<ul class="nav nav-tabs">
+			  <li role="presentation"  style='cursor:pointer' ng-class="{'active' : showing == 'details'}"><a ng-click="toggle_view('details')">Personal Information</a></li>
+			  <li role="presentation"  style='cursor:pointer' ng-class="{'active' : showing == 'methods'}"><a ng-click="toggle_view('methods')">Payout Methods</a></li>
+			  <li role="presentation" style='cursor:pointer' ><a>History</a></li>
+			</ul>
+			<div ng-show='showing == "details"'>
+				<form class='form' ng-submit='verify_identity(detail)'>
+					<div class='col-xs-12'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('country') > -1}">
+			        		<label>Country</label>
+			        		<select class='form-control' ng-model='detail.country'>
+			        			<option value=''>Choose your country</option>
+			        			<option ng-repeat='(key, value) in countries' value='{{key}}'>{{value}}</option>
+			        		</select>
+			        	</div>
+			        </div>
+					<div class='col-xs-12 col-sm-6'>
+						<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.first_name') > -1}">
+							<label>First Name</label>
+							<input class='form-control' ng-model='detail.first_name' placeholder='First Name' type='text'>
+						</div>
+					</div>
+			        <div class='col-xs-12 col-sm-6'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.last_name') > -1}">
+			        		<label>Last Name</label>
+			        		<input class='form-control' ng-model='detail.last_name' placeholder='Last Name' type='text'>
+			        	</div>
+			        </div>
+			        <div class='col-xs-12 col-sm-4'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.year') > -1}">
+			        		<label>Birth Year</label>
+			        		<input type='text' placeholder='ex. 1995' class='form-control' ng-model='detail.dob_year'>
+			        	</div>
+			        </div>
+			        <div class='col-xs-12 col-sm-4'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.month') > -1}">
+							<label>Birth Month</label>
+							<input type='text' placeholder='ex. 06' class='form-control' ng-model='detail.dob_month'>
+			        	</div>
+			        </div>
+			        <div class='col-xs-12 col-sm-4'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.dob.day') > -1}">
+			        		<label>Birth Day</label>
+							<input type='text' placeholder='ex. 21' class='form-control' ng-model='detail.dob_day'>
+			        	</div>
+			        </div>
+					<div class='col-xs-12 col-sm-12'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.line1') > -1}">
+			        		<label>Address Line 1</label>
+			        		<input class='form-control' ng-model='detail.address_line1' placeholder='Address' type='text'>
+			        	</div>
+			        </div>
+					<div class='col-xs-12 col-sm-12'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.line1') > -1}">
+			        		<label>Address Line 2</label>
+			        		<input class='form-control' ng-model='detail.address_line2' placeholder='Address' type='text'>
+			        	</div>
+			        </div>
+					<div class='col-xs-12 col-sm-5'>
+						<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.city') > -1}">
+							<label>City</label>
+							<input class='form-control' ng-model='detail.city' placeholder='City' type='text'>
+						</div>
+					</div>
+					<div class='col-xs-12 col-sm-3'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.state') > -1}">
+			        		<label>State / Province</label>
+			        		<input class='form-control' ng-model='detail.state' placeholder='State' type='text'>
+			        	</div>
+			        </div>
+					<div class='col-xs-12 col-sm-4'>
+			        	<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.address.postal_code') > -1}">
+			        		<label>Postal Code</label>
+			        		<input class='form-control' ng-model='detail.postal_code' placeholder='Postal' type='text'>
+			        	</div>
+			        </div>
+					<!-- <div class='col-xs-12 col-sm-4 col-sm-offset-4'>
 						<div class='form-group' ng-class="{'has-error' : account.verification.fields_needed.indexOf('legal_entity.ssn_last_4') > -1}">
 							<label>Last 4 of SSN</label>
 							<input class='form-control' ng-model='detail.ssn_last_4' placeholder='Last 4 of SSN' type='password'>
 						</div>
 					</div> -->
-							<div class='col-xs-12 text-center'>
-								<button class='btn btn-oj' type='submit'>Register Your Account</button>
-								<br>
-								<span class='tos_label' style='font-size:0.7em;'>By registering your account, you agree to<br><a href="#">Stripe Connected Account Agreement</a> </span></div>
-						</form>
-					</div>
-					<div ng-show='showing == "methods"' ng-init='add_method = false'>
-						<div class='col-xs-12' ng-show='account.external_accounts.data.length > 0'>
-							<div class='col-sm-12 payment-method-container'>
-								<div class='payment-method-card' ng-repeat='account in account.external_accounts.data' ng-class='{"default_method" : account.default_for_currency}'>
-									<h5>
+			        <div class='col-xs-12 text-center'>
+						<button class='btn btn-oj' type='submit'>Register Your Account</button><br>
+						<span class='tos_label' style='font-size:0.7em;'>By registering your account, you agree to<br><a href="#">Stripe Connected Account Agreement</a> </span></div>
+			    </form>
+			</div>
+			<div ng-show='showing == "methods"' ng-init='add_method = false'>
+				<div class='col-xs-12' ng-show='account.external_accounts.data.length > 0'>
+					<div class='col-sm-12 payment-method-container'>
+						<div class='payment-method-card' ng-repeat='account in account.external_accounts.data' ng-class='{"default_method" : account.default_for_currency}'>
+							<h5>
 								<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
 								<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
 								<img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
 								<img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
 								&nbsp;&nbsp;&nbsp;********{{account.last4}}
 							</h5>
-									<span><strong>Expires &nbsp;&nbsp;{{account.exp_month}}/{{account.exp_year}}</strong></span>
-									<div class='payment-method-actions' uib-dropdown>
-										<button href uib-dropdown-toggle>Actions<span class="caret"></span></button>
-										<ul uib-dropdown-menu role="menu">
-											<li role='menuitem' ng-if='!account.default_for_currency' ng-click='set_default(account.id)'><a>Set As Default</a></li>
-											<li role='menuitem' ng-if='!account.default_for_currency' ng-click='remove_method(account.id)'><a>Remove</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
+							<span><strong>Expires &nbsp;&nbsp;{{account.exp_month}}/{{account.exp_year}}</strong></span>
+							<div class='payment-method-actions' uib-dropdown>
+	                            <button href uib-dropdown-toggle>Actions<span class="caret"></span></button>
+	                            <ul uib-dropdown-menu role="menu">
+	                                <li role='menuitem' ng-if='!account.default_for_currency' ng-click='set_default(account.id)'><a>Set As Default</a></li>
+		                            <li role='menuitem' ng-if='!account.default_for_currency' ng-click='remove_method(account.id)'><a>Remove</a></li>
+	                            </ul>
+		                    </div>
 						</div>
-						<div class='alert alert-warning col-sm-12' style='margin-top:10px;' ng-show='account.external_accounts.data.length == 0'>
-							You don't have any payout methods yet
-						</div>
-						<div class='col-xs-12 text-center'>
-							<button class='btn btn-oj' ng-click='open_add()'>
-								Add Payout Method
-							</button>
-							<br>
-							<span class='tos_label' style='font-size:0.7em;'>Tappyn will never charge you.<br>But we do want to send you money!</span>
-						</div>
-					</div>
-					<br>
-					<div class='col-xs-12 text-center' style='margin-top:10px;'>
-						<a class='text-center' href="https://stripe.com" target="_blank"><img height='30' src="public/img/big.png" /></a>
 					</div>
 				</div>
+				<div class='alert alert-warning col-sm-12' style='margin-top:10px;' ng-show='account.external_accounts.data.length == 0'>
+					You don't have any payout methods yet
+				</div>
+				<div class='col-xs-12 text-center'>
+					<button class='btn btn-oj' ng-click='open_add()'>
+						Add Payout Method
+					</button><br>
+					<span class='tos_label' style='font-size:0.7em;'>Tappyn will never charge you.<br>But we do want to send you money!</span>
+				</div>
 			</div>
-		</div>
-		<div class='col-xs-12 col-sm-3'>
-			<div class='panel'>
-				<div class='panel-body'>
-					<h4 class='text-center'>Payment FAQ</h4>
-					<uib-accordion id='faqpayment'>
-						<uib-accordion-group heading="Why is my payment info required?">
-							Stripe, a globally trusted payment processor, requires the card information to set up a direct deposit system with the associated account of your choosing. We do not store this account information, and your card will never be charged under any circumstances.
-						</uib-accordion-group>
-						<uib-accordion-group heading="How do I remove my info?">
-							If you would like to remove a payment method, please contact us through our chat or at squad@tappyn.com, and we'll take care of it immediately.
-						</uib-accordion-group>
-						<uib-accordion-group heading="Are there any other payout options?">
-							If you are an international user or you'd prefer not to be paid through Stripe, we also offer payouts via PayPal. Simply contact us through our chat or at squad@tappyn.com with your PayPal address after you've won a contest, and we'll promptly transfer
-							your winnings.
-						</uib-accordion-group>
-						<uib-accordion-group heading="Is this safe?">
-							Stripe payouts are 100% safe. Tappyn does not store your card details or any financial information, and all transactions go only through Stripe. Feel free to contact us if you have any additional concerns!
-						</uib-accordion-group>
-					</uib-accordion>
+				<br>
+				<div class='col-xs-12 text-center' style='margin-top:10px;'>
+					<a class='text-center' href="https://stripe.com" target="_blank"><img height='30' src="public/img/big.png" /></a>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class='col-xs-12 col-sm-3'>
+		<div class='panel'>
+			<div class='panel-body'>
+				<h4 class='text-center'>Payment FAQ</h4>
+				<uib-accordion id='faqpayment'>
+			      <uib-accordion-group heading="Why is my payment info required?">
+			        	Stripe, a globally trusted payment processor, requires the card information to set up a direct deposit system with the associated account of your choosing. We do not store this account information, and your card will never be charged under any circumstances.
+			      </uib-accordion-group>
+			      <uib-accordion-group heading="How do I remove my info?">
+			        If you would like to remove a payment method, please contact us through our chat or at squad@tappyn.com, and we'll take care of it immediately.
+			      </uib-accordion-group>
+			      <uib-accordion-group heading="Are there any other payout options?">
+			       If you are an international user or you'd prefer not to be paid through Stripe, we also offer payouts via PayPal. Simply contact us through our chat or at squad@tappyn.com with your PayPal address after you've won a contest, and we'll promptly transfer your winnings.
+			      </uib-accordion-group>
+			      <uib-accordion-group heading="Is this safe?">
+			        Stripe payouts are 100% safe. Tappyn does not store your card details or any financial information, and all transactions go only through Stripe. Feel free to contact us if you have any additional concerns!
+			      </uib-accordion-group>
+			    </uib-accordion>
+			</div>
+		</div>
+	</div>
+</div>
 </div>
 <script>
-	fbq('track', 'PageView');
-	window.Intercom('update');
+fbq('track', 'PageView');
+window.Intercom('update');
 </script>
 <style>
 	.payment-method-container {
@@ -235,24 +231,20 @@
 		padding-left: 0px;
 		padding-right: 0px;
 	}
-
 	.payment-method-card {
 		padding: 10px;
 	}
-
 	.default_method {
 		border: 1px solid #00aaff;
 		border-radius: 5px;
 	}
-
 	.payment-method-card:hover {
 		background-color: #f2f2f2;
 	}
-
 	.payment-method-actions {
-		margin: auto;
+		margin:auto;
 		position: absolute;
 		right: 20px;
-		top: 50%;
+		top:50%;
 	}
 </style>

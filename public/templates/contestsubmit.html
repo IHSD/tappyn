@@ -2,7 +2,7 @@
 	<h3 ng-show='submission.headline'>{{submission.headline}}</h3>
 	<div class="contest-content">
 		<span ng-show='submission.link_explanation'>{{submission.link_explanation}}</span>
-		<span ng-show='submission.text'>{{submission.text}}</span>
+    <span ng-show='submission.text'>{{submission.text}}</span>
 	</div>
 	<h5 class='text-right' style='color:#ff6c00;'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 </div>
@@ -15,10 +15,10 @@
 	</div>
 </div>
 <div class="contest-info">
-	<h5>
+    <h5>
     	<span class='duration' style='position: absolute;left: 3px;bottom: 0;'>
     		{{submission.created_at  | untilFilter}} ago
     	</span>
    	</h5>
-	<div style='position: absolute;right:0px;bottom: 0;' class="share_logo" ng-show='submission.hovering' ng-click='share(submission)'>Share</div>
+   	<div style='position: absolute;right:0px;bottom: 0;' class="share_logo"  ng-show='submission.hovering' ng-click='share(submission)'>Share</div>
 </div>

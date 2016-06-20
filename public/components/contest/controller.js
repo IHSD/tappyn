@@ -42,21 +42,12 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
         $scope.cropper_box = true;
     }
 
-    $scope.view = {
-        brief: true,
-        submissions: false
-    };
+    $scope.view = { brief: true, submissions: false };
     $scope.view_brief = function() {
-        $scope.view = {
-            brief: true,
-            submissions: false
-        };
+        $scope.view = { brief: true, submissions: false };
     }
     $scope.view_submissions = function() {
-        $scope.view = {
-            brief: false,
-            submissions: true
-        };
+        $scope.view = { brief: false, submissions: true };
     }
 
     $scope.scroll_to_submish = function() {
@@ -110,10 +101,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
             });
         }, "image/png", 0.95);
     }
-    $scope.submit = {
-        headline: '',
-        text: ''
-    };
+    $scope.submit = { headline: '', text: '' };
     $scope.submit_to = function(id, submission) {
         if ($scope.form_limit.headline && submission.headline.length < 1) $scope.set_alert("Headline is required", "error");
         else if ($scope.form_limit.text && submission.text.length < 1) $scope.set_alert("Text is required", "error");
@@ -155,10 +143,7 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
     }
 
     $scope.upvote = function(submission) {
-        if (!$rootScope.user) $scope.open_register("upvote", {
-            contest: $scope.contest.id,
-            submission: submission.id
-        });
+        if (!$rootScope.user) $scope.open_register("upvote", { contest: $scope.contest.id, submission: submission.id });
         else {
             contestFactory.upvote($scope.contest.id, submission.id).success(function(response) {
                 if (response.http_status_code == 200) {

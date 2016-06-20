@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='container'>	
 	<div class='row'>
 		<div style='margin-top:5px;' class='row contest-box'>
 			<div class='col-xs-12 text-left'>
@@ -12,12 +12,10 @@
 				<div class='col-xs-12 col-sm-4 text-center'>
 					<div class='btn-group'>
 						<a ng-show='company.company_url != "" && company.company_url != null' href='{{company.company_url | urlFilter}}' target='_blank' class='btn btn-outliner'>Visit Website</a>
-						<a ng-show='company.facebook_url != "" && company.facebook_url != null' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"'
-										ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+						<a ng-show='company.facebook_url != "" && company.facebook_url != null' href='{{company.facebook_url | urlFilter}}' href='' target='_blank' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
 							<img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
 						</a>
-						<a ng-show='company.twitter_handle != "" && company.twitter_handle != null' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"'
-										ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+						<a ng-show='company.twitter_handle != "" && company.twitter_handle != null' href='https://twitter.com/{{company.twitter_handle}}' target='_blank' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
 							<img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
 						</a>
 					</div>
@@ -38,74 +36,74 @@
 		</div>
 		<div class='content-padding'>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='first_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='first_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='second_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='second_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='third_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='third_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='fourth_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='fourth_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='fifth_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='fifth_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-lg-2 visible-lg">
-				<div ng-if='sixth_six($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='sixth_six($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-md-3 visible-md">
-				<div ng-if='first_fourth($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='first_fourth($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-md-3 visible-md">
-				<div ng-if='second_fourth($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='second_fourth($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-md-3 visible-md">
-				<div ng-if='third_fourth($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='third_fourth($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-md-3 visible-md">
-				<div ng-if='fourth_fourth($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='fourth_fourth($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-sm-4 visible-sm">
-				<div ng-if='first_third($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='first_third($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-sm-4 visible-sm">
-				<div ng-if='second_third($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='second_third($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 			<div class="col-sm-4 visible-sm">
-				<div ng-if='third_third($index)' ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-if='third_third($index)' ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>
 			</div>
 			<div class="col-xs-12 visible-xs">
-				<div ng-repeat='contest in contests'>
-					<div ng-include src="'templates/profilecontest.html'"></div>
-				</div>
+				 <div ng-repeat='contest in contests'>
+				 		<div ng-include src="'templates/profilecontest.html'"></div>
+				 </div>		   
 			</div>
 		</div>
 	</div>
