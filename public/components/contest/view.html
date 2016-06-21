@@ -138,9 +138,9 @@
                     <img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
                 </div>
                 <div style='padding: 20px 20px 10px 70px;'>
-                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;"><br>Write a high performing copy.</a></strong></p>
+                    <p><strong>How to:<br><button data-toggle="modal" data-target="#howto" type="button" class="btn btn-link hoverclass" style="cursor:pointer;">Write a high performing copy.</button></strong></p>
 									</div>
-								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal fade" id="howto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 								      <div class="modal-content">
 								        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
@@ -295,11 +295,11 @@
 
  <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
  <script>
- $('#myModal').on('show.bs.modal', function () {
+ $('#howto').on('show.bs.modal', function () {
     $('.container').addClass('blur');
  })
 
- $('#myModal').on('hide.bs.modal', function () {
+ $('#howto').on('hide.bs.modal', function () {
     $('.container').removeClass('blur');
  })
  </script>
@@ -332,8 +332,15 @@
  position: absolute;
  left: -5px;
  }
- a.hoverclass:hover {
-     color: #FF5C00;
+ .hoverclass {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    border: 0;
+ }
+ .hoverclass:hover, .hoverclass:focus {
+    color: #FF5C00;
+    outline: 0;
  }
  /* Limit image width to avoid overflow the container */
 
