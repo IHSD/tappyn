@@ -15,7 +15,7 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
             }
         }
         $scope.contests = filter;
-        //$scope.contests = response.data.contests;
+        $scope.contests = response.data.contests;
     });
 
     $scope.filter_industry = function(pass) {
