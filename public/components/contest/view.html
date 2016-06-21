@@ -292,118 +292,119 @@
         <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
     </div>
 </div>
-<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script>
-$('#myModal').on('show.bs.modal', function () {
-   $('.container').addClass('blur');
-})
+<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+ <script>
+ $('#myModal').on('show.bs.modal', function () {
+    $('.container').addClass('blur');
+ })
 
-$('#myModal').on('hide.bs.modal', function () {
-   $('.container').removeClass('blur');
-})
-</script>
-<script>
-fbq('track', 'ViewContent');
+ $('#myModal').on('hide.bs.modal', function () {
+    $('.container').removeClass('blur');
+ })
+ </script>
+ <script>
+ fbq('track', 'ViewContent');
 
-$("#sign-up").click(function() {
-    fbq('track', 'Lead');
-});
-$("#fb-login").click(function() {
-    fbq('track', 'Lead');
-});
-</script>
-<style>
-.check:nth-of-type(1) ul li{ /* first well;*/
-list-style-type:none;
-}
-.check:nth-of-type(1) ul li:before{
-font-family: 'Glyphicons Halflings';
-content: "\e067";
-position: absolute;
-left: -5px;
-}
-.check:nth-of-type(2) ul li{ /* second well;*/
-list-style-type:none;
-}
-.check:nth-of-type(2) ul li:before{
-font-family: 'Glyphicons Halflings';
-content: "\e014";
-position: absolute;
-left: -5px;
-}
-a.hoverclass:hover {
-    color: #FF5C00;
-}
-/* Limit image width to avoid overflow the container */
+ $("#sign-up").click(function() {
+     fbq('track', 'Lead');
+ });
+ $("#fb-login").click(function() {
+     fbq('track', 'Lead');
+ });
+ </script>
+ <style>
+ .check:nth-of-type(1) ul li{ /* first well;*/
+ list-style-type:none;
+ }
+ .check:nth-of-type(1) ul li:before{
+ font-family: 'Glyphicons Halflings';
+ content: "\e067";
+ position: absolute;
+ left: -5px;
+ }
+ .check:nth-of-type(2) ul li{ /* second well;*/
+ list-style-type:none;
+ }
+ .check:nth-of-type(2) ul li:before{
+ font-family: 'Glyphicons Halflings';
+ content: "\e014";
+ position: absolute;
+ left: -5px;
+ }
+ a.hoverclass:hover {
+     color: #FF5C00;
+ }
+ /* Limit image width to avoid overflow the container */
 
-hr {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
+ hr {
+     margin-top: 5px;
+     margin-bottom: 5px;
+ }
 
-.inputfile {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
+ .inputfile {
+     width: 0.1px;
+     height: 0.1px;
+     opacity: 0;
+     overflow: hidden;
+     position: absolute;
+     z-index: -1;
+ }
 
-.inputfile+ label {
-    font-size: 1.25em;
-    font-weight: 500;
-    color: white;
-    background-color: #ff5c00;
-    display: inline-block;
-    cursor: pointer;
-    padding: 7px 14px;
-    border-radius: 5px;
-    border: 1px solid transparent;
-}
+ .inputfile+ label {
+     font-size: 1.25em;
+     font-weight: 500;
+     color: white;
+     background-color: #ff5c00;
+     display: inline-block;
+     cursor: pointer;
+     padding: 7px 14px;
+     border-radius: 5px;
+     border: 1px solid transparent;
+ }
 
-.inputfile+ label:hover {
-    background-color: red;
-}
-.blur {
-    -webkit-filter: blur(5px) grayscale(20%);
-}
-.modal-backdrop {
-  background-color: #fff;
-  opacity: 0.5;
-}
-@media (min-width: 768px)
-.modal-content {
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
-  box-shadow: 0 1px 5px rgba(0,0,0,.5);
-}
-.modal-header {
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-.modal-body {
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-	border-bottom: 1px solid #ccc;
-	border-bottom-left-radius: 6px;
-	border-bottom-right-radius: 6px;
-}
-.modal-content {
-  background-color: #f4f7f9;
-  border: 0;
-  border-radius: 2px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.modal-dialog {
-  color: #526880;
-}
-.modal-footer {
-   border-top: none;
-   border-bottom-left-radius: 6px;
-   border-bottom-right-radius: 6px;
-}
-</style>
+ .inputfile+ label:hover {
+     background-color: red;
+ }
+ .blur {
+     -webkit-filter: blur(5px) grayscale(20%);
+ }
+ .modal-backdrop {
+   background-color: #fff;
+   opacity: 0.5;
+ }
+ @media (min-width: 768px)
+ .modal-content {
+   -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
+   box-shadow: 0 1px 5px rgba(0,0,0,.5);
+ }
+ .modal-header {
+     border-left: 1px solid #ccc;
+     border-top: 1px solid #ccc;
+     border-right: 1px solid #ccc;
+     border-top-left-radius: 6px;
+     border-top-right-radius: 6px;
+ }
+ .modal-body {
+   border-left: 1px solid #ccc;
+   border-right: 1px solid #ccc;
+ 	border-bottom: 1px solid #ccc;
+ 	border-bottom-left-radius: 6px;
+ 	border-bottom-right-radius: 6px;
+ }
+ .modal-content {
+   background-color: #f4f7f9;
+   border: 0;
+   border-radius: 2px;
+   -webkit-box-shadow: none;
+   box-shadow: none;
+ }
+ .modal-dialog {
+   color: #526880;
+ }
+ .modal-footer {
+    border-top: none;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+ }
+ </style>
