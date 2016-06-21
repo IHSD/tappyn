@@ -217,6 +217,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 if (response.http_status_code == 200) {
                     if (response.success) {
                         $scope.contest.id = response.data.id;
+                        $scope.contest.attachment_url = response.data.attachment_url;
                         if (pay) $scope.open_payment();
                         else {
                             //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
