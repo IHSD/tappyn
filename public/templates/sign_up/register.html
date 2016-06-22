@@ -2,7 +2,7 @@
     <div class='modal_inner col-xs-12 text-center' ng-class='{"col-sm-9 col-md-9 col-lg-7" : registrar.group_id == "2" && registrar.step == 3, "col-sm-7 col-md-5 col-lg-4" : registrar.step != 3}'>
         <div ng-hide='registration.type == "must"' class='close_circle' ng-click='close_register()'>x</div>
         <div ng-show='registrar.group_id == "2"'>
-            <form class='form' ng-submit='sign_up(registrar)' onsubmit="return redirect()">
+            <form class='form' ng-submit='sign_up(registrar)'>
                 <div class='row' ng-show='registrar.step== 1'>
                   <div class="logo">
                       <center><img width='120px;' height='120px;' src="https://s3-us-west-2.amazonaws.com/tappyn/alyssa-modal.jpg" class="img-responsive"></center>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="col-xs-6 col-xs-offset-3">
-                        <button id='step-2' type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
+                        <button id='step-2'  ng-click="return redirect()" type='submit' class='col-xs-12 btn btn-oj'>Come on In</button>
                     </div>
                 </div>
                 <center><div data-toggle="buttons" class="col-xs-6 col-xs-offset-3" style='max-width:60%;'>
