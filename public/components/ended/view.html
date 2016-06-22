@@ -76,7 +76,6 @@
                         </div>
                         <h5 class='winner-name'> {{winner.first_name}} {{winner.last_name | firstChar}}.</h5>
                         <span class='winner-tag'>Winner</span>
-                        <span class='contest-reward'>${{contest.prize}}</span>
                         <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
                         <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
                     </div>
