@@ -112,50 +112,7 @@
             </div>
         </div>
     </div>
-
-    <!-- TODO: remove confirm winner modal if not needed! -->
-    <div class='modal_actions col-xs-12' ng-show='confirm_winner.show'>
-        <div class='panel modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4'>
-            <div class='panel-body '>
-                <div class='close_circle' ng-click='close_confirm()'>x</div>
-                <div class='row'>
-                    <div class='col-xs-12' style='border-bottom:1px solid #ff5c00;margin-bottom:5px;'>
-                        <h3 class='text-left'>Award Winner</h3>
-                    </div>
-                    <p class='text-left'>Are you sure you want to choose this ad by {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}. as your winning submission?</p>
-                    <div class="contest-box">
-                        <div class='contest-image'>
-                            <img ng-src='{{confirm_winner.submission.attachment}}'>
-                        </div>
-                        <div class='contest-company text-left'>
-                            <span class='company-name'>from {{user.first_name}} &#8226; {{confirm_winner.submission.contest.platform | capitalize}}</span>
-                        </div>
-                        <div class='contest-entry text-left'>
-                            <h3 ng-show='confirm_winner.submission.headline'>{{confirm_winner.submission.headline}}</h3>
-                            <h4 ng-show='confirm_winner.submission.link_explanation'>{{confirm_winner.submission.link_explanation}}<br></h4>
-                            <h4 ng-show='confirm_winner.submission.text'>{{confirm_winner.submission.text}}</h4>
-                            <div class='contest-upvotes disable-click'>
-                                <span class='glyphicon glyphicon-heart'></span> {{confirm_winner.submission.votes | number}}
-                            </div>
-                        </div>
-                        <div class='contest-winner text-left'>
-                            <div class='avatar'>
-                                <img ng-src='{{confirm_winner.avatar_url}}' src='public/img/avatar.png' alt=''>
-                            </div>
-                            <h5 class='winner-name'> {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}.</h5>
-                            <span class='contest-ctr' ng-show='confirm_winner.submission.ctr'>{{confirm_winner.submission.ctr}}%</span>
-                        </div>
-                        <div class='text-center contest-winner-select'>
-                            <button ng-click='choose_winner(confirm_winner.submission.id)' class='btn btn-oj'>Confirm Winner</button>
-                            <a style='color:#ff5c00;' ng-click='close_confirm()'>Cancel</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
-
 <div class='row'>
     <div class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
         <div class='col-xs-12' ng-if='user.type == "company"'>
@@ -252,46 +209,39 @@
             </table>
             <div ng-show='view == "winner"'>
                 <div class='col-xs-12'>
-                  <div class="row">
-                    <div class="col-xs-6">
-                      <!-- TODO: only show when pending testing -->
-                      <button class='btn btn-oj' ng-click='' style='margin-right: 10px;'>A/B Test</button>
-                      <!-- TODO: only show when pending testing & pending purchase -->
-                      <button class='btn btn-oj' ng-click=''>Purchase</button>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class='btn btn-oj' ng-show="winner_contest.status == 'pending_testing'" ng-click='' style='margin-right: 10px;'>A/B Test</button>
+                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click=''>Purchase</button>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                            <a class='btn btn-oj' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Publish Campaign</a>
+                            <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
+                        </div>
                     </div>
-                    <div class="col-xs-6 text-right">
-                      <!-- TODO: contest.id not working -->
-                      <a class='btn btn-oj' href='/edit/{{contest.id}}'  style='margin-right: 10px;'>View Campaign</a>
-                      <!-- TODO: contest.id not working; edit available for draft or live -->
-                      <a class='btn btn-oj' href='/edit/{{contest.id}}'  style='margin-right: 10px;'>Edit Campaign</a>
-                      <!-- TODO: contest.paid not working -->
-                      <a ng-if='contest.paid == "0"' class='btn btn-oj' href='' ng-click='set_contest_live(contest)'  style='margin-right: 10px;'>Publish Campaign</a>
-                      <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
-                    </div>
-                  </div>
-
                 </div>
                 <div class='col-xs-12'>
-                    <!-- TODO: platform, objective & status not working -->
-                    <h3 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} ({{contest.status | capUnderscore}})</h3></div>
+                    <h3 class='text-center'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}})</h3></div>
                 <div class='col-sm-4 hidden-xs'>
                     <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                        <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
+                        <div ng-include src="'templates/submits/companysubmits-new.html?1'"></div>
                     </div>
                 </div>
                 <div class='col-sm-4 hidden-xs'>
                     <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                        <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
+                        <div ng-include src="'templates/submits/companysubmits-new.html?1'"></div>
                     </div>
                 </div>
                 <div class='col-sm-4 hidden-xs'>
                     <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                        <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
+                        <div ng-include src="'templates/submits/companysubmits-new.html?1'"></div>
                     </div>
                 </div>
                 <div class='col-xs-12 visible-xs'>
                     <div class="contest-box row" ng-repeat='submission in submissions'>
-                        <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
+                        <div ng-include src="'templates/submits/companysubmits-new.html?1'"></div>
                     </div>
                 </div>
             </div>

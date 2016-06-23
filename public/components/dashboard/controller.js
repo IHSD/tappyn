@@ -262,7 +262,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                     for (var i in res.data) {
                         contest[i] = res.data[i];
                     }
-                    contest.status = 'public';
+                    contest.status = 'live';
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);

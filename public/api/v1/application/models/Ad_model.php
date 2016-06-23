@@ -17,9 +17,9 @@ class Ad_model extends MY_Model
     public function create($contest_id, $submission_id, $platform)
     {
         return $this->db->insert('ads', array(
-            'contest_id' => $contest_id,
+            'contest_id'    => $contest_id,
             'submission_id' => $submission_id,
-            'platform' => $platform,
+            'platform'      => $platform,
         ));
     }
 
@@ -40,7 +40,11 @@ class Ad_model extends MY_Model
 
     public function is_testing_status($contest_id)
     {
-        foreach ($this->select_by_contest_id($contest_id)->result() as $ad) {
+        $result = $this->select_by_contest_id($contest_id)->result();
+        if (empty($result)) {
+            return null;
+        }
+        foreach ($result as $ad) {
             if ($ad->done == 0) {
                 return true;
             }

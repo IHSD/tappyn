@@ -19,13 +19,10 @@
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
 </div>
-
-<!-- TODO: remember to change "select-contest-id" to the real contest id -->
-<!-- TODO: only show checkbox when in pending testing and pending purchase status -->
-<div class='text-center contest-winner-select'>
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
     <!-- <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button> -->
     <div class="checkbox-container">
-      <input type="checkbox" name="name" value="" id="select-contest-id">
-      <label for="select-contest-id"><span class="glyphicon glyphicon-ok"></span></label>
+        <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
+        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok"></span></label>
     </div>
 </div>
