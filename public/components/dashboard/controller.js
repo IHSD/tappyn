@@ -171,14 +171,18 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.payment_obj.price = response.data.price;
+                    $scope.reduction = response.data.discount;
                     if (contest) {
                         $scope.set_model('adding_payment');
+                    }
+                    if (response.data.error_alert) {
+                        $scope.set_alert(response.data.error_alert, "error");
                     }
                 }
                 return;
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
-            $scope.close_payment();
+            //$scope.close_payment();
         });
     }
 
@@ -226,8 +230,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             if (res.http_status_code == 200) {
                 if (res.success) {
                     $scope.set_alert(res.message, "default");
-                    $rootScope.modal_up = false;
-                    $scope.adding_payment = false;
+                    $scope.set_model();
                     $route.reload();
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
@@ -256,7 +259,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.grab_checked_submission = function() {
         var tmp = [];
-        $("input:checked").each(function() {
+        $(".container input:checked").each(function() {
             tmp.push($(this).val());
         });
         return tmp;

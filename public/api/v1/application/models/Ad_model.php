@@ -23,6 +23,11 @@ class Ad_model extends MY_Model
         ));
     }
 
+    public function create_by_array($data)
+    {
+        return $this->db->insert_batch('ads', $data);
+    }
+
     public function select_by_contest_id($contest_id)
     {
         return $this->db->select("*")->from("ads")->where('contest_id', $contest_id)->get();

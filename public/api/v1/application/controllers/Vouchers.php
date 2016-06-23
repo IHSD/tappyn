@@ -51,6 +51,10 @@ class Vouchers extends CI_Controller
     public function get_price()
     {
         $data = $this->price_lib->get_price_from_post($this->input->post());
-        $this->responder->data($data)->respond();
+        if ($data['success']) {
+            $this->responder->data($data)->respond();
+        } else {
+            $this->responder->fail($data['message'])->code(500)->respond();
+        }
     }
 }
