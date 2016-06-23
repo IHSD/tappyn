@@ -575,4 +575,23 @@ class Contests extends CI_Controller
             $this->responder->fail(($this->contest->errors() ? $this->contest->errors() : "There was an error deleting your contest"))->code(500)->respond();
         }
     }
+
+    public function set_live($id)
+    {
+        // Check that they own the contest
+        $contest = $this->contest->get($id);
+        if (!$contest || ($contest->owner !== $this->ion_auth->user()->row()->id)) {
+            $this->responder->fail("You do not own this contest brody")->code(403)->respond();
+            return;
+        }
+        if ($this->contest->get_status($contest) != 'draft') {
+            $this->responder->fail("Aleady public")->code(500)->respond();
+            return;
+        }
+        $start_time = date('Y-m-d H:i:s');
+        $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
+        $data = array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time);
+        $this->contest->update($id, $data);
+        $this->responder->message("Contest successfully public")->data($data)->respond();
+    }
 }
