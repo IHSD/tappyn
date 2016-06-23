@@ -296,14 +296,6 @@
                     </div>
                 </div>
                 <div class=row>
-                    <label class="col-sm-3 control-label text-left col-sm-offset-1" style=padding-top:0>Copy Direction</label>
-                    <div class=col-sm-4>
-                        <div class=form-group>
-                            <textarea class=form-control ng-model=contest.additional_info placeholder="e.g., Specific examples of how you'd use our product." style=width:380px></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class=row>
                     <label class="col-sm-3 control-label text-left col-sm-offset-1" style=padding-top:0>Ad Creative</label>
                     <div class=col-sm-4>
                         <div class=form-group ng-init="contest.attachment = ''">
@@ -429,12 +421,6 @@
                     </div>
                     <hr>
                     <div class=row>
-                        <h3 class="col-xs-12 col-sm-3">What We're Looking For</h3>
-                        <div class="col-xs-12 col-sm-9">
-                            <p>{{contest.additional_info}}</div>
-                    </div>
-                    <hr>
-                    <div class=row>
                         <h3 class="col-xs-12 col-sm-3">Ad Photo</h3>
                         <div class="col-xs-12 col-sm-9">
                             <p>
@@ -444,20 +430,6 @@
                         </div>
                     </div>
                     <hr>
-                    <div class=row>
-                        <h3 class="col-xs-12 col-sm-3">Branding Links</h3>
-                        <div class="col-xs-12 col-sm-9">
-                            <div ng-hide=!contest.company_url>
-                                <h4>Company Website</h4>
-                                <p>{{contest.company_url | urlFilter}}</div>
-                            <div ng-hide=!contest.facebook_url>
-                                <h4>Facebook</h4>
-                                <p>{{contest.facebook_url | urlFilter}}</div>
-                            <div ng-hide=!contest.twitter_handle>
-                                <h4>Twitter</h4>
-                                <p>https://twitter.com/{{contest.twitter_handle}}</div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
