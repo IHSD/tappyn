@@ -95,7 +95,7 @@
         <section class="love-raw" style='padding-top:0px;height:auto;'>
             <div class='row content-padding'>
                 <div class='container'>
-                    <h2 style='font-size:25;font-weight:bold;margin-bottom:20px;' class='text-center'>Our core campaigns are <em>free</em> to run.</h2>
+                    <h2 style='font-size:25;font-weight:bold;margin-bottom:20px;' class='text-center'>Our core campaigns are <u>free</u> to run.</h2>
                     <br/>
                      <div class="col-xs-12 text-center" style='color:#333;'>
 
@@ -170,6 +170,12 @@ $(".get_started").click(function(){
     border-radius:6px;
     padding:15px;
 }
-
-
+li.value-list:before {
+    content: "\e067";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+    float: left;
+    margin-top: 4px;
+    margin-left: -17px;
+}
 </style>
