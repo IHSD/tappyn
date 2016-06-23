@@ -261,4 +261,13 @@ class Contest extends MY_Model
         }
         return $status;
     }
+
+    public function submission_ids($contest_id)
+    {
+        $result = array();
+        foreach ($this->db->select('id')->from('submissions')->where('contest_id', $contest_id)->get()->result() as $submission) {
+            $result[] = $submission->id;
+        }
+        return $result;
+    }
 }

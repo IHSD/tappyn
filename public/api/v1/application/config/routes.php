@@ -105,4 +105,5 @@ $route['payouts/(:num)/claim']  = 'payouts/claim/$1';
 /*========================
 Vouchers
 ========================*/
-$route['vouchers'] = 'vouchers/is_valid';
+$route['vouchers']                   = 'vouchers/is_valid';
+$route['vouchers/get_price']['post'] = 'vouchers/get_price';

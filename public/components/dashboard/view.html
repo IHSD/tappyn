@@ -1,27 +1,27 @@
 <div class='wrapper'>
-    <div class='modal_actions col-sm-12' ng-show='adding_payment.show'>
+    <div class='modal_actions col-sm-12' ng-show='now_model == "adding_payment"'>
         <div class="payment_modal">
             <div class="modal_top text-center">
-                <div class='close_circle' ng-click='close_payment()'>x</div>
+                <div class='close_circle' ng-click='set_model()'>x</div>
                 <h3><strong>Campaign Payment</strong></h3>
                 <h4>{{adding_payment.contest.platform | capitalize}} Campaign</h4>
             </div>
             <div class="modal_bot">
                 <div class="voucher-group row" ng-show='voucher.visible == "1"'>
                     <p class='col-xs-12' ng-if='reduction'><strong class='pull-left'>Voucher Discount</strong><span class='pull-right'>-{{reducton | currency}}</span></p>
-                    <form class='form' ng-submit='use_voucher()'>
+                    <form class='form' ng-submit='get_price("check_voucher")'>
                         <div class='form-group col-sm-7 col-xs-12' style='padding-left: 0;'>
-                            <input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'>
+                            <input class='form-control' ng-model='payment_obj.voucher_code' type='text' placeholder='Voucher Code'>
                         </div>
                         <button class='btn btn-oj col-sm-5 col-xs-12' type='submit'>Check Voucher</button>
                     </form>
                 </div>
-                <div ng-show='price != 0.00'>
+                <div ng-show='payment_obj.price != 0.00'>
                     <div ng-show='!add_new'>
                         <div ng-show='payments.length > 0'>
                             <div class='payment-method-container'>
                                 <div class='row'>
-                                    <div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+                                    <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
                                         <h5>
                                     <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
                                     <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
@@ -36,7 +36,7 @@
                         </div>
                         <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                         <div class='text-right'>
-                            <button class='btn btn-oj' ng-click='old_payment()'>Pay {{price | currency}}</button>
+                            <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
                         </div>
                         <div class='text-center'>
                             <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
@@ -90,7 +90,7 @@
                             <input type='hidden' data-stripe='currency' value='usd' />
                             <div class='form-group checkbox'>
                                 <label class='control-label'>
-                                    <input type='checkbox' ng-model='save_method'> Save Method
+                                    <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                                 </label>
                                 <div class='pull-right' data-toggle="buttons">
                                     <label class='btn btn-link' style='color: #ff5e00; padding: 0;'>
@@ -99,17 +99,29 @@
                                 </div>
                             </div>
                             <div class='text-center'>
-                                <button class='btn btn-oj col-xs-12' ng-click='new_payment()'>Pay {{price | currency}}</button>
+                                <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
                                 <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div ng-show='price == 0.00' class='text-center'>
+                <div ng-show='payment_obj.price == 0.00' class='text-center'>
                     <h4>No need for payment, this campaign is on us!</h4>
-                    <button class='btn btn-oj col-xs-12' ng-click='voucher_payment()'>Continue</button>
+                    <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class='modal_actions col-sm-12' ng-show='now_model == "confirm_ab"'>
+        <div class="modal_top text-center">
+            <div class='close_circle' ng-click='set_model()'>x</div>
+            <h3>123</h3>
+        </div>
+        <div class="modal_bot">
+            You’ve selected {{payment_obj.submission_ids.length}} submissions for A/B test. how much would you like to spend a day?
+            <input type="number" ng-model="payment_obj.ab_aday"> how many days would you like to run the ads?
+            <input type="number" ng-model="payment_obj.ab_days"> days
+            <button ng-click="open_payment(winner_contest,'ab')">go</button>
         </div>
     </div>
 </div>
@@ -117,9 +129,9 @@
     <div class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
         <div class='col-xs-12' ng-if='user.type == "company"'>
             <div class='col-xs-12'>
-                <div class="round-avatar"><img src="public/img/avatar.png" alt=""></div>
+                <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
                 <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
-                <h3 class='text-center' style='margin-bottom: 25px;'><span>10</span><br>Campaigns</h3>
+                <h3 class='text-center' style='margin-bottom: 25px;'><span ng-bind="dash.contests.length"></span><br>Campaigns</h3>
             </div>
         </div>
         <div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"' style='margin-top:10px;'>
@@ -211,8 +223,8 @@
                 <div class='col-xs-12'>
                     <div class="row">
                         <div class="col-xs-6">
-                            <button class='btn btn-oj' ng-show="winner_contest.status == 'pending_testing'" ng-click='' style='margin-right: 10px;'>A/B Test</button>
-                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click=''>Purchase</button>
+                            <button class='btn btn-oj' ng-show="winner_contest.status == 'pending_testing'" ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
+                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")'>Purchase</button>
                         </div>
                         <div class="col-xs-6 text-right">
                             <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>

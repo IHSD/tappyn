@@ -2,8 +2,11 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     //on page load grab all
     $scope.type = '';
+    $scope.payment_obj = {};
     $scope.adding_payment = { show: false, id: '' };
     $scope.confirm_winner = { show: false, submission: null };
+    $scope.confirm_ab = { show: false };
+    $scope.now_model = '';
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
             if (response.success) $scope.dash = response.data;
@@ -19,7 +22,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         } else if (response.http_status_code == 500) alert(response.error);
         else $scope.check_code(response.http_status_code);
     })
-    $scope.price = 49.99;
+    $scope.payment_obj.price = 0;
 
     $scope.grab_dash = function(type) {
         $scope.type = type;
@@ -49,7 +52,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
 
     /** start winner functions, functions for assembling the winner view, opening and closing the modal for
-    	confirmation and the actual choosing of a winner **/
+        confirmation and the actual choosing of a winner **/
     $scope.choosing_winner = function(contest) {
         dashFactory.grabSubmissions(contest.id).success(function(response) {
             if (response.http_status_code == 200) {
@@ -115,18 +118,68 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.adding_payment.type = type;
     }
 
-    $scope.open_payment = function(contest) {
+    $scope.set_model = function(model) {
+        if (model) {
+            $scope.now_model = model;
+            $rootScope.modal_up = true;
+        } else {
+            $scope.now_model = '';
+            $rootScope.modal_up = false;
+        }
+    }
+
+    $scope.open_payment = function(contest, type) {
+        $scope.payment_obj.contest_id = contest.id;
+        $scope.payment_obj.submission_ids = $scope.grab_checked_submission();
+        if ($scope.payment_obj.submission_ids.length == 0) {
+            $scope.set_alert("please check one at least", "error");
+            return;
+        }
+        if (type == 'confirm_ab') {
+            $scope.set_model('confirm_ab');
+            return;
+        }
+
+        if (type == 'ab' && (!parseFloat($scope.payment_obj.ab_aday) || parseFloat($scope.payment_obj.ab_aday) <= 0.0 || !parseInt($scope.payment_obj.ab_days) || parseInt($scope.payment_obj.ab_days) <= 0)) {
+            $scope.set_alert("day and aday must > 0", "error");
+            return;
+        }
+
+        $scope.payment_obj.voucher_code = '';
+        $scope.payment_obj.pay_for = type;
+
         dashFactory.grabDetails().success(function(response) {
             if (response.http_status_code == 200) {
-                $scope.adding_payment = { show: true, contest: contest };
-                $rootScope.modal_up = true;
-                if (response.success) {
+                $scope.get_price('first', contest);
+                if (response.success && response.data.customer) {
                     $scope.payments = response.data.customer.sources.data;
                     $scope.add_new = false;
                 } else $scope.add_new = true;
+
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
-        })
+        });
+    }
+
+    $scope.get_price = function(get_price_type, contest) {
+        $scope.payment_obj.get_price_type = get_price_type;
+        if (get_price_type == 'check_voucher' && !$scope.payment_obj.voucher_code) {
+            $scope.set_alert("Please enter a voucher code", "error");
+            return;
+        }
+        dashFactory.getPrice($scope.payment_obj).success(function(response) {
+            if (response.http_status_code == 200) {
+                if (response.success) {
+                    $scope.payment_obj.price = response.data.price;
+                    if (contest) {
+                        $scope.set_model('adding_payment');
+                    }
+                }
+                return;
+            } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+            else $scope.check_code(response.http_status_code);
+            $scope.close_payment();
+        });
     }
 
     $scope.close_payment = function() {
@@ -141,117 +194,49 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             $scope.form_disabled = false;
         } else {
             // response contains id and card, which contains additional card details
-            var token = response.id;
-            dashFactory.payContest($scope.adding_payment.contest.id, { stripe_token: token, save_method: $scope.save_method, voucher_code: $scope.voucher_code }).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.set_alert(res.message, "default");
-                        $rootScope.modal_up = false;
-                        $scope.adding_payment = false;
-                        $scope.form_disabled = false;
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
+            $scope.payment_obj.stripe_token = response.id;
+            $scope.pay_payment('pay');
         }
     }
 
-    $scope.new_payment = function() {
-        if ($scope.price == 0.00) {
-            if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-            else {
-                dashFactory.payContest($scope.adding_payment.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                            $route.reload();
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
-            }
-        } else {
+    $scope.pay_payment = function(payment_type) {
+        if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code) {
+            $scope.set_alert("Please enter a voucher code", "error");
+            return;
+        }
+
+        payment_type = (payment_type) ? payment_type : 'old';
+        $scope.payment_obj.payment_type = payment_type;
+        if (payment_type == 'new') {
             // This identifies your website in the createToken call below
             Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
             var $form = $('#payment-form');
-
             // Disable the submit button to prevent repeated clicks
             $scope.form_disabled = true;
-
             Stripe.card.createToken($form, stripeResponseHandler);
-        }
-    }
-
-    $scope.old_payment = function() {
-        if ($scope.price == 0.00) {
-            if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-            else {
-                dashFactory.payContest($scope.adding_payment.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                            $route.reload();
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
-            }
-        } else {
-            if (!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
-            else {
-                dashFactory.payContest($scope.adding_payment.contest.id, { source_id: $scope.passing_method, voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                            $route.reload();
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
+            return;
+        } else if (payment_type == 'old') {
+            if (!$scope.payment_obj.passing_method) {
+                $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
+                return;
             }
         }
-    }
 
-    $scope.use_voucher = function() {
-        if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-        else {
-            dashFactory.voucherValid($scope.voucher_code).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.price = res.data.price;
-                        $scope.reduction = res.data.discount;
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
-        }
-    }
-
-    $scope.voucher_payment = function() {
-        if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-        else {
-            dashFactory.payContest($scope.adding_payment.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.set_alert(res.message, "default");
-                        $rootScope.modal_up = false;
-                        $scope.adding_payment = false;
-                        $route.reload();
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
-        }
+        dashFactory.payContest($scope.payment_obj.contest_id, $scope.payment_obj).success(function(res) {
+            if (res.http_status_code == 200) {
+                if (res.success) {
+                    $scope.set_alert(res.message, "default");
+                    $rootScope.modal_up = false;
+                    $scope.adding_payment = false;
+                    $route.reload();
+                } else $scope.set_alert(res.message, "default");
+            } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
+            else $scope.check_code(res.http_status_code);
+        });
     }
 
     $scope.select_current = function(pass) {
-        $scope.passing_method = pass;
+        $scope.payment_obj.passing_method = pass;
     }
 
     $scope.set_contest_live = function(contest) {
@@ -267,6 +252,14 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);
         });
+    }
+
+    $scope.grab_checked_submission = function() {
+        var tmp = [];
+        $("input:checked").each(function() {
+            tmp.push($(this).val());
+        });
+        return tmp;
     }
 
 })

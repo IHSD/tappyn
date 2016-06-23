@@ -63,7 +63,7 @@ class Companies extends CI_Controller
 
         // get follow
         $company->follows = $this->db_test->select('COUNT(*) as count')->from('follows')->where('following', $cid)->get()->row()->count;
-        $user_follows = $this->db_test->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
+        $user_follows     = $this->db_test->select('*')->from('follows')->where(array('following' => $cid, 'follower' => $this->ion_auth->user()->row()->id))->get();
         if ($user_follows->num_rows() == 0) {
             $company->user_may_follow = true;
         } else {
@@ -87,16 +87,16 @@ class Companies extends CI_Controller
 
         $contests = $this->db->select('*')->from('contests')->where(array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'paid' => 1,
-            'owner' => $cid,
+            'paid'         => 1,
+            'owner'        => $cid,
         ))->get()->result();
         foreach ($contests as $contest) {
             if ($contest->stop_time > date('Y-m-d H:i:s')) {
                 $contest->status = 'active';
-                $contest->link = 'contest';
+                $contest->link   = 'contest';
             } else {
                 $contest->status = 'ended';
-                $contest->link = 'ended';
+                $contest->link   = 'ended';
             }
             $contest->submission_count = $this->db->select('COUNT(*) as count')->from('submissions')->where('contest_id', $contest->id)->get()->row()->count;
         }
@@ -120,7 +120,7 @@ class Companies extends CI_Controller
         } else if ($this->input->get('type') === 'in_progress') {
             $this->contest->where(array(
                 'start_time <' => date('Y-m-d H:i:s'),
-                'stop_time >' => date('Y-m-d H:i:s'),
+                'stop_time >'  => date('Y-m-d H:i:s'),
             ));
         }
 
@@ -139,16 +139,17 @@ class Companies extends CI_Controller
             }
             foreach ($contests as $contest) {
                 $contest->submission_count = $this->contest->submissionsCount($contest->id);
-                $contest->views = $this->contest->views($contest->id);
-                $contest->votes = $this->vote->select("COUNT(*) as count")->where('contest_id', $contest->id)->fetch()->row()->count;
-                $share_data = $this->submission->select('SUM(shares) as shares, SUM(share_clicks) as share_clicks')->where('contest_id', $contest->id)->fetch()->row();
-                $contest->shares = $share_data->shares;
-                $contest->share_clicks = $share_data->share_clicks;
-                $contest->status = $this->contest->get_status($contest);
+                $contest->views            = $this->contest->views($contest->id);
+                $contest->votes            = $this->vote->select("COUNT(*) as count")->where('contest_id', $contest->id)->fetch()->row()->count;
+                $share_data                = $this->submission->select('SUM(shares) as shares, SUM(share_clicks) as share_clicks')->where('contest_id', $contest->id)->fetch()->row();
+                $contest->shares           = $share_data->shares;
+                $contest->share_clicks     = $share_data->share_clicks;
+                $contest->status           = $this->contest->get_status($contest);
             }
             $this->responder->data(
                 array(
                     'contests' => $contests,
+                    'profile'  => $this->user->profile($this->ion_auth->user()->row()->id),
                 )
             )->respond();
         } else {
@@ -164,16 +165,16 @@ class Companies extends CI_Controller
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = array(
-                'logo_url' => $this->input->post('logo_url'),
-                'mission' => $this->input->post('mission'),
-                'extra_info' => $this->input->post('extra_info'),
-                'name' => $this->input->post('name'),
-                'company_email' => $this->input->post('company_email'),
-                'company_url' => $this->input->post('company_url'),
-                'facebook_url' => $this->input->post('facebook_url'),
+                'logo_url'       => $this->input->post('logo_url'),
+                'mission'        => $this->input->post('mission'),
+                'extra_info'     => $this->input->post('extra_info'),
+                'name'           => $this->input->post('name'),
+                'company_email'  => $this->input->post('company_email'),
+                'company_url'    => $this->input->post('company_url'),
+                'facebook_url'   => $this->input->post('facebook_url'),
                 'twitter_handle' => $this->input->post('twitter_handle'),
-                'different' => $this->input->post('different'),
-                'summary' => $this->input->post('summary'),
+                'different'      => $this->input->post('different'),
+                'summary'        => $this->input->post('summary'),
             );
             if ($this->user->saveProfile($this->ion_auth->user()->row()->id, $data)) {
                 $this->responder->data(array('profile' => $this->user->profile($this->ion_auth->user()->row()->id)))->message("Profile successfully updated")->respond();
@@ -326,7 +327,7 @@ class Companies extends CI_Controller
                     // Update the customer with the new payment method, and get the source id
                     if ($this->stripe_customer_id) {
                         $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
-                        $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, null, $amount);
+                        $charge   = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, null, $amount);
                     }
                     // We need to create a customer, save the payment method, and charge them accordingly
                     else {
@@ -357,7 +358,7 @@ class Companies extends CI_Controller
         // Check if charge was succesful and handle accordingly
         if ($charge !== false) {
             $start_time = date('Y-m-d H:i:s');
-            $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
             $this->contest->update($contest_id, array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time));
 
             $this->responder->message(
@@ -379,10 +380,10 @@ class Companies extends CI_Controller
 
             // We find any users who have submitted to one of this companies previous contests,
             // anybody who is following this contest, and anybody who has followed this interest
-            $cids = array();
-            $uids = array();
+            $cids     = array();
+            $uids     = array();
             $industry = $contest->industry;
-            $owner = $this->ion_auth->user()->row()->id;
+            $owner    = $this->ion_auth->user()->row()->id;
             $contests = $this->db->select('*')->from('contests')->where('owner', $owner)->get();
             foreach ($contests->result() as $contest) {
                 $cids[] = $contest->id;

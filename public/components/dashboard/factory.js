@@ -113,5 +113,15 @@ tappyn.factory('dashFactory', function($http) {
             data: $.param(id)
         })
     }
+    fact.getPrice = function(obj) {
+        return $http({
+            method: 'POST',
+            url: 'api/v1/vouchers/get_price',
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            },
+            data: $.param(obj)
+        })
+    }
     return fact;
 })
