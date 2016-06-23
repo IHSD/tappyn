@@ -32,4 +32,19 @@ class Ad_model extends MY_Model
     {
         return $this->db->select("*")->from("ads")->where('done', '0')->where('end_time <', time())->limit(5)->order_by('id', 'asc')->get()->result();
     }
+
+    public function get_undone($contest_id)
+    {
+        return $this->db->select("*")->from("ads")->where('done', '0')->where('contest_id', $contest_id)->order_by('id', 'asc')->get()->result();
+    }
+
+    public function is_testing_status($contest_id)
+    {
+        foreach ($this->select_by_contest_id($contest_id)->result() as $ad) {
+            if ($ad->done == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

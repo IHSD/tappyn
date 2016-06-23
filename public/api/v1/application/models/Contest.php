@@ -12,6 +12,9 @@ class Contest extends MY_Model
         $this->table = 'contests';
         $this->order_by = 'contests.id';
         $this->order_dir = 'desc';
+        $this->load->model('ad_model');
+        $this->config->load('secrets');
+        $this->load->library('payout');
     }
 
     public function log_impression($cid, $uid = null)
@@ -235,5 +238,26 @@ class Contest extends MY_Model
             return false;
         }
         return $this->db->where('id', $id)->delete('contests');
+    }
+
+    public function get_status($contest)
+    {
+        $status = 'live';
+        if ($contest->paid == 0) {
+            $status = 'draft';
+        } else if ($this->payout->exists(array('contest_id' => $contest->id))) {
+            $status = 'purchased';
+        } else if ($contest->submission_count >= $contest->submission_limit) {
+            $status = 'pending_purchase';
+        } else if ($contest->stop_time < date('Y-m-d H:i:s')) {
+            if ($this->ad_model->is_testing_status($contest->id)) {
+                $status = 'testing';
+            } else {
+                $status = 'pending_purchase';
+            }
+        } else if ($contest->start_time > date('Y-m-d H:i:s')) {
+            $status = 'scheduled';
+        }
+        return $status;
     }
 }
