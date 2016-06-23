@@ -272,8 +272,8 @@
 
                 </div>
                 <div class='col-xs-12'>
-                    <!-- TODO: platform & objective not working -->
-                    <h3 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</h3></div>
+                    <!-- TODO: platform, objective & status not working -->
+                    <h3 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}} ({{contest.status | capUnderscore}})</h3></div>
                 <div class='col-sm-4 hidden-xs'>
                     <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
                         <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
