@@ -20,5 +20,10 @@
     <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
 </div>
 <div class='text-center contest-winner-select'>
-    <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button>
+  <!-- TODO: remember to change "select-contest-id" to the real contest id -->
+    <!-- <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button> -->
+    <div class="checkbox-container">
+      <input type="checkbox" name="name" value="" id="select-contest-id">
+      <label for="select-contest-id"><span class="glyphicon glyphicon-ok"></span></label>
+    </div>
 </div>

@@ -114,6 +114,8 @@
         </div>
       </div>
     </div>
+
+    <!-- TODO: remove confirm winner modal if not needed! -->
     <div class='modal_actions col-xs-12' ng-show='confirm_winner.show'>
         <div class='panel modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4'>
             <div class='panel-body '>
@@ -155,8 +157,9 @@
         </div>
     </div>
 </div>
+
 <div class='row'>
-    <div ng-if='view == "table"' class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
+    <div class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
         <div class='col-xs-12' ng-if='user.type == "company"'>
             <div class='col-xs-12'>
                 <div class="round-avatar"><img src="public/img/avatar.png" alt=""></div>
@@ -215,14 +218,14 @@
             <table ng-show='view == "table"' class='table table-hover' style='border-radius:5px;background:#fff;'>
                 <thead>
                     <tr>
-                        <td class='text-center' style='width: 75px;'>Actions</td>
+                        <!-- <td class='text-center' style='width: 75px;'>Actions</td> -->
                         <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign</td>
                         <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
                         <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads</td>
                     </tr>
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
-                    <td class='text-center'>
+                    <!-- <td class='text-center'>
                         <div uib-dropdown>
                             <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
                             <ul uib-dropdown-menu role="menu">
@@ -233,16 +236,16 @@
                                 <li ng-if='contest.status == "completed"' role='menuitem'><a ng-click='view_pcp(contest.id)'>View Winner</a></li>
                             </ul>
                         </div>
-                    </td>
+                    </td> -->
                     <td>
-                        <a href='/contest/{{contest.id}}' style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
                         <small>
-              <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
-              <span ng-if='contest.status == "draft"'>No start : Draft</span> -
-              <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
-              <span ng-if='contest.status == "draft"'>No stop : Draft</span>
-            </small>
+                          <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"'>No start : Draft</span> -
+                          <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"'>No stop : Draft</span>
+                        </small>
                     </td>
                     <td>{{contest.status | capUnderscore}}</td>
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
@@ -250,10 +253,24 @@
             </table>
             <div ng-show='view == "winner"'>
                 <div class='col-xs-12'>
-                    <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
+                  <div class="row">
+                    <!-- TODO: only show ab test & purchase when submissions full -->
+                    <div class="col-xs-6">
+                      <button class='btn btn-oj' ng-click='' style='margin-right: 10px;'>A/B Test</button>
+                      <button class='btn btn-oj' ng-click=''>Purchase</button>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                      <!-- TODO: contest.id not working -->
+                      <a class='btn btn-oj' href='/edit/{{contest.id}}'  style='margin-right: 10px;'>View Campaign</a>
+                      <a class='btn btn-oj' href='/edit/{{contest.id}}'  style='margin-right: 10px;'>Edit Campaign</a>
+                      <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
+                    </div>
+                  </div>
+
                 </div>
                 <div class='col-xs-12'>
-                    <h3 class='text-center'>Choose a winner</h3></div>
+                    <!-- TODO: platform & objective not working -->
+                    <h3 class='text-center'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</h3></div>
                 <div class='col-sm-4 hidden-xs'>
                     <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
                         <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
