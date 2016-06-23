@@ -1,22 +1,28 @@
-<div class='submission-text'>
-<div class='col-xs-12 text-left'>
-	<span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{submission.contest.platform | capitalize}}
+<div class='contest-image'>
+    <img ng-src='{{submission.attachment}}'>
 </div>
-<div class='col-xs-12' style='margin-top:15px;'>
-	<div class="contest-content">
-		<h4 style='color:#333' ng-show='submission.link_explanation'>{{submission.link_explanation}}<br></h4>
-	    <h4 style='color:#333' ng-show='submission.text'>{{submission.text}}</h4>
-	</div>
+<div class='contest-company text-left'>
+    <span class='company-name'>from {{user.first_name}} &#8226; {{submission.contest.platform | capitalize}}</span>
 </div>
-<div class='col-xs-12' style='margin-bottom:10px;'>
-	<img style='max-width:100%' ng-src='{{submission.attachment}}'>
+<div class='contest-entry text-left'>
+    <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
+    <h4 ng-show='submission.link_explanation'>{{submission.link_explanation}}<br></h4>
+    <h4 ng-show='submission.text'>{{submission.text}}</h4>
+    <div class='contest-upvotes disable-click'>
+        <span class='glyphicon glyphicon-heart'></span> {{submission.votes | number}}
+    </div>
 </div>
-<div class='col-xs-12'><h3 style='color:#ff5c00;' class='text-left' ng-show='submission.headline'>{{submission.headline}}</h3></div>
-<div class='col-xs-12'><h5 class='text-left'>- {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5></div>
-<div class='col-xs-12 text-center' style='border-top:solid #333 1px;padding:0;'>
-	{{submission.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='submission.votes != 1'>s</span>
+<div class='contest-winner text-left'>
+    <div class='avatar'>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
+    </div>
+    <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
 </div>
-</div>
-<!-- Generate a select as winner button if campaign is over and user owns contest -->
-<div class='text-center' style='padding-top: 10px'><button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button></div>
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
+    <!-- <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button> -->
+    <div class="checkbox-container">
+        <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
+        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok"></span></label>
+    </div>
 </div>
