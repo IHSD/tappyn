@@ -590,8 +590,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     if ($scope.registration.type != "company") {
                       $location.path("/contests");
                     }
-                    if ($scope.registration.type == "company") {
-                      $location.path("/company")
+                    else ($scope.registration.type == "company") {
+                      $location.path("/company");
                     }
                     $scope.registration = { show: false, type: '', object: '' };
                 } else $scope.set_alert(response.message, "default");
