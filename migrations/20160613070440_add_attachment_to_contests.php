@@ -40,8 +40,5 @@ class AddAttachmentToContests extends AbstractMigration
         if (!$contests->hasColumn('tone_of_voice_box')) {
             $contests->addColumn('tone_of_voice_box', 'string', array('limit' => 100, 'null' => true, 'default' => null))->update();
         }
-        if (!$contests->hasColumn('additional_info_box')) {
-            $contests->addColumn('additional_info_box', 'string', array('limit' => 100, 'null' => true, 'default' => null))->update();
-        }
     }
 }

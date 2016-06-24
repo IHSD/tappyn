@@ -256,10 +256,6 @@ class Contests extends CI_Controller
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
-            $additional_info_box = $this->input->post('additional_info_box');
-            if (is_array($additional_info_box)) {
-                $additional_info_box = implode(',', $additional_info_box);
-            }
             // Do some preliminary formatting
             $data = array(
                 'tone_of_voice_box' => $tone_of_voice_box,

@@ -38,9 +38,9 @@
                     <h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
 										<h3 style='margin-bottom: 0;'>What We're Looking For</h3>
-                  
-                    <p><span ng-repeat="additional_info_box in contest.additional_info_box">{{additional_info_boxes[additional_info_box]}}</span></p>
-
+                    <p ng-if='contest.additional_info'>
+                        {{contest.additional_info}}
+                    </p>
 									</div>
                     <div class='row'>
                         <div class="col-md-12 col-xs-12 text-center">
