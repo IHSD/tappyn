@@ -48,6 +48,7 @@ class Contest extends MY_Model
             $contest->location = explode(',', $contest->location);
             $contest->industry = explode(',', $contest->industry);
             $contest->tone_of_voice_box = explode(',', $contest->tone_of_voice_box);
+            $contest->additional_info_box = explode(',', $contest->additional_info_box);
             return $contest;
         }
         return false;
