@@ -282,7 +282,6 @@
                         <td>
                             <p style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</p>
                             <!--<a href='/contest/{{contest.id}}' style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>-->
-                            <br>
                             <small>
 							<span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
 							<span ng-if='contest.status == "draft"'>No start : Draft</span> -
