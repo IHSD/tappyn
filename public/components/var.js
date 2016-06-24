@@ -39,7 +39,7 @@ tappyn.factory('tappyn_var', function() {
     ];
 
     items.additional_info_boxes = {
-        '1': 'Specific examples of how you would use our product',
+        '1': 'Specific examples of how you would use our product.',
         '2': 'Specific examples of how the current alternatives to our product fall short.',
         '3': 'Life after you have used our product.',
     };
