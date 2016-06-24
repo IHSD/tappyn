@@ -39,9 +39,9 @@ tappyn.factory('tappyn_var', function() {
     ];
 
     items.additional_info_boxes = {
-        '1': 'Photos of people who have downloaded your app and are using it in different situations.',
-        '2': 'Photos of situations where people need your product.',
-        '3': ' Photos of situations after people have used your product.',
+        '1': 'Specific examples of how you would use our product',
+        '2': 'Specific examples of how the current alternatives to our product fall short.',
+        '3': 'Life after you have used our product.',
     };
 
     items.locations = {
