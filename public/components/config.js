@@ -587,12 +587,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                         eventAction: 'Signup',
                         eventLabel: 'New User Email'
                     });
-                    if ($scope.registration.type != "company") {
+                    if ($scope.registration.type != "company")
                       $location.path("/contests");
-                    }
-                    else ($scope.registration.type == "company") {
+
+                    else ($scope.registration.type == "company") 
                       $location.path("/company");
-                    }
+
                     $scope.registration = { show: false, type: '', object: '' };
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
