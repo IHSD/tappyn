@@ -31,7 +31,7 @@ foreach($requirements as $req)
     <p><strong>Text :</strong> <?php echo $submission->text; ?></p>
 <?php endif; ?>
 <?php if(!is_null($submission->attachment)): ?>
-    <p><strong>Ad Image :</strong> You'll find your Ad image attached below</p>
+    <p><strong>Ad:</strong> You'll find your chosen ads attached below</p>
 <?php endif; ?>
 
 <br>
