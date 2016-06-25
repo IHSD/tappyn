@@ -22,7 +22,7 @@ $query_string['redirect'] = 'dashboard';
 <!-- Orange header -->
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
-<?php $query_string['redirect'] = 'contest/'.$contest->id; ?>
+<?php $query_string['redirect'] = 'ended/'.$contest->id; ?>
 <p style='text-align:left;margin:auto;width:600px'>See all of the purchased ads <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'guide'; ?>
