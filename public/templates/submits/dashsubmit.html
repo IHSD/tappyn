@@ -5,7 +5,7 @@
     <span class="company-name">from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}}</span>
 </div>
 <div class="contest-entry text-left">
-    <h3 ng-show="form_limit.headline">{{submission.headline}}</h3>
+    <h3 ng-show="submission.headline">{{submission.headline}}</h3>
     <h4 ng-show="submission.text">{{submission.text}}</h4>
     <h4 ng-show="submission.link_explanation">{{submission.link_explanation}}<br></h4>
     <div class="contest-upvotes disable-click" ng-click="upvote(submission)">
@@ -23,4 +23,3 @@
 <div class="text-center contest-winner-select" ng-if="submission.payout" style="border-top:none;">
     <button ng-click="claim_winnings(submission.payout.id)" class="btn btn-oj">Claim Winnings</button>
 </div>
- 
