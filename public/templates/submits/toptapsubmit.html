@@ -42,6 +42,6 @@
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span class='winner-tag'>Tapped</span>
-    <span data-toggle="modal" class='contest-reward' href="#myModalnew" ng-if='!submission.ctr ' style="cursor:help;">${{submission.contest.prize}}</span>
-    <span data-toggle="modal" class='contest-reward' href="#myModalnew" ng-if='submission.ctr ' style="cursor:help;">${{submission.contest.prize}}-{{submission.ctr}}%</span>
+    <span class='contest-reward'>${{submission.contest.prize}}</span>
+    <span class='contest-reward' >${{submission.contest.prize}}-<span data-toggle="modal" class="contest-ctr" href="#myModalnew"  ng-if='submission.ctr' style="cursor:help;">{{submission.ctr}}%</span></span>
 </div>
