@@ -37,13 +37,6 @@ if(!isset($contest) ||
 <h4 style='text-align:center'><?php echo $company; ?></h4>
 
 <table style='max-width:500px' align='center'>
-  <?php if(!is_null($attachment)): ?>
-      <tr>
-          <td>
-              <img src="<?php echo $attachment; ?>">
-          </td>
-      </tr>
-  <?php endif; ?>
     <?php if(isset($headline)): ?>
     <tr>
         <td>
@@ -53,7 +46,13 @@ if(!isset($contest) ||
         </td>
     </tr>
     <?php endif; ?>
-
+    <?php if(!is_null($thumbnail_url)): ?>
+        <tr>
+            <td>
+                <img src="<?php echo $thumbnail_url; ?>">
+            </td>
+        </tr>
+    <?php endif; ?>
     <tr>
         <td>
             <p style='max-width:600px;text-align:justify;'>
