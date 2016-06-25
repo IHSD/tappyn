@@ -15,9 +15,9 @@ RewriteRule ^(.*)$ index.html [L]
 # https://tools.ietf.org/html/rfc7232#section-2.3
 
 # `FileETag None` doesn't work in all cases.
-<IfModule mod_headers.c>
-    Header unset ETag
-</IfModule>
+#<IfModule mod_headers.c>
+#Header unset ETag
+#</IfModule>
 
 FileETag None
 

@@ -20,7 +20,7 @@ $query_string['redirect'] = 'dashboard';
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We hope you’re doing well!</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your contest recently closed, and it’s time to Tapp your favorite ads.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your campaign recently closed, and it’s time to Tapp your favorite ads.</p><br>
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have been chosen. If you have questions, let us know. If you’re ready, select your favorite ads
 below!</p><br>
@@ -31,7 +31,7 @@ below!</p><br>
     </a>
 <p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t choose at least one ad within 3 days of your campaign closing, the submission with the highest CTR will be announced the winner. So don’t delay: select your favorite submission now, and keep the ball rolling!</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t choose at least one ad within 3 days of your campaign closing, the submission with the highest CTR will be chosen. So don’t delay: test your favorite ads now, and keep the ball rolling!</p><br>
 
 <!-- End Email Content -->
 
