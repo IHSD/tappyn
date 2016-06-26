@@ -14,7 +14,7 @@
         <img ng-if='!contest.company.logo_url' src="favicon.ico">
         <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
     </div>
-    <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
+    <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
 <div class='contest-entry text-left'>
     <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
@@ -26,11 +26,12 @@
 </div>
 <div class='contest-winner text-left'>
     <div class='avatar'>
-        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
-    <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <span class='winner-tag'>Tapped</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
 </div>
  <script type="text/javascript">
  var addthis_config = addthis_config || {};

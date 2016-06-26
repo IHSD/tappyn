@@ -2,23 +2,24 @@
     <img ng-src="{{submission.attachment}}">
 </div>
 <div class="contest-company text-left">
-    <span class="company-name">from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}}</span>
+  <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
-<div class="contest-entry text-left">
-    <h3 ng-show="submission.headline">{{submission.headline}}</h3>
-    <h4 ng-show="submission.text">{{submission.text}}</h4>
-    <h4 ng-show="submission.link_explanation">{{submission.link_explanation}}<br></h4>
-    <div class="contest-upvotes disable-click" ng-click="upvote(submission)">
-        <span class="glyphicon glyphicon-heart"></span> {{submission.votes | number}}
-    </div>
+<div class='contest-entry text-left'>
+  <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
+  <h4 ng-show='submission.link_explanation'>{{submission.link_explanation}}<br></h4>
+  <h4 ng-show='submission.text'>{{submission.text}}</h4>
+  <div class='contest-upvotes' ng-click='upvote(submission)'>
+      <span class='glyphicon glyphicon-heart'></span> {{submission.votes | number}}
+  </div>
 </div>
-<div class="contest-winner text-left">
-    <div class="avatar">
-        <img ng-src="{{submission.avatar_url}}" src="public/img/avatar.png" alt=" ">
-    </div>
-    <h5 class="winner-name"> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}</h5>
-    <span data-toggle="modal" data-dismiss="modal" data-backdrop="false" href="#myModaldash" class="contest-ctr" ng-if="!submission.ctr" style="cursor:help;">-</span>
-    <span data-toggle="modal" data-dismiss="modal" data-backdrop="false" href="#myModaldash" class="contest-ctr" ng-if="submission.ctr" style="cursor:help;">{{submission.ctr}}%</span>
+<div class='contest-winner text-left'>
+  <div class='avatar'>
+      <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
+  </div>
+  <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+  <span class='winner-tag'>Tapped</span>
+  <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+  <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
 </div>
 <div class="text-center contest-winner-select" ng-if="submission.payout" style="border-top:none;">
     <button ng-click="claim_winnings(submission.payout.id)" class="btn btn-oj">Claim Winnings</button>
