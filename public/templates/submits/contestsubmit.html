@@ -32,18 +32,6 @@
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
 </div>
-
-  <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
- <script>
- $('#myModalnew').on('show.bs.modal', function () {
-    $('.container').addClass('blur');
- })
-
- $('#myModalnew').on('hide.bs.modal', function () {
-    $('.container').removeClass('blur');
- })
- </script>
  <script type="text/javascript">
  var addthis_config = addthis_config || {};
  addthis_config.data_track_addressbar = false;
@@ -56,51 +44,3 @@
      }
  }
  </script>
-  <style>
-  .blur {
-      -webkit-filter: blur(5px) grayscale(20%);
-  }
-  .modal-backdrop {
-    background-color: #fff;
-    opacity: 0.5;
-  }
-  @media (min-width: 768px)
-  .modal-content {
-    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
-    box-shadow: 0 1px 5px rgba(0,0,0,.5);
-  }
-  .modal-header {
-      border-left: 1px solid #ccc;
-      border-top: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      border-top-left-radius: 6px;
-      border-top-right-radius: 6px;
-  }
-  .modal-body-sub {
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
-  }
-  .modal-content {
-    background-color: #f4f7f9;
-    border: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-  .modal-dialog {
-    color: #526880;
-  }
-  .modal-footer-sub {
-     border-top: none;
-     border-left: 1px solid #ccc;
-     border-right: 1px solid #ccc;
-     border-bottom-left-radius: 6px;
-     border-bottom-right-radius: 6px;
-     border-bottom: 1px solid #ccc;
-     padding-bottom: 10px;
-     padding-right:10px;
-     padding-top:30px;
-  }
-  </style>
