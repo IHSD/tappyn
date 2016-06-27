@@ -82,6 +82,48 @@
                     </div>
                 </div>
             </div>
+            <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
+              <div class='row' style='padding-bottom:10px;' id='submishes'>
+                  <div class='col-md-3 visible-md visible-lg'>
+                      <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-md-3 visible-md visible-lg'>
+                      <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-md-3 visible-md visible-lg'>
+                      <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-md-3 visible-md visible-lg'>
+                      <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-sm-4 visible-sm'>
+                      <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-sm-4 visible-sm'>
+                      <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-sm-4 visible-sm'>
+                      <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
+                  <div class='col-xs-12 visible-xs'>
+                      <div class="contest-box row" ng-repeat='submission in submissions'>
+                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                      </div>
+                  </div>
         </div>
     </div>
 </div>
