@@ -11,15 +11,5 @@ tappyn.factory("endedFactory", function($http){
 		})
 	}
 
-	fact.submitTo = function(id, submission){
-		return $http({
-			method : 'POST',
-			url : 'api/v1/contests/'+id+'/submissions',
-			headers : {
-				'Content-type' : 'application/x-www-form-urlencoded'
-			},
-			'data' : $.param(submission)
-		});
-	}
 	return fact;
 })
