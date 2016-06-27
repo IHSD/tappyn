@@ -287,11 +287,6 @@
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:1px;">Locations</label>
                     <div class="col-sm-4">
                         <div class='form-group'>
-                            <h4 style="font-size:14px;"><strong>The audience and locations engagement</strong></h4>
-                            <select ng-model="contest.location_box" ng-init="contest.location_box = location_boxes[0]" ng-options="item as item.text for item in location_boxes track by item.id" class='form-control'>
-                            </select>
-                        </div>
-                        <div class='form-group'>
                             <h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>
                             <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:380px;">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
@@ -336,7 +331,7 @@
                 <div class='row'>
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Interest</label>
                     <div class="col-sm-4 form-group">
-                        <h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>
+                        <h4 style="font-size:14px;"><strong>Select the interest category that your target audience most closely shares.</strong></h4>
                         <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
@@ -359,7 +354,7 @@
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <textarea class='form-control' style="width:380px;" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
+                            <textarea class='form-control' style="width:380px;" maxlength="140" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
                         </div>
                     </div>
                 </div>
@@ -367,7 +362,7 @@
                     <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
                     <div class="col-sm-4">
                         <div class="form-group" ng-init="contest.attachment = ''">
-                            <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
+                            <h4 style="font-size:14px;"><strong>Upload the photo you plan on using in your ad.</strong></h4>
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                         </div>
                         <div class="row form-group" ng-show="new_img">
