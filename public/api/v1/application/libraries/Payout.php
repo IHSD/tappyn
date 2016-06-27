@@ -105,4 +105,14 @@ class Payout
     {
         return $this->errors;
     }
+
+    public function get_submission_ids_by_cid($cid)
+    {
+        $result  = array();
+        $payouts = $this->db->select('submission_id')->from('payouts')->where('contest_id', $cid)->get()->result();
+        foreach ($payouts as $payout) {
+            $result[] = $payout->submission_id;
+        }
+        return $result;
+    }
 }

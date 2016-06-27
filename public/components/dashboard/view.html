@@ -4,11 +4,8 @@
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
                 <h3><strong>Campaign Payment</strong></h3>
-                <!-- TODO for Onion: -->
-                <!-- if ab test show [ A/B Test $123.00 for 2 Days ] -->
-                <!-- <h4>A/B Test $123.00 for 2 Days</h4> -->
-                <!-- if purchase show [ Purchase 2 Ads ] -->
-                <!-- <h4>Purchase 2 Ads</h4> -->
+                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} for {{payment_obj.ab_days}} Days</h4>
+                <h4 ng-show="payment_obj.pay_for=='purchase'">Purchase {{payment_obj.submission_ids.length}} Ads</h4>
             </div>
             <div class="modal_bot">
                 <div class="voucher-group row" ng-show='voucher.visible == "1"'>
@@ -118,31 +115,31 @@
     </div>
     <div class='modal_actions col-sm-12' ng-show='now_model == "confirm_ab"'>
         <div class="payment_modal">
-          <div class="modal_top text-center">
-              <div class='close_circle' ng-click='set_model()'>x</div>
-              <h3><strong>A/B Testing</strong></h3>
-              <h4>You’ve selected {{payment_obj.submission_ids.length}} submissions.</h4>
-          </div>
-          <div class="modal_bot">
-            <div class="form-group">
-              <label for="ab-aday" class="control-label">How much would you like to spend a day?</label>
-              <div class="input-group">
-                <div class="input-group-addon">$</div>
-                <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
-                <div class="input-group-addon">.00</div>
-              </div>
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h3><strong>A/B Testing</strong></h3>
+                <h4>You’ve selected {{payment_obj.submission_ids.length}} submissions.</h4>
             </div>
-            <div class="form-group">
-              <label for="ab-days">How many days would you like to run the ads?</label>
-              <div class="input-group">
-                <input type="number" ng-model="payment_obj.ab_days" id="ab-days" class="form-control">
-                <div class="input-group-addon">days</div>
-              </div>
+            <div class="modal_bot">
+                <div class="form-group">
+                    <label for="ab-aday" class="control-label">How much would you like to spend a day?</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">$</div>
+                        <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
+                        <div class="input-group-addon">.00</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="ab-days">How many days would you like to run the ads?</label>
+                    <div class="input-group">
+                        <input type="number" ng-model="payment_obj.ab_days" id="ab-days" class="form-control">
+                        <div class="input-group-addon">days</div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-12">Confirm</button>
+                </div>
             </div>
-            <div class="form-group row">
-              <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-12">Confirm</button>
-            </div>
-          </div>
         </div>
     </div>
 </div>
