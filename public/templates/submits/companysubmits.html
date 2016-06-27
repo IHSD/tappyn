@@ -17,10 +17,11 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <!-- TODO for Onion: show [ Tapped ] for winner entry -->
+    <!-- <span class='winner-tag'>Tapped</span> -->
     <span class='contest-ctr' ng-show='submission.ctr'>{{submission.ctr}}%</span>
 </div>
 <div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
-    <!-- <button ng-click='confirming_winner(submission)' class='btn btn-oj'>Choose Winner</button> -->
     <div class="checkbox-container">
         <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
         <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok"></span></label>
