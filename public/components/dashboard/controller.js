@@ -132,7 +132,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.payment_obj.contest_id = contest.id;
         $scope.payment_obj.submission_ids = $scope.grab_checked_submission();
         if ($scope.payment_obj.submission_ids.length == 0) {
-            $scope.set_alert("please check one at least", "error");
+            $scope.set_alert("Please select at least one submission", "error");
             return;
         }
         if (type == 'confirm_ab') {
@@ -141,7 +141,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         }
 
         if (type == 'ab' && (!parseFloat($scope.payment_obj.ab_aday) || parseFloat($scope.payment_obj.ab_aday) <= 0.0 || !parseInt($scope.payment_obj.ab_days) || parseInt($scope.payment_obj.ab_days) <= 0)) {
-            $scope.set_alert("day and aday must > 0", "error");
+            $scope.set_alert("Campaign has to run at least more than 1 day and the amount cannot be $0", "error");
             return;
         }
 
