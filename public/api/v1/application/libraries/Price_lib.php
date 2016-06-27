@@ -74,6 +74,7 @@ class Price_lib
             } else if ($post['pay_for'] == 'ab') {
                 $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
             }
+            $result['origin_price'] = number_format($price, 2, '.', '');
 
             if ($voucher) {
                 if ($post['go_pay'] === true && !$this->vouchers_library->redeem($voucher->id, $post['contest_id'])) {
@@ -91,10 +92,10 @@ class Price_lib
                 if ($price < 000) {
                     $price = 00.00;
                 }
-                $result['discount'] = $discount;
+                $result['discount'] = number_format($discount, 2, '.', '');
             }
 
-            $result['price']   = $price;
+            $result['price']   = number_format($price, 2, '.', '');
             $result['success'] = true;
         } catch (Exception $e) {
             $result['success'] = false;

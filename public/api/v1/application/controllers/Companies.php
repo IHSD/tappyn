@@ -296,6 +296,7 @@ class Companies extends CI_Controller
             $charge = array();
         }
 
+        $post['origin_price'] = $data['origin_price'];
         // Check if charge was succesful and handle accordingly
         if ($charge !== false) {
             if ($post['pay_for'] == 'purchase') {
@@ -433,7 +434,8 @@ class Companies extends CI_Controller
     private function ab($post)
     {
         $this->load->library('ad_lib');
-        $content = serialize($post);
+        $post['info'] = 'contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for a/b test (' . $post['ab_aday'] . ' aday for ' . $post['ab_days'] . ' days) (origin price:' . $post['origin_price'] . ') ';
+        $content      = serialize($post);
         if (!$this->ad_lib->go_test_by_company($post['contest_id'], $post['submission_ids'], $content)) {
             $this->responder->fail("An unknown error occured ab test")->code(500)->respond();
         } else {
