@@ -347,9 +347,9 @@
                     <div class="col-sm-4">
                         <div class="form-group" ng-init="contest.tone_of_voice_box = []">
                             <h4 style="font-size:14px;"><strong>Select a tone of voice that represents your brand:<br>(please choose one)</strong></h4>
-                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
+                            <div class="radio" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
+                                    <input type="radio" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
                                 </label>
                             </div>
                         </div>
