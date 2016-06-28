@@ -2493,35 +2493,35 @@ footer {
 @media only screen and (max-device-width:480px){
        /* styles for mobile browsers smaller than 480px; (iPhone) */
        .howitworks {
-           background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+           background: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg') no-repeat;
            background-size: cover;
        }
     }
 
 @media (min-width: 641px) and (max-width: 1024px) {
     .howitworks {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .howitworks {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .howitworks {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 /** Testimonials **/
 
 .testimonials {
-    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg');
+    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg');
     background-size: cover;
     background-color: #EEEEEE;
     height: 400px;
