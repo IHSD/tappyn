@@ -1,80 +1,86 @@
-<div class=container>
-    <div class="row content-padding">
-        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-            <div class="row launch-page-box">
-                <h3 class=text-center>Edit Campaign</h3>
-                <form class=form ng-submit=edit(contest)>
-                    <div class=row>
-                        <div class=col-sm-6>
-                            <label class=control-label ng-init="contest.min_age=18;contest.max_age=45">Age</label>
-                            <div class=form-group>
-                                <div class=pull-left>
-                                    <select class=form-control ng-model=contest.min_age ng-options="number as number for number in ages" type=text>
-                                        <option value="">Min Age</select>
+<div class='container'>
+    <div class='row content-padding'>
+        <div class='col-sm-8 col-sm-offset-2 col-xs-12'>
+            <div class='launch-page-box row'>
+                <h3 class='text-center'>Edit Contest</h3>
+                <form class='form' ng-submit='edit(contest)'>
+                    <div class='row'>
+                        <div class="col-sm-6">
+                            <label ng-init='contest.min_age=18;contest.max_age=45' class='control-label'>Age</label>
+                            <div class="form-group">
+                                <div class='pull-left'>
+                                    <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+                                        <option value=''>Min Age</option>
+                                    </select>
                                 </div>
-                                <h4 class="pull-left text-center" style="padding:0 10px">-</h4>
-                                <div class=pull-left>
-                                    <select class=form-control ng-model=contest.max_age ng-options="number as number for number in ages" type=text>
-                                        <option value="">Max Age</select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=col-sm-6>
-                            <label class=ontrol-label ng-init="contest.gender = 0">Gender</label>
-                            <div class=form-group>
-                                <div class=btn-group-sm data-toggle=buttons ng-init="contest.gender = 0" style=padding-top:5px>
-                                    <label class=btn ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
-                                        <input type=radio ng-model=contest.gender value=0> All Genders</label>
-                                    <label class=btn ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
-                                        <input type=radio ng-model=contest.gender value=1> Men</label>
-                                    <label class=btn ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
-                                        <input type=radio ng-model=contest.gender value=2> Women</label>
+                                <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
+                                <div class='pull-left'>
+                                    <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+                                        <option value=''>Max Age</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class=col-xs-12 ng-if="contest.use_attachment == 1">
-                        <label class=control-label>Ad Creative</label>
-                        <div class=form-group>
-                            <input type=file accept=image/* custom-on-change=image_cropper id=contest-photo>
-                            <div class=docs-preview ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                <div class=img-preview><img class=contest-img-edit id=contest-img-edit ng-src={{contest.attachment}}></div>
+                        <div class="col-sm-6">
+                            <label ng-init='contest.gender = 0' class='ontrol-label'>Gender</label>
+                            <div class="form-group">
+                                <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
+                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+                                        <input type='radio' ng-model='contest.gender' value='0'> All Genders
+                                    </label>
+                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+                                        <input type='radio' ng-model='contest.gender' value='1'> Men
+                                    </label>
+                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+                                        <input type='radio' ng-model='contest.gender' value='2'> Women
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class=col-xs-12>
-                        <label class=control-label>Tone Of Voice</label>
-                        <div class=form-group>
-                            <div class=checkbox ng-repeat="(key,value) in tone_of_voice_boxes">
+                    <!-- TODO for Onion, please remove this once done -->
+                    <div class="col-xs-12" ng-if="contest.use_attachment == 1">
+                        <label class='control-label'>Ad Creative</label>
+                        <div class="form-group">
+                            <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                <div class="img-preview"><img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <label class='control-label'>Tone Of Voice</label>
+                        <div class="form-group">
+                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
                                 <label>
-                                    <input type=checkbox ng-checked="contest.tone_of_voice_box.indexOf(key) != -1" ng-click=add_interest_image(key,contest.tone_of_voice_box)>{{value}}</label>
+                                    <input type="checkbox" ng-checked="contest.tone_of_voice_box.indexOf(key) != -1" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
+                                </label>
                             </div>
                         </div>
-                        <div class=form-group>
-                            <textarea class=form-control ng-model=contest.additional_info placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
+                        <div class="form-group">
+                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of photos you'd like to receive."></textarea>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12">
-                        <label class=control-label>Summary of product or service</label>
-                        <input ng-model=contest.summary class=form-control placeholder="Enter your short summary here">
+                    <div class='col-xs-12 form-group'>
+                        <label class='control-label'>Summary of product or service</label>
+                        <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
                     </div>
-                    <div class="form-group col-xs-12">
-                        <label class=control-label>Describe what makes you different (and better) than your competition.</label>
-                        <textarea class=form-control ng-model=contest.different placeholder="i.e., For every good purchase we donate the same industrial part to a developing country."
-                            rows=4></textarea>
+                    <div class='col-xs-12 form-group'>
+                        <label class='control-label'>Describe what makes you different (and better) than your competition.</label>
+                        <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
                     </div>
-                    <div class="col-xs-12 text-center">
-                        <button class="btn btn-oj" type=submit>Edit</button>
+                    <div class='col-xs-12 text-center'>
+                        <button class='btn btn-oj' type='submit'>Edit</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(function() {
-        $(".location-selection-edit-view").select2({
-            placeholder: "Add Locations"
-        })
-    })
+<script type="text/javascript">
+$(function() {
+    $(".location-selection-edit-view").select2({
+        placeholder: "Add Locations"
+    });
+});
 </script>
