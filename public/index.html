@@ -68,8 +68,8 @@
     <div class='container-fluid'>
         <div ng-include src="'templates/footer.html'" ng-hide='currentView == "/launch"'></div>
         <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error", "launch-error" : currentView == "/launch"}'>
-            <p class='hidden-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>
-            <p class='visible-xs text-center'>{{alert.message}} <span class='alert-closer' ng-click='close_alert()'>x</span></p>
+            <p class='hidden-xs text-center'><span ng-bind="alert.message"></span> <span class='alert-closer' ng-bind="alert_close_text" ng-click='close_alert()'></span></p>
+            <p class='visible-xs text-center'><span ng-bind="alert.message"></span> <span class='alert-closer' ng-bind="alert_close_text" ng-click='close_alert()'></span></p>
         </div>
     </div>
     <script src="app.js" defer></script>
