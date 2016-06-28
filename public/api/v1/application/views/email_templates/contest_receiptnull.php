@@ -16,7 +16,7 @@
                             </td>
 
                             <td style="padding: 5px;vertical-align: top;text-align: right;padding-bottom: 20px;">
-                                Contest #: <?php echo $contest->id; ?><br>
+                                Campaign #: <?php echo $contest->id; ?><br>
                                 Created: <?php echo date('F d, Y', strtotime($contest->created_at)); ?><br>
                             </td>
                         </tr>

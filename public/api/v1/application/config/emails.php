@@ -123,7 +123,7 @@ $config['email_program']['sign_up_conf']['additional_data'] = array();
 */
 $config['email_program']['contest_completed']['template'] = 'email_templates/contest_completed';
 $config['email_program']['contest_completed']['from'] = 'alek@tappyn.com';
-$config['email_program']['contest_completed']['subject'] = "Reminder: It’s time to select your favorite ad!";
+$config['email_program']['contest_completed']['subject'] = "We're just finishing up.";
 $config['email_program']['contest_completed']['query_string'] = array(
     'utm_source' => 'newsletter',
     'utm_medium' => 'email',
