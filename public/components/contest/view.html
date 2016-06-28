@@ -229,8 +229,8 @@
                     <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
-                    <h3 ng-if='submit.text.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
-                    <h3 ng-if='submit.text.length > 0'>{{submit.headline}}</h3>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
                     <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your ad text will be shown here</h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
                     <div class='contest-upvotes disable-click'>
@@ -238,8 +238,8 @@
                     </div>
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
-                    <h3 ng-if='submit.text.length == 0 && form_limit.headline'>Headline will be shown here.</h3>
-                    <h3 ng-if='submit.text.length > 0'>{{submit.headline}}</h3>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
                     <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your ad text will be shown here<br></h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
