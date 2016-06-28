@@ -225,18 +225,24 @@
                     </div>
                     <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
                 </div>
-                <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
-                    <h3 ng-if='submit.text.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
+                <div class='contest-entry text-left' ng-show='form_limit.headline'>
+                    <h3 ng-if='submit.text.length == 0 && form_limit.text'>Headline will be shown here.</h3>
                     <h3 ng-if='submit.text.length > 0'>{{submit.headline}}</h3>
-                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your first line will be shown here</h4>
-                    <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
+                </div>
+                <div class='contest-entry text-left' ng-show='form_limit.text'>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.line_2'>Your ad text will be shown here<br></h4>
+                    <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
                         <span class='glyphicon glyphicon-heart'></span> 0
                     </div>
                 </div>
-                <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
-                    <h3 ng-if='submit.text.length == 0 && form_limit.text'>Headline will be shown here.</h3>
-                    <h3 ng-if='submit.text.length > 0'>{{submit.headline}}</h3>
+                <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
+                    <h3 ng-if='submit.text.length == 0 && form_limit.card_title'>Head line will be shown here.</h3>
+                    <h3 ng-if='submit.text.length > 0'>{{submit.link_explanation}}</h3>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your first line will be shown here</h4>
+                    <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
+                </div>
+                <div class='contest-entry text-left' ng-show='form_limit.line_2'>
                     <h4 ng-if='submit.text.length == 0 && form_limit.line_2'>Your second line will be shown here<br></h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
