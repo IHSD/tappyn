@@ -299,6 +299,7 @@ class Companies extends CI_Controller
         $post['origin_price'] = $data['origin_price'];
         // Check if charge was succesful and handle accordingly
         if ($charge !== false) {
+            $this->load->library('slack');
             if ($post['pay_for'] == 'purchase') {
                 $this->select_winner($post);
             } else if ($post['pay_for'] == 'ab') {
@@ -393,6 +394,8 @@ class Companies extends CI_Controller
         if ($pid = $this->payout->create($cid, $sids)) {
             // Send the email congratulating the user
             // Tell the company they have successfully selected a winner!
+            $msg = '[payment][select_winner]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for select_winner (' . count($sids) . ' Ads) (origin price:' . $post['origin_price'] . ') ';
+            $this->slack->send($msg);
             $this->responder->message(
                 "winners have been chosen!"
             )->respond();
@@ -434,8 +437,9 @@ class Companies extends CI_Controller
     private function ab($post)
     {
         $this->load->library('ad_lib');
-        $post['info'] = 'contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for a/b test (' . $post['ab_aday'] . ' aday for ' . $post['ab_days'] . ' days) (origin price:' . $post['origin_price'] . ') ';
-        $content      = serialize($post);
+        $post['info'] = '[payment][ab_test]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for a/b test (' . $post['ab_aday'] . ' aday for ' . $post['ab_days'] . ' days) (origin price:' . $post['origin_price'] . ') ';
+        $this->slack->send($post['info']);
+        $content = serialize($post);
         if (!$this->ad_lib->go_test_by_company($post['contest_id'], $post['submission_ids'], $content)) {
             $this->responder->fail("An unknown error occured ab test")->code(500)->respond();
         } else {

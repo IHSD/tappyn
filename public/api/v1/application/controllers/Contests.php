@@ -26,18 +26,18 @@ class Contests extends CI_Controller
     public function index($type = 'all')
     {
         $gender = null;
-        $age = null;
+        $age    = null;
 
         if ($this->ion_auth->logged_in()) {
             $profile = $this->user->profile($this->ion_auth->user()->row()->id);
-            $gender = $profile->gender;
-            $age = $profile->age;
+            $gender  = $profile->gender;
+            $age     = $profile->age;
         }
 
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
+            'stop_time >'  => date('Y-m-d H:i:s'),
+            'paid'         => 1,
         );
 
         $has_more = false;
@@ -66,12 +66,12 @@ class Contests extends CI_Controller
             $this->params['industry'] = $this->input->get('industry');
         }
 
-        $config['base_url'] = base_url() . 'contests/index';
+        $config['base_url']   = base_url() . 'contests/index';
         $config['total_rows'] = $this->contest->count($this->params);
-        $config['per_page'] = ($this->input->get('per_page') ? $this->input->get('per_page') : 20);
+        $config['per_page']   = ($this->input->get('per_page') ? $this->input->get('per_page') : 20);
         $this->pagination->initialize($config);
-        $limit = $config['per_page'];
-        $offset = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
+        $limit    = $config['per_page'];
+        $offset   = $this->uri->segment(3) ? $this->uri->segment(3) : 0;
         $contests = $this->contest->fetchAll($this->params, 'start_time', 'asc', $limit, $offset, $sql_interests);
 
         if (($offset + $config['per_page']) < $config['total_rows']) {
@@ -79,11 +79,11 @@ class Contests extends CI_Controller
         }
         if ($contests !== false) {
             $this->responder->data(array(
-                'contests' => $contests,
+                'contests'   => $contests,
                 'total_rows' => $config['total_rows'],
-                'per_page' => (int) $config['per_page'],
-                'has_more' => $has_more,
-                'page' => $offset == 0 ? 1 : floor($offset / $config['per_page'] + 1),
+                'per_page'   => (int) $config['per_page'],
+                'has_more'   => $has_more,
+                'page'       => $offset == 0 ? 1 : floor($offset / $config['per_page'] + 1),
             ))->respond();
         } else {
             $this->responder->fail("An unknown error occured")->code(500)->respond();
@@ -98,8 +98,8 @@ class Contests extends CI_Controller
     {
         $this->params = array(
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
-            'paid' => 1,
+            'stop_time >'  => date('Y-m-d H:i:s'),
+            'paid'         => 1,
         );
 
         if (!$this->contest->where($this->params)->fetch()) {
@@ -109,9 +109,9 @@ class Contests extends CI_Controller
         $contests = $this->contest->result();
 
         foreach ($contests as $contest) {
-            $contest->votes = $this->vote->select('COUNT(*) as count')->where('contest_id', $contest->id)->fetch()->row()->count;
+            $contest->votes            = $this->vote->select('COUNT(*) as count')->where('contest_id', $contest->id)->fetch()->row()->count;
             $contest->submission_count = $this->contest->submissionsCount($contest->id);
-            $contest->company = $this->user->profile($contest->owner);
+            $contest->company          = $this->user->profile($contest->owner);
             unset($contest->company->stripe_customer_id);
         }
 
@@ -148,9 +148,9 @@ class Contests extends CI_Controller
             $this->contest->log_impression($cid, $this->ion_auth->user()->row()->id);
         }
         $this->analytics->track(array(
-            'event_name' => 'view_contest',
+            'event_name'  => 'view_contest',
             'object_type' => 'contest',
-            'object_id' => $cid,
+            'object_id'   => $cid,
         ));
     }
 
@@ -177,12 +177,12 @@ class Contests extends CI_Controller
         }
 
         if ($payout = $this->payout->exists(array('contest_id' => $contest_id))) {
-            $winner = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
-            $owner = $winner->owner;
+            $winner             = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
+            $owner              = $winner->owner;
             $winner->first_name = $this->ion_auth->user($owner)->row()->first_name;
-            $winner->last_name = $this->ion_auth->user($owner)->row()->last_name;
-            $winner->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
-            $contest->payout = true;
+            $winner->last_name  = $this->ion_auth->user($owner)->row()->last_name;
+            $winner->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
+            $contest->payout    = true;
             if ($contest->use_attachment == 1) {
                 $winner->attachment = $contest->attachment;
             }
@@ -237,9 +237,9 @@ class Contests extends CI_Controller
         if ($this->form_validation->run() == true) {
             $this->config->load('upvote');
             $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
-            $age = $this->input->post('age');
-            $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
-            $location = $this->input->post('location');
+            $age        = $this->input->post('age');
+            $gender     = $this->input->post('gender') ? $this->input->post('gender') : 0;
+            $location   = $this->input->post('location');
             if (is_array($location)) {
                 $location = implode(',', $location);
             }
@@ -258,34 +258,34 @@ class Contests extends CI_Controller
             }
 
             $start_time = date('Y-m-d H:i:s');
-            $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
+            $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
             // Do some preliminary formatting
             $data = array(
-                'paid' => 1,
-                'start_time' => $start_time,
-                'stop_time' => $stop_time,
+                'paid'                => 1,
+                'start_time'          => $start_time,
+                'stop_time'           => $stop_time,
 
-                'tone_of_voice_box' => $tone_of_voice_box,
-                'use_attachment' => 1,
-                'attachment' => $attachment_url,
+                'tone_of_voice_box'   => $tone_of_voice_box,
+                'use_attachment'      => 1,
+                'attachment'          => $attachment_url,
 
-                'location' => $location,
+                'location'            => $location,
                 'additional_info_box' => $this->input->post('additional_info_box'),
-                'location_box' => $location_box,
-                'summary' => $this->input->post('summary'),
-                'additional_info' => $this->input->post('additional_info'),
-                'different' => $this->input->post('different'),
-                'objective' => $this->input->post('objective'),
-                'platform' => $platform,
-                'gender' => $this->input->post('gender'),
-                'owner' => $this->ion_auth->user()->row()->id,
-                'min_age' => $this->input->post('min_age'),
-                'max_age' => $this->input->post('max_age'),
-                'industry' => $industry,
-                'emotion' => $this->input->post('emotion'),
-                'display_type' => $this->input->post('display_type'),
-                'submission_limit' => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
-                'prize' => $this->config->item('default_payout_per_contest'),
+                'location_box'        => $location_box,
+                'summary'             => $this->input->post('summary'),
+                'additional_info'     => $this->input->post('additional_info'),
+                'different'           => $this->input->post('different'),
+                'objective'           => $this->input->post('objective'),
+                'platform'            => $platform,
+                'gender'              => $this->input->post('gender'),
+                'owner'               => $this->ion_auth->user()->row()->id,
+                'min_age'             => $this->input->post('min_age'),
+                'max_age'             => $this->input->post('max_age'),
+                'industry'            => $industry,
+                'emotion'             => $this->input->post('emotion'),
+                'display_type'        => $this->input->post('display_type'),
+                'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
+                'prize'               => $this->config->item('default_payout_per_contest'),
             );
 
             $images = array();
@@ -307,12 +307,12 @@ class Contests extends CI_Controller
             $message = $update ? 'updated' : 'created';
             $this->responder->message("Contest successfully {$message}")->data(array('id' => $cid, 'attachment_url' => $attachment_url))->respond();
             $this->analytics->track(array(
-                'event_name' => "contest_creation",
+                'event_name'  => "contest_creation",
                 'object_type' => "contest",
-                'object_id' => $cid,
+                'object_id'   => $cid,
             ));
             $profile_data = array();
-            $profile = $this->ion_auth->profile();
+            $profile      = $this->ion_auth->profile();
             if (is_null($profile->mission)) {
                 $profile_data['mission'] = $this->input->post('audience');
             }
@@ -407,7 +407,7 @@ class Contests extends CI_Controller
             $this->vote->dole_out_points($submission->id);
 
             // We have to notify the winner they won, and all other users that it ended but they didnt win
-            $eid = $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_chosen');
+            $eid         = $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_chosen');
             $submissions = $this->db->select('users.*, submissions.id as sub_id, users.id as uid')->from('submissions')->join('users', 'submissions.owner = users.id', 'left')->where('contest_id', $contest->id)->get()->result();
             foreach ($submissions as $entry) {
                 if ($entry->sub_id == $this->input->post('submission')) {
@@ -419,9 +419,9 @@ class Contests extends CI_Controller
                 }
             }
             $this->analytics->track(array(
-                'event_name' => "winner_selected",
+                'event_name'  => "winner_selected",
                 'object_type' => "contest",
-                'object_id' => $cid,
+                'object_id'   => $cid,
             ));
             $this->notification->create($submission->owner, 'submission_chosen', 'submission', $submission->id);
 
@@ -454,7 +454,7 @@ class Contests extends CI_Controller
         //$this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
 
-        $platform = $contest->platform;
+        $platform       = $contest->platform;
         $attachment_url = $contest->attachment;
         if ($this->input->post('photo')) {
 
@@ -479,9 +479,9 @@ class Contests extends CI_Controller
         }
 
         if ($this->form_validation->run() == true) {
-            $start_time = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
-            $age = $this->input->post('age');
-            $gender = $this->input->post('gender') ? $this->input->post('gender') : 0;
+            $start_time        = ($this->input->post('start_time') ? $this->input->post('start_time') : date('Y-m-d H:i:s', strtotime('+1 hour')));
+            $age               = $this->input->post('age');
+            $gender            = $this->input->post('gender') ? $this->input->post('gender') : 0;
             $tone_of_voice_box = $this->input->post('tone_of_voice_box');
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
@@ -489,24 +489,24 @@ class Contests extends CI_Controller
 
             // Do some preliminary formatting
             $data = array(
-                'tone_of_voice_box' => $tone_of_voice_box,
-                'attachment' => $attachment_url,
+                'tone_of_voice_box'   => $tone_of_voice_box,
+                'attachment'          => $attachment_url,
 
                 'additional_info_box' => $this->input->post('additional_info_box'),
-                'summary' => $this->input->post('summary'),
-                'additional_info' => $this->input->post('additional_info'),
-                'different' => $this->input->post('different'),
-                'objective' => $this->input->post('objective'),
+                'summary'             => $this->input->post('summary'),
+                'additional_info'     => $this->input->post('additional_info'),
+                'different'           => $this->input->post('different'),
+                'objective'           => $this->input->post('objective'),
                 //'platform' => $this->input->post('platform'),
-                'gender' => $this->input->post('gender'),
-                'owner' => $this->ion_auth->user()->row()->id,
-                'min_age' => $this->input->post('min_age'),
-                'max_age' => $this->input->post('max_age'),
-                'start_time' => $start_time,
-                'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days')),
-                'emotion' => $this->input->post('emotion'),
-                'display_type' => $this->input->post('display_type'),
-                'submission_limit' => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
+                'gender'              => $this->input->post('gender'),
+                'owner'               => $this->ion_auth->user()->row()->id,
+                'min_age'             => $this->input->post('min_age'),
+                'max_age'             => $this->input->post('max_age'),
+                'start_time'          => $start_time,
+                'stop_time'           => date('Y-m-d H:i:s', strtotime('+7 days')),
+                'emotion'             => $this->input->post('emotion'),
+                'display_type'        => $this->input->post('display_type'),
+                'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
             );
 
             $images = array();
@@ -526,12 +526,12 @@ class Contests extends CI_Controller
             $message = $update ? 'updated' : 'created';
             $this->responder->message("Contest successfully updated")->data(array('id' => $cid))->respond();
             $this->analytics->track(array(
-                'event_name' => "contest_creation",
+                'event_name'  => "contest_creation",
                 'object_type' => "contest",
-                'object_id' => $cid,
+                'object_id'   => $cid,
             ));
             $profile_data = array();
-            $profile = $this->ion_auth->profile();
+            $profile      = $this->ion_auth->profile();
             if (is_null($profile->mission)) {
                 $profile_data['mission'] = $this->input->post('audience');
             }
@@ -589,8 +589,8 @@ class Contests extends CI_Controller
             return;
         }
         $start_time = date('Y-m-d H:i:s');
-        $stop_time = date('Y-m-d H:i:s', strtotime('+7 days'));
-        $data = array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time);
+        $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
+        $data       = array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time);
         $this->contest->update($id, $data);
         $this->responder->message("Contest successfully public")->data($data)->respond();
     }
