@@ -417,3 +417,9 @@
     border: 2px solid #ff6c00;
 
 }
+#ab-aday::-webkit-inner-spin-button,
+#ab-aday::-webkit-outer-spin-button,
+#ab-days::-webkit-inner-spin-button,
+#ab-days::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
