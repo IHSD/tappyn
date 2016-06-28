@@ -44,15 +44,15 @@
         </div>
     </div>
     <div class='row'>
-        <div ng-class='{"col-xs-12 col-md-5" : user.type != "company", "col-xs-12" : user && user.type=="company"}'>
+        <div class='col-xs-12 col-md-5'>
             <div class='launch-page-box launch-preview'>
-                <div ng-class='{"col-xs-12" : user.type != "company", "col-sm-6" : user && user.type=="company"}'>
+                <div class='col-xs-12'>
                     <h3 style='margin-bottom: 0;'>About</h3>
                     <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>How We're Different</h3>
                     <p>{{contest.different}}</p>
                 </div>
-                <div style="border:1px solid #FF5C00;border-radius:6px;" ng-class='{"col-xs-12" : user.type != "company", "col-sm-6" : user && user.type=="company"}'>
+                <div style="border:1px solid #FF5C00;border-radius:6px;" class='col-xs-12'>
                     <h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
                     <h3 style='margin-bottom: 0;'>What We're Looking For</h3>
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <div class='col-md-4 col-xs-12' ng-show='user.type != "company"'>
+        <div class='col-md-4 col-xs-12'>
             <div class='launch-page-box'>
                 <div ng-show='(contest.submission_count >= contest.submission_limit) &&  !contest.user_has_submitted'>
                     <div class='alert alert-success text-center'>
@@ -86,6 +86,12 @@
                     <div class='submish-overlay'></div>
                     <div class='alert alert-danger text-center submish-panel'>
                         <a href ng-click='open_login("default", "")'>Log in</a> or <a href ng-click='open_register("default", "", "2")'>sign up</a> to enter this campaign.
+                    </div>
+                </div>
+                <div ng-show='user && user.type=="company"'>
+                    <div class='submish-overlay'></div>
+                    <div class='alert alert-danger text-center submish-panel'>
+                        You can’t create an ad for your own campaign.
                     </div>
                 </div>
                 <div ng-show='user && !user.is_active'>
@@ -100,7 +106,7 @@
                     </div>
                 </div>
                 <div class='col-xs-12'>
-                    <form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit) || user.type=="company"'>
+                    <form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
                             <h4 class='control-label'><strong>Image</strong></h4>
                             <div ng-hide='!cropper_box'>
@@ -149,7 +155,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-3" ng-show='user.type!="company"'>
+        <div class="col-xs-12 col-md-3">
             <div class="contest-box" ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
                 <div style='float:left;padding:30px 10px 10px 30px;'>
                     <img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
