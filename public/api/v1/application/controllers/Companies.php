@@ -275,9 +275,10 @@ class Companies extends CI_Controller
         $charge = false;
 
         $this->load->library('price_lib');
-        $post           = $this->input->post();
-        $post['go_pay'] = true;
-        $data           = $this->price_lib->get_price_from_post($post);
+        $post            = $this->input->post();
+        $post['go_pay']  = true;
+        $post['ab_days'] = 1;
+        $data            = $this->price_lib->get_price_from_post($post);
         if ($data['success']) {
             $amount = $data['price'] * 100;
         } else {

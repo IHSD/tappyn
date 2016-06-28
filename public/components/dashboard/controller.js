@@ -140,6 +140,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             return;
         }
 
+        $scope.payment_obj.ab_days = 1;
         if (type == 'ab' && (!parseFloat($scope.payment_obj.ab_aday) || parseFloat($scope.payment_obj.ab_aday) <= 0.0 || !parseInt($scope.payment_obj.ab_days) || parseInt($scope.payment_obj.ab_days) <= 0)) {
             $scope.set_alert("Campaign has to run at least more than 1 day and the amount cannot be $0", "error");
             return;

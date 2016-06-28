@@ -4,7 +4,7 @@
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
                 <h3><strong>Campaign Payment</strong></h3>
-                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} for {{payment_obj.ab_days}} Days</h4>
+                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} <!--for {{payment_obj.ab_days}} Days--></h4>
                 <h4 ng-show="payment_obj.pay_for=='purchase'">Purchase {{payment_obj.submission_ids.length}} Ads</h4>
             </div>
             <div class="modal_bot">
@@ -110,6 +110,9 @@
                     <h4>No need for payment, this campaign is on us!</h4>
                     <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
                 </div>
+                <div ng-show="payment_obj.pay_for=='ab'" class='text-center row'>
+                    <button class='btn btn-oj col-xs-12' ng-click="open_payment(winner_contest,'confirm_ab')">Back</button>
+                </div>
             </div>
         </div>
     </div>
@@ -129,13 +132,13 @@
                         <div class="input-group-addon">.00</div>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <label for="ab-days">How many days would you like to run the ads?</label>
                     <div class="input-group">
                         <input type="number" ng-model="payment_obj.ab_days" id="ab-days" class="form-control">
                         <div class="input-group-addon">days</div>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group row">
                     <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-12">Confirm</button>
                 </div>
