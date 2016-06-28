@@ -235,6 +235,7 @@
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
                     <h3 ng-if='submit.text.length == 0 && form_limit.text'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.text.length > 0'>{{submit.headline}}</h3>
                     <h4 ng-if='submit.text.length == 0 && form_limit.line_2'>Your second line will be shown here<br></h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
