@@ -7,9 +7,12 @@
                 ${{contest.prize}}
             </span>
             </div>
-            <div class="company-img text-center" style='margin-top:10px;'>
+            <div class="company-img text-center" style='margin:10px 0 0 0;'>
                 <img ng-if='contest.company.logo_url' ng-src="{{contest.company.logo_url}}">
                 <img ng-if='!contest.company.logo_url' src="public/img/TappynLogo2.png">
+            </div>
+            <div class="contest-company text-left" style="padding: 5px 0px;">
+                <span class="company-name" style="font-size:12px;">{{contest.platform | capitalize}}</span>
             </div>
             <div style='width: 100%;'>
                 <div class='contest-audience'>

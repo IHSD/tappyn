@@ -25,11 +25,13 @@ class Submissions extends CI_Controller
      */
     public function index($contest_id)
     {
+        $this->load->library('payout');
         $contest = $this->contest->get($contest_id);
         if (!$contest) {
             $this->responder->fail("That contest does not exist")->code(500)->respond();
             return;
         }
+        $winners = $this->payout->get_submission_ids_by_cid($contest_id);
 
         $submissions = $this->submission->where(array('contest_id' => $contest_id))->fetch()->result();
         foreach ($submissions as $submission) {
@@ -39,16 +41,17 @@ class Submissions extends CI_Controller
 
             // only ower show ad reach
             /**if (!$this->ion_auth->logged_in() || $this->ion_auth->user()->row()->id != $contest->owner) {
-                unset($submission->ctr);
+            unset($submission->ctr);
             }
-            **/
+             **/
 
             if ($contest->use_attachment == 1) {
                 $submission->attachment = $contest->attachment;
             }
 
-            $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            $submission->votes         = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool) $this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
+            $submission->is_winner     = (in_array($submission->id, $winners)) ? true : false;
         }
         /** Sort our submissions on upvotes **/
         usort($submissions, function ($a, $b) {
@@ -63,11 +66,11 @@ class Submissions extends CI_Controller
         $usub = false;
         foreach ($submissions as $key => $submission) {
             $submissions[$key]->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
-            $submissions[$key]->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submissions[$key]->owner      = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
             if ($this->ion_auth->logged_in()) {
                 if ($submission->owner == $this->ion_auth->user()->row()->id) {
                     $submissions[$key]->user_owned = true;
-                    $usub = $submissions[$key];
+                    $usub                          = $submissions[$key];
                     unset($submissions[$key]);
                 }
             }
@@ -82,13 +85,13 @@ class Submissions extends CI_Controller
             $contest->status = 'active';
         }
 
-        $contest->views = $this->contest->views($contest_id);
+        $contest->views              = $this->contest->views($contest_id);
         $contest->user_has_submitted = false;
-        $contest->user_may_submit = false;
+        $contest->user_may_submit    = false;
 
         if ($this->ion_auth->logged_in()) {
             $contest->user_has_submitted = $this->contest->hasUserSubmitted($this->ion_auth->user()->row()->id, $contest_id);
-            $contest->user_may_submit = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $contest_id);
+            $contest->user_may_submit    = $this->contest->mayUserSubmit($this->ion_auth->user()->row()->id, $contest_id);
         }
 
         // Process the images array, and remove all nulls
@@ -112,7 +115,7 @@ class Submissions extends CI_Controller
 
         $this->responder->data(array(
             'submissions' => $submissions,
-            'contest' => $contest,
+            'contest'     => $contest,
         ))->respond();
 
         $this->contest->log_impression($contest_id);
@@ -191,9 +194,9 @@ class Submissions extends CI_Controller
             )->respond();
             $this->user->attribute_points($this->ion_auth->user()->row()->id, $this->config->item('points_per_submission'));
             $this->analytics->track(array(
-                'event_name' => "submission_create",
+                'event_name'  => "submission_create",
                 'object_type' => "submission",
-                'object_id' => $sid,
+                'object_id'   => $sid,
             ));
 
             $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
@@ -208,11 +211,11 @@ class Submissions extends CI_Controller
     {
         $leaderboard_size = $this->config->item('leaderboard_limit');
         // Get a list of all active contests
-        $ids = array();
+        $ids      = array();
         $contests = $this->contest->where(array(
-            'paid' => 1,
+            'paid'         => 1,
             'start_time <' => date('Y-m-d H:i:s'),
-            'stop_time >' => date('Y-m-d H:i:s'),
+            'stop_time >'  => date('Y-m-d H:i:s'),
         ))->fetch()->result();
 
         // We dont have any active contests, so ets just exit out with success
@@ -232,11 +235,11 @@ class Submissions extends CI_Controller
         }
         $submissions = array();
         foreach ($check->result() as $sub) {
-            $submission = $this->submission->get($sub->submission_id);
-            $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            $submission                = $this->submission->get($sub->submission_id);
+            $submission->votes         = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool) $this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
-            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
-            $submission->contest = $this->contest->get($submission->contest_id);
+            $submission->owner         = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->contest       = $this->contest->get($submission->contest_id);
             if (is_null($submission->thumbnail_url)) {
                 $submission->thumbnail_url = false;
             }
@@ -251,19 +254,19 @@ class Submissions extends CI_Controller
     public function share($id)
     {
 
-        $submission = $this->submission->get($id);
+        $submission        = $this->submission->get($id);
         $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
         $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
 
         // If the png hasnt been created, we generate an image
         if (!file_exists(FCPATH . "public/img/subs/sub_{$id}.png")) {
-            $my_img = imagecreate(1200, 630);
-            $background = imagecolorallocate($my_img, 255, 255, 255);
+            $my_img      = imagecreate(1200, 630);
+            $background  = imagecolorallocate($my_img, 255, 255, 255);
             $text_colour = imagecolorallocate($my_img, 255, 92, 0);
-            $black = imagecolorallocate($my_img, 0, 0, 0);
+            $black       = imagecolorallocate($my_img, 0, 0, 0);
             $text_length = 50;
-            $sig = wordwrap($submission->text, $text_length, "<br />", true);
-            $text = str_replace('<br />', "\n", $sig);
+            $sig         = wordwrap($submission->text, $text_length, "<br />", true);
+            $text        = str_replace('<br />', "\n", $sig);
             imagettftext($my_img, 45, 0, 45, 100, $text_colour, FCPATH . 'fonts/Lato-Medium.ttf', $submission->headline);
             imagettftext($my_img, 35, 0, 45, 210, $black, FCPATH . 'fonts/Lato-Thin.ttf', $text);
             imagesetthickness($my_img, 5);
@@ -278,9 +281,9 @@ class Submissions extends CI_Controller
         // Create image based on submission
         $this->load->view('submissions/share', array('submission' => $submission));
         $this->analytics->track(array(
-            'event_name' => "submission_share_view",
+            'event_name'  => "submission_share_view",
             'object_type' => "submission",
-            'object_id' => $id,
+            'object_id'   => $id,
         ));
 
         $this->db->where('id', $id);
@@ -304,11 +307,15 @@ class Submissions extends CI_Controller
         $winners = $this->db->select('created_at, contest_id, amount, user_id, submission_id')->from('payouts')->limit(15)->order_by('created_at', 'desc')->get()->result();
         foreach ($winners as $winner) {
             // We have the submission I
-            $submission = $this->submission->get($winner->submission_id);
-            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
-            $submission->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $winner->user_id)->limit(1)->get()->row()->avatar_url;
+            $submission          = $this->submission->get($winner->submission_id);
             $submission->contest = $this->contest->get($winner->contest_id);
-            $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            if (!$submission->contest) {
+                continue;
+            }
+            $submission->owner         = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
+            $submission->avatar_url    = $this->db->select('avatar_url')->from('profiles')->where('id', $winner->user_id)->limit(1)->get()->row()->avatar_url;
+            $submission->contest       = $this->contest->get($winner->contest_id);
+            $submission->votes         = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool) $this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
             if ($submission->contest->use_attachment == 1) {
                 $submission->attachment = $submission->contest->attachment;
@@ -324,8 +331,8 @@ class Submissions extends CI_Controller
             $this->responder->fail("You must provide a submission and rating")->code(500)->respond();
             return;
         }
-        $sid = $this->input->post('submission_id');
-        $rating = (int) $this->input->post('rating');
+        $sid        = $this->input->post('submission_id');
+        $rating     = (int) $this->input->post('rating');
         $submission = $this->submission->get($sid);
         if (!$submission) {
             $this->responder->fail("That submission does not exist")->code(500)->respond();

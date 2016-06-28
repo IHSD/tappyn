@@ -83,6 +83,9 @@ tappyn.config(function($routeProvider, $locationProvider) {
             templateUrl: 'components/reset_pass/view.html',
             controller: 'resetController'
         })
+        .when('/how_it_works', {
+            templateUrl: 'components/how_it_works/view.html'
+        })
         .otherwise({ redirectTo: '/home' })
 
     $locationProvider.html5Mode(true);

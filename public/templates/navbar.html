@@ -1,9 +1,13 @@
 <header>
     <div class="col-xs-1">
         <div class="logo">
-            <a href="/home">
+
+            <span ng-hide='user.type == "company"'><a href="/home">
                 <img src="public/img/beta_logo.png" width='100'>
-            </a>
+            </a></span>
+            <span ng-show='user.type == "company"'><a href="/for_companies">
+                <img src="public/img/beta_logo.png" width='100'>
+            </a></span>
         </div>
     </div>
     <div class="col-xs-11">
@@ -13,13 +17,12 @@
                 <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create</a></li>
                 <li ng-show='!user' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
                 <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
-                <li ng-show='user.type == "company"' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
-                <li ng-show='user.type == "member"' style='cursor:pointer'><a href="/winners">Most Popular</a></li>
+                <li style='cursor:pointer'><a href="/winners">Recently Tapped</a></li>
                 <li ng-if='user' style='float:right;'>
                     <a href>
                         <span class='notifications-container'>
                             <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
-	                    			<span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
+	                    			<span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()'></span>
                             <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                             <span ng-include src="'templates/notifications.html'"></span>
                         </span>
@@ -47,7 +50,7 @@
                     <a href>
                         <span class='notifications-container'>
                           <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
-                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()' style="color:#ff5c00;"></span>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()'></span>
                           <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
                         </span>
                     </a>

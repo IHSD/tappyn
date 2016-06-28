@@ -5,12 +5,12 @@ class Vouchers extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if(!$this->ion_auth->logged_in())
-        {
+        if (!$this->ion_auth->logged_in()) {
             $this->responder->fail("Unauthorized Access")->code(401)->respond();
             exit();
         }
         $this->load->library('vouchers_library');
+        $this->load->library('price_lib');
     }
 
     /**
@@ -20,30 +20,41 @@ class Vouchers extends CI_Controller
      */
     public function is_valid()
     {
-        $code = $this->input->post('voucher_code');
+        $code    = $this->input->post('voucher_code');
         $voucher = $this->vouchers_library->fetchByCode($code);
-        if(!$voucher)
-        {
+        if (!$voucher) {
             $this->responder->fail("We couldnt find a voucher with that code")->code(500)->respond();
             return;
         }
         $vid = $voucher->id;
-        if($this->vouchers_library->is_valid($vid))
-        {
-            $price = 49.99;
+        if ($this->vouchers_library->is_valid($vid)) {
+            $price = (int) $this->input->post('price');
+            $price = ($price > 0) ? $price : 49.99;
 
-            if($voucher->discount_type == 'amount')
-            {
+            if ($voucher->discount_type == 'amount') {
                 $discount = $voucher->value;
-                $price = $price - $discount;
+                $price    = $price - $discount;
             } else {
                 $discount = $price * $voucher_value;
-                $price = $price - $discount;
+                $price    = $price - $discount;
             }
-            if($price < 000) $price = 00.00;
+            if ($price < 000) {
+                $price = 00.00;
+            }
+
             $this->responder->data(array('is_valid' => true, 'price' => number_format($price, 2), 'discount' => number_format($discount, 2)))->respond();
         } else {
             $this->responder->fail(($this->vouchers_library->errors() ? $this->vouchers_library->errors() : "Voucher invalid"))->code(500)->respond();
+        }
+    }
+
+    public function get_price()
+    {
+        $data = $this->price_lib->get_price_from_post($this->input->post());
+        if ($data['success']) {
+            $this->responder->data($data)->respond();
+        } else {
+            $this->responder->fail($data['message'])->code(500)->respond();
         }
     }
 }

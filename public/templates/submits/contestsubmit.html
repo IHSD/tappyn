@@ -5,15 +5,29 @@
         <span class='glyphicon glyphicon-send'></span> Send
         <div class="contest-share-socials">
             <div class='addthis_sharing_toolbox' data-url='https://tappyn.com/contest/{{contest.id}}' data-title='{{submission.headline == "" ? submission.text : submission.headline}}' data-description='{{submission.headline == "" ? "from " + contest.company.name : submission.text}}' data-media='{{submission.attachment}}'></div>
+            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+            <script type="text/javascript">
+            var addthis_config = addthis_config || {};
+            addthis_config.data_track_addressbar = false;
+            addthis_config.data_track_clickback = false;
+            addthis_share = {
+                passthrough: {
+                    twitter: {
+                        via: "TheRealTappyn"
+                    }
+                }
+            }
+            </script>
         </div>
     </div>
+
 </div>
 <div class='contest-company text-left'>
     <div class='avatar'>
         <img ng-if='!contest.company.logo_url' src="favicon.ico">
         <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
     </div>
-    <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
+    <span class='company-name'>from {{contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
 <div class='contest-entry text-left'>
     <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
@@ -25,98 +39,10 @@
 </div>
 <div class='contest-winner text-left'>
     <div class='avatar'>
-        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png ' alt=' '>
+        <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
-    <h5 class='winner-name '> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <span class='winner-tag'>Tapped</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-<div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
-	<div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
-        </div>
-        <div class="modal-body-sub text-center">
-          <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
-        </div>
-        <div class="modal-footer-sub text-right">
-        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
-      </div>
-      </div>
-    </div>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
 </div>
-</div>
-<script type='text/javascript' src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script>
-$('#myModalnew').on('show.bs.modal', function () {
-   $('.container').addClass('blur');
-})
-
-$('#myModalnew').on('hide.bs.modal', function () {
-   $('.container').removeClass('blur');
-})
-</script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
-<script type="text/javascript">
-var addthis_config = addthis_config || {};
-addthis_config.data_track_addressbar = false;
-addthis_config.data_track_clickback = false;
-addthis_share = {
-    passthrough: {
-        twitter: {
-            via: "TheRealTappyn"
-        }
-    }
-}
-</script>
-<style>
-.blur {
-    -webkit-filter: blur(5px) grayscale(20%);
-}
-.modal-backdrop {
-  background-color: #fff;
-  opacity: 0.5;
-}
-@media (min-width: 768px)
-.modal-content {
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
-  box-shadow: 0 1px 5px rgba(0,0,0,.5);
-}
-.modal-header {
-    border-left: 1px solid #ccc;
-    border-top: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-}
-.modal-body-sub {
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-.modal-content {
-  background-color: #f4f7f9;
-  border: 0;
-  border-radius: 2px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-}
-.modal-dialog {
-  color: #526880;
-}
-.modal-footer-sub {
-   border-top: none;
-   border-bottom-left-radius: 6px;
-   border-bottom-right-radius: 6px;
-   border-left: 1px solid #ccc;
-   border-right: 1px solid #ccc;
-   border-bottom: 1px solid #ccc;
-   padding-bottom: 10px;
-   padding-right:10px;
-   padding-top:30px;
-}
-</style>

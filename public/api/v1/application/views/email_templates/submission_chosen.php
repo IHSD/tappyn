@@ -28,7 +28,7 @@ $query_string['redirect'] = 'dashboard';
     you'll need to set up your payout information, which takes only seconds. </p>
 <br>
 <?php $query_string['redirect'] = 'contests'; ?>
-<p style='text-align:left;margin:auto;width:600px'>Congrats again on killing it, and keep up your winning reign by checking out our other campaigns <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>. </p>
+<p style='text-align:left;margin:auto;width:600px'>Congrats again on killing it, and keep up your Tappyn reign by checking out our other campaigns <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'here'); ?>. </p>
 <br>
 <!-- End Email Content -->
 <!-- Orange header -->
