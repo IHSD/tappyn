@@ -844,6 +844,7 @@ li.value-list:before {
     width: auto;
     height: auto;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .contest-reward,

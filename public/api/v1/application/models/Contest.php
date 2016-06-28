@@ -2,16 +2,19 @@
 
 class Contest extends MY_Model
 {
-    protected $errors = false;
+    protected $errors   = false;
     protected $messages = false;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->database();
-        $this->table = 'contests';
-        $this->order_by = 'contests.id';
+        $this->table     = 'contests';
+        $this->order_by  = 'contests.id';
         $this->order_dir = 'desc';
+        $this->load->model('ad_model');
+        $this->config->load('secrets');
+        $this->load->library('payout');
     }
 
     public function log_impression($cid, $uid = null)
@@ -20,7 +23,7 @@ class Contest extends MY_Model
             'contest_id' => $cid,
             'ip_address' => $_SERVER['REMOTE_ADDR'],
             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
-            'user_id' => $uid,
+            'user_id'    => $uid,
         ));
     }
 
@@ -37,16 +40,16 @@ class Contest extends MY_Model
     {
         $contest = $this->db->select('*')->from('contests')->where('id', $id)->limit(1)->get();
         if ($contest && $contest->num_rows() == 1) {
-            $contest = $contest->row();
+            $contest                   = $contest->row();
             $contest->submission_limit = (int) $contest->submission_limit;
             $contest->submission_count = (int) $this->submissionsCount($contest->id);
-            $contest->company = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->limit(1)->get()->row();
-            $contest->min_age = (int) $contest->min_age;
-            $contest->max_age = (int) $contest->max_age;
+            $contest->company          = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->limit(1)->get()->row();
+            $contest->min_age          = (int) $contest->min_age;
+            $contest->max_age          = (int) $contest->max_age;
             unset($contest->company->stripe_customer_id);
-            $contest->needs_winner = $this->needsWinner($contest->id);
-            $contest->location = explode(',', $contest->location);
-            $contest->industry = explode(',', $contest->industry);
+            $contest->needs_winner      = $this->needsWinner($contest->id);
+            $contest->location          = explode(',', $contest->location);
+            $contest->industry          = explode(',', $contest->industry);
             $contest->tone_of_voice_box = explode(',', $contest->tone_of_voice_box);
             return $contest;
         }
@@ -75,8 +78,8 @@ class Contest extends MY_Model
             $results = $contests->result();
             foreach ($results as $result) {
                 $result->submission_count = $this->submissionsCount($result->id);
-                $result->company = $this->db->select('*')->from('profiles')->where('id', $result->owner)->limit(1)->get()->row();
-                $result->industry = explode(',', $result->industry);
+                $result->company          = $this->db->select('*')->from('profiles')->where('id', $result->owner)->limit(1)->get()->row();
+                $result->industry         = explode(',', $result->industry);
                 unset($result->company->stripe_customer_id);
             }
             return $results;
@@ -235,5 +238,36 @@ class Contest extends MY_Model
             return false;
         }
         return $this->db->where('id', $id)->delete('contests');
+    }
+
+    public function get_status($contest)
+    {
+        $status = 'live';
+        if ($contest->paid == 0) {
+            $status = 'draft';
+        } else if ($this->payout->exists(array('contest_id' => $contest->id))) {
+            $status = 'purchased';
+        } else if ($contest->submission_count >= $contest->submission_limit || $contest->stop_time < date('Y-m-d H:i:s')) {
+            $testing = $this->ad_model->is_testing_status($contest->id);
+            if ($testing) {
+                $status = 'testing';
+            } else if ($testing === null) {
+                $status = 'pending_testing';
+            } else {
+                $status = 'pending_purchase';
+            }
+        } else if ($contest->start_time > date('Y-m-d H:i:s')) {
+            $status = 'scheduled';
+        }
+        return $status;
+    }
+
+    public function submission_ids($contest_id)
+    {
+        $result = array();
+        foreach ($this->db->select('id')->from('submissions')->where('contest_id', $contest_id)->get()->result() as $submission) {
+            $result[] = $submission->id;
+        }
+        return $result;
     }
 }

@@ -1,371 +1,321 @@
 <div class='wrapper'>
-    <div class='modal_actions col-sm-12' ng-show='adding_payment.show'>
-      <div class="payment_modal">
-        <div class="modal_top text-center">
-          <div class='close_circle' ng-click='close_payment()'>x</div>
-          <h3><strong>Campaign Payment</strong></h3>
-          <h4>{{adding_payment.contest.platform | capitalize}} Campaign</h4>
-        </div>
-        <div class="modal_bot">
-          <div class="voucher-group row" ng-show='voucher.visible == "1"'>
-            <p class='col-xs-12' ng-if='reduction'><strong class='pull-left'>Voucher Discount</strong><span class='pull-right'>-{{reducton | currency}}</span></p>
-            <form class='form' ng-submit='use_voucher()'>
-              <div class='form-group col-sm-7 col-xs-12' style='padding-left: 0;'>
-                <input class='form-control' ng-model='voucher_code' type='text' placeholder='Voucher Code'>
-              </div>
-              <button class='btn btn-oj col-sm-5 col-xs-12' type='submit'>Check Voucher</button>
-            </form>
-          </div>
-
-          <div ng-show='price != 0.00'>
-              <div ng-show='!add_new'>
-                  <div ng-show='payments.length > 0'>
-                      <div class='payment-method-container'>
-                          <div class='row'>
-                              <div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
-                                  <h5>
+    <div class='modal_actions col-sm-12' ng-show='now_model == "adding_payment"'>
+        <div class="payment_modal">
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h3><strong>Campaign Payment</strong></h3>
+                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} <!--for {{payment_obj.ab_days}} Days--></h4>
+                <h4 ng-show="payment_obj.pay_for=='purchase'">Purchase {{payment_obj.submission_ids.length}} Ads</h4>
+            </div>
+            <div class="modal_bot">
+                <div class="voucher-group row" ng-show='voucher.visible == "1"'>
+                    <p class='col-xs-12' ng-if='reduction'><strong class='pull-left'>Voucher Discount</strong><span class='pull-right'>-{{reduction | currency}}</span></p>
+                    <form class='form' ng-submit='get_price("check_voucher")'>
+                        <div class='form-group col-sm-7 col-xs-12' style='padding-left: 0;'>
+                            <input class='form-control' ng-model='payment_obj.voucher_code' type='text' placeholder='Voucher Code'>
+                        </div>
+                        <button class='btn btn-oj col-sm-5 col-xs-12' type='submit'>Check Voucher</button>
+                    </form>
+                </div>
+                <div ng-show='payment_obj.price != 0.00'>
+                    <div ng-show='!add_new'>
+                        <div ng-show='payments.length > 0'>
+                            <div class='payment-method-container'>
+                                <div class='row'>
+                                    <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+                                        <h5>
                                     <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
                                     <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
                                     <img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
                                     <img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
                                     &nbsp;&nbsp;&nbsp;********{{payment.last4}}
                                   </h5>
-                                  <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
-                  <div class='text-right'>
-                      <button class='btn btn-oj' ng-click='old_payment()'>Pay {{price | currency}}</button>
-                  </div>
-                  <div class='text-center'>
-                      <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
-                  </div>
-              </div>
-              <div ng-show='add_new'>
-                  <div class='text-center' ng-show='payments.length > 0'>
-                      <button class='btn btn-oj' ng-click='add_new = false'>Use a saved method</button>
-                  </div>
-                  <form class='form row' method="POST" id="payment-form">
-                      <div class='payment-empty-card'>
-                          <div class="card-group">
-                              <input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number" />
-                          </div>
-                          <div class="card-group">
-                              <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc" />
-                          </div>
-                          <div class="card-group">
-                              <select class='form-control' data-stripe="exp-month">
-                                  <option value='01'>01</option>
-                                  <option value='02'>02</option>
-                                  <option value='03'>03</option>
-                                  <option value='04'>04</option>
-                                  <option value='05'>05</option>
-                                  <option value='06'>06</option>
-                                  <option value='07'>07</option>
-                                  <option value='08'>08</option>
-                                  <option value='09'>09</option>
-                                  <option value='10'>10</option>
-                                  <option value='11'>11</option>
-                                  <option value='12'>12</option>
-                              </select>
-                          </div>
-                          <div class='card-group'>
-                              <select class='form-control' data-stripe="exp-year">
-                                  <option value='2016'>2016</option>
-                                  <option value='2017'>2017</option>
-                                  <option value='2018'>2018</option>
-                                  <option value='2019'>2019</option>
-                                  <option value='2020'>2020</option>
-                                  <option value='2021'>2021</option>
-                                  <option value='2022'>2022</option>
-                                  <option value='2023'>2023</option>
-                                  <option value='2024'>2024</option>
-                                  <option value='2025'>2025</option>
-                                  <option value='2026'>2026</option>
-                                  <option value='2027'>2027</option>
-                              </select>
-                          </div>
-                      </div>
-                      <input type='hidden' data-stripe='currency' value='usd' />
-                      <div class='form-group checkbox'>
-                          <label class='control-label'>
-                              <input type='checkbox' ng-model='save_method'> Save Method
-                          </label>
-                          <div class='pull-right' data-toggle="buttons">
-                            <label class='btn btn-link' style='color: #ff5e00; padding: 0;'>
-                              <input type='radio' name="reg" value='1' ng-model='voucher.visible'>I have a voucher!
-                            </label>
-                          </div>
-                      </div>
-                      <div class='text-center'>
-                        <button class='btn btn-oj col-xs-12' ng-click='new_payment()'>Pay {{price | currency}}</button>
-                        <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
-                      </div>
-                  </form>
-              </div>
-          </div>
-          <div ng-show='price == 0.00' class='text-center'>
-              <h4>No need for payment, this campaign is on us!</h4>
-              <button class='btn btn-oj col-xs-12' ng-click='voucher_payment()'>Continue</button>
-          </div>
-
+                                        <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
+                        <div class='text-right'>
+                            <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                        </div>
+                        <div class='text-center'>
+                            <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
+                        </div>
+                    </div>
+                    <div ng-show='add_new'>
+                        <div class='text-center' ng-show='payments.length > 0'>
+                            <button class='btn btn-oj' ng-click='add_new = false'>Use a saved method</button>
+                        </div>
+                        <form class='form row' method="POST" id="payment-form">
+                            <div class='payment-empty-card'>
+                                <div class="card-group">
+                                    <input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number" />
+                                </div>
+                                <div class="card-group">
+                                    <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc" />
+                                </div>
+                                <div class="card-group">
+                                    <select class='form-control' data-stripe="exp-month">
+                                        <option value='01'>01</option>
+                                        <option value='02'>02</option>
+                                        <option value='03'>03</option>
+                                        <option value='04'>04</option>
+                                        <option value='05'>05</option>
+                                        <option value='06'>06</option>
+                                        <option value='07'>07</option>
+                                        <option value='08'>08</option>
+                                        <option value='09'>09</option>
+                                        <option value='10'>10</option>
+                                        <option value='11'>11</option>
+                                        <option value='12'>12</option>
+                                    </select>
+                                </div>
+                                <div class='card-group'>
+                                    <select class='form-control' data-stripe="exp-year">
+                                        <option value='2016'>2016</option>
+                                        <option value='2017'>2017</option>
+                                        <option value='2018'>2018</option>
+                                        <option value='2019'>2019</option>
+                                        <option value='2020'>2020</option>
+                                        <option value='2021'>2021</option>
+                                        <option value='2022'>2022</option>
+                                        <option value='2023'>2023</option>
+                                        <option value='2024'>2024</option>
+                                        <option value='2025'>2025</option>
+                                        <option value='2026'>2026</option>
+                                        <option value='2027'>2027</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type='hidden' data-stripe='currency' value='usd' />
+                            <div class='form-group checkbox'>
+                                <label class='control-label'>
+                                    <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
+                                </label>
+                                <div class='pull-right' data-toggle="buttons">
+                                    <label class='btn btn-link' style='color: #ff5e00; padding: 0;'>
+                                        <input type='radio' name="reg" value='1' ng-model='voucher.visible'>I have a voucher!
+                                    </label>
+                                </div>
+                            </div>
+                            <div class='text-center'>
+                                <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")' style='margin-bottom:10px;'>Pay {{payment_obj.price | currency}}</button>
+                                <button ng-show="payment_obj.pay_for=='ab'" class='btn btn-oj col-xs-12 btn-secondary' ng-click="open_payment(winner_contest,'confirm_ab')">Back</button>
+                                <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div ng-show='payment_obj.price == 0.00' class='text-center row'>
+                    <h4>No need for payment, this campaign is on us!</h4>
+                    <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-    <div class='modal_actions col-xs-12' ng-show='confirm_winner.show'>
-        <div class='panel modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4'>
-            <div class='panel-body '>
-                <div class='close_circle' ng-click='close_confirm()'>x</div>
-                <div class='row'>
-                    <div class='col-xs-12' style='border-bottom:1px solid #ff5c00;margin-bottom:5px;'>
-                        <h3 class='text-left'>Award Winner</h3>
+    <div class='modal_actions col-sm-12' ng-show='now_model == "confirm_ab"'>
+        <div class="payment_modal">
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h3><strong>A/B Testing</strong></h3>
+                <h4>You’ve selected {{payment_obj.submission_ids.length}} submissions.</h4>
+            </div>
+            <div class="modal_bot">
+                <div class="form-group">
+                    <label for="ab-aday" class="control-label">How much would you like to spend a day?</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">$</div>
+                        <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
+                        <div class="input-group-addon">.00</div>
                     </div>
-                    <p class='text-left'>Are you sure you want to choose this ad by {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}. as your winning submission?</p>
-                    <div class="contest-box">
-                        <div class='contest-image'>
-                            <img ng-src='{{confirm_winner.submission.attachment}}'>
-                        </div>
-                        <div class='contest-company text-left'>
-                            <span class='company-name'>from {{user.first_name}} &#8226; {{confirm_winner.submission.contest.platform | capitalize}}</span>
-                        </div>
-                        <div class='contest-entry text-left'>
-                            <h3 ng-show='confirm_winner.submission.headline'>{{confirm_winner.submission.headline}}</h3>
-                            <h4 ng-show='confirm_winner.submission.link_explanation'>{{confirm_winner.submission.link_explanation}}<br></h4>
-                            <h4 ng-show='confirm_winner.submission.text'>{{confirm_winner.submission.text}}</h4>
-                            <div class='contest-upvotes disable-click'>
-                                <span class='glyphicon glyphicon-heart'></span> {{confirm_winner.submission.votes | number}}
-                            </div>
-                        </div>
-                        <div class='contest-winner text-left'>
-                            <div class='avatar'>
-                                <img ng-src='{{confirm_winner.avatar_url}}' src='public/img/avatar.png' alt=''>
-                            </div>
-                            <h5 class='winner-name'> {{confirm_winner.submission.owner.first_name}} {{confirm_winner.submission.owner.last_name | firstChar}}.</h5>
-                            <span class='contest-ctr' ng-show='confirm_winner.submission.ctr'>{{confirm_winner.submission.ctr}}%</span>
-                        </div>
-                        <div class='text-center contest-winner-select'>
-                            <button ng-click='choose_winner(confirm_winner.submission.id)' class='btn btn-oj'>Confirm Winner</button>
-                            <a style='color:#ff5c00;' ng-click='close_confirm()'>Cancel</a>
-                        </div>
+                </div>
+                <!--<div class="form-group">
+                    <label for="ab-days">How many days would you like to run the ads?</label>
+                    <div class="input-group">
+                        <input type="number" ng-model="payment_obj.ab_days" id="ab-days" class="form-control">
+                        <div class="input-group-addon">days</div>
                     </div>
+                </div>-->
+                <div class="form-group row">
+                    <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-12">Confirm</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class='container'>
-    <div class='row'>
-      <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
-        <div ng-if='view == "table"' class='row contest-box' style='margin-top:5px;'>
-
-            <div class='col-xs-12' ng-if='user.type == "company"'>
-                <div class='col-xs-12'>
-
-                </div>
-                <div class='col-xs-12'>
-                    <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
-                </div>
-                <div ng-click='set_type_dash("")' class='col-xs-6 col-sm-2 col-sm-offset-1' ng-class='{"dash-oj" : type == "", "dash-black" : type != ""}'>
-                    <h3 class='text-center'>All</h3>
-                </div>
-                <div ng-click='set_type_dash("active")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "active", "dash-black" : type != "active"}'>
-                    <h3 class='text-center'>Active</h3>
-                </div>
-                <div ng-click='set_type_dash("draft")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "draft", "dash-black" : type != "draft"}'>
-                    <h3 class='text-center'>Drafts</h3>
-                </div>
-                <div ng-click='set_type_dash("needs_winner")' class='col-xs-6 col-sm-2 dash-bordered' ng-class='{"dash-oj" : type == "needs_winner", "dash-black" : type != "needs_winner"}'>
-                    <h3 class='text-center'>Need Winner</h3>
-                </div>
-                <div ng-click='set_type_dash("completed")' class='col-xs-6 col-sm-2' ng-class='{"dash-oj" : type == "completed", "dash-black" : type != "completed"}'>
-                    <h3 class='text-center'>Completed</h3>
+<div class='row'>
+    <div class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
+        <div class='col-xs-12' ng-if='user.type == "company"'>
+            <div class='col-xs-12'>
+                <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
+                <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
+                <h3 class='text-center' style='margin-bottom: 25px;'><span ng-bind="dash.contests.length"></span><br>Campaigns</h3>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"' style='margin-top:10px;'>
+            <div class='col-xs-12'>
+                <a href='/profile' class='btn btn-oj pull-right' style='margin-right:5px;margin-bottom:10px;'>Edit Profile</a>
+            </div>
+            <div class='col-xs-12'>
+                <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+            </div>
+            <div class='col-xs-12' style='margin-bottom:-25px;'>
+                <hr style='border-color:#eee'>
+            </div>
+            <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
+                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.submissions}}</h3>
+                <h3 class='text-center' style="margin-bottom:5px;">Ads</h3>
+            </div>
+            <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "upvotes", "dash-oj" : type == "upvotes"}' ng-click='grab_dash("upvotes")'>
+                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.upvotes}}</h3>
+                <h3 class='text-center' style="margin-bottom:5px;">Likes</h3>
+            </div>
+            <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>
+                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.won}}</h3>
+                <h3 class='text-center' style="margin-bottom:5px;">Tapped</h3>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class='row' ng-if='user.type == "member"'>
+            <div class='col-sm-4 hidden-xs'>
+                <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                    <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
-            <div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"' style='margin-top:10px;'>
-                <div class='col-xs-12'>
-                    <a href='/profile' class='btn btn-oj pull-right' style='margin-right:5px;margin-bottom:10px;'>Edit Profile</a>
+            <div class='col-sm-4 hidden-xs'>
+                <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                    <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
-                <div class='col-xs-12'>
-                    <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+            </div>
+            <div class='col-sm-4 hidden-xs'>
+                <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                    <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
-                <div class='col-xs-12' style='margin-bottom:-25px;'>
-                    <hr style='border-color:#eee'>
-                </div>
-                <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
-                    <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.submissions}}</h3>
-                    <h3 class='text-center' style="margin-bottom:5px;">Ads</h3>
-                </div>
-                <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "upvotes", "dash-oj" : type == "upvotes"}' ng-click='grab_dash("upvotes")'>
-                    <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.upvotes}}</h3>
-                    <h3 class='text-center' style="margin-bottom:5px;">Likes</h3>
-                </div>
-                <div class='col-xs-6 col-sm-4' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>
-                    <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.won}}</h3>
-                    <h3 class='text-center' style="margin-bottom:5px;">Tapped</h3>
+            </div>
+            <div class='col-xs-12 visible-xs'>
+                <div class="contest-box row" ng-repeat='submission in dash.submissions'>
+                    <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="myModaldash" tabindex="-1" role="dialog" aria-labelledby="myModalLabeldash" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title text-center" id="myModalLabeldash">This is your ad's CTR.</h4>
-                    </div>
-                    <div class="modal-body text-center">
-                        <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp.
-                            (The higher the better!)
-                            <br>
-                        </p>
-                    </div>
-                    <div class="modal-footer text-right">
-                        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
+        <div class='row' ng-if='user.type == "company"'>
+            <table ng-show='view == "table"' class='table table-hover' style='border-radius:5px;background:#fff;'>
+                <thead>
+                    <tr>
+                        <!-- <td class='text-center' style='width: 75px;'>Actions</td> -->
+                        <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign</td>
+                        <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
+                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads</td>
+                    </tr>
+                </thead>
+                <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
+                    <!-- <td class='text-center'>
+                        <div uib-dropdown>
+                            <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
+                            <ul uib-dropdown-menu role="menu">
+                                <li role='menuitem'><a href="/contest/{{contest.id}}">View Campaign</a></li>
+                                <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Campaign</a></li>
+                                <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='set_contest_live(contest)'>Public</a></li>
+                                <li ng-if='contest.status != "testing"' role='menuitem'><a href="/edit/{{contest.id}}">Edit Campaign</a></li>
+                                <li ng-if='contest.status == "pending_testing"' role='menuitem'><a ng-click='choosing_winner(contest)'>Choose winner</a></li>
+                                <li ng-if='contest.status == "purchased"' role='menuitem'><a ng-click='view_pcp(contest.id)'>View Winner</a></li>
+                            </ul>
+                        </div>
+                    </td> -->
+                    <td>
+                        <a ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <br>
+                        <small>
+                          <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"'>No start : Draft</span> -
+                          <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"'>No stop : Draft</span>
+                        </small>
+                    </td>
+                    <td>{{contest.status | capUnderscore}}</td>
+                    <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                </tr>
+            </table>
+            <div ng-show='view == "winner"'>
+                <div class='col-xs-12'>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button class='btn btn-oj' ng-show="winner_contest.status == 'pending_testing'" ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
+                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")'>Purchase</button>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                            <a class='btn btn-oj' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Publish Campaign</a>
+                            <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class='content-padding'>
-            <div ng-if='user.type == "member"'>
+                <div class='col-xs-12'>
+                    <h3 class='text-center' style='margin-top:30px;margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3></div>
                 <div class='col-sm-4 hidden-xs'>
-                    <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
-                        <div ng-include src="'templates/submits/dashsubmit.html'"></div>
+                    <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+                        <div ng-include src="'templates/submits/companysubmits.html'"></div>
                     </div>
                 </div>
                 <div class='col-sm-4 hidden-xs'>
-                    <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
-                        <div ng-include src="'templates/submits/dashsubmit.html'"></div>
+                    <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+                        <div ng-include src="'templates/submits/companysubmits.html'"></div>
                     </div>
                 </div>
                 <div class='col-sm-4 hidden-xs'>
-                    <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
-                        <div ng-include src="'templates/submits/dashsubmit.html'"></div>
+                    <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
+                        <div ng-include src="'templates/submits/companysubmits.html'"></div>
                     </div>
                 </div>
                 <div class='col-xs-12 visible-xs'>
-                    <div class="contest-box row" ng-repeat='submission in dash.submissions'>
-                        <div ng-include src="'templates/submits/dashsubmit.html'"></div>
+                    <div class="contest-box row" ng-repeat='submission in submissions'>
+                        <div ng-include src="'templates/submits/companysubmits.html'"></div>
                     </div>
                 </div>
             </div>
-            <div ng-if='user.type == "company"'>
-                <table ng-show='view == "table"' class='table table-hover text-center' style='border-radius:5px;background:#fff;'>
-                    <thead>
-                        <tr>
-                            <td>Actions</td>
-                            <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign</td>
-                            <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
-                            <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads</td>
-                            <td style='cursor:pointer' ng-click='predicate="views";reverse=!reverse'>Views</td>
-                            <td style='cursor:pointer' ng-click='predicate="votes";reverse=!reverse'>Upvotes</td>
-                            <td style='cursor:pointer' ng-click='predicate="website_clicks";reverse=!reverse'>Site Clicks</td>
-                            <td style='cursor:pointer' ng-click='predicate="facebok_clicks";reverse=!reverse'>Facebook Clicks</td>
-                            <td style='cursor:pointer' ng-click='predicate="twitter_clicks";reverse=!reverse'>Twitter Clicks</td>
-                        </tr>
-                    </thead>
-                    <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
-                        <td>
-                            <div uib-dropdown>
-                                <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
-                                <ul uib-dropdown-menu role="menu">
-                                    <li role='menuitem'><a href="/contest/{{contest.id}}">View Campaign</a></li>
-                                    <li ng-if='contest.paid == "0"' role='menuitem'><a href ng-click='open_payment(contest)'>Pay for Campaign</a></li>
-                                    <li role='menuitem'><a href="/edit/{{contest.id}}">Edit Campaign</a></li>
-                                    <li ng-if='contest.status == "needs_winner"' role='menuitem'><a ng-click='choosing_winner(contest)'>Choose winner</a></li>
-                                    <li ng-if='contest.status == "completed"' role='menuitem'><a ng-click='view_pcp(contest.id)'>View Winner</a></li>
-                                </ul>
+            <div ng-show='view == "pcp"'>
+                <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+                    <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
+                    <div class='contest-box row'>
+                        <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
+                            <div class='col-xs-12 text-left'>
+                                <span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
                             </div>
-                        </td>
-                        <td>
-                            <p style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</p>
-                            <!--<a href='/contest/{{contest.id}}' style='color:#ff5c00;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>-->
-                            <small>
-							<span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
-							<span ng-if='contest.status == "draft"'>No start : Draft</span> -
-							<span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
-							<span ng-if='contest.status == "draft"'>No stop : Draft</span>
-						</small>
-                        </td>
-                        <td>{{contest.status | capUnderscore}}</td>
-                        <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
-                        <td>{{contest.views | number}}</td>
-                        <td>{{contest.votes | number}}</td>
-                        <td>{{contest.website_clicks | number}}</td>
-                        <td>{{contest.facebook_clicks | number}}</td>
-                        <td>{{contest.twitter_clicks | number}}</td>
-                    </tr>
-                </table>
-                <div ng-show='view == "winner"'>
-                    <div class='col-xs-12'>
-                        <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
-                    </div>
-                    <div class='col-xs-12'>
-                        <h3 class='text-center'>Choose a winner</h3></div>
-                    <div class='col-sm-4 hidden-xs'>
-                        <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
-                        </div>
-                    </div>
-                    <div class='col-sm-4 hidden-xs'>
-                        <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
-                        </div>
-                    </div>
-                    <div class='col-sm-4 hidden-xs'>
-                        <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
-                        </div>
-                    </div>
-                    <div class='col-xs-12 visible-xs'>
-                        <div class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits-new.html'"></div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-show='view == "pcp"'>
-                    <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
-                        <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
-                        <div class='contest-box row'>
-                            <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
-                                <div class='col-xs-12 text-left'>
-                                    <span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
-                                </div>
-                                <div class='col-xs-12' style='margin-top:15px;'>
-                                    <div class="contest-content">
-                                        <h4 style='color:#333' ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
-                                        <h4 style='color:#333' ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
-                                    </div>
-                                </div>
-                                <div class='col-xs-12' style='margin-bottom:10px;'>
-                                    <img style='max-width:100%' ng-src='{{winner.winner.attachment}}'>
-                                </div>
-                                <div class='col-xs-12'>
-                                    <h3 style='color:#ff5c00;' class='text-left' ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3></div>
-                                <div class='col-xs-12'>
-                                    <h5 class='text-left'>- {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5></div>
-                                <div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
-                                    {{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>
+                            <div class='col-xs-12' style='margin-top:15px;'>
+                                <div class="contest-content">
+                                    <h4 style='color:#333' ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
+                                    <h4 style='color:#333' ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
                                 </div>
                             </div>
-                            <div class='col-xs-12 col-sm-6'>
-                                <h4>{{winner.contest.platform | capitalize}} - {{winner.contest.objective | capUnderscore}} - {{winner.contest.min_age}} to {{winner.contest.max_age}} <span ng-switch on="winner.contest.gender">
-								  <span ng-switch-when="1">Men</span>
-								  <span ng-switch-when="2">Women</span>
-								  <span ng-switch-default>Men and Women</span>
-								</span>
-				    	</h4>
-                                <h5>Ended {{contest.stop_time | dashDate}}</h5>
-                                <div class='col-xs-12'>
-                                    <a style='margin-bottom: 10px;' class='btn btn-oj col-xs-8 pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
-                                </div>
-                                <div class='col-xs-12' ng-switch on='winner.contest.platform'>
-                                    <a ng-switch-when='facebook' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Facebook Campaign</a>
-                                    <a ng-switch-when='instagram' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Instagram Campaign</a>
-                                    <a ng-switch-when='twitter' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://ads.twitter.com'>Launch Twitter Campaign</a>
-                                </div>
+                            <div class='col-xs-12' style='margin-bottom:10px;'>
+                                <img style='max-width:100%' ng-src='{{winner.winner.attachment}}'>
+                            </div>
+                            <div class='col-xs-12'>
+                                <h3 style='color:#ff5c00;' class='text-left' ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3></div>
+                            <div class='col-xs-12'>
+                                <h5 class='text-left'>- {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5></div>
+                            <div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
+                                {{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>
+                            </div>
+                        </div>
+                        <div class='col-xs-12 col-sm-6'>
+                            <h4>{{winner.contest.platform | capitalize}} - {{winner.contest.objective | capUnderscore}} - {{winner.contest.min_age}} to {{winner.contest.max_age}} <span ng-switch on="winner.contest.gender">
+                  <span ng-switch-when="1">Men</span>
+                  <span ng-switch-when="2">Women</span>
+                  <span ng-switch-default>Men and Women</span>
+                </span>
+              </h4>
+                            <h5>Ended {{contest.stop_time | dashDate}}</h5>
+                            <div class='col-xs-12'>
+                                <a style='margin-bottom: 10px;' class='btn btn-oj col-xs-8 pull-right' ng-if='winner.winner.attachment' href='{{winner.winner.attachment}}' download='winner.jpg'>Download Image</a>
+                            </div>
+                            <div class='col-xs-12' ng-switch on='winner.contest.platform'>
+                                <a ng-switch-when='facebook' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Facebook Campaign</a>
+                                <a ng-switch-when='instagram' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://business.facebook.com'>Launch Instagram Campaign</a>
+                                <a ng-switch-when='twitter' class='btn btn-oj col-xs-8 pull-right' target='_blank' href='https://ads.twitter.com'>Launch Twitter Campaign</a>
                             </div>
                         </div>
                     </div>
@@ -374,67 +324,7 @@
         </div>
     </div>
 </div>
-<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
-    $('#myModalnew').on('show.bs.modal', function() {
-        $('.container').addClass('blur');
-    })
-
-    $('#myModalnew').on('hide.bs.modal', function() {
-        $('.container').removeClass('blur');
-    })
+fbq('track', 'PageView');
+window.Intercom('update');
 </script>
-<style>
-    .blur {
-        -webkit-filter: blur(5px) grayscale(20%);
-    }
-
-    .modal-backdrop {
-        background-color: #fff;
-        opacity: 0.5;
-    }
-
-    @media (min-width: 768px) .modal-content {
-        -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
-        box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
-    }
-
-    .modal-header {
-        border-left: 1px solid #ccc;
-        border-top: 1px solid #ccc;
-        border-right: 1px solid #ccc;
-        border-top-left-radius: 6px;
-        border-top-right-radius: 6px;
-    }
-
-    .modal-body {
-      border-left: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      padding-top: 10px;
-      padding-right: 10px;
-      padding-left: 10px;
-    }
-
-    .modal-content {
-        background-color: #f4f7f9;
-        border: 0;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-
-    .modal-dialog {
-        color: #526880;
-    }
-
-    .modal-footer {
-       border-top: none;
-       border-left: 1px solid #ccc;
-       border-right: 1px solid #ccc;
-       border-bottom-left-radius: 6px;
-       border-bottom-right-radius: 6px;
-       border-bottom: 1px solid #ccc;
-       padding-bottom: 10px;
-       padding-right:10px;
-       padding-top:30px;
-    }
-</style>
