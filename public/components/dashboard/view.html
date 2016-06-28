@@ -100,7 +100,8 @@
                                 </div>
                             </div>
                             <div class='text-center'>
-                                <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
+                                <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")' style='margin-bottom:10px;'>Pay {{payment_obj.price | currency}}</button>
+                                <button ng-show="payment_obj.pay_for=='ab'" class='btn btn-oj col-xs-12 btn-secondary' ng-click="open_payment(winner_contest,'confirm_ab')">Back</button>
                                 <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                         </form>
@@ -109,9 +110,6 @@
                 <div ng-show='payment_obj.price == 0.00' class='text-center row'>
                     <h4>No need for payment, this campaign is on us!</h4>
                     <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
-                </div>
-                <div ng-show="payment_obj.pay_for=='ab'" class='text-center row'>
-                    <button class='btn btn-oj col-xs-12' ng-click="open_payment(winner_contest,'confirm_ab')">Back</button>
                 </div>
             </div>
         </div>
