@@ -22,7 +22,7 @@
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
                 <h3><strong>Campaign Payment</strong></h3>
-                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} <!--for {{payment_obj.ab_days}} Days--></h4>
+                <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} for {{payment_obj.ab_days}} Days</h4>
                 <h4 ng-show="payment_obj.pay_for=='purchase'">Purchase {{payment_obj.submission_ids.length}} Ads</h4>
             </div>
             <div class="modal_bot">
