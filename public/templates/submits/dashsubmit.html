@@ -16,8 +16,8 @@
   <div class='avatar'>
       <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
   </div>
-  <h5 class='winner-name' ng-if="{{user.first_name}} && {{user.last_name == {{submission.owner.first_name}} && {{submission.owner.last_name}}">{{user.first_name}} {{user.last_name |firstChar}}.</h5>
-  <h5 class='winner-name' ng-if="{{user.first_name}} && {{user.last_name != {{submission.owner.first_name}} && {{submission.owner.last_name}}">{{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+  <h5 class='winner-name' ng-if="{{user.first_name}} && {{user.last_name}} == {{submission.owner.first_name}} && {{submission.owner.last_name}}">{{user.first_name}} {{user.last_name |firstChar}}.</h5>
+  <h5 class='winner-name' ng-if="{{user.first_name}} && {{user.last_name}} != {{submission.owner.first_name}} && {{submission.owner.last_name}}">{{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
   <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
   <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
 </div>
