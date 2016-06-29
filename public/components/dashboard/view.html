@@ -140,15 +140,20 @@
                 <h4>You’ve selected {{payment_obj.submission_ids.length}} submissions.</h4>
             </div>
             <div class="modal_bot">
-                <div class="form-group">
+                <div class="form-group col-xs-12">
+                  <div class="col-xs-6">
                     <label for="ab-aday" class="control-label">How much would you like to spend testing the following ads?</label>
-                    <p><small>Each test will last approximately 24 hours.</small></p>
-                    <div class="input-group">
+                  </div>
+                    <div class="input-group col-xs-6">
                         <div class="input-group-addon">$</div>
                         <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
                         <!--<div class="input-group-addon">.00</div>-->
                     </div>
-                </div>
+                  </div>
+                  <div class="form-group col-xs-6">
+                    <p><small>Each test will last approximately 24 hours.</small></p>
+                  </div>
+
                 <!--<div class="form-group">
                     <label for="ab-days">How many days would you like to run the ads?</label>
                     <div class="input-group">
