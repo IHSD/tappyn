@@ -269,7 +269,7 @@
                           <h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3></div>
                         <div class="col-xs-6">
                             <button class='btn btn-oj' ng-show="winner_contest.status == 'pending_testing'" ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
-                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")'>Purchase</button>
+                            <button class='btn btn-oj' ng-if="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")'>Skip To Purchase</button>
                         </div>
                         <div class="col-xs-6 text-right">
                             <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
