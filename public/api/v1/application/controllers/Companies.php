@@ -292,7 +292,7 @@ class Companies extends CI_Controller
         }
 
         if ($amount > 000) {
-            $chagre = $this->get_charge();
+            $charge = $this->get_charge();
         } else {
             $charge = array();
         }
@@ -350,7 +350,7 @@ class Companies extends CI_Controller
             $this->responder->fail("We were unable to process your request1111")->code(500)->respond();
             die();
         }
-        return $chagre;
+        return $charge;
     }
 
     public function setAsDefault()
