@@ -1,3 +1,21 @@
+<div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+            </div>
+            <div class="modal-body-sub text-center">
+                <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)
+                    <br>
+                </p>
+            </div>
+            <div class="modal-footer-sub text-right">
+                <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show='now_model == "adding_payment"'>
         <div class="payment_modal">
@@ -325,7 +343,71 @@
         </div>
     </div>
 </div>
+<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script>
+$('#myModalnew').on('show.bs.modal', function() {
+    $('.container').addClass('blur');
+})
+
+$('#myModalnew').on('hide.bs.modal', function() {
+    $('.container').removeClass('blur');
+})
+</script>
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
+<style>
+.blur {
+    -webkit-filter: blur(5px) grayscale(20%);
+}
+
+.modal-backdrop {
+    background-color: #fff;
+    opacity: 0.5;
+}
+
+@media (min-width: 768px) .modal-content {
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+}
+
+.modal-header {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.modal-content {
+    background-color: #f4f7f9;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.modal-dialog {
+    color: #526880;
+}
+
+.modal-body-sub {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.modal-footer-sub {
+    border-top: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+}
+</style>
