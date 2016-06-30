@@ -26,7 +26,7 @@
 								<div ng-show='payments.length > 0'>
 									<div class='payment-method-container'>
 										<div class='row'>
-											<div ng-class='{"highlight_payment" : payment.id == passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+											<div ng-class='{"highlight_payment" : payment.id == passing_method}' style="border: 1px solid #CCC;" class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
 												<h5>
 													<img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
 													<img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
