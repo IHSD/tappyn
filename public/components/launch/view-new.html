@@ -21,7 +21,7 @@
                         <div ng-show='payments.length > 0'>
                             <div class='payment-method-container'>
                                 <div class='row'>
-                                    <div ng-class='{"highlight_payment" : payment.id == passing_method}' style="border: 1px solid #CCC;" class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card pay-remember' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+                                    <div ng-class='{"highlight_payment" : payment.id == passing_method}' style="border: 1px solid #CCC;" class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
                                         <h5>
                                   <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
                                   <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                         <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
-                        <div class='text-center' style="padding-top:10px;padding-bottom:20px;">
+                        <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
                             <button class='btn btn-oj' ng-click='old_payment()'>Pay {{price | currency}}</button>
                         </div>
                         <div class='text-center'>
@@ -746,9 +746,5 @@ hr {
 .addthis_button_facebook,
 .addthis_button_email {
     margin: 0 10px;
-}
-.pay-remember:hover,
-.pay-remember:focus {
-  border-color: #ff5c00;
 }
 </style>
