@@ -133,7 +133,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.payment_obj.contest_id = contest.id;
         $scope.payment_obj.submission_ids = $scope.grab_checked_submission();
         if ($scope.payment_obj.submission_ids.length == 0) {
-            $scope.set_alert("Please select at least one submission", "error");
+            $scope.set_alert("Please select at least one ad to continue", "error");
             return;
         }
         if (type == 'confirm_ab') {
