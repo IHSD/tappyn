@@ -197,6 +197,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
 
     $scope.submit_contest = function(contest, pay) {
+        contest.paid = (pay == 'draft') ? 0 : 1;
         contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
         if (contest.id) {
             launchFactory.update(contest).success(function(response) {
@@ -218,8 +219,11 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     if (response.success) {
                         $scope.contest.id = response.data.id;
                         $scope.contest.attachment_url = response.data.attachment_url;
-                        if (pay) $scope.open_payment();
-                        else {
+                        if (pay == 'draft') {
+                            window.location = "/dashboard";
+                        } else if (pay) {
+                            $scope.open_payment();
+                        } else {
                             //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                             $scope.set_step('done');
                             fbq('track', 'AddToWishlist');

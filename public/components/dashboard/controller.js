@@ -7,6 +7,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.confirm_winner = { show: false, submission: null };
     $scope.confirm_ab = { show: false };
     $scope.now_model = '';
+    $scope.voucher = { visible: false };
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
             if (response.success) $scope.dash = response.data;
@@ -260,10 +261,17 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.grab_checked_submission = function() {
         var tmp = [];
-        $(".container input:checked").each(function() {
-            tmp.push($(this).val());
+        $(".container .winner-contest .checkbox-container:visible input:checked").each(function() {
+            var val = $(this).val();
+            if ($.inArray(val, tmp) == -1) {
+                tmp.push(val);
+            }
         });
         return tmp;
+    }
+
+    $scope.select_all = function() {
+        $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
     }
 
 })
