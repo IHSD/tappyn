@@ -285,20 +285,21 @@
                     <h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6">
+                          <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
-                                <button class='btn btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
-                                <button class='btn btn-oj btn-secondary' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase</button>
-                                <span ng-if="winner_contest.status == 'pending_testing'">
-                                    <button class='btn btn-oj btn-secondary'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase</button>
-                                    <button class='btn btn-oj' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
-                                </span>
+                                <button class='btn btn-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
+
                             </span>
                         </div>
                         <div class="col-xs-6 text-right">
                             <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;' ng-if="winner_contest.status == 'live' || winner_contest.status == 'draft'">View Campaign</a>
                             <a class='btn btn-oj' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now</a>
-                            <button class='btn btn-oj btn-secondary' ng-click='back_table()'>Back</button>
+                            <button class='btn btn-dash btn-oj btn-secondary' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase</button>
+                            <span ng-if="winner_contest.status == 'pending_testing'">
+                                <button class='btn btn-oj btn-secondary'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase</button>
+                                <button class='btn btn-oj' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -451,7 +452,7 @@ window.Intercom('update');
     padding-top: 30px;
 }
 
-.btn:focus {
+.btn-dash:focus {
     color: #ff5e00;
 }
 </style>
