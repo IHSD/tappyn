@@ -275,6 +275,8 @@ class Companies extends CI_Controller
         $charge = false;
 
         $this->load->library('price_lib');
+        $this->load->library('stripe/stripe_charge_library');
+
         $post            = $this->input->post();
         $post['go_pay']  = true;
         $post['ab_days'] = 1;
@@ -292,7 +294,7 @@ class Companies extends CI_Controller
         }
 
         if ($amount > 000) {
-            $charge = $this->get_charge();
+            $charge = $this->get_charge($post, $amount);
         } else {
             $charge = array();
         }
@@ -316,34 +318,37 @@ class Companies extends CI_Controller
         }
     }
 
-    public function get_charge()
+    public function get_charge($post, $amount)
     {
-        $charge = false;
+        $contest_id  = $post['contest_id'];
+        $metadata    = array();
+        $description = 'Charge for contest ' . $contest_id . $post['pay_for'];
+        $charge      = false;
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
         if ($this->input->post('stripe_token')) {
             if ($this->input->post('save_method')) {
                 // Update the customer with the new payment method, and get the source id
                 if ($this->stripe_customer_id) {
                     $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
-                    $charge   = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, null, $amount);
+                    $charge   = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, null, $amount, $metadata, $description);
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
                 else {
                     // Create the customer
                     $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripe_token'), $this->ion_auth->user()->row()->email);
                     // Charge the customer_id
-                    $charge = $this->stripe_charge_library->create($contest_id, null, $customer->id, null, $amount);
+                    $charge = $this->stripe_charge_library->create($contest_id, null, $customer->id, null, $amount, $metadata, $description);
                 }
             }
             // The user does not want to save the method, so we just charge the card
             else {
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), null, null, $amount);
+                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), null, null, $amount, $metadata, $description);
             }
         }
 
         // Check if we have a customer, and chosen source
         else if ($this->input->post('source_id') && $this->stripe_customer_id) {
-            $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, $this->input->post('source_id'), $amount);
+            $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, $this->input->post('source_id'), $amount, $metadata, $description);
         }
         // Tell them we cant process their request
         else {
