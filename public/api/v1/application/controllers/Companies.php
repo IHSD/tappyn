@@ -347,8 +347,8 @@ class Companies extends CI_Controller
         }
 
         // Check if we have a customer, and chosen source
-        else if ($this->input->post('source_id') && $this->stripe_customer_id) {
-            $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, $this->input->post('source_id'), $amount, $metadata, $description);
+        else if ($post['passing_method'] && $this->stripe_customer_id) {
+            $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, $post['passing_method'], $amount, $metadata, $description);
         }
         // Tell them we cant process their request
         else {
