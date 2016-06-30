@@ -248,20 +248,20 @@ class Contests extends CI_Controller
                 $industry = array_slice($industry, 0, 3);
                 $industry = implode(',', $industry);
             }
-            $location_box = $this->input->post('location_box');
-            if (is_array($location_box)) {
-                $location_box = $location_box['id'];
-            }
+            $location_box      = $this->input->post('location_box');
+            $location_box      = is_array($location_box) ? $location_box['id'] : 0;
             $tone_of_voice_box = $this->input->post('tone_of_voice_box');
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
 
+            $paid       = $this->input->post('paid');
+            $paid       = is_null($paid) ? 1 : $paid;
             $start_time = date('Y-m-d H:i:s');
             $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
             // Do some preliminary formatting
             $data = array(
-                'paid'                => 1,
+                'paid'                => $paid,
                 'start_time'          => $start_time,
                 'stop_time'           => $stop_time,
 
