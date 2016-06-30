@@ -592,6 +592,6 @@ class Contests extends CI_Controller
         $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
         $data       = array('paid' => 1, 'start_time' => $start_time, 'stop_time' => $stop_time);
         $this->contest->update($id, $data);
-        $this->responder->message("Contest successfully public")->data($data)->respond();
+        $this->responder->message("Your campaign has been launched!")->data($data)->respond();
     }
 }

@@ -286,8 +286,8 @@
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6">
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
-                                <button class='btn btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>select all</button>
-                                <button class='btn btn-oj btn-secondary' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase</button>
+                                <button class='btn-sub-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
+                                <button class='btn-sub-dash btn-oj btn-secondary' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase</button>
                                 <span ng-if="winner_contest.status == 'pending_testing'">
                                     <button class='btn btn-oj btn-secondary'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase</button>
                                     <button class='btn btn-oj' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
@@ -449,5 +449,9 @@ window.Intercom('update');
     padding-bottom: 10px;
     padding-right: 10px;
     padding-top: 30px;
+}
+
+.btn-sub-dash:focus {
+    color: #ff5e00;
 }
 </style>
