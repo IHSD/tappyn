@@ -297,6 +297,9 @@
                             <span ng-if="winner_contest.status == 'pending_testing'">
                               <h4 class="text-left" style="padding-top:30px;">Please de-select ads that do not match your branding:</h4>
                             </span>
+                            <span ng-if="winner_contest.status == 'pending_purchase'">
+                              <h4 class="text-left" style="padding-top:30px;">Please select the ads you'd like to purchase and use in your future ad campaigns:</h4>
+                            </span>
                         </div>
                         <div class="col-xs-6 text-right">
                             <a class='btn btn-oj btn-secondary btn-lg' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;' ng-if="winner_contest.status == 'live' || winner_contest.status == 'draft'">View Campaign</a>
@@ -304,7 +307,7 @@
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <button class='btn btn-dash btn-oj btn-secondary btn-lg' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <span ng-if="winner_contest.status == 'pending_testing'">
-                              <button class='btn btn-oj btn-lg' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
+                              <button class='btn btn-oj btn-lg' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
                                 <button class='btn btn-oj btn-secondary btn-dash btn-lg'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             </span>
                         </div>
