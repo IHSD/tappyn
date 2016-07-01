@@ -12,7 +12,7 @@
     </div>
     <div class="col-xs-11">
         <nav class='hidden-xs' id='top-scroll'>
-            <ul id="navtab">
+            <ul>
                 <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Create</a></li>
                 <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create</a></li>
                 <li ng-show='!user' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
@@ -73,17 +73,10 @@
         </nav>
     </div>
 </header>
-<script>
-$("#navtab a").click(function() {
-    $('a').removeClass('active');
-    $(this).addClass("active");
-});
-</script>
+
 
 <style>
-.active {
-  color: #ff5c00;
-}
+
 .glyph-lg:hover {
   color: #ff5c00;
 }

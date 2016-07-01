@@ -10,7 +10,7 @@
                 <br>
                 <p style="margin:0 0 0 0">Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
                     <br>
-                
+
             </div>
             <div class="modal-footer-sub text-right">
                 <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
@@ -298,8 +298,8 @@
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now</a>
                             <button class='btn btn-dash btn-oj btn-secondary' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase</button>
                             <span ng-if="winner_contest.status == 'pending_testing'">
-                              <button class='btn btn-oj' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test</button>
-                                <button class='btn btn-oj btn-secondary btn-dash'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase</button>
+                              <button class='btn btn-oj btn-lg' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
+                                <button class='btn btn-oj btn-secondary btn-dash btn-lg'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase</button>
                             </span>
                         </div>
                     </div>
