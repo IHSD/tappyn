@@ -191,7 +191,7 @@
         <div class='col-xs-12' ng-if='user.type == "company"'>
             <div class='col-xs-12'>
                 <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
-                <h4 class='text-center' style='margin-bottom: 25px;'><span ng-bind="dash.contests.length"></span> Campaigns</h4>
+                <h4 class='text-center'><span ng-bind="dash.contests.length"></span> Campaigns</h4>
                 <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
                 <!--<hr style='border-color:#eee'>-->
 
@@ -297,9 +297,9 @@
                             </span>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <a class='btn btn-oj' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;' ng-if="winner_contest.status == 'live' || winner_contest.status == 'draft'">View Campaign</a>
-                            <a class='btn btn-oj' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
-                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now</a>
+                            <a class='btn btn-oj btn-secondary btn-lg' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;' ng-if="winner_contest.status == 'live' || winner_contest.status == 'draft'">View Campaign</a>
+                            <a class='btn btn-oj btn-secondary btn-lg' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <button class='btn btn-dash btn-oj btn-secondary btn-lg' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <span ng-if="winner_contest.status == 'pending_testing'">
                               <button class='btn btn-oj btn-lg' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
