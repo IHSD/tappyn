@@ -24,14 +24,14 @@
     <div class="checkbox-container">
       <p class="text-center">Select this ad:</p>
         <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
-        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok"></span></label>
+        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing'">
     <div class="checkbox-container" id="testing">
       <p class="text-center">Select this ad:</p>
         <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
-        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok"></span></label>
+        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -40,3 +40,12 @@ $(function(){
     $('#testing :checkbox').attr('checked', 'checked');
 });
 </script>
+<style>
+.checkbox-container input[type="checkbox"]:checked + label span {
+    color: #ff6c00;
+    border: 2px solid #ff6c00;
+    height: 50px;
+    width: 50px;
+    padding-top:10px;
+}
+</style>
