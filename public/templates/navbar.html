@@ -12,7 +12,7 @@
     </div>
     <div class="col-xs-11">
         <nav class='hidden-xs' id='top-scroll'>
-            <ul>
+            <ul class="nav">
                 <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Create</a></li>
                 <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create</a></li>
                 <li ng-show='!user' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
@@ -45,7 +45,7 @@
             </ul>
         </nav>
         <nav class='visible-xs'>
-            <ul>
+            <ul class="nav">
                 <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
                     <a href>
                         <span class='notifications-container'>
@@ -74,17 +74,26 @@
     </div>
 </header>
 <script>
-$(document).ready(function(){
-  $('ul li a').click(function(){
-    $('li a').removeClass("active");
-    $(this).addClass("active");
-});
-});
+var selector, elems, makeActive;
+
+selector = '.nav li';
+
+elems = document.querySelectorAll(selector);
+
+makeActive = function () {
+    for (var i = 0; i < elems.length; i++)
+        elems[i].classList.remove('active');
+
+    this.classList.add('active');
+};
+
+for (var i = 0; i < elems.length; i++)
+    elems[i].addEventListener('mousedown', makeActive);
 </script>
 <style>
 
-.active {
-  color: #ff5c00;
+li.active {
+    color: #ff5c00;
 }
 
 .glyph-lg:hover {
