@@ -299,7 +299,7 @@ header nav ul li .btn:hover {
 }
 
 .btn-wj:hover {
-    background: #fff;
+    /**background: #fff;**/
     color: #ff5c00;
     border: 1px solid #ff5c00;
 }
