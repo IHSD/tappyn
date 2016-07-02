@@ -251,9 +251,9 @@
                 <thead>
                     <tr>
                         <!-- <td class='text-center' style='width: 75px;'>Actions</td> -->
-                        <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign <span class="glyphicon glyphicon-sort"></span></td>
-                        <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status <span class="glyphicon glyphicon-sort"></span></td>
-                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads <span class="glyphicon glyphicon-sort"></span></td>
+                        <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
+                        <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
+                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
                     </tr>
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
