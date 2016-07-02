@@ -284,21 +284,29 @@
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                 </tr>
             </table>
-            <div class="winner-contest
-" ng-show='view == "winner"'>
+            <div class="winner-contest" ng-show='view == "winner"'>
                 <div class='col-xs-12'>
-                    <h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>
+                  <span ng-if="winner_contest.status == 'pending_testing'">
+                    <h3 class="text-center" style="margin-bottom:30px;">Please de-select ads that do not match your branding:</h3>
+                  </span>
+                  <span ng-if="winner_contest.status == 'pending_purchase'">
+                    <h3 class="text-center" style="margin-bottom:30px;">Please select the ads you'd like to purchase and use in your future ad campaigns:</h3>
+                  </span>
+                  <span ng-if="winner_contest.status == 'live'">
+                    <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently live and ads are being created about your business:</h3>
+                  </span>
+                  <span ng-if="winner_contest.status == 'testing'">
+                    <h3 class="text-center" style="margin-bottom:30px;">Your ads are currently being tested. Check back in tomorrow for the results.</h3>
+                  </span>
+                  <span ng-if="winner_contest.status == 'purchased'">
+                    <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently closed.</h3>
+                  </span>
+                    <!--<h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>-->
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6" style="margin-top:10px;">
                           <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
                                 <button class='btn btn-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
-                            </span>
-                            <span ng-if="winner_contest.status == 'pending_testing'">
-                              <h4 class="text-left" style="padding-top:30px;">Please de-select ads that do not match your branding:</h4>
-                            </span>
-                            <span ng-if="winner_contest.status == 'pending_purchase'">
-                              <h4 class="text-left" style="padding-top:30px;">Please select the ads you'd like to purchase and use in your future ad campaigns:</h4>
                             </span>
                         </div>
                         <div class="col-xs-6 text-right">
