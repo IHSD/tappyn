@@ -289,7 +289,7 @@
                     <!--<h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>-->
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6" style="margin-top:10px;">
-                          <button class='btn btn-oj btn-secondary removebutton' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                          <button class='btn btn-oj btn-secondary' type="reset" ng-click='back_table();reset();'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
                                 <button class='btn btn-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
                             </span>
@@ -322,7 +322,7 @@
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'><h4>Your ads will appear here.</h4></div>
             </div>
-            <div class='launch-page-overlaybox launch-page-box' id="removeBox">
+            <div class='launch-page-overlaybox launch-page-box'>
                 <div class="container">
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
@@ -408,7 +408,6 @@
         </div>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
 $('#myModalnew').on('show.bs.modal', function() {
@@ -427,13 +426,6 @@ $('#myModalcompany').on('show.bs.modal', function() {
 $('#myModalcompany').on('hide.bs.modal', function() {
     $('.container').removeClass('blur');
 })
-</script>
-<script>
-$(document).ready(function(){
-    $(".removebutton").click(function(){
-        $("#removeBox").remove();
-    });
-});
 </script>
 <script>
 fbq('track', 'PageView');

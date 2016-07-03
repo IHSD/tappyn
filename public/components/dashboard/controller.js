@@ -274,4 +274,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
     }
 
+    $scope.reset = function() {
+    $scope.list = {};
+}
+
 })
