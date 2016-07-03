@@ -342,16 +342,12 @@
                 <div class="container">
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
-                          <h4 class='text-left' style='color:#333'>
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span style='font-weight:300;font-size:22'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
-                          </h4>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
-                          <h4 class='text-left' style='color:#333'>
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span style='font-weight:300;font-size:22'><strong>Please de-select ads that do not match your branding.</strong></span>
-                          </h4>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please de-select ads that do not match your branding.</strong></span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                         </div>
