@@ -32,21 +32,6 @@
         <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
-<script>
-$( document ).ready( function(){
-    var testing = $( ':checkbox' );
-
-    // Check all checkboxes
-    testing.prop( 'checked', true );
-
-    // Check if they are all checked and alert a message
-    // or, if not, alert something else.
-    if ( testing.filter( ':checked' ).length == testing.length )
-        alert( 'All Checked' );
-    else
-        alert( 'Not All Checked' );
-});
-</script>
 <style>
 .checkbox-container input[type="checkbox"]:checked + label span {
     color: #ff6c00;

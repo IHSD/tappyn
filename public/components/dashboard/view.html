@@ -428,6 +428,14 @@ $('#myModalcompany').on('hide.bs.modal', function() {
 })
 </script>
 <script>
+$( document ).ready( function(){
+    var testing = $( ':checkbox' );
+
+    // Check all checkboxes
+    testing.prop( 'checked', true );
+});
+</script>
+<script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
