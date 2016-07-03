@@ -271,7 +271,7 @@
                         </div>
                     </td> -->
                     <td>
-                        <a ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-click='choosing_winner(contest);showme=false;' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
