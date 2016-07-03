@@ -345,6 +345,26 @@
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'><h4>Your ads will appear here.</h4></div>
             </div>
+            <div class='launch-page-overlaybox launch-page-box'>
+                <div class="container">
+                    <div class='row'>
+                        <div ng-show="winner_contest.status == 'testing'">
+                          <h4 class='text-left' style='color:#333'>
+              <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                                              <span style='font-weight:300;font-size:22'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
+                                              <!--<br>
+                                              <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>-->
+                                              </h4>
+                            <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-objective")'>Continue</button>-->
+                        </div>
+                            <!--<div class='col-xs-12 col-sm-6'>
+                                <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
+                            </div>-->
+                        </div>
+
+                        </div>
+                    </div>
+
             <div ng-show='view == "pcp"'>
                 <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
                     <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
