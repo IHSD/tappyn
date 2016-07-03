@@ -48,7 +48,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.back_table = function() {
         $scope.view = 'table';
-        contest.status = null;
+        $scope.contest.status = null;
     }
 
 
