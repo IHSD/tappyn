@@ -338,7 +338,7 @@
                         <div ng-show="winner_contest.status == 'draft'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Launch your free campaign now!</strong></span>
-                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                         </div>
