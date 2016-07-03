@@ -311,7 +311,10 @@ class Submissions extends CI_Controller
         $winners = $this->db->select('created_at, contest_id, amount, user_id, submission_id')->from('payouts')->limit(15)->order_by('created_at', 'desc')->get()->result();
         foreach ($winners as $winner) {
             // We have the submission I
-            $submission          = $this->submission->get($winner->submission_id);
+            $submission = $this->submission->get($winner->submission_id);
+            if (!$submission) {
+                continue;
+            }
             $submission->contest = $this->contest->get($winner->contest_id);
             if (!$submission->contest) {
                 continue;
