@@ -286,18 +286,6 @@
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
                 <div class='col-xs-12'>
-                  <span ng-if="winner_contest.status == 'pending_testing'">
-                    <h3 class="text-center" style="margin-bottom:30px;">Please de-select ads that do not match your branding:</h3>
-                  </span>
-                  <span ng-if="winner_contest.status == 'pending_purchase'">
-                    <h3 class="text-center" style="margin-bottom:30px;">Please select the ads you'd like to purchase and use in your future ad campaigns:</h3>
-                  </span>
-                  <span ng-if="winner_contest.status == 'live'">
-                    <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently live and ads are being created about your business:</h3>
-                  </span>
-                  <span ng-if="winner_contest.status == 'purchased'">
-                    <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently closed.</h3>
-                  </span>
                     <!--<h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>-->
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6" style="margin-top:10px;">
@@ -307,11 +295,7 @@
                             </span>
                         </div>
                         <div class="col-xs-6 text-right">
-                            <a class='btn btn-oj btn-secondary btn-lg' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;' ng-if="winner_contest.status == 'live' || winner_contest.status == 'draft'">View Campaign</a>
-                            <a class='btn btn-oj btn-secondary btn-lg' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
-                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
-                            <button class='btn btn-oj btn-lg' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                        </div>
+                      </div>
                     </div>
                 </div>
                 <div ng-if="submissions.length">
@@ -343,13 +327,35 @@
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Check back in 24 hours for results or email us with any questions.</span></strong></span>
+                        </div>
+                        <div ng-show="winner_contest.status == 'live'">
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and ads are being created about your business.</strong></span>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                        </div>
+                        <div ng-show="winner_contest.status == 'draft'">
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Launch your free campaign now!</strong></span>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                        </div>
+                        <div ng-show="winner_contest.status == 'purchased'">
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently closed.</strong></span>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please de-select ads that do not match your branding.</strong></span>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please de-select ads that you'd like to omit from the test.</strong></span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                        </div>
+                        <div ng-show="winner_contest.status == 'pending_purchased'">
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ads you'd like to purchase and use in your future ad campaigns.</strong></span>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                         </div>
                       </div>
                     </div>
