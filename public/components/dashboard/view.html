@@ -289,7 +289,7 @@
                     <!--<h3 class='text-center' style='margin-bottom:30px;'>{{winner_contest.platform | capitalize}} - {{winner_contest.objective | capUnderscore}} ({{winner_contest.status | capUnderscore}} )</h3>-->
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6" style="margin-top:10px;">
-                          <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                          <button class='btn btn-oj btn-secondary' ng-click='back_table();removeDiv('removeBox');'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
                                 <button class='btn btn-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
                             </span>
@@ -322,7 +322,7 @@
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'><h4>Your ads will appear here.</h4></div>
             </div>
-            <div class='launch-page-overlaybox launch-page-box'>
+            <div class='launch-page-overlaybox launch-page-box' id="removeBox">
                 <div class="container">
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
@@ -331,7 +331,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'live'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and ads are being created about your business.</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and ads are being created<br>about your business.</strong></span>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                         </div>
@@ -426,6 +426,11 @@ $('#myModalcompany').on('show.bs.modal', function() {
 $('#myModalcompany').on('hide.bs.modal', function() {
     $('.container').removeClass('blur');
 })
+</script>
+<script>
+function removeDiv(removeBox) {
+   $("#"+removeBox).remove();
+}
 </script>
 <script>
 fbq('track', 'PageView');
