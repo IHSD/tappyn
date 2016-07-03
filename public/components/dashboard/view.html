@@ -295,9 +295,6 @@
                   <span ng-if="winner_contest.status == 'live'">
                     <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently live and ads are being created about your business:</h3>
                   </span>
-                  <span ng-if="winner_contest.status == 'testing'">
-                    <h3 class="text-center" style="margin-bottom:30px;">Your ads are currently being tested. Check back in tomorrow for the results.</h3>
-                  </span>
                   <span ng-if="winner_contest.status == 'purchased'">
                     <h3 class="text-center" style="margin-bottom:30px;">Your campaign is currently closed.</h3>
                   </span>
@@ -314,10 +311,6 @@
                             <a class='btn btn-oj btn-secondary btn-lg' href='/edit/{{winner_contest.id}}' ng-if="winner_contest.status == 'draft' || winner_contest.status == 'live'" style='margin-right: 10px;'>Edit Campaign</a>
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg' ng-click='set_contest_live(winner_contest)' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <button class='btn btn-oj btn-lg' ng-if="winner_contest.status == 'pending_purchase'" ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                            <span ng-if="winner_contest.status == 'pending_testing'">
-                              <button class='btn btn-oj btn-lg' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
-                                <button class='btn btn-oj btn-secondary btn-dash btn-lg'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                            </span>
                         </div>
                     </div>
                 </div>
@@ -350,21 +343,21 @@
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
                           <h4 class='text-left' style='color:#333'>
-              <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                                              <span style='font-weight:300;font-size:22'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
-                                              <!--<br>
-                                              <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>-->
-                                              </h4>
-                            <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("tp-objective")'>Continue</button>-->
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span style='font-weight:300;font-size:22'><strong>Your ads are currently being tested. Check back in 24 hours for results or email us with any questions.</strong></span>
+                          </h4>
                         </div>
-                            <!--<div class='col-xs-12 col-sm-6'>
-                                <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
-                            </div>-->
+                        <div ng-show="winner_contest.status == 'pending_testing'">
+                          <h4 class='text-left' style='color:#333'>
+                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
+                            <span style='font-weight:300;font-size:22'><strong>Please de-select ads that do not match your branding.</strong></span>
+                          </h4>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt"></span></button>
+                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
                         </div>
-
-                        </div>
+                      </div>
                     </div>
-
+                  </div>
             <div ng-show='view == "pcp"'>
                 <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
                     <button class='btn btn-oj' ng-click='back_table()' style='margin-bottom: 10px;margin-top: 10px;'>Back</button>
