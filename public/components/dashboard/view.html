@@ -366,16 +366,16 @@
                   <button class='btn btn-oj btn-secondary' style="margin-bottom:30px;" ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                     <div class='contest-box row' style="padding:10px;">
                         <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
-                            <div class='col-xs-12 text-left'>
+                            <div class='col-xs-12 text-left' style="margin-bottom:10px;">
                                 <span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
                             </div>
                             <div class='contest-image'>
                                 <img ng-src='{{winner.winner.attachment}}'>
                             </div>
                             <div class='contest-entry text-left'>
-                                <h3 ng-show='submission.headline'>{{winner.winner.headline}}</h3>
-                                <h4 ng-show='submission.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
-                                <h4 ng-show='submission.text'>{{winner.winner.text}}</h4>
+                                <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
+                                <h4 ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
+                                <h4 ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
                                 <div class='contest-upvotes disable-click'>
                                     <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
                                 </div>
