@@ -433,6 +433,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.close_login = function() {
         $rootScope.modal_up = false;
         $scope.signing_in = { show: false, type: '', object: '' };
+        $scope.add_age = false;
     }
 
     $scope.open_register = function(type, obj, group_id) {
