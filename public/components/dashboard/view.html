@@ -383,8 +383,8 @@
                               </div>
                             <div class='contest-winner text-left'>
                                 <h5 class='text-left'>- {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{winner.winner.ctr}}%</span>
-                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='winner.winner.ctr ' style="cursor:help;">{{winner.winner.ctr}}%</span>
+                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!winner.winner.ctr ' style="cursor:help;">-</span>
                               </div>
                             <!--<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
                                 {{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>
