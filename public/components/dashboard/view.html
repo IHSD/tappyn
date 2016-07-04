@@ -431,9 +431,9 @@ $('#myModalcompany').on('hide.bs.modal', function() {
 var subt_value = parseFloat($('#subt0').text());
 var start_price = parseFloat($('#subt0').attr('data-original'));
 
-$("#select-contest-{{submission.id}}").click(function(){
+$(".ser1").click(function(){
      var amountToAdd = 0.0;
-           $("#select-contest-{{submission.id}}").each(function() {
+           $(".ser1").each(function() {
                if($(this).is(":checked")){
                    amountToAdd += parseFloat($(this).attr('data-price'));
                }
