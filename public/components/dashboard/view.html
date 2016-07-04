@@ -355,7 +355,7 @@
                         <div ng-show="winner_contest.status == 'pending_purchase'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ads you'd like to purchase and use<br>in your future ad campaigns.</strong></span>
-                            <button class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase  <label id="subt0" data-original="0.00">0.00</label><span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase  $<label id="subt0" data-original="0.00">0.00</label></span></button>
                         </div>
                       </div>
                     </div>
@@ -488,5 +488,9 @@ window.Intercom('update');
 .btn-dash:focus {
     color: #ff5e00;
 }
+
+.checkbox-container input[type="checkbox"]:hover + label span:hover {
+    color: #ff5e00;
+    border: 2px solid #ff5e00;
 
 </style>
