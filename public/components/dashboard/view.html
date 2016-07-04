@@ -363,7 +363,7 @@
                   </div>
             <div ng-show='view == "pcp"'>
                 <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
-                  <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
+                  <button class='btn btn-oj btn-secondary' style="margin-bottom:30px;" ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                     <div class='contest-box row' style="padding:10px;">
                         <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
                             <div class='col-xs-12 text-left'>
@@ -383,7 +383,7 @@
                               </div>
                             <div class='contest-winner text-left'>
                                 <h5 class='text-left'>- {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{winner.submission.ctr}}%</span>
+                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{winner.winner.ctr}}%</span>
                                 <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
                               </div>
                             <!--<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
