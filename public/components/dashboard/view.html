@@ -431,15 +431,13 @@ $('#myModalcompany').on('hide.bs.modal', function() {
 var subt_value = parseFloat($('#subt0').text());
 var start_price = parseFloat($('#subt0').attr('data-original'));
 
-$("#ser1, #ser2").click(function(){
+$("#select-contest-{{submission.id}}").click(function(){
      var amountToAdd = 0.0;
-           $("#ser1").each(function() {
+           $("#select-contest-{{submission.id}}").each(function() {
                if($(this).is(":checked")){
                    amountToAdd += parseFloat($(this).attr('data-price'));
                }
            });
-
-           alert(amountToAdd);
 
            $('#subt0').text(parseFloat(amountToAdd+start_price).toFixed(2));
       });
