@@ -428,22 +428,6 @@ $('#myModalcompany').on('hide.bs.modal', function() {
 })
 </script>
 <script>
-var subt_value = parseFloat($('#subt0').text());
-var start_price = parseFloat($('#subt0').attr('data-original'));
-
-$(".ser1").click(function(){
-     var amountToAdd = 0.0;
-           $(".ser1").each(function() {
-               if($(this).is(":checked")){
-                   amountToAdd += parseFloat($(this).attr('data-price'));
-               }
-           });
-
-           $('#subt0').text(parseFloat(amountToAdd+start_price).toFixed(2));
-           console.log("#subt0");
-      });
-</script>
-<script>
 fbq('track', 'PageView');
 window.Intercom('update');
 </script>
