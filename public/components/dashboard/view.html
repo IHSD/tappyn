@@ -257,7 +257,7 @@
                     </tr>
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
-                    <!-- <td class='text-center'>
+                    <td class='text-center'>
                         <div uib-dropdown>
                             <a class='btn btn-outliner btn-sm' href uib-dropdown-toggle><span class="glyphicon glyphicon-cog"></span></a>
                             <ul uib-dropdown-menu role="menu">
@@ -269,7 +269,7 @@
                                 <li ng-if='contest.status == "purchased"' role='menuitem'><a ng-click='view_pcp(contest.id)'>View Winner</a></li>
                             </ul>
                         </div>
-                    </td> -->
+                    </td>
                     <td>
                         <a ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
