@@ -386,11 +386,11 @@
     transform: translateY(-50%) translateX(-50%);
     position: relative;
     min-width: 100%;
-    /**min-height: 100%;**/
+    min-height: 100%;
     width: auto;
     height: auto;
     object-fit: cover;
-    /**border-radius: 50%;**/
+    border-radius: 50%;
 }
 
 /* dashboard */
