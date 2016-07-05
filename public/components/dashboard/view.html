@@ -329,6 +329,7 @@
                         <div ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Check back in 24 hours for results or email us with any questions.</span></strong></span>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'live'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
