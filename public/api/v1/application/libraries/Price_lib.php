@@ -55,9 +55,9 @@ class Price_lib
             if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
                 throw new Exception("Constest status error");
             }
-            if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
-                throw new Exception("Constest status error2");
-            }
+            //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
+                //throw new Exception("Constest status error2");
+            //}
             $submission_id_count = count($post['submission_ids']);
             if (!is_array($post['submission_ids']) || !$submission_id_count) {
                 throw new Exception("please check one at least");
