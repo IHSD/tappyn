@@ -1,3 +1,19 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @amatthi
+ Unwatch 4
+  Star 0
+  Fork 0 amatthi/tappyn PRIVATE
+ Code  Issues 0  Pull requests 0  Wiki  Pulse  Graphs  Settings
+Tree: 9f9cc1e4ab Find file Copy pathtappyn/public/components/launch/view-new.html
+9f9cc1e  5 hours ago
+@amatthi amatthi ad creative remove
+2 contributors @amatthi @yuliyang
+RawBlameHistory     751 lines (731 sloc)  43.4 KB
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show='adding_payment'>
         <div class="payment_modal">
@@ -341,7 +357,7 @@
                     </select>
                 </div>
             </div>
-            <div class='row'>
+            <!--<div class='row'>
                 <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone Of Voice</label>
                 <div class="col-sm-4">
                     <div class="form-group" ng-init="contest.tone_of_voice_box = []">
@@ -353,16 +369,16 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class='row'>
+            </div>-->
+            <!--<div class='row'>
                 <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <textarea class='form-control' style="width:380px;" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
                     </div>
                 </div>
-            </div>
-            <div class='row'>
+            </div>-->
+            <!--<div class='row'>
                 <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
                 <div class="col-sm-4">
                     <div class="form-group" ng-init="contest.attachment = ''">
@@ -377,7 +393,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div ng-show='current.step == "detail"'>
@@ -626,39 +642,32 @@ $(function() {
     margin: 0;
     border-radius: 0;
 }
-
 .payment-method-container {
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 0px;
     padding-right: 0px;
 }
-
 .payment-method-card {
     padding: 10px;
 }
-
 .default_method {
     border: 1px solid #00aaff;
     border-radius: 5px;
 }
-
 .payment-method-card:hover {
     background-color: #f2f2f2;
 }
-
 .payment-method-actions {
     margin: auto;
     position: absolute;
     right: 20px;
     top: 50%;
 }
-
 hr {
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
 .inputfile {
     width: 0.1px;
     height: 0.1px;
@@ -667,7 +676,6 @@ hr {
     position: absolute;
     z-index: -1;
 }
-
 .inputfile + label {
     font-size: 1.25em;
     font-weight: 500;
@@ -679,11 +687,9 @@ hr {
     border-radius: 5px;
     border: 1px solid transparent;
 }
-
 .inputfile + label:hover {
     background-color: red;
 }
-
 .circle-it-oj {
     padding: 10px;
     border: solid 1px #ff5c00;
@@ -693,21 +699,17 @@ hr {
     float: left;
     margin-right: 20px;
 }
-
 .control-label {
     font-weight: bold;
     font-size: 20px;
     text-align: right !important;
 }
-
 .radio label {
     cursor: auto;
 }
-
 .row-preview1 {
     margin-bottom: -40px;
 }
-
 .row-preview2 {
     margin-bottom: -40px;
     margin-top: -40px;
@@ -717,32 +719,27 @@ hr {
 .addthis_toolbox {
     margin-top: 40px;
 }
-
 .addthis_button_facebook .at-icon-wrapper,
 .addthis_button_email .at-icon-wrapper {
     display: none;
 }
-
 .addthis_button_facebook {
     background-color: #3b5998;
     color: white;
     padding: 10px 30px;
     font-size: 18px;
 }
-
 .addthis_button_facebook:hover,
 .addthis_button_email:hover {
     color: white;
     text-decoration: none;
 }
-
 .addthis_button_email {
     background-color: #848484;
     color: white;
     padding: 10px 30px;
     font-size: 18px;
 }
-
 .addthis_button_facebook,
 .addthis_button_email {
     margin: 0 10px;
