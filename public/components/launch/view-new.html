@@ -183,6 +183,86 @@
 </div>
 <div class='container' style='padding-bottom: 120px;'>
     <div ng-show='current.step == "tp-platform"' id='tp-platform'>
+      <div class='row'>
+          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:1px;">Locations</label>
+          <div class="col-sm-4">
+              <!--<div class='form-group'>
+                  <h4 style="font-size:14px;"><strong>The audience and locations engagement</strong></h4>
+                  <select ng-model="contest.location_box" ng-init="contest.location_box = location_boxes[0]" ng-options="item as item.text for item in location_boxes track by item.id" class='form-control'>
+                  </select>
+              </div>-->
+              <div class='form-group'>
+                  <h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>
+                  <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:380px;">
+                      <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div class='row'>
+          <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Age</label>
+          <div class="col-sm-4 form-group">
+              <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
+              <div class='pull-left'>
+                  <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+                      <option value=''>Min Age</option>
+                  </select>
+              </div>
+              <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
+              <div class='pull-left'>
+                  <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+                      <option value=''>Max Age</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div class='row'>
+          <label ng-init='contest.gender = 0' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:15px;">Gender</label>
+          <div class="col-sm-4 form-group" style="margin-top:10px;">
+              <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
+              <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
+                  <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+                      <input type='radio' ng-model='contest.gender' value='0'> All Genders
+                  </label>
+                  <label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+                      <input type='radio' ng-model='contest.gender' value='1'> Men
+                  </label>
+                  <label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+                      <input type='radio' ng-model='contest.gender' value='2'> Women
+                  </label>
+              </div>
+          </div>
+      </div>
+      <div class='row'>
+          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Interest</label>
+          <div class="col-sm-4 form-group">
+              <h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>
+              <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                  <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
+              </select>
+          </div>
+      </div>
+      <!--<div class='row'>
+          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone Of Voice</label>
+          <div class="col-sm-4">
+              <div class="form-group" ng-init="contest.tone_of_voice_box = []">
+                  <h4 style="font-size:14px;"><strong>Select a tone of voice that represents your brand:<br>(please choose one)</strong></h4>
+                  <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
+                      <label>
+                          <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
+                      </label>
+                  </div>
+              </div>
+          </div>
+      </div>-->
+      <!--<div class='row'>
+          <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
+          <div class="col-sm-4">
+              <div class="form-group">
+                  <textarea class='form-control' style="width:380px;" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
+              </div>
+          </div>
+      </div>-->
         <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
             <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-box launch-page-hover' ng-click='select_platform("facebook")'>
                 <h3 class='text-center launch-page-box-title'>Facebook</h3>
@@ -282,87 +362,8 @@
     </div>
     <div ng-show='current.step == "tp-audience"' id='tp-audience'>
         <div class='form-horizontal'>
+
             <div class='row'>
-                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:1px;">Locations</label>
-                <div class="col-sm-4">
-                    <!--<div class='form-group'>
-                        <h4 style="font-size:14px;"><strong>The audience and locations engagement</strong></h4>
-                        <select ng-model="contest.location_box" ng-init="contest.location_box = location_boxes[0]" ng-options="item as item.text for item in location_boxes track by item.id" class='form-control'>
-                        </select>
-                    </div>-->
-                    <div class='form-group'>
-                        <h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>
-                        <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:380px;">
-                            <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class='row'>
-                <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Age</label>
-                <div class="col-sm-4 form-group">
-                    <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
-                    <div class='pull-left'>
-                        <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
-                            <option value=''>Min Age</option>
-                        </select>
-                    </div>
-                    <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
-                    <div class='pull-left'>
-                        <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
-                            <option value=''>Max Age</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class='row'>
-                <label ng-init='contest.gender = 0' class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:15px;">Gender</label>
-                <div class="col-sm-4 form-group" style="margin-top:10px;">
-                    <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-                    <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
-                        <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
-                            <input type='radio' ng-model='contest.gender' value='0'> All Genders
-                        </label>
-                        <label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
-                            <input type='radio' ng-model='contest.gender' value='1'> Men
-                        </label>
-                        <label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
-                            <input type='radio' ng-model='contest.gender' value='2'> Women
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class='row'>
-                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Interest</label>
-                <div class="col-sm-4 form-group">
-                    <h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>
-                    <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
-                        <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
-                    </select>
-                </div>
-            </div>
-            <!--<div class='row'>
-                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Tone Of Voice</label>
-                <div class="col-sm-4">
-                    <div class="form-group" ng-init="contest.tone_of_voice_box = []">
-                        <h4 style="font-size:14px;"><strong>Select a tone of voice that represents your brand:<br>(please choose one)</strong></h4>
-                        <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
-                            <label>
-                                <input type="checkbox" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!--<div class='row'>
-                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Copy Direction</label>
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <textarea class='form-control' style="width:380px;" ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
-                    </div>
-                </div>
-            </div>-->
-            <!--<div class='row'>
                 <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
                 <div class="col-sm-4">
                     <div class="form-group" ng-init="contest.attachment = ''">
@@ -377,7 +378,7 @@
                         </div>
                     </div>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
     <div ng-show='current.step == "detail"'>
