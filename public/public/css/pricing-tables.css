@@ -95,7 +95,7 @@ Author: Rashid Shafique | rmughal@gmail.com
       line-height: 22px;
       margin-bottom: 15px;
       font-size: 14px;
-      font-weight: 400; }
+      font-weight: 200; }
       .plan ul li a {
         text-decoration: underline;
         color: #e6e9ed; }
@@ -112,6 +112,6 @@ Author: Rashid Shafique | rmughal@gmail.com
     .plan.recommended .head {
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
-      background: #171717; }
+      background: #ff5c00; }
     .plan.recommended .btn {
       margin-bottom: 10px; }
