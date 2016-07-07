@@ -346,11 +346,10 @@
     <div ng-show='current.step == "detail"'>
         <div class='form-forizontal'>
           <div class="row" ng-show='!user'>
-              <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
+              <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Create New Business Account</label>
               <div class="col-sm-9">
                   <div class="form-group">
                       <a class='text-center pull-right' style='color:#333' ng-click='open_company_login()'>Already have an account? Log in now!</a>
-                      <h4><strong>Create New Business Account</strong></h4>
                       <h5><strong>Company Email</strong></h5>
                       <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
                   </div>
@@ -358,10 +357,10 @@
                       <h5><strong>Password</strong></h5>
                       <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
                   </div>
-                  <div class="form-group">
+                  <!--<div class="form-group">
                       <h5><strong>Confirm Password</strong></h5>
                       <input class='form-control' ng-model='contest.confirm_password' placeholder='Confirm Password' type='password' style="max-width:50%;">
-                  </div>
+                  </div>-->
                   <div class="form-group">
                       <h5><strong>Company Name</strong></h5>
                       <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
@@ -375,10 +374,23 @@
                       <input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text' style="max-width:50%;">
                   </div>
               </div>
+              <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
+              <div class="col-sm-9">
+                  <div class="form-group">
+                      <h4><strong>Summary of product or service</strong></h4>
+                      <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here' style="max-width:70%;" maxlength="250">
+                      <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
+                  </div>
+                  <div class="form-group">
+                      <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
+                      <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;">
+                      <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
+                  </div>
+              </div>
           </div>
           <hr>
           <div class="row" ng-show='!user'>
-              <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Choose a plan.</label>
+              <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Choose a plan</label>
               <div class="col-sm-8 col-sm-offset-2">
                   <div class="form-group">
                       <div class="pricing-tables attached">
@@ -461,21 +473,6 @@
                     <div class="form-group">
                         <h5><strong>Company Twitter (optional)</strong></h5>
                         <input class='form-control' ng-model='contest.twitter_handle' placeholder='Company Twitter (optional)' type='text' style="max-width:50%;">
-                    </div>
-                </div>
-            </div>-->
-            <!--<div class="row">
-                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <h4><strong>Summary of product or service</strong></h4>
-                        <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here' style="max-width:70%;" maxlength="250">
-                        <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
-                    </div>
-                    <div class="form-group">
-                        <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
-                        <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;">
-                        <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
                     </div>
                 </div>
             </div>-->
@@ -614,7 +611,7 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-objective")'>Back</button>
             </div>
             <div ng-show='current.step == "detail"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
+                <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>-->
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-audience")'>Back</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
             </div>
