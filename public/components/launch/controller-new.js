@@ -3,9 +3,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.steps = {
         'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
         'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
-        'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
-        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 66.8 },
-        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
+        'tp-audience': { step: 'tp-audience', next: 'preview', previous: 'tp-objective', fill: 50.1 },
+        'preview': { step: 'preview', next: 'payment', previous: 'tp-audience', fill: 83.5 },
+        'detail': { step: 'detail', next: 'preview', previous: 'preview', fill: 83.5 },
         'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
     }
     $scope.current = $scope.steps['tp-platform'];
@@ -104,8 +104,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.set_step = function(step) {
         if (step == 'tp-objective') {
-            if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
-            else $scope.current = $scope.steps[step];
+            //if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
+             $scope.current = $scope.steps[step];
         } else if (step == 'tp-audience') {
             if (!$scope.contest.objective) $scope.set_alert("Please select an objective.", "error");
             else {
@@ -125,13 +125,16 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             else $scope.current = $scope.steps[step];
         } else if (step == 'preview') {
             if (!$rootScope.user) {
-                if (!$scope.contest.identity) $scope.set_alert("An email is required", "error");
-                else if (!$scope.contest.password) $scope.set_alert("A password is required", "error");
-                else if (!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
-                else if (!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
-                else $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
-            } else if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
-            else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
+                //if (!$scope.contest.identity) $scope.set_alert("An email is required", "error");
+                //else if (!$scope.contest.password) $scope.set_alert("A password is required", "error");
+                //else if (!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
+                //else if (!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
+                $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
+
+            }
+            //if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
+            //else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
+
             else {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
