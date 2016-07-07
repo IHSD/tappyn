@@ -4,8 +4,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
         'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
         'tp-audience': { step: 'tp-audience', next: 'preview', previous: 'tp-objective', fill: 50.1 },
-        //'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 66.8 },
         'preview': { step: 'preview', next: 'payment', previous: 'tp-audience', fill: 83.5 },
+        'detail': { step: 'detail', next: 'preview', previous: 'preview', fill: 83.5 },
         'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
     }
     $scope.current = $scope.steps['tp-platform'];
