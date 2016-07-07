@@ -350,30 +350,71 @@
                 <div class="col-sm-9">
                     <div class="form-group">
                         <a class='text-center pull-right' style='color:#333' ng-click='open_company_login()'>Already have an account? Log in now!</a>
-                        <h4><strong>Create New Business Account</strong></h4>
-                        <h5><strong>Company Email</strong></h5>
-                        <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h5><strong>Password</strong></h5>
-                        <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h5><strong>Confirm Password</strong></h5>
-                        <input class='form-control' ng-model='contest.confirm_password' placeholder='Confirm Password' type='password' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h5><strong>Company Name</strong></h5>
-                        <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h5><strong>Company Logo</strong></h5>
-                        <input ng-file-select='select_logo($files, contest)' type='file'>
-                    </div>
-                    <div class="form-group">
-                        <h5><strong>Company Website</strong></h5>
-                        <input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text' style="max-width:50%;">
-                    </div>
+                        <div class="pricing-tables attached">
+                               <div class="row">
+                                 <div class="col-sm-4 col-md-4">
+                                  <div class="plan first">
+                                     <div class="head">
+                                       <h2>Free</h2>
+                                     </div>
+                                     <h4 class="text-center" style="font-size:16px;"><strong>Free Includes</strong></h4>
+                                     <p class="text-center" style="font-weight: bold;">All of these great features:</p>
+                                     <ul class="item-list">
+                                          <li>1 campaign/mo.</li>
+                                          <li>Age, Gender, and Interest targeting.</li>
+                                          <li>Up to $50 in A/B testing per campaign. </li>
+                                          <li>$49 ad purchase price.</li>
+                                          <li>Customer Support</li>
+                                     </ul>
+                                     <div class="price">
+                                       <h3><span class="symbol">$</span>0</h3>
+                                       <h4>per month</h4>
+                                       <p class="text-center" style="font-weight:bold;">For individuals just starting advertising.</p>
+                                     </div>
+                                     <button type="button" class="btn btn-wj btn-lg">Sign Up</button>
+                                  </div>
+                                 </div>
+                                 <div class="col-sm-4 col-md-4 ">
+                                   <div class="plan recommended"><!-- style="height:635px;"-->
+                                     <div class="head">
+                                       <h2>Standard</h2>
+                                     </div>
+                                     <h4 class="text-center" style="font-size:16px;"><strong>Standard Includes</strong></h4>
+                                     <p class="text-center" style="font-weight: bold;">Everything in Free and:</p>
+                                     <ul class="item-list">
+                                       <li>Up to 5 campaign/mo.</li>
+                                       <li>Location targeting.</li>
+                                       <li>Up to $100 in A/B testing per campaign. </li>
+                                     </ul>
+                                     <div class="price"><!--style="margin-top:80px;"-->
+                                       <h3><span class="symbol">$</span>49</h3>
+                                       <h4>per month</h4>
+                                       <p class="text-center" style="font-weight:bold;">For teams looking to explore new marketing perspectives.</p>
+                                     </div>
+                                     <button type="button" class="btn btn-wj btn-lg">Sign Up</button>
+                                  </div>
+                                 </div>
+                                 <div class="col-sm-4 col-md-4  ">
+                                    <div class="plan last"><!-- style="height:618px;"-->
+                                     <div class="head">
+                                       <h2>Premium</h2>
+                                     </div>
+                                     <h4 class="text-center" style="font-size:16px;"><strong>Premium Includes</strong></h4>
+                                     <p class="text-center" style="font-weight: bold;">Everything in Standard and:</p>
+                                     <ul class="item-list">
+                                       <li>Unlimited campaign/mo.</li>
+                                       <li>Up to $500 in A/B testing per campaign. </li>
+                                     </ul>
+                                     <div class="price"><!-- style="margin-top: 121px;"-->
+                                       <h3><span class="symbol">$</span>249</h3>
+                                       <h4>per month</h4>
+                                       <p class="text-center" style="font-weight:bold;">For departments looking looking to expand and accelerate new audiences.</p>
+                                     </div>
+                                     <button type="button" class="btn btn-wj btn-lg">Sign Up</button>
+                                  </div>
+                                 </div>
+                               </div> <!-- row-->
+                             </div> <!-- pricing-tables -->
                 </div>
             </div>
             <!--<div class="row" ng-show='!user'>
@@ -389,7 +430,7 @@
                     </div>
                 </div>
             </div>-->
-            <div class="row">
+            <!--<div class="row">
                 <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
                 <div class="col-sm-9">
                     <div class="form-group">
@@ -403,9 +444,10 @@
                         <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
+  </div>
     <div ng-show='current.step == "preview"'>
         <div class='row'>
             <div class='col-xs-12' style='padding-top:10px;'>
