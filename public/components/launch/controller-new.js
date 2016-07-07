@@ -129,13 +129,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 //else if (!$scope.contest.password) $scope.set_alert("A password is required", "error");
                 //else if (!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
                 //else if (!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
-                 //$scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
+                 $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
 
             //}
-            //if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
-            //else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
+            if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
+            else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
 
-            if (!$scope.contest.summary || $scope.contest.summary == '') {
+            else {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
                 $scope.contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
