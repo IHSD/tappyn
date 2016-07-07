@@ -266,7 +266,7 @@
 
     </div>
     <div ng-show='current.step == "tp-objective"' id='tp-objective'>
-        <div style='color:#ff6c00' class='launch-page-flexbox'>
+        <div style='color:#ff6c00' class='row'>
           <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
               <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-box launch-page-hover' ng-click='select_platform("facebook")'>
                   <h3 class='text-center launch-page-box-title'>Facebook</h3>
@@ -285,6 +285,7 @@
                   <div class='text-center'><img class='launch-page-box-icon' src='public/img/insta_launch.png'></div>
               </div>
           </div>
+        </div>
             <div class='col-xs-12 col-sm-3'>
                 <div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("clicks_to_website")'>
                     <h3 class='text-center launch-page-box-title'>Send People to Your Website</h3>
@@ -322,7 +323,7 @@
                 </div>
             </div>
         </div>
-      </div>
+      
     <div ng-show='current.step == "tp-audience"' id='tp-audience'>
         <div class='form-horizontal'>
 
