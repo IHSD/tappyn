@@ -174,7 +174,7 @@
                 <uib-bar value='steps["tp-platform"].fill' type='{{ current.fill >= steps["tp-platform"].fill ? "warning" : "success" }}'></uib-bar>
                 <uib-bar value='steps["tp-objective"].fill' type='{{ current.fill >= steps["tp-objective"].fill ? "warning" : "success" }}'></uib-bar>
                 <uib-bar value='steps["tp-audience"].fill' type='{{ current.fill >= steps["tp-audience"].fill ? "warning" : "success" }}'></uib-bar>
-                <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
+                <!--<uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>-->
                 <uib-bar value='steps["preview"].fill' type='{{ current.fill >= steps["preview"].fill ? "warning" : "success" }}'></uib-bar>
                 <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
             </uib-progress>
@@ -537,7 +537,7 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-platform")'>Back</button>
             </div>
             <div ng-show='current.step == "tp-audience"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-objective")'>Back</button>
             </div>
             <div ng-show='current.step == "detail"'>
