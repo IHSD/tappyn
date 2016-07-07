@@ -263,27 +263,28 @@
               </div>
           </div>
       </div>-->
-        <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-            <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-box launch-page-hover' ng-click='select_platform("facebook")'>
-                <h3 class='text-center launch-page-box-title'>Facebook</h3>
-                <div class='text-center'><img class='launch-page-box-icon' src='public/img/facebook_launch.png'></div>
-            </div>
-        </div>
-        <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-            <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-box launch-page-hover' ng-click='select_platform("twitter")'>
-                <h3 class='text-center launch-page-box-title'>Twitter</h3>
-                <div class='text-center'><img class='launch-page-box-icon' src='public/img/twitter_launch.png'></div>
-            </div>
-        </div>
-        <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
-            <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-box launch-page-hover' ng-click='select_platform("instagram")'>
-                <h3 class='text-center launch-page-box-title'>Instagram</h3>
-                <div class='text-center'><img class='launch-page-box-icon' src='public/img/insta_launch.png'></div>
-            </div>
-        </div>
+
     </div>
     <div ng-show='current.step == "tp-objective"' id='tp-objective'>
-        <div ng-show='contest.platform=="facebook" || contest.platform == "instagram"' style='color:#ff6c00' class='launch-page-flexbox'>
+        <div style='color:#ff6c00' class='launch-page-flexbox'>
+          <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+              <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-box launch-page-hover' ng-click='select_platform("facebook")'>
+                  <h3 class='text-center launch-page-box-title'>Facebook</h3>
+                  <div class='text-center'><img class='launch-page-box-icon' src='public/img/facebook_launch.png'></div>
+              </div>
+          </div>
+          <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+              <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-box launch-page-hover' ng-click='select_platform("twitter")'>
+                  <h3 class='text-center launch-page-box-title'>Twitter</h3>
+                  <div class='text-center'><img class='launch-page-box-icon' src='public/img/twitter_launch.png'></div>
+              </div>
+          </div>
+          <div class='col-xs-12 col-sm-4' style='color:#ff6c00'>
+              <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-box launch-page-hover' ng-click='select_platform("instagram")'>
+                  <h3 class='text-center launch-page-box-title'>Instagram</h3>
+                  <div class='text-center'><img class='launch-page-box-icon' src='public/img/insta_launch.png'></div>
+              </div>
+          </div>
             <div class='col-xs-12 col-sm-3'>
                 <div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("clicks_to_website")'>
                     <h3 class='text-center launch-page-box-title'>Send People to Your Website</h3>
@@ -321,45 +322,7 @@
                 </div>
             </div>
         </div>
-        <div ng-show='contest.platform=="twitter"' style='color:#ff6c00' class='launch-page-flexbox'>
-            <div class='col-xs-12 col-sm-3'>
-                <div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("site_clicks_conversions")'>
-                    <h3 class='text-center launch-page-box-title'>Website Clicks / Conversions</h3>
-                    <div class='text-center'><img class='launch-page-box-icon' src='public/img/convert_twitter.png'></div>
-                    <div>
-                        Grow your site traffic, increase online purchases or connect with high quality leads.
-                    </div>
-                </div>
-            </div>
-            <div class='col-xs-12 col-sm-3'>
-                <div ng-class='{"package-highlight" : contest.objective == "followers"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("followers")'>
-                    <h3 class='text-center launch-page-box-title'>Gain Followers</h3>
-                    <div class='text-center'><img class='launch-page-box-icon' src='public/img/followers_launch.png'></div>
-                    <div>
-                        Grow an interested audience with which you can engage with over time.
-                    </div>
-                </div>
-            </div>
-            <div class='col-xs-12 col-sm-3'>
-                <div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("engagement")'>
-                    <h3 class='text-center launch-page-box-title'>Tweet Engagements</h3>
-                    <div class='text-center'><img class='launch-page-box-icon' src='public/img/tweet_engage.png'></div>
-                    <div>
-                        Reach a large targeted group of people, place your best content in fromt of the audience that matters to you.
-                    </div>
-                </div>
-            </div>
-            <div class='col-xs-12 col-sm-3'>
-                <div ng-class='{"package-highlight" : contest.objective == "app_installs"}' class='launch-page-box launch-page-hover' style='min-height:350px;' ng-click='select_objective("app_installs")'>
-                    <h3 class='text-center launch-page-box-title'>Increase App Installs</h3>
-                    <div class='text-center'><img class='launch-page-box-icon' src='public/img/app_installs.png'></div>
-                    <div>
-                        Reach people in your audience who are likely to install your app.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      </div>
     <div ng-show='current.step == "tp-audience"' id='tp-audience'>
         <div class='form-horizontal'>
 
