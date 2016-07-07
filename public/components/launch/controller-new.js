@@ -130,7 +130,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 //else if (!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
                 //else if (!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
                  //$scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
-                 $scope.set_step("preview");
+                 $scope.current = $scope.steps[step];
             }
             else if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
             else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
