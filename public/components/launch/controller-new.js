@@ -132,9 +132,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                  //$scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
 
             //}
-            if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
-            else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
-            else {
+            //if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
+            //else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
+
+            if (!$scope.contest.summary || $scope.contest.summary == '') {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
                 $scope.contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
