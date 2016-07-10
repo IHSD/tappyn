@@ -197,42 +197,41 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
 
     $scope.submit_contest = function(contest, pay) {
-        contest.paid = (pay == 'draft') ? 0 : 1;
-        contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
-        if (contest.id) {
-            launchFactory.update(contest).success(function(response) {
-                if (response.http_status_code == 200) {
-                    if (response.success) {
-                        if (pay) $scope.open_payment();
-                        else {
-                            $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-                            $scope.set_step('done');
-                            fbq('track', 'AddToWishlist');
-                        }
-                    } else $scope.set_alert(response.message, "default");
-                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
-                else $scope.check_code(response.http_status_code);
-            });
-        } else {
-            launchFactory.submission(contest).success(function(response) {
-                if (response.http_status_code == 200) {
-                    if (response.success) {
-                        $scope.contest.id = response.data.id;
-                        $scope.contest.attachment_url = response.data.attachment_url;
-                        if (pay == 'draft') {
-                            window.location = "/dashboard";
-                        } else if (pay) {
-                            $scope.open_payment();
-                        } else {
-                            //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-                            $scope.set_step('done');
-                            fbq('track', 'AddToWishlist');
-                        }
-                    } else $scope.set_alert(response.message, "default");
-                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
-                else $scope.check_code(response.http_status_code);
-            });
-        }
+      if(contest.id){
+        launchFactory.update(contest).success(function(response){
+          if(response.http_status_code == 200){
+            if(response.success){
+              if(pay) $scope.open_payment();
+              else{
+                $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+                $scope.set_step('done');
+                fbq('track', 'AddToWishlist');
+              }
+            }
+            else $scope.set_alert(response.message, "default");
+          }
+          else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+          else $scope.check_code(response.http_status_code);
+        });
+      }
+      else{
+        launchFactory.submission(contest).success(function(response){
+          if(response.http_status_code == 200){
+            if(response.success){
+              $scope.contest.id = response.data.id;
+              if(pay) $scope.open_payment();
+              else{
+                $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+                $scope.set_step('done');
+                fbq('track', 'AddToWishlist');
+              }
+            }
+            else $scope.set_alert(response.message, "default");
+          }
+          else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
+          else $scope.check_code(response.http_status_code);
+        });
+      }
     }
     var stripeResponseHandler = function(status, response) {
         if (response.error) {
