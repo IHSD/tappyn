@@ -273,7 +273,7 @@ class Companies extends CI_Controller
             }
             // Initialize the control variables
             $charge = FALSE;
-            $amount = 29900;
+            $amount = 5999;
             if(!$contest_id)
             {
                 $this->responder->fail("You must supply a contest")->code(500)->respond();
@@ -281,7 +281,7 @@ class Companies extends CI_Controller
             }
             if(!$contest = $this->contest->get($contest_id))
             {
-                $this->responder->fail("That contest doesnt exist silly")->code(500)->respond();
+                $this->responder->fail("That contest does not exist")->code(500)->respond();
                 return;
             }
             // Check that the contest has not aleady been paid for
