@@ -264,7 +264,7 @@ class Companies extends CI_Controller
          * @todo Still need to test selected payment method
          * @return [type]             [description]
          */
-        public function payment($contest_id = FALSE)
+        /**public function payment($contest_id = FALSE)
         {
             if(!$this->ion_auth->logged_in())
             {
@@ -418,7 +418,7 @@ class Companies extends CI_Controller
                 )->code(500)->respond();
                 return;
             }
-        }
+        }**/
     /**
      * NEW PAYMENT METHOD
      *
@@ -430,7 +430,7 @@ class Companies extends CI_Controller
      * @todo Still need to test selected payment method
      * @return [type]             [description]
      */
-    /**public function payment($contest_id = false)
+    public function payment($contest_id = false)
     {
         if (!$this->ion_auth->logged_in()) {
             $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
@@ -481,7 +481,7 @@ class Companies extends CI_Controller
             )->code(500)->respond();
             return;
         }
-    }**/
+    }
 
     public function get_charge($post, $amount)
     {
