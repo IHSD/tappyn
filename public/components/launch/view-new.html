@@ -1,10 +1,21 @@
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show='adding_payment'>
         <div class="payment_modal">
-            <div class="modal_top text-center">
+            <div class="modal_top text-center" style="padding-bottom:50px;">
                 <div class='close_circle' ng-click='close_payment()'>x</div>
                 <h3><strong>Campaign Payment</strong></h3>
                 <h4>{{contest.platform | capitalize}} Campaign</h4>
+                <ul class="text-left" style="padding-left:55px;">
+                  <li>30 Unique Ads</li>
+                  <li>1 Copyright</li>
+                  <li>Audience Targeting</li>
+                  <li>Testing And Delivery</li>
+                </ul>
+                <hr style="margin:0 !important;">
+                <div class="col-xs-12" style="padding:10px 0 20px;">
+                  <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;">Total</p>
+                  <h3 class="text-right inline" style="display: inline;font-weight:bold;">$59.99</h3>
+            </div>
             </div>
             <div class="modal_bot">
                 <div class="voucher-group row" ng-show='voucher.visible == "1"'>
@@ -44,7 +55,7 @@
                     </div>
                     <div ng-show='add_new'>
                         <div class='text-center' ng-show='payments.length > 0'>
-                            <button class='btn btn-oj' ng-click='add_new = false'>Use a saved method</button>
+                            <button class='btn btn-oj' ng-click='add_new = false' style="margin-bottom:10px;">Use a saved method</button>
                         </div>
                         <form class='form row' method="POST" id="payment-form">
                             <div class='payment-empty-card'>
@@ -330,7 +341,7 @@
                 </div>
                 </form>
           </div>
-            <div class='row' style="padding-bottom:200px;">
+            <div class='row' style="padding-bottom:200px;padding-top:100px;">
                 <label class='text-left col-sm-3' style="padding-top:0px;font-size:24px;">Ad Creative</label>
                 <div class="col-sm-4">
                     <div class="form-group" ng-init="contest.attachment = ''">
