@@ -330,8 +330,8 @@
                 </div>
                 </form>
           </div>
-            <div class='row'>
-                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
+            <div class='row' style="padding-bottom:200px;">
+                <label class='text-left col-sm-3' style="padding-top:0px;font-size:24px;">Ad Creative</label>
                 <div class="col-sm-4">
                     <div class="form-group" ng-init="contest.attachment = ''">
                         <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
@@ -523,10 +523,10 @@
             </div>
             <div class='text-left' ng-hide='current.step == "done"'>
                 <h4 class='text-left' style='color:#333'>
-    <span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>
-                                    <span style='font-weight:300;font-size:22'><strong>Our campaigns are 100% free to launch.</strong></span>
-                                    <!--<br>
-                                    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>-->
+    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
+                                    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span>
+                                    <br>
+                                    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
                                     </h4>
             </div>
         </div>
@@ -547,6 +547,10 @@ $(function() {
 });
 </script>
 <style>
+.target-label {
+  font-size: 16px;
+  font-weight: bold;
+}
 .payment .form-control {
     margin: 0;
     border-radius: 0;
