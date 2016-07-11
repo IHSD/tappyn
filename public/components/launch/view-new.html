@@ -328,8 +328,24 @@
                         <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                     </select>
                 </div>
-            </form>
+                </form>
           </div>
+            <div class='row'>
+                <label class='text-left col-sm-3 col-sm-offset-1 control-label' style="padding-top:0px;">Ad Creative</label>
+                <div class="col-sm-4">
+                    <div class="form-group" ng-init="contest.attachment = ''">
+                        <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
+                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                    </div>
+                    <div class="row form-group" ng-show="new_img">
+                        <div class="col-sm-12">
+                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                <img ng-show="contest.photo" id="upload_contest">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     <div ng-show='current.step == "detail"'>
         <div class='form-forizontal'>
