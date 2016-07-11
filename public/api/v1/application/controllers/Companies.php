@@ -279,11 +279,11 @@ class Companies extends CI_Controller
                 $this->responder->fail("You must supply a contest")->code(500)->respond();
                 return;
             }
-            if(!$contest = $this->contest->get($contest_id))
-            {
-                $this->responder->fail("That contest does not exist")->code(500)->respond();
-                return;
-            }
+            //if(!$contest = $this->contest->get($contest_id))
+          //  {
+              //  $this->responder->fail("That contest does not exist")->code(500)->respond();
+              //  return;
+          //  }
             // Check that the contest has not aleady been paid for
             $check = $this->db->select('*')->from('stripe_charges')->where('contest_id', $contest_id)->get();
             if($check && $check->num_rows() > 0)
