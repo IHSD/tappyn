@@ -6,10 +6,10 @@
                 <h3><strong>Campaign Payment</strong></h3>
                 <h4>{{contest.platform | capitalize}} Campaign</h4>
                 <ul class="text-left" style="padding-left:55px;">
-                  <li>30 Unique Ads</li>
-                  <li>1 Copyright</li>
-                  <li>Audience Targeting</li>
-                  <li>Testing And Delivery</li>
+                  <li class="value-list">30 Unique Ads</li>
+                  <li class="value-list">1 Copyright</li>
+                  <li class="value-list">Audience Targeting</li>
+                  <li class="value-list">Testing And Delivery</li>
                 </ul>
                 <hr style="margin:0 !important;">
                 <div class="col-xs-12" style="padding:10px 0 20px;">
@@ -566,7 +566,14 @@ $(function() {
     margin: 0;
     border-radius: 0;
 }
-
+li.value-list:before {
+    content: "\e067";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+    float: left;
+    margin-top: 4px;
+    margin-left: -17px
+}
 .payment-method-container {
     padding-top: 20px;
     padding-bottom: 20px;
