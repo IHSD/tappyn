@@ -20,19 +20,19 @@
     <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
     <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
 </div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_purchase'">
+<!--<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_purchase'">
     <div class="checkbox-container">
         <input type="checkbox" class="ser1" data-price="49.99" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}">
         <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
-</div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing'">
+</div>-->
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
     <div class="checkbox-container">
         <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}" checked="checked">
         <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
-<script>
+<!--<script>
 var subt_value = parseFloat($('#subt0').text());
 var start_price = parseFloat($('#subt0').attr('data-original'));
 
@@ -47,7 +47,7 @@ $(".ser1").click(function(){
            $('#subt0').text(parseFloat(amountToAdd+start_price).toFixed(2));
            console.log("#subt0");
       });
-</script>
+</script>-->
 <style>
 .checkbox-container input[type="checkbox"]:checked + label span {
     color: #ff6c00;
