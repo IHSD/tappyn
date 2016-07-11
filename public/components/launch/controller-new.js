@@ -15,9 +15,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.save_method = false;
     $scope.ages = launchModel.ages;
     $scope.registering = false;
-
+    $scope.contest.platform = "facebook";
+    $scope.contest.objective = "clicks_to_website";
     $scope.reduction = 0;
-    $scope.price = 49.99;
+    $scope.price = 59.99;
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
