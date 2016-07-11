@@ -273,7 +273,7 @@ class Companies extends CI_Controller
             }
             // Initialize the control variables
             $charge = FALSE;
-            $amount = 4900;
+            $amount = 29900;
             if(!$contest_id)
             {
                 $this->responder->fail("You must supply a contest")->code(500)->respond();
