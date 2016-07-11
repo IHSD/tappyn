@@ -568,7 +568,7 @@ class Companies extends CI_Controller
             $msg = '[payment][select_winner]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for select_winner (' . count($sids) . ' Ads) (origin price:' . $post['origin_price'] . ') ';
             $this->slack->send($msg);
             $this->responder->message(
-                "winners have been chosen!"
+                "Your ads have been successfully purchased!"
             )->respond();
             $this->load->library('vote');
             foreach ($sids as $sid) {
