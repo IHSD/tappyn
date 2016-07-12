@@ -1,10 +1,10 @@
-tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, AppFact, tappyn_var) {
+tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, $filter, AppFact, tappyn_var) {
     $rootScope.modal_up = false;
     $rootScope.root_modal = { now: '' };
 
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
-    $scope.payment_obj = { price: 0, voucher_code: '', voucher_visible: 0 };
+    $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false };
 
     $scope.$on('$routeChangeSuccess', function() {
         $scope.currentView = $location.path();
@@ -29,9 +29,16 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.open_payment = function(contest, type) {
         $scope.payment_obj.contest_id = contest.id;
-
+        $scope.payment_obj.h4 = $filter('capitalize')(contest.platform) + ' Campaign';
+        $scope.payment_obj.submission_ids = contest.submission_ids;
         $scope.payment_obj.voucher_code = '';
         $scope.payment_obj.pay_for = type;
+
+        if (contest.no_payment) {
+            $scope.payment_obj.price = 0;
+            $scope.pay_payment('no_payment');
+            return;
+        }
 
         AppFact.grabDetails().success(function(response) {
             if (response.http_status_code == 200) {
@@ -84,7 +91,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.pay_payment = function(payment_type) {
-        if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code) {
+        if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code && payment_type != 'no_payment') {
             $scope.set_alert("Please enter a voucher code", "error");
             return;
         }
@@ -109,7 +116,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         AppFact.payContest($scope.payment_obj.contest_id, $scope.payment_obj).success(function(res) {
             if (res.http_status_code == 200) {
                 if (res.success) {
-                    $scope.payment_obj.done = 1;
                     $scope.set_alert(res.message, "default");
                     $scope.set_model();
                     $scope.$broadcast('payContestDone');

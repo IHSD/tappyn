@@ -4,7 +4,7 @@ class Price_lib
 {
     public $data = array(
         'purchase' => 49.99,
-        'ab'       => 0.025,
+        'ab'       => 15,
         'launch'   => 59.99,
     );
 
@@ -24,7 +24,7 @@ class Price_lib
         try {
             $post['go_pay'] = isset($post['go_pay']) ? $post['go_pay'] : false;
             $fee            = $this->data[$post['pay_for']];
-            if (!$fee || ($post['pay_for'] == 'ab' && (!$post['ab_aday'] || !$post['ab_days']))) {
+            if (!$fee) {
                 throw new Exception("Missing parameters");
             }
 
@@ -62,6 +62,9 @@ class Price_lib
 
             if ($post['pay_for'] != 'launch') {
                 $submission_id_count = count($post['submission_ids']);
+                if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
+                    throw new Exception("purchase only one submission!");
+                }
                 if (!is_array($post['submission_ids']) || !$submission_id_count) {
                     throw new Exception("please check one at least");
                 }
@@ -75,8 +78,10 @@ class Price_lib
 
             if ($post['pay_for'] == 'purchase') {
                 $price = $submission_id_count * $fee;
+                $price = 0;
             } else if ($post['pay_for'] == 'ab') {
-                $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
+                // $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
+                $price = $submission_id_count * $fee;
             } else {
                 $price = $fee;
             }

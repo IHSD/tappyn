@@ -328,41 +328,46 @@ class Companies extends CI_Controller
 
     public function get_charge($post, $amount)
     {
-        $contest_id  = $post['contest_id'];
-        $metadata    = array();
-        $description = 'Charge for contest ' . $contest_id . $post['pay_for'];
-        $charge      = false;
+        $post['stripe_token'] = isset($post['stripe_token']) ? $post['stripe_token'] : '';
+        $post['save_method']  = isset($post['save_method']) ? $post['save_method'] : '';
+        $contest_id           = $post['contest_id'];
+        $metadata             = array();
+        $description          = 'Charge for contest ' . $contest_id . $post['pay_for'];
+        $token                = null;
+        $customer_id          = null;
+        $source_id            = null;
         // If payment details were supplied, we're either going to charge the card, or create / update a customer
-        if ($this->input->post('stripe_token')) {
-            if ($this->input->post('save_method')) {
+        if ($post['stripe_token']) {
+            if ($post['save_method'] == 'true') {
                 // Update the customer with the new payment method, and get the source id
                 if ($this->stripe_customer_id) {
-                    $customer = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $this->input->post('stripe_token')));
-                    $charge   = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, null, $amount, $metadata, $description);
+                    $customer    = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $post['stripe_token']));
+                    $customer_id = $this->stripe_customer_id;
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
                 else {
                     // Create the customer
-                    $customer = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $this->input->post('stripe_token'), $this->ion_auth->user()->row()->email);
-                    // Charge the customer_id
-                    $charge = $this->stripe_charge_library->create($contest_id, null, $customer->id, null, $amount, $metadata, $description);
+                    $customer    = $this->stripe_customer_library->create($this->ion_auth->user()->row()->id, $post['stripe_token'], $this->ion_auth->user()->row()->email);
+                    $customer_id = $customer->id;
                 }
             }
             // The user does not want to save the method, so we just charge the card
             else {
-                $charge = $this->stripe_charge_library->create($contest_id, $this->input->post('stripe_token'), null, null, $amount, $metadata, $description);
+                $token = $post['stripe_token'];
             }
         }
 
         // Check if we have a customer, and chosen source
         else if ($post['passing_method'] && $this->stripe_customer_id) {
-            $charge = $this->stripe_charge_library->create($contest_id, null, $this->stripe_customer_id, $post['passing_method'], $amount, $metadata, $description);
+            $customer_id = $this->stripe_customer_id;
+            $source_id   = $post['passing_method'];
         }
         // Tell them we cant process their request
         else {
             $this->responder->fail("We were unable to process your request1111")->code(500)->respond();
             die();
         }
+        $charge = $this->stripe_charge_library->create($contest_id, $token, $customer_id, $source_id, $amount, $metadata, $description);
         return $charge;
     }
 
@@ -451,7 +456,7 @@ class Companies extends CI_Controller
     private function ab($post)
     {
         $this->load->library('ad_lib');
-        $post['info'] = '[payment][ab_test]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for a/b test (' . $post['ab_aday'] . ' aday for ' . $post['ab_days'] . ' days) (origin price:' . $post['origin_price'] . ') ';
+        $post['info'] = '[payment][ab_test]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for a/b test (origin price:' . $post['origin_price'] . ') ';
         $this->slack->send($post['info']);
         $content = serialize($post);
         if (!$this->ad_lib->go_test_by_company($post['contest_id'], $post['submission_ids'], $content)) {

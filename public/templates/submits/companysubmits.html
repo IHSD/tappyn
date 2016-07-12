@@ -17,57 +17,11 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>
 </div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_purchase'">
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_purchase' || winner_contest.status == 'pending_testing'">
     <div class="checkbox-container">
-        <input type="checkbox" class="ser1" data-price="49.99" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}">
+        <input type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}">
         <label for="select-contest2-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_testing'">
-    <div class="checkbox-container">
-        <input type="checkbox" name="name{{submission.id}}" value="{{submission.id}}" id="select-contest-{{submission.id}}" checked="checked">
-        <label for="select-contest-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
-    </div>
-</div>
-<script>
-var subt_value = parseFloat($('#subt0').text());
-var start_price = parseFloat($('#subt0').attr('data-original'));
-
-$(".ser1").click(function(){
-     var amountToAdd = 0.0;
-           $(".ser1").each(function() {
-               if($(this).is(":checked")){
-                   amountToAdd += parseFloat($(this).attr('data-price'));
-               }
-           });
-
-           $('#subt0').text(parseFloat(amountToAdd+start_price).toFixed(2));
-           console.log("#subt0");
-      });
-</script>
-<style>
-.checkbox-container input[type="checkbox"]:checked + label span {
-    color: #ff6c00;
-    border: 2px solid #ff6c00;
-    height: 50px;
-    width: 50px;
-    padding-top:10px;
-}
-
-.checkbox-container input[type="checkbox"] + label span {
-    display: inline-block;
-    width: 25px;
-    width: 50px;
-    line-height: 21px;
-    vertical-align: middle;
-    height: 50px;
-    padding-top: 10px;
-    border: 2px solid #aaa;
-    border-radius: 2px;
-    cursor: pointer;
-    color: #aaa;
-}
-</style>
