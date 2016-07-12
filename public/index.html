@@ -62,6 +62,7 @@
             </div>
             <div ng-show='add_age' ng-include src="'templates/age_gen.html'"></div>
             <div ng-show='add_interest.show' ng-include src="'templates/interests.html'"></div>
+            <div ng-show='root_modal.now == "payment"' ng-include src="'templates/payment.html'"></div>
         </div>
     </div>
     <section class='innerpage' ng-view></section>

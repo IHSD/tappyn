@@ -18,7 +18,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.contest.platform = "facebook";
     $scope.contest.objective = "clicks_to_website";
     $scope.reduction = 0;
-    $scope.price = 59.99;
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
@@ -184,174 +183,27 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         else $scope.set_step("detail");
     }
 
-    $scope.open_payment = function() {
-        $scope.grab_payments();
-        $scope.adding_payment = true;
-        $rootScope.modal_up = true;
-        fbq('track', 'AddPaymentInfo');
-    }
-
-    $scope.close_payment = function() {
-        $scope.adding_payment = false;
-        $rootScope.modal_up = false;
-    }
-
-
     $scope.submit_contest = function(contest, pay) {
         contest.paid = (pay == 'draft') ? 0 : 1;
         contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
-        if (contest.id) {
-            launchFactory.update(contest).success(function(response) {
-                if (response.http_status_code == 200) {
-                    if (response.success) {
-                        if (pay) $scope.open_payment();
-                        else {
-                            $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-                            $scope.set_step('done');
-                            fbq('track', 'AddToWishlist');
-                        }
-                    } else $scope.set_alert(response.message, "default");
-                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
-                else $scope.check_code(response.http_status_code);
-            });
-        } else {
-            launchFactory.submission(contest).success(function(response) {
-                if (response.http_status_code == 200) {
-                    if (response.success) {
-                        $scope.contest.id = response.data.id;
-                        $scope.contest.attachment_url = response.data.attachment_url;
-                        if (pay == 'draft') {
-                            window.location = "/dashboard";
-                        } else if (pay) {
-                            $scope.open_payment();
-                        } else {
-                            //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
-                            $scope.set_step('done');
-                            fbq('track', 'AddToWishlist');
-                        }
-                    } else $scope.set_alert(response.message, "default");
-                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
-                else $scope.check_code(response.http_status_code);
-            });
-        }
-    }
-    var stripeResponseHandler = function(status, response) {
-        if (response.error) {
-            var erroring = (response.error.message).toString();
-            alert(response.error.message);
-            $scope.form_disabled = false;
-        } else {
-            // response contains id and card, which contains additional card details
-            var token = response.id;
-            launchFactory.payContest($scope.contest.id, { stripe_token: token, save_method: $scope.save_method, voucher_code: $scope.voucher_code }).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.set_alert(res.message, "default");
-                        $scope.set_step("done");
-                        $rootScope.modal_up = false;
-                        $scope.adding_payment = false;
-                        $scope.form_disabled = false;
-                        fbq('track', 'Purchase', { value: '99.00', currency: 'USD' });
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
-        }
-    }
-
-
-    $scope.new_payment = function() {
-        if ($scope.price == 0.00) {
-            if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-            else {
-                launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $scope.set_step("done");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
-            }
-        } else {
-            // This identifies your website in the createToken call below
-            Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
-            var $form = $('#payment-form');
-
-            // Disable the submit button to prevent repeated clicks
-            $scope.form_disabled = true;
-
-            Stripe.card.createToken($form, stripeResponseHandler);
-        }
-    }
-
-    $scope.old_payment = function() {
-        if ($scope.price == 0.00) {
-            if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-            else {
-                launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $scope.set_step("done");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
-            }
-        } else {
-            if (!$scope.passing_method) $scope.set_alert("Please select a saved method or provide a new means of paying", "error");
-            else {
-                launchFactory.payContest($scope.contest.id, { source_id: $scope.passing_method, voucher_code: $scope.voucher_code }).success(function(res) {
-                    if (res.http_status_code == 200) {
-                        if (res.success) {
-                            $scope.set_alert(res.message, "default");
-                            $scope.set_step("done");
-                            $rootScope.modal_up = false;
-                            $scope.adding_payment = false;
-                        } else $scope.set_alert(res.message, "default");
-                    } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                    else $scope.check_code(res.http_status_code);
-                });
-            }
-        }
-    }
-
-    $scope.use_voucher = function() {
-        if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-        else {
-            launchFactory.voucherValid($scope.voucher_code).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.price = res.data.price;
-                        $scope.reduction = res.data.discount;
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
-        }
-    }
-
-    $scope.voucher_payment = function() {
-        if (!$scope.voucher_code) $scope.set_alert("Please enter a voucher code", "error");
-        else {
-            launchFactory.payContest($scope.contest.id, { voucher_code: $scope.voucher_code }).success(function(res) {
-                if (res.http_status_code == 200) {
-                    if (res.success) {
-                        $scope.set_alert(res.message, "default");
-                        $scope.set_step("done");
-                        $rootScope.modal_up = false;
-                        $scope.adding_payment = false;
-                    } else $scope.set_alert(res.message, "default");
-                } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
-                else $scope.check_code(res.http_status_code);
-            });
-        }
+        launchFactory.submission(contest).success(function(response) {
+            if (response.http_status_code == 200) {
+                if (response.success) {
+                    contest.id = response.data.id;
+                    contest.attachment_url = response.data.attachment_url;
+                    if (pay == 'draft') {
+                        window.location = "/dashboard";
+                    } else if (pay) {
+                        $scope.open_payment(contest, 'launch');
+                    } else {
+                        //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
+                        $scope.set_step('done');
+                        fbq('track', 'AddToWishlist');
+                    }
+                } else $scope.set_alert(response.message, "default");
+            } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+            else $scope.check_code(response.http_status_code);
+        });
     }
 
     $scope.select_current = function(pass) {
@@ -432,6 +284,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         scaleable: false,
         cropBoxResizable: false,
         cropBoxMovable: false,
+    });
+
+    $scope.$on('payContestDone', function(event) {
+        $scope.set_step('done');
     });
 });
 

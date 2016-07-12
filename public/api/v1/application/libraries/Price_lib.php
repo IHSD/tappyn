@@ -5,6 +5,7 @@ class Price_lib
     public $data = array(
         'purchase' => 49.99,
         'ab'       => 0.025,
+        'launch'   => 59.99,
     );
 
     public function __construct()
@@ -56,16 +57,19 @@ class Price_lib
                 throw new Exception("Constest status error");
             }
             //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
-                //throw new Exception("Constest status error2");
+            //throw new Exception("Constest status error2");
             //}
-            $submission_id_count = count($post['submission_ids']);
-            if (!is_array($post['submission_ids']) || !$submission_id_count) {
-                throw new Exception("please check one at least");
-            }
-            $submissions = $this->contest->submission_ids($post['contest_id']);
-            foreach ($post['submission_ids'] as $id) {
-                if (!in_array($id, $submissions)) {
-                    throw new Exception("submission not exist");
+
+            if ($post['pay_for'] != 'launch') {
+                $submission_id_count = count($post['submission_ids']);
+                if (!is_array($post['submission_ids']) || !$submission_id_count) {
+                    throw new Exception("please check one at least");
+                }
+                $submissions = $this->contest->submission_ids($post['contest_id']);
+                foreach ($post['submission_ids'] as $id) {
+                    if (!in_array($id, $submissions)) {
+                        throw new Exception("submission not exist");
+                    }
                 }
             }
 
@@ -73,7 +77,10 @@ class Price_lib
                 $price = $submission_id_count * $fee;
             } else if ($post['pay_for'] == 'ab') {
                 $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
+            } else {
+                $price = $fee;
             }
+
             $result['origin_price'] = number_format($price, 2, '.', '');
 
             if ($voucher) {

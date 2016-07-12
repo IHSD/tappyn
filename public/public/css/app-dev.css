@@ -369,7 +369,9 @@
     height: 100%;
 }
 
+
 /* avatar */
+
 .round-avatar {
     width: 70px;
     height: 70px;
@@ -393,33 +395,42 @@
     border-radius: 50%;
 }
 
+
 /* dashboard */
+
 .checkbox-container input[type="checkbox"] {
-    display:none;
+    display: none;
 }
+
 .checkbox-container input[type="checkbox"] + label span {
-    display:inline-block;
-    width:25px;
-    height:25px;
-    line-height:21px;
-    vertical-align:middle;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    line-height: 21px;
+    vertical-align: middle;
     border: 2px solid #aaa;
     border-radius: 2px;
-    cursor:pointer;
+    cursor: pointer;
     color: #aaa;
 }
+
 .checkbox-container input[type="checkbox"]:hover + label span:hover {
-  color: #555;
-  border: 2px solid #555;
+    color: #555;
+    border: 2px solid #555;
 }
+
 .checkbox-container input[type="checkbox"]:checked + label span {
     color: #ff6c00;
     border: 2px solid #ff6c00;
-
 }
+
 #ab-aday::-webkit-inner-spin-button,
 #ab-aday::-webkit-outer-spin-button,
 #ab-days::-webkit-inner-spin-button,
 #ab-days::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
+}
+
+.payment-method-card {
+    border: 1px solid #CCC;
 }

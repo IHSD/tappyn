@@ -255,15 +255,9 @@ class Contests extends CI_Controller
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
 
-            $paid       = $this->input->post('paid');
-            $paid       = is_null($paid) ? 1 : $paid;
-            $start_time = date('Y-m-d H:i:s');
-            $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
             // Do some preliminary formatting
             $data = array(
-                'paid'                => $paid,
-                'start_time'          => $start_time,
-                'stop_time'           => $stop_time,
+                'paid'                => 0,
 
                 'tone_of_voice_box'   => $tone_of_voice_box,
                 'use_attachment'      => 1,
