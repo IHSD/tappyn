@@ -50,3 +50,6 @@ Dockerfile
 # Test
 
 .deploy_args.php
+/composer.phar.2
+composer.phar.1
+/.deploy_args.php.bak
