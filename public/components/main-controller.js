@@ -17,6 +17,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.locations = tappyn_var.get('locations');
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
 
+    $scope.click_subscription = function(sub) {
+        $scope.open_payment({ sub_level: sub }, 'subscription');
+
+    }
+
     $scope.set_model = function(model) {
         if (model) {
             $rootScope.root_modal.now = model;
@@ -28,10 +33,17 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.open_payment = function(contest, type) {
-        $scope.payment_obj.contest_id = contest.id;
-        $scope.payment_obj.h4 = $filter('capitalize')(contest.platform) + ' Campaign';
-        $scope.payment_obj.submission_ids = contest.submission_ids;
-        $scope.payment_obj.voucher_code = '';
+        if (type == 'subscription') {
+            $scope.payment_obj.contest_id = '';
+            $scope.payment_obj.h4 = 'Subscription';
+            $scope.payment_obj.sub_level = contest.sub_level;
+        } else {
+            $scope.payment_obj.contest_id = contest.id;
+            $scope.payment_obj.h4 = $filter('capitalize')(contest.platform) + ' Campaign';
+            $scope.payment_obj.submission_ids = contest.submission_ids;
+            $scope.payment_obj.voucher_code = '';
+            $scope.payment_obj.pay_for = type;
+        }
         $scope.payment_obj.pay_for = type;
 
         if (contest.no_payment) {

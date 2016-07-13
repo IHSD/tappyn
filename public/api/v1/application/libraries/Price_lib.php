@@ -3,9 +3,14 @@
 class Price_lib
 {
     public $data = array(
-        'purchase' => 49.99,
-        'ab'       => 15,
-        'launch'   => 59.99,
+        'purchase'     => 49.99,
+        'ab'           => 15,
+        'launch'       => 59.99,
+        'subscription' => array(
+            1 => 59,
+            2 => 149,
+            3 => 319,
+        ),
     );
 
     public function __construct()
@@ -47,31 +52,34 @@ class Price_lib
                     }
                 }
             }
-            $contest = $this->contest->get($post['contest_id']);
-            if (!$contest) {
-                throw new Exception("We couldnt find that constest");
-            }
-            $status          = $this->contest->get_status($contest);
-            $purchase_status = array('pending_purchase', 'pending_testing');
-            if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
-                throw new Exception("Constest status error");
-            }
-            //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
-            //throw new Exception("Constest status error2");
-            //}
 
-            if ($post['pay_for'] != 'launch') {
-                $submission_id_count = count($post['submission_ids']);
-                if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
-                    throw new Exception("purchase only one submission!");
+            if ($post['pay_for'] != 'subscription') {
+                $contest = $this->contest->get($post['contest_id']);
+                if (!$contest) {
+                    throw new Exception("We couldnt find that constest");
                 }
-                if (!is_array($post['submission_ids']) || !$submission_id_count) {
-                    throw new Exception("please check one at least");
+                $status          = $this->contest->get_status($contest);
+                $purchase_status = array('pending_purchase', 'pending_testing');
+                if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
+                    throw new Exception("Constest status error");
                 }
-                $submissions = $this->contest->submission_ids($post['contest_id']);
-                foreach ($post['submission_ids'] as $id) {
-                    if (!in_array($id, $submissions)) {
-                        throw new Exception("submission not exist");
+                //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
+                //throw new Exception("Constest status error2");
+                //}
+
+                if ($post['pay_for'] != 'launch') {
+                    $submission_id_count = count($post['submission_ids']);
+                    if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
+                        throw new Exception("purchase only one submission!");
+                    }
+                    if (!is_array($post['submission_ids']) || !$submission_id_count) {
+                        throw new Exception("please check one at least");
+                    }
+                    $submissions = $this->contest->submission_ids($post['contest_id']);
+                    foreach ($post['submission_ids'] as $id) {
+                        if (!in_array($id, $submissions)) {
+                            throw new Exception("submission not exist");
+                        }
                     }
                 }
             }
@@ -82,6 +90,8 @@ class Price_lib
             } else if ($post['pay_for'] == 'ab') {
                 // $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
                 $price = $submission_id_count * $fee;
+            } else if ($post['pay_for'] == 'subscription') {
+                $price = $fee[$post['sub_level']];
             } else {
                 $price = $fee;
             }
