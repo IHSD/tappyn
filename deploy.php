@@ -24,8 +24,8 @@ env('deploy_path', '/var/www/tappyn');
 server("tappyn-live", "tappyn.com", 22)
     ->user('deploy')
     //->identityFile($public_key_file, $private_key_file)
-    //->identityFile('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa')
-    ->forwardAgent()
+    ->identityFile('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa')
+    //->forwardAgent()
     ->env('environment', 'production')
     ->stage('production')
     ->env('branch', 'master');
