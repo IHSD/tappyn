@@ -101,7 +101,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         if (payment_type == 'new') {
             // This identifies your website in the createToken call below
             Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
-            var $form = $('#payment-form');
+            var $form = $('#payment-form-global');
             // Disable the submit button to prevent repeated clicks
             $scope.form_disabled = true;
             Stripe.card.createToken($form, stripeResponseHandler);
