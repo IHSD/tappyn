@@ -4,7 +4,7 @@ class Price_lib
 {
     public $data = array(
         'purchase' => 49.99,
-        'ab'       => 0.025,
+        'ab'       => 0.000,
         'launch'   => 59.99,
     );
 
@@ -80,8 +80,13 @@ class Price_lib
                 $price = $submission_id_count * $fee;
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
+                if ($post['ab_aday'] == 15) {
+                  $price = $fee;
+                }
+                else {
                 $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
                 //$price = $submission_id_count * $fee;
+                }
             } else {
                 $price = $fee;
             }
