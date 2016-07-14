@@ -25,7 +25,7 @@
                 <div class='close_circle' ng-click='set_model()'>x</div>
                 <!--<h3><strong>Campaign Payment</strong></h3>-->
                 <h4 ng-show="payment_obj.pay_for=='ab'">A/B Test {{payment_obj.price | currency}} <!--for {{payment_obj.ab_days}} Days--></h4>
-                <h3 ng-show="payment_obj.pay_for=='purchase'"><strong>Purchase Ads</strong></h3>
+                <h3 ng-show="payment_obj.pay_for=='purchase'"><strong>Confirm Ad Selection</strong></h3>
                 <h4 ng-if="payment_obj.submission_ids.length > 1">You’ve selected {{payment_obj.submission_ids.length}} ads.</h4>
                 <h4 ng-if="payment_obj.submission_ids.length == 1">You’ve selected {{payment_obj.submission_ids.length}} ad.</h4>
             </div>
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div ng-show='payment_obj.price == 0.00' class='text-center row'>
-                    <h4>No need for payment, this campaign is on us!</h4>
+                    <!--<h4>No need for payment, this campaign is on us!</h4>-->
                     <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
                 </div>
             </div>
@@ -146,8 +146,9 @@
             </div>
             <div class="modal_bot">
                 <div class="form-group">
+                  <p class="text-center" style="font-size:18px; font-weight:bold;">Up to $15.00 of Ad Spend is included in your campaign.</p>
                     <div class="col-xs-8">
-                        <label for="ab-aday" class="control-label">Tell us how much you'd like to spend testing:</label>
+                        <label for="ab-aday" class="control-label">Input your own budget, or simply continue to start testing:</label>
                     </div>
                     <div class="input-group col-xs-4">
                         <div class="input-group-addon">$</div>
