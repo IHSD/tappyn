@@ -81,7 +81,7 @@ class Price_lib
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
                 if ($post['ab_aday'] == 15) {
-                  $price = $fee;
+                  $price = 0;
                 }
                 else {
                 $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
