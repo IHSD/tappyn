@@ -4,7 +4,7 @@ class Price_lib
 {
     public $data = array(
         'purchase' => 49.99,
-        'ab'       => 15,
+        'ab'       => 0.025,
         'launch'   => 59.99,
     );
 
@@ -52,7 +52,7 @@ class Price_lib
                 throw new Exception("We couldnt find that constest");
             }
             $status          = $this->contest->get_status($contest);
-            $purchase_status = array('pending_purchase', 'pending_testing');
+            $purchase_status = array('pending_selection', 'pending_testing');
             if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
                 throw new Exception("Constest status error");
             }
@@ -80,8 +80,13 @@ class Price_lib
                 $price = $submission_id_count * $fee;
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
-                // $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
-                $price = $submission_id_count * $fee;
+                if ($post['ab_aday'] <= 15) {
+                  $price = 0;
+                }
+                else {
+                $price = ($post['ab_aday'] * $post['ab_days']);
+                //$price = $submission_id_count * $fee;
+                }
             } else {
                 $price = $fee;
             }

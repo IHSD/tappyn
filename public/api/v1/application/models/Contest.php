@@ -246,7 +246,7 @@ class Contest extends MY_Model
         if ($contest->paid == 0) {
             $status = 'draft';
         } else if ($this->payout->exists(array('contest_id' => $contest->id))) {
-            $status = 'purchased';
+            $status = 'completed';
         } else if ($contest->submission_count >= $contest->submission_limit || $contest->stop_time < date('Y-m-d H:i:s')) {
             $testing = $this->ad_model->is_testing_status($contest->id);
             if ($testing) {
@@ -254,7 +254,7 @@ class Contest extends MY_Model
             } else if ($testing === null) {
                 $status = 'pending_testing';
             } else {
-                $status = 'pending_purchase';
+                $status = 'pending_selection';
             }
         } else if ($contest->start_time > date('Y-m-d H:i:s')) {
             $status = 'scheduled';

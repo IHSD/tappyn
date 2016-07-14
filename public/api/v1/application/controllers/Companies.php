@@ -221,7 +221,7 @@ class Companies extends CI_Controller
                 'customer' => $this->data['customer'],
             ))->respond();
         } else {
-            $this->responder->fail("You dont have any account details yet")->code(200)->respond();
+            $this->responder->fail("You do not have any account details yet")->code(200)->respond();
             return;
         }
     }
@@ -233,7 +233,7 @@ class Companies extends CI_Controller
             exit();
         }
         if (!$stripe_customer_id) {
-            $this->session->set_flashdata('You havent created a payment method with us yet');
+            $this->session->set_flashdata('You have not created a payment method with us yet');
             redirect('api/v1/companies/accounts', 'refresh');
         }
         if ($this->input->post('source_id')) {
@@ -311,7 +311,7 @@ class Companies extends CI_Controller
                 $this->load->library('contest_lib');
                 $msg = $this->contest_lib->set_live($post['contest_id']);
                 if ($msg === true) {
-                    $this->responder->message("Your Campaign Launch Successfully!")->respond();
+                    $this->responder->message("Your Campaign Launched Successfully!")->respond();
                 } else {
                     $this->responder->fail($msg)->code(500)->respond();
                 }
@@ -378,7 +378,7 @@ class Companies extends CI_Controller
             exit();
         }
         if (!$stripe_customer_id) {
-            $this->session->set_flashdata('You havent created a payment method with us yet');
+            $this->session->set_flashdata('You have not created a payment method with us yet');
             redirect('companies/accounts', 'refresh');
         }
     }
@@ -400,13 +400,13 @@ class Companies extends CI_Controller
 
         if ($this->ion_auth->user()->row()->id != $contest->owner) {
             if (!$this->ion_auth->is_admin()) {
-                $this->responder->fail('You must own the contest to select a winner')->code(403)->respond();
+                $this->responder->fail('You must own the campaign to select an ad')->code(403)->respond();
                 return;
             }
         }
         $payout = $this->payout->exists(array('contest_id' => $cid));
         if ($payout) {
-            $this->responder->fail("An ad has already been chosen as the winner.")->code(500)->respond();
+            $this->responder->fail("An ad has already been Tapped.")->code(500)->respond();
             return;
         }
         // Attempt to create the payouts
@@ -416,7 +416,7 @@ class Companies extends CI_Controller
             $msg = '[payment][select_winner]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for select_winner (' . count($sids) . ' Ads) (origin price:' . $post['origin_price'] . ') ';
             $this->slack->send($msg);
             $this->responder->message(
-                "Your ads have been successfully purchased!"
+                "Your ads have been successfully selected!"
             )->respond();
             $this->load->library('vote');
             foreach ($sids as $sid) {
