@@ -84,7 +84,7 @@ class Price_lib
                   $price = 0;
                 }
                 else {
-                $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
+                $price = ($post['ab_aday'] * $post['ab_days']);
                 //$price = $submission_id_count * $fee;
                 }
             } else {
