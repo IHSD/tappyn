@@ -4,7 +4,7 @@ class Price_lib
 {
     public $data = array(
         'purchase' => 49.99,
-        'ab'       => 0.000,
+        'ab'       => 0.025,
         'launch'   => 59.99,
     );
 
