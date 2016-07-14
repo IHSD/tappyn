@@ -155,10 +155,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         }
 
         $scope.pay_payment = function(payment_type) {
-            if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code) {
-                $scope.set_alert("Please enter a voucher code", "error");
-                return;
-            }
+            //if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code) {
+                //$scope.set_alert("Please enter a voucher code", "error");
+                //return;
+            //}
 
             payment_type = (payment_type) ? payment_type : 'old';
             $scope.payment_obj.payment_type = payment_type;
