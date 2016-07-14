@@ -80,7 +80,7 @@ class Price_lib
                 $price = $submission_id_count * $fee;
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
-                if ($post['ab_aday'] == 15) {
+                if ($post['ab_aday'] <= 15) {
                   $price = 0;
                 }
                 else {
