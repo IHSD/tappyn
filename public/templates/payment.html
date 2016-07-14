@@ -103,8 +103,8 @@
                                 <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                             </label>
                             <div class='pull-right' data-toggle="buttons">
-                                <label class='btn btn-link' style='color: #ff5e00; padding: 0;'>
-                                    <input type='radio' name="reg" ng-click="voucher.visible = 1">I have a voucher!
+                                <label class='btn btn-link' style='color: #ff5e00; padding: 0;'ng-click="voucher.visible = 1">
+                                    <input type='radio' name="reg" value='1' ng-model='payment_obj.voucher_visible'>I have a voucher!
                                 </label>
                             </div>
                         </div>
