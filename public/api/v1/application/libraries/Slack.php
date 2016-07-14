@@ -8,7 +8,14 @@ class slack
     public function __construct()
     {
         // setting from https://my.slack.com/services/new/incoming-webhook
-        $this->client = new Maknz\Slack\Client('https://hooks.slack.com/services/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');
+        if (ENVIRONMENT == 'development') {
+            // test channel
+            $url = 'https://hooks.slack.com/services/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';
+        } else {
+            // notification channel
+            $url = 'https://hooks.slack.com/services/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';
+        }
+        $this->client = new Maknz\Slack\Client($url);
     }
 
     public function send($msg = '')

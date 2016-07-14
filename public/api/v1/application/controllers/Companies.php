@@ -267,6 +267,7 @@ class Companies extends CI_Controller
      */
     public function payment($contest_id = false)
     {
+        $this->load->library('slack');
         if (!$this->ion_auth->logged_in()) {
             $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
             exit();
@@ -293,6 +294,10 @@ class Companies extends CI_Controller
             exit();
         }
 
+        if ($post['pay_for'] == 'subscription') {
+            $post['save_method'] = 'true';
+        }
+
         if ($amount > 000) {
             $charge = $this->get_charge($post, $amount);
         } else {
@@ -315,6 +320,8 @@ class Companies extends CI_Controller
                 } else {
                     $this->responder->fail($msg)->code(500)->respond();
                 }
+            } else if ($post['pay_for'] == 'subscription') {
+                $this->responder->message("doneeee")->respond();
             }
         }
         // An error occured, so respond as such
@@ -341,7 +348,7 @@ class Companies extends CI_Controller
             if ($post['save_method'] == 'true') {
                 // Update the customer with the new payment method, and get the source id
                 if ($this->stripe_customer_id) {
-                    $customer    = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $post['stripe_token']));
+                    $customer    = $this->stripe_customer_library->update($this->ion_auth->user()->row()->id, $this->stripe_customer_id, array("source" => $post['stripe_token']));
                     $customer_id = $this->stripe_customer_id;
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly

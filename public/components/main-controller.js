@@ -4,7 +4,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
-    $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false };
+    $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false, hide_voucher: false };
 
     $scope.$on('$routeChangeSuccess', function() {
         $scope.currentView = $location.path();
@@ -37,12 +37,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             $scope.payment_obj.contest_id = '';
             $scope.payment_obj.h4 = 'Subscription';
             $scope.payment_obj.sub_level = contest.sub_level;
+            $scope.payment_obj.contest_id = '';
+            $scope.payment_obj.hide_voucher = true;
         } else {
             $scope.payment_obj.contest_id = contest.id;
             $scope.payment_obj.h4 = $filter('capitalize')(contest.platform) + ' Campaign';
             $scope.payment_obj.submission_ids = contest.submission_ids;
             $scope.payment_obj.voucher_code = '';
             $scope.payment_obj.pay_for = type;
+            $scope.payment_obj.hide_voucher = false;
         }
         $scope.payment_obj.pay_for = type;
 

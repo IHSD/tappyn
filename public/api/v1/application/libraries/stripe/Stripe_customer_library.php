@@ -19,67 +19,72 @@ class Stripe_customer_library
 
     public function __call($method, $arguments)
     {
-        if(!method_exists($this->stripe_customer, $method))
-        {
+        if (!method_exists($this->stripe_customer, $method)) {
             throw new Exception("Call to undefined method Stripe_customer::{$method}()");
         }
-        return call_user_func_array( array($this->stripe_customer, $method), $arguments);
+        return call_user_func_array(array($this->stripe_customer, $method), $arguments);
     }
 
-    public function charges($args = NULL)
+    public function charges($args = null)
     {
         try {
             $charges = \Stripe\Charge::all($args);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->errors = $e->getMessage();
-            return FALSE;
+            return false;
         }
         return $charges;
     }
 
-    public function create($uid, $token, $email = NULL)
+    public function create($uid, $token, $email = null)
     {
         try {
             $customer = \Stripe\Customer::create(array(
-                "email" => $email,
+                "email"       => $email,
                 "description" => "Customer for {$uid}",
-                "source" => $token
+                "source"      => $token,
             ));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->errors = $e->getMessage();
             return false;
         }
-        if($this->save($uid, $customer))
-        {
+        if ($this->save($uid, $customer)) {
             return $customer;
         }
-        return FALSE;
+        return false;
     }
 
-    public function update($cid, $data)
+    public function update($uid, $cid, $data)
     {
         $customer = $this->fetch($cid);
-        if(!$customer)
-        {
+        if (!$customer) {
             return false;
         }
-        foreach($data as $key => $value)
-        {
+        foreach ($data as $key => $value) {
             $customer->$key = $value;
         }
-        if($customer->save)
-        {
-            return true;
+        try {
+            $customer->save();
+        } catch (Exception $e) {
+            $this->errors = $e->getMessage();
+            return false;
+        }
+
+        if ($this->save($uid, $customer)) {
+            return $customer;
         }
         return false;
     }
     public function addPaymentSource($cid, $token)
     {
         $customer = $this->fetch($cid);
-        if(!$customer) return false;
+        if (!$customer) {
+            return false;
+        }
+
         try {
             $customer->sources->create(array('source' => $token));
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->errors = $e->getMessage();
             return false;
         }
@@ -90,7 +95,7 @@ class Stripe_customer_library
     {
         try {
             $customer = \Stripe\Customer::retrieve($cid);
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             $this->errors = $e->getMessage();
             return false;
         }

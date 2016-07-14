@@ -4,7 +4,7 @@
             <div class='close_circle' ng-click='set_model()'>x</div>
             <h3><strong>Campaign Payment</strong></h3>
             <h4>{{payment_obj.h4}}</h4>
-            <ul class="text-left" style="padding-left:70px;">
+            <ul ng-if="payment_obj.pay_for == 'launch'" class="text-left" style="padding-left:70px;">
                 <li class="value-list">30 Unique Ads</li>
                 <li class="value-list">1 Copyright</li>
                 <li class="value-list">Audience Targeting</li>
@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <input type='hidden' data-stripe='currency' value='usd' />
-                        <div class='form-group checkbox'>
+                        <div class='form-group checkbox' ng-hide="payment_obj.hide_voucher">
                             <label class='control-label' style='font-size: 14px;'>
                                 <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                             </label>
