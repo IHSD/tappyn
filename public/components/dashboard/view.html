@@ -342,7 +342,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Launch your free campaign now!</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Launch your campaign now!</strong></span>
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"launch")' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
@@ -353,9 +353,9 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please de-select ads that you'd like to omit from the test.</strong></span>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select ads that you'd like to test.</strong></span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
-                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <!--<button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
                             <!--New Test Buttons
                             <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
@@ -363,7 +363,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ad you'd like to purchase and use<br>in your future ad campaigns.</strong></span>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ad you'd like to use<br>in your future ad campaigns.</strong></span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button> <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                             <!--New Payment buttons
