@@ -52,7 +52,7 @@ class Price_lib
                 throw new Exception("We couldnt find that constest");
             }
             $status          = $this->contest->get_status($contest);
-            $purchase_status = array('pending_purchase', 'pending_testing');
+            $purchase_status = array('pending_selection', 'pending_testing');
             if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
                 throw new Exception("Constest status error");
             }
