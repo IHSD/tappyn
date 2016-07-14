@@ -4,7 +4,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
-    $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false, hide_voucher: false };
+    $scope.payment_obj = {};
 
     $scope.$on('$routeChangeSuccess', function() {
         $scope.currentView = $location.path();
@@ -17,9 +17,13 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.locations = tappyn_var.get('locations');
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
 
+    $scope.set_payment_obj_default = function() {
+        $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false, hide_voucher: false };
+    }
+    $scope.set_payment_obj_default();
+
     $scope.click_subscription = function(sub) {
         $scope.open_payment({ sub_level: sub }, 'subscription');
-
     }
 
     $scope.set_model = function(model) {
@@ -106,6 +110,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.pay_payment = function(payment_type) {
+        var form_id = '#payment-form-global';
         if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code && payment_type != 'no_payment') {
             $scope.set_alert("Please enter a voucher code", "error");
             return;
@@ -116,7 +121,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         if (payment_type == 'new') {
             // This identifies your website in the createToken call below
             Stripe.setPublishableKey(APP_ENV.stripe_api_publishable_key);
-            var $form = $('#payment-form');
+            var $form = $(form_id);
             // Disable the submit button to prevent repeated clicks
             $scope.form_disabled = true;
             Stripe.card.createToken($form, stripeResponseHandler);
@@ -134,6 +139,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     $scope.set_alert(res.message, "default");
                     $scope.set_model();
                     $scope.$broadcast('payContestDone');
+                    $(form_id).find('input[type="reset"]').trigger('click');
+                    $scope.set_payment_obj_default();
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);
