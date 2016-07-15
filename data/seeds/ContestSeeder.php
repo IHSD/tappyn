@@ -20,7 +20,7 @@ class ContestSeeder extends AbstractSeed
             'brand_positioning',
             'exposure'
         );
-        
+
         $platforms = array(
             'facebook',
             'twitter',
@@ -52,7 +52,7 @@ class ContestSeeder extends AbstractSeed
                 'start_time' => date('Y-m-d H:i:s'),
                 'stop_time' => date('Y-m-d H:i:s', strtotime('+7 days')),
                 'submission_limit' => 50,
-                'prize' => 50.00,
+                'prize' => 20.00,
                 'objective' => $faker->randomElement($objectives),
                 'platform' => $faker->randomElement($platforms),
                 'age' => 0,
