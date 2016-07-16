@@ -139,7 +139,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 fbq('track', 'CompleteRegistration');
             }
         } else if (step == 'done') {
-            fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
             $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2");
             $scope.current = $scope.steps[step];
         } else $scope.current = $scope.steps[step];
