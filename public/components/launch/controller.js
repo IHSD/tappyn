@@ -105,7 +105,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 
 	$scope.set_step = function(step){
 		if(step == 'detail'){
-			
+			fbq('track', 'InitiateCheckout');
 			if($rootScope.user && !$scope.profile) $scope.grab_profile();
 			else $scope.current = $scope.steps[step];
 		}
@@ -122,7 +122,8 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 			else{
 				$scope.form_limit = launchModel.parallel_submission($scope.contest);
 				$scope.current = $scope.steps[step];
-
+				fbq('track', 'CompleteRegistration');
+			}
 		}
 		else $scope.current = $scope.steps[step];
 		$scope.to_top();
@@ -170,7 +171,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 		$scope.grab_payments();
 		$scope.adding_payment = true;
 		$rootScope.modal_up = true;
-
+		fbq('track', 'AddPaymentInfo');
 	}
 
 	$scope.close_payment = function(){
@@ -188,7 +189,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						else{
 							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
 							$scope.set_step('done');
-
+							fbq('track', 'AddToWishlist');
 						}
 					}
 					else $scope.set_alert(response.message, "default");
@@ -206,7 +207,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 						else{
 							$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
 							$scope.set_step('done');
-
+							fbq('track', 'AddToWishlist');
 						}
 					}
 					else $scope.set_alert(response.message, "default");
@@ -233,6 +234,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					$rootScope.modal_up = false;
 					$scope.adding_payment = false;
 					$scope.form_disabled = false;
+					fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
 				}
 				else $scope.set_alert(res.message, "default");
 			}
