@@ -119,6 +119,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     $scope.set_alert(res.message, "default");
                     $scope.set_model();
                     $scope.$broadcast('payContestDone');
+                    fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);
