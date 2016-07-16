@@ -234,7 +234,7 @@ tappyn.controller('launchController', function($scope, $location, $anchorScroll,
 					$rootScope.modal_up = false;
 					$scope.adding_payment = false;
 					$scope.form_disabled = false;
-					fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
+					//fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
 				}
 				else $scope.set_alert(res.message, "default");
 			}
