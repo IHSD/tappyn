@@ -287,6 +287,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     });
 
     $scope.$on('payContestDone', function(event) {
+      fbq('track', 'Purchase', {value: '59.99', currency:'USD'});
         $scope.set_step('done');
     });
 });
