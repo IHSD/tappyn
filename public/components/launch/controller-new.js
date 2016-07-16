@@ -192,14 +192,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     contest.id = response.data.id;
                     contest.attachment_url = response.data.attachment_url;
                     if (pay == 'draft') {
-                      fbq('track', 'AddToWishlist');
                         window.location = "/dashboard";
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
                     } else {
                         //$scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                         $scope.set_step('done');
-
+                        fbq('track', 'AddToWishlist');
                     }
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
@@ -288,7 +287,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     });
 
     $scope.$on('payContestDone', function(event) {
-        fbq('track', 'Purchase', {value: '59.99', currency: 'USD'});
         $scope.set_step('done');
     });
 });
