@@ -192,6 +192,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     contest.id = response.data.id;
                     contest.attachment_url = response.data.attachment_url;
                     if (pay == 'draft') {
+                        $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                         window.location = "/dashboard";
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
@@ -288,6 +289,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.$on('payContestDone', function(event) {
         $scope.set_step('done');
+        fbq('track', 'Purchase', {value: '49.99', currency:'USD'});
     });
 });
 
