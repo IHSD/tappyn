@@ -42,15 +42,6 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.open_payment(contest, type);
     }
 
-    $scope.submit_contest = function(contest, pay) {
-        contest.paid = (pay == 'draft') ? 0 : 1;
-        launchFactory.submission(contest).success(function(response) {
-           if (pay) {
-                        $scope.open_payment(contest, 'launch');
-        }
-      }
-    }
-
     $scope.grab_dash = function(type) {
         $scope.type = type;
 
@@ -87,7 +78,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             }
         }
 
-        $scope.open_payments = function(contest, type) {
+        $scope.open_payment = function(contest, type) {
             $scope.payment_obj.contest_id = contest.id;
             $scope.payment_obj.submission_ids = $scope.grab_checked_submission();
             if ($scope.payment_obj.submission_ids.length == 0) {

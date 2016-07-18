@@ -11,7 +11,6 @@ tappyn.factory('dashFactory', function($http) {
         });
     }
 
-    
 
     fact.claimWinnings = function(id) {
         return $http({
