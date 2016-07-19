@@ -57,6 +57,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.open_payment(contest, type);
     }
 
+    $scope.$on('payContestDone', function(event) {
+        $route.reload();
+    });
+
     $scope.grab_dash = function(type) {
         $scope.type = type;
 
