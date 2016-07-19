@@ -22,8 +22,9 @@ class Price_lib
     {
         $result = array();
         try {
-            $post['go_pay'] = isset($post['go_pay']) ? $post['go_pay'] : false;
-            $fee            = $this->data[$post['pay_for']];
+            $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;
+            $post['ab_days'] = 1;
+            $fee             = $this->data[$post['pay_for']];
             if (!$fee) {
                 throw new Exception("Missing parameters");
             }
@@ -81,11 +82,10 @@ class Price_lib
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
                 if ($post['ab_aday'] <= 15) {
-                  $price = 0;
-                }
-                else {
-                $price = ($post['ab_aday'] * $post['ab_days']) - 15;
-                //$price = $submission_id_count * $fee;
+                    $price = 0;
+                } else {
+                    $price = ($post['ab_aday'] * $post['ab_days']) - 15;
+                    //$price = $submission_id_count * $fee;
                 }
             } else {
                 $price = $fee;
