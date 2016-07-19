@@ -266,13 +266,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.image_cropper = function(evt) {
-      var file = evt.currentTarget.files[0];
         var reader = new FileReader();
         var input = document.getElementById('contest-photo');
-        //if (!input || !input.files || !input.files[0]) {
-            //return;
-        //}
-        //var file = input.files[0];
+        if (!input || !input.files || !input.files[0]) {
+            return;
+        }
+        var file = input.files[0];
         reader.onload = function(evt) {
             $scope.$apply(function($scope) {
                 $scope.cropper.replace(evt.target.result);
