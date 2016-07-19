@@ -29,7 +29,7 @@
             </div>
             <div class="modal_bot">
                 <div class="form-group">
-                    <div ng-hide="payment_obj.re_ab">
+                    <div ng-if="payment_obj.re_ab == 0">
                         <p class="text-center" style="font-size:18px; font-weight:bold;">Up to $15.00 of Ad Spend is included in your campaign.</p>
                         <div class="col-xs-8">
                             <label for="ab-aday" class="control-label">Input your own budget, or continue to start testing:</label>
