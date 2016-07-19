@@ -18,6 +18,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.ages = launchModel.ages;
     $scope.registering = false;
     $scope.contest.platform = "facebook";
+    $scope.setting = $scope.platform_image_settings[$scope.contest.platform];
+    $scope.cropper.setAspectRatio($scope.setting['aspect_ratio']);
+    $scope.cropper.setCropBoxData({ width: $scope.setting['min_width'], height: $scope.setting['min_height'] });
     $scope.contest.objective = "clicks_to_website";
     $scope.reduction = 0;
     $scope.new_img = false;
@@ -168,14 +171,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.objective = null;
         $scope.contest.display_type = null;
         $scope.image_cropper();
-
-    }
-
-    $scope.platform_cropper = function(platform) {
-      $scope.contest.platform = platform;
-      var setting = $scope.platform_image_settings[$scope.contest.platform];
-      $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-      $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+        var setting = $scope.platform_image_settings[$scope.contest.platform];
+        $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+        $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
     }
 
     $scope.select_display = function(type) {
@@ -299,7 +297,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         };
         reader.readAsDataURL(file);
         $scope.new_img = true;
-        $scope.platform_cropper();
     }
 
     $scope.get_test = function() {
