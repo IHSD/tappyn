@@ -66,9 +66,9 @@ class Price_lib
                 if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
                     throw new Exception("purchase only one submission!");
                 }
-                if (!is_array($post['submission_ids']) || !$submission_id_count) {
-                    throw new Exception("please check one at least");
-                }
+                //if (!is_array($post['submission_ids']) || !$submission_id_count) {
+                    //throw new Exception("please check one at least");
+                //}
                 $submissions = $this->contest->submission_ids($post['contest_id']);
                 foreach ($post['submission_ids'] as $id) {
                     if (!in_array($id, $submissions)) {
