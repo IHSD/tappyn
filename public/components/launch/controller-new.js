@@ -105,6 +105,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         });
     }
 
+
+
     $scope.set_step = function(step) {
         if (step == 'tp-objective') {
             if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
@@ -166,6 +168,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.objective = null;
         $scope.contest.display_type = null;
         $scope.image_cropper();
+        var setting = $scope.platform_image_settings[$scope.contest.platform];
+        $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+        $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
     }
 
     $scope.select_display = function(type) {
