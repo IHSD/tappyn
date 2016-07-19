@@ -24,6 +24,7 @@ class Price_lib
         try {
             $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;
             $post['ab_days'] = 1;
+            $post['ab_aday'] = isset($post['ab_aday']) ? floatval($post['ab_aday']) : false;
             $fee             = $this->data[$post['pay_for']];
             if (!$fee) {
                 throw new Exception("Missing parameters");
@@ -81,10 +82,13 @@ class Price_lib
                 $price = $submission_id_count * $fee;
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
-                if ($post['ab_aday'] <= 15) {
+                $free_ab = ($status == 'pending_selection') ? 0 : 15;
+                if ($free_ab == 0 && !$post['ab_aday']) {
+                    throw new Exception("Please enter a integer number!");
+                } else if ($post['ab_aday'] <= $free_ab) {
                     $price = 0;
                 } else {
-                    $price = ($post['ab_aday'] * $post['ab_days']) - 15;
+                    $price = ($post['ab_aday'] * $post['ab_days']) - $free_ab;
                     //$price = $submission_id_count * $fee;
                 }
             } else {

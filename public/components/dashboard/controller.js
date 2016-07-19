@@ -33,7 +33,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             contest.no_payment = 1;
-        } else if (type == 'confirm_ab') {
+        } else if (type == 'confirm_ab' || type == 'confirm_re_ab') {
             if (contest.submission_ids.length == 0) {
                 $scope.set_alert("Please select 1 at least", "error");
                 return;
@@ -41,6 +41,11 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             $scope.payment_obj.h3 = 'A/B Testing Payment';
             $scope.payment_obj.h4 = 'hide';
             $scope.payment_obj.ab_aday = 15;
+            $scope.payment_obj.re_ab = 0;
+            if (type = 'confirm_re_ab') {
+                $scope.payment_obj.ab_aday = 0;
+                $scope.payment_obj.re_ab = 1;
+            }
             $scope.set_model('confirm_ab');
             return;
 
@@ -51,6 +56,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
         $scope.open_payment(contest, type);
     }
+
+    $scope.$on('payContestDone', function(event) {
+        $route.reload();
+    });
 
     $scope.grab_dash = function(type) {
         $scope.type = type;

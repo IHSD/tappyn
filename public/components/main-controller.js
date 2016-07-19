@@ -18,7 +18,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
 
     $scope.set_payment_obj_default = function() {
-        $scope.payment_obj = { price: 0, voucher_code: '', h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };
+        $scope.payment_obj = { price: 0, voucher_code: '', re_ab: 0, h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };
     }
     $scope.set_payment_obj_default();
 
@@ -33,6 +33,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.open_payment = function(contest, type) {
+        if ($scope.payment_obj.re_ab && $scope.payment_obj.ab_aday <= 0) {
+            $scope.set_alert("Please enter a integer number", "error");
+            return;
+        }
         $scope.payment_obj.contest_id = contest.id;
         $scope.payment_obj.h3 = ($scope.payment_obj.h3) ? $scope.payment_obj.h3 : 'Campaign Payment';
         $scope.payment_obj.h4 = ($scope.payment_obj.h4) ? $scope.payment_obj.h4 : $filter('capitalize')(contest.platform) + ' Campaign';
