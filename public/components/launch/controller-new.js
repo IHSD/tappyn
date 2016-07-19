@@ -23,10 +23,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
-    var setting = $scope.platform_image_settings[$scope.contest.platform];
-    $scope.current = $scope.steps[step];
-    $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-    $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
 
     $scope.grab_profile = function() {
@@ -305,7 +301,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-        aspectRatio: 1 / 1,
+        width: 1200,
+        height: 628,
+        aspectRatio: 1.91 / 1,
         dragMode: 'move',
         scaleable: false,
         cropBoxResizable: false,
