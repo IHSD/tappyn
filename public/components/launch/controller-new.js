@@ -18,14 +18,15 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.ages = launchModel.ages;
     $scope.registering = false;
     $scope.contest.platform = "facebook";
-    $scope.setting = $scope.platform_image_settings[$scope.contest.platform];
-    $scope.cropper.setAspectRatio($scope.setting['aspect_ratio']);
-    $scope.cropper.setCropBoxData({ width: $scope.setting['min_width'], height: $scope.setting['min_height'] });
     $scope.contest.objective = "clicks_to_website";
     $scope.reduction = 0;
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
+    var setting = $scope.platform_image_settings[$scope.contest.platform];
+    $scope.current = $scope.steps[step];
+    $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+    $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
 
     $scope.grab_profile = function() {
