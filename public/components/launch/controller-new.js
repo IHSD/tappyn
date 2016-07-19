@@ -301,13 +301,17 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-        width: 1200,
-        height: 628,
         aspectRatio: 1.91 / 1,
         dragMode: 'move',
         scaleable: false,
         cropBoxResizable: false,
         cropBoxMovable: false,
+        built: function () {
+          $(this).cropper('setCropBoxData', {
+            width: 1200,
+            height: 628,
+          }
+        }
     });
 
     $scope.$on('payContestDone', function(event) {
