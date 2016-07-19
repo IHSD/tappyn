@@ -182,7 +182,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
         else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
-        //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
+        else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
 
