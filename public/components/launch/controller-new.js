@@ -23,9 +23,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
-    var setting = $scope.platform_image_settings[$scope.contest.platform];
-    $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-    $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -124,6 +122,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         }
         // else if(step == 'tp-audience'){
         // }
+        else if (step =="tp-prior") {
+          var setting = $scope.platform_image_settings[$scope.contest.platform];
+          $scope.current = $scope.steps[step];
+          $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+          $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
+        }
 
         else if (step == 'detail') {
             fbq('track', 'InitiateCheckout');
