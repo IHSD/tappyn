@@ -280,21 +280,27 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.image_cropper = function(evt) {
-        var reader = new FileReader();
-        var input = document.getElementById('contest-photo');
-        if (!input || !input.files || !input.files[0]) {
-            return;
-        }
-        var file = input.files[0];
-        reader.onload = function(evt) {
-            $scope.$apply(function($scope) {
-                $scope.cropper.replace(evt.target.result);
-                $scope.imagerino = evt.target.result;
-            });
-        };
-        reader.readAsDataURL(file);
-        $scope.new_img = true;
-    }
+      var setting = $scope.platform_image_settings[$scope.contest.platform];
+      $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
+          aspectRatio: setting['aspect_ratio'],
+          dragMode: 'move',
+          scaleable: false,
+          cropBoxResizable: false,
+          cropBoxMovable: false,
+      });
+      $scope.new_img = true;
+      var file = evt.currentTarget.files[0];
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+          $scope.$apply(function($scope) {
+              $scope.cropper.replace(evt.target.result);
+              $scope.imagerino = evt.target.result;
+          });
+      };
+      reader.readAsDataURL(file);
+      }
+    });
+
 
     $scope.get_test = function() {
         console.log($scope.cropper, $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg'));
@@ -309,6 +315,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         cropBoxResizable: false,
         cropBoxMovable: false,
     });
+
 
     $scope.$on('payContestDone', function(event) {
         $scope.set_step('done');
