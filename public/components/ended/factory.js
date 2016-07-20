@@ -5,7 +5,7 @@ tappyn.factory("endedFactory", function($http){
 		return $http({
 			method : 'GET',
 			url : 'api/v1/contests/'+id+'/winner',
-			headers : {aa
+			headers : {
 				'Content-type' : 'application/x-www-form-urlencoded'
 			}
 		})
