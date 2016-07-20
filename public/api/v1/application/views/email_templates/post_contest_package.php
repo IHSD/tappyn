@@ -20,7 +20,6 @@ foreach($requirements as $req)
 
 <p><strong>Details</strong></p>
 <p><strong>Platform :</strong> <?php echo $contest->platform; ?></p>
-<p><strong>Objective :</strong> <?php echo $contest->objective; ?></p>
 <p><strong>Target Audience :</strong> <?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year olds in your specified gender category </p>
 <br>
 <p><strong>Ad Creative</strong></p>

@@ -93,11 +93,11 @@ $config['email_program']['mailing_list_conf']['additional_data'] = array();
  *
  * Sent to confirm that someone has subsribed to our mailing list
  */
-//$config['email_program']['post_contest_package']['template']        = 'email_templates/post_contest_package';
-//$config['email_program']['post_contest_package']['from']            = 'alek@tappyn.com';
-//$config['email_program']['post_contest_package']['subject']         = "Here's your Tappyn Ad!";
-//$config['email_program']['post_contest_package']['query_string']    = array();
-//$config['email_program']['post_contest_package']['additional_data'] = array();
+$config['email_program']['post_contest_package']['template']        = 'email_templates/post_contest_package';
+$config['email_program']['post_contest_package']['from']            = 'alek@tappyn.com';
+$config['email_program']['post_contest_package']['subject']         = "Here's your Tappyn Ad!";
+$config['email_program']['post_contest_package']['query_string']    = array();
+$config['email_program']['post_contest_package']['additional_data'] = array();
 
 /**
  * Sign Up Confirmation
@@ -136,7 +136,7 @@ $config['email_program']['contest_completed']['additional_data'] = array();
  */
 $config['email_program']['submission_chosen']['template']     = 'email_templates/submission_chosen';
 $config['email_program']['submission_chosen']['from']         = 'austin@tappyn.com';
-$config['email_program']['submission_chosen']['subject']      = "Your ad won on Tappyn!";
+$config['email_program']['submission_chosen']['subject']      = "Your ad has been Tapped!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source'  => 'transaction',
     'utm_medium'  => 'email',
