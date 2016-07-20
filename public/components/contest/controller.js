@@ -37,7 +37,21 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
             });
         }
     });
+    $scope.grabSubmissions().success(function(response) {
+        var filter = [];
+        var all_submissions = response.data.submissions;
+            for (var i = 0; i <= all_contests.length - 1; i++) {
+                for (var j = all_contests[i].industry.length - 1; j >= 0; j--) {
+                    if ($.inArray(all_contests[i].industry[j], $rootScope.user.interests) != -1) {
+                        filter.push(all_contests[i]);
+                        break;
+                    }
+                }
 
+        }
+        $scope.contests = filter;
+        //$scope.contests = response.data.contests;
+    });
     $scope.show_cropper = function() {
         $scope.cropper_box = true;
     }
