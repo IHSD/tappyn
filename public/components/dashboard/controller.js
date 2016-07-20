@@ -42,7 +42,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             $scope.payment_obj.h4 = 'hide';
             $scope.payment_obj.ab_aday = 15;
             $scope.payment_obj.re_ab = 0;
-            if (type = 'confirm_re_ab') {
+            if (type == 'confirm_re_ab') {
                 $scope.payment_obj.ab_aday = 0;
                 $scope.payment_obj.re_ab = 1;
             }

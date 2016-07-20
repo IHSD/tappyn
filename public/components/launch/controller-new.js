@@ -24,6 +24,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 
+
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
             if (response.http_status_code == 200) {
@@ -104,6 +105,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         });
     }
 
+
+
     $scope.set_step = function(step) {
         if (step == 'tp-objective') {
             if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
@@ -121,6 +124,14 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         }
         // else if(step == 'tp-audience'){
         // }
+        else if (step =="tp-prior") {
+          var setting = $scope.platform_image_settings[$scope.contest.platform];
+          $scope.current = $scope.steps[step];
+          $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+          $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
+        }
+
         else if (step == 'detail') {
             fbq('track', 'InitiateCheckout');
             if ($rootScope.user && !$scope.profile) $scope.grab_profile();
@@ -157,6 +168,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.objective = null;
         $scope.contest.display_type = null;
         $scope.image_cropper();
+        var setting = $scope.platform_image_settings[$scope.contest.platform];
+        $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+        $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
     }
 
     $scope.select_display = function(type) {
@@ -179,10 +193,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.to_detail = function(contest) {
         contest.display_type = "with_photo";
         if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
-        else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
+        //else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
         else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
-        //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
+        else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
 
@@ -287,7 +301,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-        aspectRatio: 1 / 1,
+        aspectRatio: 1.91 / 1,
+        width: 1200,
+        height: 628,
         dragMode: 'move',
         scaleable: false,
         cropBoxResizable: false,

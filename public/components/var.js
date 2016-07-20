@@ -116,8 +116,8 @@ tappyn.factory('tappyn_var', function() {
         },
         'instagram': {
             'aspect_ratio': 1 / 1,
-            'min_width': 1080,
-            'min_height': 1080,
+            'min_width': 540,
+            'min_height': 540,
         },
         'twitter': {
             'aspect_ratio': 2 / 1,
