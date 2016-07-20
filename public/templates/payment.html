@@ -2,19 +2,7 @@
     <div class="payment_modal">
         <div class="modal_top text-center" style="padding-bottom:50px;">
             <div class='close_circle' ng-click='set_model()'>x</div>
-            <h3><strong>{{payment_obj.h3}}</strong></h3>
-            <h4 ng-hide="payment_obj.h4 == 'hide'">{{payment_obj.h4}}</h4>
-            <ul ng-if="payment_obj.pay_for == 'launch'" class="text-left" style="padding-left:70px;">
-                <li class="value-list">30 Unique Ads</li>
-                <li class="value-list">1 Copyright</li>
-                <li class="value-list">Audience Targeting</li>
-                <li class="value-list">Testing And Delivery</li>
-            </ul>
-            <hr style="margin:0 !important;">
-            <div class="col-xs-12" style="padding:10px 0 20px;">
-                <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
-                <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
-            </div>
+            <h3><strong>Campaign Payment</strong></h3>
         </div>
         <div class="modal_bot">
             <div class="voucher-group row" ng-show='payment_obj.voucher_visible'>
@@ -25,6 +13,20 @@
                     </div>
                     <button class='btn btn-oj col-sm-5 col-xs-12' type='submit'>Check Voucher</button>
                 </form>
+            </div>
+            <div class="text=left">
+              <h4>{{payment_obj.h4}}</h4>
+              <ul class="text-left" style="padding-left:70px;">
+                  <li class="value-list">30 Unique Ads</li>
+                  <li class="value-list">1 Copyright</li>
+                  <li class="value-list">Audience Targeting</li>
+                  <li class="value-list">Testing And Delivery</li>
+              </ul>
+              <hr style="margin:0 !important;">
+              <div class="col-xs-12" style="padding:10px 0 20px;">
+                  <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
+                  <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+              </div>
             </div>
             <div ng-show='payment_obj.price != 0.00'>
                 <div ng-show='!add_new'>
@@ -103,7 +105,7 @@
                                 <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                             </label>
                             <div class='pull-right' data-toggle="buttons">
-                                <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="payment_obj.voucher_visible = 1">
+                                <label class='btn btn-link' style='color: #ff5e00; padding: 0;'  ng-click="voucher.visible = 1">
                                     <input type='radio' name="reg" value='1' ng-model='payment_obj.voucher_visible'>I have a voucher!
                                 </label>
                             </div>
@@ -122,6 +124,7 @@
         </div>
     </div>
 </div>
+
 <style>
 li.value-list:before {
     content: "\e067";
@@ -130,5 +133,5 @@ li.value-list:before {
     float: left;
     margin-top: 4px;
     margin-left: -17px
-}
-</style>
+  }
+  </style>
