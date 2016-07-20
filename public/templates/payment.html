@@ -13,8 +13,8 @@
                     </div>
                     <button class='btn btn-oj col-sm-5 col-xs-12' type='submit'>Check Voucher</button>
                 </form>
-            </div>
-            <div class="text=left">
+            </div>	
+            <div class="col-md-6">
               <h4>{{payment_obj.h4}}</h4>
               <ul class="text-left" style="padding-left:70px;">
                   <li class="value-list">30 Unique Ads</li>
@@ -28,7 +28,7 @@
                   <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
               </div>
             </div>
-            <div ng-show='payment_obj.price != 0.00'>
+            <div class="col-md-6" ng-show='payment_obj.price != 0.00'>
                 <div ng-show='!add_new'>
                     <div ng-show='payments.length > 0'>
                         <div class='payment-method-container'>
