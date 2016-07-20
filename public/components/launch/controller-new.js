@@ -112,8 +112,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
             else $scope.current = $scope.steps[step];
         } else if (step == 'tp-audience') {
-            //if (!$scope.contest.objective) $scope.set_alert("Please select an objective.", "error");
-            if {
+            if (!$scope.contest.objective) $scope.set_alert("Please select an objective.", "error");
+            else {
                 var setting = $scope.platform_image_settings[$scope.contest.platform];
 
                 $scope.current = $scope.steps[step];
