@@ -160,7 +160,7 @@
           <div class="form-group col-xs-12 col-sm-6 col-md-3"  style="padding-left:0;padding-right:0;">
             <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
             <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-            <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
+            <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
               <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
               </label>
