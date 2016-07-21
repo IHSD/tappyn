@@ -15,7 +15,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         else $scope.check_code(response.http_status_code);
     });
 
-
+    $scope.allSelected = false;
+        $scope.selectText = "Select All";
 
     dashFactory.grabTotals().success(function(response) {
         if (response.http_status_code == 200) {
@@ -188,10 +189,17 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         return tmp;
     }
 
-    $scope.select_all = function() {
-        $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
+    $scope.Toggleselect_all = function() {
+        $scope.allSelected = !$scope.allSelected;
+        if($scope.allSelected){
+            $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
+                $scope.selectText = "Deselect All";
+            } else {
+                $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
+                $scope.selectText = "Select All";
+            }
     }
 
 
 
-})
+});
