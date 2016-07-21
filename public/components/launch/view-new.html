@@ -46,16 +46,16 @@
                 <h4>We'll channel your campaign to our users who meet your target demographics. Fill out the creative direction so creators know what you're looking for.</h4>
             </div> -->
       <div ng-show='current.step == "tp-prior"'>
-        <h2>How does this work?</h2>
-        <h4>Please read over everything carefully before launching.</h4>
+        <h2>What would you like?</h2>
+        <h4>Please tell us about your ad and your audience.</h4>
       </div>
       <div ng-show='current.step == "detail"'>
-        <h2>Tell us more about you.</h2>
-        <h4>Fill out our brief so our creators know more about your business. You'll only have to do this once.</h4>
+        <h2>Tell us more about your business.</h2>
+        <h4>Fill out our brief so our partners know more about your business. You'll only have to do this once.</h4>
       </div>
       <div ng-show='current.step == "preview"'>
-        <h2>Campaign Preview</h2>
-        <h4>This is what our creators will see.</h4>
+        <h2>How does this look?</h2>
+        <h4>Please read over everything carefully before launching.</h4>
       </div>
       <div ng-show='current.step == "done"'>
         <h2>Congratulations!</h2>
@@ -73,7 +73,9 @@
 <div class='container' style='padding-bottom: 120px;'>
   <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12">
     <div class="row">
-      <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Platform</label>
+      <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Platform
+        <span class="glyphicon glyphicon-question-sign" style="font-size:14px;position:relative;top:-10px;"></span>
+      </label>
       <div class="col-sm-10">
         <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
           <img src="public/img/ico-facebook.svg">
@@ -132,7 +134,9 @@
       </div>
     </div>-->
     <div class="row" style="padding-top:40px;">
-      <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Audience</label>
+      <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:24px;cursor:pointer;">Audience
+        <span class="glyphicon glyphicon-question-sign" style="font-size:14px;position:relative;top:-10px;"></span>
+      </label>
       <div class="col-sm-10">
         <form class="form-inline ng-pristine ng-valid" role="form">
           <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
@@ -186,7 +190,8 @@
       <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Copy Direction</label>
         <div class="col-sm-10 col-md-5">
           <div class="form-group">
-            <textarea class='form-control' ng-model='contest.additional_info' placeholder="e.g., Specific examples of how you'd use our product."></textarea>
+            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter text that clearly describes the message or feeling you want to communicate.">
+            </textarea>
           </div>
         </div>
     </div>
@@ -194,7 +199,8 @@
       <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Creative</label>
       <div class="col-sm-10">
         <div class="form-group" ng-init="contest.attachment = ''">
-          <h4 style="font-size:14px;"><strong>Upload the photo you would like to include in your ad</strong></h4>
+          <h4 style="font-size:14px;"><strong>Choose the photo you'd like to be paired with your ad.</strong></h4>
+          <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
           <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
         </div>
         <div class="row form-group" ng-show="new_img">
@@ -255,17 +261,17 @@
                 </div>
             </div>-->
       <div class="row">
-        <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Product/Service</label>
+        <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Product/Service</label>
         <div class="col-sm-9">
           <div class="form-group">
             <h4><strong>Summary of product or service</strong></h4>
-            <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here' style="max-width:70%;" maxlength="250">
-            <p class='launch-page-message'><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
+            <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
+            <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
           </div>
           <div class="form-group">
             <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
-            <input class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;">
-            <p class='launch-page-message'><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
+            <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
+            <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
           </div>
         </div>
       </div>
@@ -367,7 +373,7 @@
         <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
       </div>
       <div ng-show='current.step == "detail"'>
-        <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Preview Campaign</button>
+        <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Create Account</button>
         <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
         <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
       </div>
@@ -388,10 +394,10 @@
       <div class='text-left' ng-hide='current.step == "done"'>
         <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                                    <span style='font-weight:300;font-size:22'><strong>100% Money Back guarantee</strong></span>
-                                    <br>
-                                    <span style='font-weight:300;font-size:18'>An ad your audience loves or your money back</span>
-                                    </h4>
+        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+          <strong>100% Money Back guarantee</strong>
+        </span>
+        </h4>
       </div>
     </div>
   </div>

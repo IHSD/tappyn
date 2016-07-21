@@ -15,6 +15,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         else $scope.check_code(response.http_status_code);
     });
 
+
+
     dashFactory.grabTotals().success(function(response) {
         if (response.http_status_code == 200) {
             if (response.success) $scope.totals = response.data;
@@ -68,7 +70,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             dashFactory.grabUpvoted().success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
-        } else {
+        }
+        else {
             dashFactory.grabDash(type).success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
