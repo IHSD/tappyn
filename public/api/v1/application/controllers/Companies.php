@@ -321,7 +321,7 @@ class Companies extends CI_Controller
                     $this->responder->fail($msg)->code(500)->respond();
                 }
             } else if ($post['pay_for'] == 'subscription') {
-                $this->responder->message("doneeee")->respond();
+                $this->subscription_update($post);
             }
         }
         // An error occured, so respond as such
@@ -471,6 +471,18 @@ class Companies extends CI_Controller
         } else {
             $this->mailer->queue('alek@tappyn.com', $this->ion_auth->user()->row()->id, 'ab_test', 'contest', $post['contest_id']);
             $this->responder->message("A/B Test have been set!")->respond();
+        }
+    }
+
+    private function subscription_update($post)
+    {
+        $this->load->library('subscription_lib');
+        $user_id = $this->ion_auth->user()->row()->id;
+        $result  = $this->subscription_lib->update_level($user_id, array('next_level' => $post['sub_level']));
+        if ($result === true) {
+            $this->responder->message("doneeee")->respond();
+        } else {
+            $this->responder->fail($result)->code(500)->respond();
         }
     }
 }

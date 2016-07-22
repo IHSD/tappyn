@@ -7,16 +7,19 @@ class Price_lib
         'ab'           => 15,
         'launch'       => 59.99,
         'subscription' => array(
-            1 => 59,
-            2 => 149,
-            3 => 319,
+            0  => 0,
+            10 => 59,
+            20 => 149,
+            30 => 319,
         ),
     );
+    public $user_id = 0;
 
     public function __construct()
     {
-        $this->load->library('vouchers_library');
+        $this->load->library(array('vouchers_library', 'subscription_lib'));
         $this->load->model('contest');
+        $this->user_id = $this->ion_auth->user()->row()->id;
     }
     public function __get($var)
     {
@@ -91,7 +94,12 @@ class Price_lib
                 // $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
                 $price = $submission_id_count * $fee;
             } else if ($post['pay_for'] == 'subscription') {
-                $price = $fee[$post['sub_level']];
+                $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
+                $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
+                $price        = $fee[$post['sub_level']] - $diff;
+                if ($price < 0) {
+                    $price = 0;
+                }
             } else {
                 $price = $fee;
             }
