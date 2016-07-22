@@ -97,8 +97,9 @@ class Price_lib
                 $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
                 $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
                 $price        = $fee[$post['sub_level']] - $diff;
-                if ($price < 0) {
-                    $price = 0;
+                if ($price <= 0) {
+                    $price                = 0;
+                    $result['no_payment'] = true;
                 }
             } else {
                 $price = $fee;

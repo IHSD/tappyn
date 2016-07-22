@@ -639,3 +639,13 @@ Author: Rashid Shafique | rmughal@gmail.com
 .plan.recommended .btn {
     margin-bottom: 10px;
 }
+
+.subscription-div.now-level.next-level .sign-up-btn,
+.subscription-div .more-p {
+    display: none;
+}
+
+.subscription-div.now-level .more-p.now-level-p,
+.subscription-div.next-level .more-p.next-level-p {
+    display: block;
+}

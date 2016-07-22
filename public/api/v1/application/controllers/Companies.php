@@ -480,9 +480,14 @@ class Companies extends CI_Controller
         $user_id = $this->ion_auth->user()->row()->id;
         $result  = $this->subscription_lib->update_level($user_id, array('next_level' => $post['sub_level']));
         if ($result === true) {
-            $this->responder->message("doneeee")->respond();
+            $this->responder->message("update subscription success")->respond();
         } else {
             $this->responder->fail($result)->code(500)->respond();
         }
+    }
+
+    public function check_subscription()
+    {
+
     }
 }

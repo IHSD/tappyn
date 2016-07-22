@@ -120,7 +120,7 @@
         </section>
         <section class=love-raw style="padding-top:0;height:auto;background:#fff;">
             <div class="row content-padding">
-                <div ng-include src="'templates/company/subscription.html'" ng-if='user.type == "company"'></div>
+                <div ng-init="subscription_type = 'company'" ng-include src="'templates/company/subscription.html'" ng-if='user.type == "company"'></div>
             </div>
         </section>
         <section class=how-it-works style=padding-bottom:20px>

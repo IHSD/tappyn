@@ -58,8 +58,8 @@ class Subscription_lib
             $temp['now_level'] = $temp['next_level'] = $data['next_level'];
             $result            = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
         }
-        // downgrate
-        else if ($now['now_level'] > $data['next_level']) {
+        // downgrate or same
+        else {
             $temp['user_id']    = $user_id;
             $temp['next_level'] = $data['next_level'];
             $result             = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
