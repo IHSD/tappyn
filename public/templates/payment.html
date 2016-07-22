@@ -4,17 +4,6 @@
             <div class='close_circle' ng-click='set_model()'>x</div>
             <h3><strong>Checkout</strong></h3>
             <h4>{{payment_obj.h4}}</h4>
-            <ul ng-if="payment_obj.pay_for == 'launch'" class="text-left" style="padding-left:70px;">
-                <li class="value-list">30 Unique Ads</li>
-                <li class="value-list">1 Copyright</li>
-                <li class="value-list">Audience Targeting</li>
-                <li class="value-list">Testing And Delivery</li>
-            </ul>
-            <hr style="margin:0 !important;">
-            <div class="col-xs-12" style="padding:10px 0 20px;">
-                <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
-                <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
-            </div>
         </div>
         <div class="modal_bot">
             <div class="voucher-group row" ng-show='payment_obj.voucher_visible'>
@@ -28,7 +17,7 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" ng-show="payment_obj.pay_for == 'launch'">
                         <h4 class="text-left" style="font-weight:bold;font-size:16px;margin-top:0px;">Standard Package</h4>
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
@@ -113,7 +102,7 @@
                                     </div>
                                 </div>
                                 <input type='hidden' data-stripe='currency' value='usd' />
-                                <div class='form-group checkbox' ng-hide="payment_obj.hide_voucher">
+                                <div class='form-group checkbox'>
                                     <label class='control-label' style='font-size: 14px;'>
                                         <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                                     </label>
@@ -127,7 +116,6 @@
                                     <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
                                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                                 </div>
-                                <input type="reset" class="hidden">
                             </form>
                         </div>
                     </div>

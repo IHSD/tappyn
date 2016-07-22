@@ -58,19 +58,6 @@ class Price_lib
                 }
             }
 
-            $contest = $this->contest->get($post['contest_id']);
-            if (!$contest) {
-                throw new Exception("We couldnt find that constest");
-            }
-            $status          = $this->contest->get_status($contest);
-            $purchase_status = array('pending_selection', 'pending_testing');
-            if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
-                throw new Exception("Constest status error");
-            }
-            //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
-            //throw new Exception("Constest status error2");
-            //}
-
             if ($post['pay_for'] != 'subscription' && $post['pay_for'] != 'launch') {
                 $contest = $this->contest->get($post['contest_id']);
                 if (!$contest) {
