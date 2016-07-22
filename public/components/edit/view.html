@@ -38,7 +38,38 @@
                             </div>
                         </div>
                     </div>
-                    <!-- TODO for Onion, please remove this once done -->
+                    <!--
+                    <div class="row">
+                    <div class="form-group col-xs-12 col-sm-6" style="padding-left: 0;">
+                    <label class='text-left target-label' style="padding-top:0px;">Detailed Targeting</label>
+
+                    <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                      <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
+                    </select>
+                    </div>
+                    <div class='form-group col-xs-12 col-sm-6'>
+                    <label class='text-left target-label' style="padding-top:1px;">Locations</label>
+
+                    <select select2 ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:100%;">
+                      <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
+                    </select>
+                  </div>
+                  </div>
+              -->
+                    <div class="col-xs-12 form-group">
+                        <label class='control-label'>Copy Direction</label>
+                        <div class="form-group">
+                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of copies you'd like to receive."></textarea>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 form-group'>
+                        <label class='control-label'>Summary of product or service</label>
+                        <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='Enter your short summary here' maxlength="250"></textarea>
+                    </div>
+                    <div class='col-xs-12 form-group'>
+                        <label class='control-label'>Describe what makes you different (and better) than your competition.</label>
+                        <textarea class='form-control' row='4'ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' maxlength="250"></textarea>
+                    </div>
                     <div class="col-xs-12" ng-if="contest.use_attachment == 1">
                         <label class='control-label'>Ad Creative</label>
                         <div class="form-group">
@@ -47,27 +78,6 @@
                                 <div class="img-preview"><img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-xs-12">
-                        <label class='control-label'>Tone Of Voice</label>
-                        <div class="form-group">
-                            <div class="checkbox" ng-repeat="(key,value) in tone_of_voice_boxes">
-                                <label>
-                                    <input type="checkbox" ng-checked="contest.tone_of_voice_box.indexOf(key) != -1" ng-click="add_interest_image(key,contest.tone_of_voice_box)"> {{value}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter a short description of what type of copies you'd like to receive."></textarea>
-                        </div>
-                    </div>
-                    <div class='col-xs-12 form-group'>
-                        <label class='control-label'>Summary of product or service</label>
-                        <input class='form-control' ng-model='contest.summary' placeholder='Enter your short summary here'>
-                    </div>
-                    <div class='col-xs-12 form-group'>
-                        <label class='control-label'>Describe what makes you different (and better) than your competition.</label>
-                        <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.'></textarea>
                     </div>
                     <div class='col-xs-12 text-center'>
                         <button class='btn btn-oj' type='submit'>Edit</button>

@@ -30,8 +30,10 @@ class Price_lib
     {
         $result = array();
         try {
-            $post['go_pay'] = isset($post['go_pay']) ? $post['go_pay'] : false;
-            $fee            = $this->data[$post['pay_for']];
+            $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;
+            $post['ab_days'] = 1;
+            $post['ab_aday'] = isset($post['ab_aday']) ? floatval($post['ab_aday']) : false;
+            $fee             = $this->data[$post['pay_for']];
             if (!$fee) {
                 throw new Exception("Missing parameters");
             }
@@ -56,7 +58,20 @@ class Price_lib
                 }
             }
 
-            if ($post['pay_for'] != 'subscription') {
+            $contest = $this->contest->get($post['contest_id']);
+            if (!$contest) {
+                throw new Exception("We couldnt find that constest");
+            }
+            $status          = $this->contest->get_status($contest);
+            $purchase_status = array('pending_selection', 'pending_testing');
+            if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
+                throw new Exception("Constest status error");
+            }
+            //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
+            //throw new Exception("Constest status error2");
+            //}
+
+            if ($post['pay_for'] != 'subscription' && $post['pay_for'] != 'launch') {
                 $contest = $this->contest->get($post['contest_id']);
                 if (!$contest) {
                     throw new Exception("We couldnt find that constest");
@@ -70,19 +85,17 @@ class Price_lib
                 //throw new Exception("Constest status error2");
                 //}
 
-                if ($post['pay_for'] != 'launch') {
-                    $submission_id_count = count($post['submission_ids']);
-                    if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
-                        throw new Exception("purchase only one submission!");
-                    }
-                    if (!is_array($post['submission_ids']) || !$submission_id_count) {
-                        throw new Exception("please check one at least");
-                    }
-                    $submissions = $this->contest->submission_ids($post['contest_id']);
-                    foreach ($post['submission_ids'] as $id) {
-                        if (!in_array($id, $submissions)) {
-                            throw new Exception("submission not exist");
-                        }
+                $submission_id_count = count($post['submission_ids']);
+                if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
+                    throw new Exception("purchase only one submission!");
+                }
+                if (!is_array($post['submission_ids']) || !$submission_id_count) {
+                    throw new Exception("please check one at least");
+                }
+                $submissions = $this->contest->submission_ids($post['contest_id']);
+                foreach ($post['submission_ids'] as $id) {
+                    if (!in_array($id, $submissions)) {
+                        throw new Exception("submission not exist");
                     }
                 }
             }
@@ -91,8 +104,15 @@ class Price_lib
                 $price = $submission_id_count * $fee;
                 $price = 0;
             } else if ($post['pay_for'] == 'ab') {
-                // $price = ($post['ab_aday'] * $post['ab_days']) * (1 + $fee);
-                $price = $submission_id_count * $fee;
+                $free_ab = ($status == 'pending_selection') ? 0 : 15;
+                if ($free_ab == 0 && !$post['ab_aday']) {
+                    throw new Exception("Please enter a integer number!");
+                } else if ($post['ab_aday'] <= $free_ab) {
+                    $price = 0;
+                } else {
+                    $price = ($post['ab_aday'] * $post['ab_days']) - $free_ab;
+                    //$price = $submission_id_count * $fee;
+                }
             } else if ($post['pay_for'] == 'subscription') {
                 $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
                 $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;

@@ -27,9 +27,9 @@ $query_string['redirect'] = 'dashboard';
 
 <p>3) Launch your campaign, and watch personalized ads roll in. </p>
 
-<p>4) Input your testing budget, and check out each ad's Click Through Rate (CTR).</p>
+<p>4) Review the ads you’d like to test and start receiving results.</p>
 
-<p>5)  Purchase your favorite ads and leave with a relevant copy guaranteed to connect with your audience.</p>
+<p>5) Look at all your ads with their results and decide which one you’d like to own.</p>
 
 <p>Got a question? I’m <a href="mailto:alek@tappyn.com">here to help</a>, and answer any questions. My cell is below - feel free to call me with any questions or concerns.</p>
 

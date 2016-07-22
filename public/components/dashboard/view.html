@@ -17,6 +17,44 @@
         </div>
     </div>
 </div>
+<!--Start Old AB Modal-->
+<div class='wrapper'>
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_ab'">
+        <div class="payment_modal">
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h3><strong>A/B Testing</strong></h3>
+                <h4 ng-if="winner_contest.submission_ids.length > 1">You’ve selected {{winner_contest.submission_ids.length}} ads.</h4>
+                <h4 ng-if="winner_contest.submission_ids.length == 1">You’ve selected {{winner_contest.submission_ids.length}} ad.</h4>
+            </div>
+            <div class="modal_bot">
+                <div class="form-group">
+                    <div ng-hide="payment_obj.re_ab">
+                        <p class="text-center" style="font-size:18px; font-weight:bold;">Up to $15.00 of Ad Spend is included in your campaign.</p>
+                        <div class="col-xs-8">
+                            <label for="ab-aday" class="control-label">Input your own budget, or continue to start testing:</label>
+                        </div>
+                    </div>
+                    <div ng-show="payment_obj.re_ab">
+                        <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like for more accurate results.</p>
+                        <div class="col-xs-8">
+                            <label for="ab-aday" class="control-label" style="text-align:right;">Input your own budget to get started:</label>
+                        </div>
+                    </div>
+                    <div class="input-group col-xs-4" style="padding-top:5px;">
+                        <div class="input-group-addon">$</div>
+                        <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <p class="col-xs-12" style="font-size:12px;"><small>Each test will last approximately 24 hours.</small></p>
+                    <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-6 col-xs-offset-3">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End OLD AB MODAL-->
 <div class="modal fade" id="myModalcompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabelcompany" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -138,32 +176,30 @@
                         <div class="col-xs-6" style="margin-top:10px;">
                             <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
-                                <button class='btn btn-dash btn-oj btn-secondary' ng-click='select_all()' style='margin-right: 10px;'>Select All</button>
+                                <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>{{selectText}}</button>
                             </span>
-                        </div>
-                        <div class="col-xs-6 text-right">
                         </div>
                     </div>
                 </div>
                 <div ng-if="submissions.length">
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?1'"></div>
+                            <div ng-include src="'templates/submits/companysubmits.html?11'"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?1'"></div>
+                            <div ng-include src="'templates/submits/companysubmits.html?11'"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?1'"></div>
+                            <div ng-include src="'templates/submits/companysubmits.html?11'"></div>
                         </div>
                     </div>
                     <div class='col-xs-12 visible-xs'>
                         <div class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?1'"></div>
+                            <div ng-include src="'templates/submits/companysubmits.html?11'"></div>
                         </div>
                     </div>
                 </div>
@@ -180,16 +216,16 @@
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and ads are being created<br>about your business.</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and we're waiting on 30 ads<br>to be created about your business.</strong></span>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Launch your free campaign now!</strong></span>
-                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click='open_payment(winner_contest,"launch")' style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>It looks like your campaign hasn't launched yet.</strong></span>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')" style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
                         </div>
                         <div ng-show="view == 'pcp'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
@@ -197,18 +233,27 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please de-select ads that you'd like to omit from the test.</strong></span>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select ads that you'd like to test.</strong></span>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
+                            <!--<button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
+                            <!--New Test Buttons
                             <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                          -->
                         </div>
-                        <div ng-show="winner_contest.status == 'pending_purchase'">
+                        <div ng-show="winner_contest.status == 'pending_selection'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ads you'd like to purchase and use<br>in your future ad campaigns.</strong></span>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please select the ad you'd like to use<br>in your future ad campaigns.</strong></span>
+                            <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
+                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_re_ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
+                            <!--New Payment buttons
                             <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase $
                                 <label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label>
                                 </span>
                             </button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
+                          -->
                         </div>
                     </div>
                 </div>
@@ -293,7 +338,7 @@ fbq('track', 'PageView');
 window.Intercom('update');
 </script>
 <style>
-    .blur {
+.blur {
     -webkit-filter: blur(5px) grayscale(20%);
 }
 
@@ -353,4 +398,5 @@ window.Intercom('update');
 .checkbox-container input[type="checkbox"]:hover + label span:hover {
     color: #ff5e00;
     border: 2px solid #ff5e00;
+}
 </style>

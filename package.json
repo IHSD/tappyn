@@ -1,17 +1,17 @@
 {
-  "name": "Tappyn",
-  "version": "1.0.0",
-  "description": "",
+  "name": "123",
+  "version": "1.1.1",
+  "description": "123",
   "main": "public/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "gulp js"
+    "build": "gulp js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/IHSD/tappyn.git"
   },
-  "author": "",
+  "author": "123",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/IHSD/tappyn/issues"
@@ -20,5 +20,15 @@
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0"
-  }
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0"
+  },
+  "keywords": [
+    "123"
+  ]
 }

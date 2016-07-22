@@ -649,3 +649,63 @@ Author: Rashid Shafique | rmughal@gmail.com
 .subscription-div.next-level .more-p.next-level-p {
     display: block;
 }
+
+
+/* launch page */
+
+.launch-page-btn.package-highlight {
+    border: 2px solid #ff6c00;
+}
+
+.launch-page-btn {
+    background: #fff;
+    position: relative;
+    padding: 15px 30px;
+    border: 1px solid #E0E0E0;
+    word-wrap: break-word;
+    -webkit-box-shadow: 0 0px 5px -2px rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0px 5px -2px rgba(0, 0, 0, 0.22);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid #ffffff;
+    float: left;
+    /*white-space: nowrap;*/
+    margin: 0 2% 20px 0;
+}
+
+.launch-page-btn img {
+    float: left;
+    margin-right: 10px;
+    max-height: 20px;
+    width: auto;
+}
+
+.launch-page-btn h4 {
+    float: left;
+    margin: 0;
+    font-weight: bold;
+    /*font-size: 22px;*/
+    /*white-space: nowrap;*/
+}
+
+.launch-page-btn p {
+    float: left;
+    margin-top: 10px;
+}
+
+.contest-test-result {
+    position: absolute;
+    right: 26px;
+    bottom: 0;
+}
+
+.contest-test-result span {
+    margin-left: 35px;
+    font-size: 16px;
+}
+
+@media screen and (min-width: 768px) {
+    .launch-page-btn {
+        max-width: 48%;
+    }
+}

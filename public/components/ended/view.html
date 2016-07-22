@@ -1,17 +1,19 @@
 <div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
-  <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+            </div>
+            <div class="modal-body-sub text-center">
+                <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)
+                    <br>
+                </p>
+            </div>
+            <div class="modal-footer-sub text-right">
+                <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
+            </div>
         </div>
-        <div class="modal-body-sub text-center">
-          <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)<br></p>
-        </div>
-        <div class="modal-footer-sub text-right">
-        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
-      </div>
-      </div>
     </div>
 </div>
 <div class='container'>
@@ -22,7 +24,7 @@
                     <div class='panel-body'>
                         <div class='col-sm-4 col-xs-12' style='padding-top:5px;'>
                             <h3 style='margin-top:0px;'><img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
-						<img ng-if='contest.company.logo_url' style='height:auto;' width='50px' src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
+            <img ng-if='contest.company.logo_url' style='height:auto;' width='50px' src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
                         </div>
                         <div class='col-sm-4 col-xs-12' style='padding-top:30px;'>
                             <div style='width:100%'>
@@ -35,8 +37,8 @@
                         </div>
                         <div class='col-sm-3 col-xs-6 text-right'>
                             <h4 style='margin:0px;margin-top:20px;'>
-			            	Ended {{contest.stop_time | untilFilter}} ago
-						</h4>
+                    Ended {{contest.stop_time | untilFilter}} ago
+            </h4>
                             <h4>{{contest.views}} Views</h4>
                             <h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
                         </div>
@@ -45,7 +47,6 @@
             </div>
         </div>
         <div class='row content-padding'>
-          <h2 class="text-center" style="font-weight:300;">Congratulations!</h2>
             <div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='!contest.payout'>
                 <div class="contest-box row">
                     <div class='col-xs-12 text-center'>
@@ -54,8 +55,8 @@
                     </div>
                 </div>
             </div>
-
             <div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.payout'>
+                <h2 class="text-center" style="font-weight:300;">Congratulations!</h2>
                 <div class="contest-box row">
                     <div class='contest-image'>
                         <img ng-src='{{winner.attachment}}'>
@@ -79,79 +80,86 @@
                         <span class='winner-tag'>Winner</span>
                         <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
                         <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+                        <div ng-if="submission.test_result.impressions" class="contest-test-result">
+                            <span class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
+                            <span class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
+                            <span class="test-results" ng-bind="submission.test_result.results"></span>
+                        </div>
                     </div>
                 </div>
             </div>
-          </div>
-            <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
-              <div class='row' style='padding-bottom:10px;' id='submishes'>
-                  <div class='col-md-3 visible-md visible-lg'>
-                      <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-md-3 visible-md visible-lg'>
-                      <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-md-3 visible-md visible-lg'>
-                      <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-md-3 visible-md visible-lg'>
-                      <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-sm-4 visible-sm'>
-                      <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-sm-4 visible-sm'>
-                      <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-sm-4 visible-sm'>
-                      <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
-                  <div class='col-xs-12 visible-xs'>
-                      <div class="contest-box row" ng-repeat='submission in submissions'>
-                          <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                      </div>
-                  </div>
+        </div>
+        <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
+        <div class='row' style='padding-bottom:10px;' id='submishes'>
+            <div class='col-md-3 visible-md visible-lg'>
+                <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-md-3 visible-md visible-lg'>
+                <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-md-3 visible-md visible-lg'>
+                <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-md-3 visible-md visible-lg'>
+                <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-sm-4 visible-sm'>
+                <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-sm-4 visible-sm'>
+                <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-sm-4 visible-sm'>
+                <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
+            <div class='col-xs-12 visible-xs'>
+                <div class="contest-box row" ng-repeat='submission in submissions'>
+                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
 <script>
-$('#myModalnew').on('show.bs.modal', function () {
-   $('.container').addClass('blur');
+$('#myModalnew').on('show.bs.modal', function() {
+    $('.container').addClass('blur');
 })
 
-$('#myModalnew').on('hide.bs.modal', function () {
-   $('.container').removeClass('blur');
+$('#myModalnew').on('hide.bs.modal', function() {
+    $('.container').removeClass('blur');
 })
 </script>
 <style>
 .blur {
     -webkit-filter: blur(5px) grayscale(20%);
 }
+
 .modal-backdrop {
-  background-color: #fff;
-  opacity: 0.5;
+    background-color: #fff;
+    opacity: 0.5;
 }
-@media (min-width: 768px)
-.modal-content {
-  -webkit-box-shadow: 0 1px 5px rgba(0,0,0,.5);
-  box-shadow: 0 1px 5px rgba(0,0,0,.5);
+
+@media (min-width: 768px) .modal-content {
+    -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
 }
+
 .modal-header {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
@@ -159,32 +167,36 @@ $('#myModalnew').on('hide.bs.modal', function () {
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
 }
+
 .modal-body-sub {
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-left: 10px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
 }
+
 .modal-content {
-  background-color: #f4f7f9;
-  border: 0;
-  border-radius: 2px;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+    background-color: #f4f7f9;
+    border: 0;
+    border-radius: 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
+
 .modal-dialog {
-  color: #526880;
+    color: #526880;
 }
+
 .modal-footer-sub {
-   border-top: none;
-   border-left: 1px solid #ccc;
-   border-right: 1px solid #ccc;
-   border-bottom-left-radius: 6px;
-   border-bottom-right-radius: 6px;
-   border-bottom: 1px solid #ccc;
-   padding-bottom: 10px;
-   padding-right:10px;
-   padding-top:30px;
+    border-top: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
 }
 </style>

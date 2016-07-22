@@ -3317,6 +3317,20 @@ nav .dropdown-menu {
     overflow-y: scroll;
 }
 
+@media (min-width:768px) {
+  .payment_modal {
+      max-width: 100%;
+      width: 600px;
+      border-radius: 3px;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      max-height: 90%;
+      overflow-y: scroll;
+  }
+}
+
 .payment-empty-card {
     display: flex;
     justify-content: space-around;
@@ -3752,7 +3766,7 @@ nav .dropdown-menu {
     line-height: 35px;
     text-align: center;
     right: 0px;
-    background: #FF5E00;
+    /**background: #FF5E00;**/
     color: #fff;
     top: 0;
     z-index: 20;
@@ -3761,7 +3775,7 @@ nav .dropdown-menu {
 
 .contest-price:before {
     border-left: 1.5em solid transparent;
-    border-top: 1.75em solid #FF5E00;
+    /**border-top: 1.75em solid #FF5E00;**/
     content: "";
     height: 0;
     z-index: 1;
@@ -3773,7 +3787,7 @@ nav .dropdown-menu {
 
 .contest-price:after {
     border-left: 1.5em solid transparent;
-    border-bottom: 1.75em solid #FF5E00;
+    /**border-bottom: 1.75em solid #FF5E00;**/
     content: "";
     height: 0;
     z-index: 1;

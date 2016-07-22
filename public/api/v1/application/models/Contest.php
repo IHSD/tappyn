@@ -254,7 +254,7 @@ class Contest extends MY_Model
             } else if ($testing === null) {
                 $status = 'pending_testing';
             } else {
-                $status = 'pending_purchase';
+                $status = 'pending_selection';
             }
         } else if ($contest->start_time > date('Y-m-d H:i:s')) {
             $status = 'scheduled';

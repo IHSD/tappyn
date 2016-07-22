@@ -7,7 +7,6 @@
             <div class='addthis_sharing_toolbox' data-url='https://tappyn.com/contest/{{contest.id}}' data-title='{{submission.headline == "" ? submission.text : submission.headline}}' data-description='{{submission.headline == "" ? "from " + contest.company.name : submission.text}}' data-media='{{submission.attachment}}'></div>
         </div>
     </div>
-
 </div>
 <div class='contest-company text-left'>
     <div class='avatar'>
@@ -31,6 +30,11 @@
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <div ng-if="submission.test_result.impressions" class="contest-test-result">
+        <span class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
+        <span class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
+        <span class="test-results" ng-bind="submission.test_result.results"></span>
+    </div>
 </div>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
 <script type="text/javascript">

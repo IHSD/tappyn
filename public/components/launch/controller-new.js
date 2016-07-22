@@ -1,14 +1,16 @@
 tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions, tappyn_var) {
     $scope.logged_in()
     $scope.steps = {
-        'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
-        'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
-        'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
-        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 66.8 },
-        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 83.5 },
-        'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
-    }
-    $scope.current = $scope.steps['tp-platform'];
+            // 'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
+            // 'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
+            // 'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
+            'tp-prior': { step: 'tp-prior', next: 'detail', previous: 'none', fill: 25 },
+            'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
+            'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
+            'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
+        }
+        // $scope.current = $scope.steps['tp-platform'];
+    $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
     $scope.contest = {};
     $scope.company = {};
@@ -21,6 +23,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.new_img = false;
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
+
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -102,6 +105,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         });
     }
 
+
+
     $scope.set_step = function(step) {
         if (step == 'tp-objective') {
             if (!$scope.contest.platform) $scope.set_alert("Please select a platform.", "error");
@@ -119,6 +124,14 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         }
         // else if(step == 'tp-audience'){
         // }
+        else if (step =="tp-prior") {
+          var setting = $scope.platform_image_settings[$scope.contest.platform];
+          $scope.current = $scope.steps[step];
+          $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+          $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+
+        }
+
         else if (step == 'detail') {
             fbq('track', 'InitiateCheckout');
             if ($rootScope.user && !$scope.profile) $scope.grab_profile();
@@ -154,6 +167,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.platform = platform;
         $scope.contest.objective = null;
         $scope.contest.display_type = null;
+        $scope.image_cropper();
+        var setting = $scope.platform_image_settings[$scope.contest.platform];
+        $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+        $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
     }
 
     $scope.select_display = function(type) {
@@ -176,10 +193,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.to_detail = function(contest) {
         contest.display_type = "with_photo";
         if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
-        else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
+        //else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
         else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
-        //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
+        else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
 
@@ -192,6 +209,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     contest.id = response.data.id;
                     contest.attachment_url = response.data.attachment_url;
                     if (pay == 'draft') {
+                        $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                         window.location = "/dashboard";
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
@@ -262,8 +280,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.image_cropper = function(evt) {
-        var file = evt.currentTarget.files[0];
         var reader = new FileReader();
+        var input = document.getElementById('contest-photo');
+        if (!input || !input.files || !input.files[0]) {
+            return;
+        }
+        var file = input.files[0];
         reader.onload = function(evt) {
             $scope.$apply(function($scope) {
                 $scope.cropper.replace(evt.target.result);
@@ -279,7 +301,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-        aspectRatio: 1 / 1,
+        aspectRatio: 1.91 / 1,
+        width: 1200,
+        height: 628,
         dragMode: 'move',
         scaleable: false,
         cropBoxResizable: false,
@@ -288,6 +312,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.$on('payContestDone', function(event) {
         $scope.set_step('done');
+        fbq('track', 'Purchase', { value: '49.99', currency: 'USD' });
     });
 });
 

@@ -18,13 +18,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
 
     $scope.set_payment_obj_default = function() {
-        $scope.payment_obj = { price: 0, voucher_code: '', h4: '', voucher_visible: 0, save_method: false, hide_voucher: false };
+        $scope.payment_obj = { price: 0, voucher_code: '', re_ab: 0, h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };
     }
     $scope.set_payment_obj_default();
-
-    $scope.click_subscription = function(sub) {
-        $scope.open_payment({ sub_level: sub }, 'subscription');
-    }
 
     $scope.set_model = function(model) {
         if (model) {
@@ -37,20 +33,15 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.open_payment = function(contest, type) {
-        if (type == 'subscription') {
-            $scope.payment_obj.contest_id = '';
-            $scope.payment_obj.h4 = 'Subscription';
-            $scope.payment_obj.sub_level = contest.sub_level;
-            $scope.payment_obj.contest_id = '';
-            $scope.payment_obj.hide_voucher = true;
-        } else {
-            $scope.payment_obj.contest_id = contest.id;
-            $scope.payment_obj.h4 = $filter('capitalize')(contest.platform) + ' Campaign';
-            $scope.payment_obj.submission_ids = contest.submission_ids;
-            $scope.payment_obj.voucher_code = '';
-            $scope.payment_obj.pay_for = type;
-            $scope.payment_obj.hide_voucher = false;
+        if ($scope.payment_obj.re_ab && $scope.payment_obj.ab_aday <= 0) {
+            $scope.set_alert("Please enter a integer number", "error");
+            return;
         }
+        $scope.payment_obj.contest_id = contest.id;
+        $scope.payment_obj.h3 = ($scope.payment_obj.h3) ? $scope.payment_obj.h3 : 'Campaign Payment';
+        $scope.payment_obj.h4 = ($scope.payment_obj.h4) ? $scope.payment_obj.h4 : $filter('capitalize')(contest.platform) + ' Campaign';
+        $scope.payment_obj.submission_ids = contest.submission_ids;
+        $scope.payment_obj.voucher_code = '';
         $scope.payment_obj.pay_for = type;
 
         if (contest.no_payment) {
@@ -113,10 +104,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.pay_payment = function(payment_type) {
         var form_id = '#payment-form-global';
-        //if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code && payment_type != 'no_payment') {
-        //    $scope.set_alert("Please enter a voucher code", "error");
-        //    return;
-        //}
 
         payment_type = (payment_type) ? payment_type : 'old';
         $scope.payment_obj.payment_type = payment_type;
@@ -621,5 +608,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         } else {
             to_array.splice(index, 1);
         }
+    }
+
+    $scope.click_subscription = function(sub) {
+        $scope.payment_obj.h4 = 'Subscription';
+        $scope.payment_obj.hide_voucher = true;
+        $scope.open_payment({ sub_level: sub }, 'subscription');
     }
 });

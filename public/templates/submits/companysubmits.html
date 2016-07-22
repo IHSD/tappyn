@@ -17,9 +17,16 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>
+    <!--<span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>-->
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <div ng-if="submission.test_result.impressions" class="contest-test-result">
+        <span class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
+        <span class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
+        <span class="test-results" ng-bind="submission.test_result.results"></span>
+    </div>
 </div>
-<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_purchase' || winner_contest.status == 'pending_testing'">
+<div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_selection' || winner_contest.status == 'pending_testing'">
     <div class="checkbox-container">
         <input type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}">
         <label for="select-contest2-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>

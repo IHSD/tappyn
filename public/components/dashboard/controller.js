@@ -4,6 +4,9 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.type = '';
     $scope.adding_payment = { show: false, id: '' };
     $scope.confirm_winner = { show: false, submission: null };
+    $scope.confirm_ab = { show: false };
+    $scope.now_model = '';
+    $scope.voucher = { visible: false };
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
             if (response.success) $scope.dash = response.data;
@@ -11,6 +14,9 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         } else if (response.http_status_code == 500) alert(response.error);
         else $scope.check_code(response.http_status_code);
     });
+
+    $scope.allSelected = false;
+        $scope.selectText = "Select All";
 
     dashFactory.grabTotals().success(function(response) {
         if (response.http_status_code == 200) {
@@ -30,6 +36,22 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             contest.no_payment = 1;
+        } else if (type == 'confirm_ab' || type == 'confirm_re_ab') {
+            if (contest.submission_ids.length == 0) {
+                $scope.set_alert("Please select 1 at least", "error");
+                return;
+            }
+            $scope.payment_obj.h3 = 'A/B Testing Payment';
+            $scope.payment_obj.h4 = 'hide';
+            $scope.payment_obj.ab_aday = 15;
+            $scope.payment_obj.re_ab = 0;
+            if (type == 'confirm_re_ab') {
+                $scope.payment_obj.ab_aday = 0;
+                $scope.payment_obj.re_ab = 1;
+            }
+            $scope.set_model('confirm_ab');
+            return;
+
         } else if (contest.submission_ids.length == 0) {
             $scope.set_alert("Please select at least one ad to continue", "error");
             return;
@@ -38,6 +60,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.open_payment(contest, type);
     }
 
+    $scope.$on('payContestDone', function(event) {
+        $route.reload();
+    });
+
     $scope.grab_dash = function(type) {
         $scope.type = type;
 
@@ -45,7 +71,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             dashFactory.grabUpvoted().success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
-        } else {
+        }
+        else {
             dashFactory.grabDash(type).success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
@@ -63,8 +90,6 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         $scope.view = 'table';
 
     }
-
-
 
     /** start winner functions, functions for assembling the winner view, opening and closing the modal for
         confirmation and the actual choosing of a winner **/
@@ -164,10 +189,17 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         return tmp;
     }
 
-    $scope.select_all = function() {
-        $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
+    $scope.Toggleselect_all = function() {
+        $scope.allSelected = !$scope.allSelected;
+        if($scope.allSelected){
+            $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
+                $scope.selectText = "Deselect All";
+            } else {
+                $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
+                $scope.selectText = "Select All";
+            }
     }
 
 
 
-})
+});
