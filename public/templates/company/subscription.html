@@ -3,7 +3,7 @@
     <div class="form-group">
         <div class="pricing-tables attached">
             <div class="row">
-                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}">
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='10'">
                     <div class="plan first">
                         <div class="head">
                             <h2>Standard</h2>
@@ -27,7 +27,7 @@
                         <p class="more-p now-level-p">Now level</p>
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}">
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
                     <div class="plan recommended">
                         <!-- style="height:635px;"-->
                         <div class="head">
@@ -51,7 +51,7 @@
                         <p class="more-p now-level-p">Now level</p>
                     </div>
                 </div>
-                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}">
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
                     <div class="plan last">
                         <!-- style="height:618px;"-->
                         <div class="head">

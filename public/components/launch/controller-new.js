@@ -7,6 +7,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             'tp-prior': { step: 'tp-prior', next: 'detail', previous: 'none', fill: 25 },
             'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
             'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
+            'subscription': { step: 'subscription', next: 'payment', previous: 'package', fill: 75 },
             'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
         }
         // $scope.current = $scope.steps['tp-platform'];
@@ -22,6 +23,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.reduction = 0;
     $scope.new_img = false;
 
+    // todo 把subscription放在launch
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 
 
@@ -124,15 +126,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         }
         // else if(step == 'tp-audience'){
         // }
-        else if (step =="tp-prior") {
-          var setting = $scope.platform_image_settings[$scope.contest.platform];
-          $scope.current = $scope.steps[step];
-          $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-          $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+        else if (step == "tp-prior") {
+            var setting = $scope.platform_image_settings[$scope.contest.platform];
+            $scope.current = $scope.steps[step];
+            $scope.cropper.setAspectRatio(setting['aspect_ratio']);
+            $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
-        }
-
-        else if (step == 'detail') {
+        } else if (step == 'detail') {
             fbq('track', 'InitiateCheckout');
             if ($rootScope.user && !$scope.profile) $scope.grab_profile();
             else $scope.current = $scope.steps[step];
@@ -202,6 +202,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.submit_contest = function(contest, pay) {
         contest.paid = (pay == 'draft') ? 0 : 1;
+        contest.submit_type = pay;
         contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
         launchFactory.submission(contest).success(function(response) {
             if (response.http_status_code == 200) {
@@ -211,6 +212,11 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     if (pay == 'draft') {
                         $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                         window.location = "/dashboard";
+                    } else if (pay == 'launch') {
+                        contest.no_payment = true;
+                        $scope.open_payment(contest, 'launch');
+                    } else if (pay == 'subscription') {
+                        $scope.set_step('subscription');
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
                     } else {
@@ -311,8 +317,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     });
 
     $scope.$on('payContestDone', function(event) {
-        $scope.set_step('done');
-        fbq('track', 'Purchase', { value: '49.99', currency: 'USD' });
+        if ($scope.current.step == 'subscription' && $scope.contest.submit_type == 'subscription') {
+            $scope.contest.submit_type = 'launch';
+            $scope.contest.no_payment = true;
+            $scope.open_payment($scope.contest, 'launch');
+        } else {
+            $scope.set_step('done');
+        }
     });
 });
 

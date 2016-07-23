@@ -484,9 +484,4 @@ class Companies extends CI_Controller
             $this->responder->fail($result)->code(500)->respond();
         }
     }
-
-    public function check_subscription()
-    {
-
-    }
 }

@@ -5,7 +5,7 @@ class Price_lib
     public $data = array(
         'purchase'     => 49.99,
         'ab'           => 15,
-        'launch'       => 59.99,
+        'launch'       => 0,
         'subscription' => array(
             0  => 0,
             10 => 59,
@@ -33,11 +33,11 @@ class Price_lib
             $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;
             $post['ab_days'] = 1;
             $post['ab_aday'] = isset($post['ab_aday']) ? floatval($post['ab_aday']) : false;
-            $fee             = $this->data[$post['pay_for']];
-            if (!$fee) {
+            if (!isset($this->data[$post['pay_for']])) {
                 throw new Exception("Missing parameters");
             }
 
+            $fee     = $this->data[$post['pay_for']];
             $voucher = false;
             if ($post['voucher_code']) {
                 $msg     = '';
