@@ -175,7 +175,7 @@
                     <div class="row" style='margin-bottom:20px;'>
                         <div class="col-xs-6" style="margin-top:10px;">
                             <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
-                            <span ng-show="winner_contest.status == 'pending_testing' || winner_contest.status == 'pending_purchase'">
+                            <span ng-show="winner_contest.status == 'pending_testing'">
                                 <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>{{selectText}}</button>
                             </span>
                         </div>
@@ -211,7 +211,7 @@
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Check back in 24 hours for results or email us with any questions.</span></strong>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Please check back in 24 hours for results or email us with any questions.</span></strong>
                             </span>
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
