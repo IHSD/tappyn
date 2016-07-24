@@ -4,6 +4,7 @@
             <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
             <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
             <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
+            <li ng-show='user.type == "company"'><a href="#sprofile" class='scrolling'>Plan</a></li>
         </ul>
         <div class='col-sm-12 col-md-7 list-style-form-wrap'>
             <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
@@ -101,6 +102,21 @@
                     </li>
                 </ul>
             </form>
+            <div class='form' ng-if='user.type == "company"'>
+                <ul class='list-style-form form-horizontal' id='sprofile'>
+                    <li class='section-title'>
+                        <h2>Plan</h2>
+                    </li>
+                    <li>
+                        <div id="sprofile" ng-include src="'templates/company/subscription.html'" ng-init="subscription_type = 'profile'"></div>
+                    </li>
+                    <li ng-show="user.subscription.next_level > 0">
+                        <div>Would you like to
+                            <button ng-click="click_subscription('0')">cancel your subscription?</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
             <form class='form' ng-submit='update_profile(profile)' ng-if='user.type=="member"'>
                 <ul class='list-style-form form-horizontal' id='mprofile'>
                     <li class='section-title'>

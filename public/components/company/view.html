@@ -99,7 +99,8 @@
         </section>
         <section class=love-raw style="padding-top:0;height:auto;background:#fff;">
             <div id="subscription" class="row content-padding">
-                <div ng-init="subscription_type = 'company'" ng-include src="'templates/company/subscription.html'" ng-if='user.type == "company"'></div>
+                <label class='text-left col-sm-3 control-label'>Choose a plan</label>
+                <div class="col-sm-8 col-sm-offset-2" ng-init="subscription_type = 'company'" ng-include src="'templates/company/subscription.html'" ng-if='user.type == "company"'></div>
             </div>
         </section>
         <section class=love-raw style="padding-top:0;height:auto;background:#fff;">

@@ -107,3 +107,9 @@ Vouchers
 ========================*/
 $route['vouchers']                   = 'vouchers/is_valid';
 $route['vouchers/get_price']['post'] = 'vouchers/get_price';
+
+/*========================
+OutCrons
+========================*/
+$route['admin/outcrons/test']         = 'admin/outcrons/test';
+$route['admin/outcrons/subscription'] = 'admin/outcrons/subscription';

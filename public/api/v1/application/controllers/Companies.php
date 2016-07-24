@@ -479,6 +479,10 @@ class Companies extends CI_Controller
         $user_id = $this->ion_auth->user()->row()->id;
         $result  = $this->subscription_lib->update_level($user_id, array('next_level' => $post['sub_level']));
         if ($result === true) {
+            if ($this->subscription_lib->msg) {
+                $post['info'] = '[payment][subscription] user ' . $user_id . ' paid ' . $post['price'] . ' amount for ' . $this->subscription_lib->msg . ' (origin price:' . $post['origin_price'] . ') ';
+                $this->slack->send($post['info']);
+            }
             $this->responder->message("update subscription success")->respond();
         } else {
             $this->responder->fail($result)->code(500)->respond();
