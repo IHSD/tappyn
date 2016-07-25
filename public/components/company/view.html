@@ -96,10 +96,10 @@
         <section class="love-raw" style="padding-top:0;height:auto;background:#F2F2F2;">
             <center><img src="https://s3-us-west-2.amazonaws.com/tappyn/bannernews.jpg" class="img-responsive" style="padding-right:100px;padding-left:100px;padding-top:20px;"></center>
         </section>
-        <section class=love-raw style="padding-top:0;height:auto;background:#fff;">
+        <section ng-if='user.type == "company"' class=love-raw style="padding-top:0;height:auto;background:#fff;">
             <div id="subscription" class="row content-padding">
                 <label class='text-left col-sm-3 control-label'>Choose a plan</label>
-                <div class="col-sm-8 col-sm-offset-2" ng-init="subscription_type = 'company'" ng-include src="'templates/company/subscription.html'" ng-if='user.type == "company"'></div>
+                <div class="col-sm-8 col-sm-offset-2" ng-init="subscription_type = 'company'" ng-include src="'templates/company/subscription.html'"></div>
             </div>
         </section>
         <section class=love-raw style="padding-top:0;height:auto;background:#fff;">
