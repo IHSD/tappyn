@@ -15,6 +15,22 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         else $scope.check_code(response.http_status_code);
     });
 
+    $scope.editorEnabled = false;
+
+    $scope.enableEditor = function() {
+    $scope.editorEnabled = true;
+    $scope.submission.headline = $scope.submission.headline;
+  };
+  $scope.disableEditor = function() {
+    $scope.editorEnabled = false;
+  };
+
+  $scope.save = function() {
+   $scope.submission.headline = $scope.submission.headline;
+   $scope.disableEditor();
+ };
+
+
 
     $scope.allSelected = true;
         $scope.selectText = "De-select All";
@@ -200,7 +216,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             } else {
                 $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
                 $scope.selectText = "Select All";
-            
+
 
             }
 

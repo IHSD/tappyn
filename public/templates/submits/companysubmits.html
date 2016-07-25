@@ -5,9 +5,24 @@
     <span class='company-name'>from {{user.first_name}} &#8226; {{submission.contest.platform | capitalize}}</span>
 </div>
 <div class='contest-entry text-left'>
+    <div ng-hide="editorEnabled">
     <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
+    <a href="#" ng-click="enableEditor()">Edit Headline</a>
+    </div>
     <h4 ng-show='submission.link_explanation'>{{submission.link_explanation}}<br></h4>
     <h4 ng-show='submission.text'>{{submission.text}}</h4>
+
+    <div class='contest-upvotes disable-click'>
+        <span class='glyphicon glyphicon-heart'></span> {{submission.votes | number}}
+    </div>
+</div>
+<div class='contest-entry text-left'>
+<div ng-show="editorEnabled">
+      <input class='form-control' ng-model='submission.headline' type='text'>
+      <a href="#" ng-click="save()">Save</a>
+      or
+      <a href="#" ng-click="disableEditor()">cancel</a>.
+    </div>
     <div class='contest-upvotes disable-click'>
         <span class='glyphicon glyphicon-heart'></span> {{submission.votes | number}}
     </div>
