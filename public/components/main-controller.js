@@ -42,7 +42,12 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.payment_obj.h4 = ($scope.payment_obj.h4) ? $scope.payment_obj.h4 : $filter('capitalize')(contest.platform) + ' Campaign';
         $scope.payment_obj.submission_ids = contest.submission_ids;
         $scope.payment_obj.voucher_code = '';
+        $scope.payment_obj.sub_level = contest.sub_level;
         $scope.payment_obj.pay_for = type;
+
+        if (type == 'launch') {
+            contest.no_payment = 1;
+        }
 
         if (contest.no_payment) {
             $scope.payment_obj.price = 0;
@@ -74,7 +79,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                 if (response.success) {
                     $scope.payment_obj.price = response.data.price;
                     $scope.reduction = response.data.discount;
-                    if (contest) {
+                    if (response.data.no_payment) {
+                        $scope.pay_payment('no_payment');
+                    } else if (contest) {
                         $scope.set_model('payment');
                     }
                     if (response.data.error_alert) {
@@ -101,10 +108,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.pay_payment = function(payment_type) {
-        //if ($scope.payment_obj.price == 0.00 && !$scope.payment_obj.voucher_code && payment_type != 'no_payment') {
-        //    $scope.set_alert("Please enter a voucher code", "error");
-        //    return;
-        //}
         var form_id = '#payment-form-global';
 
         payment_type = (payment_type) ? payment_type : 'old';
@@ -132,6 +135,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                     $scope.$broadcast('payContestDone');
                     $(form_id).find('input[type="reset"]').trigger('click');
                     $scope.set_payment_obj_default();
+                    $scope.is_login();
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);
@@ -199,68 +203,46 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.logged_in = function() {
-        $interval(function() {
-            AppFact.isLoggedIn().success(function(response) {
-                if (response.http_status_code == 200) {
-                    $rootScope.user = response.data;
-                    sessionStorage.setItem("user", JSON.stringify(response.data));
-                }
-                if ($rootScope.user) {
-                    window.Intercom('boot', {
-                        app_id: 'qj6arzfj',
-                        email: $rootScope.user.email,
-                        user_id: $rootScope.user.id,
-                        created_at: $rootScope.user.created_at,
-                        widget: {
-                            activator: '#IntercomDefaultWidget'
-                        }
-                    });
-                } else {
-                    window.Intercom('boot', {
-                        app_id: 'qj6arzfj',
-                        widget: {
-                            activator: '#IntercomDefaultWidget'
-                        }
-                    })
-                }
-            });
-        }, 20000);
+        $scope.is_login();
     }
 
-    AppFact.isLoggedIn().success(function(response) {
-        if (response.http_status_code == 200) {
-            $rootScope.user = response.data;
-            sessionStorage.setItem("user", JSON.stringify(response.data));
-            if ($rootScope.user.type == 'member') {
-                if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || $rootScope.user.interests.length < 3) {
-                    $rootScope.modal_up = true;
-                    $scope.add_age = true;
-                    $scope.up_age = $rootScope.user.age;
-                    $scope.up_gen = $rootScope.user.gender;
-                    $scope.up_interest = $rootScope.user.interests;
+    $scope.is_login = function(type) {
+        AppFact.isLoggedIn().success(function(response) {
+            if (response.http_status_code == 200) {
+                $rootScope.user = response.data;
+                sessionStorage.setItem("user", JSON.stringify(response.data));
+                if ($rootScope.user.type == 'member' && type == 'first') {
+                    if (!$rootScope.user.age || !$rootScope.user.gender || !$rootScope.user.interests || $rootScope.user.interests.length < 3) {
+                        $rootScope.modal_up = true;
+                        $scope.add_age = true;
+                        $scope.up_age = $rootScope.user.age;
+                        $scope.up_gen = $rootScope.user.gender;
+                        $scope.up_interest = $rootScope.user.interests;
+                    }
                 }
             }
-        }
-        if ($rootScope.user) {
-            window.Intercom('boot', {
-                app_id: APP_ENV.intercom_app_id,
-                email: $rootScope.user.email,
-                user_id: $rootScope.user.id,
-                created_at: $rootScope.user.created_at,
-                widget: {
-                    activator: APP_ENV.intercom_default_widget
-                }
-            });
-        } else {
-            window.Intercom('boot', {
-                app_id: APP_ENV.intercom_app_id,
-                widget: {
-                    activator: APP_ENV.intercom_default_widget
-                }
-            })
-        }
-    });
-    $scope.logged_in();
+            if ($rootScope.user) {
+                window.Intercom('boot', {
+                    app_id: APP_ENV.intercom_app_id,
+                    email: $rootScope.user.email,
+                    user_id: $rootScope.user.id,
+                    created_at: $rootScope.user.created_at,
+                    widget: {
+                        activator: APP_ENV.intercom_default_widget
+                    }
+                });
+            } else {
+                window.Intercom('boot', {
+                    app_id: APP_ENV.intercom_app_id,
+                    widget: {
+                        activator: APP_ENV.intercom_default_widget
+                    }
+                })
+            }
+        });
+    }
+    $interval($scope.is_login, 20000);
+    $scope.is_login('first');
 
     $scope.to_top = function() {
         var old = $location.hash();
@@ -631,5 +613,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         } else {
             to_array.splice(index, 1);
         }
+    }
+
+    $scope.click_subscription = function(sub) {
+        $scope.payment_obj.h4 = 'Subscription';
+        $scope.payment_obj.hide_voucher = true;
+        $scope.open_payment({ sub_level: sub }, 'subscription');
     }
 });

@@ -1,0 +1,81 @@
+<div class="col-sm-12">
+    <div class="form-group">
+        <div class="pricing-tables attached">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='10'">
+                    <div class="plan first">
+                        <div class="head">
+                            <h2>Standard</h2>
+                        </div>
+                        <h4 class="text-center" style="font-size:16px;"><strong>Standard Includes</strong></h4>
+                        <p class="text-center" style="font-weight: bold;">All of these great features:</p>
+                        <ul class="item-list">
+                            <li>1 campaign/mo.</li>
+                            <li>Age, Gender, and Interest targeting.</li>
+                            <li>Up to $50 in A/B testing per campaign. </li>
+                            <li>$49 ad purchase price.</li>
+                            <li>Customer Support</li>
+                        </ul>
+                        <div class="price">
+                            <h3><span class="symbol">$</span>59</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;">For individuals just starting advertising.</p>
+                        </div>
+                        <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("10")'>Sign Up</button>
+                        <p class="more-p next-level-p">Next level</p>
+                        <p class="more-p now-level-p">Now level</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
+                    <div class="plan recommended">
+                        <!-- style="height:635px;"-->
+                        <div class="head">
+                            <h2>Premium</h2>
+                        </div>
+                        <h4 class="text-center" style="font-size:16px;"><strong>Premium Includes</strong></h4>
+                        <p class="text-center" style="font-weight: bold;">Everything in Standard and:</p>
+                        <ul class="item-list">
+                            <li>Up to 5 campaign/mo.</li>
+                            <li>Location targeting.</li>
+                            <li>Up to $100 in A/B testing per campaign. </li>
+                        </ul>
+                        <div class="price">
+                            <!--style="margin-top:80px;"-->
+                            <h3><span class="symbol">$</span>149</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;">For teams looking to explore new marketing perspectives.</p>
+                        </div>
+                        <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("20")'>Sign Up</button>
+                        <p class="more-p next-level-p">Next level</p>
+                        <p class="more-p now-level-p">Now level</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
+                    <div class="plan last">
+                        <!-- style="height:618px;"-->
+                        <div class="head">
+                            <h2>Platinum</h2>
+                        </div>
+                        <h4 class="text-center" style="font-size:16px;"><strong>Platinum Includes</strong></h4>
+                        <p class="text-center" style="font-weight: bold;">Everything in Premium and:</p>
+                        <ul class="item-list">
+                            <li>Unlimited campaign/mo.</li>
+                            <li>Up to $500 in A/B testing per campaign. </li>
+                        </ul>
+                        <div class="price">
+                            <!-- style="margin-top: 121px;"-->
+                            <h3><span class="symbol">$</span>319</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;">For departments looking looking to expand and accelerate new audiences.</p>
+                        </div>
+                        <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("30")'>Sign Up</button>
+                        <p class="more-p next-level-p">Next level</p>
+                        <p class="more-p now-level-p">Now level</p>
+                    </div>
+                </div>
+            </div>
+            <!-- row-->
+        </div>
+        <!-- pricing-tables -->
+    </div>
+</div>

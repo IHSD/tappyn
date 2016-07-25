@@ -267,6 +267,7 @@ class Companies extends CI_Controller
      */
     public function payment($contest_id = false)
     {
+        $this->load->library('slack');
         if (!$this->ion_auth->logged_in()) {
             $this->responder->fail("You must be logged in as a company to access this area")->code(401)->respond();
             exit();
@@ -292,6 +293,10 @@ class Companies extends CI_Controller
             exit();
         }
 
+        if ($post['pay_for'] == 'subscription') {
+            $post['save_method'] = 'true';
+        }
+
         if ($amount > 000) {
             $charge = $this->get_charge($post, $amount);
         } else {
@@ -314,6 +319,8 @@ class Companies extends CI_Controller
                 } else {
                     $this->responder->fail($msg)->code(500)->respond();
                 }
+            } else if ($post['pay_for'] == 'subscription') {
+                $this->subscription_update($post);
             }
         }
         // An error occured, so respond as such
@@ -340,7 +347,7 @@ class Companies extends CI_Controller
             if ($post['save_method'] == 'true') {
                 // Update the customer with the new payment method, and get the source id
                 if ($this->stripe_customer_id) {
-                    $customer    = $this->stripe_customer_library->update($this->stripe_customer_id, array("source" => $post['stripe_token']));
+                    $customer    = $this->stripe_customer_library->update($this->ion_auth->user()->row()->id, $this->stripe_customer_id, array("source" => $post['stripe_token']));
                     $customer_id = $this->stripe_customer_id;
                 }
                 // We need to create a customer, save the payment method, and charge them accordingly
@@ -463,6 +470,22 @@ class Companies extends CI_Controller
         } else {
             $this->mailer->queue('alek@tappyn.com', $this->ion_auth->user()->row()->id, 'ab_test', 'contest', $post['contest_id']);
             $this->responder->message("A/B Test have been set!")->respond();
+        }
+    }
+
+    private function subscription_update($post)
+    {
+        $this->load->library('subscription_lib');
+        $user_id = $this->ion_auth->user()->row()->id;
+        $result  = $this->subscription_lib->update_level($user_id, array('next_level' => $post['sub_level']));
+        if ($result === true) {
+            if ($this->subscription_lib->msg) {
+                $post['info'] = '[payment][subscription] user ' . $user_id . ' paid ' . $post['price'] . ' amount for ' . $this->subscription_lib->msg . ' (origin price:' . $post['origin_price'] . ') ';
+                $this->slack->send($post['info']);
+            }
+            $this->responder->message("update subscription success")->respond();
+        } else {
+            $this->responder->fail($result)->code(500)->respond();
         }
     }
 }

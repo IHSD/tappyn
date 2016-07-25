@@ -33,12 +33,13 @@ class Auth extends CI_Controller
             $this->notification->setUser($uid);
             $user = $this->ion_auth->ajax_user();
             $this->load->library('interest');
-            $profile = $this->user->profile($uid);
-            $user['interests'] = $this->interest->get_user_interests($uid);
-            $user['age'] = $profile->age;
-            $user['gender'] = $profile->gender;
+            $profile               = $this->user->profile($uid);
+            $user['interests']     = $this->interest->get_user_interests($uid);
+            $user['age']           = $profile->age;
+            $user['gender']        = $profile->gender;
             $user['notifications'] = $this->notification->count();
             if ($user['type'] == 'company') {
+                $this->load->library('subscription_lib');
                 $profile = $this->user->profile($this->ion_auth->user()->row()->id);
                 if (!is_null($profile->facebook_url)) {
                     $user['facebook_url'] = $profile->facebook_url;
@@ -51,7 +52,7 @@ class Auth extends CI_Controller
                 if (!is_null($profile->company_url)) {
                     $user['company_url'] = $profile->company_url;
                 }
-
+                $user['subscription'] = $this->subscription_lib->get_by_user_id($this->ion_auth->user()->row()->id);
             }
             $this->responder
                 ->data($user)
@@ -79,9 +80,9 @@ class Auth extends CI_Controller
             return;
         }
         $data = array(
-            'identity' => $user->email,
-            'id' => $user->id,
-            'email' => $user->email,
+            'identity'   => $user->email,
+            'id'         => $user->id,
+            'email'      => $user->email,
             'activation' => $user->activation_code,
         );
 
@@ -241,7 +242,7 @@ class Auth extends CI_Controller
             $this->data['type'] = $this->config->item('identity', 'ion_auth');
             // setup the input
             $this->data['identity'] = array('name' => 'identity',
-                'id' => 'identity',
+                'id'                                   => 'identity',
             );
 
             if ($this->config->item('identity', 'ion_auth') != 'email') {
@@ -254,7 +255,7 @@ class Auth extends CI_Controller
             return;
         } else {
             $identity_column = $this->config->item('identity', 'ion_auth');
-            $identity = $this->ion_auth->where($identity_column, $this->input->post('identity'))->users()->row();
+            $identity        = $this->ion_auth->where($identity_column, $this->input->post('identity'))->users()->row();
 
             if (empty($identity)) {
 
@@ -303,7 +304,7 @@ class Auth extends CI_Controller
 
             if ($this->form_validation->run() == false) {
                 $this->responder->data(array(
-                    'csrf' => $this->_get_csrf_nonce(),
+                    'csrf'    => $this->_get_csrf_nonce(),
                     'user_id' => $user->id,
                 ))->respond();
                 return;
@@ -432,12 +433,12 @@ class Auth extends CI_Controller
         // Check if they are registering as a guest, which limits the required fields for registration
         $as_guest = false;
 
-        $tables = $this->config->item('tables', 'ion_auth');
-        $identity_column = $this->config->item('identity', 'ion_auth');
+        $tables                        = $this->config->item('tables', 'ion_auth');
+        $identity_column               = $this->config->item('identity', 'ion_auth');
         $this->data['identity_column'] = $identity_column;
-        $first_validation = $this->input->post('first_validation');
-        $first_validation = ($first_validation) ? $first_validation : 99;
-        $interests = $this->input->post('interests');
+        $first_validation              = $this->input->post('first_validation');
+        $first_validation              = ($first_validation) ? $first_validation : 99;
+        $interests                     = $this->input->post('interests');
 
         // validate form input
         if ($this->input->post('group_id') == 1) {
@@ -473,22 +474,22 @@ class Auth extends CI_Controller
                 $this->responder->data(array('first_validation_return' => 'ok'))->respond();
                 return;
             }
-            $email = strtolower($this->input->post('identity'));
+            $email    = strtolower($this->input->post('identity'));
             $identity = ($identity_column === 'email') ? $email : $this->input->post('identity');
             $password = $as_guest ? bin2hex(openssl_random_pseudo_bytes(5)) : $this->input->post('password');
 
             if ($this->input->post('group_id') == 2) {
-                $name_chunks = explode(' ', $this->input->post('name'));
+                $name_chunks     = explode(' ', $this->input->post('name'));
                 $additional_data = array(
                     'first_name' => $name_chunks[0],
-                    'last_name' => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
-                    'age' => ($this->input->post('age') ? $this->input->post('age') : null),
-                    'gender' => ($this->input->post('gender') ? $this->_genderize($this->input->post('gender')) : null),
+                    'last_name'  => (isset($name_chunks[1]) ? $name_chunks[1] : ''),
+                    'age'        => ($this->input->post('age') ? $this->input->post('age') : null),
+                    'gender'     => ($this->input->post('gender') ? $this->_genderize($this->input->post('gender')) : null),
                 );
             } else {
                 $additional_data = array(
                     'first_name' => $this->input->post('name'),
-                    'last_name' => '',
+                    'last_name'  => '',
                 );
             }
         }
@@ -504,11 +505,11 @@ class Auth extends CI_Controller
                 //     ->html($this->load->view('auth/email/registration', array(), true))
                 //     ->send();
                 $this->user->saveProfile($id, array(
-                    'name' => $this->input->post('name'),
-                    'logo_url' => $this->input->post('logo_url'),
-                    'company_url' => $this->input->post('company_url'),
-                    'company_email' => $this->input->post('identity'),
-                    'facebook_url' => $this->input->post('facebook_url'),
+                    'name'           => $this->input->post('name'),
+                    'logo_url'       => $this->input->post('logo_url'),
+                    'company_url'    => $this->input->post('company_url'),
+                    'company_email'  => $this->input->post('identity'),
+                    'facebook_url'   => $this->input->post('facebook_url'),
                     'twitter_handle' => $this->input->post('twitter_handle')));
                 if ($this->ion_auth->login($identity, $password)) {
                     $this->responder->message('Account successfully created')->data($this->ion_auth->ajax_user())->respond();
@@ -528,9 +529,9 @@ class Auth extends CI_Controller
 
             // Track the login event
             $this->analytics->track(array(
-                'event_name' => 'registration',
+                'event_name'  => 'registration',
                 'object_type' => 'user',
-                'object_id' => $id,
+                'object_id'   => $id,
             ));
         } else {
             $this->responder->fail(
@@ -542,7 +543,7 @@ class Auth extends CI_Controller
     public function _get_csrf_nonce()
     {
         $this->load->helper('string');
-        $key = random_string('alnum', 8);
+        $key   = random_string('alnum', 8);
         $value = random_string('alnum', 20);
         $this->session->set_flashdata('csrfkey', $key);
         $this->session->set_flashdata('csrfvalue', $value);
