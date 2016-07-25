@@ -82,6 +82,12 @@ class Subscription_lib
             $temp['end_at']    = date('Y-m-d H:i:s', strtotime('+1 month'));
             $result            = $this->db->insert('user_subscription', $temp);
             $this->msg         = 'New subscription ' . $detail['name'];
+        } // crons charge
+        else if (isset($data['act']) && $data['act'] == 'charge_subscription') {
+            $temp['user_id']   = $user_id;
+            $temp['now_level'] = $now['next_level'];
+            $temp['end_at']    = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($now['end_at'])));
+            $result            = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
         }
         // end
         else if ($now['end_at'] < $now_ts) {

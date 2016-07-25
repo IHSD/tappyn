@@ -22,7 +22,9 @@ class Outcrons extends CI_Controller
         $tmp      = $this->db->select('*')->from('user_subscription')
             ->where('end_at <=', $tomorrow)
             ->where('end_at >=', $now)
+            ->limit(5)
             ->order_by('updated_at', 'ASC')->get()->result_array();
+        $ids = array();
 
         foreach ($tmp as $data) {
             if ($data['next_level'] <= 0) {
@@ -50,14 +52,29 @@ class Outcrons extends CI_Controller
                 continue;
             }
 
-            $contest_id  = $token  = '';
+            $user_id     = $data['user_id'];
+            $ids[]       = $user_id;
+            $contest_id  = $msg  = '';
+            $token       = null;
             $metadata    = array();
-            $description = 'Charge for contest ' . $contest_id . $post['pay_for'];
+            $description = 'subscription crons user ' . $user_id . ' level ' . $data['next_level'];
 
             $charge = $this->stripe_charge_library->create($contest_id, $token, $stripe_customer_id, $source_id, $amount, $metadata, $description);
-
+            if ($charge === false) {
+                $msg = 'error:' . $this->stripe_customer_library->errors() ? $this->stripe_customer_library->errors() : ($this->stripe_charge_library->errors() ? $this->stripe_charge_library->errors() : "An unknown error occured with payment");
+            } else {
+                $tmp = array('act' => 'charge_subscription', 'next_level' => $data['next_level']);
+                if ($this->subscription_lib->update_level($user_id, $tmp) === true) {
+                    $msg = 'success';
+                } else {
+                    $msg = 'error:update_level fail';
+                }
+            }
+            $slack_msg = '[payment][subscription] ' . $description . ' ' . $msg;
+            $this->slack->send($slack_msg);
+            //var_dump($charge, $error);
         }
-
-        var_dump($tmp, $this->db->last_query(), date_default_timezone_get());
+        //var_dump($this->db->last_query());
+        echo count($ids) . ' done ' . implode(',', $ids);
     }
 }

@@ -19,7 +19,7 @@ class Price_lib
     {
         $this->load->library(array('vouchers_library', 'subscription_lib'));
         $this->load->model('contest');
-        $this->user_id = $this->ion_auth->user()->row()->id;
+        $this->user_id = ($this->ion_auth->logged_in()) ? $this->ion_auth->user()->row()->id : 0;
     }
     public function __get($var)
     {
