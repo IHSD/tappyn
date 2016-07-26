@@ -395,7 +395,7 @@ class Contests extends CI_Controller
             $this->responder->message(
                 "A winner has been chosen!"
             )->respond();
-            /**$this->mailer->queue($this->ion_auth->user()->row()->email, $this->ion_auth->user()->row()->id, 'post_contest_package', 'contest', $contest->id);**/
+            $this->mailer->queue($this->ion_auth->user()->row()->email, $this->ion_auth->user()->row()->id, 'post_contest_package', 'contest', $contest->id);
             $this->user->attribute_points($submission->owner, $this->config->item('points_per_winning_submission'));
             $this->load->library('vote');
             $this->vote->dole_out_points($submission->id);
@@ -442,7 +442,7 @@ class Contests extends CI_Controller
             return;
         }
         $this->form_validation->set_rules('different', 'How Your Different', 'required');
-        $this->form_validation->set_rules('objective', 'Objective', 'required');
+        //$this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
         //$this->form_validation->set_rules('attachment', 'Photo', 'required');
