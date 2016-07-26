@@ -206,7 +206,7 @@ class Contests extends CI_Controller
         }
 
         $this->form_validation->set_rules('different', 'How Your Different', 'required');
-        $this->form_validation->set_rules('objective', 'Objective', 'required');
+        //$this->form_validation->set_rules('objective', 'Objective', 'required');
         $this->form_validation->set_rules('platform', 'Format', 'required');
         $this->form_validation->set_rules('summary', 'Summary', 'required');
         //$this->form_validation->set_rules('attachment', 'Photo', 'required');
