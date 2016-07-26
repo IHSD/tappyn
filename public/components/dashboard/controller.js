@@ -51,6 +51,24 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         }
     }
 
+    $scope.submission_link_act = function(submission, act) {
+        if (act == 'edit') {
+            submission.link_temp = submission.link_explanation;
+            submission.link_editor = 1;
+        } else if (act == 'cancel') {
+            submission.link_editor = 0;
+        } else if (act == 'save') {
+            AppFact.updateSubmissionHeadline(submission).success(function(response) {
+                if (response.http_status_code == 200) {
+                    $scope.set_alert(response.message, "default");
+                    submission.link_explanation = submission.link_temp;
+                    submission.link_editor = 0;
+                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+                else $scope.check_code(response.http_status_code);
+            });
+        }
+    }
+
     $scope.allSelected = true;
     $scope.selectText = "De-select All";
 

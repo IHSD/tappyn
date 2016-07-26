@@ -383,6 +383,10 @@ class Submissions extends CI_Controller
             $this->responder->fail("Fail , try again later.")->code(500)->respond();
             return;
         }
+        if (!$this->submission_library->update_submission($id, array('link_explanation' => $post['link_temp']))) {
+            $this->responder->fail("Fail , try again later.")->code(500)->respond();
+            return;
+        }
         $this->responder->message("Submission updated succesfully.")->respond();
     }
 }
