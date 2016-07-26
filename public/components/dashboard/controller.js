@@ -16,8 +16,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     });
 
 
-    $scope.allSelected = true;
-        $scope.selectText = "De-select All";
+    $scope.allSelected = false;
+        $scope.selectText = "Select All";
 
     dashFactory.grabTotals().success(function(response) {
         if (response.http_status_code == 200) {
@@ -200,7 +200,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             } else {
                 $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
                 $scope.selectText = "Select All";
-            
+
 
             }
 
