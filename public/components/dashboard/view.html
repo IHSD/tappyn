@@ -80,7 +80,13 @@
                 <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
                 <h4 class='text-center'><span ng-bind="dash.contests.length"></span> Campaigns</h4>
                 <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
-                <div class="col-xs-10 text-right">Campaigns remaining this month <span ng-bind="user.subscription.remaining"></span><a class="btn btn-wj btn-lg hidden-xs hidden-sm" href="/profile#sprofile">Upgrade</a></div>
+                <div class="col-xs-12 col-sm-10 text-right">
+                    <a class="btn btn-wj btn-lg" href="/profile#sprofile">Upgrade</a>
+                </div>
+                <div class="col-xs-12 col-sm-10 text-right">
+                    Campaigns remaining this month <span ng-bind="user.subscription.remaining"></span>
+                </div>
+
                 <!--<hr style='border-color:#eee'>-->
             </div>
         </div>

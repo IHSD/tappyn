@@ -7,25 +7,27 @@
                         <div class="head">
                             <h2>Standard</h2>
                         </div>
-                        <h4 class="text-center" style="font-size:16px;"><strong>Standard Includes</strong></h4>
-                        <p class="text-center" style="font-weight: bold;">All of these great features:</p>
+                        <div class="price">
+                            <h3><span class="symbol">$</span>59</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;font-size:18px;">For individuals just starting advertising.</p>
+                            <p class="text-center" style="font-weight: bold;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                        </div>
+
+                        <center><hr style="margin: 0 !important;width:50%;"></center>
                         <ul class="item-list">
-                            <li>1 Campaign/mo.</li>
-                            <li>1 Audience.</li>
+                            <li style="font-weight:bold;">1 Campaign</li>
+                            <li>1 Audience</li>
                             <li>1 Platform</li>
                             <li>1 Copyright</li>
                             <li>30 Ads</li>
                             <li>Testing & Delivery</li>
                             <li>Money Back Guarantee</li>
                         </ul>
-                        <div class="price">
-                            <h3><span class="symbol">$</span>59</h3>
-                            <h4>per month</h4>
-                            <p class="text-center" style="font-weight:bold;">For individuals just starting advertising.</p>
-                        </div>
+
                         <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("10")'>Sign Up</button>
-                        <p class="more-p next-level-p">Next level</p>
-                        <p class="more-p now-level-p">Now level</p>
+                        <p class="more-p next-level-p">Next Upgrade</p>
+                        <p class="more-p now-level-p">Current Plan</p>
                     </div>
                 </div>
                 <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
@@ -34,23 +36,24 @@
                         <div class="head">
                             <h2>Premium</h2>
                         </div>
-                        <h4 class="text-center" style="font-size:16px;"><strong>Premium Includes</strong></h4>
-                        <p class="text-center" style="font-weight: bold;">Everything in Standard and:</p>
+                        <div class="price" style="border-top:none;">
+                            <!--style="margin-top:80px;"-->
+                            <h3><span class="symbol">$</span>149</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;font-size:18px;">For teams looking to explore new marketing perspectives.</p>
+                            <p class="text-center" style="font-weight: bold;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                        </div>
+                        <center><hr style="margin: 0 !important;width:50%;"></center>
                         <ul class="item-list">
-                            <li>3 Campaign/mo.</li>
-                            <li>Up to 3 Audiences.</li>
+                            <li style="font-weight:bold;">Up To 3 Campaigns</li>
+                            <li>Up to 3 Audiences</li>
                             <li>Up to 3 Platforms</li>
                             <li>3 Copyright</li>
                             <li>90 Ads</li>
                             <li>Testing & Delivery</li>
                             <li>Money Back Guarantee</li>
                         </ul>
-                        <div class="price">
-                            <!--style="margin-top:80px;"-->
-                            <h3><span class="symbol">$</span>149</h3>
-                            <h4>per month</h4>
-                            <p class="text-center" style="font-weight:bold;">For teams looking to explore new marketing perspectives.</p>
-                        </div>
+
                         <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("20")'>Sign Up</button>
                         <p class="more-p next-level-p">Next level</p>
                         <p class="more-p now-level-p">Now level</p>
@@ -62,23 +65,24 @@
                         <div class="head">
                             <h2>Platinum</h2>
                         </div>
-                        <h4 class="text-center" style="font-size:16px;"><strong>Platinum Includes</strong></h4>
-                        <p class="text-center" style="font-weight: bold;">Everything in Premium and:</p>
+                        <div class="price">
+                            <!-- style="margin-top: 121px;"-->
+                            <h3><span class="symbol">$</span>319</h3>
+                            <h4>per month</h4>
+                            <p class="text-center" style="font-weight:bold;font-size:18px;">For departments looking looking to expand and accelerate new audiences.</p>
+                            <p class="text-center" style="font-weight: bold;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                        </div>
+                        <center><hr style="margin: 0 !important;width:50%;"></center>
                         <ul class="item-list">
-                            <li>7 Campaign/mo.</li>
-                            <li>Up to 7 Different Audiences.</li>
+                            <li style="font-weight:bold;">Up To 7 Campaigns</li>
+                            <li>Up to 7 Different Audiences</li>
                             <li>Up to 7 Different Platforms</li>
                             <li>7 Copyright</li>
                             <li>210 Ads</li>
                             <li>Testing & Delivery</li>
                             <li>Money Back Guarantee</li>
                         </ul>
-                        <div class="price">
-                            <!-- style="margin-top: 121px;"-->
-                            <h3><span class="symbol">$</span>319</h3>
-                            <h4>per month</h4>
-                            <p class="text-center" style="font-weight:bold;">For departments looking looking to expand and accelerate new audiences.</p>
-                        </div>
+
                         <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("30")'>Sign Up</button>
                         <p class="more-p next-level-p">Next level</p>
                         <p class="more-p now-level-p">Now level</p>
@@ -91,3 +95,9 @@
         <!-- pricing-tables -->
     </div>
 </div>
+<style>
+.list-style-form li {
+    overflow:hidden;
+    border-top: none !important;
+    padding: 0 !important;
+}
