@@ -192,7 +192,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.Toggleselect_all = function() {
         $scope.allSelected = !$scope.allSelected;
-        if($scope.allSelected){
+        if($scope.allSelected = true){
             $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
                 $scope.selectText = "De-select All";
 
