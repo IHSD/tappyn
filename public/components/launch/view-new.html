@@ -70,7 +70,7 @@
         </div>
     </div>
 </div>
-<div class='container' style='padding-bottom: 120px;'>
+<div class='container'>
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12">
         <div class="row">
             <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Platform
@@ -341,6 +341,7 @@
     </div>
 </div>
 <div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
+    <h3 style="text-align:center;font-size:32px;">Choose a pricing plan to complete your order.</h3>
     <div class="row">
         <div class='col-sm-8 col-sm-offset-2 text-center'>
             <div ng-include src="'templates/company/subscription.html'" ng-init="subscription_type = 'launch'"></div>
