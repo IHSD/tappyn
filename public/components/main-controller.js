@@ -616,8 +616,22 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.click_subscription = function(sub) {
-        $scope.payment_obj.h4 = 'Subscription';
-        $scope.payment_obj.hide_voucher = true;
-        $scope.open_payment({ sub_level: sub }, 'subscription');
-    }
+        if (sub == '10') {
+            $scope.payment_obj.h4 = 'Standard Subscription';
+            $scope.payment_obj.hide_voucher = true;
+            $scope.open_payment({ sub_level: sub }, 'subscription');
+        }
+        else if (sub == '20') {
+            $scope.payment_obj.h4 = 'Premium Subscription';
+            $scope.payment_obj.hide_voucher = true;
+            $scope.open_payment({ sub_level: sub }, 'subscription');
+        }
+        else if (sub == '30') {
+            $scope.payment_obj.h4 = 'Platinum Subscription';
+            $scope.payment_obj.hide_voucher = true;
+            $scope.open_payment({ sub_level: sub }, 'subscription');
+        }
+
+        }
+
 });

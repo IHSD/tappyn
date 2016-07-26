@@ -17,20 +17,55 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6" ng-show="payment_obj.pay_for == 'launch'">
+                    <div ng-show="payment_obj.h4 == 'Standard Subscription'" class="col-md-6">
                         <h4 class="text-left" style="font-weight:bold;font-size:16px;margin-top:0px;">Standard Package</h4>
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
+                            <li>Campaign (1) <span class="text-right" style="padding-left:60px;">$20.00</span></li>
                             <li>Copyright (1) <span class="text-right" style="padding-left:60px;">$20.00</span></li>
-                            <li>Testing And Delivery <span class="text-right" style="padding-left:14px;">$20.00</span></li>
                             <li>Ads (30) <span class="text-right" style="padding-left:86px;">$19.99</span></li>
+                            <li>Testing And Delivery <span class="text-right" style="padding-left:10px;"><i>Included</i></span></li>
+                            <li>Platform (1) <span class="text-right" style="padding-left:60px;"><i>Included</i></span></li>
+                            <li>Custom Audience (1) <span class="text-right" style="padding-left:3px;"><i>Included</i></span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
                             <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
                         </div>
                     </div>
-                    <div class="col-md-6" ng-show='payment_obj.price != 0.00'>
+                    <div ng-show="payment_obj.h4 == 'Premium Subscription'" class="col-md-6">
+                        <h4 class="text-left" style="font-weight:bold;font-size:16px;margin-top:0px;">Premium Package</h4>
+                        <hr style="margin:0 0 5 !important">
+                        <ul class="col-md-12">
+                            <li>Campaigns (3) <span class="text-right" style="padding-left:60px;">$50.00</span></li>
+                            <li>Copyright (3) <span class="text-right" style="padding-left:60px;">$50.00</span></li>
+                            <li>Ads (90) <span class="text-right" style="padding-left:86px;">$49.99</span></li>
+                            <li>Testing And Delivery <span class="text-right" style="padding-left:10px;"><i>Included</i></span></li>
+                            <li>Platform (3) <span class="text-right" style="padding-left:60px;"><i>Included</i></span></li>
+                            <li>Custom Audience (3) <span class="text-right" style="padding-left:3px;"><i>Included</i></span></li>
+                        </ul>
+                        <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
+                            <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
+                            <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+                        </div>
+                    </div>
+                    <div ng-show="payment_obj.h4 == 'Platinum Subscription'" class="col-md-6">
+                        <h4 class="text-left" style="font-weight:bold;font-size:16px;margin-top:0px;">Platinum Package</h4>
+                        <hr style="margin:0 0 5 !important">
+                        <ul class="col-md-12">
+                            <li>Campaigns (7) <span class="text-right" style="padding-left:60px;">$100.00</span></li>
+                            <li>Copyright (7) <span class="text-right" style="padding-left:60px;">$110.00</span></li>
+                            <li>Ads (210) <span class="text-right" style="padding-left:86px;">$109.99</span></li>
+                            <li>Testing And Delivery <span class="text-right" style="padding-left:10px;"><i>Included</i></span></li>
+                            <li>Platform (7) <span class="text-right" style="padding-left:60px;"><i>Included</i></span></li>
+                            <li>Custom Audience (7) <span class="text-right" style="padding-left:3px;"><i>Included</i></span></li>
+                        </ul>
+                        <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
+                            <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
+                            <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show='payment_obj.price != 0.00' style="padding-top:30px;">
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
