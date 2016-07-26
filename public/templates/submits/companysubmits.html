@@ -28,8 +28,8 @@
 </div>
 <div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_selection' || winner_contest.status == 'pending_testing'">
     <div class="checkbox-container">
-        <input ng-show="winner_contest.status == 'pending_testing'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="true">
-        <input ng-show="winner_contest.status == 'pending_selection'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="false">
+        <input ng-if="winner_contest.status == 'pending_testing'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="true">
+        <input ng-if="winner_contest.status == 'pending_selection'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="false">
         <label for="select-contest2-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
     </div>
 </div>
