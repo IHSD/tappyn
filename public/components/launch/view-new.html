@@ -51,7 +51,7 @@
             </div>
             <div ng-show='current.step == "detail"'>
                 <h2>Tell us more about your business.</h2>
-                <h4>Fill out our brief so our partners know more about your business. You'll only have to do this once.</h4>
+        <h4>Fill out our brief so our partners know more about your business.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
                 <h2>How does this look?</h2>
@@ -402,11 +402,27 @@
                     <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
                 </div>
             </div>
-            <div class='text-left' ng-hide='current.step == "done"'>
+      <div class='text-left' ng-show='current.step == "preview"'>
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
           <strong>100% Money Back guarantee</strong>
+        </span>
+        </h4>
+      </div>
+      <div class='text-left' ng-show='current.step == "detail"'>
+        <h4 class='text-left' style='color:#333'>
+    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
+        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+          <strong>You'll only have to do this once.</strong>
+        </span>
+        </h4>
+      </div>
+      <div class='text-left' ng-show='current.step == "tp-prior"'>
+        <h4 class='text-left' style='color:#333'>
+          <span class='glyphicon glyphicon-ok circle-it-oj'></span>
+        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+          <strong>The easiest way to grow your business.</strong>
         </span>
         </h4>
             </div>
