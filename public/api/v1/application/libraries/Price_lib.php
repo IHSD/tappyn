@@ -65,9 +65,9 @@ class Price_lib
                 }
                 $status          = $this->contest->get_status($contest);
                 $purchase_status = array('pending_purchase', 'pending_testing');
-                if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
-                    throw new Exception("Constest status error");
-                }
+                //if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
+                    //throw new Exception("Constest status error");
+                //}
                 //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
                 //throw new Exception("Constest status error2");
                 //}
