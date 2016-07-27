@@ -27,7 +27,7 @@ class Contest_lib
         }
         $sub = $this->subscription_lib->get_by_user_id($this->ion_auth->user()->row()->id);
         if ($sub['can_launch'] == false) {
-            return 'You need upgrate subscription to launch';
+            return 'You need to upgrade your current subscription to launch';
         }
         $start_time = date('Y-m-d H:i:s');
         $stop_time  = date('Y-m-d H:i:s', strtotime('+7 days'));
