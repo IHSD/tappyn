@@ -116,70 +116,111 @@
               <img src="https://s3-us-west-2.amazonaws.com/tappyn/bannernews.jpg" class="img-responsive" style="padding-right:100px;padding-left:100px;padding-top:20px;">
           </center>
         </section>
-        <section class=love-raw style="padding-top:0;height:auto;background:#fff;">
-            <div class="row content-padding">
-              <div class="container" style="background-color: #ffffff;border-radius:6px;width:70%;padding-bottom:30px;position:relative;">
+        <section ng-if='user.type == "company" || !user ' class=love-raw style="padding-top:0;height:auto;background:#fff;">
+            <div id="subscription" class="row content-padding">
+                <h2 style="font-size:28;font-weight:600;margin-bottom:10px;line-height:1.3;" class="text-center">Find the right fit.</h2>
+                <h4 class="text-center" style="font-size:22px;">Different businesses have different needs.<br>Select the plan that works for you.</h4>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <div class="pricing-tables attached">
+                                <div class="row">
+                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='10'">
+                                        <div class="plan first">
+                                            <div class="head">
+                                                <h2>Standard</h2>
+                                            </div>
+                                            <div class="price">
+                                                <h3><span class="symbol">$</span>59</h3>
+                                                <h4>per month</h4>
+                                                <p class="text-center" style="font-weight:bold;font-size:18px;">For individuals just starting advertising.</p>
+                                                <p class="text-center" style="font-weight: 300;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                                            </div>
 
-                  <h2 style="font-size: 40;font-weight:bold;padding-bottom: 80px;padding-top:50px;" class="text-center">Our core campaigns are a flat fee.</h2>
-                  <!--<center><h3 style="font-size:14;margin-bottom:40px;width:75%;" class="text-center">So how do we make money?<br>In two ways. First, when your campaign is finished and you decide to split test your ads against each other, we usually deduct a small commission. In addition, when you decide to purchase the copyright to an ad, we charge a flat rate (100% of the cost goes to the creator of the ad).</h2></center>-->
-                  <br>
-
-                  <div class="container" style="background-color: #f2f2f2;border-radius:6px;width:70%;position:relative;">
-                  <!--<center><img src="public/img/zero.png" width=75px; height=75px; class="overlay"></center>-->
-                  <div class="col-xs-12" style="padding-top: 20px;">
-                    <center>
-                      <div class="text-center overlay" style="border:3px solid #FF5E00;border-radius: 75px;width: 125px;height: 125px;position: relative;bottom: 90px;left: 5px;background: #FF5E00;">
-
-                      <h2 style="font-weight:bold;font-size:34px;color:#fff;padding-top:20px;">$59.99</h2>
-                      </div>
-                   </center>
-                 </div>
-                  <div class="text-center col-xs-12" style="color:#333">
-                      <h4 style="color:#333;font-weight:700;font-size:22;padding-top:40px;margin-top: -100px;">1 Campaign</h4>
-                      <center><hr style="margin:0 !important;width:50%;"></center>
-                    </div>
-
-                  <br>
-
-<div class="col-xs-12 text-center" style="color:#333;margin-top:-20px;">
-  <div class="col-sm-6 col-xs-12">
-  <ul class="ul-price text-left" style="padding-bottom: 20;font-size:18px;">
-                          <li>1 Audience</li>
-                            <li>1 Platform</li>
-                            <li>Testing And Delivery</li>
-                          </ul>
-                        </div>
-                          <div class="col-sm-6 col-xs-12">
-                          <ul class="ul-price text-left" style="padding-bottom:100px;font-size:18px;">
-                                <li>30 Unique Copies</li>
-                                <li>1 Copyright</li>
-                                <li>100% Money Back Guarantee</li>
-                                    </ul>
-                                  </div>
-
-
-                                    <!--<hr>
-
-                                        <h4 style="color:#333;font-weight:700;font-size:22;text-align:center;">Premium Services:</h4>
-
-
-
-                                    <ul class=value-list>
-                                      <li class=value-list>Split testing fee (2.5%).
-                                        <li class=value-list>Copyright of ads ($49.99 per ad).</ul>
+                                            <center><hr style="margin: 0 !important;width:75%;"></center>
+                                            <ul class="item-list" style="text-align:left;">
+                                                <li style="font-weight:bold;">1 Campaign</li>
+                                                <li>1 Audience</li>
+                                                <li>1 Platform</li>
+                                                <li>1 Copyright</li>
+                                                <li>30 Ads</li>
+                                                <li style="padding-bottom:10px !important;">Testing & Delivery</li>
+                                                <center><hr style="margin: 0 !important;width:75%;"></center>
+                                                <li style="padding-top:10px !important;">Money Back Guarantee</li>
+                                            </ul>
+                                            <center><a href="/launch" class="btn btn-lg btn-wj get_started">Get Started</a></center>
+                                            <p class="more-p next-level-p">Next Plan</p>
+                                            <p class="more-p now-level-p">Current Plan</p>
                                         </div>
-                      <br>-->
-                      <br>
-
-
-              <div class="text-center col-xs-12" style="padding-top:20px;padding-bottom:20px;"><a href="/launch" class="btn btn-lg btn-wj get_started" style="padding-right:50px;padding-left:50px;">Get Started</a></div>
-
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
+                                        <div class="plan recommended">
+                                            <!-- style="height:635px;"-->
+                                            <div class="head" style="background:#f7a000;">
+                                                <h2>Premium</h2>
+                                            </div>
+                                            <div class="price" style="border-top:none;">
+                                                <!--style="margin-top:80px;"-->
+                                                <h3><span class="symbol">$</span>149</h3>
+                                                <h4>per month</h4>
+                                                <p class="text-center" style="font-weight:bold;font-size:18px;">For teams looking to explore new marketing perspectives.</p>
+                                                <p class="text-center" style="font-weight: 300;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                                            </div>
+                                            <center><hr style="margin: 0 !important;width:75%;"></center>
+                                            <ul class="item-list" style="text-align:left;">
+                                                <li style="font-weight:bold;">Up To 3 Campaigns</li>
+                                                <li>Up to 3 Audiences</li>
+                                                <li>Up to 3 Platforms</li>
+                                                <li>3 Copyright</li>
+                                                <li>90 Ads</li>
+                                                <li style="padding-bottom:10px !important;">Testing & Delivery</li>
+                                                <center><hr style="margin: 0 !important;width:75%;"></center>
+                                                <li style="padding-top:10px !important;">Money Back Guarantee</li>
+                                            </ul>
+                                            <center><a href="/launch" class="btn btn-lg btn-wj get_started">Get Started</a></center>
+                                            <p class="more-p next-level-p">Next Plan</p>
+                                            <p class="more-p now-level-p">Current Plan</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
+                                        <div class="plan last">
+                                            <!-- style="height:618px;"-->
+                                            <div class="head"  style="background:#f72200;">
+                                                <h2>Platinum</h2>
+                                            </div>
+                                            <div class="price">
+                                                <!-- style="margin-top: 121px;"-->
+                                                <h3><span class="symbol">$</span>319</h3>
+                                                <h4>per month</h4>
+                                                <p class="text-center" style="font-weight:bold;font-size:18px;">For departments looking looking to expand and accelerate new audiences.</p>
+                                                <p class="text-center" style="font-weight: 300;font-size:12px;margin-bottom:0;">(Cancel Anytime)</p>
+                                            </div>
+                                            <center><hr style="margin: 0 !important;width:75%;"></center>
+                                            <ul class="item-list" style="text-align:left;">
+                                                <li style="font-weight:bold;">Up To 7 Campaigns</li>
+                                                <li>Up to 7 Different Audiences</li>
+                                                <li>Up to 7 Different Platforms</li>
+                                                <li>7 Copyright</li>
+                                                <li>210 Ads</li>
+                                                <li style="padding-bottom:10px !important;">Testing & Delivery</li>
+                                                <center><hr style="margin: 0 !important;width:75%;"></center>
+                                                <li style="padding-top:10px !important;">Money Back Guarantee</li>
+                                            </ul>
+                                            <center><a href="/launch" class="btn btn-lg btn-wj get_started">Get Started</a></center>
+                                            <p class="more-p next-level-p">Next Plan</p>
+                                            <p class="more-p now-level-p">Current Plan</p>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!-- row-->
+                            </div>
+                            <!-- pricing-tables -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-
-        </div>
-        <center><hr class="style-two" style="color: #EBEFF2;width:75%;"></center>
-    </section>
+        </section>
 
         <section class=how-it-works style=padding-bottom:20px>
             <div class="row content-padding">
