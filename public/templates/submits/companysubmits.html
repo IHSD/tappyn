@@ -8,7 +8,7 @@
 <div ng-show="submission.headline">
     <div ng-hide="submission.headline_editor">
         <h3>{{submission.headline}}</h3>
-        <a href="#" ng-click="submission_headline_act(submission,'edit')">Edit Headline</a>
+        <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')">Edit Headline</a>
     </div>
     <div ng-show="submission.headline_editor">
         <input class='form-control' ng-model='submission.headline_temp' type='text'>
@@ -19,7 +19,7 @@
 <div ng-show="submission.link_explanation">
     <div ng-hide="submission.link_editor">
         <h4>{{submission.link_explanation}}<br></h4>
-            <a href="#" ng-click="submission_link_act(submission,'edit')">Edit Text</a>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_link_act(submission,'edit')">Edit Text</a>
     </div>
     <div ng-show="submission.link_editor">
         <input class='form-control' ng-model='submission.link_temp' type='text'>
@@ -30,7 +30,7 @@
 <div ng-show="submission.text">
     <div ng-hide="submission.text_editor">
         <h4>{{submission.text}}</h4>
-            <a href="#" ng-click="submission_text_act(submission,'edit')">Edit Text</a>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_text_act(submission,'edit')">Edit Text</a>
     </div>
     <div ng-show="submission.text_editor">
         <input class='form-control' ng-model='submission.text_temp' type='text'>
