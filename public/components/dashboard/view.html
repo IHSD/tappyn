@@ -30,13 +30,13 @@
             <div class="modal_bot">
                 <div class="form-group">
                     <div ng-hide="payment_obj.re_ab">
-                        <p class="text-center" style="font-size:18px; font-weight:bold;">Up to $15.00 of Ad Spend is included in your campaign.</p>
+                        <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us. All traffic is linked directly to your website.</p>
                         <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label">Input your own budget, or continue to start testing:</label>
+                            <label for="ab-aday" class="control-label">Input a larger budget if you'd like more data, or continue to start testing:</label>
                         </div>
                     </div>
                     <div ng-show="payment_obj.re_ab">
-                        <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like for more accurate results.</p>
+                        <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like. All traffic is linked to your website.</p>
                         <div class="col-xs-8">
                             <label for="ab-aday" class="control-label" style="text-align:right;">Input your own budget to get started:</label>
                         </div>
@@ -224,7 +224,7 @@
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Please check back in 24 hours for results or email us with any questions.</span></strong>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your ads are currently being tested.<br><span style="font-size:22px;">Please check back in 24 hours for results or <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>email</a> us with any questions.</span></strong>
                             </span>
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
@@ -256,7 +256,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please choose the ad you'd like to own the copyright of.<br><span style="font-size:22px;">If you'd like to own more than one, please contact us <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.</span></strong>
+                            <span class='text-left' style='font-weight:300;font-size:28;color:#333;'><strong>Please choose your favorite ad, and we'll transfer you the copyright.<br><span style="font-size:22px;">If you'd like to select more than one, please contact us <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.</span></strong>
                             </span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
