@@ -71,7 +71,96 @@
                             <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                         </div>
                     </div>
-                    <div class="col-md-6 text-center" ng-show='payment_obj.price != 0.00' style="padding-top:30px;">
+                    <div class="col-md-6 col-md-offset-3" ng-show='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
+                        <div ng-show='!add_new'>
+                            <div ng-show='payments.length > 0'>
+                                <div class='payment-method-container'>
+                                    <div class='row'>
+                                        <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+                                            <h5>
+                                  <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
+                                  <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
+                                  <img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
+                                  <img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
+                                  &nbsp;&nbsp;&nbsp;********{{payment.last4}}
+                                </h5>
+                                            <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
+                            <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
+                                <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                            </div>
+                            <div class='text-center'>
+                                <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
+                            </div>
+                        </div>
+                        <div ng-show='add_new'>
+                            <div class='text-center' ng-show='payments.length > 0'>
+                                <button class='btn btn-oj' ng-click='add_new = false' style="margin-bottom:10px;">Use a saved method</button>
+                            </div>
+                            <form class='form row' method="POST" id="payment-form-global">
+                                <div class='payment-empty-card'>
+                                    <div class="card-group">
+                                        <input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number" />
+                                    </div>
+                                    <div class="card-group">
+                                        <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc" />
+                                    </div>
+                                    <div class="card-group">
+                                        <select class='form-control' data-stripe="exp-month">
+                                            <option value='01'>01</option>
+                                            <option value='02'>02</option>
+                                            <option value='03'>03</option>
+                                            <option value='04'>04</option>
+                                            <option value='05'>05</option>
+                                            <option value='06'>06</option>
+                                            <option value='07'>07</option>
+                                            <option value='08'>08</option>
+                                            <option value='09'>09</option>
+                                            <option value='10'>10</option>
+                                            <option value='11'>11</option>
+                                            <option value='12'>12</option>
+                                        </select>
+                                    </div>
+                                    <div class='card-group'>
+                                        <select class='form-control' data-stripe="exp-year">
+                                            <option value='2016'>2016</option>
+                                            <option value='2017'>2017</option>
+                                            <option value='2018'>2018</option>
+                                            <option value='2019'>2019</option>
+                                            <option value='2020'>2020</option>
+                                            <option value='2021'>2021</option>
+                                            <option value='2022'>2022</option>
+                                            <option value='2023'>2023</option>
+                                            <option value='2024'>2024</option>
+                                            <option value='2025'>2025</option>
+                                            <option value='2026'>2026</option>
+                                            <option value='2027'>2027</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type='hidden' data-stripe='currency' value='usd' />
+                                <div class='form-group checkbox'>
+                                    <label class='control-label' style='font-size: 14px;'>
+                                        <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
+                                    </label>
+                                    <div class='pull-right' data-toggle="buttons">
+                                        <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="voucher.visible = 1">
+                                            <input type='radio' name="reg" value='1' ng-model='payment_obj.voucher_visible'>I have a voucher!
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class='text-center'>
+                                    <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
+                                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"' style="padding-top:30px;">
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
