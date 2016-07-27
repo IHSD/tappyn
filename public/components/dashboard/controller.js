@@ -96,7 +96,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             $scope.payment_obj.h3 = 'A/B Testing Payment';
-            $scope.payment_obj.h4 = 'hide';
+            $scope.payment_obj.h4 = 'A/B Testing Payment';
             $scope.payment_obj.ab_aday = 15;
             $scope.payment_obj.re_ab = 0;
             if (type == 'confirm_re_ab') {
