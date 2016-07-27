@@ -359,4 +359,34 @@ class Submissions extends CI_Controller
             $this->responder->fail("There was an error rating your ad.")->code(500)->respond();
         }
     }
+
+    public function update($id = 0)
+    {
+        $submission = $this->submission->get($id);
+        if (!$submission) {
+            $this->responder->fail("submission not found.")->code(500)->respond();
+            return;
+        }
+
+        $contest = $this->contest->get($submission->contest_id);
+        if (!$contest || $contest->owner !== $this->ion_auth->user()->row()->id) {
+            $this->responder->fail("That campaign doesn't exist, or you don't have permission.")->code(500)->respond();
+            return;
+        }
+
+        $post = $this->input->post('submission');
+        if (!$this->submission_library->update_submission($id, array('headline' => $post['headline_temp']))) {
+            $this->responder->fail("Fail , try again later.")->code(500)->respond();
+            return;
+        }
+        if (!$this->submission_library->update_submission($id, array('text' => $post['text_temp']))) {
+            $this->responder->fail("Fail , try again later.")->code(500)->respond();
+            return;
+        }
+        if (!$this->submission_library->update_submission($id, array('link_explanation' => $post['link_temp']))) {
+            $this->responder->fail("Fail , try again later.")->code(500)->respond();
+            return;
+        }
+        $this->responder->message("Submission updated succesfully.")->respond();
+    }
 }

@@ -1,4 +1,4 @@
-tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory) {
+tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory, AppFact) {
 
     //on page load grab all
     $scope.type = '';
@@ -15,9 +15,62 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         else $scope.check_code(response.http_status_code);
     });
 
+    $scope.submission_headline_act = function(submission, act) {
+        if (act == 'edit') {
+            submission.headline_temp = submission.headline;
+            submission.headline_editor = 1;
+        } else if (act == 'cancel') {
+            submission.headline_editor = 0;
+        } else if (act == 'save') {
+            AppFact.updateSubmissionHeadline(submission).success(function(response) {
+                if (response.http_status_code == 200) {
+                    $scope.set_alert(response.message, "default");
+                    submission.headline = submission.headline_temp;
+                    submission.headline_editor = 0;
+                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+                else $scope.check_code(response.http_status_code);
+            });
+        }
+    }
 
-    $scope.allSelected = false;
-        $scope.selectText = "Select All";
+    $scope.submission_text_act = function(submission, act) {
+        if (act == 'edit') {
+            submission.text_temp = submission.text;
+            submission.text_editor = 1;
+        } else if (act == 'cancel') {
+            submission.text_editor = 0;
+        } else if (act == 'save') {
+            AppFact.updateSubmissionHeadline(submission).success(function(response) {
+                if (response.http_status_code == 200) {
+                    $scope.set_alert(response.message, "default");
+                    submission.text = submission.text_temp;
+                    submission.text_editor = 0;
+                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+                else $scope.check_code(response.http_status_code);
+            });
+        }
+    }
+
+    $scope.submission_link_act = function(submission, act) {
+        if (act == 'edit') {
+            submission.link_temp = submission.link_explanation;
+            submission.link_editor = 1;
+        } else if (act == 'cancel') {
+            submission.link_editor = 0;
+        } else if (act == 'save') {
+            AppFact.updateSubmissionHeadline(submission).success(function(response) {
+                if (response.http_status_code == 200) {
+                    $scope.set_alert(response.message, "default");
+                    submission.link_explanation = submission.link_temp;
+                    submission.link_editor = 0;
+                } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+                else $scope.check_code(response.http_status_code);
+            });
+        }
+    }
+
+    $scope.allSelected = true;
+    $scope.selectText = "De-select All";
 
     dashFactory.grabTotals().success(function(response) {
         if (response.http_status_code == 200) {
@@ -43,7 +96,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             $scope.payment_obj.h3 = 'A/B Testing Payment';
-            $scope.payment_obj.h4 = 'hide';
+            $scope.payment_obj.h4 = 'A/B Testing Payment';
             $scope.payment_obj.ab_aday = 15;
             $scope.payment_obj.re_ab = 0;
             if (type == 'confirm_re_ab') {
@@ -72,8 +125,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             dashFactory.grabUpvoted().success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
-        }
-        else {
+        } else {
             dashFactory.grabDash(type).success(function(response) {
                 if (response.success) $scope.dash = response.data;
             });
@@ -192,17 +244,17 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.Toggleselect_all = function() {
         $scope.allSelected = !$scope.allSelected;
-        if($scope.allSelected = true){
+        if ($scope.allSelected) {
             $(".container .winner-contest .checkbox-container:visible input").attr('checked', true);
-                $scope.selectText = "De-select All";
+            $scope.selectText = "De-select All";
 
 
-            } else {
-                $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
-                $scope.selectText = "Select All";
+        } else {
+            $(".container .winner-contest .checkbox-container:visible input").attr('checked', false);
+            $scope.selectText = "Select All";
 
 
-            }
+        }
 
     }
 

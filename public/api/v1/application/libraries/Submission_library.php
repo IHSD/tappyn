@@ -55,16 +55,16 @@ class Submission_library
         }
 
         $data = array(
-            'owner' => $this->ion_auth->user()->row()->id,
-            'contest_id' => $contest->id,
-            'headline' => $headline,
+            'owner'            => $this->ion_auth->user()->row()->id,
+            'contest_id'       => $contest->id,
+            'headline'         => $headline,
             'link_explanation' => $link_explanation,
-            'text' => $text,
-            'attachment' => null,
-            'thumbnail_url' => null,
+            'text'             => $text,
+            'attachment'       => null,
+            'thumbnail_url'    => null,
         );
         if (!is_null($attachment)) {
-            $data['attachment'] = $attachment . '.jpg';
+            $data['attachment']    = $attachment . '.jpg';
             $data['thumbnail_url'] = $attachment . '_thumb.jpg';
         }
 
@@ -78,14 +78,14 @@ class Submission_library
         $company = $this->user->profile($contest->owner);
         if ($id = $this->submission->create($data)) {
             $email_data = array(
-                'headline' => $this->input->post('headline'),
-                'text' => $this->input->post('text'),
+                'headline'         => $this->input->post('headline'),
+                'text'             => $this->input->post('text'),
                 'link_explanation' => $this->input->post('link_explanation'),
-                'email' => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
-                'company' => $company->name,
-                'attachment_url' => $attachment,
-                'thumbnail_url' => $data['thumbnail_url'],
-                'eid' => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful'),
+                'email'            => ($this->ion_auth->user() ? $this->ion_auth->user()->row()->email : false),
+                'company'          => $company->name,
+                'attachment_url'   => $attachment,
+                'thumbnail_url'    => $data['thumbnail_url'],
+                'eid'              => $this->mailer->id($this->ion_auth->user()->row()->email, 'submission_successful'),
             );
 
             $this->mailer->to($this->ion_auth->user()->row()->email)
@@ -116,5 +116,10 @@ class Submission_library
     public function errors()
     {
         return $this->errors;
+    }
+
+    public function update_submission($sid, $data)
+    {
+        return $this->db->where('id', $sid)->update('submissions', $data);
     }
 }

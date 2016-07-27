@@ -138,5 +138,15 @@ tappyn.factory("AppFact", function($http) {
             data: $.param(obj)
         })
     }
+    fact.updateSubmissionHeadline = function(submission) {
+        return $http({
+            method: 'POST',
+            url: 'api/v1/submissions/update/' + submission.id,
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            },
+            data: $.param({ submission: submission })
+        })
+    }
     return fact;
 });

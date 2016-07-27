@@ -86,6 +86,7 @@ $route['submissions/leaderboard']['get']      = 'submissions/leaderboard';
 $route['submissions/(:num)/shares']['post']   = 'submissions/share/$1';
 $route['submissions/(num)/rating']['post']    = 'submissions/rating/$1';
 $route['submissions/(:num)/votes']['post']    = 'votes/create/$1';
+$route['submissions/update/(:num)']['post']   = 'submissions/update/$1';
 
 /*========================
 Notifications
@@ -107,3 +108,9 @@ Vouchers
 ========================*/
 $route['vouchers']                   = 'vouchers/is_valid';
 $route['vouchers/get_price']['post'] = 'vouchers/get_price';
+
+/*========================
+OutCrons
+========================*/
+$route['admin/outcrons/test']         = 'admin/outcrons/test';
+$route['admin/outcrons/subscription'] = 'admin/outcrons/subscription';
