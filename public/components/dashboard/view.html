@@ -211,7 +211,13 @@
                     </div>
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'>
-                    <h4>Your ads will appear here.</h4></div>
+                <span ng-show="winner_contest.status =='draft'">
+                    <h4 style="font-size:22px;">After you launch your campaign, this is where your ads will appear.</h4>
+                </span>
+                <span ng-show="winner_contest.status =='live'">
+                    <h4 style="font-size:22px;">Your campaign is currently live.<br>As ads start to be created, they will appear here.</h4>
+                </span>
+                </div>
             </div>
             <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box'>
                 <div class="container">
@@ -223,13 +229,13 @@
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Your campaign is currently live and we're waiting on 30 ads<br>to be created about your business.</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong></span>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>It looks like your campaign hasn't launched yet.</strong></span>
+                            <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Start recieving ads by launching your campaign.</strong></span>
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')" style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
