@@ -71,7 +71,18 @@
                             <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                         </div>
                     </div>
-                    <div class="col-md-6 col-md-offset-3" ng-show='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
+                    <div ng-show="payment_obj.h4 == 'A/B Testing Payment'" class="col-md-6">
+
+                        <hr style="margin:0 0 5 !important">
+                        <ul class="col-md-12">
+                            <li>24 Hour Testing<span class="text-right" style="padding-left:60px;">/span></li>
+                        </ul>
+                        <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
+                            <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
+                            <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6" ng-show='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
