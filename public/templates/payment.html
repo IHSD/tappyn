@@ -88,7 +88,7 @@
                             <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
                         </div>
                     </div>
-                    <div class="col-md-6" ng-show='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
+                    <div class="col-md-6" ng-if='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
@@ -177,7 +177,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6" ng-show='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"' style="padding-top:30px;">
+                    <div class="col-md-6" ng-if='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"' style="padding-top:30px;">
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
