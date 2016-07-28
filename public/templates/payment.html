@@ -71,11 +71,11 @@
                             <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                         </div>
                     </div>
-                    <div ng-show="payment_obj.h4 == 'A/B Testing Payment'" class="col-md-6">
+                    <div ng-show="payment_obj.price != 0.00 && payment_obj.h4 == 'A/B Testing Payment'" class="col-md-6">
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
-                            <li>24 Hour Testing<span class="text-right" style="padding-left:60px;">$15.00 (Included)</span></li>
-                            <li>Extra Ad Spend<span class="text-right" style="padding-left:15px;">-</span></li>
+                            <li>24 Hour Testing<span class="text-right" style="padding-left:50px;">$15.00 (Included)</span></li>
+                            <li>Extra Ad Spend<span class="text-right" style="padding-left:80px;">--</span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
@@ -262,6 +262,7 @@
                     </div>
                     <div ng-show='payment_obj.price == 0.00' class='text-center'>
                         <!--<h4>No need for payment, this campaign is on us!</h4>-->
+                        <h4><strong>We'll begin testing your ads immediately!</strong></h4>
                         <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
                     </div>
                 </div>
