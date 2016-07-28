@@ -22,7 +22,7 @@
 class Voucher extends MY_Model
 {
     public $table = 'vouchers';
-    protected $errors = FALSE;
+    protected $errors = false;
 
     public function __construct()
     {
@@ -31,12 +31,11 @@ class Voucher extends MY_Model
 
     public function create($data)
     {
-        if($this->db->insert('vouchers', $data))
-        {
+        if ($this->db->insert('vouchers', $data)) {
             return $this->db->insert_id();
         }
         $this->errors = $this->db->error()['message'];
-        return FALSE;
+        return false;
     }
 
     /**
@@ -48,31 +47,27 @@ class Voucher extends MY_Model
     {
         $voucher = $this->where('id', $vid)->limit(1)->fetch();
         // Does voucher exist?
-        if(!$voucher || $voucher->num_rows() == 0)
-        {
+        if (!$voucher || $voucher->num_rows() == 0) {
             $this->errors = "I couldn't find a voucher with that discount code";
-            return FALSE;
+            return false;
         }
         $voucher = $voucher->row();
         // Is it active?
-        if($voucher->status == 0)
-        {
+        if ($voucher->status == 0) {
             $this->errors = "This voucher has been disabled";
-            return FALSE;
+            return false;
         }
         // Based on its expiration, is it currently valid
-        if(!is_null($voucher->ends_at) && $voucher->ends_at < time())
-        {
+        if (!is_null($voucher->ends_at) && $voucher->ends_at < time()) {
             $this->errors = "We're sorry, but that voucher has expired";
-            return FALSE;
+            return false;
         }
         // If the expiration is uses, has it reached its capacity yet?
-        if($voucher->expiration == 'uses' && $voucher->times_used > $voucher->usage_limit)
-        {
+        if ($voucher->expiration == 'uses' && $voucher->times_used > $voucher->usage_limit) {
             $this->errors = "Were sorry, but that voucher can no longer be used";
-            return FALSE;
+            return false;
         }
-        return TRUE;
+        return true;
     }
 
     /**
@@ -102,45 +97,43 @@ class Voucher extends MY_Model
      * @param  integer $cid ID of the contest
      * @return void
      */
-    public function redeem($vid, $cid)
+    public function redeem($vid, $cid, $uid = 0)
     {
-        if($this->db->insert('voucher_uses', array(
+        if ($this->db->insert('voucher_uses', array(
             'created_at' => time(),
             'voucher_id' => $vid,
-            'contest_id' => $cid
-        )))
-        {
-            if($this->db->where('id', $vid)
-                     ->set('times_used', 'times_used+1', FALSE)
-                     ->update('vouchers')) {
-                return TRUE;
+            'contest_id' => $cid,
+            'user_id' => $uid,
+        ))) {
+            if ($this->db->where('id', $vid)
+                ->set('times_used', 'times_used+1', false)
+                ->update('vouchers')) {
+                return true;
             } else {
                 $this->errors = $this->db->error()['message'];
-                return FALSE;
+                return false;
             }
         }
         $this->errors = $this->db->error()['message'];
-        return FALSE;
+        return false;
     }
 
     public function get($vid)
     {
         $check = $this->db->select('*')->from('vouchers')->where('id', $vid)->get();
-        if($check && $check->num_rows() > 0)
-        {
+        if ($check && $check->num_rows() > 0) {
             return $check->row();
         }
-        return FALSE;
+        return false;
     }
 
     public function fetchByCode($code)
     {
         $check = $this->db->select('*')->from('vouchers')->where('code', $code)->get();
-        if($check && $check->num_rows() > 0)
-        {
+        if ($check && $check->num_rows() > 0) {
             return $check->row();
         }
-        return FALSE;
+        return false;
     }
     public function errors()
     {

@@ -14,23 +14,20 @@ class Vouchers_library
 
     public function __call($method, $arguments)
     {
-        if (!method_exists( $this->voucher, $method) )
-        {
+        if (!method_exists($this->voucher, $method)) {
             throw new Exception('Undefined method Vouchers::' . $method . '() called');
         }
-        return call_user_func_array( array($this->voucher, $method), $arguments);
+        return call_user_func_array(array($this->voucher, $method), $arguments);
     }
 
     public function uses($vid)
     {
         $uses = $this->db->select('*')->from('voucher_uses')->where('voucher_id', $vid)->get();
-        if(!$uses || $uses->num_rows() == 0)
-        {
+        if (!$uses || $uses->num_rows() == 0) {
             return array();
         }
         $uses = $uses->result();
-        foreach($uses as $use)
-        {
+        foreach ($uses as $use) {
             $use->contest = $this->contest->get($use->contest_id);
             $company = $this->ion_auth->user($use->user_id)->row();
             $company->profile = $this->user->profile($use->user_id);
@@ -48,9 +45,8 @@ class Vouchers_library
         // Create the voucher
         $id = $this->voucher->create($data);
 
-        if(!$id)
-        {
-            return FALSE;
+        if (!$id) {
+            return false;
         }
 
         return $id;
@@ -64,19 +60,17 @@ class Vouchers_library
      * @param  integer $cid ID of the contest
      * @return boolean
      */
-    public function redeem($vid, $cid)
+    public function redeem($vid, $cid, $uid = 0)
     {
         // Check that the voucher is still valid
-        if(!$this->is_valid($vid))
-        {
+        if (!$this->is_valid($vid)) {
             // Voucher is invalid
-            return FALSE;
+            return false;
         }
 
-        if($this->voucher->redeem($vid, $cid))
-        {
-            return TRUE;
+        if ($this->voucher->redeem($vid, $cid, $uid)) {
+            return true;
         }
-        return FALSE;
+        return false;
     }
 }
