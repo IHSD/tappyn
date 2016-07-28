@@ -80,8 +80,8 @@
                 <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
                 <h4 class='text-center'><span ng-bind="dash.contests.length"></span> Campaigns</h4>
                 <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
-                <div class="col-xs-12 col-sm-10 text-right">
-                    <a class="btn btn-wj btn-lg" href="/profile#sprofile">Upgrade</a>
+                <div class="col-xs-12 col-sm-10 text-right" style="padding-bottom:5px;">
+                    <a class="btn btn-wj btn-md" href="/profile#sprofile">Upgrade</a>
                 </div>
                 <div class="col-xs-12 col-sm-10 text-right">
                     Campaigns remaining this month: <span ng-bind="user.subscription.remaining"></span>
@@ -183,7 +183,7 @@
                         <div class="col-xs-6" style="margin-top:10px;">
                             <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing'">
-                                <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>{{selectText}}</button>
+                                <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>De-select All</button>
                             </span>
                         </div>
                     </div>

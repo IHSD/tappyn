@@ -57,6 +57,10 @@
                 <h2>How does this look?</h2>
                 <h4>Please read over everything carefully before launching.</h4>
             </div>
+            <div ng-show='current.step == "subscription"'>
+                <h2>Please select a plan that fits.</h2>
+                <h4>Different businesses have different needs. Find the one that works for you.<br>All packages come with a 100% Money Back Guarantee.</h4>
+            </div>
             <div ng-show='current.step == "done"'>
                 <h2>Congratulations!</h2>
                 <h4>We just received your campaign.</h4>
@@ -79,15 +83,15 @@
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
                     <img src="public/img/ico-facebook.svg">
-                    <h4 class='text-center'>Facebook</h4>
+                    <h4 class='text-center' style="cursor:default;">Facebook</h4>
                 </div>
                 <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-btn' ng-click='select_platform("twitter")'>
                     <img src="public/img/ico-twitter.svg">
-                    <h4 class='text-center'>Twitter</h4>
+                    <h4 class='text-center' style="cursor:default;">Twitter</h4>
                 </div>
                 <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-btn' ng-click='select_platform("instagram")'>
                     <img src="public/img/ico-insta.svg">
-                    <h4 class='text-center'>Instagram</h4>
+                    <h4 class='text-center' style="cursor:default;">Instagram</h4>
                 </div>
             </div>
         </div>
@@ -341,7 +345,6 @@
     </div>
 </div>
 <div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
-    <h3 style="text-align:center;font-size:32px;">Choose a pricing plan to complete your order.</h3>
     <div class="row">
         <div class='col-sm-8 col-sm-offset-2 text-center'>
             <div ng-include src="'templates/company/subscription.html'" ng-init="subscription_type = 'launch'"></div>
