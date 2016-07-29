@@ -50,7 +50,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         }
 
         if (contest.no_payment) {
-            $scope.payment_obj.price = 0;
+            $scope.payment_obj.price = 49.99;
             $scope.pay_payment('no_payment');
             return;
         }

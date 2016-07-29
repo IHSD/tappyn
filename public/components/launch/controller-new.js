@@ -213,7 +213,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         $scope.set_alert("Saved as draft, to launch, pay in dashboard", "default");
                         window.location = "/dashboard";
                     } else if (pay == 'launch') {
-                        contest.no_payment = true;
+                        contest.no_payment = false;
                         $scope.open_payment(contest, 'launch');
                     } else if (pay == 'subscription') {
                         $scope.set_step('subscription');
