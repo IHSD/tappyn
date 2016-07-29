@@ -69,6 +69,24 @@
                             <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                         </div>
                     </div>
+                    <div ng-show="payment_obj.h4 == 'Facebook Campaign' || payment_obj.h4 == 'Twitter Campaign' || payment_obj.h4 == 'Instagram Campaign'" class="col-md-6">
+                        <h4 class="text-left inline-block" style="font-weight:bold;font-size:16px;margin-top:0px;display:inline;padding-right:11px;">Platinum Package</h4>
+                        <h4 class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">Rebillable Monthly</h4>
+                        <hr style="margin:0 0 5 !important">
+                        <ul class="col-md-12">
+                            <li>Copyright (7) <span class="text-right" style="padding-left:55px;">$400.00</span></li>
+                            <li>Testing <span class="text-right" style="padding-left:90px;">$239.99</span></li>
+                            <li>Service And Support<span class="text-right" style="padding-left:29px;">$0.00</span></li>
+                            <hr style="margin:0 0 5 !important">
+                            <li>50% Discount<span class="text-right" style="padding-left:50px;"><i>-$319.99</i></span></li>
+                        </ul>
+                        <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
+                            <p class="text-left inline-block" style="display: inline;padding-right: 80px;font-weight:bold;font-size:18px;">Total</p>
+                            <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+                            <p style="font-size:12px;"><small>Fully Refundable</small></p>
+                            <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
+                        </div>
+                    </div>
                     <div ng-show="payment_obj.price != 0.00 && payment_obj.h4 == 'A/B Testing Payment'" class="col-md-6">
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">

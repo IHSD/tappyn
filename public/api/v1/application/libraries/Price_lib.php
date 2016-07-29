@@ -8,9 +8,9 @@ class Price_lib
         'launch' => 39.99,
         'subscription' => array(
             0 => 0,
-            10 => 59,
-            20 => 149,
-            30 => 319,
+            10 => 49,
+            20 => 119,
+            30 => 299,
         ),
     );
     public $user_id = 0;

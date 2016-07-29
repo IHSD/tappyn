@@ -4,9 +4,9 @@ class Subscription_lib
 {
     public $data = array(
         0 => array('contest_limit' => 0, 'name' => 'Free'),
-        10 => array('contest_limit' => 1, 'name' => 'Standard'),
-        20 => array('contest_limit' => 3, 'name' => 'Premium'),
-        30 => array('contest_limit' => 7, 'name' => 'Platinum'),
+        10 => array('contest_limit' => 100, 'name' => 'Standard'),
+        20 => array('contest_limit' => 100, 'name' => 'Premium'),
+        30 => array('contest_limit' => 100, 'name' => 'Platinum'),
     );
     public $msg = '';
 
