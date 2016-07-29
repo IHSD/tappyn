@@ -28,8 +28,14 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
+    <div ng-if="submission.test_result.impressions">
+        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;">%</span>
+        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+    </div>
+    <div ng-if="!submission.test_result.impressions">
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
     <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    </div>
     <!--<div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
         <span uib-tooltip="Impressions" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
         <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
