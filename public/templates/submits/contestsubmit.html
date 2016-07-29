@@ -29,7 +29,7 @@
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <div ng-if="submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;">%</span>
+        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
         <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="!submission.test_result.impressions">
