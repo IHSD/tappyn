@@ -3,9 +3,9 @@
 class Price_lib
 {
     public $data = array(
-        'purchase' => 49.99,
+        'purchase' => 39.99,
         'ab' => 15,
-        'launch' => 0,
+        'launch' => 39.99,
         'subscription' => array(
             0 => 0,
             10 => 59,

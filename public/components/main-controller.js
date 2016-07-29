@@ -46,11 +46,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.payment_obj.pay_for = type;
 
         if (type == 'launch') {
-            contest.no_payment = 1;
+            $scope.pay_payment();
         }
 
         if (contest.no_payment) {
-            $scope.payment_obj.price = 49.99;
+            $scope.payment_obj.price = 0;
             $scope.pay_payment('no_payment');
             return;
         }
