@@ -98,21 +98,21 @@
                         </div>
                     </li>
                     <li class='text-right' style="padding:10 10 20 !important;">
-                        <button class='btn btn-oj' type='submit'>Update Your Info</button>
+                        <button class='btn btn-oj' type='submit'>Save</button>
                     </li>
                 </ul>
             </form>
             <div class='form' ng-if='user.type == "company"'>
                 <ul class='list-style-form form-horizontal' id='sprofile'>
                     <li class='section-title text-center'>
-                        <h2>Upgrade Your Plan</h2>
+                        <h2>Current Plan</h2>
                     </li>
                     <li>
                         <div id="sprofile" ng-include src="'templates/company/subscription.html'" ng-init="subscription_type = 'profile'"></div>
                     </li>
                     <li ng-show="user.subscription.next_level > 0">
-                        <div>Would you like to
-                            <button ng-click="click_subscription('0')">cancel your subscription?</button>
+                        <div style="padding-bottom:20px;padding-left:20px;">
+                            <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription.</button>
                         </div>
                     </li>
                 </ul>

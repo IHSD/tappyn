@@ -46,8 +46,8 @@
                 <h4>We'll channel your campaign to our users who meet your target demographics. Fill out the creative direction so creators know what you're looking for.</h4>
             </div> -->
             <div ng-show='current.step == "tp-prior"'>
-                <h2>What would you like?</h2>
-                <h4>Please tell us about your ad and your audience.</h4>
+                <h2>Tell us about your campaign.</h2>
+                <h4>This will help us make sure you receive the ads that connect with the audience you're looking for.</h4>
             </div>
             <div ng-show='current.step == "detail"'>
                 <h2>Tell us more about your business.</h2>
@@ -194,7 +194,7 @@
             <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Copy Direction</label>
             <div class="col-sm-10 col-md-5">
                 <div class="form-group">
-                    <textarea class='form-control' ng-model='contest.additional_info' placeholder="Enter text that clearly describes the message or feeling you want to communicate.">
+                    <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
                     </textarea>
                 </div>
             </div>
@@ -203,7 +203,7 @@
             <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Creative</label>
             <div class="col-sm-10">
                 <div class="form-group" ng-init="contest.attachment = ''">
-                    <h4 style="font-size:14px;"><strong>Choose the photo you'd like to be paired with your ad.</strong></h4>
+                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
                     <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
                     <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                 </div>
@@ -247,7 +247,7 @@
                 </div>
                 <div class="form-group">
                     <h5><strong>Company Website</strong></h5>
-                    <input class='form-control' ng-model='contest.company_url' placeholder='Company Website' type='text' style="max-width:50%;">
+                    <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
                 </div>
             </div>
         </div>
@@ -433,7 +433,7 @@
         <h4 class='text-left' style='color:#333'>
           <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          <strong>The easiest way to grow your business.</strong>
+          <strong>You're minutes away from growing your business.</strong>
         </span>
         </h4>
             </div>
