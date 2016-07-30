@@ -45,10 +45,6 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.payment_obj.sub_level = contest.sub_level;
         $scope.payment_obj.pay_for = type;
 
-        if (type == 'launch') {
-            $scope.pay_payment();
-        }
-
         if (contest.no_payment) {
             $scope.payment_obj.price = 0;
             $scope.pay_payment('no_payment');
@@ -132,10 +128,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
                 if (res.success) {
                     $scope.set_alert(res.message, "default");
                     $scope.set_model();
-                    $scope.$broadcast('payContestDone');
                     $(form_id).find('input[type="reset"]').trigger('click');
                     $scope.set_payment_obj_default();
                     $scope.is_login();
+                    $scope.$broadcast('payContestDone');
                 } else $scope.set_alert(res.message, "default");
             } else if (res.http_status_code == 500) $scope.set_alert(res.error, "error");
             else $scope.check_code(res.http_status_code);

@@ -315,6 +315,8 @@ class Companies extends CI_Controller
                 $this->load->library('contest_lib');
                 $msg = $this->contest_lib->set_live($post['contest_id']);
                 if ($msg === true) {
+                    $msg = '[payment][launch]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for launch (origin price:' . $post['origin_price'] . ') ';
+                    $this->slack->send($msg);
                     $this->responder->message("Your Campaign Launch Successfully!")->respond();
                 } else {
                     $this->responder->fail($msg)->code(500)->respond();

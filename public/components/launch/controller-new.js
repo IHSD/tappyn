@@ -195,7 +195,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
         //else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
         else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
-        else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
+        //else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
         else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
         else $scope.set_step("detail");
     }
@@ -203,7 +203,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.submit_contest = function(contest, pay) {
         contest.paid = (pay == 'draft') ? 0 : 1;
         contest.submit_type = pay;
-        contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+        // contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
         launchFactory.submission(contest).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
@@ -318,8 +318,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.$on('payContestDone', function(event) {
         if ($scope.current.step == 'subscription' && $scope.contest.submit_type == 'subscription') {
+            $scope.set_step('preview');
             $scope.contest.submit_type = 'launch';
-            $scope.contest.no_payment = true;
+            //$scope.contest.no_payment = true;
             $scope.open_payment($scope.contest, 'launch');
         } else {
             $scope.set_step('done');
