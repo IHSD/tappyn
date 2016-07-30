@@ -211,7 +211,9 @@ class Contests extends CI_Controller
         $this->form_validation->set_rules('summary', 'Summary', 'required');
         //$this->form_validation->set_rules('attachment', 'Photo', 'required');
         //$this->form_validation->set_rules('display_type', 'Display Type', 'required');
-        $platform = $this->input->post('platform');
+        $platform       = $this->input->post('platform');
+        $use_attachment = 0;
+        $attachment_url = '';
         if ($this->input->post('photo')) {
 
             $filename = hash('sha256', uniqid());
@@ -226,6 +228,7 @@ class Contests extends CI_Controller
 
             if ($this->image->upload($thumb, $filename . '.jpg')) {
                 $attachment_url = "https://tappyn.s3.amazonaws.com/" . $filename . '.jpg';
+                $use_attachment = 1;
             } else {
                 $this->responder->fail(
                     "There was an error uploading your image."
@@ -260,7 +263,7 @@ class Contests extends CI_Controller
                 'paid'                => 0,
 
                 'tone_of_voice_box'   => $tone_of_voice_box,
-                'use_attachment'      => 1,
+                'use_attachment'      => $use_attachment,
                 'attachment'          => $attachment_url,
 
                 'location'            => $location,

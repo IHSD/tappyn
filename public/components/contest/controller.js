@@ -1,5 +1,6 @@
-tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $anchorScroll, $routeParams, $upload, $location, emotions, contestFactory, contestModel) {
+tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $anchorScroll, $routeParams, $upload, $location, emotions, contestFactory, contestModel, tappyn_var) {
     $scope.emotions = emotions;
+    $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
     contestFactory.grabContest($routeParams.id).success(function(response) {
         $scope.contest = response.data.contest;
         $scope.submissions = response.data.submissions;
@@ -15,19 +16,10 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
         $scope.form_limit = contestModel.parallel_submission($scope.contest);
         if ($scope.contest.use_attachment == 1) {
             $scope.cropper_box = true;
-        } else if ($scope.contest.platform == "instagram") {
-            $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-                aspectRatio: 1 / 1,
-                dragMode: 'move',
-                scaleable: false,
-                cropBoxResizable: false,
-                cropBoxMovable: false,
-                minCropBoxWidth: 100,
-                preview: '.img-preview'
-            });
         } else {
+            var setting = $scope.platform_image_settings[$scope.contest.platform];
             $scope.cropper = new Cropper(document.getElementById('upload_contest'), {
-                aspectRatio: 1.91 / 1,
+                aspectRatio: setting['aspect_ratio'],
                 dragMode: 'move',
                 scaleable: false,
                 cropBoxResizable: false,

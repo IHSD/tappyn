@@ -51,7 +51,7 @@
             </div>
             <div ng-show='current.step == "detail"'>
                 <h2>Tell us more about your business.</h2>
-        <h4>Fill out our brief so our partners know more about your business.</h4>
+                <h4>Fill out our brief so our partners know more about your business.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
                 <h2>How does this look?</h2>
@@ -332,13 +332,17 @@
                     <div class='row row-preview2'>
                         <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Ad Photo:</h3>
                         <div class="col-sm-9 col-xs-12">
-                            <p>
+                            <div ng-show="contest.photo">
                                 <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
                                     <div class="img-preview"><img ng-src="{{contest.photo}}"></div>
                                 </div>
+                            </div>
+                            <p ng-hide="contest.photo">
+                                by user upload
                             </p>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
@@ -405,32 +409,32 @@
                     <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
                 </div>
             </div>
-      <div class='text-left' ng-show='current.step == "preview"'>
+            <div class='text-left' ng-show='current.step == "preview"'>
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
           <strong>100% Money Back guarantee</strong>
         </span>
         </h4>
-      </div>
-      <div class='text-left' ng-show='current.step == "detail"'>
-        <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "detail"'>
+                <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
           <strong>You'll only have to do this once.</strong>
         </span>
         </h4>
-      </div>
-      <div class='text-left' ng-show='current.step == "subscription"'>
-        <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "subscription"'>
+                <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
           <strong>All packages are billed monthly, so you can cancel anytime.</strong>
         </span>
         </h4>
-      </div>
-      <div class='text-left' ng-show='current.step == "tp-prior"'>
-        <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "tp-prior"'>
+                <h4 class='text-left' style='color:#333'>
           <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
           <strong>You're minutes away from growing your business.</strong>
