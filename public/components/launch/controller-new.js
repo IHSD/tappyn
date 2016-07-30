@@ -318,8 +318,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.$on('payContestDone', function(event) {
         if ($scope.current.step == 'subscription' && $scope.contest.submit_type == 'subscription') {
+            $scope.set_step('preview');
             $scope.contest.submit_type = 'launch';
-            $scope.contest.no_payment = true;
+            //$scope.contest.no_payment = true;
             $scope.open_payment($scope.contest, 'launch');
         } else {
             $scope.set_step('done');

@@ -3,11 +3,11 @@
 class Price_lib
 {
     public $data = array(
-        'purchase' => 39.99,
-        'ab' => 15,
-        'launch' => 39.99,
+        'purchase'     => 39.99,
+        'ab'           => 15,
+        'launch'       => 39.99,
         'subscription' => array(
-            0 => 0,
+            0  => 0,
             10 => 49,
             20 => 119,
             30 => 299,
@@ -30,17 +30,17 @@ class Price_lib
     {
         $result = array();
         try {
-            $post['go_pay'] = isset($post['go_pay']) ? $post['go_pay'] : false;
+            $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;
             $post['ab_days'] = 1;
             $post['ab_aday'] = isset($post['ab_aday']) ? floatval($post['ab_aday']) : false;
             if (!isset($this->data[$post['pay_for']])) {
                 throw new Exception("Missing parameters");
             }
 
-            $fee = $this->data[$post['pay_for']];
+            $fee     = $this->data[$post['pay_for']];
             $voucher = false;
             if ($post['voucher_code']) {
-                $msg = '';
+                $msg     = '';
                 $voucher = $this->vouchers_library->fetchByCode($post['voucher_code']);
                 if (!$voucher) {
                     $msg = "We couldnt find a voucher with that code";
@@ -63,7 +63,7 @@ class Price_lib
                 if (!$contest) {
                     throw new Exception("We couldnt find that constest");
                 }
-                $status = $this->contest->get_status($contest);
+                $status          = $this->contest->get_status($contest);
                 $purchase_status = array('pending_purchase', 'pending_testing');
                 //if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
                 //throw new Exception("Constest status error");
@@ -102,10 +102,10 @@ class Price_lib
                 }
             } else if ($post['pay_for'] == 'subscription') {
                 $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
-                $diff = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
-                $price = $fee[$post['sub_level']] - $diff;
+                $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
+                $price        = $fee[$post['sub_level']] - $diff;
                 if ($price <= 0) {
-                    $price = 0;
+                    $price                = 0;
                     $result['no_payment'] = true;
                 }
             } else {
@@ -122,10 +122,10 @@ class Price_lib
 
                 if ($voucher->discount_type == 'amount') {
                     $discount = $voucher->value;
-                    $price = $price - $discount;
+                    $price    = $price - $discount;
                 } else {
                     $discount = $price * $voucher_value;
-                    $price = $price - $discount;
+                    $price    = $price - $discount;
                 }
                 if ($price < 000) {
                     $price = 00.00;
@@ -133,7 +133,7 @@ class Price_lib
                 $result['discount'] = number_format($discount, 2, '.', '');
             }
 
-            $result['price'] = number_format($price, 2, '.', '');
+            $result['price']   = number_format($price, 2, '.', '');
             $result['success'] = true;
         } catch (Exception $e) {
             $result['success'] = false;
