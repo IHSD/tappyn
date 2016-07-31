@@ -23,8 +23,18 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.reduction = 0;
     $scope.new_img = false;
 
-    // todo 把subscription放在launch
+
+     // todo 把subscription放在launch
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
+    $scope.chosen_creative = false;
+
+    $scope.choose_creative = function(type) {
+        if (type == true) {
+            $scope.chosen_creative = true;
+        } else {
+            $scope.chosen_creative = false;
+        }
+    }
 
 
     $scope.grab_profile = function() {

@@ -202,6 +202,15 @@
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
             <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Creative</label>
             <div class="col-sm-10">
+                    <div ng-class='{"package-highlight" : chosen_creative == false}' class='launch-page-btn' ng-click='choose_creative(false)'>
+
+                        <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : chosen_creative == true}' class='launch-page-btn' ng-click='choose_creative(true)'>
+
+                        <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
+                    </div>
+                    <div class="col-sm-10" ng-show="chosen_creative == true">
                 <div class="form-group" ng-init="contest.attachment = ''">
                     <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
                     <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
@@ -214,6 +223,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
