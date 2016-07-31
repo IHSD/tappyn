@@ -8,7 +8,7 @@ class Price_lib
         'launch'       => 39.99,
         'subscription' => array(
             0  => 0,
-            10 => 49,
+            10 => 39,
             20 => 119,
             30 => 299,
         ),
