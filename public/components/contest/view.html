@@ -123,7 +123,7 @@
                                 <br>
                                 <span>At least 102 pixels &#8226; 16:9 aspect ratio</span>
                             </label>
-                            <button class='btn btn-oj btn-sm pull-left btn-secondary' type='button' ng-hide="contest.photo"><a style="color: #fb5e1f;text-decoration:none;" href="https://unsplash.com/" target="_blank">Find a free for use photo on Unsplash here.</a></button>
+                            <button class='btn btn-oj btn-sm pull-left btn-secondary' type='button' ng-show='form_limit.photo || contest.use_attachment == 1'><a style="color: #fb5e1f;text-decoration:none;" href="https://unsplash.com/" target="_blank">Find a free for use photo on Unsplash here.</a></button>
 
                         </div>
                         <div ng-show='form_limit.headline' class='form-group'>
