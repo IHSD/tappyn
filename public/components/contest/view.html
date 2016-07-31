@@ -110,7 +110,7 @@
                     <form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
                             <h4 class='control-label'><strong>Image</strong></h4>
-                            <button ng-hide="contest.use_attachment == 0" class='btn btn-oj btn-sm pull-left btn-secondary' type='button'><a style="color: #fb5e1f;text-decoration:none;" href="https://unsplash.com/" target="_blank">Find a free for use photo on Unsplash here.</a></button>
+                            <button ng-show="contest.use_attachment == 1" class='btn btn-oj btn-sm pull-left btn-secondary' type='button'><a style="color: #fb5e1f;text-decoration:none;" href="https://unsplash.com/" target="_blank">Find a free for use photo on Unsplash here.</a></button>
                             <div ng-hide='!cropper_box'>
                                 <img id="upload_contest" ng-src="{{contest.attachment}}" src='public/img/placeholder.png'>
                             </div>
@@ -125,7 +125,7 @@
                                 <span>At least 102 pixels &#8226; 16:9 aspect ratio</span>
                             </label>
                             <div class="col-xs-12">
-                            
+
                         </div>
                         </div>
                         <div ng-show='form_limit.headline' class='form-group'>
