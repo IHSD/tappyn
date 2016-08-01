@@ -2,7 +2,12 @@
     <div class="payment_modal">
         <div class="modal_top text-center">
             <div class='close_circle' ng-click='set_model()'>x</div>
+            <div ng-hide="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
             <h3><strong>Checkout</strong></h3>
+        </div>
+        <div ng-show="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
+            <h3><strong>Sign Up For Plan</strong></h3>
+        </div>
             <h4>{{payment_obj.h4}}</h4>
         </div>
         <div class="modal_bot">
@@ -101,6 +106,7 @@
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
                                 <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                                <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
                                 <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
@@ -190,6 +196,7 @@
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
                                 <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                                <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
                                 <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>

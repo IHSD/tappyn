@@ -228,7 +228,7 @@
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <span class="text-left" style='font-weight:300;font-size:28;color:#333;'><strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong></span>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
+                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>-->
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
@@ -294,8 +294,20 @@
                                     <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' alt=''>
                                 </div>
                                 <h5 class='winner-name' style="font-weight:100;"> {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='winner.winner.ctr ' style="cursor:help;font-weight:100;">{{winner.winner.ctr}}%</span>
-                                <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!winner.winner.ctr ' style="cursor:help;font-weight:100;">-</span>
+                                <div ng-if="submission.test_result.impressions">
+                                    <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+                                    <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+                                </div>
+                                <div ng-if="!submission.test_result.impressions">
+                                    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='winner.winner.ctr ' style="cursor:help;font-weight:100;">{{winner.winner.ctr}}%</span>
+                                    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!winner.winner.ctr ' style="cursor:help;font-weight:100;">-</span>
+                                </div>
+                                <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
+                                    <span uib-tooltip="Impressions" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
+                                    <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
+                                    <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
+                                </div>
+
                             </div>
                             <!--<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
                                 {{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>

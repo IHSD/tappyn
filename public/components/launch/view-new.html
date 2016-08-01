@@ -59,11 +59,11 @@
             </div>
             <div ng-show='current.step == "subscription"'>
                 <h2>Please select a plan that fits.</h2>
-                <h4>Kick back and we’ll deliver fresh ads to your inbox.<br>Prices are all inclusive so there’s no later charges, commissions, or fees.</h4>
+                <h4>Different businesses have different needs. Find the plan that works for you.</h4>
             </div>
             <div ng-show='current.step == "done"'>
                 <h2>Congratulations!</h2>
-                <h4>We just received your campaign.</h4>
+                <h4>We just launched your campaign.</h4>
             </div>
             <uib-progress class='tp-progress-steps'>
                 <uib-bar value='steps["tp-prior"].fill' type='{{ current.fill >= steps["tp-prior"].fill ? "warning" : "success" }}'></uib-bar>
@@ -196,6 +196,7 @@
                 <div class="form-group">
                     <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
                     </textarea>
+                    <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
                 </div>
             </div>
         </div>
@@ -280,11 +281,13 @@
                 <div class="form-group">
                     <h4><strong>Summary of product or service</strong></h4>
                     <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count'><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                 </div>
                 <div class="form-group">
                     <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
                     <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count'><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
                 </div>
             </div>
@@ -403,8 +406,8 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
             </div>
             <div ng-show='current.step == "preview"'>
-                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Pay & Launch</button>
-                <button ng-show="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Launch Now</button>
+                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Select Plan</button>
+                <button ng-show="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $39.99 & Launch</button>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Edit Campaign</button>
             </div>

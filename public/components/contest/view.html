@@ -110,7 +110,10 @@
                     <form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
                             <h4 class='control-label'><strong>Image</strong></h4>
-                            <button ng-show="!cropper_box" class='btn btn-oj btn-sm pull-left btn-secondary' type='button'><a style="color: #fb5e1f;text-decoration:none;" href="https://unsplash.com/" target="_blank">Find a free for use photo on Unsplash here.</a></button>
+                            <div ng-show="!cropper_box">
+                                <p>Find free-to-use photos in seconds at <a style="color: #fb5e1f;" href="https://unsplash.com/" target="_blank">Unsplash</a> or <a style="color: #fb5e1f;" href="https://pixabay.com/" target="_blank">Pixabay</a>.</p>
+                                <p>Photos from other sources will be removed. <a style="color: #fb5e1f;" href="https://tappyn.com/faq" target="_blank">Learn More</a></p>
+                            </div>
                             <div ng-hide='!cropper_box'>
                                 <img id="upload_contest" ng-src="{{contest.attachment}}" src='public/img/placeholder.png'>
                             </div>
@@ -118,7 +121,7 @@
                             <label for="fileInput" style='font-size: 14px;margin-top: 20px;border: 2px dashed #ccc;background-color: white;color:#aaa;text-align:center;margin: 10px 0;padding:20px; width: 100%;' ng-click='show_cropper()' ng-show='!cropper_box'>
                                 <span style='font-weight:bold;color:#ff6c00;'>Choose from your computer</span>
                                 <br>
-                                <span>Download a free for use image on Unsplash or upload your own!</span>
+                                <span>Download a free for use image on Unsplash or Pixabay above!</span>
                                 <br>
                                 <span>JPG, PGN, BMP &#8226; 50MB file limit</span>
                                 <br>
