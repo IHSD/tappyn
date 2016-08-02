@@ -1,5 +1,5 @@
 tappyn.controller('topController', function($scope, $location, $rootScope, topFactory){
-	
+
 	$scope.view_winners = function(){
 		topFactory.grabWinners().success(function(response){
 			$scope.submissions = response.data.submissions;
@@ -9,9 +9,17 @@ tappyn.controller('topController', function($scope, $location, $rootScope, topFa
 
 	$scope.view_winners();
 
+	topFactory.grabTotals().success(function(response) {
+        if (response.http_status_code == 200) {
+            if (response.success) $scope.totals = response.data;
+            else alert(response.message);
+        } else if (response.http_status_code == 500) alert(response.error);
+        else $scope.check_code(response.http_status_code);
+    })
+
 	$scope.upvote = function(submission){
 		if(!$rootScope.user) $scope.open_register("upvote", {contest : submission.contest_id, submission : submission.id});
-		else {	
+		else {
 			topFactory.upvote(submission.contest_id,submission.id).success(function(response){
 				if(response.http_status_code == 200){
 					if(response.success){
@@ -19,8 +27,8 @@ tappyn.controller('topController', function($scope, $location, $rootScope, topFa
 						$scope.update_points(1);
 						submission.user_may_vote = false;
 						submission.votes++;
-					}	
-					else $scope.set_alert(response.message, "default");	 
+					}
+					else $scope.set_alert(response.message, "default");
 				}
 				else if(response.http_status_code == 500) $scope.set_alert(response.error, "error");
 				else $scope.check_code(response.http_status_code);
@@ -33,7 +41,7 @@ tappyn.controller('topController', function($scope, $location, $rootScope, topFa
   			method: 'share',
 		 	href: $location.protocol()+'://'+$location.host()+'/submissions/share/'+submission.id,
 		}, function(response){
-			
+
 		});
 	}
 })
