@@ -30,7 +30,11 @@
     <h5 class='winner-name' ng-if="submission.owner.first_name"> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
 
     <span class='winner-tag'>Tapped</span>
-    <h3 style='font-size:12px;'>{{totals.won}}</h3>
+    <div class="col-xs-8 col-xs-offset-2" style="font-size:12px; padding-left:25px;">
+    <span class="glyphicon glyphicon-fire" style="padding-top:5px;color:#ff5c00"></span> {{totals.won}} Tapps
+    <br>
+    <span class="glyphicon glyphicon-pencil" style="padding-top:5px;color:#ff5c00"></span> {{totals.submissions}} Ads
+    </div>
     <div ng-if="submission.test_result.impressions">
         <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
         <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
