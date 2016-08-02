@@ -6,7 +6,7 @@
                 <form class='form' ng-submit='edit(contest)'>
                     <div class='row'>
                         <div class="col-sm-6">
-                            <label ng-init='contest.min_age=18;contest.max_age=45' class='control-label'>Age</label>
+                            <label class='control-label'>Age</label>
                             <div class="form-group">
                                 <div class='pull-left'>
                                     <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
@@ -22,17 +22,17 @@
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <label ng-init='contest.gender = 0' class='ontrol-label'>Gender</label>
+                            <label class="ontrol-label">Gender</label>
                             <div class="form-group">
-                                <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0' style='padding-top: 5px;'>
-                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
-                                        <input type='radio' ng-model='contest.gender' value='0'> All Genders
+                                <div class="btn-group-sm" data-toggle="buttons" style="padding-top: 5px;">
+                                    <label class="btn" ng-click="contest.gender = 0" ng-class="{'btn-oj' : contest.gender == 0, 'btn-outliner' : contest.gender != 0}">
+                                        <input type='radio' ng-model="contest.gender" value="0"> All Genders
                                     </label>
-                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
-                                        <input type='radio' ng-model='contest.gender' value='1'> Men
+                                    <label class="btn" ng-click="contest.gender = 1" ng-class="{'btn-oj' : contest.gender == 1, 'btn-outliner' : contest.gender != 1}">
+                                        <input type="radio" ng-model="contest.gender" value="1"> Men
                                     </label>
-                                    <label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
-                                        <input type='radio' ng-model='contest.gender' value='2'> Women
+                                    <label class="btn" ng-click="contest.gender = 2" ng-class="{'btn-oj' : contest.gender == 2, 'btn-outliner' : contest.gender != 2}">
+                                        <input type="radio" ng-model="contest.gender" value="2"> Women
                                     </label>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                     </div>
                     <div class='col-xs-12 form-group'>
                         <label class='control-label'>Describe what makes you different (and better) than your competition.</label>
-                        <textarea class='form-control' row='4'ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' maxlength="250"></textarea>
+                        <textarea class='form-control' row='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' maxlength="250"></textarea>
                     </div>
                     <div class="col-xs-12" ng-if="contest.use_attachment == 1">
                         <label class='control-label'>Ad Creative</label>

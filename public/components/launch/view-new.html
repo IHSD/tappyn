@@ -169,13 +169,13 @@
                         <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
-                            <label class="btn" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+                            <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
                             </label>
-                            <label class="btn" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
                                 <input type='radio' ng-model='contest.gender' value='1'> Men
                             </label>
-                            <label class="btn" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
                                 <input type='radio' ng-model='contest.gender' value='2'> Women
                             </label>
                         </div>
@@ -192,7 +192,7 @@
         </div>
         <div class='row' style="padding-top:40px;">
             <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-            <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10 col-md-5">
                 <div class="form-group">
@@ -207,28 +207,26 @@
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
-                    <div ng-class='{"package-highlight" : chosen_creative == false}' class='launch-page-btn' ng-click='choose_creative(false)'>
-
-                        <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
-                    </div>
-                    <div ng-class='{"package-highlight" : chosen_creative == true}' class='launch-page-btn' ng-click='choose_creative(true)'>
-
-                        <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
-                    </div>
-                    <div class="col-sm-10" ng-show="chosen_creative == true">
-                <div class="form-group" ng-init="contest.attachment = ''">
-                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                    <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
-                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                <div ng-class='{"package-highlight" : chosen_creative == false}' class='launch-page-btn' ng-click='choose_creative(false)'>
+                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
                 </div>
-                <div class="row form-group" ng-show="new_img">
-                    <div class="col-sm-12 col-md-8">
-                        <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                            <img ng-show="contest.photo" id="upload_contest">
+                <div ng-class='{"package-highlight" : chosen_creative == true}' class='launch-page-btn' ng-click='choose_creative(true)'>
+                    <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
+                </div>
+                <div class="col-sm-10" ng-show="chosen_creative == true">
+                    <div class="form-group" ng-init="contest.attachment = ''">
+                        <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                        <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
+                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                    </div>
+                    <div class="row form-group" ng-show="new_img">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                <img ng-show="contest.photo" id="upload_contest">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
