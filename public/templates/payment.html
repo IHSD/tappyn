@@ -3,11 +3,11 @@
         <div class="modal_top text-center">
             <div class='close_circle' ng-click='set_model()'>x</div>
             <div ng-hide="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
-            <h3><strong>Checkout</strong></h3>
-        </div>
-        <div ng-show="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
-            <h3><strong>Sign Up For Plan</strong></h3>
-        </div>
+                <h3><strong>Checkout</strong></h3>
+            </div>
+            <div ng-show="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
+                <h3><strong>Sign Up For Plan</strong></h3>
+            </div>
             <h4>{{payment_obj.h4}}</h4>
         </div>
         <div class="modal_bot">
@@ -26,7 +26,7 @@
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
                             <li>Standard Package <span class="text-right" style="padding-left:25px;">$39.99</span></li>
-                                <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
+                            <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 85px;font-weight:bold;font-size:18px;">Total</p>
@@ -39,7 +39,7 @@
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
                             <li>Premium Package <span class="text-right" style="padding-left:25px;">$119.99</span></li>
-                                <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
+                            <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 80px;font-weight:bold;font-size:18px;">Total</p>
@@ -52,7 +52,7 @@
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
                             <li>Platinum Package <span class="text-right" style="padding-left:25px;">$299.99</span></li>
-                                <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
+                            <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 80px;font-weight:bold;font-size:18px;">Total</p>
@@ -163,7 +163,7 @@
                                         <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                                     </label>
                                     <div class='pull-right' data-toggle="buttons">
-                                        <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="voucher.visible = 1">
+                                        <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="payment_obj.voucher_visible = 1">
                                             <input type='radio' name="reg" value='1' ng-model='payment_obj.voucher_visible'>I have a voucher!
                                         </label>
                                     </div>
@@ -253,7 +253,7 @@
                                         <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                                     </label>
                                     <div class='pull-right' data-toggle="buttons">
-                                        <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="voucher.visible = 1">
+                                        <label class='btn btn-link' style='color: #ff5e00; padding: 0;' ng-click="payment_obj.voucher_visible = 1">
                                             <input type='radio' name="reg" value='1' ng-model='payment_obj.voucher_visible'>I have a voucher!
                                         </label>
                                     </div>
