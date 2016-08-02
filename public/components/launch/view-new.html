@@ -77,8 +77,8 @@
 <div class='container'>
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12">
         <div class="row">
-            <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Platform
-                <span class="glyphicon glyphicon-question-sign" style="font-size:14px;position:relative;top:-10px;"></span>
+            <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
+                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
@@ -138,8 +138,8 @@
       </div>
     </div>-->
         <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:24px;cursor:default;">Audience
-                <span class="glyphicon glyphicon-question-sign" style="font-size:14px;position:relative;top:-10px;"></span>
+            <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <form class="form-inline ng-pristine ng-valid" role="form">
@@ -191,7 +191,9 @@
             </div>
         </div>
         <div class='row' style="padding-top:40px;">
-            <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Copy Direction</label>
+            <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+            <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+            </label>
             <div class="col-sm-10 col-md-5">
                 <div class="form-group">
                     <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
@@ -201,7 +203,9 @@
             </div>
         </div>
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
-            <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Creative</label>
+            <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
+                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+            </label>
             <div class="col-sm-10">
                     <div ng-class='{"package-highlight" : chosen_creative == false}' class='launch-page-btn' ng-click='choose_creative(false)'>
 

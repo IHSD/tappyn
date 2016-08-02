@@ -485,7 +485,7 @@ class Companies extends CI_Controller
                 $post['info'] = '[payment][subscription] user ' . $user_id . ' paid ' . $post['price'] . ' amount for ' . $this->subscription_lib->msg . ' (origin price:' . $post['origin_price'] . ') ';
                 $this->slack->send($post['info']);
             }
-            $this->responder->message("update subscription success")->respond();
+            $this->responder->message("Subscription Success!")->respond();
         } else {
             $this->responder->fail($result)->code(500)->respond();
         }

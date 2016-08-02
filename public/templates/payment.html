@@ -265,7 +265,7 @@
                             </form>
                         </div>
                     </div>
-                    <div ng-if='payment_obj.price == 0.00' class='text-center'>
+                    <div ng-if='payment_obj.price == 0.00 && payment_obj.h4 != "A/B Testing Payment"' class='text-center'>
                         <!--<h4>No need for payment, this campaign is on us!</h4>-->
                         <button class='btn btn-oj col-xs-12' ng-click='pay_payment("voucher_payment")'>Continue</button>
                     </div>
