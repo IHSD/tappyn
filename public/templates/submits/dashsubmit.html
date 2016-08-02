@@ -1,5 +1,5 @@
 <div class="contest-image">
-    <img ng-src="{{submission.attachment}}">
+    <a href="/ended/{{contest.id}}"><img ng-src="{{submission.attachment}}"></a>
 </div>
 <div class="contest-company text-left">
     <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
