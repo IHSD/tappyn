@@ -2,7 +2,8 @@
 
 class Submission_library
 {
-    protected $errors = false;
+    protected $errors     = false;
+    protected $users_temp = array();
 
     public function __construct()
     {
@@ -121,5 +122,32 @@ class Submission_library
     public function update_submission($sid, $data)
     {
         return $this->db->where('id', $sid)->update('submissions', $data);
+    }
+
+    public function getUserAverage($uid)
+    {
+        if (isset($this->users_temp[$uid])) {
+            return $this->users_temp[$uid];
+        }
+        $result = array('tapps' => 0, 'ctr_average' => 0, 'ctr_sum' => 0);
+        $tapps  = $this->db->select('submission_id')->from('payouts')->where(array('user_id' => $uid))->get()->result();
+        if ($tapps) {
+            foreach ($tapps as $tap) {
+                $sub = $this->submission->get($tap->submission_id);
+                if (!$sub) {
+                    continue;
+                }
+
+                $sub->test_result = unserialize($sub->test_result);
+                $sub->test_result = is_array($sub->test_result) ? $sub->test_result : array();
+                $sub->ctr         = isset($sub->test_result['ctr']) ? $sub->test_result['ctr'] : $sub->ctr;
+                $result['tapps']++;
+                $result['ctr_sum'] += $sub->ctr;
+            }
+            $result['ctr_average'] = $result['ctr_sum'] / $result['tapps'];
+        }
+        $this->users_temp[$uid] = $result;
+        return $result;
+
     }
 }
