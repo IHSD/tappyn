@@ -322,6 +322,7 @@ class Submissions extends CI_Controller
             if (!$submission->contest) {
                 continue;
             }
+            $submission->owner_average = $this->submission_library->getUserAverage($winner->user_id);
             $submission->owner         = $this->db->select('first_name, last_name')->from('users')->where('id', $winner->user_id)->limit(1)->get()->row();
             $submission->avatar_url    = $this->db->select('avatar_url')->from('profiles')->where('id', $winner->user_id)->limit(1)->get()->row()->avatar_url;
             $submission->contest       = $this->contest->get($winner->contest_id);
