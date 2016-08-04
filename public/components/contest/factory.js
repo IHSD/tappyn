@@ -19,7 +19,7 @@ tappyn.factory('contestFactory', function($http){
 				'Content-type' : 'application/x-www-form-urlencoded'
 			},
 			'data' : $.param(submission)
-		});	
+		});
 	}
 
 	fact.chooseWinner = function(contest, id){
