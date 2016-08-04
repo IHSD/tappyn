@@ -49,7 +49,6 @@ class Submissions extends CI_Controller
                 $submission->attachment = $contest->attachment;
             }
 
-            $submission->owner_average = $this->submission_library->getUserAverage($this->ion_auth->user()->row()->id);
             $submission->votes         = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
             $submission->user_may_vote = (bool) $this->ion_auth->logged_in() ? $this->vote->mayUserVote($submission->id, $this->ion_auth->user()->row()->id) : true;
             $submission->is_winner     = (in_array($submission->id, $winners)) ? true : false;
