@@ -177,12 +177,15 @@ class Contests extends CI_Controller
         }
 
         if ($payout = $this->payout->exists(array('contest_id' => $contest_id))) {
-            $winner             = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
-            $owner              = $winner->owner;
-            $winner->first_name = $this->ion_auth->user($owner)->row()->first_name;
-            $winner->last_name  = $this->ion_auth->user($owner)->row()->last_name;
-            $winner->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
-            $contest->payout    = true;
+            $winner              = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
+            $owner               = $winner->owner;
+            $winner->first_name  = $this->ion_auth->user($owner)->row()->first_name;
+            $winner->last_name   = $this->ion_auth->user($owner)->row()->last_name;
+            $winner->votes       = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $winner->id))->fetch()->row()->count;
+            $winner->test_result = unserialize($winner->test_result);
+            $winner->test_result = is_array($winner->test_result) ? $winner->test_result : array();
+            $winner->ctr         = isset($winner->test_result['ctr']) ? $winner->test_result['ctr'] : $winner->ctr;
+            $contest->payout     = true;
             if ($contest->use_attachment == 1) {
                 $winner->attachment = $contest->attachment;
             }
