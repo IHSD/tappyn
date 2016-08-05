@@ -3320,7 +3320,7 @@ nav .dropdown-menu {
 @media (min-width:768px) {
   .payment_modal {
       max-width: 100%;
-      width: 600px;
+      width: 800px;
       border-radius: 3px;
       position: relative;
       left: 50%;

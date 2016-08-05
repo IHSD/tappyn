@@ -365,7 +365,7 @@
 </div>
 <div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
     <div class="row">
-        <div class='col-sm-8 col-sm-offset-2 text-center'>
+        <div class='col-sm-10 col-sm-offset-1 text-center'>
             <div ng-include src="'templates/company/subscription.html'" ng-init="subscription_type = 'launch'"></div>
         </div>
     </div>
@@ -408,7 +408,7 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
             </div>
             <div ng-show='current.step == "preview"'>
-                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Select Plan</button>
+                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Select Membership</button>
                 <button ng-show="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $39.99 & Launch</button>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Edit Campaign</button>
