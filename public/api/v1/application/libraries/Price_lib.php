@@ -3,10 +3,11 @@
 class Price_lib
 {
     public $data = array(
-        'purchase'     => 39.99,
-        'ab'           => 15,
-        'launch'       => 39.99,
-        'subscription' => array(
+        'pay_contest_and_subscription' => '',
+        'purchase'                     => 39.99,
+        'ab'                           => 15,
+        'launch'                       => 39.99,
+        'subscription'                 => array(
             0  => 0,
             10 => 39,
             20 => 119,
@@ -58,58 +59,71 @@ class Price_lib
                 }
             }
 
-            if ($post['pay_for'] != 'subscription' && $post['pay_for'] != 'launch') {
-                $contest = $this->contest->get($post['contest_id']);
-                if (!$contest) {
-                    throw new Exception("We couldnt find that constest");
-                }
-                $status          = $this->contest->get_status($contest);
-                $purchase_status = array('pending_purchase', 'pending_testing');
-                //if ($post['pay_for'] == 'purchase' && !in_array($status, $purchase_status)) {
-                //throw new Exception("Constest status error");
-                //}
-                //if ($post['pay_for'] == 'ab' && $status != 'pending_testing') {
-                //throw new Exception("Constest status error2");
-                //}
+            // validation
+            switch ($post['pay_for']) {
+                case 'subscription':
+                case 'launch':
+                case 'pay_contest_and_subscription':
+                    break;
 
-                $submission_id_count = count($post['submission_ids']);
-                if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
-                    throw new Exception("purchase only one submission!");
-                }
-                if (!is_array($post['submission_ids']) || !$submission_id_count) {
-                    throw new Exception("please check one at least");
-                }
-                $submissions = $this->contest->submission_ids($post['contest_id']);
-                foreach ($post['submission_ids'] as $id) {
-                    if (!in_array($id, $submissions)) {
-                        throw new Exception("submission not exist");
+                default:
+                    $contest = $this->contest->get($post['contest_id']);
+                    if (!$contest) {
+                        throw new Exception("We couldnt find that constest");
                     }
-                }
+                    $status              = $this->contest->get_status($contest);
+                    $purchase_status     = array('pending_purchase', 'pending_testing');
+                    $submission_id_count = count($post['submission_ids']);
+                    if ($post['pay_for'] == 'purchase' && $submission_id_count != 1) {
+                        throw new Exception("purchase only one submission!");
+                    }
+                    if (!is_array($post['submission_ids']) || !$submission_id_count) {
+                        throw new Exception("please check one at least");
+                    }
+                    $submissions = $this->contest->submission_ids($post['contest_id']);
+                    foreach ($post['submission_ids'] as $id) {
+                        if (!in_array($id, $submissions)) {
+                            throw new Exception("submission not exist");
+                        }
+                    }
+                    break;
             }
 
-            if ($post['pay_for'] == 'purchase') {
-                $price = $submission_id_count * $fee;
-                $price = 0;
-            } else if ($post['pay_for'] == 'ab') {
-                $free_ab = ($status == 'pending_selection') ? 0 : 15;
-                if ($free_ab == 0 && !$post['ab_aday']) {
-                    throw new Exception("Please enter a integer number!");
-                } else if ($post['ab_aday'] <= $free_ab) {
+            // price
+            $price = 0;
+            switch ($post['pay_for']) {
+                case 'purchase':
+                    $price = $submission_id_count * $fee;
                     $price = 0;
-                } else {
-                    $price = ($post['ab_aday'] * $post['ab_days']) - $free_ab;
-                    //$price = $submission_id_count * $fee;
-                }
-            } else if ($post['pay_for'] == 'subscription') {
-                $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
-                $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
-                $price        = $fee[$post['sub_level']] - $diff;
-                if ($price <= 0) {
-                    $price                = 0;
-                    $result['no_payment'] = true;
-                }
-            } else {
-                $price = $fee;
+                    break;
+
+                case 'ab':
+                    $free_ab = ($status == 'pending_selection') ? 0 : 15;
+                    if ($free_ab == 0 && !$post['ab_aday']) {
+                        throw new Exception("Please enter a integer number!");
+                    } else if ($post['ab_aday'] <= $free_ab) {
+                        $price = 0;
+                    } else {
+                        $price = ($post['ab_aday'] * $post['ab_days']) - $free_ab;
+                    }
+                    break;
+
+                case 'pay_contest_and_subscription':
+                    $price = $price + $this->data['launch'];
+                    $fee   = $this->data['subscription'];
+                case 'subscription':
+                    $subscription = $this->subscription_lib->get_by_user_id($this->user_id);
+                    $diff         = isset($subscription['now_level']) ? $fee[$subscription['now_level']] : 0;
+                    $price        = $price + $fee[$post['sub_level']] - $diff;
+                    if ($price <= 0) {
+                        $price                = 0;
+                        $result['no_payment'] = true;
+                    }
+                    break;
+
+                default:
+                    $price = $fee;
+                    break;
             }
 
             $result['origin_price'] = number_format($price, 2, '.', '');
