@@ -293,7 +293,7 @@ class Companies extends CI_Controller
             exit();
         }
 
-        if ($post['pay_for'] == 'subscription') {
+        if ($post['pay_for'] == 'subscription' || $post['pay_for'] == 'pay_contest_and_subscription') {
             $post['save_method'] = 'true';
         }
 
@@ -307,22 +307,42 @@ class Companies extends CI_Controller
         // Check if charge was succesful and handle accordingly
         if ($charge !== false) {
             $this->load->library('slack');
-            if ($post['pay_for'] == 'purchase') {
-                $this->select_winner($post);
-            } else if ($post['pay_for'] == 'ab') {
-                $this->ab($post);
-            } else if ($post['pay_for'] == 'launch') {
-                $this->load->library('contest_lib');
-                $msg = $this->contest_lib->set_live($post['contest_id']);
-                if ($msg === true) {
-                    $msg = '[payment][launch]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for launch (origin price:' . $post['origin_price'] . ') ';
-                    $this->slack->send($msg);
-                    $this->responder->message("Your Campaign Launch Successfully!")->respond();
-                } else {
-                    $this->responder->fail($msg)->code(500)->respond();
-                }
-            } else if ($post['pay_for'] == 'subscription') {
-                $this->subscription_update($post);
+            $return_msg = '';
+            switch ($post['pay_for']) {
+                case 'purchase':
+                    $this->select_winner($post);
+                    break;
+
+                case 'ab':
+                    $this->ab($post);
+                    break;
+
+                case 'pay_contest_and_subscription':
+                    $return_msg = $this->subscription_update($post, true);
+                    if ($return_msg == false) {
+                        $this->responder->respond();
+                        break;
+                    };
+                    $return_msg = $return_msg . ' And ';
+                case 'launch':
+                    $this->load->library('contest_lib');
+                    $msg = $this->contest_lib->set_live($post['contest_id']);
+                    if ($msg === true) {
+                        $msg = '[payment][launch]contest ' . $post['contest_id'] . ' paid ' . $post['price'] . ' amount for launch (origin price:' . $post['origin_price'] . ') ';
+                        $this->slack->send($msg);
+                        $this->responder->message($return_msg . "Your Campaign Launch Successfully!")->respond();
+                    } else {
+                        $this->responder->fail($msg)->code(500)->respond();
+                    }
+                    break;
+
+                case 'subscription':
+                    $this->subscription_update($post);
+                    break;
+
+                default:
+                    $this->responder->fail('Missing parameters!')->code(500)->respond();
+                    break;
             }
         }
         // An error occured, so respond as such
@@ -475,19 +495,28 @@ class Companies extends CI_Controller
         }
     }
 
-    private function subscription_update($post)
+    private function subscription_update($post, $return = false)
     {
         $this->load->library('subscription_lib');
         $user_id = $this->ion_auth->user()->row()->id;
         $result  = $this->subscription_lib->update_level($user_id, array('next_level' => $post['sub_level']));
         if ($result === true) {
+            $msg = array();
             if ($this->subscription_lib->msg) {
                 $post['info'] = '[payment][subscription] user ' . $user_id . ' paid ' . $post['price'] . ' amount for ' . $this->subscription_lib->msg . ' (origin price:' . $post['origin_price'] . ') ';
                 $this->slack->send($post['info']);
             }
-            $this->responder->message("Subscription Success!")->respond();
+            $msg = "Subscription Success!";
+            $this->responder->message($msg);
         } else {
-            $this->responder->fail($result)->code(500)->respond();
+            $this->responder->fail($result)->code(500);
+            $msg = false;
         }
+
+        if ($return == false) {
+            $this->responder->respond();
+            return '';
+        }
+        return $msg;
     }
 }

@@ -25,8 +25,14 @@
                     <div ng-show="payment_obj.h4 == 'Standard Subscription'" class="col-md-6">
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
-                            <li>Standard Package <span class="text-right" style="padding-left:25px;">$39.99</span></li>
+                            <li>Standard Package <span class="text-right" style="padding-left:28px;">$39.99</span></li>
                             <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
+                        </ul>
+                        <ul class="col-md-12" ng-if="payment_obj.pay_for == 'pay_contest_and_subscription'">
+                            <li>1 Tappyn Campaign<span class="text-right" style="padding-left:25px;"></span></li>
+  							<li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Non-recurring)</li>
+                            <li>- Copyright<span class="text-right" style="padding-left:77px;">$25.00</span></li>
+                            <li>- Testing<span class="text-right" style="padding-left:91px;">$14.99</span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 85px;font-weight:bold;font-size:18px;">Total</p>
@@ -41,6 +47,12 @@
                             <li>Premium Package <span class="text-right" style="padding-left:25px;">$119.99</span></li>
                             <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
                         </ul>
+                        <ul class="col-md-12" ng-if="payment_obj.pay_for == 'pay_contest_and_subscription'">
+                            <li>1 Tappyn Campaign<span class="text-right" style="padding-left:25px;"></span></li>
+  							<li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Non-recurring)</li>
+                            <li>- Copyright<span class="text-right" style="padding-left:77px;">$25.00</span></li>
+                            <li>- Testing<span class="text-right" style="padding-left:91px;">$14.99</span></li>
+                        </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 80px;font-weight:bold;font-size:18px;">Total</p>
                             <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
@@ -53,6 +65,12 @@
                         <ul class="col-md-12">
                             <li>Platinum Package <span class="text-right" style="padding-left:25px;">$299.99</span></li>
                             <li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Re-billable Monthly)</li>
+                        </ul>
+                        <ul class="col-md-12" ng-if="payment_obj.pay_for == 'pay_contest_and_subscription'">
+                            <li>1 Tappyn Campaign<span class="text-right" style="padding-left:25px;"></span></li>
+  							<li class="text-right inline" style="font-weight:bold;font-size: 10px;margin-top:0px;display:inline;">(Non-recurring)</li>
+                            <li>- Copyright<span class="text-right" style="padding-left:77px;">$25.00</span></li>
+                            <li>- Testing<span class="text-right" style="padding-left:91px;">$14.99</span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 80px;font-weight:bold;font-size:18px;">Total</p>

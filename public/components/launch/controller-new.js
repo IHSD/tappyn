@@ -22,9 +22,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.contest.objective = "clicks_to_website";
     $scope.reduction = 0;
     $scope.new_img = false;
+    $scope.more_action = '';
 
 
-     // todo 把subscription放在launch
+    // todo 把subscription放在launch
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
     $scope.chosen_creative = false;
 
@@ -158,7 +159,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             else {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
-                $scope.contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+                $scope.contest.photo = ($scope.cropper.getCroppedCanvas()) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
                 fbq('track', 'CompleteRegistration');
             }
         } else if (step == 'done') {
@@ -217,6 +218,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         launchFactory.submission(contest).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
+                    $scope.more_action = '';
                     contest.id = response.data.id;
                     contest.attachment_url = response.data.attachment_url;
                     if (pay == 'draft') {
@@ -226,6 +228,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         contest.no_payment = false;
                         $scope.open_payment(contest, 'launch');
                     } else if (pay == 'subscription') {
+                        $scope.more_action = { pay_for: 'pay_contest_and_subscription', contest_id: contest.id };
                         $scope.set_step('subscription');
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
@@ -327,14 +330,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     });
 
     $scope.$on('payContestDone', function(event) {
-        if ($scope.current.step == 'subscription' && $scope.contest.submit_type == 'subscription') {
-            $scope.set_step('preview');
-            $scope.contest.submit_type = 'launch';
-            //$scope.contest.no_payment = true;
-            $scope.open_payment($scope.contest, 'launch');
-        } else {
-            $scope.set_step('done');
-        }
+        $scope.set_step('done');
     });
 });
 
