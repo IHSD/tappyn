@@ -27,6 +27,16 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
                 minCropBoxWidth: 100,
                 preview: '.img-preview'
             });
+            var addthis_config = addthis_config || {};
+            addthis_config.data_track_addressbar = false;
+            addthis_config.data_track_clickback = false;
+            addthis_share = {
+                passthrough: {
+                    twitter: {
+                        via: "TheRealTappyn"
+                    }
+                }
+            }
         }
     });
 
