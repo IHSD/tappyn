@@ -226,7 +226,7 @@ $config['email_program']['ab_test']['additional_data'] = array();
  */
 $config['email_program']['pending_purchase']['template']     = 'email_templates/pending_purchase';
 $config['email_program']['pending_purchase']['from']         = 'squad@tappyn.com';
-$config['email_program']['pending_purchase']['subject']      = "pending purchased";
+$config['email_program']['pending_purchase']['subject']      = "The results of your testing are in!";
 $config['email_program']['pending_purchase']['query_string'] = array(
     'utm_source'   => 'transaction',
     'utm_medium'   => 'email',

@@ -16,26 +16,22 @@ $query_string['redirect'] = 'dashboard';
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Hi <?php echo $company->name; ?>,</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Hi <?php echo $company->name; ?>,</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We're glad to announce that your ads have finished testing!</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We hope you’re doing well :-)</p><br>
-
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>This is a friendly reminder that your campaign recently received 30 ads, and we wanted to give you a few days to review and omit any ads you wouldn’t like to be tested. You’re also welcome to input a larger testing budget if you’d like more data than $15 (included) can acquire.</p><br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We link this media spend directly back to your website or app, so it’s essentially purchased traffic to you, but with the added benefit of seeing how well the ads perform.</p><br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>After the test, you’ll be able to see how effective each ad is and select to own the copyright of your favorite one.</p><br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>If you have questions, let us know. If you’re ready, get started testing below.</p>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>The data from the results of the testing is viewable on the ads of your dashboard.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Check out all of the results, and select your favorite one to claim the copyright for that ad.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>If you'd like to select more than one, simply let us know!</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>If you have questions, please feel free to reach out. If you’re ready, check out the results of your testing below.</p>
 <br>
 <!--<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Tappyn partners who created personalized ads for your campaign have been anxiously waiting to find out if they have been chosen. If you have questions, let us know. If you’re ready, select your favorite ads
 below!</p><br>-->
 
 <p style='text-align:center'>
     <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url() . 'dashboard'; ?>">
-        A/B Test
+        Select Ads
     </a>
 <p>
 <br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>
-Please note if we don’t hear from you in 48 hours, we’ll go ahead and run the test with all the ads, so we can get your results as soon as possible. So don’t delay: select your favorite ads and keep the ball rolling!</p><br>
 <!--<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Please note that if you don’t choose at least one ad within 3 days of your campaign closing, the submission with the highest CTR will be chosen. So don’t delay: test your favorite ads now, and keep the ball rolling!</p><br>-->
 
 <!-- End Email Content -->
