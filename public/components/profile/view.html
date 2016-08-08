@@ -307,14 +307,14 @@
                             </form>
                         </div>
                     </li>
-                    <li>
-                        <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'" style="padding-bottom:20px;padding-left:20px;">
+                    <li ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
+                        <div style="padding-bottom:20px;padding-left:20px;">
                             <h4>Billing History:</h4>
                             <h5>Billing history should go here (download link)</h5>
                         </div>
                     </li>
-                    <li>
-                        <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'" style="padding-bottom:20px;padding-left:20px;">
+                    <li ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
+                        <div style="padding-bottom:20px;padding-left:20px;">
                             <p>We'll be sad to see you go, but you can</p>
                             <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription here.</button>
                         </div>
