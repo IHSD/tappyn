@@ -236,7 +236,7 @@
                                     <div class='payment-method-container'>
                                         <div class='row'>
                                             <h4 class="text-center">Your saved payment method:</h4>
-                                            <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card'>
+                                            <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments'>
                                                 <h5>
                                       <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
                                       <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
