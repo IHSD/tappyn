@@ -250,7 +250,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class='text-center' style="padding-bottom:5px;">
+                            <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'" class='text-center' style="padding-bottom:5px;">
                                 <button class='btn btn-oj' ng-click='add_new = true'>Update Payment Method</button>
                             </div>
                         <div ng-show='add_new'>
@@ -308,13 +308,13 @@
                         </div>
                     </li>
                     <li>
-                        <div style="padding-bottom:20px;padding-left:20px;">
+                        <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'" style="padding-bottom:20px;padding-left:20px;">
                             <h4>Billing History:</h4>
                             <h5>Billing history should go here (download link)</h5>
                         </div>
                     </li>
                     <li>
-                        <div style="padding-bottom:20px;padding-left:20px;">
+                        <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'" style="padding-bottom:20px;padding-left:20px;">
                             <p>We'll be sad to see you go, but you can</p>
                             <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription here.</button>
                         </div>
