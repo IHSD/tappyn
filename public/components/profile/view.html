@@ -228,11 +228,11 @@
                     </li>
                     <li>
                         <div class="col-md-6">
-                            <div ng-hide="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
+                            <div ng-hide="user.subscription.now_level > '0'">
                                 <h4 class="text-center">It looks like you don't have plan yet.</h4>
                                 <h5 class="text-center">Get Started by choosing one in the Plan section above.</h5>
                             </div>
-                            <div ng-show="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
+                            <div ng-show="user.subscription.now_level >'0'">
                                     <div class='payment-method-container'>
                                         <div class='row'>
                                             <h4 class="text-center">Your saved payment method:</h4>
