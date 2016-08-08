@@ -1,10 +1,8 @@
 <?php defined("BASEPATH") or exit('No direct script access allowed');
 
-$requirements = array('company', 'query_string');
-foreach($requirements as $req)
-{
-    if(!isset($$req))
-    {
+$requirements = array('company', 'contest', 'query_string');
+foreach ($requirements as $req) {
+    if (!isset($$req)) {
         throw new Exception("Email data missing {$req}");
     }
 }
@@ -12,9 +10,11 @@ foreach($requirements as $req)
 $query_string['redirect'] = 'dashboard';
 
 ?>
-<?php $this->load->view('email_templates/header', array('query_string', $query_string)); ?>
+<?php $this->load->view('email_templates/header', array('query_string', $query_string));?>
 
-<!-- Start Email Content -->
+<!-- Start Email Content <?php echo $contest->id; ?> -->
+
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Hi <?php echo $company->name; ?>,</p><br>
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Hi <?php echo $company->name; ?>,</p><br>
 
@@ -29,7 +29,7 @@ $query_string['redirect'] = 'dashboard';
 below!</p><br>-->
 
 <p style='text-align:center'>
-    <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'dashboard'; ?>">
+    <a style='display:inline-block;background:#FF5E00;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url() . 'dashboard'; ?>">
         A/B Test
     </a>
 <p>

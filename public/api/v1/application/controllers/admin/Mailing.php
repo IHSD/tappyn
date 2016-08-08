@@ -194,6 +194,19 @@ class Mailing extends CI_Controller
                     $this->email_data['subject'] = $subject;
                     break;
 
+                case 'pending_purchase':
+                    $contest = $this->db->select('*')->from('contests')->where('id', $job->object_id)->get();
+                    if (!$contest || $contest->num_rows() == 0) {
+                        $this->error_out($job->id, '["Invalid contest supplied"]');
+                        $continue = false;
+                        continue;
+                    }
+                    $contest                     = $contest->row();
+                    $contest->owner              = $this->db->select('*')->from('profiles')->where('id', $contest->owner)->get()->row();
+                    $this->email_data['contest'] = $contest;
+                    $this->email_data['company'] = $contest->owner;
+                    break;
+
                 default:
                     $this->error_out($job->id, '["Invalid email type ' . $job->email_type . ' supplied"]');
                     $continue = false;
@@ -225,6 +238,8 @@ class Mailing extends CI_Controller
                 $this->error_out($job->id, '["Template missing from requested location"]');
                 continue;
             }
+            //var_dump($subject, $generated_html);
+            //die();
             // Clean up before we try and send the email
             $this->email_data = array();
             /**

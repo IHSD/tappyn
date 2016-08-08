@@ -115,13 +115,13 @@ $config['email_program']['sign_up_conf']['query_string'] = array(
 $config['email_program']['sign_up_conf']['additional_data'] = array();
 
 /**
-* Contest has completed
-*
-* Winner needs to be selected
-*/
-$config['email_program']['contest_completed']['template'] = 'email_templates/contest_completed';
-$config['email_program']['contest_completed']['from'] = 'alek@tappyn.com';
-$config['email_program']['contest_completed']['subject'] = "We're just finishing up.";
+ * Contest has completed
+ *
+ * Winner needs to be selected
+ */
+$config['email_program']['contest_completed']['template']     = 'email_templates/contest_completed';
+$config['email_program']['contest_completed']['from']         = 'alek@tappyn.com';
+$config['email_program']['contest_completed']['subject']      = "We're just finishing up.";
 $config['email_program']['contest_completed']['query_string'] = array(
     'utm_source'   => 'newsletter',
     'utm_medium'   => 'email',
@@ -213,6 +213,21 @@ $config['email_program']['ab_test']['template']     = 'email_templates/ab_test';
 $config['email_program']['ab_test']['from']         = 'squad@tappyn.com';
 $config['email_program']['ab_test']['subject']      = "contest#%s paid %s amount for a/b test";
 $config['email_program']['ab_test']['query_string'] = array(
+    'utm_source'   => 'transaction',
+    'utm_medium'   => 'email',
+    'utm_campaign' => 'payment_receipt',
+);
+$config['email_program']['ab_test']['additional_data'] = array();
+
+/**
+ * Contest closing
+ *
+ * Sent 24 hours before a contest closes
+ */
+$config['email_program']['pending_purchase']['template']     = 'email_templates/pending_purchase';
+$config['email_program']['pending_purchase']['from']         = 'squad@tappyn.com';
+$config['email_program']['pending_purchase']['subject']      = "pending purchased";
+$config['email_program']['pending_purchase']['query_string'] = array(
     'utm_source'   => 'transaction',
     'utm_medium'   => 'email',
     'utm_campaign' => 'payment_receipt',
