@@ -219,11 +219,6 @@
                             </div>
 
                     </li>
-                    <li ng-show="user.subscription.next_level > 0">
-                        <div style="padding-bottom:20px;padding-left:20px;">
-                            <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription.</button>
-                        </div>
-                    </li>
                 </ul>
             </div>
             <div class='form' ng-if='user.type == "company"'>
@@ -233,11 +228,15 @@
                     </li>
                     <li>
                         <div class="col-md-6">
-                            <div>
-                                <div>
+                            <div ng-hide="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
+                                <h4 class="text-center">It looks like you don't have plan yet.</h4>
+                                <h5 class="text-center">Get Started by choosing one in the Plan section above.</h5>
+                            </div>
+                            <div ng-if="user.subscription.now_level=='30' || user.subscription.now_level=='10' || user.subscription.now_level=='30'">
                                     <div class='payment-method-container'>
                                         <div class='row'>
-                                            <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments' ng-click='select_current(payment.id)'>
+                                            <h4 class="text-center">Your saved payment method:</h4>
+                                            <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card'>
                                                 <h5>
                                       <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
                                       <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
@@ -247,13 +246,77 @@
                                     </h5>
                                                 <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
                                             </div>
-                                        </div>
+                                        </div> <!--row-->
                                     </div>
                                 </div>
+                            </div>
+                            <div class='text-center' style="padding-bottom:5px;">
+                                <button class='btn btn-oj' ng-click='add_new = true'>Update Payment Method</button>
+                            </div>
+                        <div ng-show='add_new'>
+                            <div class='text-center' ng-show='payments.length > 0'>
+                                <button class='btn btn-oj' ng-click='add_new = false' style="margin-bottom:10px;">Use a saved method</button>
+                            </div>
+                            <form class='form row' method="POST" id="payment-form-global">
+                                <div class='payment-empty-card'>
+                                    <div class="card-group">
+                                        <input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number" />
+                                    </div>
+                                    <div class="card-group">
+                                        <input class='form-control' placeholder='CVC' type="text" size="4" data-stripe="cvc" />
+                                    </div>
+                                    <div class="card-group">
+                                        <select class='form-control' data-stripe="exp-month">
+                                            <option value='01'>01</option>
+                                            <option value='02'>02</option>
+                                            <option value='03'>03</option>
+                                            <option value='04'>04</option>
+                                            <option value='05'>05</option>
+                                            <option value='06'>06</option>
+                                            <option value='07'>07</option>
+                                            <option value='08'>08</option>
+                                            <option value='09'>09</option>
+                                            <option value='10'>10</option>
+                                            <option value='11'>11</option>
+                                            <option value='12'>12</option>
+                                        </select>
+                                    </div>
+                                    <div class='card-group'>
+                                        <select class='form-control' data-stripe="exp-year">
+                                            <option value='2016'>2016</option>
+                                            <option value='2017'>2017</option>
+                                            <option value='2018'>2018</option>
+                                            <option value='2019'>2019</option>
+                                            <option value='2020'>2020</option>
+                                            <option value='2021'>2021</option>
+                                            <option value='2022'>2022</option>
+                                            <option value='2023'>2023</option>
+                                            <option value='2024'>2024</option>
+                                            <option value='2025'>2025</option>
+                                            <option value='2026'>2026</option>
+                                            <option value='2027'>2027</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <input type='hidden' data-stripe='currency' value='usd' />
+                                <div class='form-group checkbox'>
+                                    <div class='text-center'>
+                                        <button class='btn btn-secondary btn-sm'>Save</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </li>
                     <li>
                         <div style="padding-bottom:20px;padding-left:20px;">
-                            <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription.</button>
+                            <h4>Billing History:</h4>
+                            <h5>Billing history should go here (download link)</h5>
+                        </div>
+                    </li>
+                    <li>
+                        <div style="padding-bottom:20px;padding-left:20px;">
+                            <p>We'll be sad to see you go, but you can</p>
+                            <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription here.</button>
                         </div>
                     </li>
                 </ul>
