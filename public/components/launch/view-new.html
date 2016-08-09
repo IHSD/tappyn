@@ -191,12 +191,6 @@
             </div>
         </div>
         <div class='row' style="padding-top:40px;">
-            <div class="col-xs-12 col-sm-6">
-                <div ng-class='{"package-highlight" : more_options == true}' class='launch-page-btn' ng-click='more_options = !more_options'>
-                    <h4 class='text-center' style="cursor:default;">More Options</h4>
-                </div>
-            </div>
-            <div ng-show="more_options">
             <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
@@ -207,7 +201,6 @@
                     <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
                 </div>
             </div>
-        </div>
         </div>
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
             <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative

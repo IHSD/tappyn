@@ -28,20 +28,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     // todo 把subscription放在launch
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
     $scope.chosen_creative = false;
-    $scope.moren_options = false;
 
     $scope.choose_creative = function(type) {
         if (type == true) {
             $scope.chosen_creative = true;
         } else {
             $scope.chosen_creative = false;
-        }
-    }
-    $scope.more_options = function(type) {
-        if (type == true) {
-            $scope.moren_options = true;
-        } else {
-            $scope.moren_options = false;
         }
     }
 
