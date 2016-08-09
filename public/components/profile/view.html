@@ -5,7 +5,7 @@
             <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Account</a></li>
             <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Account</a></li>
             <li ng-show='user.type == "company"'><a href="#sprofile" class='scrolling'>Plan</a></li>
-            <li ng-show='user.type == "company"'><a href="#bprofile" class='scrolling'>Billing</a></li>
+            <!--<li ng-show='user.type == "company"'><a href="#bprofile" class='scrolling'>Billing</a></li>-->
         </ul>
         <div class='col-sm-12 col-md-7 list-style-form-wrap'>
             <div class='text-center alert alert-danger' ng-if='user.type == "member" && !user.is_active'>Email isn't verified <a href ng-click='resend()'>click here to resend verification email!</a></div>
@@ -221,7 +221,7 @@
                     </li>
                 </ul>
             </div>
-            <div class='form' ng-if='user.type == "company"'>
+            <!--<div class='form' ng-if='user.type == "company"'>
                 <ul class='list-style-form form-horizontal' id='bprofile'>
                     <li class='section-title'style="padding-left:10px !important;">
                         <h2>Billing</h2>
@@ -246,7 +246,7 @@
                                     </h5>
                                                 <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
                                             </div>
-                                        </div> <!--row-->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -320,7 +320,7 @@
                         </div>
                     </li>
                 </ul>
-            </div>
+            </div>-->
             <form class='form' ng-submit='update_profile(profile)' ng-if='user.type=="member"'>
                 <ul class='list-style-form form-horizontal' id='mprofile'>
                     <li class='section-title'>
