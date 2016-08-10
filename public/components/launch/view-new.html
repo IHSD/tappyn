@@ -32,13 +32,7 @@
 </div>
 <div style='background: white; margin-bottom: 40px; padding: 40px 0;'>
     <div class='container'>
-        <div class="col-xs-12 col-sm-3 col-sm-offset-9" style="border:1px solid #333;border-radius:3px;">
-    <h4 class="text-center" style="font-size:14px;">Order Summary</h4><br>
-    <p>Copy <span class="pull-right">$24.99</span></p>
-    <p>Testing <span class="pull-right">$15.00</span></p>
-    <p ng-show="chosen_creative == false">Photo <span class="pull-right">$20.00</span></p>
-    </div>
-        <div class='col-xs-12 text-left'>
+        <div class='col-xs-12 col-sm-9 text-left'>
             <!-- <div ng-show='current.step == "tp-platform"'>
                 <h2>What kind of ad would you like?</h2>
                 <h4>Let's start by formating the kind of ads you're looking for.</h4>
@@ -71,6 +65,21 @@
                 <h2>Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
             </div>
+        </div>
+            <div class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+                <h4 class="text-center" style="font-size:14px;">Campaign Order Summary</h4>
+                    <ul style="padding-right:20px;padding-left:5px;">
+                        <li style="font-size:12px;">Copy <span class="pull-right">$24.99</span></li>
+                        <li style="font-size:12px;">Testing <span class="pull-right">$15.00</span></li>
+                        <li ng-show="contest.chosen_creative == false"  style="font-size:12px";>Photo <span class="pull-right">$20.00</span></li>
+                        <hr style="margin: 5 0 5 0 !important;">
+                        <li style="font-size:12px;">Order Total:
+                            <span ng-if="contest.chosen_creative == true" class="pull-right">$39.99</span>
+                            <span ng-if="contest.chosen_creative == false" class="pull-right">$59.99</span>
+                        </li>
+                    </ul>
+            </div>
+            <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
                 <uib-bar value='steps["tp-prior"].fill' type='{{ current.fill >= steps["tp-prior"].fill ? "warning" : "success" }}'></uib-bar>
                 <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
@@ -78,6 +87,7 @@
                 <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
             </uib-progress>
         </div>
+
     </div>
 </div>
 <div class='container'>
@@ -219,7 +229,7 @@
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
+                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo (+$20)</h4>
                 </div>
                 <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
                     <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
