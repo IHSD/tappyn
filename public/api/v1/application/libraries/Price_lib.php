@@ -121,6 +121,18 @@ class Price_lib
                     }
                     break;
 
+                case 'launch':
+                    $price = $fee;
+                    if (isset($post['_contest']) && $post['_contest']) {
+                        if (
+                            (isset($post['_contest']['photo']) && !$post['_contest']['photo']) ||
+                            (isset($post['_contest']['use_attachment']) && !$post['_contest']['use_attachment'])
+                        ) {
+                            $price = $price + 20;
+                        }
+                    }
+                    break;
+
                 default:
                     $price = $fee;
                     break;

@@ -44,6 +44,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.payment_obj.voucher_code = '';
         $scope.payment_obj.sub_level = contest.sub_level;
         $scope.payment_obj.pay_for = type;
+        $scope.payment_obj._contest = contest;
 
         if (contest.no_payment) {
             $scope.payment_obj.price = 0;

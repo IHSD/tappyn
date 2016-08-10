@@ -195,30 +195,30 @@
                 <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
             </div>
             <div ng-show="showOptions">
-            <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
-            </label>
-            <div class="col-sm-10 col-md-5">
-                <div class="form-group">
-                    <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
-                    </textarea>
-                    <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
+                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                </label>
+                <div class="col-sm-10 col-md-5">
+                    <div class="form-group">
+                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
+                        </textarea>
+                        <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
             <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
-                <div ng-class='{"package-highlight" : chosen_creative == false}' class='launch-page-btn' ng-click='choose_creative(false)'>
+                <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
                     <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
                 </div>
-                <div ng-class='{"package-highlight" : chosen_creative == true}' class='launch-page-btn' ng-click='choose_creative(true)'>
+                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
                     <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
                 </div>
-                <div class="col-sm-10" ng-show="chosen_creative == true">
+                <div class="col-sm-10" ng-show="contest.chosen_creative == true">
                     <div class="form-group" ng-init="contest.attachment = ''">
                         <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
                         <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
@@ -414,7 +414,7 @@
             </div>
             <div ng-show='current.step == "preview"'>
                 <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Select Membership</button>
-                <button ng-show="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $39.99 & Launch</button>
+                <button ng-show="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $<span ng-bind="contest.photo? 39.99 : 59.99"></span> & Launch</button>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Edit Campaign</button>
             </div>
