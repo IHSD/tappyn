@@ -545,7 +545,6 @@ Author: Rashid Shafique | rmughal@gmail.com
     background: #fff;
     border-radius: 4px;
     margin: 20px 0;
-    padding-bottom: 25px;
     text-align: center;
 }
 
@@ -572,7 +571,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 }
 
 .plan .price h3 {
-    font-size: 82px;
+    font-size: 50px;
     vertical-align: top;
     line-height: 1;
 }
@@ -587,7 +586,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 
 .plan .price h4 {
     color: #aaa;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .plan .btn {
@@ -604,8 +603,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 
 .plan ul li {
     line-height: 22px;
-    margin-bottom: 5px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 200;
 }
 
