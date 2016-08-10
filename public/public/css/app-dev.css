@@ -597,7 +597,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 
 .plan ul {
     list-style-type: none;
-    padding: 10px;
+    padding: 0 10 0 10;
     margin-top: 2px;
 }
 
