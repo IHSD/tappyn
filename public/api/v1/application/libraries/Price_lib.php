@@ -63,7 +63,14 @@ class Price_lib
             switch ($post['pay_for']) {
                 case 'subscription':
                 case 'launch':
+                    break;
+
                 case 'pay_contest_and_subscription':
+                    $contest = $this->contest->get($post['contest_id']);
+                    if (!$contest) {
+                        throw new Exception("We couldnt find that constest");
+                    }
+                    $post['_contest']['use_attachment'] = $contest->use_attachment;
                     break;
 
                 default:
@@ -118,6 +125,20 @@ class Price_lib
                     if ($price <= 0) {
                         $price                = 0;
                         $result['no_payment'] = true;
+                    }
+                    if ($post['pay_for'] == 'subscription') {
+                        break;
+                    }
+
+                case 'launch':
+                    $price = ($price) ? $price : $fee;
+                    if (isset($post['_contest']) && $post['_contest']) {
+                        if (
+                            (isset($post['_contest']['photo']) && !$post['_contest']['photo']) ||
+                            (isset($post['_contest']['use_attachment']) && !$post['_contest']['use_attachment'])
+                        ) {
+                            $price = $price + 20;
+                        }
                     }
                     break;
 

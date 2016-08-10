@@ -13,7 +13,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         // $scope.current = $scope.steps['tp-platform'];
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
-    $scope.contest = {};
+    $scope.contest = { chosen_creative: false };
     $scope.company = {};
     $scope.save_method = false;
     $scope.ages = launchModel.ages;
@@ -24,19 +24,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.new_img = false;
     $scope.more_action = '';
 
-
-    // todo 把subscription放在launch
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
-    $scope.chosen_creative = false;
-
-    $scope.choose_creative = function(type) {
-        if (type == true) {
-            $scope.chosen_creative = true;
-        } else {
-            $scope.chosen_creative = false;
-        }
-    }
-
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -159,7 +147,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             else {
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
-                $scope.contest.photo = ($scope.cropper.getCroppedCanvas()) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
+                $scope.contest.photo = ($scope.cropper.getCroppedCanvas() && $scope.contest.chosen_creative) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
                 fbq('track', 'CompleteRegistration');
             }
         } else if (step == 'done') {
@@ -228,7 +216,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         contest.no_payment = false;
                         $scope.open_payment(contest, 'launch');
                     } else if (pay == 'subscription') {
-                        $scope.more_action = { pay_for: 'pay_contest_and_subscription', contest_id: contest.id };
+                        $scope.more_action = { pay_for: 'pay_contest_and_subscription', contest_id: contest.id, photo: contest.photo };
                         $scope.set_step('subscription');
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');

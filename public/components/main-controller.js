@@ -44,6 +44,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.payment_obj.voucher_code = '';
         $scope.payment_obj.sub_level = contest.sub_level;
         $scope.payment_obj.pay_for = type;
+        $scope.payment_obj._contest = contest;
 
         if (contest.no_payment) {
             $scope.payment_obj.price = 0;
@@ -614,6 +615,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.click_subscription = function(sub, more_action) {
         var payment_type = (more_action) ? more_action.pay_for : 'subscription';
         var contest_id = (more_action) ? more_action.contest_id : '';
+        var photo = (more_action) ? more_action.photo : '';
         if (sub == '10') {
             $scope.payment_obj.h4 = 'Standard Subscription';
         } else if (sub == '20') {
@@ -622,7 +624,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
             $scope.payment_obj.h4 = 'Platinum Subscription';
         }
         $scope.payment_obj.hide_voucher = true;
-        $scope.open_payment({ id: contest_id, sub_level: sub }, payment_type);
+        $scope.open_payment({ id: contest_id, sub_level: sub, photo: photo }, payment_type);
 
     }
 
