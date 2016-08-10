@@ -3382,43 +3382,13 @@ nav .dropdown-menu {
     opacity: 0;
 }
 
-@media (min-width:1200px) {
-    .overout
-    {
+
+.overout {
     position: relative;
     z-index: 10;
     top: -80px;
-    }
 }
 
-@media (min-width:1000px) and (max-width:1199px) {
-    .overout
-    {
-    position: relative;
-    z-index: 10;
-    top: 20px;
-    left: 70px;
-    }
-}
-
-@media (min-width:768px) and (max-width:999px) {
-    .overout
-    {
-    position: relative;
-    z-index: 10;
-    top: 20px;
-    left: 35px;
-    }
-}
-@media (min-width:453px) and (max-width:766px) {
-    .overout
-    {
-    position: relative;
-    z-index: 10;
-    top: 20px;
-    left: 180px;
-    }
-}
 
 hr.style-two {
     border: 0;
