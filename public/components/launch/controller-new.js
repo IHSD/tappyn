@@ -216,7 +216,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         contest.no_payment = false;
                         $scope.open_payment(contest, 'launch');
                     } else if (pay == 'subscription') {
-                        $scope.more_action = { pay_for: 'pay_contest_and_subscription', contest_id: contest.id };
+                        $scope.more_action = { pay_for: 'pay_contest_and_subscription', contest_id: contest.id, photo: contest.photo };
                         $scope.set_step('subscription');
                     } else if (pay) {
                         $scope.open_payment(contest, 'launch');
