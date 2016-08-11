@@ -8,7 +8,7 @@ class slack
     public function __construct()
     {
         // setting from https://my.slack.com/services/new/incoming-webhook
-        if (ENVIRONMENT == 'development') {
+        if (ENVIRONMENT == 'development' || ENVIRONMENT == 'testing') {
             // test channel
             $url = 'https://hooks.slack.com/services/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';
         } else {

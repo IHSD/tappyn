@@ -5,18 +5,18 @@
  * Set to FALSE to disable
  */
 $config['achievements'] = array(
-    'new_user' => 0,
-    'bronze' => 200,
-    'silver' => 500,
-    'gold' => 1000,
-    'platinum' => 2000,
+    'new_user'        => 0,
+    'bronze'          => 200,
+    'silver'          => 500,
+    'gold'            => 1000,
+    'platinum'        => 2000,
     'double_platinum' => 3500,
-    'triple_platinum' => 5000
+    'triple_platinum' => 5000,
 );
 $config['upvotes_per_contest'] = 5;
-$config['leaderboard_limit'] = 25;
+$config['leaderboard_limit']   = 25;
 /*====================================
-  Configuration for Points system
+Configuration for Points system
 ====================================*/
 
 /**
@@ -45,3 +45,4 @@ $config['points_per_winning_submission'] = 10;
  * Specified as float
  */
 $config['default_payout_per_contest'] = 20;
+$config['photo_payout_per_contest']   = 40;

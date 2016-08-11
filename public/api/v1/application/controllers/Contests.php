@@ -260,6 +260,7 @@ class Contests extends CI_Controller
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
+            $prize = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
 
             // Do some preliminary formatting
             $data = array(
@@ -285,7 +286,7 @@ class Contests extends CI_Controller
                 'emotion'             => $this->input->post('emotion'),
                 'display_type'        => $this->input->post('display_type'),
                 'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
-                'prize'               => $this->config->item('default_payout_per_contest'),
+                'prize'               => $prize,
             );
 
             $images = array();
