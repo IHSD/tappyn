@@ -3810,5 +3810,11 @@ hr.style-two {
     width: 0;
 }
 
+@media only screen and (max-width : 990px) {
+.cp-hd {
+padding-top:30px;    
+}
+}
+
 
 /*can remove once new submission layout is done*/

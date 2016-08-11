@@ -101,7 +101,8 @@
 
                         <ul class="col-md-12">
                             <li ng-hide="payment_obj.re_ab">24 Hour Testing<span class="text-right" style="padding-left:50px;">$15.00 (Included)</span></li>
-                            <li>Extra Ad Spend<span class="text-right" style="padding-left:80px;"></span></li>
+                            <li ng-hide="!payment_obj.re_ab">Extra Ad Spend<span class="text-right" style="padding-left:80px;">{{payment_obj.ab_aday | currency}}</span></li>
+                            <li ng-hide="payment_obj.re_ab">Extra Ad Spend<span class="text-right" style="padding-left:80px;">{{payment_obj.ab_aday - 15 | currency}}</span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
                             <p class="text-left inline-block" style="display: inline;padding-right: 100px;font-weight:bold;font-size:18px;">Total</p>
