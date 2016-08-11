@@ -66,7 +66,7 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
-            <div class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+            <div class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;margin-top:-30px;">
                 <h4 class="text-center" style="font-size:14px;">Campaign Order Summary</h4>
                     <ul style="padding-right:20px;padding-left:5px;">
                         <li style="font-size:12px;">Copy <span class="pull-right">$24.99</span></li>
@@ -206,30 +206,14 @@
                 </form>
             </div>
         </div>
-        <div class='row' style="padding-top:40px;">
-            <div style="padding-bottom:20px;padding-left:10px;">
-                <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
-            </div>
-            <div ng-show="showOptions">
-            <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
-            </label>
-            <div class="col-sm-10 col-md-5">
-                <div class="form-group">
-                    <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
-                    </textarea>
-                    <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
-                </div>
-            </div>
-        </div>
-        </div>
+
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
             <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo (+$20)</h4>
+                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
                 </div>
                 <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
                     <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
@@ -248,6 +232,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class='row' style="padding-top:40px;">
+                <div style="padding-bottom:20px;padding-left:10px;">
+                    <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
+                </div>
+                <div ng-show="showOptions">
+                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                </label>
+                <div class="col-sm-10 col-md-5">
+                    <div class="form-group">
+                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
+                        </textarea>
+                        <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
