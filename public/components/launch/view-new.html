@@ -214,8 +214,9 @@
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
                     <h4 class='text-center' style="cursor:default;">I'd Like A Photo</h4>
+                    <center><p class="text-center" style="font-size:12px;padding-left:35px;margin-bottom:0px;"><small>+$20.00</small></p></center>
                 </div>
-                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
+                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true' style="height:80px;">
                     <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
                 </div>
                  <div class="col-sm-10" ng-show="contest.chosen_creative == true">
