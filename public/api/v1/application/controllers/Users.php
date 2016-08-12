@@ -91,7 +91,7 @@ class Users extends CI_Controller
      */
     public function profile()
     {
-        $this->load->library('interest');
+        $this->load->library(array('interest', 'stripe/stripe_charge_library'));
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($this->ion_auth->in_group(2)) {
                 // Can the user change theyre age / gender / location?
@@ -188,6 +188,9 @@ class Users extends CI_Controller
             $profile->last_name    = $this->ion_auth->user()->row()->last_name;
             $profile->company_name = $profile->name;
             $profile->interests    = $this->interest->get_user_interests($uid);
+            if ($this->ion_auth->in_group(3)) {
+                $profile->billing = $this->stripe_charge_library->search_by_uid($uid);
+            }
             $this->responder->data(array(
                 'profile' => $profile,
             ))->respond();

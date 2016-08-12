@@ -358,9 +358,9 @@ class Companies extends CI_Controller
     {
         $post['stripe_token'] = isset($post['stripe_token']) ? $post['stripe_token'] : '';
         $post['save_method']  = isset($post['save_method']) ? $post['save_method'] : '';
-        $contest_id           = $post['contest_id'];
+        $contest_id           = ($post['contest_id']) ? ' contest ' . $post['contest_id'] : '';
         $metadata             = array();
-        $description          = 'Charge for contest ' . $contest_id . $post['pay_for'];
+        $description          = 'Charge for' . $contest_id . ' ' . $post['pay_for'];
         $token                = null;
         $customer_id          = null;
         $source_id            = null;

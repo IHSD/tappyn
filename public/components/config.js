@@ -113,6 +113,13 @@ tappyn.filter('dashDate', function() {
     };
 });
 
+tappyn.filter('billDate', function() {
+    return function(date) {
+        date = moment(date * 1000).format("LL");
+        return date;
+    };
+});
+
 tappyn.filter('capitalize', function() {
     return function(input) {
         if (input != null) {

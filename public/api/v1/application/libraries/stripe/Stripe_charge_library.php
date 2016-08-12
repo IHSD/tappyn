@@ -77,4 +77,9 @@ class stripe_charge_library
         }
         return $charge;
     }
+
+    public function search_by_uid($uid)
+    {
+        return $this->db->select('id,contest_id,amount,created,description')->from('stripe_charges')->where('customer', $uid)->order_by('id', 'DESC')->get()->result();
+    }
 }
