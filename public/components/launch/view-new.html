@@ -426,19 +426,20 @@
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
             </div>
             <div ng-show='current.step == "detail"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Create Account</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Save & Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
             </div>
             <div ng-show='current.step == "preview"'>
-                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Select Membership</button>
-                <button ng-show="user.subscription.can_launch && contest.chosen_creative == true" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $39.99 & Launch</button>
-                <button ng-show="user.subscription.can_launch && contest.chosen_creative == false" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Pay $59.99 & Launch</button>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Edit Campaign</button>
+                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Continue</button>
+                <button ng-show="user.subscription.can_launch && contest.chosen_creative == true" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
+                <button ng-show="user.subscription.can_launch && contest.chosen_creative == false" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
+                <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
             </div>
             <div ng-show='current.step == "subscription"'>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("preview")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
             </div>
             <div ng-show='current.step == "done"'>
                 <div class='col-xs-12 col-sm-6'>
