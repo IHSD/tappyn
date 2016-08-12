@@ -320,6 +320,10 @@ header nav ul li .btn:hover {
     border: 1px solid #ff5c00;
 }
 
+.btn-wj:focus {
+    color: #fff;
+}
+
 .btn-outliner {
     background: #fff;
     color: #ff5c00;
@@ -338,10 +342,12 @@ header nav ul li .btn:hover {
     box-shadow: none;
 }
 
+
 .btn:focus,
 .btn.focus {
     color: #fff;
 }
+
 
 .btn.btn-outliner:focus,
 .btn.btn-outliner.focus {
