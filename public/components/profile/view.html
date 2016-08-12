@@ -299,7 +299,7 @@
                     </li>
                     <li>
                         <label class='col-sm-4 control-label' style='text-align: left;'>Name</label>
-                        <div class="col-sm-8">
+                        <div class="col-sm-8" style="padding-bottom:10px;">
                             <div class='col-xs-6' style='padding-left:0;'>
                                 <input class='form-control' ng-model='profile.first_name' placeholder='First Name' type='text'>
                             </div>
@@ -325,7 +325,7 @@
                     </li>
                     <li>
                         <label class='col-sm-4 control-label' style='text-align: left;'>State</label>
-                        <div class='col-sm-8'>
+                        <div class='col-sm-8' style="padding-bottom:10px;">
                             <select class='form-control' ng-model='profile.state'>
                                 <option value=''>State</option>
                                 <option value='{{key}}' ng-repeat='(key, value) in states'>{{value}}</option>
@@ -334,7 +334,7 @@
                     </li>
                     <li>
                         <label class='col-sm-4 control-label' style='text-align: left;'>Interest</label>
-                        <div class='col-sm-8'>
+                        <div class='col-sm-8' style="padding-bottom:10px;">
                             <select class='form-control interest-selection-profile-view' ng-model='profile.interests' multiple="multiple">
                                 <option value='{{key}}' ng-repeat='(key, value) in industries'>{{value}}</option>
                             </select>
@@ -347,7 +347,7 @@
                             <img class='img-responsive' ng-if='profile.avatar_url' src='{{profile.avatar_url}}' style='max-width: 120px;height: auto;margin-top: 10px;'>
                         </div>
                     </li>
-                    <li class='text-right'>
+                    <li class='text-right' style="padding:10 10 10 !important;">
                         <button class='btn btn-oj' type='submit'>Update Your Info</button>
                     </li>
                 </ul>

@@ -377,7 +377,7 @@ header nav ul li .btn:hover {
 .progress.tp-progress-steps {
     overflow: visible;
     height: 6px;
-    bottom: -43px;
+    bottom: -15px;
     border-radius: 0;
     box-shadow: none;
 }
