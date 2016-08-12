@@ -266,7 +266,7 @@
                                     <tr ng-repeat="bill in profile.billing">
                                         <td ng-bind="bill.id"></td>
                                         <td ng-bind="bill.created | billDate"></td>
-                                        <td ng-bind="bill.amount"></td>
+                                        <td ng-bind="bill.amount/100 | currency"></td>
                                         <td ng-bind="bill.description"></td>
                                     </tr>
                                 </tbody>
