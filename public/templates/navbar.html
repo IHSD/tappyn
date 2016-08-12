@@ -40,7 +40,7 @@
                     </ul>
                 </li>
                 <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
-                <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
+                <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>
                 <li ng-hide='user.type == "member" && !user.is_admin' class='pull-right'><a class="btn btn-wj btn-lg hidden-xs hidden-sm" style="padding:10px 16px;display:inline;font-size:16px;font-weight:bold;padding-left:20px;padding-right:20px" href="/launch"><strong>New Campaign</strong></a></li>
             </ul>
         </nav>
@@ -59,7 +59,7 @@
                     <a href uib-dropdown-toggle> Menu <span class="caret"></span></a>
                     <ul uib-dropdown-menu role='menu'>
                         <li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
-                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>
+                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>
                         <li style='cursor:pointer'><a href="/contests">Discover</a></li>
                         <li><a href="/winners">Most Popular</a></li>
                         <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/launch">New Campaign</a></li>

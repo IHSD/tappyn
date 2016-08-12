@@ -1,11 +1,32 @@
 <div class='modal_actions col-xs-12'>
 	<div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
 		<div class='close_circle' ng-click='close_login()'>x</div><!--ng-hide='signing_in.type == "must"'-->
-		<img src="public/img/beta_logo.png" width='120' style='margin-bottom:20px;'>
+		<div class="logo" style="padding-bottom:25px;">
+								 <img src="public/img/beta_logo.png" width='120'>
+						 </div>
+            <div class='col-xs-12 text-center'>
+            <div class="btn-group hidden-xs" data-toggle="buttons" ng-init="user=1">
+                <label class='btn btn-lg' ng-class='{"btn-oj" : user == "1", "btn-default" : user != "1"}'>
+                    <input type='radio' ng-model="user" value="1" ng-click="showFB = !showFB">I'm a member
+                </label>
+                <label class='btn btn-lg' ng-class='{"btn-oj" : user == "2", "btn-default" : user != "2"}'>
+                    <input type='radio' ng-model="user" value="2" ng-click="showFB = !showFB">I'm a business
+                </label>
+            </div>
+            <div class="btn-group visible-xs" data-toggle="buttons" ng-init="user=1">
+                <label class='btn' ng-class='{"btn-oj" : user == "1", "btn-default" : user != "1"}'>
+                    <input type='radio' value="1" ng-model="user" ng-click="showFB = !showFB">I'm a member
+                </label>
+                <label class='btn' ng-class='{"btn-oj" : user == "2", "btn-default" : user != "2"}'>
+                    <input type='radio' value="2" ng-model="user" ng-click="showFB = !showFB">I'm a business
+                </label>
+            </div>
+        </div>
+
 	    <div ng-show='!forgot'>
 				<div class="col-xs-10 col-xs-offset-1">
 	        <div src="public/img/TappynLogo2.png" width='120' style='margin-bottom:5px;'>
-	            <a href ng-click='fb_login()'>
+	            <a ng-show="!showFB" href ng-click='fb_login()'>
 	                <center>
 										<img class='img-responsive' height='45px' style="border-radius: 5px; margin-bottom: 10px;max-width: 100%;" src="public/img/img-facebook.png">
 									</center>

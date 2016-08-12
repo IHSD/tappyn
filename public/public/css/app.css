@@ -3810,9 +3810,15 @@ hr.style-two {
     width: 0;
 }
 
+.btn-default:hover {
+background: #ff5c00;
+color:#fff;
+border-color:#ff5c00;
+}
+
 @media only screen and (max-width : 990px) {
 .cp-hd {
-padding-top:30px;    
+padding-top:30px;
 }
 }
 
