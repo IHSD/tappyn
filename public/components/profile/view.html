@@ -222,34 +222,6 @@
                     <li class='section-title' style="padding-left:10px !important;">
                         <h2>Billing</h2>
                     </li>
-                    <!--<li>
-                        <div class="col-md-6">
-                            <div ng-hide="user.subscription.now_level > '0'">
-                                <h4 class="text-center">It looks like you don't have plan yet.</h4>
-                                <h5 class="text-center">Get Started by choosing one in the Plan section above.</h5>
-                            </div>
-                            <div ng-show="user.subscription.now_level >'0'">
-                                <div class='payment-method-container'>
-                                    <div class='row'>
-                                        <h4 class="text-center">Your saved payment method:</h4>
-                                        <div ng-class='{"highlight_payment" : payment.id == payment_obj.passing_method}' class='col-xs-12 col-sm-4 col-sm-offset-4 payment-method-card' ng-repeat='payment in payments'>
-                                            <h5>
-                                      <img height='20' ng-if='payment.brand == "Visa"' src="public/img/visa-card.gif" />
-                                      <img height='20' ng-if='payment.brand == "MasterCard"' src="public/img/mastercard.gif" />
-                                      <img height='20' ng-if='payment.brand == "American Express"' src="public/img/american-express.gif" />
-                                      <img height='20' ng-if='payment.brand == "Discover"' src="public/img/discover-card.jpg" />
-                                      &nbsp;&nbsp;&nbsp;********{{payment.last4}}
-                                    </h5>
-                                            <span><strong>Expires &nbsp;&nbsp;{{payment.exp_month}}/{{payment.exp_year}}</strong></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div ng-show="user.subscription.now_level >'0'" class='text-center' style="padding-bottom:5px;">
-                            <button class='btn btn-oj' ng-click='add_new = true'>Update Payment Method</button>
-                        </div>
-                        </li>-->
                     <li ng-show="user.subscription.now_level >'0'">
                         <div style="padding-bottom:20px;padding-left:20px;">
                             <h4>Billing History:</h4>
