@@ -4,11 +4,22 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
         var filter = [];
         var all_contests = response.data.contests;
         if ($rootScope.user && $rootScope.user.interests && all_contests) {
-            for (var i = 0; i <= all_contests.length - 1; i++) {
-                for (var j = all_contests[i].industry.length - 1; j >= 0; j--) {
-                    if ($.inArray(all_contests[i].industry[j], $rootScope.user.interests) != -1) {
-                        filter.push(all_contests[i]);
-                        break;
+            if ($rootScope.user.show_all_contest == '1') {
+                filter = all_contests;
+            } else {
+                for (var i = 0; i <= all_contests.length - 1; i++) {
+                    for (var j = all_contests[i].industry.length - 1; j >= 0; j--) {
+                        // interests
+                        if ($.inArray(all_contests[i].industry[j], $rootScope.user.interests) != -1) {
+                            // age
+                            if ($rootScope.user.age >= all_contests[i].min_age && $rootScope.user.age <= all_contests[i].max_age) {
+                                // gender
+                                if (all_contests[i].gender == '0' || all_contests[i].gender == $rootScope.user.gender) {
+                                    filter.push(all_contests[i]);
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
             }

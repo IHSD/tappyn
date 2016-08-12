@@ -33,11 +33,12 @@ class Auth extends CI_Controller
             $this->notification->setUser($uid);
             $user = $this->ion_auth->ajax_user();
             $this->load->library('interest');
-            $profile               = $this->user->profile($uid);
-            $user['interests']     = $this->interest->get_user_interests($uid);
-            $user['age']           = $profile->age;
-            $user['gender']        = $profile->gender;
-            $user['notifications'] = $this->notification->count();
+            $profile                  = $this->user->profile($uid);
+            $user['interests']        = $this->interest->get_user_interests($uid);
+            $user['age']              = $profile->age;
+            $user['gender']           = $profile->gender;
+            $user['notifications']    = $this->notification->count();
+            $user['show_all_contest'] = $profile->show_all_contest;
             if ($user['type'] == 'company') {
                 $this->load->library('subscription_lib');
                 $profile = $this->user->profile($this->ion_auth->user()->row()->id);

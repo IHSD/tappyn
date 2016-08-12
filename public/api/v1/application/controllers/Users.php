@@ -36,7 +36,7 @@ class Users extends CI_Controller
         if ($this->input->get('type') === 'winning') {
             // Get all winnign submissions from payout table
             $payout_ids = array();
-            $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+            $payouts    = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
             if ($payouts) {
                 foreach ($payouts as $payout) {
                     $payout_ids[] = $payout->submission_id;
@@ -55,7 +55,7 @@ class Users extends CI_Controller
         } else if ($this->input->get('type') === 'in_progress') {
             $this->submission->join('contests', 'submissions.contest_id = contests.id', 'left');
             $this->submission->where(array(
-                'contests.stop_time >' => date('Y-m-d H:i:s'),
+                'contests.stop_time >'  => date('Y-m-d H:i:s'),
                 'contests.start_time <' => date('Y-m-d H:i:s'),
             ));
         }
@@ -64,12 +64,12 @@ class Users extends CI_Controller
         $submissions = $this->submission->fetch();
         if ($submissions !== false) {
             $submissions = $submissions->result();
-            $profile = $this->user->profile($this->ion_auth->user()->row()->id);
+            $profile     = $this->user->profile($this->ion_auth->user()->row()->id);
             foreach ($submissions as $submission) {
                 $submission->avatar_url = $profile->avatar_url;
-                $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
-                $submission->contest = $this->contest->get($submission->contest_id);
-                $submission->company = $this->user->profile($submission->owner)->name;
+                $submission->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+                $submission->contest    = $this->contest->get($submission->contest_id);
+                $submission->company    = $this->user->profile($submission->owner)->name;
                 if ($submission->contest->use_attachment == 1) {
                     $submission->attachment = $submission->contest->attachment;
                 }
@@ -96,7 +96,7 @@ class Users extends CI_Controller
             if ($this->ion_auth->in_group(2)) {
                 // Can the user change theyre age / gender / location?
                 $data = array();
-                $uid = $this->ion_auth->user()->row()->id;
+                $uid  = $this->ion_auth->user()->row()->id;
                 if ($this->interest->add_user_interests($uid, $this->input->post('interests')) === false) {
                     $this->responder
                         ->fail("At least three interests.")
@@ -104,6 +104,7 @@ class Users extends CI_Controller
                         ->respond();
                     return;
                 }
+                $data['show_all_contest'] = (int) $this->input->post('show_all_contest');
 
                 if ($this->user->canEditAge($uid) && $this->input->post('age')) {
                     $data['age'] = $this->input->post('age');
@@ -162,16 +163,16 @@ class Users extends CI_Controller
                 }
             } else {
                 $data = array(
-                    'logo_url' => $this->input->post('logo_url'),
-                    'mission' => $this->input->post('mission'),
-                    'extra_info' => $this->input->post('extra_info'),
-                    'name' => $this->input->post('company_name'),
-                    'company_email' => $this->input->post('company_email'),
-                    'company_url' => $this->input->post('company_url'),
+                    'logo_url'       => $this->input->post('logo_url'),
+                    'mission'        => $this->input->post('mission'),
+                    'extra_info'     => $this->input->post('extra_info'),
+                    'name'           => $this->input->post('company_name'),
+                    'company_email'  => $this->input->post('company_email'),
+                    'company_url'    => $this->input->post('company_url'),
                     'twitter_handle' => $this->input->post('twitter_handle'),
-                    'facebook_url' => $this->input->post('facebook_url'),
-                    'different' => $this->input->post('different'),
-                    'summary' => $this->input->post('summary'),
+                    'facebook_url'   => $this->input->post('facebook_url'),
+                    'different'      => $this->input->post('different'),
+                    'summary'        => $this->input->post('summary'),
                 );
 
                 if ($this->user->saveProfile($this->ion_auth->user()->row()->id, $data)) {
@@ -181,12 +182,12 @@ class Users extends CI_Controller
                 }
             }
         } else {
-            $uid = $this->ion_auth->user()->row()->id;
-            $profile = $this->user->profile($uid);
-            $profile->first_name = $this->ion_auth->user()->row()->first_name;
-            $profile->last_name = $this->ion_auth->user()->row()->last_name;
+            $uid                   = $this->ion_auth->user()->row()->id;
+            $profile               = $this->user->profile($uid);
+            $profile->first_name   = $this->ion_auth->user()->row()->first_name;
+            $profile->last_name    = $this->ion_auth->user()->row()->last_name;
             $profile->company_name = $profile->name;
-            $profile->interests = $this->interest->get_user_interests($uid);
+            $profile->interests    = $this->interest->get_user_interests($uid);
             $this->responder->data(array(
                 'profile' => $profile,
             ))->respond();
@@ -197,25 +198,25 @@ class Users extends CI_Controller
     public function stats()
     {
         $submissions = $this->submission->select('COUNT(*) as count')->where('owner', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
-        $upvotes = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
-        $payouts = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
-        $won = count($payouts);
+        $upvotes     = $this->vote->select('COUNT(*) as count')->where('user_id', $this->ion_auth->user()->row()->id)->fetch()->row()->count;
+        $payouts     = $this->payout->fetch(array('user_id' => $this->ion_auth->user()->row()->id));
+        $won         = count($payouts);
         $this->responder->data(array(
             'submissions' => $submissions,
-            'upvotes' => $upvotes,
-            'won' => $won,
+            'upvotes'     => $upvotes,
+            'won'         => $won,
         ))->respond();
     }
 
     public function upvoted()
     {
         $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->order_by('votes.created_at', 'desc')->limit(50)->fetch();
-        $subs = $submissions->result();
+        $subs        = $submissions->result();
         foreach ($subs as $submission) {
             $submission->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
-            $submission->owner = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
-            $submission->votes = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
-            $submission->contest = $this->contest->get($submission->contest_id);
+            $submission->owner      = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            $submission->contest    = $this->contest->get($submission->contest_id);
             if ($submission->contest->use_attachment == 1) {
                 $submission->attachment = $submission->contest->attachment;
             }
@@ -226,13 +227,13 @@ class Users extends CI_Controller
     public function follow($cid)
     {
         $this->db_test = $this->load->database('master', true);
-        $check = $this->db_test->select('*')->from('follows')->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->limit(1)->get()->row()->count;
+        $check         = $this->db_test->select('*')->from('follows')->where(array('follower' => $this->ion_auth->user()->row()->id, 'following' => $cid))->limit(1)->get()->row()->count;
         if ($check == 0) {
             // Attempt to follow
             if ($this->db_test->insert('follows', array(
-                'follower' => $this->ion_auth->user()->row()->id,
+                'follower'  => $this->ion_auth->user()->row()->id,
                 'following' => $cid,
-                'created' => time(),
+                'created'   => time(),
             ))) {
                 $this->responder->data()->respond();
             } else {
