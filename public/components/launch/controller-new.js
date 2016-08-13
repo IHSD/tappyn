@@ -79,7 +79,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.launch_signup = function(email, pass, name, logo, cpass) {
-        AppFact.signUp({ identity: email, password: pass, confirm_password: cpass, name: name, logo_url: logo, group_id: 3, first_validation: 99 }).success(function(response) {
+        AppFact.signUp({ identity: email, password: pass, name: name, logo_url: logo, group_id: 3, first_validation: 99 }).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $rootScope.user = response.data;
@@ -142,7 +142,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 else if (!$scope.contest.password) $scope.set_alert("A password is required", "error");
                 else if (!$scope.contest.name) $scope.set_alert("Your company name is required", "error");
                 else if (!$scope.contest.logo_url) $scope.set_alert("Your company logo is required", "error");
-                else $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url, $scope.contest.confirm_password);
+                else $scope.launch_signup($scope.contest.identity, $scope.contest.password, $scope.contest.name, $scope.contest.logo_url);
             } else if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
             else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
             else {

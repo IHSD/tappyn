@@ -46,12 +46,12 @@
                 <h4>We'll channel your campaign to our users who meet your target demographics. Fill out the creative direction so creators know what you're looking for.</h4>
             </div> -->
             <div ng-show='current.step == "tp-prior"'>
-                <h2>Tell us about your campaign.</h2>
-                <h4>This will help us make sure you receive the ads that connect with the audience you're looking for.</h4>
+                <h2>Who is your audience?</h2>
+                <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
             <div ng-show='current.step == "detail"'>
-                <h2>Tell us more about your business.</h2>
-                <h4>Fill out our brief so our partners know more about your business.</h4>
+                <h2>Your brand profile.</h2>
+                <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
                 <h2>How do these details look?</h2>
@@ -162,6 +162,33 @@
         </div>
       </div>
     </div>-->
+    <div class='row' style="padding-bottom:200px;padding-top:40px;">
+        <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
+            <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+        </label>
+        <div class="col-sm-10">
+            <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
+                <h4 class='text-center' style="cursor:default;">I'd Like A Photo <span><small>+$20.00</small></span></h4>
+
+            </div>
+            <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
+                <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
+            </div>
+             <div class="col-sm-10" ng-show="contest.chosen_creative == true">
+                <div class="form-group" ng-init="contest.attachment = ''">
+                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                    <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
+                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                </div>
+                <div class="row form-group" ng-show="new_img">
+                    <div class="col-sm-12 col-md-8">
+                        <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                            <img ng-show="contest.photo" id="upload_contest">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" style="padding-top:40px;">
             <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
@@ -215,34 +242,6 @@
                 </form>
             </div>
         </div>
-
-        <div class='row' style="padding-bottom:200px;padding-top:40px;">
-            <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
-                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
-            </label>
-            <div class="col-sm-10">
-                <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo <span><small>+$20.00</small></span></h4>
-
-                </div>
-                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
-                    <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
-                </div>
-                 <div class="col-sm-10" ng-show="contest.chosen_creative == true">
-                    <div class="form-group" ng-init="contest.attachment = ''">
-                        <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                        <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
-                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                    </div>
-                    <div class="row form-group" ng-show="new_img">
-                        <div class="col-sm-12 col-md-8">
-                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                <img ng-show="contest.photo" id="upload_contest">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class='row' style="padding-top:40px;">
                 <div style="padding-bottom:20px;padding-left:10px;">
                     <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
@@ -278,10 +277,10 @@
                     <h5><strong>Password</strong></h5>
                     <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <h5><strong>Confirm Password</strong></h5>
                     <input class='form-control' ng-model='contest.confirm_password' placeholder='Confirm Password' type='password' style="max-width:50%;">
-                </div>
+                </div>-->
                 <div class="form-group">
                     <h5><strong>Company Name</strong></h5>
                     <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
