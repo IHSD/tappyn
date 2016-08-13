@@ -102,8 +102,8 @@
                             <li class="pull-left" ng-hide="payment_obj.re_ab">Additional Testing Budget<span class="pull-right">{{payment_obj.ab_aday - 15 | currency}}</span></li>
                         </ul>
                         <div class="col-xs-12" style="padding:10px 0 20px;border-top:2px solid #e6e6e6;">
-                            <p class="pull-left inline-block" style="display: inline;font-weight:bold;font-size:18px;">Total</p>
-                            <h3 class="pull-right inline" style="display:inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
+                            <p ng-hide="payment_obj.re_ab" class="inline-block" style="display: inline;font-weight:bold;font-size:18px;">Total <span class="pull-right inline" style="display:inline;font-weight:bold;">{{payment_obj.price | currency}}</span></p>
+                            <p ng-hide="!payment_obj.re_ab" class="inline-block" style="display: inline;font-weight:bold;font-size:18px;">Total <span class="pull-right inline" style="display:inline;font-weight:bold;">{{payment_obj.ab_aday | currency}}</span></p>
                         </div>
                     </div>
                     <div class="col-md-6" ng-if='payment_obj.price != 0.00 && payment_obj.h4 == "A/B Testing Payment"' style="padding-top:30px;">
