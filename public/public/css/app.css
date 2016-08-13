@@ -3322,6 +3322,18 @@ nav .dropdown-menu {
     overflow-y: scroll;
 }
 
+.payment_modal_new {
+    max-width: 100%;
+    width: 400px;
+    border-radius: 3px;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    max-height: 90%;
+    overflow-y: scroll;
+}
+
 @media (min-width:768px) {
   .payment_modal {
       max-width: 100%;
@@ -3334,6 +3346,18 @@ nav .dropdown-menu {
       max-height: 90%;
       overflow-y: scroll;
   }
+  .payment_modal_new {
+      max-width: 100%;
+      width: 500px;
+      border-radius: 3px;
+      position: relative;
+      left: 50%;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      max-height: 90%;
+      overflow-y: scroll;
+  }
+
 }
 
 .payment-empty-card {

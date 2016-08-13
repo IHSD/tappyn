@@ -12,13 +12,13 @@ tappyn.controller('contestsController', function($scope, $rootScope, $location, 
                         // interests
                         if ($.inArray(all_contests[i].industry[j], $rootScope.user.interests) != -1) {
                             // age
-                            if ($rootScope.user.age >= all_contests[i].min_age && $rootScope.user.age <= all_contests[i].max_age) {
+                            //if ($rootScope.user.age >= all_contests[i].min_age && $rootScope.user.age <= all_contests[i].max_age) {
                                 // gender
                                 if (all_contests[i].gender == '0' || all_contests[i].gender == $rootScope.user.gender) {
                                     filter.push(all_contests[i]);
                                     break;
                                 }
-                            }
+                            //}
                         }
                     }
                 }

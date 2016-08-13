@@ -1,12 +1,9 @@
 <div class='modal_actions col-sm-12'>
-    <div class="payment_modal">
+    <div ng-class="{payment_modal_new: payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription', payment_modal: payment_obj.h4 != 'Standard Subscription' || payment_obj.h4 != 'Premium Subscription' || payment_obj.h4 != 'Platinum Subscription'}">
         <div class="modal_top text-center">
             <div class='close_circle' ng-click='set_model()'>x</div>
-            <div ng-hide="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
-                <h3><strong>Checkout</strong></h3>
-            </div>
             <div ng-show="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
-                <h3><strong>Checkout</strong></h3>
+                <h3><strong>Credit Card Details</strong></h3>
             </div>
             <h4>{{payment_obj.h4}}</h4>
         </div>
@@ -22,7 +19,7 @@
             </div>
             <div class="container-fluid">
                 <div class="row">
-                    <div ng-show="payment_obj.h4 == 'Standard Subscription'" class="col-md-6">
+                    <!--<div ng-show="payment_obj.h4 == 'Standard Subscription'" class="col-md-6">
                         <hr style="margin:0 0 5 !important">
                         <ul class="col-md-12">
                             <li>Standard Package <span class="text-right" style="padding-left:28px;">$39.99</span></li>
@@ -95,7 +92,7 @@
                             <h3 class="text-right inline" style="display: inline;font-weight:bold;">{{payment_obj.price | currency}}</h3>
                             <p style="font-size:12px;"><small>Fully Refundable</small></p>
                         </div>
-                    </div>
+                    </div>-->
                     <div ng-show="payment_obj.price != 0.00 && payment_obj.h4 == 'A/B Testing Payment'" class="col-md-6">
                         <hr style="margin:0 0 5 !important">
 
@@ -199,7 +196,7 @@
                             </form>
                         </div>
                     </div>
-                    <div class="col-md-6" ng-if='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"' style="padding-top:30px;">
+                    <div class="col-xs-12" ng-if='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"'>
                         <div ng-show='!add_new'>
                             <div ng-show='payments.length > 0'>
                                 <div class='payment-method-container'>
@@ -220,6 +217,7 @@
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
                                 <button class='btn btn-oj' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                                <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                                 <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
@@ -283,7 +281,8 @@
                                     </div>
                                 </div>
                                 <div class='text-center'>
-                                    <button class='btn btn-oj col-xs-12' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
+                                    <button class='btn btn-oj col-xs-6 col-xs-offset-3' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
+                                    <p class="col-xs-12" style="font-size:12px;padding-top:10px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
                                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                                 </div>
                             </form>

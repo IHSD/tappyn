@@ -23,7 +23,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.reduction = 0;
     $scope.new_img = false;
     $scope.more_action = '';
-    $scope.chosen_sub = '10';
+    $scope.chosen_sub = '0';
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 

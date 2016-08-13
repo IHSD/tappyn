@@ -66,25 +66,25 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
-            <div class="hidden-xs col-sm-3" style="border:1px solid #ff5e00;border-radius:3px;">
-                <h4 class="text-center" style="font-size:16px;color:#ff5e00;">Order Summary</h4>
+            <div class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+                <h4 class="text-center" style="font-size:16px;color:#333;">Order Summary</h4>
                     <ul style="padding-right:20px;padding-left:5px;">
-                        <li style="font-size:14px;color:#ff5e00;">Copy <span class="pull-right">$24.99</span></li>
-                        <li style="font-size:14px;color:#ff5e00;">Testing <span class="pull-right">$15.00</span></li>
-                        <li ng-show="contest.chosen_creative == false"  style="font-size:14px;color:#ff5e00;">Photo <span class="pull-right">$20.00</span></li>
-                        <li ng-show="chosen_sub == '10' && current.step == 'subscription'"  style="font-size:14px;color:#ff5e00;">Standard Membership <span class="pull-right">$39.99</span></li>
-                        <li ng-show="chosen_sub == '20' && current.step == 'subscription'"  style="font-size:14px;color:#ff5e00;">Premium Membership <span class="pull-right">$119.99</span></li>
-                        <li ng-show="chosen_sub == '30' && current.step == 'subscription'"  style="font-size:14px;color:#ff5e00;">Standard Membership <span class="pull-right">$299.99</span></li>
-                        <hr style="margin: 5 0 5 0 !important;border-top:1px solid #ff5e00;">
-                        <li style="font-size:16px;color:#ff5e00;">Order Total:
-                            <span ng-if="contest.chosen_creative == true && !current.step == 'subscription'" class="pull-right">$39.99</span>
-                            <span ng-if="contest.chosen_creative == false  && !current.step == 'subscription'" class="pull-right">$59.99</span>
+                        <li style="font-size:14px;color:#333;">Copy <span class="pull-right">$24.99</span></li>
+                        <li style="font-size:14px;color:#333;">Testing <span class="pull-right">$15.00</span></li>
+                        <li ng-show="contest.chosen_creative == false"  style="font-size:14px;color:#333;">Photo <span class="pull-right">$20.00</span></li>
+                        <li ng-show="chosen_sub == '10' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$39.99</span></li>
+                        <li ng-show="chosen_sub == '20' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Premium Membership <span class="pull-right">$119.99</span></li>
+                        <li ng-show="chosen_sub == '30' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$299.99</span></li>
+                        <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
+                        <li style="font-size:16px;color:#333;">Order Total:
+                            <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$39.99</span>
+                            <span ng-if="contest.chosen_creative == false  && chosen_sub == '0'" class="pull-right">$59.99</span>
                             <span ng-if="contest.chosen_creative == true && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$78.99</span>
                             <span ng-if="contest.chosen_creative == false && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$98.99</span>
                             <span ng-if="contest.chosen_creative == true && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$158.99</span>
                             <span ng-if="contest.chosen_creative == false && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$178.99</span>
                             <span ng-if="contest.chosen_creative == true && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$338.99</span>
-                            <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99.99</span>
+                            <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
                         </li>
                     </ul>
             </div>
@@ -385,7 +385,7 @@
                                 </div>
                             </div>
                             <p ng-hide="contest.photo">
-                                By user selection.
+                                Included in campaign
                             </p>
                         </div>
                     </div>
@@ -546,7 +546,7 @@
             <div ng-show='current.step == "detail"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Save & Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>
+                <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
             <div ng-show='current.step == "preview"'>
                 <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Continue</button>
