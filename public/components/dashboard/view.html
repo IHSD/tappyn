@@ -164,8 +164,8 @@
                         </div>
                     </td>-->
                     <td>
-                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
-                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
+                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
@@ -173,6 +173,8 @@
                           <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
                         </small>
+                    </a>
+                </a>
                     </td>
                     <td>{{contest.status | capUnderscore}}</td>
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
