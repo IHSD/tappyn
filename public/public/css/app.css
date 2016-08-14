@@ -3410,6 +3410,10 @@ hr.style-two {
     margin-bottom: 5px;
 }
 
+.table>tbody>tr>td {
+    padding:20px;
+}
+
 .modal_link a {
     color: #ff5e00;
     cursor: pointer;
