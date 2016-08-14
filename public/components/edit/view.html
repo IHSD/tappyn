@@ -118,29 +118,14 @@
                         This campaign has hit its cap of 30 ads, but check out other cool campaigns <a href="/contests">Here</a>. Also, don't forget to add more interests to your <a href="/profile">Profile</a> to see more campaigns!
                     </div>
                 </div>
-                <div ng-show='!user'>
-                    <div class='submish-overlay'></div>
-                    <div class='alert alert-danger text-center submish-panel'>
-                        <a href ng-click='open_login("default", "")'>Log in</a> or <a href ng-click='open_register("default", "", "2")'>sign up</a> to enter this campaign.
-                    </div>
-                </div>
+
                 <div ng-show='user && user.type=="company"'>
-                    <div class='submish-overlay'></div>
-                    <div class='alert alert-danger text-center submish-panel'>
+                    <!--<div class='alert alert-danger text-center submish-panel'>
                         You can’t create an ad for your own campaign.
-                    </div>
+                    </div>-->
                 </div>
-                <div ng-show='user && !user.is_active'>
-                    <div class='submish-overlay'></div>
-                    <div class='alert alert-danger text-center submish-panel'>
-                        Only verified members of Tappyn can submit to campaigns. Check your email to verify your account, or go to your <a href='#/profile'>profile</a> to re-send the email!
-                    </div>
-                </div>
-                <div ng-show='user && user.is_active && contest.user_has_submitted'>
-                    <div class='alert alert-success text-center'>
-                        You have already created an ad for this campaign. Check out how your ad is doing!
-                    </div>
-                </div>
+
+
                 <div class='col-xs-12'>
                     <form class='form'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
@@ -152,8 +137,8 @@
                             <label for="fileInput" style='font-size: 14px;margin-top: 20px;border: 2px dashed #ccc;background-color: white;color:#aaa;text-align:center;margin: 10px 0;padding:20px; width: 100%;' ng-click='show_cropper()' ng-show='!cropper_box'>
                                 <span style='font-weight:bold;color:#ff6c00;'>Choose from your computer</span>
                                 <br>
-                                <span>Download a free for use image on Unsplash or Pixabay above!</span>
-                                <br>
+
+
                                 <span>JPG, PGN, BMP &#8226; 50MB file limit</span>
                                 <br>
                                 <span>At least 102 pixels &#8226; 16:9 aspect ratio</span>
