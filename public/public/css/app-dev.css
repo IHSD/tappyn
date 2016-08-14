@@ -571,13 +571,13 @@ Author: Rashid Shafique | rmughal@gmail.com
 }
 
 .plan .price h3 {
-    font-size: 50px;
+    font-size: 40px;
     vertical-align: top;
     line-height: 1;
 }
 
 .plan .price h3 span {
-    font-size: 38px;
+    font-size: 28px;
     vertical-align: top;
     position: relative;
     margin: 6px 0 0 -7px;
@@ -635,7 +635,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 }
 
 .plan.recommended .btn {
-    
+
 }
 
 .subscription-div.now-level.next-level .sign-up-btn,
