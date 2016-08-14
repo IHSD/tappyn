@@ -164,17 +164,15 @@
                         </div>
                     </td>-->
                     <td>
-                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
-                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
+                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No start : Draft</span> -
                           <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
-                        </small>
-                    </a>
-                </a>
+                      </small>
                     </td>
                     <td>{{contest.status | capUnderscore}}</td>
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
@@ -188,6 +186,9 @@
                             <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing'">
                                 <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>De-select All</button>
+                            </span>
+                            <span ng-show="winner_contest.status == 'pending_selection'">
+                                <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>Request Expanded Results</button>
                             </span>
                         </div>
                     </div>
