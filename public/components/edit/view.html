@@ -120,9 +120,9 @@
                 </div>
 
                 <div ng-show='user && user.type=="company"'>
-                    <!--<div class='alert alert-danger text-center submish-panel'>
+                    <div class='alert alert-danger text-center submish-panel'>
                         You can’t create an ad for your own campaign.
-                    </div>-->
+                    </div>
                 </div>
 
 
@@ -171,9 +171,7 @@
                             <input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
                             <div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
                         </div>
-                        <div class='text-center'>
-                            <button class='btn btn-oj' style='margin-top:5px;margin-bottom:5px;' ng-click='submit_to(contest.id, submit)'>Tappyn</button>
-                        </div>
+
                     </form>
                 </div>
             </div>
@@ -241,6 +239,7 @@
                     <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
                         <div class="img-preview">
                             <img class="contest-img-preview" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
+                            <img id="upload_contest" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment != 1" src='public/img/placeholder.png'>
                         </div>
                     </div>
                 </div>
@@ -279,6 +278,49 @@
         </div>
     </div>
     <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
+    <div class='row' style='padding-bottom:10px;' id='submishes'>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-xs-12 visible-xs'>
+            <div class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
+    </div>
 
 
 
