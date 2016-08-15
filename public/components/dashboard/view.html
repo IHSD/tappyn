@@ -17,8 +17,8 @@
         </div>
     </div>
 </div>
-<div class="payment_modal">
-<div id="confirm">
+<div id="confirm" class="payment_modal">
+
   <div class="modal-body">
     Are you sure you want to select this add?
   </div>
@@ -27,7 +27,7 @@
     <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
   </div>
 </div>
-</div>
+
 <!--Start Old AB Modal-->
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_ab'">
@@ -396,7 +396,7 @@ $('#myModalnew').on('hide.bs.modal', function() {
 $('button[name="remove_levels"]').on('click', function(e){
 
     $('#confirm').modal({ backdrop: 'static', keyboard: false })
-        
+
 });
 </script>
 <script>
