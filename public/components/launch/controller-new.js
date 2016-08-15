@@ -56,8 +56,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     $scope.contest.facebook_url = $scope.profile.facebook_url;
                     $scope.contest.twitter_handle = $scope.profile.twitter_handle;
                     $scope.contest.logo_url = $scope.profile.logo_url;
-                    if (!$scope.contest.summary || !$scope.contest.different) $scope.set_step("detail");
-                    else $scope.set_step("preview");
+                    $scope.set_step("detail");
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
