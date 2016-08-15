@@ -22,6 +22,12 @@ tappyn.config(function($routeProvider, $locationProvider) {
             templateUrl: 'components/launch/view-new.html',
             controller: 'launchControllerNew'
         })
+        .when('/launch/:id', {
+            // templateUrl: 'components/launch/view.html',
+            // controller: 'launchController'
+            templateUrl: 'components/launch/view-new.html',
+            controller: 'launchControllerNew'
+        })
         .when('/profile', {
             templateUrl: 'components/profile/view.html',
             controller: 'profileController'

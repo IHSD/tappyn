@@ -1,5 +1,5 @@
-tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, launchFactory, launchModel, AppFact, emotions, tappyn_var) {
-    $scope.logged_in()
+tappyn.controller('launchControllerNew', function($scope, $location, $anchorScroll, $upload, $route, $rootScope, $routeParams, launchFactory, launchModel, AppFact, emotions, tappyn_var) {
+    $scope.logged_in();
     $scope.steps = {
             // 'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
             // 'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
@@ -26,6 +26,19 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.chosen_sub = '0';
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
+
+    if ($routeParams.id) {
+        AppFact.getContest($routeParams.id).success(function(response) {
+            if (response.http_status_code == 200) {
+                if (response.success) {
+                    $scope.contest = response.data.contest;
+                    $scope.contest.chosen_creative = ($scope.contest.use_attachment) ? true : false;
+                    console.log($scope.contest.use_attachment, $scope.contest.chosen_creative);
+                } else $scope.set_alert(response.message, "default");
+            } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
+            else $scope.check_code(response.http_status_code);
+        })
+    }
 
     $scope.grab_profile = function() {
         launchFactory.grabProfile().success(function(response) {
@@ -204,7 +217,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         contest.paid = (pay == 'draft') ? 0 : 1;
         contest.submit_type = pay;
         // contest.photo = $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg');
-        launchFactory.submission(contest).success(function(response) {
+        var function_name = (contest.id) ? 'update' : 'submission';
+        launchFactory[function_name](contest).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.more_action = '';

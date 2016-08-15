@@ -148,5 +148,14 @@ tappyn.factory("AppFact", function($http) {
             data: $.param({ submission: submission })
         })
     }
+    fact.getContest = function(id) {
+        return $http({
+            method: 'GET',
+            url: 'api/v1/contests/' + id,
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            }
+        });
+    }
     return fact;
 });

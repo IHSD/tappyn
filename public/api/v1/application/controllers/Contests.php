@@ -457,6 +457,7 @@ class Contests extends CI_Controller
 
         $platform       = $contest->platform;
         $attachment_url = $contest->attachment;
+        $use_attachment = 0;
         if ($this->input->post('photo')) {
 
             $filename = hash('sha256', uniqid());
@@ -471,6 +472,7 @@ class Contests extends CI_Controller
 
             if ($this->image->upload($thumb, $filename . '.jpg')) {
                 $attachment_url = "https://tappyn.s3.amazonaws.com/" . $filename . '.jpg';
+                $use_attachment = 1;
             } else {
                 $this->responder->fail(
                     "There was an error uploading your image."
@@ -510,6 +512,14 @@ class Contests extends CI_Controller
                 'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
             );
 
+            if ($this->contest->get_status($contest) == 'draft') {
+                $prize = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
+
+                $data['prize']          = $prize;
+                $data['platform']       = $this->input->post('platform');
+                $data['use_attachment'] = $use_attachment;
+            }
+
             $images = array();
             if ($this->input->post('additional_image_1'));
             $images[] = $this->input->post('additional_image_1');
@@ -525,7 +535,7 @@ class Contests extends CI_Controller
 
         if ($this->form_validation->run() == true && $cid) {
             $message = $update ? 'updated' : 'created';
-            $this->responder->message("Campaign successfully updated")->data(array('id' => $cid))->respond();
+            $this->responder->message("Campaign successfully updated")->data(array('id' => $id))->respond();
             $this->analytics->track(array(
                 'event_name'  => "contest_creation",
                 'object_type' => "contest",

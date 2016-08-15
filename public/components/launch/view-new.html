@@ -1,3 +1,4 @@
+{{contest}}
 <div class='wrapper'>
     <div class='modal_actions col-xs-12' ng-show='company_login'>
         <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
@@ -66,29 +67,29 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
-            <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
-                <h4 class="text-center" style="font-size:16px;color:#333;">Order Summary</h4>
-                    <ul style="padding-right:20px;padding-left:5px;">
-                        <li style="font-size:14px;color:#333;">Copy <span class="pull-right">$24.99</span></li>
-                        <li style="font-size:14px;color:#333;">Testing <span class="pull-right">$15.00</span></li>
-                        <li ng-show="contest.chosen_creative == false"  style="font-size:14px;color:#333;">Photo <span class="pull-right">$20.00</span></li>
-                        <li ng-show="chosen_sub == '10' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$39.99</span></li>
-                        <li ng-show="chosen_sub == '20' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Premium Membership <span class="pull-right">$119.99</span></li>
-                        <li ng-show="chosen_sub == '30' && current.step == 'subscription'"  style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$299.99</span></li>
-                        <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
-                        <li style="font-size:16px;color:#333;">Order Total:
-                            <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$39.99</span>
-                            <span ng-if="contest.chosen_creative == false  && chosen_sub == '0'" class="pull-right">$59.99</span>
-                            <span ng-if="contest.chosen_creative == true && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$78.99</span>
-                            <span ng-if="contest.chosen_creative == false && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$98.99</span>
-                            <span ng-if="contest.chosen_creative == true && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$158.99</span>
-                            <span ng-if="contest.chosen_creative == false && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$178.99</span>
-                            <span ng-if="contest.chosen_creative == true && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$338.99</span>
-                            <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
-                        </li>
-                    </ul>
-            </div>
-            <div class="col-xs-12">
+        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+            <h4 class="text-center" style="font-size:16px;color:#333;">Order Summary</h4>
+            <ul style="padding-right:20px;padding-left:5px;">
+                <li style="font-size:14px;color:#333;">Copy <span class="pull-right">$24.99</span></li>
+                <li style="font-size:14px;color:#333;">Testing <span class="pull-right">$15.00</span></li>
+                <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;">Photo <span class="pull-right">$20.00</span></li>
+                <li ng-show="chosen_sub == '10' && current.step == 'subscription'" style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$39.99</span></li>
+                <li ng-show="chosen_sub == '20' && current.step == 'subscription'" style="font-size:14px;color:#333;">Premium Membership <span class="pull-right">$119.99</span></li>
+                <li ng-show="chosen_sub == '30' && current.step == 'subscription'" style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$299.99</span></li>
+                <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
+                <li style="font-size:16px;color:#333;">Order Total:
+                    <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$39.99</span>
+                    <span ng-if="contest.chosen_creative == false  && chosen_sub == '0'" class="pull-right">$59.99</span>
+                    <span ng-if="contest.chosen_creative == true && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$78.99</span>
+                    <span ng-if="contest.chosen_creative == false && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$98.99</span>
+                    <span ng-if="contest.chosen_creative == true && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$158.99</span>
+                    <span ng-if="contest.chosen_creative == false && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$178.99</span>
+                    <span ng-if="contest.chosen_creative == true && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$338.99</span>
+                    <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
                 <uib-bar value='steps["tp-prior"].fill' type='{{ current.fill >= steps["tp-prior"].fill ? "warning" : "success" }}'></uib-bar>
                 <uib-bar value='steps["detail"].fill' type='{{ current.fill >= steps["detail"].fill ? "warning" : "success" }}'></uib-bar>
@@ -96,7 +97,6 @@
                 <uib-bar type='{{ current.fill >= steps["done"].fill ? "warning" : "success" }}' style='width:100%!important;'></uib-bar>
             </uib-progress>
         </div>
-
     </div>
 </div>
 <div class='container'>
@@ -162,102 +162,101 @@
         </div>
       </div>
     </div>-->
-    <div class='row' style="padding-bottom:200px;padding-top:40px;">
-        <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
-            <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
-        </label>
-        <div class="col-sm-10">
-            <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                <h4 class='text-center' style="cursor:default;">I'd Like A Photo <span><small>+$20.00</small></span></h4>
-
-            </div>
-            <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
-                <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
-            </div>
-             <div class="col-sm-10" ng-show="contest.chosen_creative == true">
-                <div class="form-group" ng-init="contest.attachment = ''">
-                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                    <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
-                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                </div>
-                <div class="row form-group" ng-show="new_img">
-                    <div class="col-sm-12 col-md-8">
-                        <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                            <img ng-show="contest.photo" id="upload_contest">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+        <div class='row' style="padding-bottom:200px;padding-top:40px;">
+            <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
-                <form class="form-inline ng-pristine ng-valid" role="form">
-                    <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
-                        <label class='text-left target-label' style="padding-top:0px;">Detailed Targeting</label>
-                        <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
-                        <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
-                            <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
-                        </select>
+                <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
+                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo <span><small>+$20.00</small></span></h4>
+                </div>
+                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
+                    <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
+                </div>
+                <div class="col-sm-10" ng-show="contest.chosen_creative == true">
+                    <div class="form-group" ng-init="contest.attachment = ''">
+                        <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                        <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
+                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                     </div>
-                    <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                        <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-xs-12 target-label' style="padding-top:0px;">Age</label>
-                        <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
-                        <div class='pull-left'>
-                            <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
-                                <option value=''>Min Age</option>
-                            </select>
-                        </div>
-                        <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
-                        <div class='pull-left'>
-                            <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
-                                <option value=''>Max Age</option>
-                            </select>
+                    <div class="row form-group" ng-show="new_img">
+                        <div class="col-sm-12 col-md-8">
+                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                <img ng-show="contest.photo" id="upload_contest">
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left:0;padding-right:0;">
-                        <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
-                        <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-                        <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
-                            <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
-                                <input type='radio' ng-model='contest.gender' value='0'> All Genders
-                            </label>
-                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
-                                <input type='radio' ng-model='contest.gender' value='1'> Men
-                            </label>
-                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
-                                <input type='radio' ng-model='contest.gender' value='2'> Women
-                            </label>
-                        </div>
-                    </div>
-                    <div class='form-group col-xs-12 col-sm-6 col-md-3'>
-                        <label class='text-left target-label' style="padding-top:1px;">Locations</label>
-                        <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
-                        <select select2 ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:100%;">
-                            <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
-                        </select>
-                    </div>
-                </form>
+                </div>
             </div>
-        </div>
+            <div class="row" style="padding-top:40px;">
+                <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                </label>
+                <div class="col-sm-10">
+                    <form class="form-inline ng-pristine ng-valid" role="form">
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
+                            <label class='text-left target-label' style="padding-top:0px;">Detailed Targeting</label>
+                            <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
+                            <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                                <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                            <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-xs-12 target-label' style="padding-top:0px;">Age</label>
+                            <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
+                            <div class='pull-left'>
+                                <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+                                    <option value=''>Min Age</option>
+                                </select>
+                            </div>
+                            <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
+                            <div class='pull-left'>
+                                <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+                                    <option value=''>Max Age</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left:0;padding-right:0;">
+                            <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
+                            <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
+                            <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
+                                <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+                                    <input type='radio' ng-model='contest.gender' value='0'> All Genders
+                                </label>
+                                <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+                                    <input type='radio' ng-model='contest.gender' value='1'> Men
+                                </label>
+                                <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+                                    <input type='radio' ng-model='contest.gender' value='2'> Women
+                                </label>
+                            </div>
+                        </div>
+                        <div class='form-group col-xs-12 col-sm-6 col-md-3'>
+                            <label class='text-left target-label' style="padding-top:1px;">Locations</label>
+                            <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
+                            <select select2 ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:100%;">
+                                <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class='row' style="padding-top:40px;">
                 <div style="padding-bottom:20px;padding-left:10px;">
                     <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
                 </div>
                 <div ng-show="showOptions">
-                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
-                </label>
-                <div class="col-sm-10 col-md-5">
-                    <div class="form-group">
-                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
-                        </textarea>
-                        <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
+                    <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+                        <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
+                    <div class="col-sm-10 col-md-5">
+                        <div class="form-group">
+                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
+                            </textarea>
+                            <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
+                        </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -666,6 +665,7 @@ li.value-list:before {
 .btn-sel:hover {
     color: #ff5c00;
 }
+
 .btn-sel:focus {
     color: #ff5c00 !important;
 }
