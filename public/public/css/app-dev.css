@@ -402,7 +402,7 @@
     display: none;
 }
 
-.checkbox-container input[type="checkbox"] + label span {
+.checkbox-container input[type="checkbox"] + label {
     font-family: 'Glyphicons Halflings';
     display: inline-block;
     width: 25px;
@@ -415,12 +415,12 @@
     color: #aaa;
 }
 
-.checkbox-container input[type="checkbox"]:hover + label span:hover {
+.checkbox-container input[type="checkbox"]:hover + label:hover {
     color: #555;
     border: 2px solid #555;
 }
 
-.checkbox-container input[type="checkbox"]:checked + label span {
+.checkbox-container input[type="checkbox"]:checked + label {
     color: #ff6c00;
     border: 2px solid #ff6c00;
 }
@@ -437,8 +437,6 @@
 }
 
 .checkbox-container input[type="checkbox"]:checked + label {
-    content: "\e013";
-    color: #ff6c00;
     border: 2px solid #ff6c00;
     height: 50px;
     width: 50px;
@@ -448,27 +446,9 @@
 .checkbox-container input[type="checkbox"]:checked + label:before {
     content: "\e013";
     color: #ff6c00;
-    border: 2px solid #ff6c00;
-    height: 50px;
-    width: 50px;
-    padding-top: 10px;
 }
 
 .checkbox-container input[type="checkbox"] + label {
-    display: inline-block;
-    width: 25px;
-    width: 50px;
-    line-height: 21px;
-    vertical-align: middle;
-    height: 50px;
-    padding-top: 10px;
-    border: 2px solid #aaa;
-    border-radius: 2px;
-    cursor: pointer;
-    color: #aaa;
-}
-
-.checkbox-container input[type="checkbox"] + label:before {
     display: inline-block;
     width: 25px;
     width: 50px;
