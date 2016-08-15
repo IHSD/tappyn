@@ -193,6 +193,11 @@
                     </td>
                     <td>{{contest.status | capUnderscore}}</td>
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                    <td>
+                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
+                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
+                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                    </td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
