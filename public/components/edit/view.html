@@ -31,6 +31,7 @@
             <div class='launch-page-box launch-preview'>
                 <form class='form' ng-submit='edit(contest)'>
                     <div class='row'>
+                        <h3 class="text-center">Edit Your Campaign Details Here</h3>
                         <div class="col-xs-12 form-group">
                             <label class='control-label'>Age</label>
                             <div class="form-group">
@@ -129,7 +130,7 @@
 
                 <div class='col-xs-12'>
                     <form class='form'>
-                        <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
+                        <div class='form-group'>
                             <h4 class='control-label'><strong>Image</strong></h4>
                             <div class='contest-image'>
                                 <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
