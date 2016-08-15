@@ -416,8 +416,8 @@
 }
 
 .checkbox-container input[type="checkbox"]:hover + label:hover {
-    color: #555;
-    border: 2px solid #555;
+    color: #ff5e00;
+    border: 2px solid #ff5e00;
 }
 
 .checkbox-container input[type="checkbox"]:checked + label {
@@ -446,6 +446,7 @@
 .checkbox-container input[type="checkbox"]:checked + label:before {
     content: "\e013";
     color: #ff6c00;
+    font-size:34px;
 }
 
 .checkbox-container input[type="checkbox"] + label {
