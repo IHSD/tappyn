@@ -55,20 +55,12 @@
         </div>
         <div class='col-md-4 col-xs-12'>
             <div class='launch-page-box'>
-                <div ng-show='(contest.submission_count >= contest.submission_limit) &&  !contest.user_has_submitted'>
-                    <div class='alert alert-success text-center'>
-                        This campaign has hit its cap of 30 ads, but check out other cool campaigns <a href="/contests">Here</a>. Also, don't forget to add more interests to your <a href="/profile">Profile</a> to see more campaigns!
-                    </div>
-                </div>
-
                 <div ng-show='user && user.type=="company"'>
                     <div class='submish-overlay'></div>
                     <div class='alert alert-danger text-center submish-panel'>
                         You can’t create an ad for your own campaign.
                     </div>
                 </div>
-
-
                 <div class='col-xs-12'>
                     <form class='form'>
                         <div class='form-group'>
@@ -216,52 +208,6 @@
         </div>
     </div>
     <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
-    <div class='row' style='padding-bottom:10px;' id='submishes'>
-        <div class='col-md-3 visible-md visible-lg'>
-            <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-md-3 visible-md visible-lg'>
-            <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-md-3 visible-md visible-lg'>
-            <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-md-3 visible-md visible-lg'>
-            <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-sm-4 visible-sm'>
-            <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-sm-4 visible-sm'>
-            <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-sm-4 visible-sm'>
-            <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <div class='col-xs-12 visible-xs'>
-            <div class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-            </div>
-        </div>
-        <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
-    </div>
-
-
-
 </div>
 </div>
 <script type="text/javascript">

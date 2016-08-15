@@ -8,7 +8,7 @@
 <div ng-show="submission.headline">
     <div ng-hide="submission.headline_editor">
         <h3 style="display:inline;">{{submission.headline}}</h3>
-        <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ccc;"></span></a>
+        <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ff5e00;"></span></a>
     </div>
     <div ng-show="submission.headline_editor">
         <input class='form-control' ng-model='submission.headline_temp' type='text'>
@@ -19,7 +19,7 @@
 <div ng-show="submission.link_explanation">
     <div ng-hide="submission.link_editor">
         <h4 style="display:inline;">{{submission.link_explanation}}<br></h4>
-            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_link_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ccc;"></span></a>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_link_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ff5e00;"></span></a>
     </div>
     <div ng-show="submission.link_editor">
         <input class='form-control' ng-model='submission.link_temp' type='text'>
@@ -30,7 +30,7 @@
 <div ng-show="submission.text">
     <div ng-hide="submission.text_editor">
         <h4 style="display:inline;">{{submission.text}}</h4>
-            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_text_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ccc;"></span></a>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_text_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #ff5e00;"></span></a>
     </div>
     <div ng-show="submission.text_editor">
         <input class='form-control' ng-model='submission.text_temp' type='text'>
@@ -49,12 +49,12 @@
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <!--<span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>-->
     <div ng-if="submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+        <span data-toggle="modal" href="#myModalcompany" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+        <span data-toggle="modal" href="#myModalcompany" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="!submission.test_result.impressions">
-    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-    <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
         <span uib-tooltip="Views" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
@@ -66,6 +66,6 @@
     <div class="checkbox-container">
         <input ng-if="winner_contest.status == 'pending_testing'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="true">
         <input ng-if="winner_contest.status == 'pending_selection'" type="checkbox" class="ser1" name="name2{{submission.id}}" value="{{submission.id}}" id="select-contest2-{{submission.id}}" ng-checked="false">
-        <label for="select-contest2-{{submission.id}}"><span class="glyphicon glyphicon-ok" style="font-size:40px;"></span></label>
+        <label for="select-contest2-{{submission.id}}"><span ng-class="{'glyphicon glyphicon-ok': ng-checked='true'}" style="font-size:40px;"></span></label>
     </div>
 </div>

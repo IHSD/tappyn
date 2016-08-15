@@ -491,7 +491,7 @@ class Companies extends CI_Controller
             $this->responder->fail("An unknown error occured ab test")->code(500)->respond();
         } else {
             $this->mailer->queue('alek@tappyn.com', $this->ion_auth->user()->row()->id, 'ab_test', 'contest', $post['contest_id']);
-            $this->responder->message("A/B Test have been set!")->respond();
+            $this->responder->message("Your ad testing has now started!")->respond();
         }
     }
 
