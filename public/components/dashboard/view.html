@@ -17,15 +17,21 @@
         </div>
     </div>
 </div>
-<div id="confirm" class="payment_modal">
-
-  <div class="modal-body">
-    Are you sure you want to select this add?
+<div class="payment" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
+        </div>
+  <div class="modal-body text-center">
+    <h4>Are you sure you want to select this ad?</h4>
   </div>
   <div class="modal-footer">
-    <button type="button"ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
-    <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+    <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
   </div>
+</div>
+</div>
 </div>
 
 <!--Start Old AB Modal-->
@@ -299,7 +305,7 @@
                             </span>
 
                             <!--<button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
-                            <button class='btn btn-oj btn-lg pull-right' name="remove_levels" style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' data-toggle="modal" href="#myModalconfirm" style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_re_ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                             <!--New Payment buttons
@@ -393,11 +399,13 @@ $('#myModalnew').on('hide.bs.modal', function() {
 })
 </script>
 <script>
-$('button[name="remove_levels"]').on('click', function(e){
+$('#myModalconfirm').on('show.bs.modal', function() {
+    $('.container').addClass('blur');
+})
 
-    $('#confirm').modal({ backdrop: 'static', keyboard: false })
-
-});
+$('#myModalconfirm').on('hide.bs.modal', function() {
+    $('.container').removeClass('blur');
+})
 </script>
 <script>
 $('#myModalcompany').on('show.bs.modal', function() {
