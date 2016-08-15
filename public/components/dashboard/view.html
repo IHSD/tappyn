@@ -250,77 +250,65 @@
                 <div class="container">
                     <div class='row'>
                       <div ng-show="winner_contest.status == 'testing'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results or <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>email</a> us with any questions.</span></strong>
-                            </span>
-                        </h4>
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
                           <button class='btn btn-oj btn-lg pull-right' type='button' href='/edit/{{winner_contest.id}}'>Edit Campaign</button>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Start receiving ads by launching your campaign.</strong>
-                            </span>
-
-                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')" style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/launch/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
-                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
-                        </h4>
+                            <button  ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' type='button' ng-click="open_payment(winner_contest,'launch')">Launch Now <span class="glyphicon glyphicon-flash"></span></button>
+                            <button class='btn btn-oj btn-secondary btn-lg pull-right' type='button' href='/launch/{{winner_contest.id}}'>Edit Campaign</button>
                         </div>
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Your campaign is completed.</strong>
-                            </span>
-                            </h4>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333;display:inline;'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:15px;'>
-                                <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>
-                            </span>
-                            <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
-                            <!--<button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right'  ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
-                            <!--New Test Buttons
-                            <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
-                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Skip To Purchase <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                          -->
-                      </h4>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Please select your favorite ad, and we'll transfer you the copyright.<br><span style="font-size:18px;">If you'd like to select more than one, please contact us <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.</span></strong>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
+                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
+                        </div>
+                        <div class='text-left'  ng-show="winner_contest.status == 'draft'">
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                              <strong>Start receiving ads by launching your campaign.</strong>
                             </span>
-
-                            <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
-                            <!--<button class='btn btn-oj btn-lg pull-right' data-toggle="modal" href="#myModalconfirm" style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
-                            <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
-                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_re_ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
-                            <!--New Payment buttons
-                            <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Purchase $
-                                <label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label>
-                                </span>
-                            </button>
-                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
-                          -->
-                      </h4>
+                          </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
-                                  <h4 class='text-left' style='color:#333'>
-                          <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
                               <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
-                          </span>
+                            </span>
                           </h4>
-                              </div>
+                        </div>
+                        <div class='text-left' ng-show="winner_contest.status == 'pending_testing'">
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                              <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>
+                            </span>
+                          </h4>
+                        </div>
+                        <div class='text-left' ng-show="winner_contest.status == 'testing'">
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                              <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results or <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>email</a> us with any questions.</span></strong>
+                            </span>
+                          </h4>
+                        </div>
+                        <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                              <strong>Please select your favorite ad, and we'll transfer you the copyright.<br><span style="font-size:18px;">If you'd like to select more than one, please contact us <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.</span></strong>
+                            </span>
+                          </h4>
+                        </div>
+                        <div class='text-left' ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
+                          <h4 class='text-left' style='color:#333'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                              <strong>Your campaign is completed.</strong>
+                            </span>
+                          </h4>
+                        </div>
 
                     </div>
                 </div>
