@@ -252,11 +252,11 @@
                       <div ng-show="winner_contest.status == 'testing'">
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
-                          <button class='btn btn-oj btn-lg pull-right' type='button' href='/edit/{{winner_contest.id}}'>Edit Campaign</button>
+                          <button class='btn btn-oj btn-lg pull-right' type='button' href='/edit/{{contest.id}}'>Edit Campaign</button>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
                             <button  ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' type='button' ng-click="open_payment(winner_contest,'launch')">Launch Now <span class="glyphicon glyphicon-flash"></span></button>
-                            <button class='btn btn-oj btn-secondary btn-lg pull-right' type='button' href='/launch/{{winner_contest.id}}'>Edit Campaign</button>
+                            <button class='btn btn-oj btn-secondary btn-lg pull-right' type='button' href='/launch/{{contest.id}}'>Edit Campaign</button>
                         </div>
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
                         </div>
