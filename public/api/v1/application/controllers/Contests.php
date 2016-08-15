@@ -457,8 +457,8 @@ class Contests extends CI_Controller
 
         $platform       = $contest->platform;
         $attachment_url = $contest->attachment;
-        $use_attachment = 0;
-        if ($this->input->post('photo')) {
+        $use_attachment = ($this->input->post('photo') == 'use_attachment') ? 1 : 0;
+        if ($this->input->post('photo') && $use_attachment == 0) {
 
             $filename = hash('sha256', uniqid());
             if ($platform == 'instagram') {
@@ -513,11 +513,22 @@ class Contests extends CI_Controller
             );
 
             if ($this->contest->get_status($contest) == 'draft') {
-                $prize = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
+                $prize    = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
+                $location = $this->input->post('location');
+                if (is_array($location)) {
+                    $location = implode(',', $location);
+                }
+                $industry = $this->input->post('industry');
+                if (is_array($industry)) {
+                    $industry = array_slice($industry, 0, 3);
+                    $industry = implode(',', $industry);
+                }
 
                 $data['prize']          = $prize;
                 $data['platform']       = $this->input->post('platform');
                 $data['use_attachment'] = $use_attachment;
+                $data['location']       = $location;
+                $data['industry']       = $industry;
             }
 
             $images = array();

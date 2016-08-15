@@ -1,4 +1,3 @@
-{{contest}}
 <div class='wrapper'>
     <div class='modal_actions col-xs-12' ng-show='company_login'>
         <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
@@ -182,7 +181,7 @@
                     <div class="row form-group" ng-show="new_img">
                         <div class="col-sm-12 col-md-8">
                             <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                <img ng-show="contest.photo" id="upload_contest">
+                                <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
                             </div>
                         </div>
                     </div>
@@ -197,7 +196,7 @@
                         <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
                             <label class='text-left target-label' style="padding-top:0px;">Detailed Targeting</label>
                             <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
-                            <select class='form-control interest-selection-launch-view' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                            <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                                 <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>
@@ -234,7 +233,7 @@
                         <div class='form-group col-xs-12 col-sm-6 col-md-3'>
                             <label class='text-left target-label' style="padding-top:1px;">Locations</label>
                             <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
-                            <select select2 ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view' multiple="multiple" style="width:100%;">
+                            <select select2 ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
                                 <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                             </select>
                         </div>

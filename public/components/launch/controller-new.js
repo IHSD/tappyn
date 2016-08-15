@@ -32,8 +32,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.contest = response.data.contest;
-                    $scope.contest.chosen_creative = ($scope.contest.use_attachment) ? true : false;
-                    console.log($scope.contest.use_attachment, $scope.contest.chosen_creative);
+                    $scope.contest.chosen_creative = ($scope.contest.use_attachment == '1') ? true : false;
+                    if ($scope.contest.chosen_creative) {
+                        $scope.new_img = true;
+                    }
+                    setTimeout(function() {
+                        $(".bind-select2").trigger('change');
+                    }, 1000);
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
@@ -162,6 +167,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
                 $scope.contest.photo = ($scope.cropper.getCroppedCanvas() && $scope.contest.chosen_creative) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
+                $scope.contest.photo = (!$scope.contest.photo && $scope.contest.chosen_creative && $scope.contest.use_attachment) ? 'use_attachment' : $scope.contest.photo;
                 fbq('track', 'CompleteRegistration');
             }
         } else if (step == 'done') {

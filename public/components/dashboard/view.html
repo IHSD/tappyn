@@ -18,11 +18,11 @@
     </div>
 </div>
 <div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
-  <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
-      <div class="modal-content">
-        <div class="modal-header" style="border:none;">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
+    <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
         </div>
   <div class="modal-body text-center" style="1px solid #FF5c00;">
     <h4>Are you sure you want to select this ad?</h4>
@@ -101,7 +101,6 @@
                     <!--Campaigns remaining this month: <span ng-bind="user.subscription.remaining" style="padding-right:10px;font-size:18px;"></span>-->
                     <!--<a class="btn btn-wj btn-md" href="/profile#sprofile">Upgrade</a>-->
                 </div>
-
                 <!--<hr style='border-color:#eee'>-->
             </div>
         </div>
@@ -192,9 +191,9 @@
                       </small>
                     </td>
                     <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a>
-                    <a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
+                        <a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
                     <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a>
-                    <a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
+                        <a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
@@ -235,10 +234,10 @@
                     </div>
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'>
-                <span ng-show="winner_contest.status =='draft'">
+                    <span ng-show="winner_contest.status =='draft'">
                     <h4 style="font-size:22px;">After you launch your campaign, this is where your ads will appear.</h4>
                 </span>
-                <span ng-show="winner_contest.status =='live'">
+                    <span ng-show="winner_contest.status =='live'">
                     <h4 style="font-size:22px;">Your campaign is currently live.</h4>
                 </span>
                 </div>
@@ -248,7 +247,7 @@
                     <div class='row'>
                         <div class="text-left" ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                        <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                                 <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results or <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>email</a> us with any questions.</span></strong>
                             </span>
@@ -272,7 +271,7 @@
                             </span>
 
                             <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')" style='margin-right: 10px;'>Launch Now <span class="glyphicon glyphicon-flash"></span></a>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/launch/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
                             <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
                         </h4>
                         </div>
@@ -359,7 +358,6 @@
                                     <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
                                     <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
                                 </div>
-
                             </div>
                             <!--<div class='col-xs-12 text-center submish-hovering' style='border-top:solid #333 1px;padding:0;'>
                                 {{winner.winner.votes | number}} <span class='glyphicon glyphicon-thumbs-up'></span> Upvote<span ng-if='winner.votes != 1'>s</span>
