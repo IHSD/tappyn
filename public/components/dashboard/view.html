@@ -191,10 +191,10 @@
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
                       </small>
                     </td>
-                    <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
-                    <td><a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
-                    <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
-                    <td><a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
+                    <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a>
+                    <a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
+                    <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a>
+                    <a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
