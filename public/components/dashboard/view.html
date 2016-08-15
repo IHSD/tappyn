@@ -18,16 +18,16 @@
     </div>
 </div>
 <div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
       <div class="modal-content">
-        <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+        <div class="modal-header" style="border:none;">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
         </div>
-  <div class="modal-body text-center">
+  <div class="modal-body text-center" style="1px solid #FF5c00;">
     <h4>Are you sure you want to select this ad?</h4>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer" style="border-top:none;">
     <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
   </div>
 </div>
@@ -192,7 +192,9 @@
                       </small>
                     </td>
                     <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
+                    <td><a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
                     <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
+                    <td><a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
@@ -391,11 +393,11 @@
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
 $('#myModalnew').on('show.bs.modal', function() {
-    $('.container').addClass('blur');
+
 })
 
 $('#myModalnew').on('hide.bs.modal', function() {
-    $('.container').removeClass('blur');
+
 })
 </script>
 <script>
