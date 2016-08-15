@@ -4,6 +4,7 @@ var tappyn = angular.module('tappyn', [
     'ngAnimate',
     'angularFileUpload',
     'ngSanitize'
+    'angular-confirm'
 ]);
 
 tappyn.config(function($routeProvider, $locationProvider) {

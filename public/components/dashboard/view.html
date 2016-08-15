@@ -174,8 +174,8 @@
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
                       </small>
                     </td>
-                    <td>{{contest.status | capUnderscore}}</td>
-                    <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                    <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
+                    <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
@@ -242,7 +242,7 @@
                                 <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
                             </span>
                             <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
                         </h4>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
