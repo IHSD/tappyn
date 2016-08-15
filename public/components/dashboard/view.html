@@ -17,6 +17,23 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
+  <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
+      <div class="modal-content">
+        <div class="modal-header" style="border:none;">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
+        </div>
+  <div class="modal-body text-center" style="1px solid #FF5c00;">
+    <h4>Are you sure you want to select this ad?</h4>
+  </div>
+  <div class="modal-footer" style="border-top:none;">
+    <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
+  </div>
+</div>
+</div>
+</div>
+
 <!--Start Old AB Modal-->
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_ab'">
@@ -164,20 +181,20 @@
                         </div>
                     </td>-->
                     <td>
-                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
-                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}
+                        <a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No start : Draft</span> -
                           <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
-                        </small>
-                    </a>
-                </a>
+                      </small>
                     </td>
-                    <td>{{contest.status | capUnderscore}}</td>
-                    <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                    <td><a ng-if='contest.status != "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a>
+                    <a ng-if='contest.status == "purchased"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.status | capUnderscore}}</a></td>
+                    <td><a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a>
+                    <a ng-if='contest.status != "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.submission_count | number}}/{{contest.submission_limit}}</a></td>
                 </tr>
             </table>
             <div class="winner-contest" ng-show='view == "winner"'>
@@ -188,6 +205,9 @@
                             <button class='btn btn-oj btn-secondary' ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                             <span ng-show="winner_contest.status == 'pending_testing'">
                                 <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>De-select All</button>
+                            </span>
+                            <span ng-show="winner_contest.status == 'pending_selection'">
+                                <button id="selectall" class='btn btn-dash btn-oj btn-secondary' ng-click='Toggleselect_all()' style='margin-right: 10px;'>Request Expanded Results</button>
                             </span>
                         </div>
                     </div>
@@ -240,8 +260,8 @@
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                                 <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
                             </span>
-                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>-->
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
+                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
                         </h4>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
@@ -286,7 +306,8 @@
                                 <strong>Please select your favorite ad, and we'll transfer you the copyright.<br><span style="font-size:18px;">If you'd like to select more than one, please contact us <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.</span></strong>
                             </span>
 
-                            <button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <!--<button class='btn btn-oj btn-lg pull-right' ng-click='before_open_payment(winner_contest,"purchase")' style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>-->
+                            <button class='btn btn-oj btn-lg pull-right' data-toggle="modal" href="#myModalconfirm" style='margin-right: 10px;'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <!--<label id="subt0" data-original="0.00" style="margin-bottom:2px;">0.00</label></span>-->
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_re_ab')" style='margin-right: 10px;'>Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                             <!--New Payment buttons
@@ -372,10 +393,19 @@
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script>
 $('#myModalnew').on('show.bs.modal', function() {
-    $('.container').addClass('blur');
+
 })
 
 $('#myModalnew').on('hide.bs.modal', function() {
+
+})
+</script>
+<script>
+$('#myModalconfirm').on('show.bs.modal', function() {
+    $('.container').addClass('blur');
+})
+
+$('#myModalconfirm').on('hide.bs.modal', function() {
     $('.container').removeClass('blur');
 })
 </script>

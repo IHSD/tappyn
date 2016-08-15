@@ -1,11 +1,38 @@
-<div class='container'>
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-xs-12' style='padding-top:20px;'>
+            <div class='launch-page-box'>
+                <div class='col-xs-12 col-sm-4 text-center vertical-center'>
+                    <h3 style='margin-top:0px;'>
+                        <img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
+                        <img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
+                        {{contest.company.name}}
+                    </h3>
+                    <a href="/dashboard" class='btn btn-oj btn-secondary pull-left'>Back</a>
+                </div>
+                <div class='col-sm-5 col-xs-12 vertical-center col-sm-offset-4'>
+                    <div style='width:100%;padding-top:15px;'>
+                        <uib-progressbar style='margin-bottom:5px;' value='contest.submission_count' max='contest.submission_limit' type="warning"></uib-progressbar>
+                        <p class="progress-meter-text text-center" style='margin:0px;'>{{(contest.submission_limit | number) - (contest.submission_count | number)}} of {{contest.submission_limit}} entries remaining</p>
+                    </div>
+                </div>
+                <div class='col-sm-3 col-xs-12 text-right col-sm-offset-9'>
+                    <h2 style='color:#ff5c00;margin-top: 10px;'>${{contest.prize}}</h2>
+                    <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
+                    <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
+                    <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     <div class='row content-padding'>
-        <div class='col-sm-8 col-sm-offset-2 col-xs-12'>
-            <div class='launch-page-box row'>
-                <h3 class='text-center'>Edit Campaign</h3>
+        <div class='col-xs-12 col-md-5'>
+            <div class='launch-page-box launch-preview' style="border:1px solid #FF5C00;border-radius:6px;">
                 <form class='form' ng-submit='edit(contest)'>
                     <div class='row'>
-                        <div class="col-sm-6">
+                        <h3 class="text-center">Edit Your Campaign Details Here</h3>
+                        <div class="col-xs-12 form-group">
                             <label class='control-label'>Age</label>
                             <div class="form-group">
                                 <div class='pull-left'>
@@ -21,7 +48,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-xs-12 form-group">
                             <label class="ontrol-label">Gender</label>
                             <div class="form-group">
                                 <div class="btn-group-sm" data-toggle="buttons" style="padding-top: 5px;">
@@ -70,7 +97,7 @@
                         <label class='control-label'>Describe what makes you different (and better) than your competition.</label>
                         <textarea class='form-control' row='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' maxlength="250"></textarea>
                     </div>
-                    <div class="col-xs-12" ng-if="contest.use_attachment == 1">
+                    <!--<div class="col-xs-12" ng-if="contest.use_attachment == 1">
                         <label class='control-label'>Ad Creative</label>
                         <div class="form-group">
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
@@ -78,15 +105,223 @@
                                 <div class="img-preview"><img id="contest-img-edit" class="contest-img-edit" ng-src="{{contest.attachment}}"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class='col-xs-12 text-center'>
-                        <a href="/dashboard" class='btn btn-oj btn-secondary pull-left'>Back</a>
+                    </div>-->
+                    <div class='col-xs-12 text-center' style="padding-bottom:10px;">
                         <button class='btn btn-oj pull-right' type='submit'>Save</button>
                     </div>
                 </form>
             </div>
         </div>
+        <div class='col-md-4 col-xs-12'>
+            <div class='launch-page-box'>
+                <div ng-show='(contest.submission_count >= contest.submission_limit) &&  !contest.user_has_submitted'>
+                    <div class='alert alert-success text-center'>
+                        This campaign has hit its cap of 30 ads, but check out other cool campaigns <a href="/contests">Here</a>. Also, don't forget to add more interests to your <a href="/profile">Profile</a> to see more campaigns!
+                    </div>
+                </div>
+
+                <div ng-show='user && user.type=="company"'>
+                    <div class='submish-overlay'></div>
+                    <div class='alert alert-danger text-center submish-panel'>
+                        You can’t create an ad for your own campaign.
+                    </div>
+                </div>
+
+
+                <div class='col-xs-12'>
+                    <form class='form'>
+                        <div class='form-group'>
+                            <h4 class='control-label'><strong>Image</strong></h4>
+                            <div class='contest-image'>
+                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
+                                    <div class="img-preview">
+                                        <img class="contest-img-preview" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
+                                        <img id="upload_contest" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment != 1" src='public/img/placeholder.png'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                            </div>
+                        </div>
+                        <div class='form-group'>
+                            <h4 class='control-label'><strong>Headline</strong></h4>
+                            <input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
+                            <div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
+                        </div>
+                        <div class='form-group'>
+                            <h4 class='control-label'><strong>Ad Text</strong></h4>
+                            <textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
+                            <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
+                        </div>
+                        <div ng-show='form_limit.line_1' class='form-group'>
+                            <label class='control-label'>Line One</label>
+                            <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>
+                            <div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.line_1.limit}} characters</div>
+                        </div>
+                        <div ng-show='form_limit.line_2' class='form-group'>
+                            <label class='control-label'>Line Two</label>
+                            <input class='form-control' maxlength="{{form_limit.line_2.limit}}" ng-model='submit.text' placeholder='{{form_limit.line_2.placeholder}}' type='text'>
+                            <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.line_2.limit}} characters</div>
+                        </div>
+                        <div ng-show='form_limit.card_title' class='form-group'>
+                            <label class='control-label'>Card Title</label>
+                            <input class='form-control' maxlength="{{form_limit.card_title.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.card_title.placeholder}}' type='text'>
+                            <div class='input-count'><span ng-if='!submit.link_explanation'>0</span><span ng-if='submit.link_explanation'>{{submit.link_explanation.length}}</span> of {{form_limit.card_title.limit}} characters</div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <div class="contest-box" ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
+                <div style='float:left;padding:30px 10px 10px 30px;'>
+                    <img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
+                </div>
+                <div style='padding: 20px 20px 10px 70px;'>
+                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;"><br>Write a high performing copy.</a></strong></p>
+                </div>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title text-center" id="myModalLabel">Quick Reference Guide</h4>
+                            </div>
+                            <div class="modal-body row">
+                                <div class="container-fluid bd-example-row">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="col-xs-6">
+                                                <h4 class="col-xs-12 text-center">Do</h4>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <h4 class="col-xs-12 text-center">Don't</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="check col-xs-6">
+                                                <ul class="col-xs-12">
+                                                    <li>Carefully read "What we're looking for".</li>
+                                                    <li>Draw from your personal experiences</li>
+                                                    <li>Talk like you're talking to a friend.</li>
+                                                    <li>Use specific references.</li>
+                                                    <li>Be original.</li>
+                                                    <li>Proofread!</li>
+                                                </ul>
+                                            </div>
+                                            <div class="check col-xs-6">
+                                                <ul class="col-xs-12">
+                                                    <li>Don't use exclamation points!</li>
+                                                    <li>Don't use CAPS lock.</li>
+                                                    <li>Don't sound like a salesman.</li>
+                                                    <li>Don't focus on rhyming or puns.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">Our complete copywriting guide</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contest-box">
+                <div class='contest-image'>
+                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
+                        <div class="img-preview">
+                            <img class="contest-img-preview" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
+                            <img id="upload_contest" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment != 1" src='public/img/placeholder.png'>
+                        </div>
+                    </div>
+                </div>
+                <div class='contest-company text-left'>
+                    <div class='avatar'>
+                        <img ng-if='!contest.company.logo_url' src="favicon.ico">
+                        <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
+                    </div>
+                    <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
+                </div>
+                <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your ad text will be shown here</h4>
+                    <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
+                    <div class='contest-upvotes disable-click'>
+                        <span class='glyphicon glyphicon-heart'></span> 0
+                    </div>
+                </div>
+                <div class='contest-entry text-left'>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your ad text will be shown here<br></h4>
+                    <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
+                    <div class='contest-upvotes disable-click'>
+                        <span class='glyphicon glyphicon-heart'></span> 12
+                    </div>
+                </div>
+                <div class='contest-winner text-left'>
+                    <div class='avatar'>
+                        <img src='public/img/avatar.png' alt=''>
+                    </div>
+                    <h5 class='winner-name'>{{user.first_name}} {{user.last_name | firstChar}}.</h5>
+                </div>
+            </div>
+        </div>
     </div>
+    <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
+    <div class='row' style='padding-bottom:10px;' id='submishes'>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <div class='col-xs-12 visible-xs'>
+            <div class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+            </div>
+        </div>
+        <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
+    </div>
+
+
+
+</div>
 </div>
 <script type="text/javascript">
 $(function() {
