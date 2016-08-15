@@ -249,7 +249,7 @@
             <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box'>
                 <div class="container">
                     <div class='row'>
-                        <div class="text-left" ng-show="winner_contest.status == 'testing'">
+                      <div ng-show="winner_contest.status == 'testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
@@ -258,14 +258,7 @@
                         </h4>
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
-                            <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
-                            <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
-                            </span>
-                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/edit/{{winner_contest.id}}' style='margin-right: 10px;'>Edit Campaign</a>
-                            <!--<a class='btn btn-oj btn-secondary btn-lg pull-right' href='/contest/{{winner_contest.id}}' style='margin-right: 10px;'>View Campaign</a>-->
-                        </h4>
+                          <button class='btn btn-oj btn-lg pull-right' type='button' href='/edit/{{winner_contest.id}}'>Edit Campaign</button>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
@@ -290,7 +283,7 @@
                         <div ng-show="winner_contest.status == 'pending_testing'">
                             <!--<span class='glyphicon glyphicon-ok circle-it-oj' style="top:-10px;"></span>-->
                             <h4 class='text-left' style='color:#333;display:inline;'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:20px;'>
+                            <span style='font-weight:300;font-size:22;position:relative;top:15px;'>
                                 <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>
                             </span>
                             <button class='btn btn-oj btn-lg pull-right' ng-click="before_open_payment(winner_contest,'confirm_ab')" style='margin-right: 10px;'>Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
@@ -321,6 +314,14 @@
                           -->
                       </h4>
                         </div>
+                        <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
+                                  <h4 class='text-left' style='color:#333'>
+                          <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                              <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
+                          </span>
+                          </h4>
+                              </div>
+
                     </div>
                 </div>
             </div>
