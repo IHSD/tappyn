@@ -120,6 +120,7 @@
                 </div>
 
                 <div ng-show='user && user.type=="company"'>
+                    <div class='submish-overlay'></div>
                     <div class='alert alert-danger text-center submish-panel'>
                         You can’t create an ad for your own campaign.
                     </div>
@@ -130,28 +131,23 @@
                     <form class='form'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
                             <h4 class='control-label'><strong>Image</strong></h4>
-                            <div ng-hide='!cropper_box'>
-                                <img id="upload_contest" ng-src="{{contest.attachment}}" src='public/img/placeholder.png'>
+                            <div class='contest-image'>
+                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram"}'>
+                                    <div class="img-preview">
+                                        <img class="contest-img-preview" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment == 1">
+                                        <img id="upload_contest" ng-src="{{contest.attachment}}" ng-if="contest.use_attachment != 1" src='public/img/placeholder.png'>
+                                    </div>
+                                </div>
                             </div>
-                            <input type='file' id='fileInput' name="file" class="inputfile" accept="image/*" />
-                            <label for="fileInput" style='font-size: 14px;margin-top: 20px;border: 2px dashed #ccc;background-color: white;color:#aaa;text-align:center;margin: 10px 0;padding:20px; width: 100%;' ng-click='show_cropper()' ng-show='!cropper_box'>
-                                <span style='font-weight:bold;color:#ff6c00;'>Choose from your computer</span>
-                                <br>
-
-
-                                <span>JPG, PGN, BMP &#8226; 50MB file limit</span>
-                                <br>
-                                <span>At least 102 pixels &#8226; 16:9 aspect ratio</span>
-                            </label>
                             <div class="col-xs-12">
                             </div>
                         </div>
-                        <div ng-show='form_limit.headline' class='form-group'>
+                        <div class='form-group'>
                             <h4 class='control-label'><strong>Headline</strong></h4>
                             <input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
                             <div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
                         </div>
-                        <div ng-show='form_limit.text' class='form-group'>
+                        <div class='form-group'>
                             <h4 class='control-label'><strong>Ad Text</strong></h4>
                             <textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
                             <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
@@ -259,7 +255,7 @@
                         <span class='glyphicon glyphicon-heart'></span> 0
                     </div>
                 </div>
-                <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
+                <div class='contest-entry text-left'>
                     <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline will be shown here.</h3>
                     <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
                     <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your ad text will be shown here<br></h4>
