@@ -57,8 +57,8 @@
                     <li>
                         <label class='col-sm-4 control-label' style='text-align: left;'>Company Summary</label>
                         <div class="col-sm-8" style="padding-bottom:10px;">
-                            <textarea class='form-control' ng-model='profile.summary' placeholder='Company summary' type='text'></textarea>
-                            <p>{{profile.summary.length}} of 180 characters</p>
+                            <textarea class='form-control' ng-model='profile.summary' placeholder='Company summary' type='text' maxlength="250"></textarea>
+                            <p>{{profile.summary.length}} of 250 characters</p>
                         </div>
                     </li>
                     <!--<li>
@@ -70,7 +70,8 @@
                     <li>
                         <label class='col-sm-4 control-label' style='text-align: left;'>How Your Company is Different</label>
                         <div class="col-sm-8" style="padding-bottom:10px;">
-                            <textarea class='form-control' ng-model='profile.different' placeholder='Additional Info' type='text'></textarea>
+                            <textarea class='form-control' ng-model='profile.different' placeholder='Additional Info' type='text' maxlength="250"></textarea>
+                            <p>{{profile.different.length}} of 250 characters</p>
                         </div>
                     </li>
                     <li>
@@ -263,7 +264,7 @@
                     </li>
                     <li ng-hide="user.type == 'company'">
                         <label class='col-sm-4 control-label' style='text-align: left;padding-bottom:50px;'>Show all Contests
-                    
+
                         </label>
                         <div class='col-sm-8' style="padding-top:8px;">
                             <input type="checkbox" name="show_all_contest" ng-model="profile.show_all_contest" ng-true-value="'1'" ng-false-value="'0'">

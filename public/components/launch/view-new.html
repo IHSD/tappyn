@@ -33,36 +33,24 @@
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
         <div class='col-xs-12 col-sm-9 text-left'>
-            <!-- <div ng-show='current.step == "tp-platform"'>
-                <h2>What kind of ad would you like?</h2>
-                <h4>Let's start by formating the kind of ads you're looking for.</h4>
-            </div>
-            <div ng-show='current.step == "tp-objective"'>
-                <h2>What is your ad objective?</h2>
-                <h4>Based on the media platform you picked, here are the objectives you'd like our creators to explore.</h4>
-            </div>
-            <div ng-show='current.step == "tp-audience"'>
-                <h2>Who is your target audience?</h2>
-                <h4>We'll channel your campaign to our users who meet your target demographics. Fill out the creative direction so creators know what you're looking for.</h4>
-            </div> -->
             <div ng-show='current.step == "tp-prior"'>
-                <h2 style="font-weight:600px;">Who is your audience?</h2>
+                <h2 style="font-weight:600;">Who is your audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
             <div ng-show='current.step == "detail"'>
-                <h2 style="font-weight:600px;">Your brand profile.</h2>
+                <h2 style="font-weight:600;">Your brand profile.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
-                <h2 style="font-weight:600px;">Your campaign preview.</h2>
+                <h2 style="font-weight:600;">Your campaign preview.</h2>
                 <h4>Please read over your details, and make sure everthing looks the way you like.</h4>
             </div>
             <div ng-show='current.step == "subscription"'>
-                <h2 style="font-weight:600px;">Please select a plan that fits.</h2>
-                <h4>Different businesses have different needs. Find the plan that works for you.</h4>
+                <h2 style="font-weight:600;">Which plan would you like?</h2>
+                <h4>To work with our creators, choose a plan that works for you.</h4>
             </div>
             <div ng-show='current.step == "done"'>
-                <h2 style="font-weight:600px;">Congratulations!</h2>
+                <h2 style="font-weight:600;">Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
@@ -119,55 +107,13 @@
                 </div>
             </div>
         </div>
-        <!--<div class="row">
-      <label class='text-left col-sm-2' style="padding-top:0px;font-size:24px;">Objective</label>
-      <div ng-show='contest.platform=="facebook" || contest.platform == "instagram"' class="col-sm-10">
-        <div ng-class='{"package-highlight" : contest.objective == "clicks_to_website"}' class='launch-page-btn' ng-click='select_objective("clicks_to_website")'>
-
-          <h4>Send People to Your Website</h4><br>
-          <p>Reach people who are likely to click on your ad and visit your website.</p>
-        </div>
-        <div ng-class='{"package-highlight" : contest.objective == "conversions"}' class='launch-page-btn' ng-click='select_objective("conversions")'>
-
-          <h4>Increase Website Conversions</h4><br>
-          <p>Reach people in your audience who are likely to convert on your website.</p>
-        </div>
-        <div ng-class='{"package-highlight" : contest.objective == "app_installs"}' class='launch-page-btn' ng-click='select_objective("app_installs")'>
-
-          <h4>Increase App Installs</h4><br>
-          <p>Reach people in your audience who are likely to install your app.</p>
-        </div>
-      </div>
-      <div ng-show='contest.platform=="twitter"' class='col-sm-10'>
-        <div ng-class='{"package-highlight" : contest.objective == "site_clicks_conversions"}' class='launch-page-btn' ng-click='select_objective("site_clicks_conversions")'>
-
-          <h4>Website Clicks / Conversions</h4>
-          <p>Grow your site traffic, increase online purchases or connect with high quality leads.</p>
-        </div>
-        <div ng-class='{"package-highlight" : contest.objective == "followers"}' class='launch-page-btn' ng-click='select_objective("followers")'>
-
-          <h4>Gain Followers</h4>
-          <p>Grow an interested audience with which you can engage with over time.</p>
-        </div>
-        <div ng-class='{"package-highlight" : contest.objective == "engagement"}' class='launch-page-btn' ng-click='select_objective("engagement")'>
-
-          <h4>Tweet Engagements</h4>
-          <p>Reach a large targeted group of people, place your best content in front of the audience that matters to you.</p>
-        </div>
-        <div ng-class='{"package-highlight" : contest.objective == "app_installs"}' class='launch-page-btn' ng-click='select_objective("app_installs")'>
-
-          <h4>Increase App Installs</h4>
-          <p>Reach people in your audience who are likely to install your app.</p>
-        </div>
-      </div>
-    </div>-->
         <div class='row' style="padding-bottom:200px;padding-top:40px;">
             <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
                 <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                    <h4 class='text-center' style="cursor:default;">I'd Like A Photo <span><small>+$20</small></span></h4>
+                    <h4 class='text-center' style="cursor:default;">I'd To Receive Photos <span><small>+$20</small></span></h4>
                 </div>
                 <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
                     <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
