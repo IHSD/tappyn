@@ -10,7 +10,7 @@
             <div class='col-xs-12 text-center' style='padding-bottom:10px;'>
             <div class="btn-group hidden-xs" data-toggle="buttons">
                 <label class='btn btn-lg' ng-class='{"btn-oj" : registrar.group_id == "2", "btn-default" : registrar.group_id != "2"}'>
-                    <input type='radio' value='2' ng-model='registrar.group_id'>I'm a member
+                    <input type='radio' value='2' ng-model='registrar.group_id'>I'm a creator
                 </label>
                 <label class='btn btn-lg' ng-class='{"btn-oj" : registrar.group_id == "3", "btn-default" : registrar.group_id != "3"}'>
                     <input type='radio' value='3' ng-model='registrar.group_id'>I'm a business
@@ -18,7 +18,7 @@
             </div>
             <div class="btn-group visible-xs" data-toggle="buttons">
                 <label class='btn' ng-class='{"btn-oj" : registrar.group_id == "2", "btn-default" : registrar.group_id != "2"}'>
-                    <input type='radio' value='2' ng-model='registrar.group_id' ng-click="registrar.is_user = true">I'm a member
+                    <input type='radio' value='2' ng-model='registrar.group_id' ng-click="registrar.is_user = true">I'm a creator
                 </label>
                 <label class='btn' ng-class='{"btn-oj" : registrar.group_id == "3", "btn-default" : registrar.group_id != "3"}'>
                     <input type='radio' value='3' ng-model='registrar.group_id'>I'm a business

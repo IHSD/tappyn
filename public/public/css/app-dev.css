@@ -610,7 +610,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 .plan ul li {
     line-height: 22px;
     font-size: 12px;
-    font-weight: 200;
+    font-weight: bold;
 }
 
 .plan ul li a {
