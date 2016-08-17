@@ -15,10 +15,10 @@
             </div>
             <div class="btn-group visible-xs" data-toggle="buttons">
                 <label class='btn' ng-class='{"btn-oj" : user == "1", "btn-default" : user != "1"}'>
-                    <input type='radio' value="1" ng-model="user" ng-click="showFB = !showFB">I'm a creator
+                    <input type='radio' value="1" ng-model="user" ng-click="user == '1'">I'm a creator
                 </label>
                 <label class='btn' ng-class='{"btn-oj" : user == "2", "btn-default" : user != "2"}'>
-                    <input type='radio' value="2" ng-model="user" ng-click="showFB = !showFB">I'm a business
+                    <input type='radio' value="2" ng-model="user" ng-click="user == '2'">I'm a business
                 </label>
             </div>
         </div>
