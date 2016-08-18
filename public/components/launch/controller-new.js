@@ -144,10 +144,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         // else if(step == 'tp-audience'){
         // }
         else if (step == "tp-prior") {
-            var setting = $scope.platform_image_settings[$scope.contest.platform];
+            //var setting = $scope.platform_image_settings[$scope.contest.platform];
             $scope.current = $scope.steps[step];
-            $scope.cropper.setAspectRatio(setting['aspect_ratio']);
-            $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
+            //$scope.cropper.setAspectRatio(setting['aspect_ratio']);
+            //$scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
         } else if (step == 'detail') {
             fbq('track', 'InitiateCheckout');
@@ -170,6 +170,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 fbq('track', 'CompleteRegistration');
             }
         } else if (step == 'done') {
+                fbq('track', 'Purchase', {value: '0.00', currency:'USD'});
             $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2");
             $scope.current = $scope.steps[step];
         } else $scope.current = $scope.steps[step];
