@@ -237,7 +237,7 @@
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Start A/B Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Save & Start Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
