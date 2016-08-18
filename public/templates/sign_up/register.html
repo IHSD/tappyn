@@ -1,7 +1,7 @@
 <div class='modal_actions col-xs-12'>
     <div class='modal_inner col-xs-12 text-center' ng-class='{"col-sm-9 col-md-9 col-lg-7" : registrar.group_id == "2" && registrar.step == 3, "col-sm-7 col-md-5 col-lg-4" : registrar.step != 3}'>
         <div ng-hide='registration.type == "must"' class='close_circle' ng-click='close_register()'>x</div>
-        <div ng-if='registrar.group_id == "1"'>
+        <div ng-show='registrar.group_id == "1"'>
             <div class="logo">
                 <center><img width='120px;' height='120px;' src="https://s3-us-west-2.amazonaws.com/tappyn/alyssa-modal.jpg" class="img-responsive"></center>
             </div>
@@ -26,9 +26,9 @@
             </div>
         </div>
         </div>
-        <div ng-if='registrar.group_id == "2"'>
+        <div ng-show='registrar.group_id == "2"'>
             <form class='form' ng-submit='sign_up(registrar)'>
-                <div class='row' ng-if='registrar.step== 1'>
+                <div class='row' ng-show='registrar.step== 1'>
                   <div class="logo">
                       <center><img width='120px;' height='120px;' src="https://s3-us-west-2.amazonaws.com/tappyn/alyssa-modal.jpg" class="img-responsive"></center>
                   </div>
@@ -75,7 +75,7 @@
                     </div>
                     <input type='hidden' value='2' ng-model='registrar.group_id'>
                 </div>
-                <div class='row' ng-if='registrar.step == 3'>
+                <div class='row' ng-show='registrar.step == 3'>
                   <div class="logo">
                       <img src="public/img/beta_logo.png" width='120' style='margin-bottom:5px;'>
                   </div>
@@ -107,7 +107,7 @@
                 </div></center>
             </form>
         </div>
-        <div ng-if='registrar.group_id == "3"'>
+        <div ng-show='registrar.group_id == "3"'>
           <div class="logo">
               <img src="public/img/beta_logo.png" width='120'>
           </div>
@@ -164,7 +164,7 @@
                 </div>
             </form>
         </div>
-        <div ng-if='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-12 text-center">
+        <div ng-show='registration.type == "default" || registration.type == "must"' style="font-size:12px;" class="col-xs-12 text-center">
           <div class="col-xs-12 col-md-6 col-md-offset-3" ng-show='registrar.step== 1'>
             <p style="font-size:10px;"><small>Creating an account means you're okay with Tappyn's Terms of Service and Privacy Policy.</small></p>
           </div>
