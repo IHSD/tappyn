@@ -35,18 +35,20 @@
 				</div>
 					<br>
 	        <form class='form' ng-submit="log_in(identity, password)">
+						<div class="col-xs-12" ng-show="user == '1' || user == '2'">
 	            <center>
-								<div ng-show="user == '1' || user == '2'" class='form-group' style='5px;max-width:60%;'>
+								<div class='form-group' style='5px;max-width:60%;'>
 	                <input class='form-control' ng-model='identity' placeholder='Email'>
 	              </div>
 						  </center>
 	            <center>
-								<div ng-show="user == '1' || user == '2'" class='form-group' style='max-width:60%;'>
+								<div class='form-group' style='max-width:60%;'>
 	                <input class='form-control' ng-model='password' placeholder='Password' type='password'>
 	            </div>
 						 </center>
 
 	            <button class='col-xs-6 col-xs-offset-3 btn btn-oj btn-lg' style='max-width:60%;' type='submit'>Login</button>
+						</div>
 	            <div class='modal_link'>
 		            <a class='pull-left' ng-click="open_register(&quot;default&quot;, &quot;&quot;, &quot;2&quot;)">Don't have an account?</a>
 		            <a class='pull-right' ng-click='forgot = true'>Forgot Password?</a>
