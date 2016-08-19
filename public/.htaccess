@@ -23,7 +23,7 @@ FileETag None
 
 <IfModule mod_headers.c>
 # 1 YEAR
-<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+<FilesMatch "\.(flv|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
 Header set Cache-Control "max-age=29030400, public"
 </FilesMatch>
 
