@@ -22,7 +22,9 @@ hr {
     border-top: 2px solid #e6e6e6;
 }
 
-
+a:focus {
+    color:#333;
+}
 /**Carousel test**/
 
 .quote {
