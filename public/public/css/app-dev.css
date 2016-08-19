@@ -17,7 +17,7 @@
 
 .tp-faq.panel-open .panel-heading {
     background-color: #e6e6e6;
-    color: #ff5c00;
+    color: #019F6E;
 }
 
 .tp-faq.panel-open .panel-heading a {}
@@ -31,7 +31,7 @@
 
 .notifications_count {
     display: block;
-    background-color: #ff5c00;
+    background-color: #019F6E;
     color: white;
     position: absolute;
     /*top: 10;
@@ -83,7 +83,7 @@
 /*.notif-tab-left {
     border-width: 1px 0px 1px 1px;
     border-style: solid;
-    border-color: #ff5c00;
+    border-color: #019F6E;
     border-top-left-radius: 25px;
     border-bottom-left-radius: 25px;
 }
@@ -91,7 +91,7 @@
 .notif-tab-right {
     border-width: 1px 1px 1px 0px;
     border-style: solid;
-    border-color: #ff5c00;
+    border-color: #019F6E;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
 }*/
@@ -110,7 +110,7 @@
 .notif-tab {
     height: 30px;
     background: #fff;
-    color: #ff5c00;
+    color: #019F6E;
     cursor: pointer;
     text-align: center;
     font-size: 12px;
@@ -138,7 +138,7 @@
 }
 
 .notification {
-    /*border: 1px solid #ff5c00;
+    /*border: 1px solid #019F6E;
     border-radius: 5px;
     margin-top: 5px;
     padding-top: 10px;*/
@@ -163,7 +163,7 @@
 }
 
 .noti-type .glyphicon-oj {
-    color: #ff5c00;
+    color: #019F6E;
 }
 
 .noti-content {
@@ -228,7 +228,7 @@
     top: 0;
     width: 100%;
     height: 100%;
-    border: 2px solid #ff6c00;
+    border: 2px solid #019F6E;
     border-radius: 6px;
     pointer-events: none;
 }
@@ -241,7 +241,7 @@
     pointer-events: none;
     top: auto;
     color: white;
-    background-color: #ff6c00;
+    background-color: #019F6E;
     border-radius: 50%;
     padding: 10px;
 }
@@ -416,13 +416,13 @@
 }
 
 .checkbox-container input[type="checkbox"]:hover + label:hover {
-    color: #ff5e00;
-    border: 2px solid #ff5e00;
+    color: #019F6E;
+    border: 2px solid #019F6E;
 }
 
 .checkbox-container input[type="checkbox"]:checked + label {
-    color: #ff6c00;
-    border: 2px solid #ff6c00;
+    color: #019F6E;
+    border: 2px solid #019F6E;
 }
 
 #ab-aday::-webkit-inner-spin-button,
@@ -437,7 +437,7 @@
 }
 
 .checkbox-container input[type="checkbox"]:checked + label {
-    border: 2px solid #ff6c00;
+    border: 2px solid 019F6E;
     height: 50px;
     width: 50px;
     padding-top: 10px;
@@ -445,7 +445,7 @@
 
 .checkbox-container input[type="checkbox"]:checked + label:before {
     content: "\e013";
-    color: #ff6c00;
+    color: #019F6E;
     font-size:34px;
 }
 
@@ -558,7 +558,7 @@ Author: Rashid Shafique | rmughal@gmail.com
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     padding: 12px 16px;
-    background: #ff5c00;
+    background: #019F6E;
     color: #fff;
 }
 
@@ -637,7 +637,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 .plan.recommended .head {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-    background: #ff5c00;
+    background: #019F6E;
 }
 
 .plan.recommended .btn {
@@ -658,7 +658,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 /* launch page */
 
 .launch-page-btn.package-highlight {
-    border: 2px solid #ff6c00;
+    border: 2px solid #019F6E;
 }
 
 .launch-page-btn {
