@@ -3852,8 +3852,8 @@ hr.style-two {
 }
 
 .btn-default:hover {
-background: #019F6E;
-color:#fff;
+background: #fff;
+color:#019f6e;
 border-color:#019F6E;
 }
 
