@@ -387,12 +387,12 @@
     left: 50%;
     transform: translateY(-50%) translateX(-50%);
     position: relative;
-    min-width: 100%;
-    min-height: 100%;
+    /*min-width: 100%;
+    min-height: 100%;*/
     width: auto;
     height: auto;
     object-fit: cover;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 }
 
 
@@ -610,7 +610,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 .plan ul li {
     line-height: 22px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 300;
 }
 
 .plan ul li a {
@@ -687,7 +687,7 @@ Author: Rashid Shafique | rmughal@gmail.com
 .launch-page-btn h4 {
     float: left;
     margin: 0;
-    font-weight: bold;
+    font-weight: 300;
     /*font-size: 22px;*/
     /*white-space: nowrap;*/
 }
