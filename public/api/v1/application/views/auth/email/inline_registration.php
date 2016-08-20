@@ -6,8 +6,6 @@
 
 <h3 style='text-align:center'>Boom. You're registered.</h3>
 
-<h3 style='text-align:center'>You just Tapped In.</h3>
-
 <p style='text-align:center'>
     Great news - your Tappyn account has successfully been created!
 </p>
