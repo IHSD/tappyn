@@ -66,10 +66,11 @@ class Users extends CI_Controller
             $submissions = $submissions->result();
             $profile     = $this->user->profile($this->ion_auth->user()->row()->id);
             foreach ($submissions as $submission) {
-                $submission->avatar_url = $profile->avatar_url;
-                $submission->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
-                $submission->contest    = $this->contest->get($submission->contest_id);
-                $submission->company    = $this->user->profile($submission->owner)->name;
+                $submission->avatar_url      = $profile->avatar_url;
+                $submission->votes           = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+                $submission->contest         = $this->contest->get($submission->contest_id);
+                $submission->contest->status = $this->contest->get_status($submission->contest);
+                $submission->company         = $this->user->profile($submission->owner)->name;
                 if ($submission->contest->use_attachment == 1) {
                     $submission->attachment = $submission->contest->attachment;
                 }
@@ -216,10 +217,11 @@ class Users extends CI_Controller
         $submissions = $this->vote->select('*')->join('submissions', 'votes.submission_id = submissions.id', 'left')->where('votes.user_id', $this->ion_auth->user()->row()->id)->order_by('votes.created_at', 'desc')->limit(50)->fetch();
         $subs        = $submissions->result();
         foreach ($subs as $submission) {
-            $submission->avatar_url = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
-            $submission->owner      = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
-            $submission->votes      = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
-            $submission->contest    = $this->contest->get($submission->contest_id);
+            $submission->avatar_url      = $this->db->select('avatar_url')->from('profiles')->where('id', $submission->owner)->limit(1)->get()->row()->avatar_url;
+            $submission->owner           = $this->db->select('first_name, last_name')->from('users')->where('id', $submission->owner)->limit(1)->get()->row();
+            $submission->votes           = (int) $this->vote->select('COUNT(*) as count')->where(array('submission_id' => $submission->id))->fetch()->row()->count;
+            $submission->contest         = $this->contest->get($submission->contest_id);
+            $submission->contest->status = $this->contest->get_status($submission->contest);
             if ($submission->contest->use_attachment == 1) {
                 $submission->attachment = $submission->contest->attachment;
             }
