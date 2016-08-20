@@ -294,8 +294,18 @@ header nav ul li .btn:hover {
 }
 
 .btn-oj:hover {
-    background: #018880;
-    color: #fff;
+    background: #fff;
+    color: #019F6E;
+    border:1px solid #019F6E;
+    font-weight: 400;
+}
+
+.btn-oj:focus {
+    background: #fff;
+    color: #019F6E;
+    border:1px solid #019F6E;
+    font-weight: 400;
+    outline:none;
 }
 
 .btn-white {
@@ -339,7 +349,9 @@ header nav ul li .btn:hover {
 }
 
 .btn-wj:focus {
-    color: #fff;
+    color: #019F6E;
+    background: #fff;
+    border: 1px solid #019F6E;
 }
 
 .btn-outliner {
