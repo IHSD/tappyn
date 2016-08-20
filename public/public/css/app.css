@@ -281,6 +281,18 @@ header nav ul li .btn:hover {
     font-weight: 400;
 }
 
+.btn-log {
+    background: #018880;
+    color: #fff;
+    font-weight: 400;
+}
+
+.btn-log:hover {
+    background: #018880;
+    color: #fff;
+    font-weight: 400;
+}
+
 .btn-oj:hover {
     background: #018880;
     color: #fff;
@@ -350,7 +362,10 @@ header nav ul li .btn:hover {
 
 
 .btn:focus,
-.btn.focus {
+.btn.focus,
+.btn-default:focus,
+.btn-default.focus, {
+    background-color: #018880;
     color: #fff;
 }
 
@@ -1948,7 +1963,7 @@ footer {
 }
 
 .borderlist {
-    border: 1px solid #333;
+    border: 1px solid #019f6e;
     border-radius: 3px;
     padding: 5px;
 }
@@ -3295,7 +3310,7 @@ nav .dropdown-menu {
 }
 
 .modal_inner .logo img {
-    max-width: 120px;
+    max-width: 200px;
     margin-top: -30px;
     margin-bottom: -15px;
 }
