@@ -32,7 +32,7 @@
 </div>
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
-        <div class='col-xs-12 col-sm-9 text-left'>
+        <div class='col-xs-12 col-sm-7 text-left'>
             <div ng-show='current.step == "tp-prior"'>
                 <h2 style="font-weight:400;">Who is your audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
@@ -76,6 +76,16 @@
                 </li>
             </ul>
         </div>
+        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-2">
+            <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
+            <p>
+            Fully Refundable.<br>
+            You don't like it?<br>
+            You don't pay for it.<br>
+            Period.
+            </p>
+        </center>
+        </div>
         <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
                 <uib-bar value='steps["tp-prior"].fill' type='{{ current.fill >= steps["tp-prior"].fill ? "warning" : "success" }}'></uib-bar>
@@ -90,7 +100,7 @@
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12">
         <div class="row">
             <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
-                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
@@ -109,7 +119,7 @@
         </div>
             <div class="row" style="padding-top:40px;">
                 <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
-                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10">
                     <form class="form-inline ng-pristine ng-valid" role="form">
@@ -162,7 +172,7 @@
             </div>
             <div class='row' style="padding-bottom:200px;padding-top:40px;">
                 <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
-                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10">
                     <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
@@ -192,7 +202,7 @@
                 </div>
                 <div ng-show="showOptions">
                     <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                        <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                        <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                     </label>
                     <div class="col-sm-10 col-md-5">
                         <div class="form-group">
@@ -484,7 +494,7 @@
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-         100% Money Back guarantee
+         81% of consumers ignore ads they find irrelevant.
         </span>
         </h4>
             </div>
