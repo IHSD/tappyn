@@ -16,6 +16,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
     $scope.locations = tappyn_var.get('locations');
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
+    $scope.login_scope = {};
 
     $scope.set_payment_obj_default = function() {
         $scope.payment_obj = { price: 0, voucher_code: '', re_ab: 0, h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };

@@ -1,78 +1,73 @@
 <div class='modal_actions col-xs-12'>
-	<div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
-
-		<div class='close_circle' ng-click='close_login()'>x</div><!--ng-hide='signing_in.type == "must"'-->
-		<div class="logo" style="padding-bottom:25px;padding-top:20px;">
-								 <img src="public/img/beta_logo.png" width='200'>
-						 </div>
-
-            <div class='col-xs-12 text-center hidden-xs hidden-sm'>
+    <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
+        <div class='close_circle' ng-click='close_login()'>x</div>
+        <!--ng-hide='signing_in.type == "must"'-->
+        <div class="logo" style="padding-bottom:25px;padding-top:20px;">
+            <img src="public/img/beta_logo.png" width='200'>
+        </div>
+        <div class='col-xs-12 text-center hidden-xs hidden-sm'>
             <div class="btn-group" data-toggle="buttons">
-                <label class='btn btn-lg' ng-class='{"btn-log" : user == "1", "btn-default" : user != "1"}'>
-                    <input type='radio' ng-model="user" value="1">I'm a creator
+                <label class='btn btn-lg' ng-class='{"btn-log" : login_scope.user == "1", "btn-default" : login_scope.user != "1"}'>
+                    <input type='radio' ng-model="login_scope.user" value="1">I'm a creator
                 </label>
-                <label class='btn btn-lg' ng-class='{"btn-log" : user == "2", "btn-default" : user != "2"}'>
-                    <input type='radio' ng-model="user" value="2">I'm a business
+                <label class='btn btn-lg' ng-class='{"btn-log" : login_scope.user == "2", "btn-default" : login_scope.user != "2"}'>
+                    <input type='radio' ng-model="login_scope.user" value="2">I'm a business
                 </label>
             </div>
         </div>
-				<div class='col-xs-12 text-center hidden-md hidden-lg'>
-				<div class="btn-group" data-toggle="buttons">
-						<label class='btn btn-md' ng-class='{"btn-log" : user == "1", "btn-default" : user != "1"}'>
-								<input type='radio' ng-model="user" value="1">I'm a creator
-						</label>
-						<label class='btn btn-md' ng-class='{"btn-log" : user == "2", "btn-default" : user != "2"}'>
-								<input type='radio' ng-model="user" value="2">I'm a business
-						</label>
-				</div>
-		</div>
-
-		<div ng-show="!forgot">
-	    <div ng-show="user == '1'">
-				<div class="col-xs-10 col-xs-offset-1">
-	        <div src="public/img/TappynLogo2.png" width='120' style='margin-bottom:5px;'>
-	            <a ng-show="!showFB" href ng-click='fb_login()'>
-	                <center>
-										<img class='img-responsive' height='45px' style="border-radius: 5px; margin-bottom: 10px;max-width: 100%;" src="public/img/img-facebook.png">
-									</center>
-	            </a>
-	        </div>
-				</div>
-			</div>
-					<br>
-
-	        <form class='form' ng-submit="log_in(identity, password)">
-						<div ng-show="user == '1' || user == '2'" class="col-xs-12">
-	            <center>
-								<div class='form-group' style='5px;max-width:60%;'>
-	                <input class='form-control' ng-model='identity' placeholder='Email'>
-	              </div>
-						  </center>
-	            <center>
-								<div class='form-group' style='max-width:60%;'>
-	                <input class='form-control' ng-model='password' placeholder='Password' type='password'>
-	            </div>
-						 </center>
-
-
-	            <button class='col-xs-6 col-xs-offset-3 btn btn-oj btn-lg' style='max-width:60%;' type='submit'>Login</button>
-							</div>
-	            <div class='modal_link'>
-		            <a class='pull-left' ng-click="open_register(&quot;default&quot;, &quot;&quot;, &quot;2&quot;)">Don't have an account?</a>
-		            <a class='pull-right' ng-click='forgot = true'>Forgot Password?</a>
-		        </div>
-	        </form>
-	    </div>
-
-	    <form ng-show='forgot' class='form' ng-submit="forgot_pass(identity)">
-	        <h3 class='text-center'>Forgot Password</h3>
-	        <div class='form-group'>
-	            <input class='form-control' ng-model='identity' placeholder="Enter your email">
-	        </div>
-	        <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Send me an email</button>
-	        <div class='modal_link'>
-		        <a class='pull-left' ng-click='login_to_register()'>Don't have an account?</a>
-		        <a class='pull-right' ng-click='forgot = false'>I remember it!</a>
-		    </div>
-	    </form>
-	</div>
+        <div class='col-xs-12 text-center hidden-md hidden-lg'>
+            <div class="btn-group" data-toggle="buttons">
+                <label class='btn btn-md' ng-class='{"btn-log" : login_scope.user == "1", "btn-default" : login_scope.user != "1"}'>
+                    <input type='radio' ng-model="login_scope.user" value="1">I'm a creator
+                </label>
+                <label class='btn btn-md' ng-class='{"btn-log" : login_scope.user == "2", "btn-default" : login_scope.user != "2"}'>
+                    <input type='radio' ng-model="login_scope.user" value="2">I'm a business
+                </label>
+            </div>
+        </div>
+        <div ng-show="!forgot">
+            <div ng-show="login_scope.user == '1'">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div src="public/img/TappynLogo2.png" width='120' style='margin-bottom:5px;'>
+                        <a ng-show="!showFB" href ng-click='fb_login()'>
+                            <center>
+                                <img class='img-responsive' height='45px' style="border-radius: 5px; margin-bottom: 10px;max-width: 100%;" src="public/img/img-facebook.png">
+                            </center>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <form class='form' ng-submit="log_in(identity, password)">
+                <div ng-show="login_scope.user == '1' || login_scope.user == '2'" class="col-xs-12">
+                    <center>
+                        <div class='form-group' style='5px;max-width:60%;'>
+                            <input class='form-control' ng-model='identity' placeholder='Email'>
+                        </div>
+                    </center>
+                    <center>
+                        <div class='form-group' style='max-width:60%;'>
+                            <input class='form-control' ng-model='password' placeholder='Password' type='password'>
+                        </div>
+                    </center>
+                    <button class='col-xs-6 col-xs-offset-3 btn btn-oj btn-lg' style='max-width:60%;' type='submit'>Login</button>
+                </div>
+                <div class='modal_link'>
+                    <a class='pull-left' ng-click="open_register(&quot;default&quot;, &quot;&quot;, &quot;2&quot;)">Don't have an account?</a>
+                    <a class='pull-right' ng-click='forgot = true'>Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+        <form ng-show='forgot' class='form' ng-submit="forgot_pass(identity)">
+            <h3 class='text-center'>Forgot Password</h3>
+            <div class='form-group'>
+                <input class='form-control' ng-model='identity' placeholder="Enter your email">
+            </div>
+            <button class='col-xs-12 btn btn-oj btn-lg' type='submit'>Send me an email</button>
+            <div class='modal_link'>
+                <a class='pull-left' ng-click='login_to_register()'>Don't have an account?</a>
+                <a class='pull-right' ng-click='forgot = false'>I remember it!</a>
+            </div>
+        </form>
+    </div>
+</div>
