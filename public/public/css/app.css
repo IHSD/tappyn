@@ -279,7 +279,7 @@ h4 {
     font-family: inherit;
     font-weight: 300;
     line-height: 1.1;
-    color: inherit;
+    color: #019f6e;
 }
 
 label {
@@ -563,7 +563,7 @@ li.value-list:before {
 /*** Hero Banner CSS Starts Here ***/
 
 .hero-banner {
-    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg');
+    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg');
     background-size: cover;
     background-color: #EEEEEE;
     height: 400px;
@@ -574,28 +574,28 @@ li.value-list:before {
 @media only screen and (max-device-width:480px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome2.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
         background-size: cover;
     }
 }
@@ -632,7 +632,7 @@ li.value-list:before {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 50;
-    color: #fff;
+    color: #019f6e;
 }
 
 .hero-content h3 {
@@ -2618,7 +2618,7 @@ footer {
 /** Testimonials **/
 
 .testimonials {
-    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/howitworks.jpg');
+    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome.jpg');
     background-size: cover;
     background-color: #EEEEEE;
     height: 400px;
@@ -2628,28 +2628,28 @@ footer {
 @media only screen and (max-device-width:480px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .testimonials {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
     .testimonials {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .testimonials {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome.jpg') no-repeat center center;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .testimonials {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat center center;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/cphome.jpg') no-repeat center center;
         background-size: cover;
     }
 }
