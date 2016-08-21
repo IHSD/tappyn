@@ -32,7 +32,7 @@
 </div>
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
-        <div class='col-xs-12 col-sm-7 text-left'>
+        <div class='col-xs-12 col-sm-6 text-left'>
             <div ng-show='current.step == "tp-prior"'>
                 <h2 style="font-weight:400;">Who is your audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
@@ -76,7 +76,7 @@
                 </li>
             </ul>
         </div>
-        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-2">
+        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3">
             <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
             <p>
             Fully Refundable.<br>
@@ -237,11 +237,11 @@
                 </div>
                 <div class="form-group">
                     <h4>Company Logo</h4>
-                    <input ng-file-select='select_logo($files, contest)' type='file'>
+                    <input ng-file-select='select_logo($files, contest)' type='file' required>
                 </div>
-                <center><div class='form-group'>
+                <div class='form-group'>
                     <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
-                </div></center>
+                </div>
                 <div class="form-group">
                     <h4>Company Website</h4>
                     <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
@@ -370,7 +370,7 @@
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
                                 <div class="plan recommended" style="padding-bottom:5px;">
                                     <!-- style="height:635px;"-->
-                                    <div class="head" style="background:#f7a000;">
+                                    <div class="head" style="background:#019F6E;">
                                         <h2 style="font-size:18px;">Premium</h2>
                                     </div>
                                     <div class="price" style="border-top:none;">
@@ -403,7 +403,7 @@
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
                                 <div class="plan last" style="padding-bottom:5px;">
                                     <!-- style="height:618px;"-->
-                                    <div class="head" style="background:#f72200;">
+                                    <div class="head" style="background:#018880;">
                                         <h2 style="font-size:18px;">Platinum</h2>
                                     </div>
                                     <div class="price">
