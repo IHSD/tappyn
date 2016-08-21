@@ -2,7 +2,7 @@
     <div class='modal_actions col-xs-12' ng-show='company_login'>
         <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
             <div class='close_circle' ng-click='close_company_login()'>x</div>
-            <img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:20px;'>
+            <img src="public/img/beta_logo.png" width='200' style='margin-bottom:20px;'>
             <div ng-show='!forgot'>
                 <form class='form' ng-submit="launch_log_in(identity, password)">
                     <div class='form-group'>
@@ -229,6 +229,9 @@
                     <h4>Company Logo</h4>
                     <input ng-file-select='select_logo($files, contest)' type='file'>
                 </div>
+                <center><div class='form-group'>
+                    <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
+                </div></center>
                 <div class="form-group">
                     <h4>Company Website</h4>
                     <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">

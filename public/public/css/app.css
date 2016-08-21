@@ -898,7 +898,7 @@ li.value-list:before {
 }
 
 .contest-winner .winner-name {
-    font-weight: bold;
+    font-weight: 400;
     margin-top: 0;
     margin-bottom: 0;
     line-height: 30px;

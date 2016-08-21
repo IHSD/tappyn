@@ -159,8 +159,8 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <a ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='color:#019F6E#019F6E#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
-                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#019F6E#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <a ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
                         <br>
                         <small>
