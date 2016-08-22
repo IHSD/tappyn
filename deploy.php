@@ -21,7 +21,7 @@ set('writeable_dirs', ['public/api/v1/application/cache', 'public/api/v1/applica
 set('repository', 'git@github.com:amatthi/tappyn.git');
 
 env('deploy_path', '/var/www/tappyn');
-server("tappyn-live", "tappyn.com", 22)
+server("tappyn-live", "fabel.us", 22)
     ->user('deploy')
     //->identityFile($public_key_file, $private_key_file)
     ->identityFile('~/.ssh/id_rsa.pub', '~/.ssh/id_rsa')
