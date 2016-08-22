@@ -246,7 +246,7 @@ class Contest extends MY_Model
         if ($contest->paid == 0) {
             $status = 'draft';
         } else if ($this->payout->exists(array('contest_id' => $contest->id))) {
-            $status = 'purchased';
+            $status = 'Complete';
         } else if ($contest->submission_count >= $contest->submission_limit || $contest->stop_time < date('Y-m-d H:i:s')) {
             $testing = $this->ad_model->is_testing_status($contest->id);
             if ($testing) {
