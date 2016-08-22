@@ -165,9 +165,9 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span> -

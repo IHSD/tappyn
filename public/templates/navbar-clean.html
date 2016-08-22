@@ -1,10 +1,13 @@
 <header>
     <div class="col-xs-2">
         <div class="logo">
-            <a href="/home">
-                <img src="public/img/beta_logo.png" width='200' style="padding-top:10px;">
-            </a>
-        </div>
+    <span ng-hide='user.type == "company"'><a href="/home">
+        <img src="public/img/beta_logo.png" width='200' style="padding-top:10px;">
+    </a></span>
+    <span ng-show='user.type == "company"'><a href="/for_companies">
+        <img src="public/img/beta_logo.png" width='200' style="padding-top:10px;">
+    </a></span>
+</div>
     </div>
     <div class="col-xs-10">
         <nav class='hidden-xs' id='top-scroll'>
