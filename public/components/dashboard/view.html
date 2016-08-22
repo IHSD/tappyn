@@ -165,19 +165,19 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
-                          <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span> -
-                          <span ng-if='contest.status == "draft"'>No start : Draft</span> -
-                          <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
-                          <span ng-if='contest.status == "draft"'>No stop : Draft</span>
+                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft</span>
+                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.stop_time | dashDate}}</span>
+                          <span ng-if='contest.status == "draft"' style="cursor:default;">No stop : Draft</span>
                       </small>
                     </td>
-                    <td>{{contest.status | capUnderscore}}</td>
-                    <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                    <td style="cursor:default;">{{contest.status | capUnderscore}}</td>
+                    <td style="cursor:default;">{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                     <td>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
