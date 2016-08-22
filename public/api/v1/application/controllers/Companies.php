@@ -8,7 +8,7 @@ class Companies extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model(array('company', 'user', 'contest', 'ab_model'));
+        $this->load->model(array('company', 'user', 'contest', 'ad_model'));
         $this->load->library('payout');
         $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
