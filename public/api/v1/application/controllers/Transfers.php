@@ -17,21 +17,25 @@ class Transfers extends CI_Controller
         $this->stripe_account_id = $this->user->account($this->ion_auth->user()->row()->id);
     }
 
-    public function index()
-    {
-        \Stripe\Stripe::setApiKey('sk_test_mrVtwioUR2Fq1QV6yexrrctv');
-        $transfers = $this->stripe_transfer_library->index();
-        if($transfers !== FALSE)
-        {
-            $this->responder->data(array(
-                'transfers' => $transfers
-            ))->respond();
-        } else {
-            $this->responder->fail(
-                ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'There was an error fetching your transfers.'))
-            )->code(500)->respond();
-        }
-    }
+    /**
+     * Not sure if you're actually using this?
+     * If you are, it's using the test key, so wont return expected results?
+     */
+    // public function index()
+    // {
+    //     \Stripe\Stripe::setApiKey('sk_test_mrVtwioUR2Fq1QV6yexrrctv');
+    //     $transfers = $this->stripe_transfer_library->index();
+    //     if($transfers !== FALSE)
+    //     {
+    //         $this->responder->data(array(
+    //             'transfers' => $transfers
+    //         ))->respond();
+    //     } else {
+    //         $this->responder->fail(
+    //             ($this->stripe_transfer_library->errors() ? $this->stripe_transfer_library->errors() : array('error' => 'There was an error fetching your transfers.'))
+    //         )->code(500)->respond();
+    //     }
+    // }
 
     public function show($id)
     {

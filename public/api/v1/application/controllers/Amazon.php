@@ -10,16 +10,6 @@ class Amazon extends CI_Controller
         $this->load->library('image');
     }
 
-    public function test($filename)
-    {
-        $hash = hash('sha256', uniqid());
-        echo "FILESIZE :: ".filesize("/home/rob_wittman/Pictures/".$filename)."\n";
-        $image_data = 'data:image/png;base64,'.base64_encode(file_get_contents("/home/rob_wittman/Pictures/".$filename));
-        $this->s3->upload($image_data, $hash);
-        $thumb = $this->image->compress($image_data);
-        $this->s3->upload($thumb, $hash.'_thumb');
-    }
-
     public function connect()
     {
         $this->responder->data(array('access_token' => $this->s3->connect()))->respond();
@@ -92,13 +82,3 @@ class Amazon extends CI_Controller
         // $this->s3->upload($watermark, $hash.'_watermark.jpg');
     }
 }
-
-/*
-$im = $this->create_image($base64_data);
-$watermark = imagecreatefrompng($this->watermark);
-imagepng($watermark);
-$wx = imagesx($im)/2 - imagesx($watermark)/2;
-imagecopy($im, $watermark, $wx, $wy, 0,0, imagesx($watermark), imagesy($watermark));
-$nm = $this->generate($im);
-return 'data:image/jpeg;base64,'.base64_encode($nm);
- */

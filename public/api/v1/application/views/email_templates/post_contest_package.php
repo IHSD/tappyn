@@ -15,7 +15,7 @@ foreach($requirements as $req)
 
 <!-- Start Email Content -->
 
-<p>Thanks for using Tappyn, and congrats on picking an amazing user generated ad. </p>
+<p>Thanks for using Fabel, and congrats on picking an amazing user generated ad. </p>
 <p>Your audience is going to love it!</p>
 
 <p><strong>Details</strong></p>
@@ -36,7 +36,7 @@ foreach($requirements as $req)
 <br>
 <p>Looking for an ad for a different audience?</p>
 
-<p><a href="https://tappyn.com/launch">Launch a new one now!</a></p>
+<p><a href="https://fabel.us/launch">Launch a new one now!</a></p>
 
 <!-- End Email Content -->
 
@@ -47,9 +47,9 @@ foreach($requirements as $req)
 <p>
   -Alek
   <br>
-  Co-Founder Tappyn
+  Co-Founder Fabel
     <br>
   (678)-367-1060
   <br>
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>

@@ -26,7 +26,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 <!-- Bordered box -->
 
-<h4 style='text-align:center;margin:auto;min-width:450px;width:50%'>Tappyn Guidelines</h4>
+<h4 style='text-align:center;margin:auto;min-width:450px;width:50%'>Fabel Guidelines</h4>
 <br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Before you get started, be sure to read this information that all users follow.</p>
 <br>
@@ -42,11 +42,11 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <!-- End Email Content -->
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>
-    Thanks for using Tappyn!
+    Thanks for using Fabel!
 </p>
 <br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>
     -Austin
     <br>
-    Co-Founder - Tappyn <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    Co-Founder - Fabel <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>

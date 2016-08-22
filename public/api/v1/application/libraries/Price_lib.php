@@ -29,6 +29,10 @@ class Price_lib
 
     public function get_price_from_post($post)
     {
+        // TODO: Codeigniter has an input management library.
+        // You can use $this->input->post('key') to get a variable from $_POST.
+        // It already does some security and returns false if its empty.
+        // https://www.codeigniter.com/user_guide/libraries/input.html
         $result = array();
         try {
             $post['go_pay']  = isset($post['go_pay']) ? $post['go_pay'] : false;

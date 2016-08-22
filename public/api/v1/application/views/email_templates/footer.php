@@ -8,8 +8,8 @@
 <p style='text-align:left;margin:auto;width:600px'>
   -Alek
   <br>
-  Co-Founder Tappyn
+  Co-Founder Fabel
     <br>
   (678)-367-1060
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>

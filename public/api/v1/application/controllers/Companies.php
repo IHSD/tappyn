@@ -8,18 +8,14 @@ class Companies extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('company');
-        $this->load->model('user');
-        $this->load->model('contest');
-        $this->load->model('ad_model');
-        $this->config->load('secrets');
+        $this->load->model(array('company', 'user', 'contest', 'ab_model'));
         $this->load->library('payout');
+        $this->config->load('secrets');
         $this->data['publishable_key'] = $this->config->item('stripe_api_publishable_key');
         $this->load->library('stripe/stripe_customer_library');
         if ($this->ion_auth->logged_in()) {
             $this->stripe_customer_id = $this->company->payment_details($this->ion_auth->user()->row()->id);
         }
-
     }
 
     public function index()
@@ -490,7 +486,7 @@ class Companies extends CI_Controller
         if (!$this->ad_lib->go_test_by_company($post['contest_id'], $post['submission_ids'], $content)) {
             $this->responder->fail("An unknown error occured ab test")->code(500)->respond();
         } else {
-            $this->mailer->queue('alek@tappyn.com', $this->ion_auth->user()->row()->id, 'ab_test', 'contest', $post['contest_id']);
+            $this->mailer->queue('alek@<domain_name>.com', $this->ion_auth->user()->row()->id, 'ab_test', 'contest', $post['contest_id']);
             $this->responder->message("Your ad testing has now started!")->respond();
         }
     }
