@@ -128,9 +128,9 @@
     </div>
     <div class='container'>
         <div class='row' ng-if='user.type == "member"'>
-            <div ng-show="member_filter">
+            <div ng-show="member_filter" style="padding-bottom:20px;">
                 <span ng-repeat="(_filter,_count) in member_filter">
-                    <sapn ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}}({{_count}})</span>
+                    <span class="dash-black" ng-click="set_member_filter(_filter)" style="cursor:pointer;font-size:22px;padding-right:20px;">{{_filter | capUnderscore}}({{_count}})</span>
                 </span>
             </div>
             <div class='col-sm-4 hidden-xs'>
