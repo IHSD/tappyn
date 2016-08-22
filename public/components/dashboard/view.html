@@ -48,16 +48,14 @@
                 <div class="form-group">
                     <div ng-hide="payment_obj.re_ab">
                         <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
-                        <p class="text-center" style="font-size:12px;"><small>We recommend a budget of $50 to receive significant results.</small></p>
                         <div class="col-xs-8">
                             <label for="ab-aday" class="control-label">How much would you like to spend testing?</label>
                         </div>
                     </div>
                     <div ng-show="payment_obj.re_ab">
                         <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like.</p>
-                        <p class="text-center" style="font-size:12px;"><small>We recommend a budget of $50 to receive significant results.</small></p>
                         <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label" style="text-align:right;">How much would you like to spend testing?</label>
+                            <label for="ab-aday" class="control-label">How much would you like to spend testing?</label>
                         </div>
                     </div>
                     <div class="input-group col-xs-4" style="padding-top:5px;">
@@ -68,9 +66,7 @@
                 <div class="form-group row">
                     <p class="col-xs-12" style="font-size:12px;">
                       <small>
-                            All traffic is linked directly to your website.
-                        <br>
-                            Each test will last approximately 24 hours.
+                            *We recommend a budget of $50 to receive significant results. All traffic is linked directly to your website. Each test will last approximately 24 hours.
                       </small>
                     </p>
                     <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-6 col-xs-offset-3">Continue</button>
@@ -134,7 +130,7 @@
     </div>
     <div class='container'>
         <div class='row' ng-if='user.type == "member"'>
-            <div ng-show="member_filter" style="padding-bottom:20px;">
+            <div class="text-center" ng-show="member_filter" style="padding-bottom:20px;">
                 <span ng-repeat="(_filter,_count) in member_filter">
                     <span class="dash-black" ng-click="set_member_filter(_filter)" style="cursor:pointer;font-size:22px;padding-right:20px;">{{_filter | capUnderscore}}({{_count}})</span>
                 </span>
@@ -278,7 +274,7 @@
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'testing'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
                               <strong>Your ads are currently being tested. Please check back in 24 hours for results.</strong>
                             </span>
                           </h4>
