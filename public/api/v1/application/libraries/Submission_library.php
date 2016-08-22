@@ -90,7 +90,7 @@ class Submission_library
             );
 
             $this->mailer->to($this->ion_auth->user()->row()->email)
-                ->from('squad@tappyn.com')
+                ->from('squad@fabel.us')
                 ->subject("Your submission was created!")
                 ->html($this->load->view('emails/submission_success', $email_data, true))
                 ->send();

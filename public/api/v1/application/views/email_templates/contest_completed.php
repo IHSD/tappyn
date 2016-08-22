@@ -47,9 +47,9 @@ Please note if we don’t hear from you in 48 hours, we’ll go ahead and run th
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>
   -Alek
   <br>
-  Co-Founder Tappyn
+  Co-Founder Fabel
     <br>
   (678)-367-1060
     <br>
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>

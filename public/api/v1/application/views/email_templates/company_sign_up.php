@@ -19,7 +19,7 @@ $query_string['redirect'] = 'dashboard';
 
 <p>Hi <?php echo $company->name; ?> Team,</p>
 
-<p>Congrats! Your Tappyn account has been successfully activated. We’re ecstatic to have you on board.</p>
+<p>Congrats! Your Fabel account has been successfully activated. We’re ecstatic to have you on board.</p>
 
 <p>1) Running an ad campaign is easy. Simply head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and hit "Launch New Campaign".</p>
 
@@ -31,14 +31,14 @@ $query_string['redirect'] = 'dashboard';
 
 <p>5) Look at all your ads with their results and decide which one you’d like to own.</p>
 
-<p>Got a question? I’m <a href="mailto:alek@tappyn.com">here to help</a>, and answer any questions. My cell is below - feel free to call me with any questions or concerns.</p>
+<p>Got a question? I’m <a href="mailto:alek@fabel.us">here to help</a>, and answer any questions. My cell is below - feel free to call me with any questions or concerns.</p>
 
 <p>
     -Alek
     <br>
-    Co-Founder Tappyn
+    Co-Founder Fabel
     <br>
     (678)-367-1060
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>
 <!-- End Email Content -->

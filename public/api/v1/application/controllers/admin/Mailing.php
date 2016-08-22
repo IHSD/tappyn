@@ -282,7 +282,6 @@ class Mailing extends CI_Controller
             'DATE(stop_time)' => date('Y-m-d'),
             'HOUR(stop_time)' => date('H', strtotime('-1 hour')),
         ))->get();
-        error_log($contests->num_rows());
         foreach ($contests->result() as $contest) {
             $owner = $this->db->select('*')->from('users')->where('id', $contest->owner)->get()->row();
             $this->mailer->queue($owner->email, $owner->id, 'contest_completed', 'contest', $contest->id);
@@ -292,20 +291,5 @@ class Mailing extends CI_Controller
     public function error_out($id, $error)
     {
         $this->db->where('id', $id)->update('mailing_queue', array('failure_reason' => $error));
-    }
-
-    public function test_mail()
-    {
-        $this->db->insert('mailing_queue', array(
-            'queued_at'      => time(),
-            'sent_at'        => null,
-            'failure_reason' => null,
-            'recipient'      => 'rob@ihsdigital.com',
-            'recipient_id'   => 2128,
-            'email_type'     => "test",
-            "processing"     => 0,
-            'object_type'    => null,
-            'object_id'      => null,
-        ));
     }
 }

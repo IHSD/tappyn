@@ -13,6 +13,7 @@ class S3
         $this->load->config('secrets');
         $this->aws_access_key_id = $this->config->item('aws_access_key_id');
         $this->aws_secret_key = $this->config->item('aws_secret_key');
+        /** These should probably also be removed. If the config doesn't exist, its broke lol */
         if (!$this->aws_access_key_id) {
             $this->aws_access_key_id = 'AKIAIKTBSRSNTPRV6TNA';
         }

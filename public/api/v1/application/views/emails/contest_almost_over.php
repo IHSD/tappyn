@@ -45,5 +45,5 @@ if(!isset($company))
 <p style='margin:auto;width:600px;'>
     Alek
     <br>
-    <a href="<?php echo base_url(); ?>">www.tappyn.com</a>
+    <a href="<?php echo base_url(); ?>">www.fabel.us</a>
 </p>

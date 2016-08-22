@@ -40,12 +40,9 @@ class Stripe_transfer_library
                 'description' => "Payout for contest {$contest_id}"
             ));
         } catch(Exception $e) {
-            error_log($e->getMessage());
             $this->errors = $e->getMessage();
             return false;
         }
-        // Save our transfer to the database....
-        error_log("Saving transfer and returning");
         $this->stripe_transfer->save($transfer, $payout_id);
         return $transfer;
     }
