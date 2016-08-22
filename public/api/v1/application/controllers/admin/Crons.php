@@ -64,7 +64,7 @@ class Crons extends CI_Controller
                     'eid' => $this->mailer->id($this->ion_auth->user($contest->owner)->row()->email, 'contest_completed')
                 );
                 $this->mailer->to($this->ion_auth->user($contest->owner))
-                             ->from('squad@tappyn.com')
+                             ->from('squad@<domain_name>.com')
                              ->subject('Your contest has completed!')
                              ->html($this->load->view('emails/contest_needs_winner'), $email_data, TRUE)
                              ->send();
@@ -140,7 +140,7 @@ class Crons extends CI_Controller
                 echo $email.' | '.$this->ion_auth->errors()."\n";
             } else {
                 $this->mailer->to($email)
-                             ->from('alek@tappyn.com')
+                             ->from('alek@<domain_name>.com')
                              ->subject('Your Tappyn Account is ready!')
                              ->html($this->load->view('emails/onboard', array('username' => $datum['first_name'], 'password' => $password), TRUE))
                              ->send();

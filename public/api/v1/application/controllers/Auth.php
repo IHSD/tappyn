@@ -91,7 +91,7 @@ class Auth extends CI_Controller
 
         $this->mailer
             ->to($data['identity'])
-            ->from('Registration@tappyn.com')
+            ->from('Registration@<domain_name>.com')
             ->subject("Tappyn Account Verification")
             ->html($message);
         if ($this->mailer->send() == true) {
@@ -501,7 +501,7 @@ class Auth extends CI_Controller
                 $this->mailer->queue($email, $id, 'company_sign_up_conf', 'user', $id);
                 // $this->mailer
                 //     ->to($email)
-                //     ->from("Registration@tappyn.com")
+                //     ->from("Registration@<domain_name>.com")
                 //     ->subject('Account Successfully Created')
                 //     ->html($this->load->view('auth/email/registration', array(), true))
                 //     ->send();

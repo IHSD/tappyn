@@ -60,7 +60,7 @@ class Welcome extends CI_Controller
 		if($this->form_validation->run() == true && $this->contact->create($customer, $email, $message))
 		{
 			$this->mailer
-				->to('squad@tappyn.com')
+				->to('squad@<domain_name>.com')
 				->from($email)
 				->subject("New Contact Message Received")
 				->html($this->load->view('emails/contact_success', array('contact' => $customer, 'email' => $email, 'details' => $message), true))

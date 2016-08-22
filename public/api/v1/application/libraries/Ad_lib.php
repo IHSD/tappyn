@@ -23,6 +23,10 @@ use FacebookAds\Object\Values\OptimizationGoals;
 
 class Ad_lib
 {
+    /**
+     * I would move these to a config file
+     * @var array
+     */
     private $fb_setting = array(
         'bussiness_id' => 'act_502815969898232',
         'app_id'       => '1018237411624257',
@@ -31,6 +35,7 @@ class Ad_lib
         'ig_id'        => '1027980790609615',
         'token'        => 'EAAOeFN83hUEBAIbSV1ynUOEBQmqPsqdEicikxnK9oWJDzQhVRHLoNUQfR0r3RJxB7kJIZC7NZCZBHFoZCztFgiT09z0uJF7htlIVrLWAd1i8PPc6PK773XDAb84DZALfaspFqUdyweuCzjVLicpEfccojcZB2MxDzN0TrSDIJmsAZDZD',
     );
+
     public function __construct()
     {
         $this->load->model('ad_model');
@@ -206,8 +211,8 @@ class Ad_lib
                 $link_data = new LinkData();
                 $link_data->setData(array(
                     LinkDataFields::MESSAGE    => $submission->text,
-                    LinkDataFields::LINK       => 'https://tappyn.com/contest/' . $contest->id,
-                    LinkDataFields::CAPTION    => 'https://tappyn.com/',
+                    LinkDataFields::LINK       => 'https://<domain_name>.com/contest/' . $contest->id,
+                    LinkDataFields::CAPTION    => 'https://<domain_name>.com/',
                     LinkDataFields::IMAGE_HASH => $image->{AdImageFields::HASH},
                 ));
 
