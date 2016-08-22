@@ -184,7 +184,7 @@ class Ion_auth
 					$message = $this->load->view($this->config->item('email_templates', 'ion_auth').$this->config->item('email_forgot_password', 'ion_auth'), $data, true);
 					$this->mailer
 						 	->to($data['identity'])
-							->from('support@<domain_name>.com')
+							->from('support@fabel.us')
 							->subject("Password reset requested")
 							->html($message);
 					if ($this->mailer->send())
@@ -252,7 +252,7 @@ class Ion_auth
 
 				$this->mailer
 						->to($data['identity'])
-						->from('support@<domain_name>.com')
+						->from('support@fabel.us')
 						->subject("Password successfully changed")
 						->html($message);
 				if ($this->mailer->send())
@@ -382,7 +382,7 @@ class Ion_auth
 				return $id;
 				// // $this->mailer
 				// // 		->to($data['identity'])
-				// // 		->from('Registration@<domain_name>.com')
+				// // 		->from('Registration@fabel.us')
 				// // 		->subject("Account successfully created")
 				// // 		->html($message);
 				//

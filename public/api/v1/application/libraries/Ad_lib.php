@@ -211,8 +211,8 @@ class Ad_lib
                 $link_data = new LinkData();
                 $link_data->setData(array(
                     LinkDataFields::MESSAGE    => $submission->text,
-                    LinkDataFields::LINK       => 'https://<domain_name>.com/contest/' . $contest->id,
-                    LinkDataFields::CAPTION    => 'https://<domain_name>.com/',
+                    LinkDataFields::LINK       => 'https://fabel.us/contest/' . $contest->id,
+                    LinkDataFields::CAPTION    => 'https://fabel.us/',
                     LinkDataFields::IMAGE_HASH => $image->{AdImageFields::HASH},
                 ));
 
