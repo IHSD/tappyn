@@ -47,7 +47,7 @@
             <div class="modal_bot">
                 <div class="form-group">
                     <div ng-hide="payment_obj.re_ab">
-                      <p class="text-center" style="font-size:18px; font-weight:bold;">We recommend a budget of $50 to receive significant results.</p>
+                        <p class="text-center" style="font-size:18px; font-weight:bold;">We recommend a budget of $50 to receive significant results.</p>
                         <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
                         <div class="col-xs-8">
                             <label for="ab-aday" class="control-label">Input a larger budget if you'd like more data or continue to start testing:</label>
@@ -128,23 +128,28 @@
     </div>
     <div class='container'>
         <div class='row' ng-if='user.type == "member"'>
+            <div ng-show="member_filter">
+                <span ng-repeat="(_filter,_count) in member_filter">
+                    <sapn ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}}({{_count}})</span>
+                </span>
+            </div>
             <div class='col-sm-4 hidden-xs'>
-                <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
                     <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
             <div class='col-sm-4 hidden-xs'>
-                <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
                     <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
             <div class='col-sm-4 hidden-xs'>
-                <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in dash.submissions'>
+                <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
                     <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
             <div class='col-xs-12 visible-xs'>
-                <div class="contest-box row" ng-repeat='submission in dash.submissions'>
+                <div ng-if="show_submission(submission)" class="contest-box row" ng-repeat='submission in dash2'>
                     <div ng-include src="'templates/submits/dashsubmit.html'"></div>
                 </div>
             </div>
@@ -174,9 +179,9 @@
                     <td>{{contest.status | capUnderscore}}</td>
                     <td>{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                     <td>
-                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
-                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
-                      <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                     </td>
                 </tr>
             </table>
@@ -225,15 +230,15 @@
             <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box'>
                 <div class="container">
                     <div class='row'>
-                      <div ng-show="winner_contest.status == 'testing'">
-                        <!--<a class='btn btn-oj btn-lg pull-right' href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>Questions?</a>-->
+                        <div ng-show="winner_contest.status == 'testing'">
+                            <!--<a class='btn btn-oj btn-lg pull-right' href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>Questions?</a>-->
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
-                        <a class='btn btn-oj btn-lg pull-right' href='/edit/{{winner_contest.id}}'>Edit Campaign</a>
+                            <a class='btn btn-oj btn-lg pull-right' href='/edit/{{winner_contest.id}}'>Edit Campaign</a>
                         </div>
                         <div ng-show="winner_contest.status == 'draft'">
-                          <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')">Launch Now <span class="glyphicon glyphicon-flash"></span></a>
-                          <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/launch/{{winner_contest.id}}'>Edit Campaign</a>
+                            <a ng-if='winner_contest.paid == "0"' class='btn btn-oj btn-lg pull-right' ng-click="open_payment(winner_contest,'launch')">Launch Now <span class="glyphicon glyphicon-flash"></span></a>
+                            <a class='btn btn-oj btn-secondary btn-lg pull-right' href='/launch/{{winner_contest.id}}'>Edit Campaign</a>
                         </div>
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
                         </div>
@@ -244,49 +249,48 @@
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
-                        <div class='text-left'  ng-show="winner_contest.status == 'draft'">
-                          <h4 class='text-left' style='color:#333'>
+                        <div class='text-left' ng-show="winner_contest.status == 'draft'">
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Start receiving ads by launching your campaign.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
-                          <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;'>
                               <strong>Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_testing' && view != 'pcp'">
-                          <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'testing'">
-                          <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;'>
                               <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results.</span></strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                          <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Please select your favorite ad, and we'll transfer you the copyright.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
-                          <h4 class='text-left' style='color:#333'>
+                            <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Your campaign is completed.</strong>
                             </span>
                           </h4>
                         </div>
-
                     </div>
                 </div>
             </div>
