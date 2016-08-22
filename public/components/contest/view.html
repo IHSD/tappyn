@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class='col-sm-3 col-xs-12 text-right col-sm-offset-9'>
-                    <h2 style='color:#019F6E;margin-top: 10px;'>${{contest.prize}}</h2>
+                    <h2 style='color:#333;margin-top: 10px;'>${{contest.prize}}</h2>
                     <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
                     <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
                     <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
@@ -47,16 +47,16 @@
         <div class='col-xs-12 col-md-5'>
             <div class='launch-page-box launch-preview'>
                 <div class='col-xs-12'>
-                    <h3 style='margin-bottom: 0;'>About</h3>
+                    <h3 style='margin-bottom: 0;'>Our Business</h3>
                     <p>{{contest.summary}}</p>
-                    <h3 style='margin-bottom: 0;'>How We're Different</h3>
+                    <h3 style='margin-bottom: 0;'>Our Difference</h3>
                     <p>{{contest.different}}</p>
                 </div>
                 <div ng-show="contest.additional_info" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
                     <!--<h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
                   -->
-                    <h3 style='margin-bottom: 0;'>What We're Looking For</h3>
+                    <h3 style='margin-bottom: 0;'>Our Style</h3>
                     <p ng-if='contest.additional_info'>
                         {{contest.additional_info}}
                     </p>
@@ -193,25 +193,25 @@
                                         <div class="col-xs-12">
                                             <div class="check col-xs-6">
                                                 <ul class="col-xs-12">
-                                                    <li>Draw from your personal experiences</li>
-                                                    <li>Talk like you're talking to a friend.</li>
-                                                    <li>Use specific moment.</li>
-                                                    <li>Be original.</li>
-                                                    <li>Check your work!</li>
+                                                    <li style="padding-bottom:5px;">Draw from your personal experiences</li>
+                                                    <li style="padding-bottom:5px;">Talk like you're talking to a friend.</li>
+                                                    <li style="padding-bottom:5px;">Use specific moment.</li>
+                                                    <li style="padding-bottom:5px;">Be original.</li>
+                                                    <li style="padding-bottom:5px;">Check your work!</li>
                                                 </ul>
                                             </div>
                                             <div class="check col-xs-6">
                                                 <ul class="col-xs-12">
-                                                    <li>Don't use exclamation points!</li>
-                                                    <li>Don't use CAPS lock.</li>
-                                                    <li>Don't sound Sam the Salesman.</li>
-                                                    <li>Don't focus on rhyming or puns.</li>
+                                                    <li style="padding-bottom:5px;">Don't use exclamation points!</li>
+                                                    <li style="padding-bottom:5px;">Don't use CAPS lock.</li>
+                                                    <li style="padding-bottom:5px;">Don't sound Sam the Salesman.</li>
+                                                    <li style="padding-bottom:5px;">Don't focus on rhyming or puns.</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#019F6E;border-color:#019F6E;">Our complete ad creation guide</button>
+                                        <p class="text-center">Looking for more? Check out our complete guide <a style="cursor:pointer;" onclick="location.href = 'https://fabel.us/guide';">here</a>.</p>
                                     </div>
                                 </div>
                             </div>

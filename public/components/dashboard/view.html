@@ -50,7 +50,7 @@
                         <p class="text-center" style="font-size:18px; font-weight:bold;">We recommend a budget of $50 to receive significant results.</p>
                         <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
                         <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label">Input a larger budget if you'd like more data or continue to start testing:</label>
+                            <label for="ab-aday" class="control-label">How much would you like to spend testing?</label>
                         </div>
                     </div>
                     <div ng-show="payment_obj.re_ab">
@@ -165,8 +165,8 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "Complete"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
@@ -223,7 +223,7 @@
                     <h4 style="font-size:22px;">After you launch your campaign, this is where your ads will appear.</h4>
                 </span>
                     <span ng-show="winner_contest.status =='live'">
-                    <h4 style="font-size:22px;">Your campaign is currently live.</h4>
+                    <h4 style="font-size:22px;">Your campaign is currently live. As soon as it starts receiving ads, you'll see them here.</h4>
                 </span>
                 </div>
             </div>
@@ -243,7 +243,7 @@
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Save & Start Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Continue <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
@@ -273,7 +273,7 @@
                         <div class='text-left' ng-show="winner_contest.status == 'testing'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;'>
-                              <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results.</span></strong>
+                              <strong>Your ads are currently being tested. Please check back in 24 hours for results.</strong>
                             </span>
                           </h4>
                         </div>
@@ -286,7 +286,7 @@
                         </div>
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
                               <strong>Your campaign is completed.</strong>
                             </span>
                           </h4>
