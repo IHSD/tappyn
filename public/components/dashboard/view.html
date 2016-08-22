@@ -170,8 +170,8 @@
                         <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
-                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}}</span>
-                          <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft</span>
+                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}} - </span>
+                          <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft - </span>
                           <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"' style="cursor:default;">No stop : Draft</span>
                       </small>
@@ -179,8 +179,8 @@
                     <td style="cursor:default;">{{contest.status | capUnderscore}}</td>
                     <td style="cursor:default;">{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                     <td>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "Complete" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                     </td>
                 </tr>
@@ -300,7 +300,7 @@
                     <div class='contest-box row' style="padding:10px;">
                         <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
                             <div class='col-xs-12 text-left' style="margin-bottom:10px;">
-                                <span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
+                                <span style='color:#333;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
                             </div>
                             <div class='contest-image'>
                                 <img ng-src='{{winner.winner.attachment}}'>
