@@ -10,7 +10,7 @@
         <div class="modal_bot">
             <div class="voucher-group row" ng-show='payment_obj.voucher_visible'>
                 <p class='col-xs-12' ng-show='reduction'><strong class='pull-left'>Voucher Discount</strong><span class='pull-right'>-{{reduction | currency}}</span></p>
-                <p class='col-xs-12' ng-show='reduction'><span class="alert alert-success">Your first month is on us. We hope you enjoy it!</span></p>
+                <p class='col-xs-12' ng-show='reduction' style="padding-top:5px;padding-bottom:10px;"><span class="alert alert-success">Your first month is on us. We hope you enjoy it!</span></p>
                 <form class='form' ng-submit='get_price("check_voucher")'>
                     <div class='form-group col-sm-7 col-xs-12' style='padding-left: 0;'>
                         <input class='form-control' ng-model='payment_obj.voucher_code' type='text' placeholder='Voucher Code'>
