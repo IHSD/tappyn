@@ -145,7 +145,7 @@ class Submissions extends CI_Controller
 
         if ($this->ion_auth->in_group(3)) {
             $this->responder->fail(
-                "Only members of Tappyn are allowed to submit to contests."
+                "Only members of Fabel are allowed to submit to contests."
             )->code(403)->respond();
             return;
         }

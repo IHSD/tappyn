@@ -1842,7 +1842,7 @@ button {
 }
 
  .accordion > .accordion-title:hover,.accordion > .accordion-title:focus{
-    color: #FF5E00;
+    color: #06883F;
   }
   :last-child > .accordion-title {
     border-bottom-width: 0; }
@@ -1863,7 +1863,7 @@ button {
   .is-active > .accordion-title::before {
     content: '–'; }
 .accordion-title:focus, .is-active > .accordion-title {
-  color: #FF5E00;
+  color: #06883F;
 }
 .accordion-content {
   padding: 0 1.5rem 0.5rem;
@@ -2083,7 +2083,7 @@ button {
     width: 0;
     height: 0;
     border: inset 5px;
-    border-color: #ff5e00 transparent transparent;
+    border-color: #06883F transparent transparent;
     border-top-style: solid;
     position: absolute;
     top: 0.825rem;
@@ -2509,7 +2509,7 @@ body {
       }
   .pagination .current {
     padding: 0.1875rem 0.625rem;
-    background: #ff5e00;
+    background: #06883F;
     color: #fff;
     cursor: default; }
   .pagination .disabled {
@@ -2557,7 +2557,7 @@ body {
   display: block;
   width: 0%;
   height: 100%;
-  background-color: #ff5e00;
+  background-color: #06883F;
   }
   .progress-meter .progress-meter-text {
     position: absolute;

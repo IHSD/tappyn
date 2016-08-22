@@ -36,7 +36,7 @@ $config['email_program']['contest_closing']['additional_data'] = array();
  */
 $config['email_program']['winner_announced']['template']     = 'email_templates/winner_announced';
 $config['email_program']['winner_announced']['from']         = 'austin@tappyn.com';
-$config['email_program']['winner_announced']['subject']      = "%s has just Tapped ads in their campaign!";
+$config['email_program']['winner_announced']['subject']      = "%s has just purchased ads in their campaign!";
 $config['email_program']['winner_announced']['query_string'] = array(
     'utm_source'   => 'newsletter',
     'utm_medium'   => 'email',
@@ -136,7 +136,7 @@ $config['email_program']['contest_completed']['additional_data'] = array();
  */
 $config['email_program']['submission_chosen']['template']     = 'email_templates/submission_chosen';
 $config['email_program']['submission_chosen']['from']         = 'austin@tappyn.com';
-$config['email_program']['submission_chosen']['subject']      = "Your ad has been Tapped!";
+$config['email_program']['submission_chosen']['subject']      = "Your ad has been purchased!";
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source'  => 'transaction',
     'utm_medium'  => 'email',

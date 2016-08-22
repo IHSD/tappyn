@@ -32,7 +32,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>1 ) <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'Verify your email!'); ?></p><br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>2 ) Read the submission guide before you begin submitting. It's pretty much essential to create an awesome. The guide can be found on every contest brief page or through <a href="https://tappyn.com/guide">this link</a>.</p><br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>3 ) Always read the contest's Target Audience and Creative Direction. This info can be easily found in a company's brief on the left side of any contest page. Companies are often looking for specific content, and this information will increase the chances of your ad being Tapped.</p>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>3 ) Always read the contest's Target Audience and Creative Direction. This info can be easily found in a company's brief on the left side of any contest page. Companies are often looking for specific content, and this information will increase the chances of your ad being purchased.</p>
 <br>
 <!-- End Bordered-box -->
 

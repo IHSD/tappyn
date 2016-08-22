@@ -47,6 +47,7 @@
             <div class="modal_bot">
                 <div class="form-group">
                     <div ng-hide="payment_obj.re_ab">
+                      <p class="text-center" style="font-size:18px; font-weight:bold;">We recommend a budget of $50 to receive significant results.</p>
                         <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
                         <div class="col-xs-8">
                             <label for="ab-aday" class="control-label">Input a larger budget if you'd like more data or continue to start testing:</label>
@@ -159,12 +160,12 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <a ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
-                        <a ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
-                        <a ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='color:#ff5c00;cursor: pointer;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</a>
+                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "draft"' style='color:#019F6E;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
-                          <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span>
+                          <span ng-if='contest.status != "draft"'>{{contest.start_time | dashDate}}</span> -
                           <span ng-if='contest.status == "draft"'>No start : Draft</span> -
                           <span ng-if='contest.status != "draft"'>{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"'>No stop : Draft</span>
@@ -253,11 +254,11 @@
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
                           <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;'>
-                              <strong>Once you receive 30 ads, we'll begin testing.<br>It shouldn't take more than a few days.</strong>
+                              <strong>Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.</strong>
                             </span>
                           </h4>
                         </div>
-                        <div class='text-left' ng-show="winner_contest.status == 'pending_testing'">
+                        <div class='text-left' ng-show="winner_contest.status == 'pending_testing' && view != 'pcp'">
                           <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>

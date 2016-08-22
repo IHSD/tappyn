@@ -21,10 +21,10 @@ $query_string['redirect'] = 'dashboard';
 <p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
 
 <?php $query_string['redirect'] = 'ended/' . $contest->id;?>
-<p style='text-align:left;margin:auto;width:600px'>Check out your ad's Click Through Rate and all of the Tapped ads <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'here'); ?>.</p>
+<p style='text-align:left;margin:auto;width:600px'>Check out your ad's Click Through Rate and all of the purchased ads <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'guide';?>
-<p style='text-align:left;margin:auto;width:600px'>Wondering why your ad wasn't Tapped? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'here'); ?>.</p>
+<p style='text-align:left;margin:auto;width:600px'>Wondering why your ad wasn't purchased? Take a look at our creative guide to learn more about what makes a great ad <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'here'); ?>.</p>
 <br>
 <?php $query_string['redirect'] = 'contests';?>
 <p style='text-align:left;margin:auto;width:600px'>Or you can see some of our <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'new campaigns'); ?>.<br/></p>

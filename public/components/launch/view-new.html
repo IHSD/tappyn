@@ -2,7 +2,7 @@
     <div class='modal_actions col-xs-12' ng-show='company_login'>
         <div class='modal_inner col-xs-12 col-sm-7 col-md-5 col-lg-4 text-center'>
             <div class='close_circle' ng-click='close_company_login()'>x</div>
-            <img src="public/img/TappynLogo2.png" width='70' style='margin-bottom:20px;'>
+            <img src="public/img/beta_logo.png" width='200' style='margin-bottom:20px;'>
             <div ng-show='!forgot'>
                 <form class='form' ng-submit="launch_log_in(identity, password)">
                     <div class='form-group'>
@@ -32,37 +32,37 @@
 </div>
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
-        <div class='col-xs-12 col-sm-9 text-left'>
+        <div class='col-xs-12 col-sm-6 text-left'>
             <div ng-show='current.step == "tp-prior"'>
-                <h2 style="font-weight:600;">Who is your audience?</h2>
+                <h2 style="font-weight:400;">Who is your audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
             <div ng-show='current.step == "detail"'>
-                <h2 style="font-weight:600;">Your brand profile.</h2>
+                <h2 style="font-weight:400;">Your brand profile.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
             <div ng-show='current.step == "preview"'>
-                <h2 style="font-weight:600;">Your campaign preview.</h2>
+                <h2 style="font-weight:400;">Your campaign preview.</h2>
                 <h4>Please read over your details, and make sure everthing looks the way you like.</h4>
             </div>
             <div ng-show='current.step == "subscription"'>
-                <h2 style="font-weight:600;">Which plan would you like?</h2>
+                <h2 style="font-weight:400;">Which plan would you like?</h2>
                 <h4>To work with our creators, choose a plan that works for you.</h4>
             </div>
             <div ng-show='current.step == "done"'>
-                <h2 style="font-weight:600;">Congratulations!</h2>
+                <h2 style="font-weight:400;">Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
         <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
-            <h4 class="text-center" style="font-size:16px;color:#333;">Order Summary</h4>
+            <h4 class="text-center" style="font-size:16px;color:#333;font-weight:400;">Order Summary</h4>
             <ul style="padding-right:20px;padding-left:5px;">
-                <li style="font-size:14px;color:#333;">Copy <span class="pull-right">$24.99</span></li>
-                <li style="font-size:14px;color:#333;">Testing <span class="pull-right">$15.00</span></li>
-                <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;">Photo <span class="pull-right">$20.00</span></li>
-                <li ng-show="chosen_sub == '10' && current.step == 'subscription'" style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$39.99</span></li>
-                <li ng-show="chosen_sub == '20' && current.step == 'subscription'" style="font-size:14px;color:#333;">Premium Membership <span class="pull-right">$119.99</span></li>
-                <li ng-show="chosen_sub == '30' && current.step == 'subscription'" style="font-size:14px;color:#333;">Standard Membership <span class="pull-right">$299.99</span></li>
+                <li style="font-size:14px;color:#333;font-weight:300;">Copy <span class="pull-right">$24.99</span></li>
+                <li style="font-size:14px;color:#333;font-weight:300;">Testing <span class="pull-right">$15.00</span></li>
+                <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;font-weight:300;">Photo <span class="pull-right">$20.00</span></li>
+                <li ng-show="chosen_sub == '10' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Standard Membership <span class="pull-right">$39.99</span></li>
+                <li ng-show="chosen_sub == '20' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Premium Membership <span class="pull-right">$119.99</span></li>
+                <li ng-show="chosen_sub == '30' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Standard Membership <span class="pull-right">$299.99</span></li>
                 <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
                 <li style="font-size:16px;color:#333;">Order Total:
                     <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$39.99</span>
@@ -75,6 +75,16 @@
                     <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
                 </li>
             </ul>
+        </div>
+        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3">
+            <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
+            <p>
+            Fully Refundable.<br>
+            You don't like it?<br>
+            You don't pay for it.<br>
+            Period.
+            </p>
+        </center>
         </div>
         <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
@@ -90,7 +100,7 @@
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12">
         <div class="row">
             <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
-                <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
@@ -109,7 +119,7 @@
         </div>
             <div class="row" style="padding-top:40px;">
                 <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
-                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10">
                     <form class="form-inline ng-pristine ng-valid" role="form">
@@ -162,14 +172,14 @@
             </div>
             <div class='row' style="padding-bottom:200px;padding-top:40px;">
                 <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
-                    <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10">
                     <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                        <h4 class='text-center' style="cursor:default;">I'd Like To Receive Photos <span><small>$20</small></span></h4>
+                        <h4 class='text-center' style="cursor:default;">I Need Photos People Love<span><small>$20</small></span></h4>
                     </div>
                     <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
-                        <h4 class='text-center' style="cursor:default;">I'd Like To Upload A Photo</h4>
+                        <h4 class='text-center' style="cursor:default;">I Have A Photo People Love</h4>
                     </div>
                     <div class="col-sm-10" ng-show="contest.chosen_creative == true">
                         <div class="form-group" ng-init="contest.attachment = ''">
@@ -192,7 +202,7 @@
                 </div>
                 <div ng-show="showOptions">
                     <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                        <span class="glyphicon glyphicon-question-sign" style="font-size:10px;position:relative;top:-10px;"></span>
+                        <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                     </label>
                     <div class="col-sm-10 col-md-5">
                         <div class="form-group">
@@ -214,23 +224,26 @@
                 <div class="form-group">
                     <a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>
                     <!--<h4><strong>Create New Business Account</strong></h4>-->
-                    <h5><strong>Company Email</strong></h5>
+                    <h4>Company Email</h4>
                     <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h5><strong>Password</strong></h5>
+                    <h4>Password</h4>
                     <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h5><strong>Company Name</strong></h5>
+                    <h4>Company Name</h4>
                     <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h5><strong>Company Logo</strong></h5>
-                    <input ng-file-select='select_logo($files, contest)' type='file'>
+                    <h4>Company Logo</h4>
+                    <input ng-file-select='select_logo($files, contest)' type='file' required>
+                </div>
+                <div class='form-group'>
+                    <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
                 </div>
                 <div class="form-group">
-                    <h5><strong>Company Website</strong></h5>
+                    <h4>Company Website</h4>
                     <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
                 </div>
             </div>
@@ -239,16 +252,16 @@
             <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Product/Service</label>
             <div class="col-sm-9">
                 <div class="form-group">
-                    <h4><strong>Summary of product or service</strong></h4>
+                    <h4>Summary of product or service</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                 </div>
                 <div class="form-group">
-                    <h4><strong>Describe what makes you different (and better) than your competition.</strong></h4>
+                    <h4>Describe what makes you different (and better) than your competition.</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
-                    <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> Be as clear and definitive as possible to allow for the best ads.</p>
+                    <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best ads.</p>
                 </div>
             </div>
         </div>
@@ -260,14 +273,14 @@
             <div class="col-xs-8 col-xs-offset-2">
                 <div class='launch-page-box launch-preview'>
                     <div class='row row-preview1'>
-                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Target Interest:</h3>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Interest:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}</span></p>
                         </div>
                     </div>
                     <hr>
                     <div class='row row-preview2'>
-                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Target Audience:</h3>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Audience:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <p>
                                 <span>{{contest.min_age}}-{{contest.max_age}}</span>
@@ -281,7 +294,7 @@
                     </div>
                     <hr>
                     <div class='row row-preview2'>
-                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Target Location:</h3>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Location:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <p>{{contest.location_box.text}}</p>
                             <p><span ng-repeat="_location in contest.location">{{locations[_location]}}</span></p>
@@ -289,14 +302,14 @@
                     </div>
                     <hr>
                     <div class='row row-preview2'>
-                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Platform:</h3>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Platform:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <p>{{contest.platform}}</p>
                         </div>
                     </div>
                     <hr>
                     <div class='row row-preview2'>
-                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight: bold;">Ad Photo:</h3>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Ad Photo:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <div ng-show="contest.photo">
                                 <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
@@ -328,7 +341,7 @@
                                     </div>
                                     <div class="price">
                                         <!--<h3 style="font-size:34;text-decoration:line-through;">$120</h3>-->
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:bold;"><span class="symbol">$</span>39</h3>
+                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>39</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For individuals just starting advertising.</p>
                                         <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
@@ -357,13 +370,13 @@
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
                                 <div class="plan recommended" style="padding-bottom:5px;">
                                     <!-- style="height:635px;"-->
-                                    <div class="head" style="background:#f7a000;">
+                                    <div class="head" style="background:#019F6E;">
                                         <h2 style="font-size:18px;">Premium</h2>
                                     </div>
                                     <div class="price" style="border-top:none;">
                                         <!--style="margin-top:80px;"-->
                                         <!--<h3 style="font-size:34;text-decoration:line-through;">$300</h3>-->
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:bold;"><span class="symbol">$</span>119</h3>
+                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>119</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For teams looking to explore new marketing perspectives.</p>
                                         <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
@@ -390,13 +403,13 @@
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
                                 <div class="plan last" style="padding-bottom:5px;">
                                     <!-- style="height:618px;"-->
-                                    <div class="head" style="background:#f72200;">
+                                    <div class="head" style="background:#018880;">
                                         <h2 style="font-size:18px;">Platinum</h2>
                                     </div>
                                     <div class="price">
                                         <!-- style="margin-top: 121px;"-->
                                         <!--<h3 style="font-size:34;text-decoration:line-through;">$299</h3>-->
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:bold;"><span class="symbol">$</span>299</h3>
+                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>299</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For departments looking looking to expand and accelerate new audiences.</p>
                                         <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
@@ -481,7 +494,7 @@
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          <strong>100% Money Back guarantee</strong>
+         81% of consumers ignore ads they find irrelevant.
         </span>
         </h4>
             </div>
@@ -489,7 +502,7 @@
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          <strong>You'll only have to do this once.</strong>
+          You'll only have to do this once.
         </span>
         </h4>
             </div>
@@ -497,7 +510,7 @@
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          <strong>All packages are billed monthly, so you can cancel anytime.</strong>
+          All packages are billed monthly, so you can cancel anytime.
         </span>
         </h4>
             </div>
@@ -505,7 +518,7 @@
                 <h4 class='text-left' style='color:#333'>
           <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          <strong>People are 23% more likely to enjoy ads they find relevant.</strong>
+          People are 23% more likely to enjoy ads they find relevant.
         </span>
         </h4>
             </div>
@@ -529,7 +542,7 @@ $(function() {
 <style>
 .target-label {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .payment .form-control {
@@ -568,16 +581,16 @@ li.value-list:before {
 
 .btn-sel {
     background: #fff;
-    color: #ff5c00;
-    border: 1px solid #ff5c00
+    color: #019F6E;
+    border: 1px solid #019F6E
 }
 
 .btn-sel:hover {
-    color: #ff5c00;
+    color: #019F6E;
 }
 
 .btn-sel:focus {
-    color: #ff5c00 !important;
+    color: #019F6E !important;
 }
 
 .payment-method-actions {
@@ -605,7 +618,7 @@ hr {
     font-size: 1.25em;
     font-weight: 500;
     color: white;
-    background-color: #ff5c00;
+    background-color: #019F6E;
     display: inline-block;
     cursor: pointer;
     padding: 7px 14px;
@@ -619,16 +632,16 @@ hr {
 
 .circle-it-oj {
     padding: 10px;
-    border: solid 1px #ff5c00;
+    border: solid 1px #019F6E;
     border-radius: 30px;
-    background: #ff5c00;
+    background: #019F6E;
     color: #fff;
     float: left;
     margin-right: 20px;
 }
 
 .control-label {
-    font-weight: bold;
+    font-weight: 400;
     font-size: 20px;
     text-align: right !important;
 }

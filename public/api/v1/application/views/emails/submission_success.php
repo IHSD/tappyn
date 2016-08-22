@@ -27,8 +27,6 @@ if(!isset($contest) ||
 
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Boom. You're confirmed.</h2>
 
-<h3 style='text-align:center;margin:auto;min-width:450px;width:50%'>You just Tapped In</h3>
-
 <p style='text-align:center;margin:auto;width:600px'>Great news - your ad to Tappyn has been confirmed. Yup - it's go time.</p><br>
 
 <p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the ad you submitted to us:</p><br>

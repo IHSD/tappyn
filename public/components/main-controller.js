@@ -16,6 +16,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
     $scope.locations = tappyn_var.get('locations');
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
+    $scope.login_scope = {};
+    $scope.registrar = {};
 
     $scope.set_payment_obj_default = function() {
         $scope.payment_obj = { price: 0, voucher_code: '', re_ab: 0, h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };
@@ -419,6 +421,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.log_out = function() {
         AppFact.loggingOut().success(function(response) {
             $rootScope.user = null;
+            $scope.login_scope = {};
             sessionStorage.removeItem('user');
             window.Intercom('shutdown');
             $location.path("/home");
