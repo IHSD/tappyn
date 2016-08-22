@@ -35,13 +35,8 @@ $config['email_program']['contest_closing']['additional_data'] = array();
  * Sent when a winner has been selected for a contest
  */
 $config['email_program']['winner_announced']['template']     = 'email_templates/winner_announced';
-<<<<<<< HEAD
-$config['email_program']['winner_announced']['from']         = 'austin@tappyn.com';
 $config['email_program']['winner_announced']['subject']      = "%s has just purchased ads in their campaign!";
-=======
 $config['email_program']['winner_announced']['from']         = 'austin@fabel.us';
-$config['email_program']['winner_announced']['subject']      = "%s has just Tapped ads in their campaign!";
->>>>>>> update_domain_name
 $config['email_program']['winner_announced']['query_string'] = array(
     'utm_source'   => 'newsletter',
     'utm_medium'   => 'email',
@@ -140,13 +135,8 @@ $config['email_program']['contest_completed']['additional_data'] = array();
  * Let a winner know that their submission has won
  */
 $config['email_program']['submission_chosen']['template']     = 'email_templates/submission_chosen';
-<<<<<<< HEAD
-$config['email_program']['submission_chosen']['from']         = 'austin@tappyn.com';
 $config['email_program']['submission_chosen']['subject']      = "Your ad has been purchased!";
-=======
 $config['email_program']['submission_chosen']['from']         = 'austin@fabel.us';
-$config['email_program']['submission_chosen']['subject']      = "Your ad has been Tapped!";
->>>>>>> update_domain_name
 $config['email_program']['submission_chosen']['query_string'] = array(
     'utm_source'  => 'transaction',
     'utm_medium'  => 'email',
