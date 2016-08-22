@@ -7,13 +7,53 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.confirm_ab = { show: false };
     $scope.now_model = '';
     $scope.voucher = { visible: false };
+    $scope.member_filter = {};
+    $scope.member_filter_chose = 'all';
+    $scope.dash2 = [];
+
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
-            if (response.success) $scope.dash = response.data;
-            else alert(response.message);
+            if (response.success) {
+                $scope.dash = response.data;
+                $scope.dash2 = $scope.refresh_member_filter($scope.dash);
+            } else alert(response.message);
         } else if (response.http_status_code == 500) alert(response.error);
         else $scope.check_code(response.http_status_code);
     });
+
+
+    $scope.refresh_member_filter = function(newValue) {
+        $scope.member_filter = {};
+        var data = [];
+        if (newValue && newValue.submissions) {
+            for (var i = 0; i < newValue.submissions.length; i++) {
+                $scope.member_filter['all'] = ($scope.member_filter['all']) ? $scope.member_filter['all'] + 1 : 1;
+                var contest_status = newValue.submissions[i].contest.status;
+                $scope.member_filter[contest_status] = ($scope.member_filter[contest_status]) ? $scope.member_filter[contest_status] + 1 : 1;
+                if ($scope.show_submission(newValue.submissions[i])) {
+                    data.push(newValue.submissions[i]);
+                }
+            }
+        }
+        return data;
+    };
+
+    $scope.set_member_filter = function(type) {
+        $scope.member_filter_chose = type;
+        $scope.dash2 = $scope.refresh_member_filter($scope.dash);
+    }
+
+    $scope.show_submission = function(submission) {
+        if ($scope.member_filter_chose == 'all') {
+            return true;
+        }
+
+        if (submission && submission.contest && submission.contest.status && submission.contest.status == $scope.member_filter_chose) {
+            return true;
+        }
+
+        return false;
+    }
 
     $scope.submission_headline_act = function(submission, act) {
         if (act == 'edit') {
@@ -123,13 +163,21 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
         if (type == "upvotes") {
             dashFactory.grabUpvoted().success(function(response) {
-                if (response.success) $scope.dash = response.data;
+                if (response.success) {
+                    $scope.dash = response.data;
+                    $scope.dash2 = $scope.refresh_member_filter($scope.dash);
+                }
             });
         } else {
             dashFactory.grabDash(type).success(function(response) {
-                if (response.success) $scope.dash = response.data;
+                if (response.success) {
+                    $scope.dash = response.data;
+                    $scope.dash2 = $scope.refresh_member_filter($scope.dash);
+                }
             });
         }
+
+
         $scope.view = 'table';
     }
     $scope.view = "table";
