@@ -251,7 +251,7 @@
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Continue <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                            <button data-toggle="modal" href="#myModalconfirm" class='btn btn-oj btn-lg pull-right' type='button'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
