@@ -132,8 +132,11 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             }
             contest.no_payment = 1;
         } else if (type =="confirm_selection") {
+            if (contest.submission_ids.length != 1) {
+                $scope.set_alert("Please select 1", "error");
+                return;
+            }
             $scope.set_model('confirm_select');
-            return;
         } else if (type == 'confirm_ab' || type == 'confirm_re_ab') {
             if (contest.submission_ids.length == 0) {
                 $scope.set_alert("Please select 1 at least", "error");
