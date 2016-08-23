@@ -132,8 +132,11 @@
         <div class='row' ng-if='user.type == "member"'>
             <div class="text-center" ng-show="member_filter" style="padding-bottom:20px;">
                 <span ng-repeat="(_filter,_count) in member_filter">
-                    <span class="dash-black" ng-click="set_member_filter(_filter)" style="cursor:pointer;font-size:22px;padding-right:20px;">{{_filter | capUnderscore}}({{_count}})</span>
+                    <span class="dash-stat" ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}}({{_count}})</span>
                 </span>
+                <a href="/faq" target="_blank">
+                  <span class="glyphicon glyphicon-question-sign" style="font-size: 18;top: -10px;color: #333;"></span>
+                </a>
             </div>
             <div class='col-sm-4 hidden-xs'>
                 <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
@@ -248,7 +251,7 @@
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Continue <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button data-toggle="modal" href="#myModalconfirm" class='btn btn-oj btn-lg pull-right' type='button'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
