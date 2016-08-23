@@ -17,63 +17,26 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
-    <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
-        <div class="modal-content">
-            <div class="modal-header" style="border:none;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
-        </div>
-  <div class="modal-body text-center" style="1px solid #FF5c00;">
-    <h4>Are you sure you want to select this ad?</h4>
-  </div>
-  <div class="modal-footer" style="border-top:none;">
-    <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
-  </div>
-</div>
-</div>
-</div>
-
 <!--Start Old AB Modal-->
 <div class='wrapper'>
-    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_ab'">
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_select'">
         <div class="payment_modal">
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
-                <h3><strong>A/B Testing</strong></h3>
+                <h3><strong>Confirm Ad Selection</strong></h3>
                 <h4 ng-if="winner_contest.submission_ids.length > 1">You’ve selected {{winner_contest.submission_ids.length}} ads.</h4>
                 <h4 ng-if="winner_contest.submission_ids.length == 1">You’ve selected {{winner_contest.submission_ids.length}} ad.</h4>
             </div>
             <div class="modal_bot">
-                <div class="form-group">
-                    <div ng-hide="payment_obj.re_ab">
-                        <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
-                        <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label">How much would you like to spend testing?</label>
-                        </div>
-                    </div>
-                    <div ng-show="payment_obj.re_ab">
-                        <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like.</p>
-                        <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label">How much would you like to spend testing?</label>
-                        </div>
-                    </div>
-                    <div class="input-group col-xs-4" style="padding-top:5px;">
-                        <div class="input-group-addon">$</div>
-                        <input type="number" ng-model="payment_obj.ab_aday" id="ab-aday" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <p class="col-xs-12" style="font-size:12px;">
-                      <small>
-                            *We recommend a budget of $50 to receive significant results. All traffic is linked directly to your website. Each test will last approximately 24 hours.
-                      </small>
-                    </p>
-                    <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-6 col-xs-offset-3">Continue</button>
-                </div>
-            </div>
+              <div class="modal-body text-center" style="1px solid #FF5c00;">
+                <h4>Are you sure you want to select this ad?</h4>
+              </div>
+              <div class="modal-footer" style="border-top:none;">
+                <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
+              </div>
         </div>
     </div>
+  </div>
 </div>
 <!--End OLD AB MODAL-->
 <div class="modal fade" id="myModalcompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabelcompany" aria-hidden="true">
@@ -251,7 +214,7 @@
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Continue <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"confirm_selection")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
