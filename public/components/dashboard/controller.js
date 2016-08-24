@@ -6,6 +6,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.confirm_winner = { show: false, submission: null };
     $scope.confirm_ab = { show: false };
     $scope.confirm_select = { show: false };
+    $scope.learn = { show:false };
     $scope.now_model = '';
     $scope.voucher = { visible: false };
     $scope.member_filter = {};
@@ -72,6 +73,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 else $scope.check_code(response.http_status_code);
             });
         }
+    }
+
+    $scope.showlearn = function() {
+        $scope.set_model('learn');
     }
 
     $scope.submission_text_act = function(submission, act) {
