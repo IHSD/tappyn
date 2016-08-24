@@ -216,6 +216,9 @@ class Submissions extends CI_Controller
             ));
 
             $this->notification->create($this->ion_auth->user()->row()->id, 'submission_confirmed', 'submission', $sid);
+            $post          = $this->input->post();
+            $post['photo'] = '';
+            error_log('submission ' . $sid . ' created,post ' . json_encode($post));
         } else {
             $this->responder->fail(
                 ($this->submission_library->errors() ? $this->submission_library->errors() : 'An unknown error occured')
