@@ -1,8 +1,11 @@
 <IfModule mod_rewrite.c>
 RewriteEngine On
 
-RewriteCond %{HTTP_HOST} ^www\.fabel\.us$ [NC]
-RewriteRule ^(.*)$ https://fabel.us/$1 [R=301,L]
+# Due to domain change, check if we are not currently on fabel.us
+# and redirect if necessary
+<If "%{HTTP_HOST} != 'fabel.us'">
+    Redirect / https://fabel.us
+</If>
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
