@@ -18,6 +18,27 @@
     </div>
 </div>
 <!--Start Old AB Modal-->
+<div class="modal fade" id="myModallearn" tabindex="-1" role="dialog" aria-labelledby="myModalLabelcompany" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 1px solid #FF5C00;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-center" id="myModalLabelcompany">How do I choose the best ad?</h4>
+            </div>
+            <div class="modal-body-sub text-center">
+                <p style="margin:0 0 0 0">
+                    Before you select an ad to own, you need to decide what makes a great ad.
+                    <br>
+                    CTR, Clicks, Spent, CPC, Cost Per Conversion, Conversion Rate...Facebook and other platforms offer so many metrics that it can be overwhelming. Also, sometimes, they can be contradictory. Unless you're an expert, we suggest that you pick one single metric that you'll use to judge your tests.
+                    <br>
+                    For most of our campaigns, we suggest using the Click Through Rate (CTR). It's straightforward and one of the most impactful for the growth of your business. If you care more about volume of traffic instead of traffic quality, however, Cost Per Click might be a better metric for you.
+                </p>
+            </div>
+            <div class="modal-footer-sub text-right">
+            </div>
+        </div>
+    </div>
+</div>
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_select'">
         <div class="payment_modal">
@@ -248,7 +269,7 @@
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Please select your favorite ad, and we'll transfer you the copyright.</strong>
+                              <strong>Please choose your favorite ad. Learn more about our metrics <a href="#myModallearn">here</a>.</strong>
                             </span>
                           </h4>
                         </div>
@@ -334,11 +355,11 @@ $('#myModalnew').on('hide.bs.modal', function() {
 })
 </script>
 <script>
-$('#myModalconfirm').on('show.bs.modal', function() {
+$('#myModallearn').on('show.bs.modal', function() {
     $('.container').addClass('blur');
 })
 
-$('#myModalconfirm').on('hide.bs.modal', function() {
+$('#myModallearn').on('hide.bs.modal', function() {
     $('.container').removeClass('blur');
 })
 </script>
