@@ -171,6 +171,14 @@ class Submissions extends CI_Controller
             return;
         }
 
+        $headline = $this->input->post('headline');
+        if (!$headline && $contest->platform == 'facebook') {
+            $this->responder->fail(
+                "Headline is required!"
+            )->code(500)->respond();
+            return;
+        }
+
         $attachment_url = null;
         if ($this->input->post('photo')) {
 
@@ -191,7 +199,7 @@ class Submissions extends CI_Controller
             }
         }
 
-        if ($sid = $this->submission_library->create($contest_id, $this->input->post('headline'), $this->input->post('text'), $this->input->post('link_explanation'), $attachment_url)) {
+        if ($sid = $this->submission_library->create($contest_id, $headline, $this->input->post('text'), $this->input->post('link_explanation'), $attachment_url)) {
             // If this submission would cap the contest, we set the contesst to end in 1 day!
             if (($contest->submission_count + 1) == $contest->submission_limit) {
                 $this->contest->update($contest_id, array('stop_time' => date('Y-m-d H:i:S', strtotime('+1 day'))));
