@@ -337,7 +337,7 @@ class Companies extends CI_Controller
                     break;
 
                 default:
-                    $this->responder->fail('Missing parameters!')->code(500)->respond();
+                    //$this->responder->fail('Missing parameters!')->code(500)->respond();
                     break;
             }
         }
