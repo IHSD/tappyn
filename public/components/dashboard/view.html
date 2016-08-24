@@ -85,13 +85,11 @@
         <div class="payment_modal">
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
-                <h3><strong>Confirm Ad Selection</strong></h3>
-                <h4 ng-if="winner_contest.submission_ids.length > 1">You’ve selected {{winner_contest.submission_ids.length}} ads.</h4>
-                <h4 ng-if="winner_contest.submission_ids.length == 1">You’ve selected {{winner_contest.submission_ids.length}} ad.</h4>
+                <h3><strong>Select Ownership</strong></h3>
             </div>
             <div class="modal_bot">
               <div class="modal-body text-center" style="1px solid #FF5c00;">
-                <h4>Are you sure you want to select this ad?</h4>
+                <h4>Are you sure you want to select this ad to own?</h4>
               </div>
               <div class="modal-footer" style="border-top:none;">
                 <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
@@ -316,7 +314,7 @@
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;'>
-                              <strong>Your campaign is completed.</strong>
+                              <strong>Congratulations! You now own an ad your audience will love. Start growing your business by using it!</strong>
                             </span>
                           </h4>
                         </div>
