@@ -5,6 +5,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.adding_payment = { show: false, id: '' };
     $scope.confirm_winner = { show: false, submission: null };
     $scope.confirm_ab = { show: false };
+    $scope.confirm_select = { show: false };
+    $scope.learn = { show:false };
     $scope.now_model = '';
     $scope.voucher = { visible: false };
     $scope.member_filter = {};
@@ -73,6 +75,10 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         }
     }
 
+    $scope.showlearn = function() {
+        $scope.set_model('learn');
+    }
+
     $scope.submission_text_act = function(submission, act) {
         if (act == 'edit') {
             submission.text_temp = submission.text;
@@ -130,6 +136,9 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             contest.no_payment = 1;
+        } else if (type =="confirm_selection") {
+            $scope.set_model('confirm_select');
+            return;
         } else if (type == 'confirm_ab' || type == 'confirm_re_ab') {
             if (contest.submission_ids.length == 0) {
                 $scope.set_alert("Please select 1 at least", "error");

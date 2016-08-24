@@ -33,23 +33,23 @@
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
         <div class='col-xs-12 col-sm-6 text-left'>
-            <div ng-show='current.step == "tp-prior"'>
+            <div ng-show='current.step == "tp-prior"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Who is your audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
-            <div ng-show='current.step == "detail"'>
+            <div ng-show='current.step == "detail"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Your brand profile.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
-            <div ng-show='current.step == "preview"'>
+            <div ng-show='current.step == "preview"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Your campaign preview.</h2>
                 <h4>Please read over your details, and make sure everthing looks the way you like.</h4>
             </div>
-            <div ng-show='current.step == "subscription"'>
+            <div ng-show='current.step == "subscription"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Which plan would you like?</h2>
                 <h4>To work with our creators, choose a plan that works for you.</h4>
             </div>
-            <div ng-show='current.step == "done"'>
+            <div ng-show='current.step == "done"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
             </div>
@@ -176,7 +176,7 @@
                 </label>
                 <div class="col-sm-10">
                     <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                        <h4 class='text-center' style="cursor:default;">I Need Photos People Love<span><small>$20</small></span></h4>
+                        <h4 class='text-center' style="cursor:default;">I Need Photos People Love<span style="padding-left:10px;font-size:14px;">$20</span></h4>
                     </div>
                     <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
                         <h4 class='text-center' style="cursor:default;">I Have A Photo People Love</h4>
@@ -184,7 +184,7 @@
                     <div class="col-sm-10" ng-show="contest.chosen_creative == true">
                         <div class="form-group" ng-init="contest.attachment = ''">
                             <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                            <p style="font-size:12px;"><small>Tip: Try to select a photo of people benefiting from using your product or service.</small></p>
+                            <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
                             <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                         </div>
                         <div class="row form-group" ng-show="new_img">

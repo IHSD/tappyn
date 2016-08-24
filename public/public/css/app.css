@@ -3670,13 +3670,25 @@ hr.style-two {
     font-weight: 500;
 }
 
+.dash-stat {
+    cursor:pointer;
+    font-size:18px;
+    border:1px solid #333;
+    color: #333;
+    padding:5px;
+}
+
 .dash-black {
     color: #333;
     cursor: pointer;
 }
 
-.dash-black:hover {
+.dash-stat:hover {
+    cursor:pointer;
+    font-size:18px;
+    border:1px solid #019F6E;
     color: #019F6E;
+    padding:5px;
 }
 
 .dash-oj {

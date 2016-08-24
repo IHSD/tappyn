@@ -26,21 +26,17 @@
                             <h3 style='margin-top:0px;'><img ng-if='!contest.company.logo_url' style='height:auto;' width='50px' src="public/img/contest-default.jpg">
             <img ng-if='contest.company.logo_url' style='height:auto;' width='50px' src="{{contest.company.logo_url}}">{{contest.company.name}}</h3>
                         </div>
-                        <div class='col-sm-4 col-xs-12' style='padding-top:30px;'>
+                        <div class='col-sm-5 col-xs-12' style='padding-top:30px;'>
                             <div style='width:100%'>
                                 <uib-progressbar value='contest.submission_count' max='30' type="warning"></uib-progressbar>
                                 <p class="progress-meter-text text-center" style='margin:0px;'>{{contest.submission_count | number}} of 30 entries total</p>
                             </div>
                         </div>
-                        <div class='col-sm-1 col-xs-6'>
-                            <h1 class='text-right' style='color:#ff6c00'>$20</h1>
-                        </div>
                         <div class='col-sm-3 col-xs-6 text-right'>
-                            <h4 style='margin:0px;margin-top:20px;'>
-                    Ended {{contest.stop_time | untilFilter}} ago
-            </h4>
-                            <h4>{{contest.views}} Views</h4>
-                            <h4 style='margin:0px;'>{{contest.platform | capitalize}}</h4>
+                            <h2 style='color:#333;margin-top: 10px;'>${{contest.prize}}</h2>
+                            <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
+                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
+                            <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
                         </div>
                     </div>
                 </div>
@@ -50,13 +46,13 @@
             <div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='!contest.payout'>
                 <div class="contest-box row">
                     <div class='col-xs-12 text-center'>
-                        <h3>The company is still choosing an ad for this campaign.</h3>
-                        <h4>Check back soon!</h4>
+                        <h3>This business is currently reviewing their ads.</h3>
+                        <h4>Please check back in a few days!</h4>
                     </div>
                 </div>
             </div>
             <div class='col-sm-4 col-sm-offset-4 col-xs-12' ng-if='contest.payout'>
-                <h2 class="text-center" style="font-weight:300;">Congratulations!</h2>
+                <h2 class="text-center" style="font-weight:300;">Congratulations, {{winner.first_name}}!</h2>
                 <div class="contest-box row">
                     <div class='contest-image'>
                         <img ng-src='{{winner.attachment}}'>
@@ -77,7 +73,7 @@
                             <img ng-src='{{winner.avatar_url}}' src='public/img/avatar.png' alt=''>
                         </div>
                         <h5 class='winner-name'> {{winner.first_name}} {{winner.last_name | firstChar}}.</h5>
-                        <span class='winner-tag'>Winner</span>
+                        <span class='winner-tag'>Purchased</span>
                         <div ng-if="winner.test_result.impressions">
                             <span data-toggle="modal" href="#myModalnew" ng-bind="winner.test_result.ctr + '%'" class='contest-ctr ' ng-if='winner.test_result.ctr ' style="cursor:help;"></span>
                             <span data-toggle="modal" href="#myModalnew" ng-bind="winner.test_result.ctr" class='contest-ctr ' ng-if='!winner.test_result.ctr ' style="cursor:help;">-</span>

@@ -6,34 +6,17 @@
                 <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
             </div>
             <div class="modal-body-sub text-center">
-                <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to Tapp. (The higher the better!)</p>
+                <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
                 <br>
                 <p style="margin:0 0 0 0">Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
                 <br>
             </div>
             <div class="modal-footer-sub text-right">
-                <button class="btn btn-primary" onclick="location.href = 'https://tappyn.com/guide';" style="background-color:#FF5C00;border-color:#FF5C00;">How do I write a great copy?</button>
+                <p class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="myModalconfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabelconfirm" aria-hidden="true">
-    <div class="modal-dialog" style="border:1px solid #ccc;border-radius:6px;">
-        <div class="modal-content">
-            <div class="modal-header" style="border:none;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3 class="modal-title text-center" id="myModalLabelnew">Confirm Ad Selection<h3>
-        </div>
-  <div class="modal-body text-center" style="1px solid #FF5c00;">
-    <h4>Are you sure you want to select this ad?</h4>
-  </div>
-  <div class="modal-footer" style="border-top:none;">
-    <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
-  </div>
-</div>
-</div>
-</div>
-
 <!--Start Old AB Modal-->
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_ab'">
@@ -47,16 +30,15 @@
             <div class="modal_bot">
                 <div class="form-group">
                     <div ng-hide="payment_obj.re_ab">
-                        <p class="text-center" style="font-size:18px; font-weight:bold;">We recommend a budget of $50 to receive significant results.</p>
                         <p class="text-center" style="font-size:18px; font-weight:bold;">The first $15 in testing is on us.</p>
                         <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label">Input a larger budget if you'd like more data or continue to start testing:</label>
+                            <label for="ab-aday" class="control-label">How much would you like to spend?</label>
                         </div>
                     </div>
                     <div ng-show="payment_obj.re_ab">
                         <p class="text-center" style="font-size:18px; font-weight:bold;">Re-test as many ads as you'd like.</p>
                         <div class="col-xs-8">
-                            <label for="ab-aday" class="control-label" style="text-align:right;">Input your own budget to get started:</label>
+                            <label for="ab-aday" class="control-label">How much would you like to spend?</label>
                         </div>
                     </div>
                     <div class="input-group col-xs-4" style="padding-top:5px;">
@@ -65,8 +47,13 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <p class="col-xs-12" style="font-size:12px;"><small>All traffic is linked directly to your website.</small></p>
-                    <p class="col-xs-12" style="font-size:12px;"><small>Each test will last approximately 24 hours.</small></p>
+                    <p class="col-xs-12" style="font-size:12px;">
+                      <small>
+                        All traffic is linked directly to your website.
+                        Each test will last approximately 24 hours.
+                        We recommend a budget of $50 to receive significant results.
+                      </small>
+                    </p>
                     <button ng-click="open_payment(winner_contest,'ab')" class="btn btn-oj col-xs-6 col-xs-offset-3">Continue</button>
                 </div>
             </div>
@@ -74,6 +61,47 @@
     </div>
 </div>
 <!--End OLD AB MODAL-->
+<div class='wrapper'>
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'learn'">
+        <div class="payment_modal">
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h4 class="modal-title">How do I choose the best ad?</h4>
+            </div>
+            <div class="modal_bot">
+              <div class="modal-body text-center" style="1px solid #FF5c00;">
+                <p>
+                    Before you select an ad to own, you need to decide what makes a great ad.
+                </p>
+                <p>
+                    CTR, Clicks, Spent, CPC, Cost Per Conversion, Conversion Rate...Facebook and other platforms offer so many metrics that it can be overwhelming. Also, sometimes, they can be contradictory. Unless you're an expert, we suggest that you pick one single metric that you'll use to judge your tests.
+                </p>
+                <p>
+                    For most of our campaigns, we suggest using the Click Through Rate (CTR). It's straightforward and one of the most impactful for the growth of your business. If you care more about volume of traffic instead of traffic quality, however, Cost Per Click might be a better metric for you.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class='wrapper'>
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'confirm_select'">
+        <div class="payment_modal">
+            <div class="modal_top text-center">
+                <div class='close_circle' ng-click='set_model()'>x</div>
+                <h3><strong>Select Ownership</strong></h3>
+            </div>
+            <div class="modal_bot">
+              <div class="modal-body text-center" style="1px solid #FF5c00;">
+                <h4>Are you sure you want to select this ad to own?</h4>
+              </div>
+              <div class="modal-footer" style="border-top:none;">
+                <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
+              </div>
+        </div>
+    </div>
+  </div>
+</div>
 <div class="modal fade" id="myModalcompany" tabindex="-1" role="dialog" aria-labelledby="myModalLabelcompany" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -128,10 +156,13 @@
     </div>
     <div class='container'>
         <div class='row' ng-if='user.type == "member"'>
-            <div ng-show="member_filter" style="padding-bottom:20px;">
+            <div class="text-center" ng-show="member_filter" style="padding-bottom:20px;">
                 <span ng-repeat="(_filter,_count) in member_filter">
-                    <span class="dash-black" ng-click="set_member_filter(_filter)" style="cursor:pointer;font-size:22px;padding-right:20px;">{{_filter | capUnderscore}}({{_count}})</span>
+                    <span class="dash-stat" ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}}({{_count}})</span>
                 </span>
+                <a href="/faq" target="_blank">
+                  <span class="glyphicon glyphicon-question-sign" style="font-size: 18;top: -10px;color: #333;"></span>
+                </a>
             </div>
             <div class='col-sm-4 hidden-xs'>
                 <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
@@ -165,13 +196,13 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "purchased" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
-                        <span ng-if='contest.status == "purchased"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "Complete"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.platform | capitalize}} - {{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
-                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}}</span>
-                          <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft</span>
+                          <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}} - </span>
+                          <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft - </span>
                           <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"' style="cursor:default;">No stop : Draft</span>
                       </small>
@@ -179,8 +210,8 @@
                     <td style="cursor:default;">{{contest.status | capUnderscore}}</td>
                     <td style="cursor:default;">{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                     <td>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "purchased" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "purchased"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "Complete" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                     </td>
                 </tr>
@@ -223,11 +254,11 @@
                     <h4 style="font-size:22px;">After you launch your campaign, this is where your ads will appear.</h4>
                 </span>
                     <span ng-show="winner_contest.status =='live'">
-                    <h4 style="font-size:22px;">Your campaign is currently live.</h4>
+                    <h4 style="font-size:22px;">Your campaign is currently live. As soon as it starts receiving ads, you'll see them here.</h4>
                 </span>
                 </div>
             </div>
-            <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box'>
+            <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box' style="height:70px;">
                 <div class="container">
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
@@ -243,10 +274,10 @@
                         <div ng-show="view == 'pcp' && !winner_contest.status == 'draft'">
                         </div>
                         <div ng-show="winner_contest.status == 'pending_testing'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Save & Start Test <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_ab')">Continue <span class="glyphicon glyphicon-share-alt" style="padding-bottom:8px;"></span></button>
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
-                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"purchase")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
+                            <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"confirm_selection")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
                             <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
@@ -258,7 +289,7 @@
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;'>
+                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
                               <strong>Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.</strong>
                             </span>
                           </h4>
@@ -272,22 +303,22 @@
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'testing'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;'>
-                              <strong>Your ads are currently being tested.<br><span style="font-size:18px;">Please check back in 24 hours for results.</span></strong>
+                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                              <strong>Your ads are currently being tested. Please check back in 24 hours for results.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Please select your favorite ad, and we'll transfer you the copyright.</strong>
+                                <strong>Please choose your favorite ad. Learn more about our metrics <span ng-click="showlearn()" style="cursor:pointer;color:#019F6E;">here</a>.</strong>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Your campaign is completed.</strong>
+                              <strong>Congratulations! You now own an ad your audience will love. Start growing your business by using it!</strong>
                             </span>
                           </h4>
                         </div>
@@ -300,7 +331,7 @@
                     <div class='contest-box row' style="padding:10px;">
                         <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
                             <div class='col-xs-12 text-left' style="margin-bottom:10px;">
-                                <span style='color:#ff5c00;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
+                                <span style='color:#333;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
                             </div>
                             <div class='contest-image'>
                                 <img ng-src='{{winner.winner.attachment}}'>
@@ -366,11 +397,11 @@ $('#myModalnew').on('hide.bs.modal', function() {
 })
 </script>
 <script>
-$('#myModalconfirm').on('show.bs.modal', function() {
+$('#myModallearn').on('show.bs.modal', function() {
     $('.container').addClass('blur');
 })
 
-$('#myModalconfirm').on('hide.bs.modal', function() {
+$('#myModallearn').on('hide.bs.modal', function() {
     $('.container').removeClass('blur');
 })
 </script>
@@ -442,7 +473,7 @@ window.Intercom('update');
 }
 
 .btn-dash:focus {
-    color: #ff5e00;
+    color: #019f6e;
 }
 
 .checkbox-container input[type="checkbox"]:hover + label span:hover {
