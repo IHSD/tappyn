@@ -1,18 +1,20 @@
-<div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
+<div class='wrapper'>
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'ctr_show'">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+                <div ng-click='set_model()' class="close">&times;</div>
+                <h4 class="modal-title text-center">This is your ad's CTR.</h4>
             </div>
-            <div class="modal-body text-center">
-                <p style="margin:0 0 0 0">The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them CTR of each. This is one of the primary ways they decide which ads to purchase.
-                    (The higher the better!)
-                    <br>
-                </p>
+            <div class="modal-body-sub text-center" style="padding:10px;">
+                <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
+                <br>
+                <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
+                <br>
             </div>
-            <div class="modal-footer text-right">
+                <div class="modal-footer-sub text-right" style="padding-bottom:10px;">
                 <p class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -45,17 +47,6 @@
 	    </div>
 	</div>
 </div>
-<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
-<script>
-$('#myModalnew').on('show.bs.modal', function () {
-	$('.container').addClass('blur');
-})
-
-$('#myModalnew').on('hide.bs.modal', function () {
-	$('.container').removeClass('blur');
-})
-</script>
 <script>
 fbq('track', 'PageView');
 window.Intercom('update');
@@ -73,12 +64,6 @@ addthis_share = {
 }
 </script>
 <style>
-.modal-open {
-  overflow:auto;
-}
-.blur {
-		-webkit-filter: blur(5px) grayscale(20%);
-}
 .modal-backdrop {
 	background-color: #fff;
 	opacity: 0.5;
@@ -95,13 +80,6 @@ addthis_share = {
 		border-top-left-radius: 6px;
 		border-top-right-radius: 6px;
 }
-.modal-body {
-	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
-	padding-top: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
-}
 
 .modal-content {
 		background-color: #f4f7f9;
@@ -110,19 +88,28 @@ addthis_share = {
 		box-shadow: none;
 }
 
+.modal-body-sub {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.modal-footer-sub {
+    border-top: none;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-top: 30px;
+}
+
 .modal-dialog {
 		color: #526880;
 }
 
-.modal-footer {
-	 border-top: none;
-	 border-left: 1px solid #ccc;
-	 border-right: 1px solid #ccc;
-	 border-bottom-left-radius: 6px;
-	 border-bottom-right-radius: 6px;
-	 border-bottom: 1px solid #ccc;
-	 padding-bottom: 10px;
-	 padding-right:10px;
-	 padding-top:30px;
-}
 </style>

@@ -5,6 +5,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.adding_payment = { show: false, id: '' };
     $scope.confirm_winner = { show: false, submission: null };
     $scope.confirm_ab = { show: false };
+    $scope.ctr_show = { show: false };
     $scope.confirm_select = { show: false };
     $scope.learn = { show:false };
     $scope.now_model = '';
@@ -77,6 +78,9 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     $scope.showlearn = function() {
         $scope.set_model('learn');
+    }
+    $scope.showctr = function() {
+        $scope.set_model('ctr_show');
     }
 
     $scope.submission_text_act = function(submission, act) {

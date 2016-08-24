@@ -19,12 +19,12 @@
     <h5 class='winner-name' ng-if="submission.owner.first_name"> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <h5 class='winner-name' ng-if="!submission.owner.first_name"> {{user.first_name}} {{user.last_name | firstChar}}.</h5>
     <div ng-if="submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+        <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+        <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="!submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+        <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+        <span ng-click="showctr()" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     </div>
     <div>
         <span class='winner-tag' style="border-radius:6px;">{{submission.contest.status | capUnderscore}}</span>

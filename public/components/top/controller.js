@@ -1,5 +1,7 @@
 tappyn.controller('topController', function($scope, $location, $rootScope, topFactory) {
 
+    $scope.ctr_show = { show: false };
+
     $scope.view_winners = function() {
         topFactory.grabWinners().success(function(response) {
             $scope.submissions = response.data.submissions;
@@ -24,6 +26,10 @@ tappyn.controller('topController', function($scope, $location, $rootScope, topFa
                 else $scope.check_code(response.http_status_code);
             })
         }
+    }
+
+    $scope.showctr = function() {
+        $scope.set_model('ctr_show');
     }
 
     $scope.share = function(submission) {

@@ -35,10 +35,10 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     }
 
     $scope.open_payment = function(contest, type) {
-        if ($scope.payment_obj.re_ab && $scope.payment_obj.ab_aday <= 0) {
-            $scope.set_alert("Please enter a integer number", "error");
-            return;
-        }
+        //if ($scope.payment_obj.re_ab && $scope.payment_obj.ab_aday <= 0) {
+            //$scope.set_alert("Please enterfdsafsf a integer number", "error");
+            //return;
+        //}
         $scope.payment_obj.contest_id = contest.id;
         $scope.payment_obj.h3 = ($scope.payment_obj.h3) ? $scope.payment_obj.h3 : 'Campaign Payment';
         $scope.payment_obj.h4 = ($scope.payment_obj.h4) ? $scope.payment_obj.h4 : $filter('capitalize')(contest.platform) + ' Campaign';

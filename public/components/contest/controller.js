@@ -1,6 +1,7 @@
 tappyn.controller('contestController', function($scope, $rootScope, $filter, $route, $anchorScroll, $routeParams, $upload, $location, emotions, contestFactory, contestModel, tappyn_var) {
     $scope.emotions = emotions;
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
+    $scope.ctr_show = { show: false };
     contestFactory.grabContest($routeParams.id).success(function(response) {
         $scope.contest = response.data.contest;
         $scope.submissions = response.data.submissions;
@@ -173,6 +174,10 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
     }
     $scope.hide_tips = function() {
         $scope.tips = false;
+    }
+
+    $scope.showctr = function() {
+        $scope.set_model('ctr_show');
     }
 
     var handleFileSelect = function(evt) {

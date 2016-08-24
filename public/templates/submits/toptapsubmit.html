@@ -35,12 +35,12 @@
         <span class="glyphicon glyphicon-pencil" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.ctr_average | number:2}}% Avg. CTR
     </div>
     <div ng-if="submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-        <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+        <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+        <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="!submission.test_result.impressions">
-        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+        <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
+        <span ng-click="showctr()" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
     </div>
     <!--<div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
         <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>

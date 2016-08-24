@@ -1,9 +1,9 @@
 <div class='container'>
-    <div class='row content-padding'>
+    <div class='row content-padding' style="padding-bottom:500px;">
         <ul class="list-style-form-nav">
             <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
-            <li ng-show='user.type=="member"'><a href="#mprofile" class='scrolling'>Account</a></li>
-            <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Account</a></li>
+            <li ng-show='user.type == "member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
+            <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
             <li ng-show='user.type == "company"'><a href="#sprofile" class='scrolling'>Plan</a></li>
             <li ng-show='user.type == "company"'><a href="#bprofile" class='scrolling'>Billing</a></li>
         </ul>
@@ -250,6 +250,7 @@
                         <div style="padding-bottom:20px;padding-left:20px;">
                             <p>We'll be sad to see you go, but you can</p>
                             <button class="btn btn-oj btn-md btn-secondary" ng-click="click_subscription('0')">Cancel your subscription here.</button>
+                            <p style="font-size:12px;"><small>*If you decide to cancel, your membership will be active for the rest of the current billing cycle, but you won't be charged again.</small></p>
                         </div>
                     </li>
                 </ul>
