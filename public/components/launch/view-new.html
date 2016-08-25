@@ -54,6 +54,18 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
+        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3">
+            <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
+            <p>
+                <small>
+                    Fully Refundable.<br>
+                    You don't like it?<br>
+                    You don't pay for it.<br>
+                    Period.
+                </small>
+            </p>
+        </center>
+        </div>
         <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
             <h4 class="text-center" style="font-size:16px;color:#333;font-weight:400;">Order Summary</h4>
             <ul style="padding-right:20px;padding-left:5px;">
@@ -75,18 +87,6 @@
                     <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
                 </li>
             </ul>
-        </div>
-        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3">
-            <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
-            <p>
-                <small>
-                    Fully Refundable.<br>
-                    You don't like it?<br>
-                    You don't pay for it.<br>
-                    Period.
-                </small>
-            </p>
-        </center>
         </div>
         <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
