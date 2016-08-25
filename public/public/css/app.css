@@ -3672,7 +3672,7 @@ hr.style-two {
 .dash-stat {
     cursor:pointer;
     font-size:18px;
-    border:1px solid #333;
+    border:1px solid #ccc;
     color: #333;
     background: #ccc;
     padding:5px;
@@ -3686,8 +3686,8 @@ hr.style-two {
 .dash-stat:hover {
     cursor:pointer;
     font-size:18px;
-    border:1px solid #019F6E;
-    color: #019F6E;
+    border:1px solid #333;
+    color: #333;
     padding:5px;
 }
 

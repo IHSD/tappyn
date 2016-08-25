@@ -123,38 +123,34 @@
             </div>
         </div>
         <div class='col-xs-12 col-sm-10 col-sm-offset-1' ng-if='user.type == "member"' style='margin-top:10px;'>
-            <div class='col-xs-12'>
-                <a href='/profile' class='btn btn-oj pull-right' style='margin-right:5px;margin-bottom:10px;'>Edit Profile</a>
-            </div>
-            <div class='col-xs-12'>
-                <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
-            </div>
-            <div class='col-xs-12' style='margin-bottom:-25px;'>
-                <hr style='border-color:#eee'>
-            </div>
-            <div class='col-xs-6 col-sm-4' style="cursor:default;">
-                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.submissions}}</h3>
-                <h3 class='text-center' style="margin-bottom:5px;">Ads</h3>
-            </div>
-            <div class='col-xs-6 col-sm-4' style="cursor:default;">
-                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.won}}</h3>
-                <h3 class='text-center' style="margin-bottom:5px;">Tapped</h3>
-            </div>
-            <div class='col-xs-6 col-sm-4' style="cursor:default;">
-                <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.upvotes}}</h3>
-                <h3 class='text-center' style="margin-bottom:5px;">Likes</h3>
-            </div>
-        </div>
+    <div class='col-xs-12'>
+        <a href='/profile' class='btn btn-oj pull-right' style='margin-right:5px;margin-bottom:10px;'>Edit Profile</a>
     </div>
+    <div class='col-xs-12'>
+        <h2 class='text-center'>{{user.first_name | capitalize}}</h2>
+    </div>
+    <div class='col-xs-12' style='margin-bottom:-25px;'>
+        <hr style='border-color:#eee'>
+    </div>
+    <div class='col-xs-6 col-sm-6' ng-class='{"dash-black" : type != "all", "dash-oj" : type == "all"}' ng-click='grab_dash("all")'>
+        <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.submissions}}</h3>
+        <h3 class='text-center' style="margin-bottom:5px;">Ads</h3>
+    </div>
+    <div class='col-xs-6 col-sm-6' ng-class='{"dash-black" : type != "winning", "dash-oj" : type == "winning"}' ng-click='grab_dash("winning")'>
+        <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.won}}</h3>
+        <h3 class='text-center' style="margin-bottom:5px;">Purchased</h3>
+    </div>
+</div>
+</div>
     <div class='container'>
         <div class='row' ng-if='user.type == "member"'>
-            <div class="text-left" ng-show="member_filter" style="padding-bottom:20px;">
+            <div class="text-left" ng-show="member_filter" style="padding-bottom:20px;padding-left:20px;">
                 <span ng-repeat="(_filter,_count) in member_filter">
-                    <span class="dash-stat" ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}}({{_count}})</span>
+                    <span class="dash-stat" ng-click="set_member_filter(_filter)">{{_filter | capUnderscore}} <span style="color:#777;font-size:14px;">({{_count}})</span></span>
                 </span>
-                <a href="/faq" target="_blank">
+                <!--<a href="/faq" target="_blank">
                   <span class="glyphicon glyphicon-question-sign" style="font-size: 16px;top: -10px;color: #333;"></span>
-                </a>
+              </a>-->
             </div>
             <div class='col-sm-4 hidden-xs'>
                 <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in dash2'>
