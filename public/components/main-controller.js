@@ -19,6 +19,23 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.login_scope = {};
     $scope.registrar = {};
 
+    $scope.close_modal = function() {
+        $scope.set_model();
+        $scope.signing_in = { show: false, type: '', object: '' };
+        $scope.add_interest = { show: false, type: '' };
+        $scope.registration = { show: false, type: '', object: '' };
+        $scope.add_age = false;
+        $scope.$apply();
+    }
+
+    $(".wrapper").on('click', '.modal_actions', function(event) {
+        if (event.target !== this) {
+            return;
+        }
+        $scope.close_modal();
+        $scope.$broadcast('closeModal');
+    });
+
     $scope.set_payment_obj_default = function() {
         $scope.payment_obj = { price: 0, voucher_code: '', re_ab: 0, h4: '', h3: '', voucher_visible: 0, save_method: false, hide_voucher: false };
     }
@@ -36,8 +53,8 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     $scope.open_payment = function(contest, type) {
         //if ($scope.payment_obj.re_ab && $scope.payment_obj.ab_aday <= 0) {
-            //$scope.set_alert("Please enterfdsafsf a integer number", "error");
-            //return;
+        //$scope.set_alert("Please enterfdsafsf a integer number", "error");
+        //return;
         //}
         $scope.payment_obj.contest_id = contest.id;
         $scope.payment_obj.h3 = ($scope.payment_obj.h3) ? $scope.payment_obj.h3 : 'Campaign Payment';
