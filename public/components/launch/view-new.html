@@ -329,7 +329,78 @@
         </div>
     </div>
 </div>
-<div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
+<div class="row" ng-show='current.step == "subscription"' style="padding-bottom:120px;">
+    <div class='col-sm-10 col-sm-offset-1 text-center'>
+    <table class='table table-hover' style='border-radius:5px;'>
+        <thead>
+            <tr>
+                <td class="text-center"></td>
+                <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;">Standard</td>
+                <td class="text-center" style="font-size:18px;background:#019F6E;color:#fff;">Premium</td>
+                <td class="text-center" style="font-size:18px;background:#018880;color:#fff;">Platinum</td>
+            </tr>
+        </thead>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Monthly price after 1 month free trial:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><p style="font-size:24px;">$39<br><span style="font-size:14px;">For individuals just starting advertising</span></p></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><p style="font-size:24px;">$119<br><span style="font-size:14px;">For teams looking to explore new marketing perspectives</span></p></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><p style="font-size:24px;">$299<br><span style="font-size:14px;">For departments looking looking to expand and accelerate new audiences</span></p></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Unlimited access to creators:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Creator targeting:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Money back guarantee:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Campaign testing limit:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><p style="font-size:18px;">$50</p></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><p style="font-size:18px;">$250</p></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><p style="font-size:18px;">Unlimited</p></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Optimized A/B testing:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#fff;color:#333;max-width:125px;"><p>Audience discovery:</p></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"></span></td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+        </tr>
+        <tr>
+            <td class="text-center" style="background:#EBEEF0;"></td>
+            <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
+                <button ng-show="chosen_sub == '0' || chosen_sub == '30' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '10'">Select</button>
+                <button ng-show="chosen_sub == '10'" type="button" class="btn btn-lg btn-sel sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+            </td>
+            <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
+                <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '30'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '20'">Select</button>
+                <button ng-show="chosen_sub == '20'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+            </td>
+            <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
+                <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '30'">Select</button>
+                <button ng-show="chosen_sub == '30'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+<!--<div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
     <div class="row">
         <div class='col-sm-10 col-sm-offset-1 text-center'>
             <div class="col-sm-12">
@@ -342,7 +413,7 @@
                                         <h2 style="font-size:18px;">Standard</h2>
                                     </div>
                                     <div class="price">
-                                        <!--<h3 style="font-size:34;text-decoration:line-through;">$120</h3>-->
+                                        <h3 style="font-size:34;text-decoration:line-through;">$120</h3>
                                         <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>39</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For individuals just starting advertising.</p>
@@ -371,13 +442,12 @@
                             </div>
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
                                 <div class="plan recommended" style="padding-bottom:5px;">
-                                    <!-- style="height:635px;"-->
+
                                     <div class="head" style="background:#019F6E;">
                                         <h2 style="font-size:18px;">Premium</h2>
                                     </div>
                                     <div class="price" style="border-top:none;">
-                                        <!--style="margin-top:80px;"-->
-                                        <!--<h3 style="font-size:34;text-decoration:line-through;">$300</h3>-->
+
                                         <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>119</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For teams looking to explore new marketing perspectives.</p>
@@ -404,13 +474,12 @@
                             </div>
                             <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
                                 <div class="plan last" style="padding-bottom:5px;">
-                                    <!-- style="height:618px;"-->
+
                                     <div class="head" style="background:#018880;">
                                         <h2 style="font-size:18px;">Platinum</h2>
                                     </div>
                                     <div class="price">
-                                        <!-- style="margin-top: 121px;"-->
-                                        <!--<h3 style="font-size:34;text-decoration:line-through;">$299</h3>-->
+
                                         <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>299</h3>
                                         <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
                                         <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For departments looking looking to expand and accelerate new audiences.</p>
@@ -437,14 +506,14 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
-                        <!-- row-->
+
                     </div>
-                    <!-- pricing-tables -->
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div>-->
 <div ng-show='current.step == "done"'>
     <div class="row">
         <div class='col-xs-12 text-center' style='padding-top:10px;'>
