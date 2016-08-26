@@ -71,7 +71,7 @@ class Outcrons extends CI_Controller
                 }
             }
             $slack_msg = '[payment][subscription] ' . $description . ' ' . $msg;
-            $this->slack->send($slack_msg);
+            //$this->slack->send($slack_msg);
             //var_dump($charge, $error);
         }
         //var_dump($this->db->last_query());
