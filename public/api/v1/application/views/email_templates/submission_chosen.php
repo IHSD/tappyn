@@ -20,9 +20,9 @@ $query_string['redirect'] = 'dashboard';
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Congratulations!</h2>
 <br>
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 
-<p style='text-align:left;margin:auto;width:600px'><?php echo $company->name; ?> has picked your awesome ad for their campaign, and they are sending $20 your way.</p>
+<p style='text-align:left;margin:auto;width:600px'><?php echo $company->name; ?> has picked your awesome ad for their campaign, and they are sending money your way.</p>
 <br>
 <p style='text-align:left;margin:auto;width:600px'>To collect your payment, head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and claim the payout for your ad. If you haven't yet,
     you'll need to set up your payout information, which takes only seconds. </p>
@@ -32,6 +32,6 @@ $query_string['redirect'] = 'dashboard';
 <br>
 <!-- End Email Content -->
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 
 <?php $this->load->view('email_templates/austin_footer'); ?>

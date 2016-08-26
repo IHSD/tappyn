@@ -18,7 +18,7 @@ $query_string['redirect'] = 'dashboard';
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'><?php echo $company->name; ?>'s campaign has ended</h2>
 <br>
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 
 <?php $query_string['redirect'] = 'ended/' . $contest->id;?>
 <p style='text-align:left;margin:auto;width:600px'>Check out your ad's Click Through Rate and all of the purchased ads <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'here'); ?>.</p>
@@ -30,7 +30,7 @@ $query_string['redirect'] = 'dashboard';
 <p style='text-align:left;margin:auto;width:600px'>Or you can see some of our <?php echo anchor('api/v1/analytics/click?' . http_build_query($query_string), 'new campaigns'); ?>.<br/></p>
 <br>
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 
 <!-- End Email Content -->
 

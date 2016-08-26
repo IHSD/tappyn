@@ -23,7 +23,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <br>
 
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 <!-- Bordered box -->
 
 <h4 style='text-align:center;margin:auto;min-width:450px;width:50%'>Fabel Guidelines</h4>
@@ -37,7 +37,7 @@ $query_string['redirect'] = 'api/v1/auth/activate/'.$uid.'/'.$activation;
 <!-- End Bordered-box -->
 
 <!-- Orange header -->
-<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #FF5E00'></p><br>
+<p style='text-align:center;margin:auto;min-width:450px;width:50%;border-bottom:2px solid #019F6E'></p><br>
 
 <!-- End Email Content -->
 
