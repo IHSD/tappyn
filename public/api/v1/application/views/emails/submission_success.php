@@ -22,7 +22,7 @@ if(!isset($contest) ||
 
 <br>
 <p style='width:100%;text-align:center'>
-    <img align='center' height='75' src="<?php echo base_url().'public/img/beta_logo.png'; ?>">
+    <img align='center' height='50' src="<?php echo base_url().'public/img/beta_logo.png'; ?>">
 </p>
 
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Boom. You're confirmed.</h2>

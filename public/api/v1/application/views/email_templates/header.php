@@ -8,7 +8,7 @@ if(!isset($query_string))
 ?>
 
 <p style='width:100%;text-align:center'>
-    <img align='center' height='75' src="https://fabel.us/public/img/beta_logo.png">
+    <img align='center' height='50' src="https://fabel.us/public/img/beta_logo.png">
 </p>
 
 
