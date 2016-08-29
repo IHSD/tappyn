@@ -116,7 +116,7 @@
         <div class='col-xs-12' ng-if='user.type == "company"'>
             <div class='col-xs-12'>
                 <div class="round-avatar"><img ng-src="{{dash.profile.logo_url}}" alt=""></div>
-                <h4 class='text-center'><span ng-bind="dash.contests.length"></span> Campaigns</h4>
+                <!--<h4 class='text-center'><span ng-bind="dash.contests.length"></span> Campaigns</h4>-->
                 <h2 class='text-center' style='font-weight: bold;'>{{user.first_name | capitalize}}</h2>
                 <div class="col-xs-12 col-sm-10 text-right">
                 </div>
@@ -317,50 +317,53 @@
                 <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
                     <button class='btn btn-oj btn-secondary' style="margin-bottom:30px;" ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                     <div class='contest-box row' style="padding:10px;">
-                        <div class='col-xs-12 col-sm-6 submission-text' style='border:1px solid #333;border-radius:7px;padding:5px;'>
-                            <div class='col-xs-12 text-left' style="margin-bottom:10px;">
-                                <span style='color:#333;'>{{user.first_name}}</span> &#8226; {{winner.contest.platform | capitalize}}
+
+
+                        <div class="contest-image">
+                            <img ng-src='{{winner.winner.attachment}}'>
+                        </div>
+                        <div class='contest-company text-left'>
+                            <span class='company-name'>from {{user.first_name}} &#8226; {{winner.contest.platform | capitalize}}</span>
+                        </div>
+                        <div class='contest-entry text-left'>
+                            <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
+                            <h4 ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
+                            <h4 ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
+                            <div class='contest-upvotes disable-click'>
+                                <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
                             </div>
-                            <div class='contest-image'>
-                                <img ng-src='{{winner.winner.attachment}}'>
+                        </div>
+                        <div class='contest-winner text-left'>
+                            <div class='avatar'>
+                                <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' alt=''>
                             </div>
-                            <div class='contest-entry text-left'>
-                                <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
-                                <h4 ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
-                                <h4 ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
-                                <div class='contest-upvotes disable-click'>
-                                    <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
-                                </div>
+                            <h5 class='winner-name'> {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
+                            <!--<span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>-->
+                            <div ng-if="submission.test_result.impressions">
+                                <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+                                <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
                             </div>
-                            <div class='contest-winner text-left'>
-                                <div class='avatar'>
-                                    <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' alt=''>
-                                </div>
-                                <h5 class='winner-name' style="font-weight:100;"> {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <div ng-if="submission.test_result.impressions">
-                                    <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-                                    <span data-toggle="modal" href="#myModalnew" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
-                                </div>
-                                <div ng-if="!submission.test_result.impressions">
-                                    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='winner.winner.ctr ' style="cursor:help;font-weight:100;">{{winner.winner.ctr}}%</span>
-                                    <span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!winner.winner.ctr ' style="cursor:help;font-weight:100;">-</span>
-                                </div>
-                                <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
-                                    <span uib-tooltip="Impressions" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
-                                    <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
-                                    <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
-                                </div>
+                            <div ng-if="!submission.test_result.impressions">
+                            <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{winner.winner.ctr}}%</span>
+                            <span ng-click="showctr()" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
+                            </div>
+                            <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
+                                <span uib-tooltip="Views" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
+                                <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
+                                <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
                             </div>
                         </div>
                         <div class='col-xs-12 col-sm-6'>
                             <h3>{{winner.contest.platform | capitalize}}</h3>
-                            <h4 ng-repeat="_industry in winner.contest.industry">{{industries[_industry]}}</h4>
-                            <h4>{{winner.contest.min_age}} to {{winner.contest.max_age}} <span ng-switch on="winner.contest.gender">
+                            <h4>
+                            <span ng-switch on="winner.contest.gender">
                               <span ng-switch-when="1">Men</span>
                               <span ng-switch-when="2">Women</span>
                               <span ng-switch-default>Men and Women</span>
                             </span>
+                            {{winner.contest.min_age}} to {{winner.contest.max_age}}
                             </h4>
+                            <h4 ng-repeat="_industry in winner.contest.industry">{{industries[_industry]}}</h4>
                             <h5>Started {{contest.start_time | dashDate}}</h5>
                             <h5>Ended {{contest.stop_time | dashDate}}</h5>
                             <br>
