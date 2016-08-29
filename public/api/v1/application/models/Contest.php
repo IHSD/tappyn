@@ -249,7 +249,7 @@ class Contest extends MY_Model
             $status = 'Complete';
         } else if ($contest->submission_count >= $contest->submission_limit || $contest->stop_time < date('Y-m-d H:i:s')) {
             $testing = $this->ad_model->is_testing_status($contest->id);
-            if ($testing) {
+            if ($testing && $contest->test_upload_time < $contest->test_start_time) {
                 $status = 'testing';
             } else if ($testing === null) {
                 $status = 'pending_testing';
