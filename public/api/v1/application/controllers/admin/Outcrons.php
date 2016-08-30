@@ -57,7 +57,7 @@ class Outcrons extends CI_Controller
             $contest_id  = $msg  = '';
             $token       = null;
             $metadata    = array();
-            $description = 'subscription crons user ' . $user_id . ' level ' . $data['next_level'];
+            $description = 'subscription payment for user: ' . $user_id . '. Current level: ' . $data['next_level'];
 
             $charge = $this->stripe_charge_library->create($contest_id, $token, $stripe_customer_id, $source_id, $amount, $metadata, $description);
             if ($charge === false) {
