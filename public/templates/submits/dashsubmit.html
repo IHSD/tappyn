@@ -2,6 +2,10 @@
     <a href="/ended/{{submission.contest.id}}"><img ng-src="{{submission.attachment}}"></a>
 </div>
 <div class="contest-company text-left">
+    <div class='avatar'>
+        <img ng-if='!submission.contest.company.logo_url' src="favicon.ico">
+        <img ng-if='submission.contest.company.logo_url' src="{{contest.company.logo_url}}">
+    </div>
     <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
 <div class='contest-entry text-left'>
