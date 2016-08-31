@@ -172,32 +172,7 @@
                 </form>
             </div>
         </div>
-        <div class='row' style="padding-bottom:200px;padding-top:40px;">
-            <label uib-tooltip="Select if you'd like us to supply your creative or if you already have one you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Creative
-                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
-            </label>
-            <div class="col-sm-10">
-                <div ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false'>
-                    <h4 class='text-center' style="cursor:default;">I Need Photos People Love<span style="padding-left:10px;font-size:14px;">$110</span></h4>
-                </div>
-                <div ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true'>
-                    <h4 class='text-center' style="cursor:default;">I Have A Photo People Love</h4>
-                </div>
-                <div class="col-sm-10" ng-show="contest.chosen_creative == true">
-                    <div class="form-group" ng-init="contest.attachment = ''">
-                        <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                        <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                    </div>
-                    <div class="row form-group" ng-show="new_img">
-                        <div class="col-sm-12 col-md-8">
-                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class='row' style="padding-top:40px;">
                 <div style="padding-bottom:20px;padding-left:10px;">
                     <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
@@ -335,7 +310,7 @@
             <thead>
                 <tr>
                     <td class="text-center"></td>
-                    <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;">Standard</td>
+                    <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;">Basic</td>
                     <td class="text-center" style="font-size:18px;background:#019F6E;color:#fff;">Premium</td>
                     <td class="text-center" style="font-size:18px;background:#018880;color:#fff;">Platinum</td>
                 </tr>
@@ -345,25 +320,17 @@
                     <p>Monthly price after 1 month free trial:</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$39
-                        <br><span style="font-size:14px;">For individuals just starting advertising</span></p>
+                    <p style="font-size:24px;">$59
+                        <br><span style="font-size:14px;">Text Only</span></p>
                 </td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$119
-                        <br><span style="font-size:14px;">For teams looking to explore new marketing perspectives</span></p>
+                    <p style="font-size:24px;">$149
+                        <br><span style="font-size:14px;">Photos & Text</span></p>
                 </td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$299
-                        <br><span style="font-size:14px;">For departments looking looking to expand and accelerate new audiences</span></p>
+                    <p style="font-size:24px;">$519
+                        <br><span style="font-size:14px;">Videos</span></p>
                 </td>
-            </tr>
-            <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Unlimited access to creators:</p>
-                </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
@@ -375,7 +342,7 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Money back guarantee:</p>
+                    <p>A/B Testing ($15 Included)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -383,21 +350,31 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Campaign testing limit:</p>
+                    <p>Unlimited Platforms</p>
                 </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
-                    <p style="font-size:18px;">$50</p>
-                </td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
-                    <p style="font-size:18px;">$250</p>
-                </td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
-                    <p style="font-size:18px;">Unlimited</p>
-                </td>
+                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Optimized A/B testing:</p>
+                    <p>Ad Copyright (1)</p>
+                </td>
+                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            </tr>
+            <tr>
+                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                    <p>Copies (30)</p>
+                </td>
+                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            </tr>
+            <tr>
+                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                    <p>Photos (30)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -405,30 +382,56 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Audience discovery:</p>
+                    <p>Videos (30)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
-                    </span>
-                </td>
+                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"></td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
+                <td class="text-center" style="background:#fff;color:#333;max-width:125px;border-top:1px solid #333;">
+                    <p>100% Money Back Guarantee</p>
+                </td>
+                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+            </tr>
+
+            <tr>
                 <td class="text-center" style="background:#EBEEF0;"></td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
-                    <button ng-show="chosen_sub == '0' || chosen_sub == '30' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '10'">Select</button>
-                    <button ng-show="chosen_sub == '10'" type="button" class="btn btn-lg btn-sel sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true' style="float:none;">Select</button>
+                    </center>
                 </td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
-                    <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '30'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '20'">Select</button>
-                    <button ng-show="chosen_sub == '20'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false' style="float:none;">Select</button>
+                    </center>
                 </td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
-                    <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '30'">Select</button>
-                    <button ng-show="chosen_sub == '30'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true' style="float:none;">Select</button>
+                    </center>
                 </td>
             </tr>
         </table>
+        <div class="col-sm-10" ng-show="contest.chosen_creative == true">
+            <div class="form-group" ng-init="contest.attachment = ''">
+                <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
+                <center>
+                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                </center>
+            </div>
+            <div class="row form-group" ng-show="new_img">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                        <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--<div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
@@ -572,16 +575,12 @@
                 <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
             <div ng-show='current.step == "preview"'>
-                <button ng-hide="user.subscription.can_launch" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Continue</button>
-                <button ng-show="user.subscription.can_launch && contest.chosen_creative == true" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
-                <button ng-show="user.subscription.can_launch && contest.chosen_creative == false" class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Continue</button>
                 <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
             </div>
             <div ng-show='current.step == "subscription"'>
-                <button ng-show="chosen_sub == '10'" class='btn btn-oj btn-lg pull-right' type='button' ng-click="click_subscription('10',more_action)">Continue</button>
-                <button ng-show="chosen_sub == '20'" class='btn btn-oj btn-lg pull-right' type='button' ng-click="click_subscription('20',more_action)">Continue</button>
-                <button ng-show="chosen_sub == '30'" class='btn btn-oj btn-lg pull-right' type='button' ng-click="click_subscription('30',more_action)">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("preview")'>Back</button>
             </div>
             <div ng-show='current.step == "done"'>
