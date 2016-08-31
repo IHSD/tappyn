@@ -6,7 +6,7 @@ class Price_lib
         'pay_contest_and_subscription' => '',
         'purchase'                     => 39.99,
         'ab'                           => 15,
-        'launch'                       => 39.99,
+        'launch'                       => 59.99,
         'subscription'                 => array(
             0  => 0,
             10 => 39,
@@ -141,7 +141,7 @@ class Price_lib
                             (isset($post['_contest']['photo']) && !$post['_contest']['photo']) ||
                             (isset($post['_contest']['use_attachment']) && !$post['_contest']['use_attachment'])
                         ) {
-                            $price = $price + 20;
+                            $price = $price + 90;
                         }
                     }
                     break;

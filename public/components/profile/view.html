@@ -4,7 +4,6 @@
             <li class='active'><a href="#basics" class='scrolling'>Account Basics</a></li>
             <li ng-show='user.type == "member"'><a href="#mprofile" class='scrolling'>Profile</a></li>
             <li ng-show='user.type == "company"'><a href="#cprofile" class='scrolling'>Profile</a></li>
-            <li ng-show='user.type == "company"'><a href="#sprofile" class='scrolling'>Plan</a></li>
             <li ng-show='user.type == "company"'><a href="#bprofile" class='scrolling'>Billing</a></li>
         </ul>
         <div class='col-sm-12 col-md-7 list-style-form-wrap'>
@@ -105,120 +104,6 @@
                 </ul>
             </form>
             <div class='form' ng-if='user.type == "company"'>
-                <ul class='list-style-form form-horizontal' id='sprofile'>
-                    <li class='section-title' style="padding-left:10px !important;">
-                        <h2>Current Plan</h2>
-                    </li>
-                    <li>
-                        <div class="form-group">
-                            <div class="pricing-tables attached">
-                                <div class="row">
-                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='10'">
-                                        <div class="plan first" style="padding-bottom:5px;">
-                                            <div class="head">
-                                                <h2>Standard</h2>
-                                            </div>
-                                            <div class="price">
-                                                <!--<h3 style="font-size:34;text-decoration:line-through;">$120</h3>-->
-                                                <h3><span class="symbol">$</span>39</h3>
-                                                <h4>per month</h4>
-                                                <p class="text-center" style="font-weight:bold;font-size:14px;">For individuals just starting advertising.</p>
-                                                <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                            </div>
-                                            <center>
-                                                <hr style="margin: 0 !important;width:75%;">
-                                            </center>
-                                            <ul class="item-list" style="text-align:left;padding-top:0px;padding-bottom:0px;">
-                                                <li style="font-weight:bold;">Standard Includes:</li>
-                                                <li>Unlimited Access To Audience-Generated Campaigns</li>
-                                                <li>Guranteed Satisfation</li>
-                                                <li>Creator Targeting</li>
-                                                <li>Up To $50 In Testing</li>
-                                            </ul>
-                                            <ul class="item-list">
-                                                <center>
-                                                    <hr style="margin: 0 !important;width:75%;">
-                                                </center>
-                                                <li style="padding-top:10px !important;text-align:center;padding-bottom:10px;">Money Back Guarantee</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("10",more_action)'>Select</button>
-                                            <p class="more-p now-level-p">Current Plan</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
-                                        <div class="plan recommended" style="padding-bottom:5px;">
-                                            <!-- style="height:635px;"-->
-                                            <div class="head" style="background:#019F6E;">
-                                                <h2>Premium</h2>
-                                            </div>
-                                            <div class="price" style="border-top:none;">
-                                                <!--style="margin-top:80px;"-->
-                                                <!--<h3 style="font-size:34;text-decoration:line-through;">$300</h3>-->
-                                                <h3><span class="symbol">$</span>119</h3>
-                                                <h4>per month</h4>
-                                                <p class="text-center" style="font-weight:bold;font-size:14px;">For teams looking to explore new marketing perspectives.</p>
-                                                <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                            </div>
-                                            <center>
-                                                <hr style="margin: 0 !important;width:75%;">
-                                            </center>
-                                            <ul class="item-list" style="text-align:left;padding-top:0px;padding-bottom:0px;">
-                                                <li style="font-weight:bold;">Everything In Standard And:</li>
-                                                <li>Up To $250 In Testing</li>
-                                                <li>Optimized A/B Testing Software</li>
-                                            </ul>
-                                            <ul class="item-list">
-                                                <center>
-                                                    <hr style="margin: 0 !important;width:75%;">
-                                                </center>
-                                                <li style="padding-top:10px !important;text-align:center;padding-bottom:10px;">Money Back Guarantee</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("20",more_action)'>Select</button>
-                                            <p class="more-p now-level-p">Current Plan</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
-                                        <div class="plan last" style="padding-bottom:5px;">
-                                            <!-- style="height:618px;"-->
-                                            <div class="head" style="background:#018880;">
-                                                <h2>Platinum</h2>
-                                            </div>
-                                            <div class="price">
-                                                <!-- style="margin-top: 121px;"-->
-                                                <!--<h3 style="font-size:34;text-decoration:line-through;">$299</h3>-->
-                                                <h3><span class="symbol">$</span>299</h3>
-                                                <h4>per month</h4>
-                                                <p class="text-center" style="font-weight:bold;font-size:14px;">For departments looking looking to expand and accelerate new audiences.</p>
-                                                <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                            </div>
-                                            <center>
-                                                <hr style="margin: 0 !important;width:75%;">
-                                            </center>
-                                            <ul class="item-list" style="text-align:left;padding-top:0px;padding-bottom:0px;">
-                                                <li style="font-weight:bold;">Everything In Premium And:</li>
-                                                <li>Up To $500 In Testing</li>
-                                                <li>Auidience Insights And Discovery</li>
-                                            </ul>
-                                            <ul class="item-list">
-                                                <center>
-                                                    <hr style="margin: 0 !important;width:75%;">
-                                                </center>
-                                                <li style="padding-top:10px !important;text-align:center;padding-bottom:10px;">Money Back Guarantee</li>
-                                            </ul>
-                                            <button type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click='click_subscription("30",more_action)'>Select</button>
-                                            <p class="more-p now-level-p">Current Plan</p>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                                <!-- row-->
-                            </div>
-                            <!-- pricing-tables -->
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <div class='form' ng-if='user.type == "company"'>
                 <ul class='list-style-form form-horizontal' id='bprofile'>
                     <li class='section-title' style="padding-left:10px !important;">
                         <h2>Billing</h2>
@@ -265,7 +150,6 @@
                     </li>
                     <li ng-hide="user.type == 'company'">
                         <label class='col-sm-4 control-label' style='text-align: left;padding-bottom:50px;'>Show All Campaigns
-
                         </label>
                         <div class='col-sm-8' style="padding-top:8px;">
                             <input type="checkbox" name="show_all_contest" ng-model="profile.show_all_contest" ng-true-value="'1'" ng-false-value="'0'">
