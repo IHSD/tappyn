@@ -47,7 +47,7 @@
             </div>
             <div ng-show='current.step == "subscription"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">You're almost there.</h2>
-                <h4>To work with our creators, choose a plan that works for you.</h4>
+                <h4>Different packages fit different needs. Find the one that works for you.</h4>
             </div>
             <div ng-show='current.step == "done"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Congratulations!</h2>
@@ -66,25 +66,16 @@
                 </p>
             </center>
         </div>
-        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+        <div ng-show="current.step == 'subscription' || curent.step == 'preview'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
             <h4 class="text-center" style="font-size:16px;color:#333;font-weight:400;">Order Summary</h4>
             <ul style="padding-right:20px;padding-left:5px;">
                 <li style="font-size:14px;color:#333;font-weight:300;">Copy <span class="pull-right">$44.99</span></li>
                 <li style="font-size:14px;color:#333;font-weight:300;">Testing <span class="pull-right">$15.00</span></li>
                 <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;font-weight:300;">Photo <span class="pull-right">$110.00</span></li>
-                <li ng-show="chosen_sub == '10' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Standard Membership <span class="pull-right">$39.99</span></li>
-                <li ng-show="chosen_sub == '20' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Premium Membership <span class="pull-right">$119.99</span></li>
-                <li ng-show="chosen_sub == '30' && current.step == 'subscription'" style="font-size:14px;color:#333;font-weight:300;">Standard Membership <span class="pull-right">$299.99</span></li>
                 <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
                 <li style="font-size:16px;color:#333;">Order Total:
                     <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$59.99</span>
                     <span ng-if="contest.chosen_creative == false  && chosen_sub == '0'" class="pull-right">$149.99</span>
-                    <span ng-if="contest.chosen_creative == true && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$78.99</span>
-                    <span ng-if="contest.chosen_creative == false && chosen_sub == '10' && current.step == 'subscription'" class="pull-right">$98.99</span>
-                    <span ng-if="contest.chosen_creative == true && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$158.99</span>
-                    <span ng-if="contest.chosen_creative == false && chosen_sub == '20' && current.step == 'subscription'" class="pull-right">$178.99</span>
-                    <span ng-if="contest.chosen_creative == true && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$338.99</span>
-                    <span ng-if="contest.chosen_creative == false && chosen_sub == '30' && current.step == 'subscription'" class="pull-right">$358.99</span>
                 </li>
             </ul>
         </div>
@@ -334,7 +325,7 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Creator targeting:</p>
+                    <p>Creator Targeting:</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -401,21 +392,24 @@
                 <td class="text-center" style="background:#EBEEF0;"></td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
                     <center>
-                        <button ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true' style="float:none;">Select</button>
+                        <button ng-hide="contest.chosen_creative == true" class='btn btn-wj btn-lg sign-up-btn' ng-click='gotoBottom("bottom")' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+                        <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-lg sign-up-btn' ng-click='contest.chosen_creative = true' style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
                     </center>
                 </td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
                     <center>
-                        <button ng-class='{"package-highlight" : contest.chosen_creative == false}' class='launch-page-btn' ng-click='contest.chosen_creative = false' style="float:none;">Select</button>
+                        <button ng-hide="contest.chosen_creative == false" class='btn btn-wj btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+                        <button ng-show="contest.chosen_creative == false" class='btn btn-secondary btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
                     </center>
                 </td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
                     <center>
-                        <button ng-class='{"package-highlight" : contest.chosen_creative == true}' class='launch-page-btn' ng-click='contest.chosen_creative = true' style="float:none;">Select</button>
+                        <button class='btn btn-wj btn-lg sign-up-btn' ng-click='choose_video(true)' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                     </center>
                 </td>
             </tr>
         </table>
+        <div id="bottom" style="padding-bottom:300px;">
         <div class="col-sm-10" ng-show="contest.chosen_creative == true">
             <div class="form-group" ng-init="contest.attachment = ''">
                 <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
@@ -433,121 +427,8 @@
             </div>
         </div>
     </div>
-</div>
-<!--<div ng-show='current.step == "subscription"' style="padding-bottom: 120px;">
-    <div class="row">
-        <div class='col-sm-10 col-sm-offset-1 text-center'>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <div class="pricing-tables attached">
-                        <div class="row">
-                            <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='10','next-level':user.subscription.next_level=='10'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='10'">
-                                <div class="plan first" style="padding-bottom:5px;">
-                                    <div class="head">
-                                        <h2 style="font-size:18px;">Standard</h2>
-                                    </div>
-                                    <div class="price">
-                                        <h3 style="font-size:34;text-decoration:line-through;">$120</h3>
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>39</h3>
-                                        <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
-                                        <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For individuals just starting advertising.</p>
-                                        <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                    </div>
-                                    <center>
-                                        <hr style="margin: 0 !important;width:75%;">
-                                    </center>
-                                    <ul class="item-list" style="text-align:left;padding-left:40px;padding-top:0px;padding-bottom:0px;">
-                                        <li style="font-weight:bold;">Standard Includes:</li>
-                                        <li>Unlimited Access To Audience-Generated Campaigns</li>
-                                        <li>Guranteed Satisfation</li>
-                                        <li>Creator Targeting</li>
-                                        <li>Up To $50 In Testing</li>
-                                    </ul>
-                                    <ul class="item-list" style="padding-top:0px;margin-bottom:0px;">
-                                        <center>
-                                            <hr style="margin: 0 !important;width:75%;">
-                                        </center>
-                                        <li style="text-align:center;">Money Back Guarantee</li>
-                                    </ul>
-                                    <button ng-show="chosen_sub == '0' || chosen_sub == '30' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '10'">Select</button>
-                                    <button ng-show="chosen_sub == '10'" type="button" class="btn btn-lg btn-sel sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
-                                    <p class="more-p now-level-p">Current Plan</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='20','next-level':user.subscription.next_level=='20'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='20'">
-                                <div class="plan recommended" style="padding-bottom:5px;">
-
-                                    <div class="head" style="background:#019F6E;">
-                                        <h2 style="font-size:18px;">Premium</h2>
-                                    </div>
-                                    <div class="price" style="border-top:none;">
-
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>119</h3>
-                                        <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
-                                        <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For teams looking to explore new marketing perspectives.</p>
-                                        <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                    </div>
-                                    <center>
-                                        <hr style="margin: 0 !important;width:75%;">
-                                    </center>
-                                    <ul class="item-list" style="text-align:left;padding-left:40px;padding-top:0px;padding-bottom:0px;">
-                                        <li style="font-weight:bold;">Everything In Standard And:</li>
-                                        <li>Up To $250 In Testing</li>
-                                        <li>Optimized A/B Testing Software</li>
-                                    </ul>
-                                    <ul class="item-list" style="padding-top:0px;margin-bottom:0px;">
-                                        <center>
-                                            <hr style="margin: 0 !important;width:75%;">
-                                        </center>
-                                        <li style="text-align:center;">Money Back Guarantee</li>
-                                    </ul>
-                                    <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '30'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '20'">Select</button>
-                                    <button ng-show="chosen_sub == '20'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
-                                    <p class="more-p now-level-p">Current Plan</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-md-4 subscription-div" ng-class="{'now-level':user.subscription.now_level=='30','next-level':user.subscription.next_level=='30'}" ng-hide="subscription_type == 'launch' && user.subscription.now_level>='30'">
-                                <div class="plan last" style="padding-bottom:5px;">
-
-                                    <div class="head" style="background:#018880;">
-                                        <h2 style="font-size:18px;">Platinum</h2>
-                                    </div>
-                                    <div class="price">
-
-                                        <h3 style="margin-top:10px;margin-bottom:0px;font-weight:400;"><span class="symbol">$</span>299</h3>
-                                        <h4 style="margin-bottom:5px;margin-top:0px;">per month</h4>
-                                        <p style="margin-bottom:0px;height:40px;font-size:14px;font-weight:bold;" class="text-center">For departments looking looking to expand and accelerate new audiences.</p>
-                                        <p class="text-center" style="font-weight: 300;font-size:10px;margin-bottom:0;">(Cancel Anytime)</p>
-                                    </div>
-                                    <center>
-                                        <hr style="margin: 0 !important;width:75%;">
-                                    </center>
-                                    <ul class="item-list" style="text-align:left;padding-left:40px;padding-top:0px;padding-bottom:0px;">
-                                        <li style="font-weight:bold;">Everything In Premium And:</li>
-                                        <li>Up To $500 In Testing</li>
-                                        <li>Auidience Insights And Discovery</li>
-                                    </ul>
-                                    <ul class="item-list" style="padding-top:0px;margin-bottom:0px;">
-                                        <center>
-                                            <hr style="margin: 0 !important;width:75%;">
-                                        </center>
-                                        <li style="text-align:center;">Money Back Guarantee</li>
-                                    </ul>
-                                    <button ng-show="chosen_sub == '0' || chosen_sub == '10' || chosen_sub == '20'" type="button" class="btn btn-wj btn-lg sign-up-btn" ng-click="chosen_sub = '30'">Select</button>
-                                    <button ng-show="chosen_sub == '30'" type="button" class="btn btn-sel btn-lg sign-up-btn" ng-click="chosen_sub = '0'">Selected</button>
-                                    <p class="more-p now-level-p">Current Plan</p>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </div>
-</div>-->
+</div>
 <div ng-show='current.step == "done"'>
     <div class="row">
         <div class='col-xs-12 text-center' style='padding-top:10px;'>
@@ -570,17 +451,18 @@
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
             </div>
             <div ng-show='current.step == "detail"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Save & Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Save & Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
                 <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
             <div ng-show='current.step == "preview"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'subscription')">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
                 <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
             </div>
             <div ng-show='current.step == "subscription"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Continue</button>
+
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("preview")'>Back</button>
             </div>
             <div ng-show='current.step == "done"'>
@@ -611,7 +493,7 @@
                 <h4 class='text-left' style='color:#333'>
     <span class='glyphicon glyphicon-ok circle-it-oj'></span>
         <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          All packages are billed monthly, so you can cancel anytime.
+          100% Money Back Guarantee
         </span>
         </h4>
             </div>
@@ -641,6 +523,10 @@ $(function() {
 });
 </script>
 <style>
+
+.btn:focus {
+    color:#019F6E;
+}
 .target-label {
     font-size: 16px;
     font-weight: 400;

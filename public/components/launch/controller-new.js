@@ -71,6 +71,17 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $rootScope.modal_up = true;
         $scope.company_login = true;
     }
+    $scope.choose_video = function(video) {
+        if (video == true) {
+            $scope.set_alert ("Please contact us at alek@fabel.us", "error");
+        }
+    }
+
+    $scope.gotoBottom = function(id) {
+        $scope.contest.chosen_creative = true;
+        $location.hash(id);
+        $anchorScroll();
+    };
 
     $scope.launch_log_in = function(email, pass) {
         AppFact.loggingIn(email, pass).success(function(response) {
