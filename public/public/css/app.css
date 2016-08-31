@@ -3475,6 +3475,18 @@ hr.style-two {
     text-decoration: none;
 }
 
+.dash-round {
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.dash-round-reverse {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+}
+
 .close_circle {
     background: #aaa;
     border-radius: 25px;
