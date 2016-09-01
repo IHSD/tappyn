@@ -377,6 +377,45 @@ label {
     border: 1px solid #019F6E;
 }
 
+.btn-last {
+    background: #018880;
+    color: #fff;
+    font-weight: 400;
+    border: 1px solid #fff;
+}
+
+.btn-last:hover {
+    background: #fff;
+    color: #018880;
+    border: 1px solid #018880;
+}
+
+.btn-last:focus {
+    background: #018880;
+    color: #fff !important;
+    font-weight: 400;
+    border: 1px solid #fff;
+}
+
+.btn-first {
+    background: #06883F;
+    color: #fff;
+    font-weight: 400;
+    border: 1px solid #fff;
+}
+
+.btn-first:hover {
+    background: #fff;
+    color: #06883F;
+    border: 1px solid #06883F;
+}
+
+.btn-first:focus {
+    color: #06883F;
+    background: #fff;
+    border: 1px solid #06883F;
+}
+
 .btn-outliner {
     background: #fff;
     color: #019F6E;

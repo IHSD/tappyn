@@ -301,9 +301,9 @@
             <thead>
                 <tr>
                     <td class="text-center" style="font-size:18px;background:#fff;"></td>
-                    <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;">Basic</td>
-                    <td class="text-center" style="font-size:18px;background:#019F6E;color:#fff;">Premium</td>
-                    <td class="text-center" style="font-size:18px;background:#018880;color:#fff;">Platinum</td>
+                    <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;font-weight:300;">Basic</td>
+                    <td class="text-center" style="font-size:18px;background:#019F6E;color:#fff;font-weight:300;">Premium</td>
+                    <td class="text-center" style="font-size:18px;background:#018880;color:#fff;font-weight:300;">Platinum</td>
                 </tr>
             </thead>
             <tr>
@@ -391,7 +391,7 @@
                 <td class="text-center" style="background:#EBEEF0;"></td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
                     <center>
-                        <button ng-hide="contest.chosen_creative == true" class='btn btn-wj btn-lg sign-up-btn' ng-click='contest.chosen_creative = true' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+                        <button ng-hide="contest.chosen_creative == true" class='btn btn-first btn-lg sign-up-btn' ng-click='contest.chosen_creative = true' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                         <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-lg sign-up-btn' ng-click='contest.chosen_creative = true' style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
                     </center>
                 </td>
@@ -403,7 +403,7 @@
                 </td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
                     <center>
-                        <button class='btn btn-wj btn-lg sign-up-btn' ng-click='choose_video(true)' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+                        <button class='btn btn-last btn-lg sign-up-btn' ng-click='choose_video(true)' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                     </center>
                 </td>
             </tr>

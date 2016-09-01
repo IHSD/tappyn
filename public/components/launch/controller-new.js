@@ -73,7 +73,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
     $scope.choose_video = function(video) {
         if (video == true) {
-            $scope.set_alert ("Please contact us at alek@fabel.us", "error");
+            $scope.set_alert ("This package is not currently available. Please contact us at alek@fabel.us for more info.", "error");
         }
     }
 
