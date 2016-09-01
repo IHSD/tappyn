@@ -455,15 +455,15 @@
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
                 <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
-            <div ng-show='current.step == "preview"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
-                <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
-            </div>
             <div ng-show='current.step == "subscription"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Continue</button>
 
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("preview")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
+            </div>
+            <div ng-show='current.step == "preview"'>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Continue</button>
+                <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("subscription")'>Back</button>
             </div>
             <div ng-show='current.step == "done"'>
                 <div class='col-xs-12 col-sm-6'>
