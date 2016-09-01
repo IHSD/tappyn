@@ -138,8 +138,7 @@ class Price_lib
                     $price = ($price) ? $price : $fee;
                     if (isset($post['_contest']) && $post['_contest']) {
                         if (
-                            (isset($post['_contest']['photo']) && !$post['_contest']['photo']) ||
-                            (isset($post['_contest']['use_attachment']) && !$post['_contest']['use_attachment'])
+                            (isset($post['_contest']['photo']) && !$post['_contest']['photo'])
                         ) {
                             $price = $price + 90;
                         }

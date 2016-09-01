@@ -163,26 +163,25 @@
                 </form>
             </div>
         </div>
-
-            <div class='row' style="padding-top:40px;">
-                <div style="padding-bottom:20px;padding-left:10px;">
-                    <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
-                </div>
-                <div ng-show="showOptions">
-                    <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                        <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
-                    </label>
-                    <div class="col-sm-10 col-md-5">
-                        <div class="form-group">
-                            <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
-                            </textarea>
-                            <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
-                        </div>
+        <div class='row' style="padding-top:40px;">
+            <div style="padding-bottom:20px;padding-left:10px;">
+                <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
+            </div>
+            <div ng-show="showOptions">
+                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                </label>
+                <div class="col-sm-10 col-md-5">
+                    <div class="form-group">
+                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
+                        </textarea>
+                        <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <div ng-show='current.step == "detail"'>
     <div class='form-forizontal'>
@@ -281,7 +280,10 @@
                         <div class="col-sm-9 col-xs-12">
                             <div ng-show="contest.photo">
                                 <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                    <div class="img-preview"><img ng-src="{{contest.photo}}"></div>
+                                    <div class="img-preview">
+                                        <img ng-if="contest.photo && contest.photo!='use_attachment'" ng-src="{{contest.photo}}">
+                                        <img ng-if="contest.photo && contest.photo=='use_attachment'" ng-src="{{contest.attachment}}">
+                                    </div>
                                 </div>
                             </div>
                             <p ng-hide="contest.photo">
@@ -295,7 +297,7 @@
         </div>
     </div>
 </div>
-<div class="row" ng-show='current.step == "subscription"' style="padding-bottom:120px;">
+<div class="row" ng-show='current.step == "chose-plan"' style="padding-bottom:120px;">
     <div class='col-xs-12 col-sm-8 col-sm-offset-2 text-center'>
         <table class="table table-condensed" style='border-radius:5px;'>
             <thead>
@@ -401,7 +403,6 @@
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
-
             <tr>
                 <td class="text-center" style="background:#EBEEF0;"></td>
                 <td class="text-center" style="background:#EBEEF0;max-width:100px;">
@@ -424,23 +425,23 @@
             </tr>
         </table>
         <div id="bottom" style="padding-bottom:300px;">
-        <div class="col-sm-10" ng-show="contest.chosen_creative == true">
-            <div class="form-group" ng-init="contest.attachment = ''">
-                <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-                <center>
-                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                </center>
-            </div>
-            <div class="row form-group" ng-show="new_img">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                        <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
+            <div class="col-sm-10" ng-show="contest.chosen_creative == true">
+                <div class="form-group" ng-init="contest.attachment = ''">
+                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                    <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
+                    <center>
+                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                    </center>
+                </div>
+                <div class="row form-group" ng-show="new_img">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                            <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 <div ng-show='current.step == "done"'>
@@ -455,29 +456,25 @@
         </div>
     </div>
 </div>
-</div>
-</div>
-</div>
 <div class='launch-page-overlaybox launch-page-box'>
     <div class="container">
         <div class='row'>
             <div ng-show='current.step == "tp-prior"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='to_detail(contest)'>Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')">Continue</button>
             </div>
             <div ng-show='current.step == "detail"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("subscription")'>Save & Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")'>Save & Continue</button>
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
                 <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
-            <div ng-show='current.step == "subscription"'>
+            <div ng-show='current.step == "chose-plan"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Continue</button>
-
                 <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
             </div>
             <div ng-show='current.step == "preview"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Launch</button>
                 <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("subscription")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("chose-plan")'>Back</button>
             </div>
             <div ng-show='current.step == "done"'>
                 <div class='col-xs-12 col-sm-6'>
@@ -537,10 +534,10 @@ $(function() {
 });
 </script>
 <style>
-
 .btn:focus {
-    color:#019F6E;
+    color: #019F6E;
 }
+
 .target-label {
     font-size: 16px;
     font-weight: 400;
@@ -664,6 +661,7 @@ hr {
     margin-bottom: -40px;
     margin-top: -40px;
 }
+
 .addthis_toolbox {
     margin-top: 40px;
 }

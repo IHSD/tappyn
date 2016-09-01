@@ -7,7 +7,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             'tp-prior': { step: 'tp-prior', next: 'detail', previous: 'none', fill: 25 },
             'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
             'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
-            'subscription': { step: 'subscription', next: 'payment', previous: 'package', fill: 75 },
+            'chose-plan': { step: 'chose-plan', next: 'payment', previous: 'package', fill: 75 },
             'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
         }
         // $scope.current = $scope.steps['tp-platform'];
@@ -73,15 +73,9 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
     $scope.choose_video = function(video) {
         if (video == true) {
-            $scope.set_alert ("This package is not currently available. Please contact us at alek@fabel.us for more info.", "error");
+            $scope.set_alert("This package is not currently available. Please contact us at alek@fabel.us for more info.", "error");
         }
     }
-
-    $scope.gotoBottom = function(id) {
-        $scope.contest.chosen_creative = true;
-        $location.hash(id);
-        $anchorScroll();
-    };
 
     $scope.launch_log_in = function(email, pass) {
         AppFact.loggingIn(email, pass).success(function(response) {
@@ -128,7 +122,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                         eventAction: 'Signup',
                         eventLabel: 'New User Email'
                     });
-                    $scope.set_step("preview");
+                    $scope.set_step("chose-plan");
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
@@ -161,10 +155,28 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             //$scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
         } else if (step == 'detail') {
+            $scope.contest.display_type = ($scope.contest.display_type) ? $scope.contest.display_type : "with_photo";
             fbq('track', 'InitiateCheckout');
-            if ($rootScope.user && !$scope.profile) $scope.grab_profile();
+            if (!$scope.contest.platform || $scope.contest.platform == '') $scope.set_alert("You need to select a platform", "error");
+            else if (!$scope.contest.industry) $scope.set_alert("Please choose an interest to target", "error");
+            else if ($rootScope.user && !$scope.profile) $scope.grab_profile();
             else $scope.current = $scope.steps[step];
         } else if (step == 'preview') {
+
+            $scope.form_limit = launchModel.parallel_submission($scope.contest);
+            $scope.contest.photo = ($scope.cropper.getCroppedCanvas() && $scope.contest.chosen_creative) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
+            $scope.contest.photo = (!$scope.contest.photo && $scope.contest.chosen_creative && $scope.contest.use_attachment == '1') ? 'use_attachment' : $scope.contest.photo;
+            if ($scope.contest.chosen_creative && !$scope.contest.photo) {
+                $scope.set_alert("You need to upload a photo", "error");
+            } else {
+                $scope.current = $scope.steps[step];
+                fbq('track', 'CompleteRegistration');
+            }
+        } else if (step == 'done') {
+            fbq('track', 'Purchase', { value: '0.00', currency: 'USD' });
+            $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2");
+            $scope.current = $scope.steps[step];
+        } else if (step == 'chose-plan') {
             if (!$rootScope.user) {
                 if (!$scope.contest.identity) $scope.set_alert("An email is required", "error");
                 else if (!$scope.contest.password) $scope.set_alert("A password is required", "error");
@@ -174,16 +186,8 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             } else if (!$scope.contest.summary || $scope.contest.summary == '') $scope.set_alert("A summary of service or product is required", "error");
             else if (!$scope.contest.different || $scope.contest.different == '') $scope.set_alert("What makes you different is required", "error");
             else {
-                $scope.form_limit = launchModel.parallel_submission($scope.contest);
                 $scope.current = $scope.steps[step];
-                $scope.contest.photo = ($scope.cropper.getCroppedCanvas() && $scope.contest.chosen_creative) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
-                $scope.contest.photo = (!$scope.contest.photo && $scope.contest.chosen_creative && $scope.contest.use_attachment) ? 'use_attachment' : $scope.contest.photo;
-                fbq('track', 'CompleteRegistration');
             }
-        } else if (step == 'done') {
-                fbq('track', 'Purchase', {value: '0.00', currency:'USD'});
-            $.getScript("//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5767b4c2d9b6a4c2");
-            $scope.current = $scope.steps[step];
         } else $scope.current = $scope.steps[step];
         $scope.to_top();
     }
@@ -218,16 +222,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
         })
-    }
-
-    $scope.to_detail = function(contest) {
-        contest.display_type = "with_photo";
-        if (!contest.platform || contest.platform == '') $scope.set_alert("You need to select a platform", "error");
-        //else if (!contest.objective || contest.objective == '') $scope.set_alert("You need to select an ad objective", "error");
-        else if (!contest.industry) $scope.set_alert("Please choose an interest to target", "error");
-        //else if (!$scope.new_img) $scope.set_alert("Please upload the photo", "error");
-        //else if (!contest.additional_info) $scope.set_alert("Please provide some creative direction", "error");
-        else $scope.set_step("detail");
     }
 
     $scope.submit_contest = function(contest, pay) {
@@ -333,6 +327,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         };
         reader.readAsDataURL(file);
         $scope.new_img = true;
+        $anchorScroll('bottom');
     }
 
     $scope.get_test = function() {
