@@ -53,7 +53,7 @@
                             </div>
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
-                                <button class='btn btn-oj purchase-pixel' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
+                                <button class='btn btn-lg btn-oj purchase-pixel' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
                                 <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
@@ -117,7 +117,7 @@
                                     </div>
                                 </div>
                                 <div class='text-center'>
-                                    <button class='btn btn-oj col-xs-12 purchase-pixel' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
+                                    <button class='btn btn-lg btn-oj col-xs-12 purchase-pixel' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
                                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                                 </div>
                             </form>
@@ -143,8 +143,7 @@
                             </div>
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div class='text-center' style="padding-top:10px; padding-bottom:20px;">
-                                <button class='btn btn-oj purchase-pixel' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
-                                <p style="font-size:12px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
+                                <button class='btn btn-lg btn-oj purchase-pixel' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
                                 <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
@@ -208,8 +207,7 @@
                                     </div>
                                 </div>
                                 <div class='text-center'>
-                                    <button class='btn btn-oj col-xs-6 col-xs-offset-3 purchase-pixel' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
-                                    <p class="col-xs-12" style="font-size:12px;padding-top:10px;">*Subscriptions will be automatically renewed for successive monthly periods and your payment method will automatically be charged until you cancel. You may cancel your subscription at any time.</p>
+                                    <button class='btn btn-lg btn-oj col-xs-6 col-xs-offset-3 purchase-pixel' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
                                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                                 </div>
                             </form>
