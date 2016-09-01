@@ -14,6 +14,9 @@ class Outcrons extends CI_Controller
 
     public function subscription()
     {
+        echo 'cancel';
+        return;
+
         $this->load->library(array('slack', 'subscription_lib', 'price_lib', 'stripe/stripe_charge_library', 'stripe/stripe_customer_library'));
         $this->load->model('company');
 

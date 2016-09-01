@@ -3,7 +3,7 @@
 class Subscription_lib
 {
     public $data = array(
-        0 => array('contest_limit' => 0, 'name' => 'Free'),
+        0  => array('contest_limit' => 0, 'name' => 'Free'),
         10 => array('contest_limit' => 100, 'name' => 'Standard'),
         20 => array('contest_limit' => 100, 'name' => 'Premium'),
         30 => array('contest_limit' => 100, 'name' => 'Platinum'),
@@ -21,18 +21,21 @@ class Subscription_lib
 
     public function get_by_user_id($user_id = 0)
     {
+        $result = ['can_launch' => true, 'cant_launch_this_month' => false, 'remaining' => ''];
+        return $result;
+
         $result = array();
         if (!$user_id) {
             return $result;
         }
 
         $now_ts = date('Y-m-d H:i:s');
-        $tmp = $this->db->select('*')->from('user_subscription')->where('user_id', $user_id)->limit(1)->get()->result_array();
+        $tmp    = $this->db->select('*')->from('user_subscription')->where('user_id', $user_id)->limit(1)->get()->result_array();
         $result = ($tmp) ? $tmp[0] : array();
 
-        $result['can_launch'] = false;
+        $result['can_launch']             = false;
         $result['cant_launch_this_month'] = false;
-        $result['remaining'] = 0;
+        $result['remaining']              = 0;
 
         if (isset($result['end_at']) && $result['end_at'] < $now_ts) {
             unset($result['now_level'], $result['next_level']);
@@ -50,7 +53,7 @@ class Subscription_lib
             if ($level) {
                 $max_level = max(array_keys($this->data));
                 if ($level['contest_limit'] > $count) {
-                    $result['remaining'] = $level['contest_limit'] - $count;
+                    $result['remaining']  = $level['contest_limit'] - $count;
                     $result['can_launch'] = true;
                 } else if ($result['now_level'] >= $max_level) {
                     $result['cant_launch_this_month'] = true;
@@ -68,49 +71,49 @@ class Subscription_lib
             return false;
         }
 
-        $now_ts = date('Y-m-d H:i:s');
-        $temp = array('updated_at' => $now_ts);
-        $now = $this->get_by_user_id($user_id);
-        $detail = $this->data[$data['next_level']];
-        $result = false;
+        $now_ts    = date('Y-m-d H:i:s');
+        $temp      = array('updated_at' => $now_ts);
+        $now       = $this->get_by_user_id($user_id);
+        $detail    = $this->data[$data['next_level']];
+        $result    = false;
         $this->msg = '';
 
         // new
         if (!isset($now['id'])) {
-            $temp['user_id'] = $user_id;
+            $temp['user_id']   = $user_id;
             $temp['now_level'] = $temp['next_level'] = $data['next_level'];
-            $temp['start_at'] = $now_ts;
-            $temp['end_at'] = date('Y-m-d H:i:s', strtotime('+1 month'));
-            $result = $this->db->insert('user_subscription', $temp);
-            $this->msg = 'New subscription ' . $detail['name'];
+            $temp['start_at']  = $now_ts;
+            $temp['end_at']    = date('Y-m-d H:i:s', strtotime('+1 month'));
+            $result            = $this->db->insert('user_subscription', $temp);
+            $this->msg         = 'New subscription ' . $detail['name'];
         } // crons charge
         else if (isset($data['act']) && $data['act'] == 'charge_subscription') {
-            $temp['user_id'] = $user_id;
+            $temp['user_id']   = $user_id;
             $temp['now_level'] = $now['next_level'];
-            $temp['end_at'] = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($now['end_at'])));
-            $result = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
+            $temp['end_at']    = date('Y-m-d H:i:s', strtotime('+1 month', strtotime($now['end_at'])));
+            $result            = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
         }
         // end
         else if ($now['end_at'] < $now_ts) {
-            $temp['user_id'] = $user_id;
+            $temp['user_id']   = $user_id;
             $temp['now_level'] = $temp['next_level'] = $data['next_level'];
-            $temp['start_at'] = $now_ts;
-            $temp['end_at'] = date('Y-m-d H:i:s', strtotime('+1 month'));
-            $result = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
-            $this->msg = 'Renew subscription ' . $detail['name'];
+            $temp['start_at']  = $now_ts;
+            $temp['end_at']    = date('Y-m-d H:i:s', strtotime('+1 month'));
+            $result            = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
+            $this->msg         = 'Renew subscription ' . $detail['name'];
         }
         // upgrade
         else if ($now['now_level'] < $data['next_level']) {
-            $temp['user_id'] = $user_id;
+            $temp['user_id']   = $user_id;
             $temp['now_level'] = $temp['next_level'] = $data['next_level'];
-            $result = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
-            $this->msg = 'Upgrade subscription from ' . $this->data[$now['now_level']]['name'] . ' to ' . $detail['name'];
+            $result            = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
+            $this->msg         = 'Upgrade subscription from ' . $this->data[$now['now_level']]['name'] . ' to ' . $detail['name'];
         }
         // downgrate or same
         else {
-            $temp['user_id'] = $user_id;
+            $temp['user_id']    = $user_id;
             $temp['next_level'] = $data['next_level'];
-            $result = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
+            $result             = $this->db->where('id', $now['id'])->update('user_subscription', $temp);
         }
 
         return $result;

@@ -17,7 +17,7 @@
                             <span ng-if='!user.is_active' uib-tooltip="Your account isn't verified, check your email to verify" tooltip-placement='bottom' class='glyphicon glyphicon-exclamation-sign' style='color:#f00;'></span>
                             <span class="caret"></span></a>
                     <ul uib-dropdown-menu role="menu">
-
+                        <li role='menuitem'><a href="/dashboard">My Dashboard</a></li>
                         <li ng-hide='user.type == "company"' role='menuitem'><a href="/payment">Payment</a></li>
                         <li role='menuitem'><a href="/profile">My Profile</a></li>
                         <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
@@ -34,7 +34,7 @@
                     <ul uib-dropdown-menu role='menu'>
                         <li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
                         <!--<li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "2")'>Sign Up</a></li>-->
-                        
+                        <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
                         <li ng-hide='!user && user.type == "company"'><a href="/payment">Payment</a></li>
                         <li ng-hide='!user'><a href="/profile">My Profile</a></li>
                         <li ng-hide='!user'><a ng-click='log_out()'>Log out</a></li>
