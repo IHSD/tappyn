@@ -347,6 +347,13 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.$on('payContestDone', function(event) {
         $scope.set_step('done');
     });
+
+    $scope.set_creative = function(boo) {
+        $scope.contest.chosen_creative = boo;
+        if (boo) {
+            $anchorScroll('bottom');
+        }
+    }
 });
 
 tappyn.directive('customOnChange', function() {
