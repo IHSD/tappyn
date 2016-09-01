@@ -54,7 +54,7 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
-        <div ng-hide="current.step == 'done'" class="hidden-xs col-sm-3">
+        <div ng-show="current.step == 'subscription' || current.step == 'preview'" class="hidden-xs col-sm-3">
             <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
                 <p>
                     <small>
@@ -66,16 +66,16 @@
                 </p>
             </center>
         </div>
-        <div ng-show="current.step == 'subscription' || curent.step == 'preview'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+        <div ng-show="current.step == 'subscription' || current.step == 'preview'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
             <h4 class="text-center" style="font-size:16px;color:#333;font-weight:400;">Order Summary</h4>
             <ul style="padding-right:20px;padding-left:5px;">
-                <li style="font-size:14px;color:#333;font-weight:300;">Copy <span class="pull-right">$44.99</span></li>
+                <li style="font-size:14px;color:#333;font-weight:300;">Copy (30)<span class="pull-right">$44.99</span></li>
                 <li style="font-size:14px;color:#333;font-weight:300;">Testing <span class="pull-right">$15.00</span></li>
-                <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;font-weight:300;">Photo <span class="pull-right">$110.00</span></li>
+                <li ng-show="contest.chosen_creative == false" style="font-size:14px;color:#333;font-weight:300;">Photo (30)<span class="pull-right">$90.00</span></li>
                 <hr style="margin: 5 0 5 0 !important;border-top:1px solid #333;">
                 <li style="font-size:16px;color:#333;">Order Total:
-                    <span ng-if="contest.chosen_creative == true && chosen_sub == '0'" class="pull-right">$59.99</span>
-                    <span ng-if="contest.chosen_creative == false  && chosen_sub == '0'" class="pull-right">$149.99</span>
+                    <span ng-if="contest.chosen_creative == true" class="pull-right">$59.99</span>
+                    <span ng-if="contest.chosen_creative == false" class="pull-right">$149.99</span>
                 </li>
             </ul>
         </div>
@@ -296,43 +296,42 @@
     </div>
 </div>
 <div class="row" ng-show='current.step == "subscription"' style="padding-bottom:120px;">
-    <div class='col-sm-10 col-sm-offset-1 text-center'>
+    <div class='col-xs-12 col-sm-8 col-sm-offset-2 text-center'>
         <table class="table table-condensed" style='border-radius:5px;'>
             <thead>
                 <tr>
-                    <td class="text-center"></td>
+                    <td class="text-center" style="font-size:18px;background:#fff;"></td>
                     <td class="text-center" style="font-size:18px;background:#06883F;color:#fff;">Basic</td>
                     <td class="text-center" style="font-size:18px;background:#019F6E;color:#fff;">Premium</td>
                     <td class="text-center" style="font-size:18px;background:#018880;color:#fff;">Platinum</td>
                 </tr>
             </thead>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Monthly price after 1 month free trial:</p>
+                <td class="text-center" style="background:#fff;color:#333;max-width:50px;">
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$59
+                    <p style="font-size:24px;font-weight:300;">$59
                         <br><span style="font-size:14px;">Text Only</span></p>
                 </td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$149
+                    <p style="font-size:24px;font-weight:300;">$149
                         <br><span style="font-size:14px;">Photos & Text</span></p>
                 </td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
-                    <p style="font-size:24px;">$519
+                    <p style="font-size:24px;font-weight:300;">$519
                         <br><span style="font-size:14px;">Videos</span></p>
                 </td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
-                    <p>Creator Targeting:</p>
+                <td style="background:#fff;color:#333;max-width:50px;">
+                    <p>Creator Targeting</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>A/B Testing ($15 Included)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -340,7 +339,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>Unlimited Platforms</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -348,7 +347,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>Ad Copyright (1)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -356,7 +355,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>Copies (30)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -364,7 +363,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>Photos (30)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
@@ -372,7 +371,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;">
+                <td style="background:#fff;color:#333;max-width:50px;">
                     <p>Videos (30)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
@@ -380,7 +379,7 @@
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
             </tr>
             <tr>
-                <td class="text-center" style="background:#fff;color:#333;max-width:125px;border-top:1px solid #333;">
+                <td style="background:#fff;color:#333;max-width:125px;border-top:1px solid #333;">
                     <p>100% Money Back Guarantee</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
