@@ -156,7 +156,7 @@
                     <div class='form-group col-xs-12 col-sm-6 col-md-3'>
                         <label class='text-left target-label' style="padding-top:1px;">Locations</label>
                         <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
-                        <select select2 ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
+                        <select ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
                             <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
                         </select>
                     </div>
@@ -333,10 +333,20 @@
         <table class="table table-condensed" style='border-radius:5px;'>
             <thead>
                 <tr>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;"></td>
-                    <td class="text-center" style="font-size:22px;background:#06883F;color:#fff;font-weight:300;">Basic</td>
-                    <td class="text-center" style="font-size:22px;background:#019F6E;color:#fff;font-weight:300;">Premium</td>
-                    <td class="text-center" style="font-size:22px;background:#018880;color:#fff;font-weight:300;">Platinum</td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;">
+                        <center>
+                            <img src="https://s3-us-west-2.amazonaws.com/tappyn/rec.jpg" width=150px height=35px; style="display:block;margin-bottom:0px;" alt="Fabel Recommended">
+                        </center>
+                    </td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#06883F;color:#fff;font-weight:300;max-width:100px;">Basic</td>
+                    <td class="text-center" style="font-size:22px;background:#019F6E;color:#fff;font-weight:300;max-width:100px;">Premium</td>
+                    <td class="text-center" style="font-size:22px;background:#018880;color:#fff;font-weight:300;max-width:100px;">Platinum</td>
                 </tr>
             </thead>
             <tr>
@@ -344,22 +354,22 @@
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;">
                     <p>
-                        <span style="font-size:22px;font-weight:300;text-decoration:line-through;">$120</span>
-                        <br>
+                        <!--<span style="font-size:22px;font-weight:300;text-decoration:line-through;">$120</span>
+                        <br>-->
                         <span style="font-size:32px;font-weight:300;">$59</span>
                     </p>
                 </td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;">
                     <p>
-                        <span style="font-size:22px;font-weight:300;text-decoration:line-through;">$300</span>
-                        <br>
+                        <!--<span style="font-size:22px;font-weight:300;text-decoration:line-through;">$300</span>
+                        <br>-->
                         <span style="font-size:32px;font-weight:300;">$149</span>
                     </p>
                 </td>
                 <td class="text-center" style="background:#018880;color:#fff;max-width:100px;">
                     <p>
-                        <span style="font-size:22px;font-weight:300;text-decoration:line-through;">$1,020</span>
-                        <br>
+                        <!--<span style="font-size:22px;font-weight:300;text-decoration:line-through;">$1,020</span>
+                        <br>-->
                         <span style="font-size:32px;font-weight:300;">$519</span>
                     </p>
                 </td>
@@ -375,22 +385,6 @@
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
                     <p>A/B Testing ($15 Included)</p>
-                </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-            </tr>
-            <tr>
-                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Unlimited Platforms</p>
-                </td>
-                <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01A398;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-            </tr>
-            <tr>
-                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Ad Copyright (1)</p>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -430,33 +424,48 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#EBEEF0;"></td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
                     <center>
                         <button ng-hide="contest.chosen_creative == true" class='btn btn-first btn-lg sign-up-btn' ng-click="set_creative(true)" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                         <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-lg sign-up-btn' ng-click="set_creative(true)" style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
                     </center>
                 </td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button ng-hide="contest.chosen_creative == true" class='btn btn-first btn-md sign-up-btn' ng-click="set_creative(true)" style="float:none;">Select</button>
+                        <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-md sign-up-btn' ng-click="set_creative(true)" style="float:none;">Selected</button>
+                    </center>
+                </td>
+                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
                     <center>
                         <button ng-hide="contest.chosen_creative == false" class='btn btn-wj btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                         <button ng-show="contest.chosen_creative == false" class='btn btn-secondary btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
                     </center>
                 </td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button ng-hide="contest.chosen_creative == false" class='btn btn-wj btn-md sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;">Select</button>
+                        <button ng-show="contest.chosen_creative == false" class='btn btn-secondary btn-md sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;">Selected</button>
+                    </center>
+                </td>
+                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
                     <center>
                         <button class='btn btn-last btn-lg sign-up-btn' ng-click='choose_video(true)' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+                    </center>
+                </td>
+                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
+                    <center>
+                        <button class='btn btn-last btn-md sign-up-btn' ng-click='choose_video(true)' style="float:none;">Select</button>
                     </center>
                 </td>
             </tr>
         </table>
         <div id="bottom" style="padding-bottom:300px;">
-            <div class="col-sm-10" ng-show="contest.chosen_creative == true">
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3 text-left" ng-show="contest.chosen_creative == true">
                 <div class="form-group" ng-init="contest.attachment = ''">
                     <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
                     <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-                    <center>
                         <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                    </center>
                 </div>
                 <div class="row form-group" ng-show="new_img">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -550,7 +559,7 @@ fbq('track', 'PageView');
 <script type="text/javascript">
 $(function() {
     $(".location-selection-launch-view").select2({
-        placeholder: "Add Locations"
+        placeholder: "Add Locations",
     });
     $(".interest-selection-launch-view").select2({
         placeholder: "Add interest",
@@ -583,7 +592,10 @@ li.value-list:before {
 }
 
 .table>tbody>tr>td {
-    padding: 10px !important;
+    padding: 5px !important;
+    border-top: none;
+}
+.table>thead>tr>td {
     border-top: none;
 }
 
