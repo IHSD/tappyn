@@ -7,7 +7,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.confirm_ab = { show: false };
     $scope.ctr_show = { show: false };
     $scope.confirm_select = { show: false };
-    $scope.learn = { show:false };
+    $scope.learn = { show: false };
     $scope.now_model = '';
     $scope.voucher = { visible: false };
     $scope.member_filter = {};
@@ -140,7 +140,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
                 return;
             }
             contest.no_payment = 1;
-        } else if (type =="confirm_selection") {
+        } else if (type == "confirm_selection") {
             $scope.set_model('confirm_select');
             return;
         } else if (type == 'confirm_ab' || type == 'confirm_re_ab') {
@@ -317,6 +317,17 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
         }
 
+    }
+
+    $scope.download_winner_image = function() {
+        var node = document.getElementById('winner-div');
+        var options = { bgcolor: 'white', width: node.scrollWidth + 3, height: node.scrollHeight + 3 };
+        domtoimage.toJpeg(node, options).then(function(dataUrl) {
+            var link = document.createElement('a');
+            link.download = 'contest-' + $scope.winner.contest.id + '-winner.jpeg';
+            link.href = dataUrl;
+            link.click();
+        });
     }
 
 
