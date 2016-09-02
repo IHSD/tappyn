@@ -76,6 +76,9 @@ tappyn.config(function($routeProvider, $locationProvider) {
         .when('/guide', {
             templateUrl: 'components/guide/view.html'
         })
+        .when('/priority', {
+            templateUrl: 'components/priority/view.html'
+        })
         .when('/privacy', {
             templateUrl: 'components/privacy_policy/view.html'
         })
