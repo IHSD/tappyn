@@ -34,7 +34,7 @@
     <div class='container'>
         <div class='col-xs-12 col-sm-6 text-left'>
             <div ng-show='current.step == "tp-prior"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">Who is your audience?</h2>
+                <h2 style="font-weight:400;">Your target audience.</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
             <div ng-show='current.step == "detail"' style="padding-top:25px;">
@@ -169,19 +169,19 @@
             </label>
       <div class="col-sm-10">
         <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
-            <span class="glyphicon glyphicon-usd" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+            <span class="glyphicon glyphicon-search" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
           <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Price</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Cost Per Click)</p>
+          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>
         </div>
         <div ng-class='{"package-highlight" : contest.objective == "Quality"}' class='launch-page-btn' ng-click='select_objective("Quality")' style="cursor:default;">
-            <span class="glyphicon glyphicon-scale" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+            <span class="glyphicon glyphicon-globe" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
           <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Quality</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Click Through Rate)</p>
+          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>
         </div>
         <div ng-class='{"package-highlight" : contest.objective == "Awareness"}' class='launch-page-btn' ng-click='select_objective("Awareness")' style="cursor:default;">
-            <span class="glyphicon glyphicon-thumbs-up" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+            <span class="glyphicon glyphicon-comment" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
           <h4 class="text-center" style="float:none;display:inline-block;"> Awareness</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Views)</p>
+          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>
         </div>
       </div>
     </div>
