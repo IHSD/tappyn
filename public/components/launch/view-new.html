@@ -169,16 +169,19 @@
             </label>
       <div class="col-sm-10">
         <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
-          <h4 class="text-center" style="float:none;">Price</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;">(Cost Per Click)</p>
+            <span class="glyphicon glyphicon-usd" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+          <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Price</h4>
+          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Cost Per Click)</p>
         </div>
         <div ng-class='{"package-highlight" : contest.objective == "Quality"}' class='launch-page-btn' ng-click='select_objective("Quality")' style="cursor:default;">
-          <h4 class="text-center" style="float:none;">Quality</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;">(Click Through Rate)</p>
+            <span class="glyphicon glyphicon-scale" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+          <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Quality</h4>
+          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Click Through Rate)</p>
         </div>
         <div ng-class='{"package-highlight" : contest.objective == "Awareness"}' class='launch-page-btn' ng-click='select_objective("Awareness")' style="cursor:default;">
-          <h4 class="text-center" style="float:none;">Awareness</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:300;">(Views)</p>
+            <span class="glyphicon glyphicon-thumbs-up" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+          <h4 class="text-center" style="float:none;display:inline-block;"> Awareness</h4>
+          <p class="text-center" style="float:none;margin:0px;font-weight:300;position:relative;left:10px;">(Views)</p>
         </div>
       </div>
     </div>
@@ -520,35 +523,39 @@
             </div>
             <div class='text-left' ng-show='current.step == "preview"'>
                 <h4 class='text-left' style='color:#333'>
-    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-         81% of consumers ignore ads they find irrelevant.
-        </span>
-        </h4>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                        <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                            <span style='font-weight:300;font-size:22;top:10px;'>
+                                 81% of consumers ignore ads they find irrelevant.
+                            </span>
+                </h4>
             </div>
             <div class='text-left' ng-show='current.step == "detail"'>
                 <h4 class='text-left' style='color:#333'>
-    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          You'll only have to do this once.
-        </span>
-        </h4>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                        <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                            <span style='font-weight:300;font-size:22;top:10px;'>
+                                  You'll only have to do this once.
+                            </span>
+                </h4>
             </div>
             <div class='text-left' ng-show='current.step == "chose-plan"'>
                 <h4 class='text-left' style='color:#333'>
-    <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          100% Money Back Guarantee
-        </span>
-        </h4>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                        <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                            <span style='font-weight:300;font-size:22;top:10px;'>
+                              100% Money Back Guarantee
+                            </span>
+                </h4>
             </div>
             <div class='text-left' ng-show='current.step == "tp-prior"'>
                 <h4 class='text-left' style='color:#333'>
-          <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-        <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-          People are 23% more likely to enjoy ads they find relevant.
-        </span>
-        </h4>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span style='font-weight:300;font-size:22;top:10px;'>
+                              People are 23% more likely to enjoy ads they find relevant.
+                        </span>
+                </h4>
             </div>
         </div>
     </div>

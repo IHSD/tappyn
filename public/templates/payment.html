@@ -144,7 +144,6 @@
                             <div class='alert alert-warning' ng-show='payments.length < 1'>You don't have any saved payment methods</div>
                             <div style="padding-top:10px; padding-bottom:20px;">
                                 <button class='btn btn-lg btn-oj purchase-pixel' ng-click='pay_payment("old")'>Pay {{payment_obj.price | currency}}</button>
-                                <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
                             </div>
                             <div class='text-center'>
                                 <button class='btn btn-oj' ng-click='add_new = true'>Add Payment Method</button>
@@ -155,7 +154,7 @@
                                 <button class='btn btn-oj' ng-click='add_new = false' style="margin-bottom:10px;">Use a saved method</button>
                             </div>
                             <form class='form row' method="POST" id="payment-form-global">
-                                <div class='payment-empty-card'>
+                                <div class='payment-empty-card col-xs-12 col-sm-8 col-sm-offset-2' style="width:250px;">
                                     <div class="card-group">
                                         <input class='form-control' placeholder='Enter your Card Number' type="text" size="20" data-stripe="number" />
                                     </div>
@@ -196,7 +195,7 @@
                                     </div>
                                 </div>
                                 <input type='hidden' data-stripe='currency' value='usd' />
-                                <div class='form-group checkbox'>
+                                <div class='form-group checkbox col-xs-12 col-sm-8 col-sm-offset-2'>
                                     <label class='control-label' style='font-size: 14px;'>
                                         <input type='checkbox' ng-model='payment_obj.save_method'> Save Method
                                     </label>
@@ -207,8 +206,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <button class='btn btn-lg btn-oj col-xs-6 col-xs-offset-3 purchase-pixel' ng-click='pay_payment("new")'>Pay {{payment_obj.price | currency}}</button>
-                                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px auto; display: inline-block;'>
+                                    <button class='btn btn-lg btn-oj col-xs-12 col-sm-8 col-sm-offset-2 purchase-pixel' ng-click='pay_payment("new")'><span class="glyphicon glyphicon-lock" style="font-size:16px;"></span> Pay {{payment_obj.price | currency}}</button>
                                 </div>
                             </form>
                         </div>
