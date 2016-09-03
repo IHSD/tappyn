@@ -115,7 +115,7 @@
                             <h4 class='control-label'><strong>Image</strong></h4>
                             <div ng-show="!cropper_box">
                                 <p style="font-size:12px;margin-bottom:0px;">Find free-to-use photos in seconds at <a style="color: #019f6e;" href="https://unsplash.com/" target="_blank">Unsplash</a> or <a style="color: #019f6e;" href="https://pixabay.com/" target="_blank">Pixabay</a>.</p>
-                                <p style="font-size:12px;">Photos from other sources will be removed. <a style="color: #019f6e;" href="https://tappyn.com/faq" target="_blank">Learn More</a></p>
+                                <p style="font-size:12px;">Photos from other sources will be removed. <a style="color: #019f6e;" href="https://fabel.us/faq" target="_blank">Learn More</a></p>
                             </div>
                             <div ng-hide='!cropper_box'>
                                 <img id="upload_contest" ng-src="{{contest.attachment}}" src='public/img/placeholder.png'>
@@ -312,6 +312,17 @@
         <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
     </div>
 </div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
+<script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script>
+$('#myModal').on('show.bs.modal', function() {
+    $('.container').addClass('blur');
+})
+
+$('#myModal').on('hide.bs.modal', function() {
+    $('.container').removeClass('blur');
+})
+</script>
 <script>
 fbq('track', 'ViewContent');
 
