@@ -90,21 +90,21 @@
     </div>
 </div>
 <div class='container'>
-    <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12"  style="padding-bottom:200px;">
+    <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12" style="padding-bottom:200px;">
         <div class="row">
             <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
                 <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
-                <div ng-class='{"package-highlight" : contest.platform == "Facebook"}' class='launch-page-btn' ng-click='select_platform("Facebook")'>
+                <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
                     <img src="public/img/ico-facebook.svg">
                     <h4 class='text-center' style="cursor:default;">Facebook</h4>
                 </div>
-                <div ng-class='{"package-highlight" : contest.platform == "Twitter"}' class='launch-page-btn' ng-click='select_platform("Twitter")'>
+                <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-btn' ng-click='select_platform("twitter")'>
                     <img src="public/img/ico-twitter.svg">
                     <h4 class='text-center' style="cursor:default;">Twitter</h4>
                 </div>
-                <div ng-class='{"package-highlight" : contest.platform == "Instagram"}' class='launch-page-btn' ng-click='select_platform("Instagram")'>
+                <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-btn' ng-click='select_platform("instagram")'>
                     <img src="public/img/ico-insta.svg">
                     <h4 class='text-center' style="cursor:default;">Instagram</h4>
                 </div>
@@ -167,29 +167,29 @@
             <label uib-tooltip="Define the type of metric that you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
                 <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
-      <div class="col-sm-10">
-        <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
-            <span class="glyphicon glyphicon-search" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-          <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Price</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>
+            <div class="col-sm-10">
+                <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-search" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+                    <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Price</h4>
+                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>
+                </div>
+                <div ng-class='{"package-highlight" : contest.objective == "Quality"}' class='launch-page-btn' ng-click='select_objective("Quality")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-globe" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+                    <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Quality</h4>
+                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>
+                </div>
+                <div ng-class='{"package-highlight" : contest.objective == "Awareness"}' class='launch-page-btn' ng-click='select_objective("Awareness")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-comment" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
+                    <h4 class="text-center" style="float:none;display:inline-block;"> Awareness</h4>
+                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>
+                </div>
+            </div>
         </div>
-        <div ng-class='{"package-highlight" : contest.objective == "Quality"}' class='launch-page-btn' ng-click='select_objective("Quality")' style="cursor:default;">
-            <span class="glyphicon glyphicon-globe" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-          <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Quality</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 col-sm-offset-2">
+                <p style="font-size:12px;"><small>Learn about campaign priorities <a href="/priority" style="cursor:pointer;" target="_blank">here</a>.</small></p>
+            </div>
         </div>
-        <div ng-class='{"package-highlight" : contest.objective == "Awareness"}' class='launch-page-btn' ng-click='select_objective("Awareness")' style="cursor:default;">
-            <span class="glyphicon glyphicon-comment" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-          <h4 class="text-center" style="float:none;display:inline-block;"> Awareness</h4>
-          <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 col-sm-offset-2">
-            <p style="font-size:12px;"><small>Learn about campaign priorities <a href="/priority" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-        </div>
-    </div>
         <div class='row' style="padding-top:40px;">
             <div style="padding-bottom:20px;padding-left:10px;">
                 <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
@@ -468,7 +468,7 @@
                 <div class="form-group" ng-init="contest.attachment = ''">
                     <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
                     <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                 </div>
                 <div class="row form-group" ng-show="new_img">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
@@ -602,6 +602,7 @@ li.value-list:before {
     padding: 5px !important;
     border-top: none;
 }
+
 .table>thead>tr>td {
     border-top: none;
 }
