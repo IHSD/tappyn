@@ -74,11 +74,11 @@
                 <div class='row'>
                     <div class="col-md-12 col-xs-12 text-center">
                         <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
-                            <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-outliner'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
-                            <a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-outliner' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
+                            <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-secondary'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
+                            <a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-secondary' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
                                 <img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
                             </a>
-                            <a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-outliner' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
+                            <a ng-if='contest.company.twitter_handle && contest.company.twitter_handle != ""' ng-click='track_click("twitter_click", contest)' class='btn btn-secondary' ng-init='company.social_twitter = "public/img/OrangeTwitterIcon.png"' ng-mouseenter='company.social_twitter = "public/img/WhiteTwitterIcon.png"' ng-mouseleave='company.social_twitter = "public/img/OrangeTwitterIcon.png"'>
                                 <img width='20px' height='20px' ng-src='{{company.social_twitter}}'>
                             </a>
                         </div>
@@ -178,7 +178,7 @@
                     <img width='20px' height='20px' ng-src='https://s3-us-west-2.amazonaws.com/tappyn/key.jpg'>
                 </div>
                 <div style='padding: 20px 20px 10px 70px;'>
-                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;"><br>Create a story that connects.</a></strong></p>
+                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;color:#019f6e;"><br>Create a story that connects.</a></strong></p>
                 </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
