@@ -4,12 +4,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             // 'tp-platform': { step: 'tp-platform', next: 'tp-objective', previous: 'none', fill: 16.7 },
             // 'tp-objective': { step: 'tp-objective', next: 'tp-audience', previous: 'tp-platform', fill: 33.4 },
             // 'tp-audience': { step: 'tp-audience', next: 'detail', previous: 'tp-objective', fill: 50.1 },
-            'tp-prior': { step: 'tp-prior', next: 'detail', previous: 'none', fill: 25 },
-            'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
-            'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
-            'chose-plan': { step: 'chose-plan', next: 'payment', previous: 'package', fill: 75 },
-            'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
-        }
+        'tp-prior': { step: 'tp-prior', next: 'detail', previous: 'none', fill: 25 },
+        'detail': { step: 'detail', next: 'payment', previous: 'tp-audience', fill: 50 },
+        'preview': { step: 'preview', next: 'payment', previous: 'package', fill: 75 },
+        'chose-plan': { step: 'chose-plan', next: 'payment', previous: 'package', fill: 75 },
+        'done': { step: 'done', next: 'none', previous: 'none', fill: 100 }
+    }
         // $scope.current = $scope.steps['tp-platform'];
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
@@ -104,6 +104,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         AppFact.signUp({ identity: email, password: pass, name: name, logo_url: logo, group_id: 3, first_validation: 99 }).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
+                    $scope.profile = { summary: $scope.contest.summary, different: $scope.contest.different };
                     $rootScope.user = response.data;
                     sessionStorage.setItem("user", JSON.stringify(response.data));
                     window.Intercom('update', {
@@ -145,10 +146,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                 $scope.cropper.setCropBoxData({ width: setting['min_width'], height: setting['min_height'] });
 
             }
-        }
-        // else if(step == 'tp-audience'){
-        // }
-        else if (step == "tp-prior") {
+        } else if (step == "tp-prior") {
             //var setting = $scope.platform_image_settings[$scope.contest.platform];
             $scope.current = $scope.steps[step];
             //$scope.cropper.setAspectRatio(setting['aspect_ratio']);
