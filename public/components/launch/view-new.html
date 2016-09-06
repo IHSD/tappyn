@@ -93,7 +93,7 @@
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12" style="padding-bottom:200px;">
         <div class="row">
             <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
-                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
@@ -112,7 +112,7 @@
         </div>
         <div class="row" style="padding-top:40px;">
             <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
-                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <form class="form-inline ng-pristine ng-valid" role="form">
@@ -165,7 +165,7 @@
         </div>
         <div class="row" style="padding-top:40px;">
             <label uib-tooltip="Define the type of metric that is most important to you." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
-                <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
@@ -196,7 +196,7 @@
             </div>
             <div ng-show="showOptions">
                 <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
-                    <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10 col-md-5">
                     <div class="form-group">
@@ -391,7 +391,10 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Creator Targeting</p>
+                    <label uib-tooltip="You can target creators within certain demographics to read and create for your company.">
+                        <p style="display:inline;">Creator Targeting</p>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
                 </td>
                 <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -401,9 +404,8 @@
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
                     <label uib-tooltip="We link this spend to your website & show you all the results of our ads performance.">
                         <p style="display:inline;">A/B Testing ($15 Included)</p>
-                        <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                     </label>
-
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -411,7 +413,10 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Copies (30)</p>
+                    <label uib-tooltip="30 unique copies optimized for the media platform you select.">
+                        <p style="display:inline;">Copies (30)</p>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
                 </td>
                 <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -419,7 +424,10 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Photos (30)</p>
+                    <label uib-tooltip="30 unique photos optimized for the media platform you select.">
+                        <p style="display:inline;">Photos (30)</p>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -427,7 +435,10 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>Videos (30)</p>
+                    <label uib-tooltip="30 unique videos optimized for the media platform you select.">
+                        <p style="display:inline;">Videos (30)</p>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
                 </td>
                 <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"></td>
                 <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"></td>
