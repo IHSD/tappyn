@@ -102,7 +102,7 @@
                     <h3><strong>Select Ownership</strong></h3>
                 </div>
                 <div class="modal-body-sub text-center">
-                    <h4>Are you sure you want to select this ad to own?</h4>
+                    <h4>We'll transfer you the copyright of the ad you select. It will then be owned by you officially and you can use it in your future advertising campaigns.<br>Are you sure you want to select this ad to own?</h4>
                 </div>
                 <div class="modal-footer-sub text-right" style="border-top:none;">
                     <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
@@ -271,42 +271,44 @@
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Start receiving ads by launching your campaign.</strong>
+                              Start receiving ads by launching your campaign.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.</strong>
+                              Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_testing' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Please review, edit, and de-select ads that you'd like to omit from testing.</strong>
+                              Please review, edit, and de-select ads that you'd like to omit from testing.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'testing' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Your ads are currently being tested. Please check back in 24 hours for results.</strong>
+                              Your ads are currently being tested. Please check back in 24 hours for results.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                <strong>Please choose your favorite ad. Learn more about our metrics <span ng-click="showlearn()" style="cursor:pointer;color:#019F6E;">here</a>.</strong>
+                            <span style='font-weight:300;font-size:22;position:relative;'>
+                                Please choose your favorite ad.
+                                <br>
+                                <span style="font-weight:300;font-size:18px;">Questions? Learn more about testing <a href="/faq">here</a>.</span>
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              <strong>Congratulations! You now own an ad your audience will love. Start growing your business by using it!</strong>
+                              Congratulations! You now own an ad your audience will love. Start growing your business by using it!
                             </span>
                           </h4>
                         </div>
