@@ -2398,6 +2398,19 @@ footer {
 .subpage-image {
     overflow: hidden;
 }
+.btn-jj {
+    background: #fff;
+    color: #333;
+    border: 2px solid #019F6E;
+    font-weight: 400;
+}
+
+.btn-jh {
+    background: #fff;
+    color: #333;
+    border: 2px solid #fff;
+    font-weight: 400;
+}
 
 .subpage-image .columns {
     height: 100%;

@@ -142,13 +142,13 @@
                         <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
-                             <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}' style="cursor:default;">
+                             <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
                             </label>
-                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-jj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}' style="cursor:default;">
+                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-jj" : contest.gender == 1, "btn-jh" : contest.gender != 1}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='1'> Men
                             </label>
-                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-jj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}' style="cursor:default;">
+                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-jj" : contest.gender == 2, "btn-jh" : contest.gender != 2}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='2'> Women
                             </label>
                         </div>
@@ -346,6 +346,7 @@
                     <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
                 </tr>
                 <tr>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;color:#fff;font-weight:300;max-width:100px;"></td>
                     <td class="text-center" style="font-size:22px;background:#06883F;color:#fff;font-weight:300;max-width:100px;">
                         Basic
                         <br>
@@ -548,7 +549,7 @@
             <div class='text-left' ng-show='current.step == "detail"'>
                 <h4 class='text-left' style='color:#333'>
                         <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                            <span style='font-weight:300;font-size:22;top:10px;'>
+                            <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
                                   You'll only have to do this once.
                             </span>
                 </h4>
@@ -556,7 +557,7 @@
             <div class='text-left' ng-show='current.step == "chose-plan"'>
                 <h4 class='text-left' style='color:#333'>
                         <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                            <span style='font-weight:300;font-size:22;top:10px;'>
+                            <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
                               100% Money Back Guarantee
                             </span>
                 </h4>
@@ -564,7 +565,7 @@
             <div class='text-left' ng-show='current.step == "tp-prior"'>
                 <h4 class='text-left' style='color:#333'>
                       <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                        <span style='font-weight:300;font-size:22;top:10px;'>
+                        <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
                               People are 23% more likely to enjoy ads they find relevant.
                         </span>
                 </h4>
