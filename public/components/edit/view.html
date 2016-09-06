@@ -1,6 +1,9 @@
 <div class='container-fluid'>
     <div class='row'>
         <div class='col-xs-12' style='padding-top:20px;'>
+            <a href="/dashboard" class='btn btn-oj btn-secondary pull-left'>Back</a>
+        </div>
+        <div class='col-xs-12' style='padding-top:10px;'>
             <div class='launch-page-box'>
                 <div class='col-xs-12 col-sm-4 text-center vertical-center'>
                     <h3 style='margin-top:0px;'>
@@ -8,7 +11,6 @@
                         <img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
                         {{contest.company.name}}
                     </h3>
-                    <a href="/dashboard" class='btn btn-oj btn-secondary pull-left'>Back</a>
                 </div>
                 <div class='col-sm-5 col-xs-12 vertical-center col-sm-offset-4'>
                     <div style='width:100%;padding-top:15px;'>
@@ -107,12 +109,6 @@
         </div>
         <div class="col-xs-12 col-md-3">
             <div class="contest-box" ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
-                <div style='float:left;padding:30px 10px 10px 30px;'>
-                    <img width='20px' height='20px' ng-src='public/img/lightbulb.png'>
-                </div>
-                <div style='padding: 20px 20px 10px 70px;'>
-                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;"><br>Write a high performing copy.</a></strong></p>
-                </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
