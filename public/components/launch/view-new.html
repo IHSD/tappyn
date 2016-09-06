@@ -47,7 +47,7 @@
             </div>
             <div ng-show='current.step == "chose-plan"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">You're almost there.</h2>
-                <h4>Different packages fit different needs. Find the one that works for you.</h4>
+                <h4>All packages come with a 100% money back guarantee and full copyright ownership of the final ad.</h4>
             </div>
             <div ng-show='current.step == "done"' style="padding-top:25px;">
                 <h2 style="font-weight:400;">Congratulations!</h2>
@@ -142,13 +142,13 @@
                         <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
-                            <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-oj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}'>
+                             <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-outliner" : contest.gender != 0}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
                             </label>
-                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-oj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}'>
+                            <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-jj" : contest.gender == 1, "btn-outliner" : contest.gender != 1}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='1'> Men
                             </label>
-                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-oj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}'>
+                            <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-jj" : contest.gender == 2, "btn-outliner" : contest.gender != 2}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='2'> Women
                             </label>
                         </div>
@@ -164,7 +164,7 @@
             </div>
         </div>
         <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define the type of metric that you'd like to use." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
+            <label uib-tooltip="Define the type of metric that is most important to you." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
                 <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
@@ -192,7 +192,7 @@
         </div>
         <div class='row' style="padding-top:40px;">
             <div style="padding-bottom:20px;padding-left:10px;">
-                <button class="btn-sm btn btn-oj" ng-click="showOptions = !showOptions">More Options</button>
+                <button class="btn-sm btn btn-secondary" ng-click="showOptions = !showOptions">More Options</button>
             </div>
             <div ng-show="showOptions">
                 <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
@@ -200,7 +200,7 @@
                 </label>
                 <div class="col-sm-10 col-md-5">
                     <div class="form-group">
-                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." maxlength="250">
+                        <textarea class='form-control' ng-model='contest.additional_info' placeholder="i.e., Use a sense of humour, and have fun explaining how other alternatives fall short." rows="4" maxlength="250">
                         </textarea>
                         <div class='input-count'><span ng-if='!contest.additional_info'>0</span><span ng-if='contest.additional_info'>{{contest.additional_info.length}}</span> of 250 characters</div>
                     </div>
@@ -346,10 +346,21 @@
                     <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
                 </tr>
                 <tr>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                    <td class="text-center" style="font-size:22px;background:#06883F;color:#fff;font-weight:300;max-width:100px;">Basic</td>
-                    <td class="text-center" style="font-size:22px;background:#019F6E;color:#fff;font-weight:300;max-width:100px;">Premium</td>
-                    <td class="text-center" style="font-size:22px;background:#018880;color:#fff;font-weight:300;max-width:100px;">Platinum</td>
+                    <td class="text-center" style="font-size:22px;background:#06883F;color:#fff;font-weight:300;max-width:100px;">
+                        Basic
+                        <br>
+                        <span style="font-size:12px;">Perfect for people just testing the water.</span>
+                    </td>
+                    <td class="text-center" style="font-size:22px;background:#019F6E;color:#fff;font-weight:300;max-width:100px;">
+                        Premium
+                        <br>
+                        <span style="font-size:12px;">Perfect for businesses looking to grow online.</span>
+                    </td>
+                    <td class="text-center" style="font-size:22px;background:#018880;color:#fff;font-weight:300;max-width:100px;">
+                        Platinum
+                        <br>
+                        <span style="font-size:12px;">Perfect for brands looking to supercharge their digital presence.</span>
+                    </td>
                 </tr>
             </thead>
             <tr>
@@ -387,7 +398,11 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <p>A/B Testing ($15 Included)</p>
+                    <label uib-tooltip="We link this spend to your website & show you all the results of our ads performance.">
+                        <p style="display:inline;">A/B Testing ($15 Included)</p>
+                        <span class="glyphicon glyphicon-question-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    </label>
+
                 </td>
                 <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
                 <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
@@ -532,8 +547,7 @@
             </div>
             <div class='text-left' ng-show='current.step == "detail"'>
                 <h4 class='text-left' style='color:#333'>
-                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
-                        <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span class='glyphicon glyphicon-ok circle-it-oj'></span>
                             <span style='font-weight:300;font-size:22;top:10px;'>
                                   You'll only have to do this once.
                             </span>
@@ -541,8 +555,7 @@
             </div>
             <div class='text-left' ng-show='current.step == "chose-plan"'>
                 <h4 class='text-left' style='color:#333'>
-                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
-                        <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span class='glyphicon glyphicon-ok circle-it-oj'></span>
                             <span style='font-weight:300;font-size:22;top:10px;'>
                               100% Money Back Guarantee
                             </span>
@@ -550,8 +563,7 @@
             </div>
             <div class='text-left' ng-show='current.step == "tp-prior"'>
                 <h4 class='text-left' style='color:#333'>
-                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
-                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                      <span class='glyphicon glyphicon-ok circle-it-oj'></span>
                         <span style='font-weight:300;font-size:22;top:10px;'>
                               People are 23% more likely to enjoy ads they find relevant.
                         </span>
