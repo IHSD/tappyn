@@ -46,3 +46,7 @@ $config['points_per_winning_submission'] = 10;
  */
 $config['default_payout_per_contest'] = 20;
 $config['photo_payout_per_contest']   = 40;
+$config['payout_to_launch_price']     = [
+    20 => 59,
+    40 => 149,
+];

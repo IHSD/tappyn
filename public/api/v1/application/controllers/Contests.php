@@ -175,6 +175,7 @@ class Contests extends CI_Controller
         } else {
             $contest->status = 'active';
         }
+        $contest->total_amount = $this->config->item('payout_to_launch_price')[$contest->prize];
 
         if ($payout = $this->payout->exists(array('contest_id' => $contest_id))) {
             $winner              = $this->submission->where('id', $payout->submission_id)->limit(1)->fetch()->row();
