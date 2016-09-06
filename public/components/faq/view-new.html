@@ -14,13 +14,11 @@
     </div>
   </div>
 </script>
-
 <div class="container">
   <div class='content-padding'>
   <h2 class='text-center' style='font-weight:300;'>Frequently Asked Questions</h2>
   <div class='row'>
     <div class="col-xs-12 launch-page-box">
-
       <uib-tabset active="active">
         <uib-tab index="0" heading="Members" style="font-size:18px;">
           <div class="row">
@@ -116,7 +114,6 @@
             </uib-accordion>
           </div>
         </uib-tab>
-
         <uib-tab index="$index + 1" heading="Businesses" class='row' style="font-size:18px;">
           <uib-accordion class='col-sm-4 col-xs-12'>
             <h3>How Campaigns Work</h3>
@@ -140,14 +137,12 @@
               Absolutely. As each campaign is tailored for a specific social media platform, having different campaigns active can drastically expand your advertising reach.
             </uib-accordion-group>
           </uib-accordion>
-
           <uib-accordion class='col-sm-4 col-xs-12'>
             <h3>Managing Your Campaign</h3>
             <uib-accordion-group heading="How do I edit my campaign?" template-url="group-template.html">
               Log into your account, and simply hit edit campaign in your dashboard. Contact us if you have any questions at all during this process.
             </uib-accordion-group>
           </uib-accordion>
-
           <uib-accordion class='col-sm-4 col-xs-12'>
             <h3>Choosing A Winner</h3>
             <uib-accordion-group heading="How do I choose a winner?" template-url="group-template.html">
@@ -160,7 +155,39 @@
               You have 3 days from when the campaign closes to choose a winner. Otherwise, we'll pick the one with the highest up-votes to complete your campaign.
             </uib-accordion-group>
           </uib-accordion>
-
+          <uib-accordion class='col-sm-4 col-xs-12'>
+            <h3>Ad Testing</h3>
+            <uib-accordion-group heading="What do you mean by 'testing'?" template-url="group-template.html">
+              Once your campaign has reached 30 ads, we want to show you how well the perform. To do this, we've built a system to run the ads on the platform you selected to obtain actual performance results.
+            </uib-accordion-group>
+            <uib-accordion-group heading="What targeting do you use during testing?" template-url="group-template.html">
+            We start off with the creator targeting you set up in your campaign, but if you'd like us to be more specific, we're happy to add on additional specficiations. Please let us know about any requests <a href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>here</a>.
+            </uib-accordion-group>
+            <uib-accordion-group heading="Where do the people who click on the ads go?" template-url="group-template.html">
+              We link all traffic to the website you provided in your profile.
+            </uib-accordion-group>
+            <uib-accordion-group heading="What if I don't want to test some ads?" template-url="group-template.html">
+              We recommend that you test as many ads as possible. The more ads that we test, the greater the chance is we find an ad your audience loves. If you feel some ads mischaracterize your brand, you have the ability to edit or omit those from testing.
+            </uib-accordion-group>
+            <uib-accordion-group heading="How long does the test take?" template-url="group-template.html">
+              Generally, about 24 hours. If you put in a custom testing budget, it could be as long as 72 hours.
+            </uib-accordion-group>
+            <uib-accordion-group heading="How much do you spend on testing?" template-url="group-template.html">
+              $15 of testing is included in all packages, but if you'd like more data than $15 can purchase, you have the option to increase the testing budget at no charge.
+            </uib-accordion-group>
+            <uib-accordion-group heading="Why were some ads shown more than others?" template-url="group-template.html">
+              When one ad start to perform better than others, system automatically begin to show that ad more. This leads to different numbers of views across ads in the same campaign.
+            </uib-accordion-group>
+            <uib-accordion-group heading="Why don't some ads have results?" template-url="group-template.html">
+            If some ads are not showing any results, that means that they were either omitted from testing or the testing budget expired before anyone could click on those ads.
+            </uib-accordion-group>
+          </uib-accordion>
+          <uib-accordion class='col-sm-4 col-xs-12'>
+            <h3>Selecting Your Favorite Ad</h3>
+            <uib-accordion-group heading="How do I decide which ad to select?" template-url="group-template.html">
+              Sometimes it can be confusing to decide which ad to purchase. We recommend picking one metric and focusing on that entirely. For most of our campaigns, we suggest using the Click Through Rate (CTR). It's straightforward and one of the most impactful for the growth of your business. If you care more about volume of traffic instead of traffic quality, however, Cost Per Click might be a better metric for you.
+            </uib-accordion-group>
+          </uib-accordion>
         </uib-tab>
       </uib-tabset>
       </div>
@@ -169,11 +196,11 @@
 </div>
 
 <style>
-.nav-tabs>li.active>a {
+.tp-faq .panel-title a:focus {
   color: #019F6E;
 }
 
-.nav-tabs>li.active>a:hover {
+.tp-faq .panel-title a:hover {
   color: #019F6E;
 }
 
