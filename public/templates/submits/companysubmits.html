@@ -12,8 +12,8 @@
         </div>
         <div ng-show="submission.headline_editor">
             <input class='form-control' ng-model='submission.headline_temp' type='text'>
-            <a ng-show="submission.headline.length > 1" href="#" ng-click="submission_headline_act(submission,'save')">Save</a> or
-            <a href="#" ng-click="submission_headline_act(submission,'cancel')">cancel</a>.
+            <a ng-show="submission.headline_temp.length > 0" href="#" ng-click="submission_headline_act(submission,'save')">Save</a>
+            <a class="pull-right" href="#" ng-click="submission_headline_act(submission,'cancel')">Cancel</a>
         </div>
     </div>
     <div ng-show="submission.link_explanation">
@@ -23,8 +23,8 @@
         </div>
         <div ng-show="submission.link_editor">
             <input class='form-control' ng-model='submission.link_temp' type='text'>
-            <a ng-show="submission.link_explanation.length > 1" href="#" ng-click="submission_link_act(submission,'save')">Save</a> or
-            <a href="#" ng-click="submission_link_act(submission,'cancel')">cancel</a>.
+            <a ng-show="submission.link_temp.length > 0" href="#" ng-click="submission_link_act(submission,'save')">Save</a>
+            <a class="pull-right" href="#" ng-click="submission_link_act(submission,'cancel')">Cancel</a>
         </div>
     </div>
     <div ng-show="submission.text">
@@ -34,8 +34,8 @@
         </div>
         <div ng-show="submission.text_editor">
             <input class='form-control' ng-model='submission.text_temp' type='text'>
-            <a ng-show="submission.text.length > 1" href="#" ng-click="submission_text_act(submission,'save')">Save</a> or
-            <a href="#" ng-click="submission_text_act(submission,'cancel')">cancel</a>.
+            <a ng-show="submission.text_temp.length > 1" href="#" ng-click="submission_text_act(submission,'save')">Save</a>
+            <a class="pull-right" href="#" ng-click="submission_text_act(submission,'cancel')">Cancel</a>
         </div>
     </div>
     <div class='contest-upvotes disable-click'>
