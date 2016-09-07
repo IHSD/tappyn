@@ -199,7 +199,7 @@
                     <td style="cursor:default;">{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
                     <td>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "Complete" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest.id)' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest)' style='margin-right: 10px;'>View Campaign</a>
                         <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
                     </td>
                 </tr>
@@ -391,6 +391,28 @@
                             <div class="col-xs-12" style="padding-top:25px;">
                                 <a class="btn btn-oj col-xs-8 col-xs-offset-2 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="submissions_others().length">
+                    <div class='col-sm-4 hidden-xs'>
+                        <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
+                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                        </div>
+                    </div>
+                    <div class='col-sm-4 hidden-xs'>
+                        <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
+                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                        </div>
+                    </div>
+                    <div class='col-sm-4 hidden-xs'>
+                        <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
+                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                        </div>
+                    </div>
+                    <div class='col-xs-12 visible-xs'>
+                        <div class="contest-box row" ng-repeat='submission in submissions_others()'>
+                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
                         </div>
                     </div>
                 </div>

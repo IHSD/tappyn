@@ -207,13 +207,13 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
 
     /** start winner functions, functions for assembling the winner view, opening and closing the modal for
         confirmation and the actual choosing of a winner **/
-    $scope.choosing_winner = function(contest) {
+    $scope.choosing_winner = function(contest, view) {
         dashFactory.grabSubmissions(contest.id).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.winner_contest = contest; //to pass with the chosen submission
                     $scope.submissions = response.data.submissions;
-                    $scope.view = 'winner';
+                    $scope.view = (view) ? view : 'winner';
                 } else alert(response.message);
             } else if (response.http_status_code == 500) alert(response.error);
             else $scope.check_code(response.http_status_code);
@@ -256,12 +256,13 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         }
         /** end winner functions **/
 
-    $scope.view_pcp = function(id) {
-        dashFactory.viewWinner(id).success(function(response) {
+    $scope.view_pcp = function(contest) {
+        dashFactory.viewWinner(contest.id).success(function(response) {
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.winner = response.data;
                     $scope.view = "pcp";
+                    $scope.choosing_winner(contest, 'pcp');
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
             else $scope.check_code(response.http_status_code);
@@ -328,6 +329,19 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             link.href = dataUrl;
             link.click();
         });
+    }
+
+    $scope.submissions_others = function() {
+        var submissions = [];
+        if ($scope.winner && $scope.submissions) {
+            for (var i in $scope.submissions) {
+                if ($scope.submissions[i].id != $scope.winner.winner.id) {
+                    submissions.push($scope.submissions[i]);
+                }
+            }
+        }
+
+        return submissions;
     }
 
 
