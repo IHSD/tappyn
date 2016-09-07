@@ -446,7 +446,7 @@
 .checkbox-container input[type="checkbox"]:checked + label:before {
     content: "\e013";
     color: #019F6E;
-    font-size:34px;
+    font-size: 34px;
 }
 
 .checkbox-container input[type="checkbox"] + label {
@@ -640,9 +640,7 @@ Author: Rashid Shafique | rmughal@gmail.com
     background: #019F6E;
 }
 
-.plan.recommended .btn {
-
-}
+.plan.recommended .btn {}
 
 .subscription-div.now-level.next-level .sign-up-btn,
 .subscription-div .more-p {
@@ -701,12 +699,24 @@ Author: Rashid Shafique | rmughal@gmail.com
     position: absolute;
     right: 26px;
     bottom: 0;
-    cursor:default;
+    cursor: default;
 }
 
 .contest-test-result span {
     margin-left: 35px;
     font-size: 16px;
+}
+
+.view-dashboard .contest-test-result span:first-child {
+    display: block;
+    font-size: 34px;
+    position: absolute;
+    right: 20px;
+    bottom: 15px;
+}
+
+.view-dashboard .contest-test-result .test-ctr {
+    cursor: help;
 }
 
 @media screen and (min-width: 768px) {

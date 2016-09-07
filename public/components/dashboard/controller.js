@@ -1,4 +1,4 @@
-tappyn.controller('dashController', function($scope, $rootScope, $route, dashFactory, AppFact) {
+tappyn.controller('dashController', function($scope, $rootScope, $route, $filter, dashFactory, AppFact) {
 
     //on page load grab all
     $scope.type = '';
@@ -13,6 +13,12 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.member_filter = {};
     $scope.member_filter_chose = 'all';
     $scope.dash2 = [];
+    $scope.tooltip_title = {
+        'cost_per_result': 'Cost Per Click',
+        'ctr': 'Click Through Rate',
+        'impressions': 'Views',
+        'results': 'Total Clicks'
+    };
 
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
@@ -79,7 +85,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
     $scope.showlearn = function() {
         $scope.set_model('learn');
     }
-    $scope.showctr = function() {
+    $scope.showctr = function(key) {
+        if (key && key != 'ctr') return;
         $scope.set_model('ctr_show');
     }
 
@@ -212,7 +219,18 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.winner_contest = contest; //to pass with the chosen submission
-                    $scope.submissions = response.data.submissions;
+                    var filtered = [];
+                    angular.forEach(response.data.submissions, function(item) {
+                        if (item.test_result.ctr) {
+                            var _results = [];
+                            for (var i in item.test_result) {
+                                _results.push({ key: i, value: item.test_result[i] });
+                            }
+                            item.test_result_array = _results;
+                        }
+                        filtered.push(item);
+                    });
+                    $scope.submissions = filtered;
                     $scope.view = (view) ? view : 'winner';
                 } else alert(response.message);
             } else if (response.http_status_code == 500) alert(response.error);
@@ -344,6 +362,32 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, dashFac
         return submissions;
     }
 
+    $scope.test_result_content = function(test_result) {
+        var return_value = '';
+        switch (test_result.key) {
+            case 'cost_per_result':
+                return_value = $filter('currency')(test_result.value);
+                break;
+            case 'ctr':
+                return_value = test_result.value + '%';
+                break;
+            case 'impressions':
+                return_value = $filter('number')(test_result.value);
+                break;
+            default:
+                return_value = test_result.value;
+                break;
 
+        }
+        return return_value;
+    }
 
+    $scope.test_big = function(test_result) {
+        var c = {
+            'Price': 'cost_per_result',
+            'Awareness': 'impressions',
+            'Quality': 'ctr'
+        };
+        return (c[$scope.winner_contest.objective] && c[$scope.winner_contest.objective] == test_result.key) ? -1 : 1;
+    }
 });

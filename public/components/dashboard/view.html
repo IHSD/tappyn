@@ -111,7 +111,7 @@
         </div>
     </div>
 </div>
-<div class='row'>
+<div class="view-dashboard row">
     <div class='' style='background: white; margin-bottom: 40px; padding: 40px 0;overflow:hidden;'>
         <div class='col-xs-12' ng-if='user.type == "company"'>
             <div class='col-xs-12'>
@@ -218,22 +218,22 @@
                 <div ng-if="submissions.length">
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-xs-12 visible-xs'>
                         <div class="contest-box row" ng-repeat='submission in submissions'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                 </div>
@@ -397,22 +397,22 @@
                 <div ng-if="submissions_others().length">
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='first_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='second_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-sm-4 hidden-xs'>
                         <div ng-if='third_third($index)' class="contest-box row" ng-repeat='submission in submissions_others()'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                     <div class='col-xs-12 visible-xs'>
                         <div class="contest-box row" ng-repeat='submission in submissions_others()'>
-                            <div ng-include src="'templates/submits/companysubmits.html?123'"></div>
+                            <div ng-include="'templates/submits/companysubmits.html?'+template_version"></div>
                         </div>
                     </div>
                 </div>

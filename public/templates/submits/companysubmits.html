@@ -5,39 +5,39 @@
     <span class='company-name'>from {{user.first_name}} &#8226; {{submission.contest.platform | capitalize}}</span>
 </div>
 <div class='contest-entry text-left'>
-<div ng-show="submission.headline">
-    <div ng-hide="submission.headline_editor">
-        <h3 style="display:inline;">{{submission.headline}}</h3>
-        <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
+    <div ng-show="submission.headline">
+        <div ng-hide="submission.headline_editor">
+            <h3 style="display:inline;">{{submission.headline}}</h3>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
+        </div>
+        <div ng-show="submission.headline_editor">
+            <input class='form-control' ng-model='submission.headline_temp' type='text'>
+            <a ng-show="submission.headline.length > 0" href="#" ng-click="submission_headline_act(submission,'save')">Save</a> or
+            <a href="#" ng-click="submission_headline_act(submission,'cancel')">cancel</a>.
+        </div>
     </div>
-    <div ng-show="submission.headline_editor">
-        <input class='form-control' ng-model='submission.headline_temp' type='text'>
-        <a ng-show="submission.headline.length > 0" href="#" ng-click="submission_headline_act(submission,'save')">Save</a> or
-        <a href="#" ng-click="submission_headline_act(submission,'cancel')">cancel</a>.
-    </div>
-</div>
-<div ng-show="submission.link_explanation">
-    <div ng-hide="submission.link_editor">
-        <h4 style="display:inline;">{{submission.link_explanation}}<br></h4>
+    <div ng-show="submission.link_explanation">
+        <div ng-hide="submission.link_editor">
+            <h4 style="display:inline;">{{submission.link_explanation}}<br></h4>
             <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_link_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
+        </div>
+        <div ng-show="submission.link_editor">
+            <input class='form-control' ng-model='submission.link_temp' type='text'>
+            <a ng-show="submission.link_explanation.length > 0" href="#" ng-click="submission_link_act(submission,'save')">Save</a> or
+            <a href="#" ng-click="submission_link_act(submission,'cancel')">cancel</a>.
+        </div>
     </div>
-    <div ng-show="submission.link_editor">
-        <input class='form-control' ng-model='submission.link_temp' type='text'>
-        <a ng-show="submission.link_explanation.length > 0" href="#" ng-click="submission_link_act(submission,'save')">Save</a> or
-        <a href="#" ng-click="submission_link_act(submission,'cancel')">cancel</a>.
-    </div>
-</div>
-<div ng-show="submission.text">
-    <div ng-hide="submission.text_editor">
-        <h4 style="display:inline;">{{submission.text}}</h4>
+    <div ng-show="submission.text">
+        <div ng-hide="submission.text_editor">
+            <h4 style="display:inline;">{{submission.text}}</h4>
             <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_text_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
+        </div>
+        <div ng-show="submission.text_editor">
+            <input class='form-control' ng-model='submission.text_temp' type='text'>
+            <a ng-show="submission.text.length > 0" href="#" ng-click="submission_text_act(submission,'save')">Save</a> or
+            <a href="#" ng-click="submission_text_act(submission,'cancel')">cancel</a>.
+        </div>
     </div>
-    <div ng-show="submission.text_editor">
-        <input class='form-control' ng-model='submission.text_temp' type='text'>
-        <a ng-show="submission.text.length > 0" href="#" ng-click="submission_text_act(submission,'save')">Save</a> or
-        <a href="#" ng-click="submission_text_act(submission,'cancel')">cancel</a>.
-    </div>
-</div>
     <div class='contest-upvotes disable-click'>
         <span class='glyphicon glyphicon-heart'></span> {{submission.votes | number}}
     </div>
@@ -47,19 +47,8 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <!--<span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>-->
-    <div ng-if="submission.test_result.impressions">
-        <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-        <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
-    </div>
-    <div ng-if="!submission.test_result.impressions">
-    <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>
-    <span ng-click="showctr()" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-    </div>
-    <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
-        <span uib-tooltip="Views" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
-        <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
-        <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
+    <div ng-if="submission.test_result_array" class="contest-test-result col-xs-12 text-center">
+        <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in submission.test_result_array | orderBy:test_big" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
     </div>
 </div>
 <div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_selection' || winner_contest.status == 'pending_testing'">
