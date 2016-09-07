@@ -102,7 +102,8 @@
                     <h3><strong>Select Ownership</strong></h3>
                 </div>
                 <div class="modal-body-sub text-center">
-                    <h4>We'll transfer you the copyright of the ad you select. It will then be owned by you officially and you can use it in your future advertising campaigns.<br>Are you sure you want to select this ad to own?</h4>
+                    <h4>We'll transfer you the copyright of the ad you select. It will then be owned by you officially and you can use it in your future advertising campaigns.<br></h4>
+                    <h4 style="padding-top:25px;">Are you sure you want to select this ad to own?</h4>
                 </div>
                 <div class="modal-footer-sub text-right" style="border-top:none;">
                     <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
@@ -298,10 +299,8 @@
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
-                            <span style='font-weight:300;font-size:22;position:relative;'>
-                                Please choose your favorite ad.
-                                <br>
-                                <span style="font-weight:300;font-size:18px;">Questions? Learn more about testing <a target="/blank" href="/faq">here</a>.</span>
+                            <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
+                                Please choose your favorite ad. Learn more about testing <a target="/blank" href="/faq">here</a>.
                             </span>
                           </h4>
                         </div>
