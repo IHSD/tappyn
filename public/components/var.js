@@ -127,6 +127,13 @@ tappyn.factory('tappyn_var', function() {
 
     };
 
+    items.tooltip_title = {
+        'cost_per_result': 'Cost Per Click',
+        'ctr': 'Click Through Rate',
+        'impressions': 'Views',
+        'results': 'Total Clicks'
+    };
+
     itemsService.get = function(name) {
         if (items[name]) {
             return items[name];
