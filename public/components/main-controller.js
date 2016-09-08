@@ -649,4 +649,9 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
 
     }
 
+    $scope.showctr = function(key) {
+        if (key && key != 'ctr') return;
+        $scope.set_model('ctr_show');
+    }
+
 });

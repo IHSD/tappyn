@@ -157,5 +157,14 @@ tappyn.factory("AppFact", function($http) {
             }
         });
     }
+    fact.grabSubmissions = function(id) {
+        return $http({
+            method: 'GET',
+            url: 'api/v1/contests/' + id,
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            }
+        });
+    }
     return fact;
 });

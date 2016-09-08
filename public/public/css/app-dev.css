@@ -707,7 +707,7 @@ Author: Rashid Shafique | rmughal@gmail.com
     font-size: 16px;
 }
 
-.view-dashboard .contest-test-result span:first-child {
+.view-ended .contest-test-result span:first-child {
     display: block;
     font-size: 34px;
     position: absolute;
@@ -715,7 +715,7 @@ Author: Rashid Shafique | rmughal@gmail.com
     bottom: 15px;
 }
 
-.view-dashboard .contest-test-result .test-ctr {
+.view-ended .contest-test-result .test-ctr {
     cursor: help;
 }
 

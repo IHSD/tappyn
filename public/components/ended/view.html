@@ -1,3 +1,29 @@
+<div class='wrapper'>
+    <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'ctr_show'">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
+                    <div ng-click='set_model()' class="close">&times;</div>
+                    <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+                </div>
+                <div ng-show="user.type == 'company'" class="modal-body-sub text-center">
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. This is the primary metric that we use to define the effectiveness of an advertisement.
+                        <br>
+                    </p>
+                </div>
+                <div ng-hide="user.type =='company'" class="modal-body-sub text-center">
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
+                    <br>
+                    <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
+                    <br>
+                </div>
+                <div class="modal-footer-sub text-right">
+                    <p ng-hide="user.type =='company'" class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="myModalnew" tabindex="-1" role="dialog" aria-labelledby="myModalLabelnew" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -16,7 +42,7 @@
         </div>
     </div>
 </div>
-<div class='container-fluid'>
+<div class="view-ended container-fluid">
     <div class='row'>
         <div class='col-xs-12' style='padding-top:20px;'>
             <div class='launch-page-box' style="min-height:137px;">
@@ -46,16 +72,16 @@
             <div class='launch-page-box launch-preview'>
                 <div class='col-xs-12'>
                     <h3 style='margin-bottom: 0;'>Our Business</h3>
-                        <p>{{contest.summary}}</p>
+                    <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>Our Difference</h3>
-                        <p>{{contest.different}}</p>
+                    <p>{{contest.different}}</p>
                     <h3 style='margin-bottom: 0;'>Our Audience</h3>
-                        <p>{{contest.min_age}} - {{contest.max_age}} <span ng-switch on="contest.gender">
+                    <p>{{contest.min_age}} - {{contest.max_age}} <span ng-switch on="contest.gender">
                               <span ng-switch-when="1">Men</span>
-                              <span ng-switch-when="2">Women</span>
-                              <span ng-switch-default>Men and Women</span>
-                            </span>
-                        </p>
+                        <span ng-switch-when="2">Women</span>
+                        <span ng-switch-default>Men and Women</span>
+                        </span>
+                    </p>
                 </div>
                 <div ng-show="contest.additional_info" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
                     <!--<h3 style='margin-bottom: 0;'>Be Sure To...</h3>
@@ -133,18 +159,12 @@
                     </div>
                     <h5 class='winner-name'> {{winner.first_name}} {{winner.last_name | firstChar}}.</h5>
                     <span class='winner-tag'>Purchased</span>
-                    <div ng-if="winner.test_result.impressions">
-                        <span data-toggle="modal" href="#myModalnew" ng-bind="winner.test_result.ctr + '%'" class='contest-ctr ' ng-if='winner.test_result.ctr ' style="cursor:help;"></span>
-                        <span data-toggle="modal" href="#myModalnew" ng-bind="winner.test_result.ctr" class='contest-ctr ' ng-if='!winner.test_result.ctr ' style="cursor:help;">-</span>
-                    </div>
-                    <div ng-if="!winner.test_result.impressions">
-                        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='winner.ctr ' style="cursor:help;">{{winner.ctr}}%</span>
-                        <span data-toggle="modal" href="#myModalnew" class='contest-ctr ' ng-if='!winner.ctr ' style="cursor:help;">-</span>
+                    <div ng-if="winner.test_result_array" class="contest-test-result col-xs-12 text-center">
+                        <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in winner.test_result_array | orderBy:test_big" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
                     </div>
                 </div>
             </div>
         </div>
-
         <div class="col-xs-12 col-md-3">
             <div class="contest-box">
                 <div style='float:left;padding:30px 10px 10px 30px;'>
@@ -248,51 +268,50 @@
             </div>
         </div>
     </div>
-
     <hr style="border-top:2px solid #DEDEDE; margin:20px 0 40px 0 !important;">
-        <div class='row' style='padding-bottom:10px;' id='submishes'>
-            <div class='col-md-3 visible-md visible-lg'>
-                <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+    <div class='row' style='padding-bottom:10px;' id='submishes' ng-init="contest_template = 'ended'">
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-md-3 visible-md visible-lg'>
-                <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-md-3 visible-md visible-lg'>
-                <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-md-3 visible-md visible-lg'>
-                <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-md-3 visible-md visible-lg'>
+            <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-sm-4 visible-sm'>
-                <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-sm-4 visible-sm'>
-                <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-sm-4 visible-sm'>
-                <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-sm-4 visible-sm'>
+            <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
-            <div class='col-xs-12 visible-xs'>
-                <div class="contest-box row" ng-repeat='submission in submissions'>
-                    <div ng-include src="'templates/submits/contestsubmit.html'"></div>
-                </div>
+        </div>
+        <div class='col-xs-12 visible-xs'>
+            <div class="contest-box row" ng-repeat='submission in submissions'>
+                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <script type='text/javascript' src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
