@@ -3732,6 +3732,15 @@ hr.style-two {
     border: 1px solid #019F6E;
 }
 
+.tooltip-inner {
+    color:#333;
+    background: #fff;
+    border:1px solid #333;
+    opacity: 100;
+}
+.tooltip.in {
+    opacity: 100;
+}
 .faqpayment .panel-heading {
     border: 1px solid #019F6E;
     background: #fff;

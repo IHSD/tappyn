@@ -3022,8 +3022,8 @@ table.hover tr:nth-of-type(even):hover {
   cursor: help; }
 
 .tooltip {
-  background-color: #0a0a0a;
-  color: #fefefe;
+  background-color: #fff;
+  color: #333;
   font-size: 80%;
   padding: 0.75rem;
   position: absolute;
