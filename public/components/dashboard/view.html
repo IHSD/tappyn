@@ -267,7 +267,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"confirm_selection")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test Ads <span class="glyphicon glyphicon-share-alt"></span></button>
+                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
                             <h4 class='text-left' style='color:#333'>
@@ -300,14 +300,14 @@
                         <div class='text-left' ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                                Please choose your favorite ad. Learn more about testing <a target="/blank" href="/faq">here</a>.
+                                Please select the ad you'd like to own. Learn more about our testing process <a target="/blank" href="/faq">here</a>.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="view == 'pcp' && winner_contest.status != 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              Congratulations! You now own an ad your audience will love. Start growing your business by using it!
+                             Congratulations! You are the owner of an advertisement your audience loves. Place it in your next advertising campaign and watch your business grow.
                             </span>
                           </h4>
                         </div>

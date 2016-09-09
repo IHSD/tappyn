@@ -128,10 +128,10 @@ tappyn.factory('tappyn_var', function() {
     };
 
     items.tooltip_title = {
-        'cost_per_result': 'Cost Per Click',
-        'ctr': 'Click Through Rate',
-        'impressions': 'Views',
-        'results': 'Total Clicks'
+        'cost_per_result': "Cost per click for all clicks on your ad. The amount you're charged each time someone interacts with your ad. Your total charges are based on the amount you spent on the ad divided by all clicks the ad received.",
+        'ctr': 'Click-through rate for all clicks. The total number of clicks you received (ex: offsite clicks, likes, event responses) divided by the number of impressions.',
+        'impressions': "The number of times an ad was viewed. With a few exceptions, an impression is counted each time an ad can be viewed when it enters a person's screen.",
+        'results': 'The total number of clicks on your ad. This may include offsite clicks to your website, Page likes, post comments, event responses or app installs.'
     };
 
     itemsService.get = function(name) {
