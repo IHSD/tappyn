@@ -1,7 +1,7 @@
 tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, $filter, AppFact, tappyn_var) {
     $rootScope.modal_up = false;
     $rootScope.root_modal = { now: '' };
-    $rootScope.template_version = '1.2.6';
+    $rootScope.template_version = '1.2.8';
 
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
@@ -17,6 +17,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.additional_info_boxes = tappyn_var.get('additional_info_boxes');
     $scope.locations = tappyn_var.get('locations');
     $scope.tone_of_voice_boxes = tappyn_var.get('tone_of_voice_boxes');
+    $scope.tooltip_title = tappyn_var.get('tooltip_title');
     $scope.login_scope = {};
     $scope.registrar = {};
 
@@ -652,6 +653,54 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
     $scope.showctr = function(key) {
         if (key && key != 'ctr') return;
         $scope.set_model('ctr_show');
+    }
+
+    $scope.add_test_result_array = function(results) {
+        var filtered = [];
+        var last;
+        angular.forEach(results, function(item) {
+            if (item.test_result && item.test_result.ctr) {
+                var _results = [];
+                for (var i in item.test_result) {
+                    _results.push({ key: i, value: item.test_result[i] });
+                }
+                item.test_result_array = _results;
+            }
+            last = item;
+            filtered.push(item);
+        });
+        return (results.length == 1) ? last : filtered;
+    }
+
+    $scope.test_result_content = function(test_result) {
+        var return_value = '';
+        switch (test_result.key) {
+            case 'cost_per_result':
+                return_value = $filter('currency')(test_result.value);
+                break;
+            case 'ctr':
+                return_value = test_result.value + '%';
+                break;
+            case 'impressions':
+                return_value = $filter('number')(test_result.value);
+                break;
+            default:
+                return_value = test_result.value;
+                break;
+
+        }
+        return return_value;
+    }
+
+    $scope.test_big = function(contest) {
+        return function(test_result) {
+            var c = {
+                'Price': 'cost_per_result',
+                'Awareness': 'impressions',
+                'Quality': 'ctr'
+            };
+            return (c[contest.objective] && c[contest.objective] == test_result.key) ? -1 : 1;
+        }
     }
 
 });

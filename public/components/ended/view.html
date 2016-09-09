@@ -159,8 +159,8 @@
                     </div>
                     <h5 class='winner-name'> {{winner.first_name}} {{winner.last_name | firstChar}}.</h5>
                     <span class='winner-tag'>Purchased</span>
-                    <div ng-if="winner.test_result_array" class="contest-test-result col-xs-12 text-center">
-                        <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in winner.test_result_array | orderBy:test_big" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
+                    <div ng-if="winner.ctr">
+                        <span ng-click="showctr()" ng-bind="(winner.test_result.ctr)?winner.test_result.ctr + '%':'-'" class='contest-ctr ' ng-if='winner.test_result.ctr ' style="cursor:help;"></span>
                     </div>
                 </div>
             </div>
@@ -272,42 +272,42 @@
     <div class='row' style='padding-bottom:10px;' id='submishes' ng-init="contest_template = 'ended'">
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-xs-12 visible-xs'>
             <div class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
     </div>

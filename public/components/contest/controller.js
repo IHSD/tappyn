@@ -2,14 +2,18 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
     $scope.emotions = emotions;
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
     $scope.ctr_show = { show: false };
+    $scope.contest_template = 'contest';
+
     contestFactory.grabContest($routeParams.id).success(function(response) {
         $scope.contest = response.data.contest;
-        $scope.submissions = response.data.submissions;
+        $scope.submissions = $scope.add_test_result_array(response.data.submissions);
         contestModel.fire_google($scope.contest);
         if ($scope.contest.status == "ended") {
-            if ($rootScope.user) {
-                if ($rootScope.user.id != $scope.contest.owner && !$rootScope.user.is_admin) $location.path('/ended/' + $routeParams.id);
-            } else $location.path('/ended/' + $routeParams.id);
+            if ($rootScope.user && ($rootScope.user.id == $scope.contest.owner || $rootScope.user.is_admin)) {
+                $scope.contest_template = 'contest_owner';
+            } else {
+                $location.path('/ended/' + $routeParams.id);
+            }
         }
         if ($scope.contest.emotion) {
             $scope.emotion_contest = contestModel.sift_images($scope.contest, $scope.emotions);

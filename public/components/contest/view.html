@@ -1,19 +1,19 @@
 <div class='wrapper'>
     <div class='modal_actions col-sm-12' ng-show="root_modal.now == 'ctr_show'">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
-                <div ng-click='set_model()' class="close">&times;</div>
-                <h4 class="modal-title text-center">This is your ad's CTR.</h4>
-            </div>
-            <div class="modal-body-sub text-center" style="padding:10px;">
-                <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
-                <br>
-                <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
-                <br>
-            </div>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
+                    <div ng-click='set_model()' class="close">&times;</div>
+                    <h4 class="modal-title text-center">This is your ad's CTR.</h4>
+                </div>
+                <div class="modal-body-sub text-center" style="padding:10px;">
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
+                    <br>
+                    <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
+                    <br>
+                </div>
                 <div class="modal-footer-sub text-right" style="padding-bottom:10px;">
-                <p class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
+                    <p class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
                 </div>
             </div>
         </div>
@@ -51,16 +51,16 @@
             <div class='launch-page-box launch-preview'>
                 <div class='col-xs-12'>
                     <h3 style='margin-bottom: 0;'>Our Business</h3>
-                        <p>{{contest.summary}}</p>
+                    <p>{{contest.summary}}</p>
                     <h3 style='margin-bottom: 0;'>Our Difference</h3>
-                        <p>{{contest.different}}</p>
+                    <p>{{contest.different}}</p>
                     <h3 style='margin-bottom: 0;'>Our Audience</h3>
-                        <p>{{contest.min_age}} - {{contest.max_age}} <span ng-switch on="contest.gender">
+                    <p>{{contest.min_age}} - {{contest.max_age}} <span ng-switch on="contest.gender">
                               <span ng-switch-when="1">Men</span>
-                              <span ng-switch-when="2">Women</span>
-                              <span ng-switch-default>Men and Women</span>
-                            </span>
-                        </p>
+                        <span ng-switch-when="2">Women</span>
+                        <span ng-switch-default>Men and Women</span>
+                        </span>
+                    </p>
                 </div>
                 <div ng-show="contest.additional_info" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
                     <!--<h3 style='margin-bottom: 0;'>Be Sure To...</h3>
@@ -279,42 +279,42 @@
     <div class='row' style='padding-bottom:10px;' id='submishes'>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='first_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='second_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='third_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-md-3 visible-md visible-lg'>
             <div ng-if='fourth_fourth($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='first_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='second_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-sm-4 visible-sm'>
             <div ng-if='third_third($index)' ng-mouseenter='submission.hovering = true' ng-mouseleave='submission.hovering = false' class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <div class='col-xs-12 visible-xs'>
             <div class="contest-box row" ng-repeat='submission in submissions'>
-                <div ng-include src="'templates/submits/contestsubmit.html'"></div>
+                <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
         <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
@@ -342,7 +342,6 @@ $("#fb-login").click(function() {
 });
 </script>
 <style>
-
 .check:nth-of-type(1) ul li {
     /* first well;*/
     list-style-type: none;
@@ -428,7 +427,6 @@ hr {
     -webkit-box-shadow: none;
     box-shadow: none;
 }
-
 
 .modal-body-sub {
     border-left: 1px solid #ccc;

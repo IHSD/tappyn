@@ -34,15 +34,14 @@
         <span class="glyphicon glyphicon-pencil" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.ctr_average | number:2}}% Avg. CTR
     </div>
     <div ng-switch="contest_template">
-        <div ng-switch-when="ended">
+        <div class="contest-full-result" ng-switch-when="contest_owner">
             <div ng-if="submission.test_result_array" class="contest-test-result col-xs-12 text-center">
-                <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in submission.test_result_array | orderBy:test_big" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
+                <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in submission.test_result_array | orderBy:test_big(contest)" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
             </div>
         </div>
         <div ng-switch-default>
             <div ng-if="submission.test_result.impressions">
-                <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-                <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+                <span ng-click="showctr()" ng-bind="(submission.test_result.ctr)?submission.test_result.ctr + '%':'-'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
             </div>
         </div>
     </div>
