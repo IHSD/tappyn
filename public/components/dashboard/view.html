@@ -349,24 +349,13 @@
                                     <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
                                 </div>
                             </div>
-                            <div class='contest-winner text-left'>
+                            <div class="contest-full-result contest-winner text-left">
                                 <div class='avatar'>
                                     <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' crossorigin="anonymous" alt=''>
                                 </div>
                                 <h5 class='winner-name'> {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <!--<span data-toggle="modal" href="#myModalcompany" class='contest-ctr ' ng-if='!submission.ctr ' ng-bind="(submission.ctr)?submission.ctr:'-'" style="cursor:help;"></span>-->
-                                <div ng-if="submission.test_result.impressions">
-                                    <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-                                    <span ng-click="showctr()" ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
-                                </div>
-                                <div ng-if="!submission.test_result.impressions">
-                                    <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{winner.winner.ctr}}%</span>
-                                    <span ng-click="showctr()" class='contest-ctr ' ng-if='!submission.ctr ' style="cursor:help;">-</span>
-                                </div>
-                                <div ng-if="submission.test_result.impressions" class="contest-test-result col-xs-12 text-center">
-                                    <span uib-tooltip="Views" class="test-impressions" ng-bind="submission.test_result.impressions | number"></span>
-                                    <span uib-tooltip="Cost Per Click" class="test-cost_per_result" ng-bind="'$' + submission.test_result.cost_per_result"></span>
-                                    <span uib-tooltip="Total Clicks" class="test-results" ng-bind="submission.test_result.results"></span>
+                                <div ng-if="winner.winner.test_result_array" class="contest-test-result col-xs-12 text-center">
+                                    <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in winner.winner.test_result_array | orderBy:test_big(winner.contest)" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
                                 </div>
                             </div>
                         </div>
