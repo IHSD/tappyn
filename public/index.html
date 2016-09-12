@@ -48,12 +48,13 @@
         <div ng-show='root_modal.now == "payment"' ng-include src="'templates/payment.html'"></div>
     </div>
     <div class='container-fluid navbar-fixed-top'>
-        <div ng-include src="'templates/navbar.html'" ng-if='currentView != "/launch"'></div>
+        <div ng-include src="'templates/navbar.html'" ng-if='currentView != "/launch" && currentView != "/for_companies" && currentView != "/how_it_works" && currentView != "/pricing"'></div>
         <div ng-include src="'templates/navbar-clean.html'" ng-if='currentView == "/launch"'></div>
+        <div ng-include src="'templates/navbar-company.html'" ng-if='currentView == "/for_companies" || currentView == "/how_it_works" || currentView == "/pricing"'></div>
     </div>
     <section class='innerpage' ng-view></section>
     <div class='container-fluid'>
-        <div ng-include src="'templates/footer.html'" ng-hide='currentView == "/launch"'></div>
+        <div ng-include src="'templates/footer.html'"></div>
         <div ng-show='alert.show' class='alerter' ng-class='{"default-alerter" : alert.type == "default","error-alerter" : alert.type == "error", "launch-error" : currentView == "/launch"}'>
             <p class='hidden-xs text-center'><span ng-bind="alert.message"></span> <span class='alert-closer' ng-bind="alert_close_text" ng-click='close_alert()'></span></p>
             <p class='visible-xs text-center'><span ng-bind="alert.message"></span> <span class='alert-closer' ng-bind="alert_close_text" ng-click='close_alert()'></span></p>

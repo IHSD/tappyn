@@ -261,6 +261,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
             if (response.http_status_code == 200) {
                 if (response.success) {
                     $scope.winner = response.data;
+                    $scope.winner.winner = $scope.add_test_result_array([$scope.winner.winner]);
                     $scope.view = "pcp";
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");

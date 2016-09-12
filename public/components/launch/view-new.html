@@ -32,25 +32,33 @@
 </div>
 <div style='background: white; margin-bottom: 40px; padding: 10px 0;'>
     <div class='container'>
-        <div class='col-xs-12 col-sm-6 text-left'>
-            <div ng-show='current.step == "tp-prior"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">Your target audience.</h2>
+        <div ng-show='current.step == "tp-prior"' class='col-xs-12 text-left'>
+            <div style="padding-top:25px;">
+                <h2 style="font-weight:400;font-size:48px;">Who is your target audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
-            <div ng-show='current.step == "detail"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">Your brand profile.</h2>
+            </div>
+            <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
+            <div style="padding-top:25px;">
+                <h2 style="font-weight:400;font-size:48px;">Your brand profile.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
-            <div ng-show='current.step == "preview"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">Your campaign preview.</h2>
+            </div>
+            <div ng-show='current.step == "preview"' class='col-xs-12 col-sm-6 text-left'>
+            <div style="padding-top:25px;">
+                <h2 style="font-weight:400;font-size:48px;">Your campaign preview.</h2>
                 <h4>Please read over your details, and make sure everything looks the way you like.</h4>
             </div>
-            <div ng-show='current.step == "chose-plan"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">You're almost there.</h2>
+            </div>
+            <div ng-show='current.step == "chose-plan"' class='col-xs-12 col-sm-6 text-left'>
+            <div style="padding-top:25px;">
+                <h2 style="font-weight:400;font-size:48px;">You're almost there.</h2>
                 <h4>All packages come with a 100% money back guarantee and full copyright ownership of the final ad.</h4>
             </div>
-            <div ng-show='current.step == "done"' style="padding-top:25px;">
-                <h2 style="font-weight:400;">Congratulations!</h2>
+            </div>
+            <div ng-show='current.step == "done"' class='col-xs-12 col-sm-6 text-left'>
+            <div style="padding-top:25px;">
+                <h2 style="font-weight:400;font-size:48px;">Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
@@ -185,11 +193,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <!--<div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-2">
                 <p style="font-size:12px;"><small>Learn about campaign priorities <a href="/priority" style="cursor:pointer;" target="_blank">here</a>.</small></p>
             </div>
-        </div>
+        </div>-->
         <div class='row' style="padding-top:40px;">
             <div style="padding-bottom:20px;padding-left:10px;">
                 <button class="btn-sm btn btn-secondary" ng-click="showOptions = !showOptions">More Options</button>
@@ -212,19 +220,26 @@
 </div>
 <div ng-show='current.step == "detail"'>
     <div class='form-forizontal'>
-        <div class="row" ng-show='!user'>
+        <div class="row" ng-show='user'>
             <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
             <div class="col-sm-9">
                 <div class="form-group">
-                    <!--<a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>-->
-                    <!--<h4><strong>Create New Business Account</strong></h4>-->
-                    <h4>Company Email</h4>
-                    <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
+                    <h4>Summary of product or service</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                 </div>
                 <div class="form-group">
-                    <h4>Password</h4>
-                    <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
+                    <h4>Describe what makes you different (and better) than your competition.</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best ads.</p>
                 </div>
+            </div>
+        </div>
+        <div class="row" ng-show='!user'>
+            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
+            <div class="col-sm-9">
                 <div class="form-group">
                     <h4>Company Name</h4>
                     <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
@@ -240,11 +255,6 @@
                     <h4>Company Website</h4>
                     <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
                 </div>
-            </div>
-        </div>
-        <div class="row" style="padding-bottom:200px;">
-            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Product/Service</label>
-            <div class="col-sm-9">
                 <div class="form-group">
                     <h4>Summary of product or service</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
@@ -256,6 +266,21 @@
                     <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best ads.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:200px;" ng-show="!user">
+            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Account</label>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <!--<a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>-->
+                    <!--<h4><strong>Create New Business Account</strong></h4>-->
+                    <h4>Company Email</h4>
+                    <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
+                </div>
+                <div class="form-group">
+                    <h4>Password</h4>
+                    <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
                 </div>
             </div>
         </div>
@@ -490,8 +515,8 @@
         <div id="bottom" style="padding-bottom:300px;">
             <div class="col-xs-12 col-sm-9 col-sm-offset-3 text-left" ng-show="contest.chosen_creative == true">
                 <div class="form-group" ng-init="contest.attachment = ''">
-                    <h4 style="font-size:14px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
-                    <p style="font-size:12px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
+                    <h4 style="font-size:22px;"><strong>Choose the photo you're planning on using with your ad.</strong></h4>
+                    <p style="font-size:18px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
                     <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
                 </div>
                 <div class="row form-group" ng-show="new_img">
@@ -522,6 +547,7 @@
         <div class='row'>
             <div ng-show='current.step == "tp-prior"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')">Continue</button>
+
             </div>
             <div ng-show='current.step == "detail"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")'>Save & Continue</button>
@@ -552,31 +578,39 @@
                             <span style='font-weight:300;font-size:22;top:10px;'>
                                  81% of consumers ignore ads they find irrelevant.
                             </span>
+                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
                 </h4>
             </div>
             <div class='text-left' ng-show='current.step == "detail"'>
                 <h4 class='text-left' style='color:#333'>
-                        <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                            <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span style='font-weight:300;font-size:22px;position:relative;'>
                                   You'll only have to do this once.
                             </span>
+                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
                 </h4>
             </div>
             <div class='text-left' ng-show='current.step == "chose-plan"'>
                 <h4 class='text-left' style='color:#333'>
-                        <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                            <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span style='font-weight:300;font-size:22px;position:relative;'>
                               100% Money Back Guarantee
                             </span>
+                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
                 </h4>
             </div>
             <div class='text-left' ng-show='current.step == "tp-prior"'>
                 <h4 class='text-left' style='color:#333'>
-                      <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                        <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span style='font-weight:300;font-size:22px;position:relative;'>
                               People are 23% more likely to enjoy ads they find relevant.
                         </span>
+                        <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
                 </h4>
+
             </div>
         </div>
     </div>
