@@ -1,0 +1,68 @@
+<header>
+    <div class="col-xs-2">
+        <div class="logo">
+            <span>
+                <a href="/for_companies">
+                    <img src="public/img/beta_logo.png" width='200' style="padding-top:10px;">
+                </a>
+            </span>
+        </div>
+    </div>
+    <div class="col-xs-10">
+        <nav class='hidden-xs' id='top-scroll'>
+            <ul>
+                <li style='cursor:pointer'><a href="/how_it_works">How It Works</a></li>
+                <li style='cursor:pointer'><a href="/pricing">Pricing</a></li>
+                <li ng-if='user' style='float:right;'>
+                    <a href>
+                        <span class='notifications-container'>
+                            <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
+                        <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()'></span>
+                        <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
+                        <span ng-include src="'templates/notifications.html'"></span>
+                        </span>
+                    </a>
+                </li>
+                <li ng-if='user' style='float:right;' uib-dropdown>
+                    <a href uib-dropdown-toggle>{{user.first_name}}&nbsp;
+                            <span ng-if='!user.is_active' uib-tooltip="Your account isn't verified, check your email to verify" tooltip-placement='bottom' class='glyphicon glyphicon-exclamation-sign' style='color:#f00;'></span>
+                            <span class="caret"></span></a>
+                    <ul uib-dropdown-menu role="menu">
+                        <li role='menuitem'><a href="/dashboard">My Dashboard</a></li>
+                        <li ng-hide='user.type == "company"' role='menuitem'><a href="/payment">Payment</a></li>
+                        <li role='menuitem'><a href="/profile">My Account</a></li>
+                        <li role='menuitem'><a ng-click='log_out()'>Log out</a></li>
+                    </ul>
+                </li>
+                <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
+                <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>
+                <li ng-hide='user.type == "member" && !user.is_admin' class='pull-right'><a class="btn btn-wj btn-lg hidden-xs hidden-sm new-campaign" href="/launch">New Campaign</a></li>
+            </ul>
+        </nav>
+        <nav class='visible-xs'>
+            <ul>
+                <li ng-if='user' style='float:right;' ng-click='open_notifications()'>
+                    <a href>
+                        <span class='notifications-container'>
+                          <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications == 0' ng-click='toggle_notifications()'></span>
+                        <span class='glyphicon glyphicon-comment glyph-lg' ng-if='user.notifications > 0' ng-click='toggle_notifications()'></span>
+                        <span class='notifications_count' ng-if='user.notifications > 0' ng-click='toggle_notifications()'><strong>{{user.notifications}}</strong></span>
+                        </span>
+                    </a>
+                </li>
+                <li style='float:right;' uib-dropdown>
+                    <a href uib-dropdown-toggle> Menu <span class="caret"></span></a>
+                    <ul uib-dropdown-menu role='menu'>
+                        <li ng-if='!user' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
+                        <li ng-if='!user' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>
+                        <li class="borderlist" ng-hide='user.type == "member" && !user.is_admin'><a href="/launch">New Campaign</a></li>
+                        <li ng-hide='!user'><a href="/dashboard">My Dashboard</a></li>
+                        <li ng-hide='!user && user.type == "company"'><a href="/payment">Payment</a></li>
+                        <li ng-hide='!user'><a href="/profile">My Account</a></li>
+                        <li ng-hide='!user'><a ng-click='log_out()'>Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

@@ -92,6 +92,9 @@ tappyn.config(function($routeProvider, $locationProvider) {
             templateUrl: 'components/reset_pass/view.html',
             controller: 'resetController'
         })
+        .when('/pricing', {
+            templateUrl: 'components/pricing/view.html'
+        })
         .when('/how_it_works', {
             templateUrl: 'components/how_it_works/view.html'
         })

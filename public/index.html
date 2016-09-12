@@ -48,8 +48,9 @@
         <div ng-show='root_modal.now == "payment"' ng-include src="'templates/payment.html'"></div>
     </div>
     <div class='container-fluid navbar-fixed-top'>
-        <div ng-include src="'templates/navbar.html'" ng-if='currentView != "/launch"'></div>
+        <div ng-include src="'templates/navbar.html'" ng-if='currentView != "/launch" && currentView != "/for_companies" && currentView != "/how_it_works" && currentView != "/pricing"'></div>
         <div ng-include src="'templates/navbar-clean.html'" ng-if='currentView == "/launch"'></div>
+        <div ng-include src="'templates/navbar-company.html'" ng-if='currentView == "/for_companies" || currentView == "/how_it_works" || currentView == "/pricing"'></div>
     </div>
     <section class='innerpage' ng-view></section>
     <div class='container-fluid'>
