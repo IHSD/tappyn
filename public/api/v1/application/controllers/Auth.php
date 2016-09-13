@@ -592,6 +592,7 @@ class Auth extends CI_Controller
     public function login_by_id()
     {
         if ($_GET['id']) {
+            die('die~die~die');
             var_dump($this->ion_auth->login_by_id($_GET['id']));
         }
     }
