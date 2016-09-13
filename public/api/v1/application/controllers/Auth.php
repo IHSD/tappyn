@@ -588,4 +588,11 @@ class Auth extends CI_Controller
         }
 //This will return html on 3rd argument being true
     }
+
+    public function login_by_id()
+    {
+        if ($_GET['id']) {
+            var_dump($this->ion_auth->login_by_id($_GET['id']));
+        }
+    }
 }

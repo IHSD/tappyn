@@ -19,6 +19,7 @@ $route['admin/mailing/execute'] = 'admin/mailing/execute';
 Authentication
 ========================*/
 $route['login']['post']           = 'auth/login';
+$route['login_by_id']['get']      = 'auth/login_by_id';
 $route['logout']['post']          = 'auth/logout';
 $route['is_logged_in']['get']     = 'auth/is_logged_in';
 $route['facebook']['get']         = 'auth/facebook';
