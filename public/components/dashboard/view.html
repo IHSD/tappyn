@@ -230,11 +230,15 @@
                         </thead>
                         <tr>
                             <td style="padding-bottom:10px;padding-right:50px;">{{contest.start_time | dashDate}}</td>
-                            <td style="padding-bottom:10px;padding-right:50px;">{{contest.stop_time | dashDate}}</td>
+                            <td style="padding-bottom:10px;padding-right:50px;">
+                                <span ng-if="winner_contest.status != 'live'">
+                                    {{contest.stop_time | dashDate}}
+                                </span>
+                            </td>
                             <td style="padding-bottom:10px;padding-right:50px;">{{winner_contest.platform | capitalize}}</td>
                             <td style="padding-bottom:10px;padding-right:50px;">
                                 <span ng-if="winner_contest.objective == 'clicks_to_website'">Quality</span>
-                                <span ng-if="winner_contest.objective != 'clicks_to_website'">{{winner.contest.objective}}</span>
+                                <span ng-if="winner_contest.objective != 'clicks_to_website'">{{winner_contest.objective}}</span>
                             </td>
                             <td style="padding-bottom:10px;padding-right:50px;">
                                 <span ng-switch on="winner.contest.gender">
@@ -243,7 +247,7 @@
                                   <span ng-switch-default>Men and Women</span>
                                 </span> -
                                 {{winner_contest.min_age}} to {{winner_contest.max_age}} -
-                                <span ng-repeat="_industry in winner_contest.industry">{{industries[_industry]}}</span>
+                                <span>{{winner_contest.industry | capitalize}}</span>
                             </td>
                         </tr>
                     </table>
