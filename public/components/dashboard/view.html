@@ -223,12 +223,28 @@
                             <tr>
                                 <td style="padding-top:10px;">Started On:</td>
                                 <td style="padding-top:10px;">Ended On:</td>
+                                <td style="padding-top:10px;">Platform:</td>
+                                <td style="padding-top:10px;">Priority:</td>
+                                <td style="padding-top:10px;">Audience:</td>
                             </tr>
                         </thead>
                         <tr>
                             <td style="padding-bottom:10px;padding-right:50px;">{{contest.start_time | dashDate}}</td>
                             <td style="padding-bottom:10px;padding-right:50px;">{{contest.stop_time | dashDate}}</td>
-                            <td ng-if="winner.contest.total_amount" style="padding-bottom:10px;">{{winner.contest.total_amount | currency}}</td>
+                            <td style="padding-bottom:10px;padding-right:50px;">{{winner_contest.platform | capitalize}}</td>
+                            <td style="padding-bottom:10px;padding-right:50px;">
+                                <span ng-if="winner_contest.objective == 'clicks_to_website'">Quality</span>
+                                <span ng-if="winner_contest.objective != 'clicks_to_website'">{{winner.contest.objective}}</span>
+                            </td>
+                            <td style="padding-bottom:10px;padding-right:50px;">
+                                <span ng-switch on="winner.contest.gender">
+                                  <span ng-switch-when="1">Men</span>
+                                  <span ng-switch-when="2">Women</span>
+                                  <span ng-switch-default>Men and Women</span>
+                                </span> -
+                                {{winner_contest.min_age}} to {{winner_contest.max_age}} -
+                                <span ng-repeat="_industry in winner_contest.industry">{{industries[_industry]}}</span>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -389,7 +405,7 @@
                               <span ng-switch-when="2">Women</span>
                               <span ng-switch-default>Men and Women</span>
                           </span> -
-                            {{winner.contest.min_age}} to {{winner.contest.max_age}} - 
+                            {{winner.contest.min_age}} to {{winner.contest.max_age}} -
                             <span ng-repeat="_industry in winner.contest.industry">{{industries[_industry]}}</span>
                         </h5>
                             <br>
