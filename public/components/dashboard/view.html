@@ -222,7 +222,11 @@
                         <thead>
                             <tr>
                                 <td style="padding-top:10px;">Started On:</td>
-                                <td style="padding-top:10px;">Ended On:</td>
+                                <td style="padding-top:10px;">
+                                    <span ng-if="winner_contest.status != 'live'">
+                                        Ended On:
+                                    </span>
+                                </td>
                                 <td style="padding-top:10px;">Platform:</td>
                                 <td style="padding-top:10px;">Priority:</td>
                                 <td style="padding-top:10px;">Audience:</td>
