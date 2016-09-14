@@ -316,6 +316,19 @@ label {
     font-weight: 400;
 }
 
+.btn-yl {
+    background: #F8CA39;
+    color: #fff;
+    font-weight: 400;
+}
+
+.btn-yl:hover {
+    background: #fff;
+    color: #F8CA39;
+    font-weight: 400;
+    border:1px solid #F8CA39;
+}
+
 .btn-oj:hover {
     background: #fff;
     color: #019F6E;
