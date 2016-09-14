@@ -13,6 +13,7 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
     $scope.member_filter = {};
     $scope.member_filter_chose = 'all';
     $scope.dash2 = [];
+    $scope.temp_contest = {};
 
     dashFactory.grabDash($scope.type).success(function(response) {
         if (response.http_status_code == 200) {
@@ -133,6 +134,8 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
 
     $scope.before_open_payment = function(contest, type) {
         contest.submission_ids = $scope.grab_checked_submission();
+        contest.before_open_payment_type = type;
+        $scope.temp_contest = contest;
 
         if (type == 'purchase') {
             if (contest.submission_ids.length != 1) {
@@ -168,7 +171,11 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
     }
 
     $scope.$on('payContestDone', function(event) {
-        $route.reload();
+        if ($scope.temp_contest && $scope.temp_contest.before_open_payment_type == 'purchase') {
+            $scope.view_pcp($scope.temp_contest);
+        } else {
+            $route.reload();
+        }
     });
 
     $scope.grab_dash = function(type) {
