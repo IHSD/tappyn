@@ -37,26 +37,26 @@
                 <h2 style="font-weight:400;font-size:48px;">Who is your target audience?</h2>
                 <h4>Let's start by identifying who you plan on connecting with.</h4>
             </div>
-            </div>
-            <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
+        </div>
+        <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">Your brand profile.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
-            </div>
-            <div ng-show='current.step == "preview"' class='col-xs-12 col-sm-6 text-left'>
+        </div>
+        <div ng-show='current.step == "preview"' class='col-xs-12 col-sm-6 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">Your campaign preview.</h2>
                 <h4>Please read over your details, and make sure everything looks the way you like.</h4>
             </div>
-            </div>
-            <div ng-show='current.step == "chose-plan"' class='col-xs-12 col-sm-6 text-left'>
+        </div>
+        <div ng-show='current.step == "chose-plan"' class='col-xs-12 col-sm-6 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">You're almost there.</h2>
                 <h4>All packages come with a 100% money back guarantee and full copyright ownership of the final ad.</h4>
             </div>
-            </div>
-            <div ng-show='current.step == "done"' class='col-xs-12 col-sm-6 text-left'>
+        </div>
+        <div ng-show='current.step == "done"' class='col-xs-12 col-sm-6 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">Congratulations!</h2>
                 <h4>We just launched your campaign.</h4>
@@ -150,7 +150,7 @@
                         <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
                         <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
-                             <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
+                            <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
                             </label>
                             <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-jj" : contest.gender == 1, "btn-jh" : contest.gender != 1}' style="cursor:default;">
@@ -357,8 +357,8 @@
     </div>
 </div>
 <div class="row" ng-show='current.step == "chose-plan"' style="padding-bottom:120px;">
-    <div class='col-xs-12 col-sm-8 col-sm-offset-1 text-center'>
-        <table class="table table-condensed" style='border-radius:5px;'>
+    <div class='col-xs-12 col-sm-8 col-sm-offset-1 text-center launch-step-plan'>
+        <table class="table table-condensed table-plan plan-{{plan_name}}" style='border-radius:5px;'>
             <thead>
                 <tr>
                     <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
@@ -385,7 +385,7 @@
                         <span style="font-size:22px;font-weight:300;">Creative copies on a budget</span>
                         <br>
                         <center>
-                        <span style="font-size:32px;font-weight:300;">$59</span>
+                            <span style="font-size:32px;font-weight:300;">$59</span>
                         </center>
                     </p>
                 </td>
@@ -394,7 +394,7 @@
                         <span style="font-size:22px;font-weight:300;">High conversion rates</span>
                         <br>
                         <center>
-                        <span style="font-size:32px;font-weight:300;">$149</span>
+                            <span style="font-size:32px;font-weight:300;">$149</span>
                         </center>
                     </p>
                 </td>
@@ -403,7 +403,7 @@
                         <span style="font-size:22px;font-weight:300;">Expert level conversion rates</span>
                         <br>
                         <center>
-                        <span style="font-size:32px;font-weight:300;">$519</span>
+                            <span style="font-size:32px;font-weight:300;">$519</span>
                         </center>
                     </p>
                 </td>
@@ -466,7 +466,8 @@
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:125px;">
                     <label uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full.">
-                        <p style="display:inline;">100% Money Back<br>Guarantee</p>
+                        <p style="display:inline;">100% Money Back
+                            <br>Guarantee</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
                     </label>
                 </td>
@@ -476,38 +477,28 @@
             </tr>
             <tr>
                 <td class="text-center" style="background:#EBEEF0;"></td>
-                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button ng-hide="contest.chosen_creative == true" class='btn btn-first btn-lg sign-up-btn' ng-click="set_creative(true)" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
-                        <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-lg sign-up-btn' ng-click="set_creative(true)" style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center class="hidden-xs hidden-sm">
+                        <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;padding-right:50px;padding-left:50px;"></button>
+                    </center>
+                    <center class="hidden-md hidden-lg">
+                        <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;"></button>
                     </center>
                 </td>
-                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button ng-hide="contest.chosen_creative == true" class='btn btn-first btn-md sign-up-btn' ng-click="set_creative(true)" style="float:none;">Select</button>
-                        <button ng-show="contest.chosen_creative == true" class='btn btn-secondary btn-md sign-up-btn' ng-click="set_creative(true)" style="float:none;">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center class="hidden-xs hidden-sm">
+                        <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
+                    </center>
+                    <center class="hidden-md hidden-lg">
+                        <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
                     </center>
                 </td>
-                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button ng-hide="contest.chosen_creative == false" class='btn btn-wj btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
-                        <button ng-show="contest.chosen_creative == false" class='btn btn-secondary btn-lg sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;padding-right:50px;padding-left:50px;">Selected</button>
+                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+                    <center class="hidden-xs hidden-sm">
+                        <button class='btn btn-last btn-lg sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
                     </center>
-                </td>
-                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button ng-hide="contest.chosen_creative == false" class='btn btn-wj btn-md sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;">Select</button>
-                        <button ng-show="contest.chosen_creative == false" class='btn btn-secondary btn-md sign-up-btn' ng-click='contest.chosen_creative = false' style="float:none;">Selected</button>
-                    </center>
-                </td>
-                <td class="text-center hidden-xs hidden-sm" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button class='btn btn-last btn-lg sign-up-btn' ng-click='choose_video(true)' style="float:none;padding-right:50px;padding-left:50px;">Select</button>
-                    </center>
-                </td>
-                <td class="text-center hidden-md hidden-lg" style="background:#EBEEF0;max-width:100px;">
-                    <center>
-                        <button class='btn btn-last btn-md sign-up-btn' ng-click='choose_video(true)' style="float:none;">Select</button>
+                    <center class="hidden-md hidden-lg">
+                        <button class='btn btn-last btn-md sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;">Select</button>
                     </center>
                 </td>
             </tr>
@@ -547,7 +538,6 @@
         <div class='row'>
             <div ng-show='current.step == "tp-prior"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')">Continue</button>
-
             </div>
             <div ng-show='current.step == "detail"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")'>Save & Continue</button>

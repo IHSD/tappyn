@@ -14,6 +14,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
     $scope.contest = { chosen_creative: false };
+    $scope.plan_name = 'premium';
     $scope.company = {};
     $scope.save_method = false;
     $scope.ages = launchModel.ages;
@@ -34,6 +35,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
                     $scope.contest = response.data.contest;
                     $scope.contest.chosen_creative = ($scope.contest.use_attachment == '1') ? true : false;
                     if ($scope.contest.chosen_creative) {
+                        $scope.plan_name = 'basic';
                         $scope.new_img = true;
                     }
                     setTimeout(function() {
@@ -351,6 +353,19 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.chosen_creative = boo;
         if (boo) {
             $anchorScroll('bottom');
+        }
+    }
+
+    $scope.set_launch_plan = function(plan) {
+        if (plan == 'basic') {
+            $scope.plan_name = 'basic';
+            $scope.contest.chosen_creative = true;
+            $anchorScroll('bottom');
+        } else if (plan == 'premium') {
+            $scope.plan_name = 'premium';
+            $scope.contest.chosen_creative = false;
+        } else if (plan == 'platinum') {
+            $scope.set_alert("This package is not currently available. Please contact us at alek@fabel.us for more info.", "error");
         }
     }
 });

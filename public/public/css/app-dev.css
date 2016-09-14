@@ -719,6 +719,16 @@ Author: Rashid Shafique | rmughal@gmail.com
     cursor: help;
 }
 
+.launch-step-plan .table-plan td {
+    opacity: 0.5;
+}
+
+.launch-step-plan .table-plan td:nth-child(1),
+.launch-step-plan .table-plan.plan-basic td:nth-child(2),
+.launch-step-plan .table-plan.plan-premium td:nth-child(3) {
+    opacity: 1;
+}
+
 @media screen and (min-width: 768px) {
     .launch-page-btn {
         max-width: 48%;
