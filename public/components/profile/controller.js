@@ -46,6 +46,8 @@ tappyn.controller('profileController', function($scope, $rootScope, $upload, pro
                     $scope.set_alert(response.message, "default");
                     $rootScope.user.first_name = $scope.profile.first_name;
                     $rootScope.user.last_name = $scope.profile.last_name;
+                    $rootScope.user.show_all_contest = $scope.profile.show_all_contest;
+                    $rootScope.user.interests = $scope.profile.interests;
                     sessionStorage.setItem("user", JSON.stringify($rootScope.user));
                 } else $scope.set_alert(response.message, "default");
             } else if (response.http_status_code == 500) $scope.set_alert(response.error, "error");
