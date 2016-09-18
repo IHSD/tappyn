@@ -34,7 +34,7 @@
     <div class='container'>
         <div ng-show='current.step == "tp-prior"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
-                <h2 style="font-weight:400;font-size:48px;">Your audience</h2>
+                <h2 style="font-weight:400;font-size:48px;">Your audience.</h2>
                 <h4>Let's started by finding out who you'd like to connect with, where, and why.</h4>
             </div>
         </div>
@@ -53,7 +53,7 @@
         <div ng-show='current.step == "chose-plan"' class='col-xs-12 col-sm-6 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">You're almost there.</h2>
-                <h4>All packages come with a 100% money back guarantee and full copyright ownership of the final ad.</h4>
+                <h4>All packages come with a 100% money back guarantee and full copyright ownership of the final message.</h4>
             </div>
         </div>
         <div ng-show='current.step == "done"' class='col-xs-12 col-sm-6 text-left'>
@@ -74,7 +74,7 @@
                 </p>
             </center>
         </div>
-        <div ng-show="current.step == 'chose-plan' || current.step == 'preview'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
+        <!--<div ng-show="current.step == 'chose-plan' || current.step == 'preview'" class="hidden-xs col-sm-3" style="border:1px solid #333;border-radius:3px;">
             <h4 class="text-center" style="font-size:16px;color:#333;font-weight:400;">Order Summary</h4>
             <ul style="padding-right:20px;padding-left:5px;">
                 <li style="font-size:14px;color:#333;font-weight:300;">Copy (30)<span class="pull-right">$44.99</span></li>
@@ -86,7 +86,7 @@
                     <span ng-if="contest.chosen_creative == false" class="pull-right">$149.99</span>
                 </li>
             </ul>
-        </div>
+        </div>-->
         <div class="col-xs-12">
             <uib-progress class='tp-progress-steps'>
                 <uib-bar value='steps["tp-prior"].fill' type='{{ current.fill >= steps["tp-prior"].fill ? "warning" : "success" }}'></uib-bar>
@@ -141,13 +141,13 @@
             </div>
         </div>
         <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define who you'd like to create your stories and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+            <label uib-tooltip="Define who you'd like to create your messages and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
                 <form class="form-inline ng-pristine ng-valid" role="form">
                     <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
-                        <label class='text-left target-label' style="padding-top:0px;">Creator Targeting</label>
+                        <label class='text-left target-label' style="padding-top:0px;">Interest</label>
                         <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
                         <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>

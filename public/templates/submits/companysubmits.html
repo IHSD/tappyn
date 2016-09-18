@@ -48,8 +48,8 @@
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <div ng-if="submission.test_result.impressions">
-        <span uib-tooltip='<b>Click Through Rate:</b><br>The total number of clicks you received (ex: offsite clicks, likes, event responses) divided by the number of impressions.' ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
-        <span uib-tooltip='<b>Click Through Rate:</b><br>The total number of clicks you received (ex: offsite clicks, likes, event responses) divided by the number of impressions.' ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
+        <span uib-tooltip='Click Through Rate: The total number of clicks you received (ex: offsite clicks, likes, event responses) divided by the number of impressions.' ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>
+        <span uib-tooltip='Click Through Rate: The total number of clicks you received (ex: offsite clicks, likes, event responses) divided by the number of impressions.' ng-bind="submission.test_result.ctr" class='contest-ctr ' ng-if='!submission.test_result.ctr ' style="cursor:help;">-</span>
     </div>
     <div ng-if="!submission.test_result.impressions">
         <span ng-click="showctr()" class='contest-ctr ' ng-if='submission.ctr ' style="cursor:help;">{{submission.ctr}}%</span>

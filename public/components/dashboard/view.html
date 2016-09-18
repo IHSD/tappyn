@@ -4,21 +4,21 @@
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
                     <div ng-click='set_model()' class="close">&times;</div>
-                    <h4 class="modal-title text-center" id="myModalLabelnew">This is your ad's CTR.</h4>
+                    <h4 class="modal-title text-center" id="myModalLabelnew">This is your message's CTR.</h4>
                 </div>
                 <div ng-show="user.type == 'company'" class="modal-body-sub text-center">
-                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. This is the primary metric that we use to define the effectiveness of an advertisement.
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable a message is to a particular audience. This is the primary metric that we use to define the effectiveness of a message.
                         <br>
                     </p>
                 </div>
                 <div ng-hide="user.type =='company'" class="modal-body-sub text-center">
-                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable a message is to a particular audience. We test businesses' favorite messages and we show them the CTR of each. This is one of the primary ways they decide which messages to purchase. (The higher the better!)</p>
                     <br>
                     <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
                     <br>
                 </div>
                 <div class="modal-footer-sub text-right">
-                    <p ng-hide="user.type =='company'" class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
+                    <p ng-hide="user.type =='company'" class="text-center">Looking for more? Check out our complete message creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
                 </div>
             </div>
         </div>
@@ -30,9 +30,9 @@
         <div class="payment_modal">
             <div class="modal_top text-center">
                 <div class='close_circle' ng-click='set_model()'>x</div>
-                <h3><strong>A/B Testing</strong></h3>
-                <h4 ng-if="winner_contest.submission_ids.length > 1">You’ve selected {{winner_contest.submission_ids.length}} ads.</h4>
-                <h4 ng-if="winner_contest.submission_ids.length == 1">You’ve selected {{winner_contest.submission_ids.length}} ad.</h4>
+                <h3><strong>Testing</strong></h3>
+                <h4 ng-if="winner_contest.submission_ids.length > 1">You’ve selected {{winner_contest.submission_ids.length}} messages.</h4>
+                <h4 ng-if="winner_contest.submission_ids.length == 1">You’ve selected {{winner_contest.submission_ids.length}} message.</h4>
             </div>
             <div class="modal_bot">
                 <div class="form-group">
@@ -73,11 +73,11 @@
             <div class="modal-content">
                 <div class="modal-header text-center" style="border-bottom: 1px solid #019F6E;">
                     <div class="close" ng-click="set_model()" aria-hidden="true">&times;</div>
-                    <h4 class="modal-title">How do I choose the best ad?</h4>
+                    <h4 class="modal-title">How do I choose the best message?</h4>
                 </div>
                 <div class="modal-body-sub">
                     <p>
-                        Before you select an ad to own, you need to decide what makes a great ad.
+                        Before you select a message to own, you need to decide what makes a great message.
                     </p>
                     <p>
                         CTR, Clicks, Spent, CPC, Cost Per Conversion, Conversion Rate...Facebook and other platforms offer so many metrics that it can be overwhelming. Also, sometimes, they can be contradictory. Unless you're an expert, we suggest that you pick one single metric that you'll use to judge your tests.
@@ -101,8 +101,8 @@
                     <h3><strong>Select Ownership</strong></h3>
                 </div>
                 <div class="modal-body-sub text-center">
-                    <h4>We'll transfer you the copyright of the ad you select. It will then be owned by you officially and you can use it in your future advertising campaigns.<br></h4>
-                    <h4 style="padding-top:25px;">Are you sure you want to select this ad to own?</h4>
+                    <h4>We'll transfer you the copyright of the message you select. It will then be owned by you officially and you can use it in your future messaging and branding.<br></h4>
+                    <h4 style="padding-top:25px;">Are you sure you want to select this message to own?</h4>
                 </div>
                 <div class="modal-footer-sub text-right" style="border-top:none;">
                     <button type="button" ng-click='before_open_payment(winner_contest,"purchase")' class="btn btn-oj">Confirm</button>
@@ -134,7 +134,7 @@
             </div>
             <div class='col-xs-6 col-sm-6'>
                 <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.submissions}}</h3>
-                <h3 class='text-center' style="margin-bottom:5px;">Ads</h3>
+                <h3 class='text-center' style="margin-bottom:5px;">Messages</h3>
             </div>
             <div class='col-xs-6 col-sm-6'>
                 <h3 class='text-center' style='margin-bottom:-20px;'>{{totals.won}}</h3>
@@ -179,7 +179,7 @@
                     <tr>
                         <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
                         <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
-                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Ads <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
+                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Messages <span class="glyphicon glyphicon-sort" style="font-size:10px;"></span></td>
                     </tr>
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
@@ -227,7 +227,7 @@
                                     </span>
                                 </td>
                                 <td style="padding-top:10px;">Platform:</td>
-                                <td style="padding-top:10px;">Priority:</td>
+                                <td style="padding-top:10px;">Objective:</td>
                                 <td style="padding-top:10px;">Audience:</td>
                             </tr>
                         </thead>
@@ -280,10 +280,10 @@
                 </div>
                 <div ng-show="submissions.length == 0" class='text-center'>
                     <span ng-show="winner_contest.status =='draft'">
-                    <h4 style="font-size:22px;">After you launch your campaign, this is where your ads will appear.</h4>
+                    <h4 style="font-size:22px;">After you launch your campaign, this is where your messages will appear.</h4>
                 </span>
                     <span ng-show="winner_contest.status =='live'" style="padding-top:25px;">
-                    <h4 style="font-size:22px;">Your campaign is currently live. As soon as it starts receiving ads, you'll see them here.</h4>
+                    <h4 style="font-size:22px;">Your campaign is currently live. As soon as it starts receiving messages, you'll see them here.</h4>
                 </span>
                 </div>
             </div>
@@ -312,21 +312,21 @@
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              Start receiving ads by launching your campaign.
+                              Start receiving messages by launching your campaign.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              Once you receive 30 ads, we'll begin testing. It shouldn't take more than a few days.
+                              Once you receive 30 messsages, we'll begin testing. It shouldn't take more than a few days.
                             </span>
                           </h4>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'pending_testing' && view != 'pcp'">
                             <h4 class='text-left' style='color:#333'>
                             <span style='font-weight:300;font-size:22;position:relative;top:10px;'>
-                              Please review, edit, and de-select ads that you'd like to omit from testing.
+                              Please review, edit, and de-select messages that you'd like to omit from testing.
                             </span>
                           </h4>
                         </div>
@@ -355,7 +355,7 @@
                 </div>
             </div>
             <div ng-show='view == "pcp"'>
-                <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+                <div class='col-xs-12'>
                     <button class='btn btn-oj btn-secondary' style="margin-bottom:30px;" ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
                     <div class="col-xs-12 dash-round" style="background:#fff;">
                         <table>
@@ -420,7 +420,7 @@
                             <br>
                             <div class="col-xs-12 col-md-6">
                             <div class="col-xs-12" style="padding-top:25px;padding-bottom:25px;">
-                                <a class="btn btn-yl col-xs-8 col-xs-offset-2 text-center" href="{{winner.winner.attachment}}" download>Download Full Ad</a>
+                                <a class="btn btn-yl col-xs-8 col-xs-offset-2 text-center" href="{{winner.winner.attachment}}" download>Download Full</a>
                             </div>
                             <div class="col-xs-12" style="padding-top:25px;">
                                 <a class="btn btn-oj col-xs-8 col-xs-offset-2 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>

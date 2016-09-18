@@ -4,16 +4,16 @@
             <div class="modal-content">
                 <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
                     <div ng-click='set_model()' class="close">&times;</div>
-                    <h4 class="modal-title text-center">This is your ad's CTR.</h4>
+                    <h4 class="modal-title text-center">This is your message's CTR.</h4>
                 </div>
                 <div class="modal-body-sub text-center" style="padding:10px;">
-                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable an ad is to a particular audience. We test businesses' favorite ads and we show them the CTR of each. This is one of the primary ways they decide which ads to purchase. (The higher the better!)</p>
+                    <p>The <strong>Click Through Rate</strong> (CTR) is a measure of how relatable a message is to a particular audience. We test businesses' favorite messages and we show them the CTR of each. This is one of the primary ways they decide which messages to purchase. (The higher the better!)</p>
                     <br>
                     <p>Don't see a CTR here? No worries, CTR's are only created after the 24 hour testing period has finished after a campaign's closing, so be sure to check back!</p>
                     <br>
                 </div>
                 <div class="modal-footer-sub text-right" style="padding-bottom:10px;">
-                    <p class="text-center">Looking for more? Check out our complete ad creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
+                    <p class="text-center">Looking for more? Check out our complete message creation guide <a style="cursor:pointer;" href="/guide" target="_blank">here</a>.</p>
                 </div>
             </div>
         </div>
@@ -113,7 +113,7 @@
                 </div>
                 <div ng-show='user && user.is_active && contest.user_has_submitted'>
                     <div class='alert alert-success text-center'>
-                        You have already created an ad for this campaign. Check out how your ad is doing!
+                        You have already created a message for this campaign. Check out how your message is doing!
                     </div>
                 </div>
                 <div class='col-xs-12'>
@@ -318,7 +318,7 @@
                 <div ng-include="'templates/submits/contestsubmit.html?'+template_version"></div>
             </div>
         </div>
-        <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any ads yet. You could be the first!</h3>
+        <h3 class='text-center' ng-if='submissions.length == 0 || !submissions'>This campaign doesn't have any messages yet. You could be the first!</h3>
     </div>
 </div>
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5751c5addc1cc557"></script>
