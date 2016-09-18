@@ -183,6 +183,14 @@ tappyn.controller('contestController', function($scope, $rootScope, $filter, $ro
     $scope.showctr = function() {
         $scope.set_model('ctr_show');
     }
+    
+    $(".wrapper").on('click', '.modal_actions', function(event) {
+        if (event.target !== this) {
+            return;
+        }
+        $scope.close_modal();
+        $scope.$broadcast('closeModal');
+    });
 
     var handleFileSelect = function(evt) {
         var file = evt.currentTarget.files[0];

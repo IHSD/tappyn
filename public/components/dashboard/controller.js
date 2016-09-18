@@ -232,6 +232,14 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
         $rootScope.modal_up = true;
     }
 
+    $(".wrapper").on('click', '.modal_actions', function(event) {
+        if (event.target !== this) {
+            return;
+        }
+        $scope.close_modal();
+        $scope.$broadcast('closeModal');
+    });
+
     $scope.choose_winner = function(id) {
         dashFactory.chooseWinner($scope.winner_contest.id, id).success(function(response) {
             if (response.http_status_code == 200) {

@@ -32,6 +32,14 @@ tappyn.controller('topController', function($scope, $location, $rootScope, topFa
         $scope.set_model('ctr_show');
     }
 
+    $(".wrapper").on('click', '.modal_actions', function(event) {
+        if (event.target !== this) {
+            return;
+        }
+        $scope.close_modal();
+        $scope.$broadcast('closeModal');
+    });
+
     $scope.share = function(submission) {
         FB.ui({
             method: 'share',
