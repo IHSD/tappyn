@@ -140,7 +140,7 @@ class Price_lib
                         if (
                             (isset($post['_contest']['photo']) && !$post['_contest']['photo'])
                         ) {
-                            $price = $price + 90;
+                            $price = $price + 40;
                         }
                     }
                     break;

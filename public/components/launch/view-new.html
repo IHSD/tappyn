@@ -34,8 +34,8 @@
     <div class='container'>
         <div ng-show='current.step == "tp-prior"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
-                <h2 style="font-weight:400;font-size:48px;">Who is your target audience?</h2>
-                <h4>Let's start by identifying who you plan on connecting with.</h4>
+                <h2 style="font-weight:400;font-size:48px;">Your audience</h2>
+                <h4>Let's started by finding out who you'd like to connect with, where, and why.</h4>
             </div>
         </div>
         <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
@@ -99,8 +99,30 @@
 </div>
 <div class='container'>
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12" style="padding-bottom:200px;">
+        <div class="row" style="padding-top:40px;">
+            <label uib-tooltip="Define the type of metric that is most important to you." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+            </label>
+            <div class="col-sm-10">
+                <div ng-class='{"package-highlight" : contest.objective == "Meet"}' class='launch-page-btn' ng-click='select_objective("Meet")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-search" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
+                    <h4 style="cursor:default;">Meet</h4>
+                    <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>-->
+                </div>
+                <div ng-class='{"package-highlight" : contest.objective == "Engage"}' class='launch-page-btn' ng-click='select_objective("Engage")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-globe" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
+                    <h4 style="cursor:default;">Engage</h4>
+                    <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>-->
+                </div>
+                <div ng-class='{"package-highlight" : contest.objective == "Close"}' class='launch-page-btn' ng-click='select_objective("Close")' style="cursor:default;">
+                    <span class="glyphicon glyphicon-comment" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
+                    <h4 style="cursor:default;">Close</h4>
+                    <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>-->
+                </div>
+            </div>
+        </div>
         <div class="row">
-            <label uib-tooltip="Select the media platform where your ad will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
+            <label uib-tooltip="Select the media platform where your story will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
@@ -119,7 +141,7 @@
             </div>
         </div>
         <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define who you'd like to create your ads and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+            <label uib-tooltip="Define who you'd like to create your stories and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
@@ -171,28 +193,7 @@
                 </form>
             </div>
         </div>
-        <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define the type of metric that is most important to you." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
-                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
-            </label>
-            <div class="col-sm-10">
-                <div ng-class='{"package-highlight" : contest.objective == "Price"}' class='launch-page-btn' ng-click='select_objective("Price")' style="cursor:default;">
-                    <span class="glyphicon glyphicon-search" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-                    <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Price</h4>
-                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>
-                </div>
-                <div ng-class='{"package-highlight" : contest.objective == "Quality"}' class='launch-page-btn' ng-click='select_objective("Quality")' style="cursor:default;">
-                    <span class="glyphicon glyphicon-globe" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-                    <h4 class="text-center" style="float:none;display:inline-block;position:relative;left:10px;">Quality</h4>
-                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>
-                </div>
-                <div ng-class='{"package-highlight" : contest.objective == "Awareness"}' class='launch-page-btn' ng-click='select_objective("Awareness")' style="cursor:default;">
-                    <span class="glyphicon glyphicon-comment" style="font-size: 20px;position: relative;top: 10;right: 10;color: #8E8E8E;"></span>
-                    <h4 class="text-center" style="float:none;display:inline-block;"> Awareness</h4>
-                    <p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>
-                </div>
-            </div>
-        </div>
+
         <!--<div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-2">
                 <p style="font-size:12px;"><small>Learn about campaign priorities <a href="/priority" style="cursor:pointer;" target="_blank">here</a>.</small></p>
@@ -382,29 +383,29 @@
                 </td>
                 <td style="background:#06883F;color:#fff;width:200px;">
                     <p>
-                        <span style="font-size:22px;font-weight:400;">Creative copies on a budget</span>
+                        <span style="font-size:18px;font-weight:300;">Creative writing on a budget</span>
                         <br>
-                        <center>
-                        <span style="font-size:32px;font-weight:300;">$59</span>
-                        </center>
+
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$59</span>
+
                     </p>
                 </td>
                 <td style="background:#019F6E;color:#fff;width:200px;">
                     <p>
-                        <span style="font-size:22px;font-weight:400;">Good conversion rates</span>
+                        <span style="font-size:18px;font-weight:300;">Compelling stories with better creators</span>
                         <br>
-                        <center>
-                        <span style="font-size:32px;font-weight:300;">$149</span>
-                        </center>
+
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$99</span>
+
                     </p>
                 </td>
                 <td style="background:#018880;color:#fff;width:200px;">
                     <p>
-                        <span style="font-size:22px;font-weight:400;">Excellent conversion rates</span>
+                        <span style="font-size:18px;font-weight:300;">Work only with the best</span>
                         <br>
-                        <center>
-                        <span style="font-size:32px;font-weight:300;">$519</span>
-                        </center>
+
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$299</span>
+
                     </p>
                 </td>
             </tr>
@@ -421,7 +422,7 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Never worry how an advertisement will perform again. We test the ones you like to show real results. $15 is included in each package, but you have the option to increase this amount if you like.">
+                    <label uib-tooltip="Never wonder what messages connect again. We'll run the ads in the real world to see which perform better than others.">
                         <p style="display:inline;">A/B Testing ($15 Included)</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
                     </label>
@@ -563,7 +564,7 @@
             </div>
             <div class='text-left' ng-show='current.step == "preview"'>
                 <h4 class='text-left' style='color:#333'>
-                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
                         <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
                             <span style='font-weight:300;font-size:22;top:10px;'>
                                  81% of consumers ignore ads they find irrelevant.
@@ -580,7 +581,7 @@
             </div>
             <div class='text-left' ng-show='current.step == "chose-plan"'>
                 <h4 class='text-left' style='color:#333'>
-                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 100px; height: auto; margin: 10px 20px; display: inline-block;'>
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
                       <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
                         <span style='font-weight:300;font-size:22px;position:relative;'>
                               100% Money Back Guarantee
@@ -591,7 +592,7 @@
                 <h4 class='text-left' style='color:#333'>
                       <span class='glyphicon glyphicon-ok circle-it-oj'></span>
                         <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
-                              People are 23% more likely to enjoy ads they find relevant.
+                              70% of consumers trust messages from strangers more than brands.
                         </span>
                 </h4>
             </div>

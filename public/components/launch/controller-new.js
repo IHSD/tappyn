@@ -20,7 +20,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.ages = launchModel.ages;
     $scope.registering = false;
     $scope.contest.platform = "facebook";
-    $scope.contest.objective = "Quality";
+    $scope.contest.objective = "Engage";
     $scope.reduction = 0;
     $scope.new_img = false;
     $scope.more_action = '';

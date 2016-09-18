@@ -5,7 +5,7 @@
             <div ng-show="payment_obj.h4 == 'Standard Subscription' || payment_obj.h4 == 'Premium Subscription' || payment_obj.h4 == 'Platinum Subscription'">
                 <h3><strong>Credit Card Details</strong></h3>
             </div>
-            <h4 style="font-weight:bold;">Checkout</h4>
+            <h4 style="font-weight:bold;font-size:24px;">Checkout</h4>
         </div>
         <div class="modal_bot">
             <div class="voucher-group row" ng-show='payment_obj.voucher_visible'>
@@ -122,8 +122,8 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-xs-12 text-center">
-                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;padding-top:10px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
+                        <div class="col-xs-12 text-center" style="position:relative;top:20px;">
+                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#5e5f60;display:block;padding-left:25px;padding-top:10px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#5e5f60;">Terms</a> <a href="/privacy" style="color:#5e5f60;">Privacy</a></span></span>
                         </div>
                     </div>
                     <div class="col-xs-12" ng-if='payment_obj.price != 0.00 && payment_obj.h4 != "A/B Testing Payment"'>
@@ -213,18 +213,18 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-xs-12 text-center">
-                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#333;display:block;padding-left:25px;padding-top:10px;"><span style="font-size:14px;padding-left:2px;">Fabel <a href="/terms" style="color:#333;">Terms</a> <a href="/privacy" style="color:#333;">Privacy</a></span></span>
+                        <div class="col-xs-12 text-center" style="position:relative;top:20px;">
+                            <span class="glyphicon glyphicon-copyright-mark" style="font-size:10px;color:#5e5f60;display:block;padding-left:25px;padding-top:10px;"><span style="font-size:14px;padding-left:2px;cursor:default;">Fabel <a href="/terms" style="color:#5e5f60;">Terms</a> <a href="/privacy" style="color:#5e5f60;">Privacy</a></span></span>
                         </div>
                     </div>
                     <div ng-if='payment_obj.price == 0.00 && payment_obj.h4 != "A/B Testing Payment"' class='text-center'>
                         <!--<h4>No need for payment, this campaign is on us!</h4>-->
-                        <button class='btn btn-oj col-xs-12 purchase-pixel' ng-click='pay_payment("voucher_payment")'>Continue</button>
+                        <button class='btn btn-oj btn btn-oj col-xs-6 col-xs-offset-3 purchase-pixel' ng-click='pay_payment("voucher_payment")'>Continue</button>
                     </div>
                     <div ng-if='payment_obj.price == 0.00 && payment_obj.h4 == "A/B Testing Payment"' class='text-center'>
                         <!--<h4>No need for payment, this campaign is on us!</h4>-->
                         <h4><strong>We'll begin testing your ads immediately!</strong></h4>
-                        <button class='btn btn-oj col-xs-12 purchase-pixel' ng-click='pay_payment("voucher_payment")'>Continue</button>
+                        <button class='btn btn-oj btn btn-oj col-xs-6 col-xs-offset-3 purchase-pixel' ng-click='pay_payment("voucher_payment")'>Continue</button>
                     </div>
                 </div>
             </div>
