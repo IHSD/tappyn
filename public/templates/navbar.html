@@ -12,9 +12,9 @@
     <div class="col-xs-10">
         <nav class='hidden-xs' id='top-scroll'>
             <ul>
-                <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Create Stories</a></li>
-                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create Stories</a></li>
-                <li ng-show='!user' style='cursor:pointer'><a href="/for_companies">Purchase Stories</a></li>
+                <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/contests">Create</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a ng-click='open_register("default", "", "2")'>Create</a></li>
+                <li ng-show='!user' style='cursor:pointer'><a href="/for_companies">Purchase</a></li>
                 <li ng-show='user.type == "company"' role='menuitem'><a href="/dashboard">Dashboard</a></li>
                 <li ng-hide='user.type != "member"' style='cursor:pointer'><a href="/winners">Recently Purchased</a></li>
                 <li ng-if='user' style='float:right;'>
