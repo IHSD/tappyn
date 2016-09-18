@@ -2626,6 +2626,12 @@ footer {
     color: ##555;
     line-height: 24px;
 }
+.anchor {
+    display: block;
+    position: relative;
+    top: -75px;
+    visibility: hidden;
+}
 
 
 /*** Some info ***/
