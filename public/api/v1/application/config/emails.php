@@ -93,12 +93,12 @@ $config['email_program']['mailing_list_conf']['additional_data'] = array();
  *
  * Sent to confirm that someone has subsribed to our mailing list
  */
-$config['email_program']['post_contest_package']['template']        = 'email_templates/post_contest_package';
-$config['email_program']['post_contest_package']['from']            = 'alek@fabel.us';
-$config['email_program']['post_contest_package']['subject']         = "Here's your Tappyn Ad!";
-$config['email_program']['post_contest_package']['query_string']    = array();
-$config['email_program']['post_contest_package']['additional_data'] = array();
-
+ /**
+*$config['email_program']['post_contest_package']['template']        = 'email_templates/post_contest_package';
+*$config['email_program']['post_contest_package']['subject']         = "Here's your Tappyn Ad!";
+*$config['email_program']['post_contest_package']['query_string']    = array();
+*$config['email_program']['post_contest_package']['additional_data'] = array();
+**/
 /**
  * Sign Up Confirmation
  *
