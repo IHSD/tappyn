@@ -137,9 +137,9 @@ class Price_lib
                 case 'launch':
                     $price = ($price) ? $price : $fee;
                     if (isset($post['_contest']) && $post['_contest']) {
-                        if (
-                            (isset($post['_contest']['photo']) && !$post['_contest']['photo'])
-                        ) {
+                        if (isset($post['_contest']['plan']) && $post['_contest']['plan'] == 'basic') {
+
+                        } else if ((isset($post['_contest']['photo']) && !$post['_contest']['photo'])) {
                             $price = $price + 100;
                         }
                     }

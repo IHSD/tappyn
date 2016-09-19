@@ -13,7 +13,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         // $scope.current = $scope.steps['tp-platform'];
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
-    $scope.contest = { chosen_creative: false };
+    $scope.contest = { chosen_creative: false, plan: 'basic' };
     $scope.plan_name = 'premium';
     $scope.company = {};
     $scope.save_method = false;
@@ -167,12 +167,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
             $scope.contest.photo = ($scope.cropper.getCroppedCanvas() && $scope.contest.chosen_creative) ? $scope.cropper.getCroppedCanvas().toDataURL('image/jpeg') : '';
             $scope.contest.photo = (!$scope.contest.photo && $scope.contest.chosen_creative && $scope.contest.use_attachment == '1') ? 'use_attachment' : $scope.contest.photo;
             //if ($scope.contest.chosen_creative && !$scope.contest.photo) {
-                //$scope.set_alert("You need to upload a photo", "error");
+            //$scope.set_alert("You need to upload a photo", "error");
             //}
 
-                // $scope.current = $scope.steps[step];
-                $scope.submit_contest($scope.contest, 'launch');
-                fbq('track', 'CompleteRegistration');
+            // $scope.current = $scope.steps[step];
+            $scope.submit_contest($scope.contest, 'launch');
+            fbq('track', 'CompleteRegistration');
 
         } else if (step == 'done') {
             fbq('track', 'Purchase', { value: '0.00', currency: 'USD' });
@@ -359,10 +359,12 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
 
     $scope.set_launch_plan = function(plan) {
         if (plan == 'basic') {
+            $scope.contest.plan = 'basic';
             $scope.plan_name = 'basic';
             $scope.contest.chosen_creative = true;
             $anchorScroll('bottom');
         } else if (plan == 'premium') {
+            $scope.contest.plan = 'premium';
             $scope.plan_name = 'premium';
             $scope.contest.chosen_creative = false;
         } else if (plan == 'platinum') {
