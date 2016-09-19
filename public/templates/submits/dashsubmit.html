@@ -6,7 +6,7 @@
         <img ng-if='!submission.contest.company.logo_url' src="favicon.ico">
         <img ng-if='submission.contest.company.logo_url' src="{{submission.contest.company.logo_url}}">
     </div>
-    <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
+    <span class='company-name'>from {{submission.contest.company.name}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
 <div class='contest-entry text-left'>
     <h3 ng-show='submission.headline'>{{submission.headline}}</h3>

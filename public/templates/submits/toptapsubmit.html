@@ -13,7 +13,7 @@
         <img ng-if='!submission.contest.company.logo_url' src="favicon.ico">
         <img ng-if='submission.contest.company.logo_url' src="{{submission.contest.company.logo_url}}">
     </div>
-    <span class='company-name'>from {{submission.contest.company.name}} &#8226; {{submission.contest.platform | capitalize}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
+    <span class='company-name'>from {{submission.contest.company.name}} &#8226; <span style="color:#216C2A;">${{submission.contest.prize}}</span></span>
 </div>
 <div class='contest-entry text-left'>
     <h3 ng-show='submission.headline'>{{submission.headline}}</h3>
@@ -30,9 +30,9 @@
     <h5 class='winner-name' ng-if="submission.owner.first_name"> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
     <span class='winner-tag'>Purchased</span>
     <div class="col-xs-8 col-xs-offset-2" style="font-size:12px; padding-left:25px;">
-        <span class="glyphicon glyphicon-fire" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.tapps}} Ads Purchased
-        <br>
-        <span class="glyphicon glyphicon-pencil" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.ctr_average | number:2}}% Avg. CTR
+        <span class="glyphicon glyphicon-fire" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.tapps}} Sold
+        <!--<br>
+        <span class="glyphicon glyphicon-pencil" style="padding-top:5px;color:#019F6E"></span> {{submission.owner_average.ctr_average | number:2}}% Avg. CTR-->
     </div>
     <div ng-if="submission.test_result.impressions">
         <span ng-click="showctr()" ng-bind="submission.test_result.ctr + '%'" class='contest-ctr ' ng-if='submission.test_result.ctr ' style="cursor:help;"></span>

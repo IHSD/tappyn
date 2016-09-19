@@ -35,7 +35,7 @@
         <div ng-show='current.step == "tp-prior"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
                 <h2 style="font-weight:400;font-size:48px;">Your audience.</h2>
-                <h4>Let's started by finding out who you'd like to connect with, where, and why.</h4>
+                <h4>Let's started by finding out who you'd like to connect with and why.</h4>
             </div>
         </div>
         <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
@@ -100,7 +100,7 @@
 <div class='container'>
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12" style="padding-bottom:200px;">
         <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define the type of metric that is most important to you." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Priority
+            <label uib-tooltip="Define the goal of your message." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Objective
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
@@ -121,7 +121,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="display:none;">
             <label uib-tooltip="Select the media platform where your story will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
@@ -140,8 +140,8 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="padding-top:40px;">
-            <label uib-tooltip="Define who you'd like to create your messages and who you want to see them." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+        <div class="row">
+            <label uib-tooltip="Define you you'd like to create your messaging and who you want to show them to." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
             </label>
             <div class="col-sm-10">
@@ -321,7 +321,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class='row row-preview2'>
+                    <div class='row row-preview2' style="display:none;">
                         <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Platform:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <p>{{contest.platform}}</p>
@@ -386,7 +386,7 @@
                         <span style="font-size:18px;font-weight:300;">Creative writing on a budget</span>
                         <br>
 
-                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$59</span>
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$99</span>
 
                     </p>
                 </td>
@@ -395,7 +395,7 @@
                         <span style="font-size:18px;font-weight:300;">Compelling stories with better creators</span>
                         <br>
 
-                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$99</span>
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$199</span>
 
                     </p>
                 </td>
@@ -404,7 +404,7 @@
                         <span style="font-size:18px;font-weight:300;">Work only with the best creators</span>
                         <br>
 
-                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$299</span>
+                        <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$499</span>
 
                     </p>
                 </td>
@@ -434,7 +434,7 @@
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
                     <label uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on the most compelling aspects of your business. ">
-                        <p style="display:inline;">Copies (30)</p>
+                        <p style="display:inline;">Messages (30)</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
                     </label>
                 </td>
@@ -445,7 +445,7 @@
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
                     <label uib-tooltip="Receive original, authentic photos from the people you plan on connecting with based on what they would respond to.">
-                        <p style="display:inline;">Photos (30)</p>
+                        <p style="display:inline;">Images (30)</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
                     </label>
                 </td>

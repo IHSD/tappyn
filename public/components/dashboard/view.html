@@ -184,9 +184,9 @@
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}} - {{contest.platform | capitalize}}</span>
-                        <span ng-if='contest.status == "Complete"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}} - {{contest.platform | capitalize}}</span>
-                        <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}} - {{contest.platform | capitalize}}</span>
+                        <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "Complete"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}}</span>
+                        <span ng-if='contest.status == "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}}</span>
                         <br>
                         <small>
                           <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}} - </span>
@@ -226,7 +226,7 @@
                                         Ended On:
                                     </span>
                                 </td>
-                                <td style="padding-top:10px;">Platform:</td>
+                                <!--<td style="padding-top:10px;">Platform:</td>-->
                                 <td style="padding-top:10px;">Objective:</td>
                                 <td style="padding-top:10px;">Audience:</td>
                             </tr>
@@ -238,7 +238,7 @@
                                     {{contest.stop_time | dashDate}}
                                 </span>
                             </td>
-                            <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{winner_contest.platform | capitalize}}</td>
+                            <!--<td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{winner_contest.platform | capitalize}}</td>-->
                             <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">
                                 <span ng-if="winner_contest.objective == 'clicks_to_website'">Quality</span>
                                 <span ng-if="winner_contest.objective != 'clicks_to_website'">{{winner_contest.objective}}</span>
@@ -379,7 +379,7 @@
                                 <img ng-src="{{winner.winner.attachment}}" crossorigin="anonymous">
                             </div>
                             <div class='contest-company text-left'>
-                                <span class='company-name'>from {{user.first_name}} &#8226; {{winner.contest.platform | capitalize}}</span>
+                                <span class='company-name'>from {{user.first_name}}</span>
                             </div>
                             <div class='contest-entry text-left'>
                                 <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
@@ -401,9 +401,7 @@
                         </div>
                         <div class='col-xs-12 col-md-6'>
                             <div class="col-xs-12 col-md-6">
-                            <h4>Platform</h4>
-                            <h5 style="color:#777;">{{winner.contest.platform | capitalize}}</h5>
-                            <h4>Priority</h4>
+                            <h4>Objective</h4>
                             <h5 ng-if="winner.contest.objective == 'clicks_to_website'" style="color:#777;">Engage</h5>
                             <h5 ng-if="winner.contest.objective != 'clicks_to_website'" style="color:#777;">{{winner.contest.objective}}</h5>
                             <h4>Audience</h4>
