@@ -204,7 +204,7 @@
                 <button class="btn-sm btn btn-secondary" ng-click="showOptions = !showOptions">More Options</button>
             </div>
             <div ng-show="showOptions">
-                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Copy Direction
+                <label uib-tooltip="If there's a specific tone, style, or content you're looking for, let our creators know." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Message Direction
                     <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
                 </label>
                 <div class="col-sm-10 col-md-5">
@@ -335,7 +335,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class='row row-preview2'>
+                    <div class='row row-preview2' style="display:none;">
                         <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Ad Photo:</h3>
                         <div class="col-sm-9 col-xs-12">
                             <div ng-show="contest.photo">
@@ -504,7 +504,7 @@
                 </td>
             </tr>
         </table>
-        <!--<div id="bottom" style="padding-bottom:300px;">
+        <div id="bottom" style="padding-bottom:300px;">
             <div class="col-xs-12 col-sm-9 col-sm-offset-3 text-left" ng-show="contest.chosen_creative == true">
                 <div class="form-group" ng-init="contest.attachment = ''">
                     <h4 style="font-size:22px;"><strong>Choose the photo you're planning on using with your message.</strong></h4>
@@ -519,7 +519,7 @@
                     </div>
                 </div>
             </div>
-        </div>-->
+        </div>
     </div>
 </div>
 <div ng-show='current.step == "done"'>
