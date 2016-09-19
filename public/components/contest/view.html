@@ -29,7 +29,7 @@
                         <img ng-if='contest.company.logo_url' style='height:auto;' width='50px' ng-src="{{contest.company.logo_url}}">
                         {{contest.company.name}}
                     </h3>
-                    <button class='btn btn-default' ng-click='scroll_to_submish()'>View Current Ads</button>
+                    <button class='btn btn-default' ng-click='scroll_to_submish()'>View Current Messages</button>
                 </div>
                 <div class='col-sm-5 col-xs-12 vertical-center col-sm-offset-4'>
                     <div style='width:100%;padding-top:15px;'>
@@ -39,7 +39,7 @@
                 </div>
                 <div class='col-sm-3 col-xs-12 text-right col-sm-offset-9'>
                     <h2 style='color:#333;margin-top: 10px;'>${{contest.prize}}</h2>
-                    <h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>
+                    <!--<h4 style='font-size:15;'><strong>{{contest.platform | capitalize}}</strong></h4>-->
                     <h4 style='font-size:15;'><span class='glyphicon glyphicon-time'></span> <span>{{contest.stop_time | untilFilter}} left</span></h4>
                     <h4 style='font-size:15;'><span class='glyphicon glyphicon-eye-open'></span> <span>{{contest.views}} views</span></h4>
                 </div>
@@ -90,7 +90,7 @@
             <div class='launch-page-box'>
                 <div ng-show='(contest.submission_count >= contest.submission_limit) &&  !contest.user_has_submitted'>
                     <div class='alert alert-success text-center'>
-                        This campaign has hit its cap of 30 ads, but check out other cool campaigns <a href="/contests">Here</a>. Also, don't forget to add more interests to your <a href="/profile">Profile</a> to see more campaigns!
+                        This campaign has hit its cap of 30 messages, but check out other cool campaigns <a href="/contests">Here</a>. Also, don't forget to add more interests to your <a href="/profile">Profile</a> to see more campaigns!
                     </div>
                 </div>
                 <div ng-show='!user'>
@@ -102,7 +102,7 @@
                 <div ng-show='user && user.type=="company"'>
                     <div class='submish-overlay'></div>
                     <div class='alert alert-danger text-center submish-panel'>
-                        You can’t create an ad for your own campaign.
+                        You can’t create a message for your own campaign.
                     </div>
                 </div>
                 <div ng-show='user && !user.is_active'>
@@ -178,14 +178,14 @@
                     <img width='20px' height='20px' ng-src='https://s3-us-west-2.amazonaws.com/tappyn/key.jpg'>
                 </div>
                 <div style='padding: 20px 20px 10px 70px;'>
-                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;color:#019f6e;"><br>Create a story that connects.</a></strong></p>
+                    <p><strong>How to:<a data-toggle="modal" href="#myModal" class="hoverclass" style="cursor:pointer;color:#019f6e;"><br>Create a message that connects.</a></strong></p>
                 </div>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header" style="border-bottom: 1px solid #019F6E;">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title text-center" id="myModalLabel">How do I create a story that connects?</h4>
+                                <h4 class="modal-title text-center" id="myModalLabel">How do I create a message that connects?</h4>
                             </div>
                             <div class="modal-body row">
                                 <div class="container-fluid bd-example-row">
@@ -246,7 +246,7 @@
                         <img ng-if='!contest.company.logo_url' src="favicon.ico">
                         <img ng-if='contest.company.logo_url' src="{{contest.company.logo_url}}">
                     </div>
-                    <span class='company-name'>from {{contest.company.name}} &#8226; {{contest.platform | capitalize}}</span>
+                    <span class='company-name'>from {{contest.company.name}}</span>
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
                     <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
