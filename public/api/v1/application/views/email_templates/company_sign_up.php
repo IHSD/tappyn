@@ -21,15 +21,15 @@ $query_string['redirect'] = 'dashboard';
 
 <p>Congrats! Your Fabel account has been successfully activated. We’re ecstatic to have you on board.</p>
 
-<p>1) Running an ad campaign is easy. Simply head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and hit "Launch New Campaign".</p>
+<p>1) Running an campaign is easy. Simply head to your <?php echo anchor('api/v1/analytics/click?'.http_build_query($query_string), 'dashboard'); ?>, and hit "Launch New Campaign".</p>
 
-<p>2) Select which type of ad you'd like and who you plan on showing it to.</p>
+<p>2) Select which type of message you'd like and who you plan on showing it to.</p>
 
-<p>3) Launch your campaign, and watch personalized ads roll in. </p>
+<p>3) Launch your campaign, and watch personalized messages roll in. </p>
 
-<p>4) Review the ads you’d like to test and start receiving results.</p>
+<p>4) Review the messages you’d like to test and start receiving results.</p>
 
-<p>5) Look at all your ads with their results and decide which one you’d like to own.</p>
+<p>5) Look at all your messages with their results and decide which one you’d like to own.</p>
 
 <p>Got a question? I’m <a href="mailto:alek@fabel.us">here to help</a>, and answer any questions. My cell is below - feel free to call me with any questions or concerns.</p>
 

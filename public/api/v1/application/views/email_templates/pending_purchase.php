@@ -16,10 +16,10 @@ $query_string['redirect'] = 'dashboard';
 
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Hi <?php echo $company->name; ?>,</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We're glad to announce that your ads have finished testing!</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>We're glad to announce that your messages have finished testing!</p><br>
 
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>The data from the results of the testing is viewable on the ads of your dashboard.</p><br>
-<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Check out all of the results, and select your favorite one to claim the copyright for that ad.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>The data from the results of the testing is viewable on the messages of your dashboard.</p><br>
+<p style='text-align:justify;margin:auto;min-width:450px;width:50%'>Check out all of the results, and select your favorite one to claim the copyright for that message.</p><br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>If you'd like to select more than one, simply let us know!</p><br>
 <p style='text-align:justify;margin:auto;min-width:450px;width:50%'>If you have questions, please feel free to reach out. If you’re ready, check out the results of your testing below.</p>
 <br>
@@ -28,7 +28,7 @@ below!</p><br>-->
 
 <p style='text-align:center'>
     <a style='display:inline-block;background:#019F6E;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url() . 'dashboard'; ?>">
-        Select Ads
+        Select Messages
     </a>
 <p>
 <br>

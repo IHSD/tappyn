@@ -15,14 +15,14 @@ foreach($requirements as $req)
 
 <!-- Start Email Content -->
 
-<p>Thanks for using Fabel, and congrats on picking an amazing user generated ad. </p>
+<p>Thanks for using Fabel, and congrats on picking an amazing user generated message. </p>
 <p>Your audience is going to love it!</p>
 
 <p><strong>Details</strong></p>
 <p><strong>Platform :</strong> <?php echo $contest->platform; ?></p>
 <p><strong>Target Audience :</strong> <?php echo $contest->min_age; ?> - <?php echo $contest->max_age; ?> year olds in your specified gender category </p>
 <br>
-<p><strong>Ad Creative</strong></p>
+<p><strong>Message Creative</strong></p>
 <?php if(!is_null($submission->headline) && !$submission->headline == ''): ?>
     <p><strong>Headline :</strong> <?php echo $submission->headline; ?></p>
 <?php endif; ?>
@@ -30,7 +30,7 @@ foreach($requirements as $req)
     <p><strong>Text :</strong> <?php echo $submission->text; ?></p>
 <?php endif; ?>
 <?php if(!is_null($submission->attachment)): ?>
-    <p><strong>Ad:</strong> You'll find your chosen ads attached below</p>
+    <p><strong>Ad:</strong> You'll find your chosen message attached below</p>
 <?php endif; ?>
 
 <br>

@@ -27,9 +27,9 @@ if(!isset($contest) ||
 
 <h2 style='text-align:center;margin:auto;min-width:450px;width:50%'>Boom. You're confirmed.</h2>
 
-<p style='text-align:center;margin:auto;width:600px'>Great news - your ad to Fabel has been confirmed. Yup - it's go time.</p><br>
+<p style='text-align:center;margin:auto;width:600px'>Great news - your message to Fabel has been confirmed. Yup - it's go time.</p><br>
 
-<p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the ad you submitted to us:</p><br>
+<p style='text-align:center;margin:auto;width:600px'>For your records, here is a copy of the message you submitted to us:</p><br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #019F6E'></p>
 <h4 style='text-align:center'><?php echo $company; ?></h4>
@@ -62,7 +62,7 @@ if(!isset($contest) ||
 <br>
 
 <p style='text-align:center;margin:auto;width:600px;border-bottom:2px solid #019F6E'></p>
-<p style='text-align:left;margin:auto;width:600px'>To keep up with your ads, your up-votes, and of course, the <strong>$$$</strong> in your account: <br></p>
+<p style='text-align:left;margin:auto;width:600px'>To keep up with your messages, your up-votes, and of course, the <strong>$$$</strong> in your account: <br></p>
 <p style='text-align:center'>
     <a style='display:inline-block;background:#019F6E;border-radius:4px;color:#fff;font-height:400;font-size: 18px;width:250px;height:50px;padding:0;line-height:50px;text-decoration:none' href="<?php echo base_url().'#/dashboard'; ?>">
         Visit Your Dashboard
