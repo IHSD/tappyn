@@ -61,20 +61,22 @@
                         <span ng-switch-default>Men and Women</span>
                         </span>
                     </p>
+                    <h3 style='margin-bottom: 0;'>Our Objective</h3>
+                    <p>{{contest.objective}}</p>
                 </div>
-                <div ng-show="contest.additional_info" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
+                <div ng-show="contest.style" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
                     <!--<h3 style='margin-bottom: 0;'>Be Sure To...</h3>
                     <p><span ng-repeat="tone_of_voice_box in contest.tone_of_voice_box"> {{tone_of_voice_boxes[tone_of_voice_box]}}</span></p>
                   -->
                     <h3 style='margin-bottom: 0;'>Our Style</h3>
-                    <p ng-if='contest.additional_info'>
-                        {{contest.additional_info}}
+                    <p ng-if='contest.style'>
+                        {{contest.style}}
                     </p>
                 </div>
                 <div class='row'>
                     <div class="col-md-12 col-xs-12 text-center">
                         <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
-                            <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-secondary'><span class='glyphicon glyphicon-new-window'></span> View Branding</a>
+                            <a ng-if='contest.company.company_url && contest.company.company_url != ""' ng-click='track_click("website_click", contest)' class='btn btn-secondary'><span class='glyphicon glyphicon-new-window'></span> Learn More</a>
                             <a ng-if='contest.company.facebook_url && contest.company.facebook_url != ""' ng-click='track_click("facebook_click", contest)' class='btn btn-secondary' ng-init='company.social_facebook = "public/img/OrangeFacebookIcon.png"' ng-mouseenter='company.social_facebook = "public/img/WhiteFacebookIcon.png"' ng-mouseleave='company.social_facebook = "public/img/OrangeFacebookIcon.png"'>
                                 <img width='20px' height='20px' ng-src='{{company.social_facebook}}'>
                             </a>
@@ -119,7 +121,7 @@
                 <div class='col-xs-12'>
                     <form class='form' ng-hide='contest.user_has_submitted || (contest.submission_count >= contest.submission_limit)'>
                         <div ng-show='form_limit.photo || contest.use_attachment == 1' class='form-group'>
-                            <h4 class='control-label'><strong>Image</strong></h4>
+                            <h4 class='control-label'><strong>Image Direction</strong></h4>
                             <div ng-show="!cropper_box">
                                 <p style="font-size:12px;margin-bottom:0px;">Find free-to-use photos in seconds at <a style="color: #019f6e;" href="https://unsplash.com/" target="_blank">Unsplash</a> or <a style="color: #019f6e;" href="https://pixabay.com/" target="_blank">Pixabay</a>.</p>
                                 <p style="font-size:12px;">Photos from other sources will be removed. <a style="color: #019f6e;" href="https://fabel.us/faq" target="_blank">Learn More</a></p>
@@ -141,12 +143,12 @@
                             </div>
                         </div>
                         <div ng-show='form_limit.headline' class='form-group'>
-                            <h4 class='control-label'><strong>Headline</strong></h4>
+                            <h4 class='control-label'><strong>Headline Benefit</strong></h4>
                             <input class='form-control' maxlength="{{form_limit.headline.limit}}" ng-model='submit.headline' placeholder='{{form_limit.headline.placeholder}}' type='text'>
                             <div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
                         </div>
                         <div ng-show='form_limit.text' class='form-group'>
-                            <h4 class='control-label'><strong>Ad Text</strong></h4>
+                            <h4 class='control-label'><strong>Description</strong></h4>
                             <textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
                             <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
                         </div>
@@ -249,18 +251,18 @@
                     <span class='company-name'>from {{contest.company.name}}</span>
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
-                    <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline Benefit will be shown here.</h3>
                     <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
-                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your ad text will be shown here</h4>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your Description will be shown here</h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
                     <div class='contest-upvotes disable-click'>
                         <span class='glyphicon glyphicon-heart'></span> 0
                     </div>
                 </div>
                 <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
-                    <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline will be shown here.</h3>
+                    <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline Benefit will be shown here.</h3>
                     <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
-                    <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your ad text will be shown here<br></h4>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your Description will be shown here<br></h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
                         <span class='glyphicon glyphicon-heart'></span> 12

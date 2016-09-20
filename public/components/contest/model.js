@@ -9,19 +9,19 @@ tappyn.service("contestModel", function() {
     this.parallel_submission = function(contest) {
         var layout = {};
         if (contest.platform == "facebook") {
-            layout.text = { limit: 90, placeholder: 'A clear, simple description of why you would personally pick this product.' };
+            layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
             //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website")
-            layout.headline = { limit: 35, placeholder: "Something that grabs the readers' attention. Take a risk!" };
+            layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
         } else if (contest.platform == "twitter") {
-            if (contest.display_type == 'with_photo') layout.text = { limit: 116, placeholder: 'A clear, simple description of why you would personally pick this product.' };
-            else layout.text = { limit: 140, placeholder: 'A clear, simple description of why you would personally pick this product.' };
-            if (contest.objective == "site_clicks_conversions") layout.card_title = { limit: 70, placeholder: 'A clear, simple description of why you would personally pick this product.' }
+            if (contest.display_type == 'with_photo') layout.text = { limit: 116, placeholder: 'How would you describe this business to your friends?' };
+            else layout.text = { limit: 140, placeholder: 'How would you describe this business to your friends?' };
+            if (contest.objective == "site_clicks_conversions") layout.card_title = { limit: 70, placeholder: 'How would you describe this business to your friends?' }
         } else if (contest.platform == "google") {
-            layout.headline = { limit: 25, placeholder: "Something that grabs the readers' attention. Take a risk!" };
-            layout.line_1 = { limit: 35, placeholder: 'A clear, simple description of why you would personally pick this product.' };
-            layout.line_2 = { limit: 35, placeholder: 'A clear, simple description of why you would personally pick this product.' };
-        } else if (contest.platform == "general") layout.headline = { limit: 35, placeholder: "Something that grabs the readers' attention. Take a risk!" };
-        else if (contest.platform == "instagram") layout.text = { limit: 90, placeholder: 'A clear, simple description of why you would personally pick this product.' };
+            layout.headline = { limit: 25, placeholder: "What is the primary goal this audience is after?" };
+            layout.line_1 = { limit: 35, placeholder: 'How would you describe this business to your friends?' };
+            layout.line_2 = { limit: 35, placeholder: 'How would you describe this business to your friends?' };
+        } else if (contest.platform == "general") layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
+        else if (contest.platform == "instagram") layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
 
         if (contest.use_attachment == 1) layout.photo = false;
         else if (contest.display_type == "with_photo") layout.photo = true;
