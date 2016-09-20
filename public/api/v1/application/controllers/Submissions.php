@@ -60,6 +60,12 @@ class Submissions extends CI_Controller
         usort($submissions, function ($a, $b) {
             if ($a->ctr != $b->ctr) {
                 return ((float) $b->ctr < (float) $a->ctr) ? -1 : 1;
+            } else if ($a->test_result['impressions'] != $b->test_result['impressions']) {
+                return $b->test_result['impressions'] < $a->test_result['impressions'] ? -1 : 1;
+            } else if ($a->test_result['cost_per_result'] != $b->test_result['cost_per_result']) {
+                return $b->test_result['cost_per_result'] < $a->test_result['cost_per_result'] ? -1 : 1;
+            } else if ($a->test_result['results'] != $b->test_result['results']) {
+                return $b->test_result['results'] < $a->test_result['results'] ? -1 : 1;
             } else {
                 return ((int) $b->votes < (int) $a->votes) ? -1 : 1;
             }

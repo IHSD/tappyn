@@ -1,7 +1,7 @@
 tappyn.controller("ApplicationController", function($scope, $rootScope, $upload, $interval, $route, $location, $anchorScroll, $timeout, $filter, AppFact, tappyn_var) {
     $rootScope.modal_up = false;
     $rootScope.root_modal = { now: '' };
-    $rootScope.template_version = '1.2.8';
+    $rootScope.template_version = '1.2.12';
 
     $scope.signing_in = { show: false, type: '', object: '' };
     $scope.registration = { show: false, type: '', object: '' };
