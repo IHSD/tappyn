@@ -199,6 +199,10 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         $scope.contest.display_type = null;
     }
 
+    $scope.select_style = function(style) {
+        $scope.contest.style = style;
+    }
+
     $scope.select_platform = function(platform) {
         $scope.contest.platform = platform;
         $scope.contest.objective = null;
