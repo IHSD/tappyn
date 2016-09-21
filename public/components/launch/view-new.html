@@ -406,39 +406,39 @@
 </div>
 <div class="row" ng-show='current.step == "chose-plan"' style="padding-bottom:120px;">
     <div class='col-xs-12 col-sm-8 col-sm-offset-1 text-center launch-step-plan'>
-        <table class="table table-condensed table-plan plan-{{plan_name}}" style='border-radius:5px;'>
+        <table class="table table-condensed" style='border-radius:5px;'>
             <thead>
                 <tr>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;">
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;">
                         <center>
                             <img src="https://s3-us-west-2.amazonaws.com/tappyn/rec.jpg" width=150px height=35px; style="display:block;margin-bottom:0px;" alt="Fabel Recommended">
                         </center>
                     </td>
-                    <td class="text-center" style="font-size:22px;background:#EBEEF0;max-width:100px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
                 </tr>
                 <tr>
                     <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                    <td class="text-left" style="font-size:22px;background:#06883F;color:#fff;font-weight:400;width:200px;">Basic</td>
-                    <td class="text-left" style="font-size:22px;background:#019F6E;color:#fff;font-weight:400;width:200px;">Premium</td>
-                    <td class="text-left" style="font-size:22px;background:#018880;color:#fff;font-weight:400;width:200px;">Platinum</td>
+                    <td class="text-left top-box-left" style="font-size:26px;font-weight:400;width:200px;background:#fff;">Basic</td>
+                    <td class="text-left top-box-mid" style="font-size:26px;font-weight:400;width:200px;background:#fff;">Premium</td>
+                    <td class="text-left top-box-right" style="font-size:26px;font-weight:400;width:200px;background:#fff;">Platinum</td>
                 </tr>
             </thead>
             <tr>
                 <td class="text-center" style="background:#EBEEF0;color:#333;width:200px;">
                 </td>
-                <td style="background:#06883F;color:#fff;width:200px;">
+                <td class="mid-box-left" style="width:200px;">
                     <p>
                         <span style="font-size:18px;font-weight:300;">Creative writing on a budget</span>
                     </p>
                 </td>
-                <td style="background:#019F6E;color:#fff;width:200px;">
+                <td class="mid-box-mid" style="width:200px;">
                     <p>
                         <span style="font-size:18px;font-weight:300;">Best value for your money<br></span>
                     </p>
                 </td>
-                <td style="background:#018880;color:#fff;width:200px;">
+                <td class="mid-box-right" style="width:200px;">
                     <p>
                         <span style="font-size:18px;font-weight:300;">Complete brand messaging for any platform</span>
                     </p>
@@ -447,17 +447,17 @@
             <tr>
                 <td class="text-center" style="background:#EBEEF0;color:#333;width:200px;">
                 </td>
-                <td style="background:#06883F;color:#fff;width:200px;">
+                <td class="bot-box-left" style="width:200px;">
                     <p>
                         <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$99</span>
                     </p>
                 </td>
-                <td style="background:#019F6E;color:#fff;width:200px;">
+                <td class="bot-box-mid" style="width:200px;">
                     <p>
                         <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$199</span>
                     </p>
                 </td>
-                <td style="background:#018880;color:#fff;width:200px;">
+                <td class="bot-box-right" style="width:200px;">
                     <p>
                         <span class="pull-right" style="font-size:32px;font-weight:300;padding-right:10px;">$499</span>
                     </p>
@@ -465,97 +465,47 @@
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Every package includes the ability to target our creator base to source messages from specific demographics.">
+                    <!--<label uib-tooltip="Every package includes the ability to target our creator base to source messages from specific demographics.">
                         <p style="display:inline;">Creator Targeting</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
+                    </label>-->
                 </td>
-                <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01A398;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Expect 30 Messages</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Expect 30 Messages And Images</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Expect 30 Messages, Images, and Videos</td>
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Never wonder what messages connect again. We'll run the messages in the real world to see which perform better than others.">
+                    <!--<label uib-tooltip="Never worry how your message will perform again. We test the ones you like to show real results.">
                         <p style="display:inline;">Testing</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
+                    </label>-->
                 </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Basic Creator Targeting</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Deeper Creative Targeting</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Expert Creative Targeting</td>
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on the most compelling aspects of your business. ">
+                    <!--<label uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on the most compelling aspects of your business. ">
                         <p style="display:inline;">Messages (30)</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
+                    </label>-->
                 </td>
-                <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#01A398;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-            </tr>
-            <tr>
-                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Receive original, authentic photos from the people you plan on connecting with based on what they would respond to.">
-                        <p style="display:inline;">Images (30)</p>
-                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
-                </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-            </tr>
-            <tr>
-                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    <label uib-tooltip="Receive original, authentic videos from the people you plan on connecting with based on situations where they would encounter your businesss.">
-                        <p style="display:inline;">Videos (30)</p>
-                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
-                </td>
-                <td class="text-center" style="background:#06A54B;color:#fff;max-width:100px;"></td>
-                <td class="text-center" style="background:#01BA7F;color:#fff;max-width:100px;"></td>
-                <td class="text-center" style="background:#01A398;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Testing</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Larger Testing</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Machine Learning Testing</td>
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:125px;">
-                    <label uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full.">
-                        <p style="display:inline;">100% Money Back
-                            <br>Guarantee</p>
+                    <!--<label uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full.">
+                        <p style="display:inline;">100% Money Back<br>Guarantee</p>
                         <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;"></span>
-                    </label>
+                    </label>-->
                 </td>
-                <td class="text-center" style="background:#06883F;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#019F6E;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-                <td class="text-center" style="background:#018880;color:#fff;max-width:100px;"><span class="glyphicon glyphicon-ok" style="font-size:22px;color:#fff;"></span></td>
-            </tr>
-            <tr>
-                <td class="text-center" style="background:#EBEEF0;"></td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                    <center class="hidden-xs hidden-sm">
-                        <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                    </center>
-                    <center class="hidden-md hidden-lg">
-                        <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;"></button>
-                    </center>
-                </td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                    <center class="hidden-xs hidden-sm">
-                        <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                    </center>
-                    <center class="hidden-md hidden-lg">
-                        <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                    </center>
-                </td>
-                <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                    <center class="hidden-xs hidden-sm">
-                        <button class='btn btn-last btn-lg sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
-                    </center>
-                    <center class="hidden-md hidden-lg">
-                        <button class='btn btn-last btn-md sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;">Select</button>
-                    </center>
-                </td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Money Back Guarantee</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Money Back Guarantee</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;">Money Back Guarantee</td>
             </tr>
         </table>
         <div id="bottom" style="padding-bottom:300px;display:none;">
