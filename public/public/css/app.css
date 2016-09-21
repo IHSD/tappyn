@@ -3004,6 +3004,16 @@ footer {
     }
 }
 
+.mob-pad {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+@media screen and (max-width: 550px) {
+    .pad-pad {
+        padding-bottom: 100px;
+    }
+}
+
 @media screen and (max-width: 550px) {
     .hero-banner2 {
         height: 500px;

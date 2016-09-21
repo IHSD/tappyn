@@ -100,32 +100,33 @@
 <div class='container'>
     <div ng-show='current.step == "tp-prior"' id='tp-prior' class="col-xs-12" style="padding-bottom:200px;">
         <div class="row" style="padding-top:40px;">
-            <label class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Objective
+            <label uib-tooltip="Select the goal of the message you're looking for." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Objective
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
             </label>
             <div class="col-sm-10">
                 <div uib-tooltip="Use Meet to introduce people to your brand and have them remember your style." ng-class='{"package-highlight" : contest.objective == "Meet"}' class='launch-page-btn' ng-click='select_objective("Meet")'>
                         <span class="glyphicon glyphicon-search" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
                         <h4 style="cursor:default;">Meet</h4>
-                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:6px;left:5px;color: #8e8e8e;"></span>
                     <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>-->
                 </div>
                 <div uib-tooltip="Use Engage to boost likes and shares of your brand." ng-class='{"package-highlight" : contest.objective == "Engage"}' class='launch-page-btn' ng-click='select_objective("Engage")'>
                     <span class="glyphicon glyphicon-globe" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
                     <h4 style="cursor:default;">Engage</h4>
-                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:6px;left:5px;color: #8e8e8e;"></span>
                     <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Click Through Rate)</p>-->
                 </div>
                 <div uib-tooltip="Use Close to drive valuable actions on your site." ng-class='{"package-highlight" : contest.objective == "Close"}' class='launch-page-btn' ng-click='select_objective("Close")' style="cursor:default;">
                     <span class="glyphicon glyphicon-comment" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
                     <h4 style="cursor:default;">Close</h4>
-                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;">
+                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:6px;left:5px;color: #8e8e8e;">
                     <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:10px;">(Views)</p>-->
                 </div>
             </div>
         </div>
         <div class="row" style="display:none;">
             <label uib-tooltip="Select the media platform where your story will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
-                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
             </label>
             <div class="col-sm-10">
                 <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
@@ -144,14 +145,14 @@
         </div>
         <div class="row">
             <label uib-tooltip="Define who you'd like to create your messaging and who you want to show them to." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
-                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
             </label>
             <div class="col-sm-10">
                 <form class="form-inline ng-pristine ng-valid" role="form">
-                    <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left:0;padding-right:0;">
+                    <div class="form-group col-xs-12 col-sm-6 col-md-4" style="padding-left:0;padding-right:0;">
                         <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                         <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-                        <div class='btn-group-sm' data-toggle="buttons" ng-init='contest.gender = 0'>
+                        <div class='btn-group-md' data-toggle="buttons" ng-init='contest.gender = 0'>
                             <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
                                 <input type='radio' ng-model='contest.gender' value='0'> All Genders
                             </label>
@@ -178,15 +179,15 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group col-xs-12 col-sm-6 col-md-3" style="padding-left: 0;">
+                    <div class="form-group col-xs-12 col-sm-6 col-md-2">
                         <label class='text-left target-label' style="padding-top:0px;">Interest</label>
                         <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
                         <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                             <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                         </select>
                     </div>
-                    <div class='form-group col-xs-12 col-sm-6 col-md-3'>
-                        <label class='text-left target-label' style="padding-top:1px;">Locations</label>
+                    <div class='form-group col-xs-12 col-sm-6 col-md-2'>
+                        <label class='text-left target-label' style="padding-top:0px;">Locations</label>
                         <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
                         <select ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
                             <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
@@ -207,48 +208,57 @@
             </div>
             <div ng-show="showOptions">
                 <label uib-tooltip="Based on the style you pick, our creators will know what to explore." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Style
-                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:-10px;"></span>
+                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
                 </label>
                 <div class="col-sm-10">
-                    <div ng-class='{"package-highlight" : contest.style == "Authoritative"}' class='launch-page-btn' ng-click='select_style("Authoritative")'>
-                        <!--<img src="https://s3-us-west-2.amazonaws.com/tappyn/NYT.jpg" width="20px" height="20px">-->
-                        <h4 class='text-center' style="cursor:default;">Authoritative</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Authoritative"}' class='launch-page-btn text-center' ng-click='select_style("Authoritative")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/NYT.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Authoritative</h4>
                     </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Informed"}' class='launch-page-btn' ng-click='select_style("Informed")'>
-                        <!--<img src="https://s3-us-west-2.amazonaws.com/tappyn/eco.jpg" width="20px" height="20px">-->
-                        <h4 class='text-center' style="cursor:default;">Informed</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Informed"}' class='launch-page-btn text-center' ng-click='select_style("Informed")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/eco.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Informed</h4>
                     </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Instructional"}' class='launch-page-btn' ng-click='select_style("Instructional")'>
-                        <!--<img src="public/img/ico-insta.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Instructional</h4>
-                    </div>
-                </div>
-                <div class="col-sm-10 col-sm-offset-2">
-                    <div ng-class='{"package-highlight" : contest.style == "Advice"}' class='launch-page-btn' ng-click='select_style("Advice")'>
-                        <!--<img src="public/img/ico-facebook.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Advice</h4>
-                    </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Viral"}' class='launch-page-btn' ng-click='select_style("Viral")'>
-                        <!--<img src="public/img/ico-twitter.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Viral</h4>
-                    </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Catchy"}' class='launch-page-btn' ng-click='select_style("Catchy")'>
-                        <!--<img src="public/img/ico-insta.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Catchy</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Instructional"}' class='launch-page-btn text-center' ng-click='select_style("Instructional")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/MH.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Instructional</h4>
                     </div>
                 </div>
                 <div class="col-sm-10 col-sm-offset-2">
-                    <div ng-class='{"package-highlight" : contest.style == "Casual"}' class='launch-page-btn' ng-click='select_style("Casual")'>
-                        <!--<img src="public/img/ico-facebook.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Casual</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Advice"}' class='launch-page-btn text-center' ng-click='select_style("Advice")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Cosmo.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Advice</h4>
                     </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Conversational"}' class='launch-page-btn' ng-click='select_style("Conversational")'>
-                        <!--<img src="public/img/ico-twitter.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Conversational</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Viral"}' class='launch-page-btn text-center' ng-click='select_style("Viral")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Buzz.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Viral</h4>
                     </div>
-                    <div ng-class='{"package-highlight" : contest.style == "Humorous"}' class='launch-page-btn' ng-click='select_style("Humorous")'>
-                        <!--<img src="public/img/ico-insta.svg">-->
-                        <h4 class='text-center' style="cursor:default;">Humorous</h4>
+                    <div ng-class='{"package-highlight" : contest.style == "Catchy"}' class='launch-page-btn text-center' ng-click='select_style("Catchy")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/chub.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Catchy</h4>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-sm-offset-2">
+                    <div ng-class='{"package-highlight" : contest.style == "Casual"}' class='launch-page-btn text-center' ng-click='select_style("Casual")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/People.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Casual</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Conversational"}' class='launch-page-btn text-center' ng-click='select_style("Conversational")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Face.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Conversational</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Humorous"}' class='launch-page-btn text-center' ng-click='select_style("Humorous")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/DSC.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Humorous</h4>
                     </div>
                 </div>
             </div>
