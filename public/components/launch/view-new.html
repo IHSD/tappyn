@@ -40,7 +40,7 @@
         </div>
         <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
-                <h2 style="font-weight:400;font-size:48px;">Your brand profile.</h2>
+                <h2 style="font-weight:400;font-size:48px;">Your brief.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
         </div>
@@ -226,8 +226,6 @@
                         <br>
                         <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Instructional</h4>
                     </div>
-                </div>
-                <div class="col-sm-10 col-sm-offset-2">
                     <div ng-class='{"package-highlight" : contest.style == "Advice"}' class='launch-page-btn text-center' ng-click='select_style("Advice")'>
                         <img src="https://s3-us-west-2.amazonaws.com/tappyn/Cosmo.jpg" style="max-height:30px;float:none;margin-right:0px;">
                         <br>
@@ -243,8 +241,6 @@
                         <br>
                         <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Catchy</h4>
                     </div>
-                </div>
-                <div class="col-sm-10 col-sm-offset-2">
                     <div ng-class='{"package-highlight" : contest.style == "Casual"}' class='launch-page-btn text-center' ng-click='select_style("Casual")'>
                         <img src="https://s3-us-west-2.amazonaws.com/tappyn/People.jpg" style="max-height:30px;float:none;margin-right:0px;">
                         <br>
@@ -272,13 +268,13 @@
             <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
             <div class="col-sm-9">
                 <div class="form-group">
-                    <h4>Summary of product or service</h4>
+                    <h4 style="font-weight:400;">Summary of product or service</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                 </div>
                 <div class="form-group">
-                    <h4>Describe what makes you different (and better) than your competition.</h4>
+                    <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messaging.</p>
@@ -289,46 +285,47 @@
             <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
             <div class="col-sm-9">
                 <div class="form-group">
-                    <h4>Company Name</h4>
-                    <input class='form-control' ng-model='contest.name' placeholder='Company Name' type='text' style="max-width:50%;">
+                    <h4 style="font-weight:400;">Company Name</h4>
+                    <input class='form-control' ng-model='contest.name' placeholder="What name would you like in your message?" type='text' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h4>Company Logo</h4>
-                    <input ng-file-select='select_logo($files, contest)' type='file' required>
-                </div>
-                <div class='form-group'>
-                    <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
-                </div>
-                <div class="form-group">
-                    <h4>Company Website</h4>
+                    <h4 style="font-weight:400;">Company Website</h4>
                     <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h4>Summary of product or service</h4>
+                    <h4 style="font-weight:400;">Describe what your organization or product does.</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
                 </div>
                 <div class="form-group">
-                    <h4>Describe what makes you different (and better) than your competition.</h4>
+                    <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
                     <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
                     <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
                     <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messages.</p>
                 </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Company Logo</h4>
+                    <input ng-file-select='select_logo($files, contest)' type='file' required>
+                </div>
+                <div class='form-group'>
+                    <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
+                </div>
             </div>
         </div>
+        <hr style="color:#ccc;">
         <div class="row" style="padding-bottom:200px;" ng-show="!user">
             <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Account</label>
             <div class="col-sm-9">
                 <div class="form-group">
                     <!--<a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>-->
                     <!--<h4><strong>Create New Business Account</strong></h4>-->
-                    <h4>Company Email</h4>
-                    <input class='form-control' ng-model='contest.identity' placeholder='Company Email' type='email' style="max-width:50%;">
+                    <h4 style="font-weight:400;">Company Email</h4>
+                    <input class='form-control' ng-model='contest.identity' placeholder="Enter your e-mail so we can save your campaign." type='email' style="max-width:50%;">
                 </div>
                 <div class="form-group">
-                    <h4>Password</h4>
-                    <input class='form-control' ng-model='contest.password' placeholder='Password' type='password' style="max-width:50%;">
+                    <h4 style="font-weight:400;">Password</h4>
+                    <input class='form-control' ng-model='contest.password' type='password' style="max-width:50%;">
                 </div>
             </div>
         </div>
@@ -480,21 +477,21 @@
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
                 <span uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on what they would respond to." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
                 </td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 Messages</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 Messages And Images</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages and images</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 Messages, Images, and Videos</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages, images, and videos</td>
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
                 <span uib-tooltip="Every package includes the ability to target our creator base to source messages from specific demographics." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
                 </td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Basic Creator Targeting</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Basic creator targeting</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Deeper Creative Targeting</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Deeper creator targeting</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expert Creative Targeting</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expert creator targeting</td>
             </tr>
             <tr>
 
@@ -503,19 +500,19 @@
                 </td>
                 <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Testing</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Larger Testing</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Larger testing</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Machine Learning Testing</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Machine learning testing</td>
             </tr>
             <tr>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
                 <span uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
                 </td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money Back Guarantee</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money Back Guarantee</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
                 <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money Back Guarantee</td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
             </tr>
             <tr>
                 <td class="text-center" style="background:#EBEEF0;"></td>
@@ -590,16 +587,16 @@
     <div class="container">
         <div class='row'>
             <div ng-show='current.step == "tp-prior"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')" style="padding-left:50px;padding-right:50px;">Continue</button>
             </div>
             <div ng-show='current.step == "detail"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")'>Save & Continue</button>
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")' style="margin-top:25px;">Save & Continue</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")' style="margin-top:25px;">Back</button>
                 <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
             </div>
             <div ng-show='current.step == "chose-plan"'>
-                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")'>Continue</button>
-                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")'>Back</button>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")' style="margin-top:25px;">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")' style="margin-top:25px;">Back</button>
             </div>
             <div ng-show='current.step == "preview"'>
                 <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Launch</button>
@@ -625,9 +622,12 @@
             </div>
             <div class='text-left' ng-show='current.step == "detail"'>
                 <h4 class='text-left' style='color:#333'>
-                      <span class='glyphicon glyphicon-ok circle-it-oj'></span>
-                        <span style='font-weight:300;font-size:22px;position:relative;top:10px;'>
-                                  You'll only have to do this once.
+                    <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
+                      <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
+                        <span style='font-weight:bold;font-size:22px;position:relative;'>
+                              100% Money Back Guarantee
+                              <br>
+                              <span style="font-size:14px;padding-left:260px;top:-15px;position:relative;">A message you love or your money back</span>
                             </span>
                 </h4>
             </div>
@@ -783,7 +783,7 @@ hr {
 
 .control-label {
     font-weight: 400;
-    font-size: 20px;
+    font-size: 24px;
     text-align: right !important;
 }
 
