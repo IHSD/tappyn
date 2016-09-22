@@ -47,7 +47,11 @@
         <img ng-src='{{submission.avatar_url}}' src='public/img/avatar.png' alt=''>
     </div>
     <h5 class='winner-name'> {{submission.owner.first_name}} {{submission.owner.last_name | firstChar}}.</h5>
-    <span class="contest-ctr" style="border:2px solid #019f6e;border-radius:50%;height:50px;width:50px;"><span style="position:relative;left:13px;color:#019f6e;">{{($index+1)}}</span></span>
+    <div uib-tooltip="Relevance Score: A rating of 1 to 30 based on how this audience is responding to this message." style="margin-left:330px;margin-top:-130px;cursor:help;">
+    <span class="contest-ctr" style="border:2px solid #019f6e;border-radius:50%;height:50px;width:50px;">
+        <span style="position:relative;left:13px;color:#019f6e;">{{($index+1)}}</span>
+    </span>
+</div>
 </div>
 <div class='text-center contest-winner-select' ng-show="winner_contest.status == 'pending_selection' || winner_contest.status == 'pending_testing'">
     <div class="checkbox-container">

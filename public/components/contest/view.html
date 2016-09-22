@@ -62,7 +62,9 @@
                         </span>
                     </p>
                     <h3 style='margin-bottom: 0;'>Our Objective</h3>
-                    <p>{{contest.objective}}</p>
+                    <p ng-if="contest.objective == 'Engage'">This business would like to create a message with the goal of getting people to like or share their content. The key here is make something fun that you want your friends to know about.</p>
+                    <p ng-if="contest.objective == 'Meet'">This business would like to create a message with the goal of getting people to remember their brand. The key here is to make something distinct and memorable.</p>
+                    <p ng-if="contest.objective == 'Close'">This business would like to create a message with the goal of getting people to use their product. The key here is to make something that personally speaks to the problem they are trying to solve.</p>
                 </div>
                 <div ng-show="contest.style" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
                     <!--<h3 style='margin-bottom: 0;'>Be Sure To...</h3>
@@ -148,7 +150,7 @@
                             <div class='input-count'><span ng-if='!submit.headline'>0</span><span ng-if='submit.headline'>{{submit.headline.length}}</span> of {{form_limit.headline.limit}} characters</div>
                         </div>
                         <div ng-show='form_limit.text' class='form-group'>
-                            <h4 class='control-label'><strong>Description</strong></h4>
+                            <h4 class='control-label'><strong>Summary</strong></h4>
                             <textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
                             <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
                         </div>
@@ -253,7 +255,7 @@
                 <div class='contest-entry text-left' ng-show='form_limit.line_1 || form_limit.card_title'>
                     <h3 ng-if='submit.headline.length == 0 && form_limit.card_title'>Headline Benefit will be shown here.</h3>
                     <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
-                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your Description will be shown here</h4>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.line_1'>Your Summary will be shown here</h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.link_explanation}}<br></h4>
                     <div class='contest-upvotes disable-click'>
                         <span class='glyphicon glyphicon-heart'></span> 0
@@ -262,7 +264,7 @@
                 <div class='contest-entry text-left' ng-show='form_limit.text || form_limit.line_2'>
                     <h3 ng-if='submit.headline.length == 0 && form_limit.headline'>Headline Benefit will be shown here.</h3>
                     <h3 ng-if='submit.headline.length > 0'>{{submit.headline}}</h3>
-                    <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your Description will be shown here<br></h4>
+                    <h4 ng-if='submit.text.length == 0 && form_limit.text'>Your Summary will be shown here<br></h4>
                     <h4 ng-if='submit.text.length > 0'>{{submit.text}}</h4>
                     <div class='contest-upvotes disable-click'>
                         <span class='glyphicon glyphicon-heart'></span> 12
