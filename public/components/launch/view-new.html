@@ -149,10 +149,10 @@
                     </label>
                     <div class="col-sm-10">
                         <form class="form-inline ng-pristine ng-valid" role="form">
-                            <div class="form-group col-xs-12 col-sm-6 col-md-4" style="padding-left:0;padding-right:0;">
+                            <div class="form-group col-xs-12 col-sm-6" style="padding-left:0;padding-right:0;">
                                 <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
                                 <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-                                <div class='btn-group-md' data-toggle="buttons" ng-init='contest.gender = 0'>
+                                <div class='btn-group-lg' data-toggle="buttons" ng-init='contest.gender = 0'>
                                     <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
                                         <input type='radio' ng-model='contest.gender' value='0'> All Genders
                                     </label>
@@ -164,29 +164,29 @@
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
+                            <div class="form-group col-xs-12 col-sm-6">
                                 <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-xs-12 target-label' style="padding-top:0px;">Age</label>
                                 <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
                                 <div class='pull-left'>
-                                    <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
+                                    <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text' style="height:48px;">
                                         <option value=''>Min Age</option>
                                     </select>
                                 </div>
                                 <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
                                 <div class='pull-left'>
-                                    <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
+                                    <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text' style="height:48px;">
                                         <option value=''>Max Age</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
+                            <div class="form-group col-xs-12 col-sm-3" style="padding-left:0px;padding-top:25px;">
                                 <label class='text-left target-label' style="padding-top:0px;">Interest</label>
                                 <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
                                 <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
                                     <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
                                 </select>
                             </div>
-                            <div class='form-group col-xs-12 col-sm-6 col-md-2'>
+                            <div class='form-group col-xs-12 col-sm-3 col-sm-offset-3' style="padding-top:25px;">
                                 <label class='text-left target-label' style="padding-top:0px;">Locations</label>
                                 <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
                                 <select ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
@@ -632,17 +632,17 @@
     .btn:focus {
         color: #019F6E;
     }
-    
+
     .target-label {
         font-size: 16px;
         font-weight: 400;
     }
-    
+
     .payment .form-control {
         margin: 0;
         border-radius: 0;
     }
-    
+
     li.value-list:before {
         content: "\e067";
         font-family: 'Glyphicons Halflings';
@@ -651,62 +651,62 @@
         margin-top: 4px;
         margin-left: -17px
     }
-    
+
     .table>tbody>tr>td {
         padding: 5px !important;
         border-top: none;
     }
-    
+
     .table>thead>tr>td {
         border-top: none;
     }
-    
+
     .payment-method-container {
         padding-top: 20px;
         padding-bottom: 20px;
         padding-left: 0px;
         padding-right: 0px;
     }
-    
+
     .payment-method-card {
         padding: 10px;
     }
-    
+
     .default_method {
         border: 1px solid #00aaff;
         border-radius: 5px;
     }
-    
+
     .payment-method-card:hover {
         background-color: #f2f2f2;
     }
-    
+
     .btn-sel {
         background: #fff;
         color: #019F6E;
         border: 1px solid #019F6E
     }
-    
+
     .btn-sel:hover {
         color: #019F6E;
     }
-    
+
     .btn-sel:focus {
         color: #019F6E !important;
     }
-    
+
     .payment-method-actions {
         margin: auto;
         position: absolute;
         right: 20px;
         top: 50%;
     }
-    
+
     hr {
         margin-top: 5px;
         margin-bottom: 5px;
     }
-    
+
     .inputfile {
         width: 0.1px;
         height: 0.1px;
@@ -715,7 +715,7 @@
         position: absolute;
         z-index: -1;
     }
-    
+
     .inputfile+ label {
         font-size: 1.25em;
         font-weight: 500;
@@ -727,11 +727,11 @@
         border-radius: 5px;
         border: 1px solid transparent;
     }
-    
+
     .inputfile+ label:hover {
         background-color: red;
     }
-    
+
     .circle-it-oj {
         padding: 10px;
         border: solid 1px #019F6E;
@@ -741,55 +741,55 @@
         float: left;
         margin-right: 20px;
     }
-    
+
     .control-label {
         font-weight: 400;
         font-size: 24px;
         text-align: right !important;
     }
-    
+
     .radio label {
         cursor: auto;
     }
-    
+
     .row-preview1 {
         margin-bottom: -40px;
     }
-    
+
     .row-preview2 {
         margin-bottom: -40px;
         margin-top: -40px;
     }
-    
+
     .addthis_toolbox {
         margin-top: 40px;
     }
-    
+
     .addthis_button_facebook .at-icon-wrapper,
     .addthis_button_email .at-icon-wrapper {
         display: none;
     }
-    
+
     .addthis_button_facebook {
         background-color: #3b5998;
         color: white;
         padding: 10px 30px;
         font-size: 18px;
     }
-    
+
     .addthis_button_facebook:hover,
     .addthis_button_email:hover {
         color: white;
         text-decoration: none;
     }
-    
+
     .addthis_button_email {
         background-color: #848484;
         color: white;
         padding: 10px 30px;
         font-size: 18px;
     }
-    
+
     .addthis_button_facebook,
     .addthis_button_email {
         margin: 0 10px;
