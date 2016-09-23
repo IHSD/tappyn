@@ -1,5 +1,7 @@
 <div class="contest-image" ng-init="submission.headline_editor = 0">
+    <span uib-tooltip="Image Direction">
     <img ng-src='{{submission.attachment}}'>
+    </span>
 </div>
 <div class='contest-company text-left'>
     <span class='company-name'>from {{user.first_name}}</span>
@@ -7,7 +9,7 @@
 <div class='contest-entry text-left'>
     <div ng-show="submission.headline">
         <div ng-hide="submission.headline_editor">
-            <h3 style="display:inline;">{{submission.headline}}</h3>
+            <h3 uib-tooltip="Primary Goal" style="display:inline;cursor:default;">{{submission.headline}}</h3>
             <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_headline_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
         </div>
         <div ng-show="submission.headline_editor">
@@ -18,7 +20,7 @@
     </div>
     <div ng-show="submission.link_explanation">
         <div ng-hide="submission.link_editor">
-            <h4 style="display:inline;">{{submission.link_explanation}}<br></h4>
+            <h4 uib-tooltip="Primary Message" style="display:inline;cursor:default;">{{submission.link_explanation}}<br></h4>
             <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_link_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
         </div>
         <div ng-show="submission.link_editor">
