@@ -13,7 +13,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         // $scope.current = $scope.steps['tp-platform'];
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
-    $scope.contest = { chosen_creative: false, plan: 'basic' };
+    $scope.contest = { chosen_creative: false, plan: 'basic',style:[] };
     $scope.plan_name = 'premium';
     $scope.company = {};
     $scope.save_method = false;
@@ -25,6 +25,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     $scope.new_img = false;
     $scope.more_action = '';
     $scope.chosen_sub = '0';
+    $scope.contest_styles = tappyn_var.get('contest_styles');
 
     $scope.platform_image_settings = tappyn_var.get('platform_image_settings');
 
@@ -200,7 +201,19 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     }
 
     $scope.select_style = function(style) {
-        $scope.contest.style = style;
+        $scope.contest.style = ($scope.contest.style) ? $scope.contest.style : [];
+
+        if($.inArray( style.name,$scope.contest.style) > -1){
+            $scope.contest.style.splice( $.inArray(style.name,$scope.contest.style), 1 );
+        }
+        else{
+            if($scope.contest.style.length >=3){
+                $scope.set_alert("Style up to 3", "error");
+            }
+            else{
+                $scope.contest.style.push(style.name);
+            }
+        }
     }
 
     $scope.select_platform = function(platform) {

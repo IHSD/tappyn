@@ -134,6 +134,18 @@ tappyn.factory('tappyn_var', function() {
         'results': 'Total Clicks: The total number of clicks on your ad. This may include offsite clicks to your website, Page likes, post comments, event responses or app installs.'
     };
 
+    items.contest_styles = [
+        { name: 'Authoritative', img: 'NYT' },
+        { name: 'Informed', img: 'eco' },
+        { name: 'Instructional', img: 'MH' },
+        { name: 'Advice', img: 'Cosmo' },
+        { name: 'Viral', img: 'Buzz' },
+        { name: 'Catchy', img: 'chub' },
+        { name: 'Casual', img: 'People' },
+        { name: 'Conversational', img: 'Face' },
+        { name: 'Humorous', img: 'DSC' },
+    ];
+
     itemsService.get = function(name) {
         if (items[name]) {
             return items[name];
