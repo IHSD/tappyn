@@ -218,6 +218,7 @@ class Contests extends CI_Controller
         $platform       = $this->input->post('platform');
         $use_attachment = 0;
         $attachment_url = '';
+        $others         = [];
         if ($this->input->post('photo')) {
 
             $filename = hash('sha256', uniqid());
@@ -261,7 +262,8 @@ class Contests extends CI_Controller
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
-            $prize = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
+            $prize           = ($use_attachment) ? $this->config->item('default_payout_per_contest') : $this->config->item('photo_payout_per_contest');
+            $others['style'] = is_array($this->input->post('style')) ? $this->input->post('style') : [];
 
             // Do some preliminary formatting
             $data = array(
@@ -288,6 +290,7 @@ class Contests extends CI_Controller
                 'display_type'        => $this->input->post('display_type'),
                 'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
                 'prize'               => $prize,
+                'others'              => serialize($others),
             );
 
             $images = array();
@@ -459,6 +462,7 @@ class Contests extends CI_Controller
         $platform       = $contest->platform;
         $attachment_url = $contest->attachment;
         $use_attachment = ($this->input->post('photo') == 'use_attachment') ? 1 : 0;
+        $others         = [];
         if ($this->input->post('photo') && $use_attachment == 0) {
 
             $filename = hash('sha256', uniqid());
@@ -490,6 +494,7 @@ class Contests extends CI_Controller
             if (is_array($tone_of_voice_box)) {
                 $tone_of_voice_box = implode(',', $tone_of_voice_box);
             }
+            $others['style'] = is_array($this->input->post('style')) ? $this->input->post('style') : [];
 
             // Do some preliminary formatting
             $data = array(
@@ -511,6 +516,7 @@ class Contests extends CI_Controller
                 'emotion'             => $this->input->post('emotion'),
                 'display_type'        => $this->input->post('display_type'),
                 'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
+                'others'              => serialize($others),
             );
 
             if ($this->contest->get_status($contest) == 'draft') {

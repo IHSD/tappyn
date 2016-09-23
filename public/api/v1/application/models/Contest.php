@@ -51,6 +51,9 @@ class Contest extends MY_Model
             $contest->location          = explode(',', $contest->location);
             $contest->industry          = explode(',', $contest->industry);
             $contest->tone_of_voice_box = explode(',', $contest->tone_of_voice_box);
+            $contest->others            = unserialize($contest->others);
+            $contest->others            = ($contest->others) ? $contest->others : [];
+            $contest->style             = isset($contest->others['style']) ? $contest->others['style'] : [];
             return $contest;
         }
         return false;

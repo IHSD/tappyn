@@ -154,6 +154,11 @@
                             <textarea class='form-control' maxlength="{{form_limit.text.limit}}" ng-model='submit.text' rows='3' placeholder='{{form_limit.text.placeholder}}'></textarea>
                             <div class='input-count'><span ng-if='!submit.text'>0</span><span ng-if='submit.text'>{{submit.text.length}}</span> of {{form_limit.text.limit}} characters</div>
                         </div>
+                        <div ng-show='form_limit.obstacle' class='form-group'>
+                            <h4 class='control-label'><strong>Obstacle</strong></h4>
+                            <textarea class='form-control' maxlength="{{form_limit.obstacle.limit}}" ng-model='submit.obstacle' rows='3' placeholder='{{form_limit.obstacle.placeholder}}'></textarea>
+                            <div class='input-count'><span ng-if='!submit.obstacle'>0</span><span ng-if='submit.obstacle'>{{submit.obstacle.length}}</span> of {{form_limit.obstacle.limit}} characters</div>
+                        </div>
                         <div ng-show='form_limit.line_1' class='form-group'>
                             <label class='control-label'>Line One</label>
                             <input class='form-control' maxlength="{{form_limit.line_1.limit}}" ng-model='submit.link_explanation' placeholder='{{form_limit.line_1.placeholder}}' type='text'>

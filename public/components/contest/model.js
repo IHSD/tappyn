@@ -10,21 +10,38 @@ tappyn.service("contestModel", function() {
         var layout = {};
         if (contest.platform == "facebook") {
             layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
+            layout.obstacle = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
             //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website")
             layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
         } else if (contest.platform == "twitter") {
-            if (contest.display_type == 'with_photo') layout.text = { limit: 116, placeholder: 'How would you describe this business to your friends?' };
-            else layout.text = { limit: 140, placeholder: 'How would you describe this business to your friends?' };
-            if (contest.objective == "site_clicks_conversions") layout.card_title = { limit: 70, placeholder: 'How would you describe this business to your friends?' }
+            if (contest.display_type == 'with_photo') {
+                layout.text = { limit: 116, placeholder: 'How would you describe this business to your friends?' };
+                layout.obstacle = { limit: 116, placeholder: 'How would you describe this business to your friends?' };
+            } else {
+                layout.text = { limit: 140, placeholder: 'How would you describe this business to your friends?' };
+                layout.obstacle = { limit: 140, placeholder: 'How would you describe this business to your friends?' };
+            }
+
+            if (contest.objective == "site_clicks_conversions") {
+                layout.card_title = { limit: 70, placeholder: 'How would you describe this business to your friends?' }
+            }
         } else if (contest.platform == "google") {
             layout.headline = { limit: 25, placeholder: "What is the primary goal this audience is after?" };
             layout.line_1 = { limit: 35, placeholder: 'How would you describe this business to your friends?' };
             layout.line_2 = { limit: 35, placeholder: 'How would you describe this business to your friends?' };
-        } else if (contest.platform == "general") layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
-        else if (contest.platform == "instagram") layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
+        } else if (contest.platform == "general") {
+            layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
+        } else if (contest.platform == "instagram") {
+            layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
+            layout.obstacle = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
+        }
 
-        if (contest.use_attachment == 1) layout.photo = false;
-        else if (contest.display_type == "with_photo") layout.photo = true;
+
+        if (contest.use_attachment == 1) {
+            layout.photo = false;
+        } else if (contest.display_type == "with_photo") {
+            layout.photo = true;
+        }
         return layout;
     }
 
