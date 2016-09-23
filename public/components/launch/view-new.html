@@ -105,9 +105,9 @@
             </label>
             <div class="col-sm-10">
                 <div uib-tooltip="Use Meet to introduce people to your brand and have them remember your style." ng-class='{"package-highlight" : contest.objective == "Meet"}' class='launch-page-btn' ng-click='select_objective("Meet")'>
-                    <span class="glyphicon glyphicon-search" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
-                    <h4 style="cursor:default;">Meet</h4>
-                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:6px;left:5px;color: #8e8e8e;"></span>
+                        <span class="glyphicon glyphicon-search" style="font-size: 20px;float:left;margin-right:10px;color: #8E8E8E;"></span>
+                        <h4 style="cursor:default;">Meet</h4>
+                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:6px;left:5px;color: #8e8e8e;"></span>
                     <!--<p class="text-center" style="float:none;margin:0px;font-weight:200;position:relative;left:15px;">(Cost Per Click)</p>-->
                 </div>
                 <div uib-tooltip="Use Engage to boost likes and shares of your brand." ng-class='{"package-highlight" : contest.objective == "Engage"}' class='launch-page-btn' ng-click='select_objective("Engage")'>
@@ -127,11 +127,19 @@
         <div class="row" style="display:none;">
             <label uib-tooltip="Select the media platform where your story will be shown. This also determines the format." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Platform
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
-                    </label>
-                    <div class="col-sm-10">
-                        <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
-                            <img src="public/img/ico-facebook.svg">
-                            <h4 class='text-center' style="cursor:default;">Facebook</h4>
+            </label>
+            <div class="col-sm-10">
+                <div ng-class='{"package-highlight" : contest.platform == "facebook"}' class='launch-page-btn' ng-click='select_platform("facebook")'>
+                    <img src="public/img/ico-facebook.svg">
+                    <h4 class='text-center' style="cursor:default;">Facebook</h4>
+                </div>
+                <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-btn' ng-click='select_platform("twitter")'>
+                    <img src="public/img/ico-twitter.svg">
+                    <h4 class='text-center' style="cursor:default;">Twitter</h4>
+                </div>
+                <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-btn' ng-click='select_platform("instagram")'>
+                    <img src="public/img/ico-insta.svg">
+                    <h4 class='text-center' style="cursor:default;">Instagram</h4>
                 </div>
             </div>
         </div>
@@ -155,460 +163,465 @@
                                 <input type='radio' ng-model='contest.gender' value='2'> Women
                             </label>
                         </div>
-                        <div ng-class='{"package-highlight" : contest.platform == "twitter"}' class='launch-page-btn' ng-click='select_platform("twitter")'>
+                    </div>
                     <div class="form-group col-xs-12 col-sm-6">
                         <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-xs-12 target-label' style="padding-top:0px;">Age</label>
-                            <img src="public/img/ico-twitter.svg">
+                        <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
+                        <div class='pull-left'>
                             <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text' style="height:48px;">
+                                <option value=''>Min Age</option>
+                            </select>
                         </div>
-                        <div ng-class='{"package-highlight" : contest.platform == "instagram"}' class='launch-page-btn' ng-click='select_platform("instagram")'>
+                        <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
                         <div class='pull-left'>
                             <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text' style="height:48px;";>
-                            <img src="public/img/ico-insta.svg">
-                            <h4 class='text-center' style="cursor:default;">Instagram</h4>
+                                <option value=''>Max Age</option>
+                            </select>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <label uib-tooltip="Define who you'd like to create your messaging and who you plan on showing it to." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
-                        <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
-                    </label>
-                    <div class="col-sm-10">
-                        <form class="form-inline ng-pristine ng-valid" role="form">
                     <div class="form-group col-xs-12 col-sm-3" style="padding-left:0px;padding-top:25px;">
-                                <label ng-init='contest.gender = 0' class='text-left target-label'>Gender</label>
-                                <!--<h4><strong>Choose "All" unless you only want your campaign to be shown to a specific gender</strong></h4>-->
-                                <div class='btn-group-md' data-toggle="buttons" ng-init='contest.gender = 0'>
-                                    <label class="btn" ng-click="contest.gender = 0" ng-class='{"btn-jj" : contest.gender == 0, "btn-jh" : contest.gender != 0}' style="cursor:default;">
-                                        <input type='radio' ng-model='contest.gender' value='0'> All Genders
-                                    </label>
-                                    <label class="btn" ng-click="contest.gender = 1" ng-class='{"btn-jj" : contest.gender == 1, "btn-jh" : contest.gender != 1}' style="cursor:default;">
-                                        <input type='radio' ng-model='contest.gender' value='1'> Men
-                                    </label>
-                                    <label class="btn" ng-click="contest.gender = 2" ng-class='{"btn-jj" : contest.gender == 2, "btn-jh" : contest.gender != 2}' style="cursor:default;">
-                                        <input type='radio' ng-model='contest.gender' value='2'> Women
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-3">
-                                <label ng-init='contest.min_age=18;contest.max_age=45' class='text-left col-xs-12 target-label' style="padding-top:0px;">Age</label>
-                                <!--<h4><strong>Select the minimum and maximum age of the people who will find your campaign relevant</strong></h4>-->
-                                <div class='pull-left'>
-                                    <select class='form-control' ng-model='contest.min_age' ng-options='number as number for number in ages' type='text'>
-                                        <option value=''>Min Age</option>
-                                    </select>
-                                </div>
-                                <h4 class='text-center pull-left' style='padding: 0 10px;'> - </h4>
-                                <div class='pull-left'>
-                                    <select class='form-control' ng-model='contest.max_age' ng-options='number as number for number in ages' type='text'>
-                                        <option value=''>Max Age</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-xs-12 col-sm-6 col-md-2">
-                                <label class='text-left target-label' style="padding-top:0px;">Interest</label>
-                                <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
-                                <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
-                                    <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
-                                </select>
-                            </div>
-                            <div class='form-group col-xs-12 col-sm-6 col-md-2'>
-                                <label class='text-left target-label' style="padding-top:0px;">Locations</label>
-                                <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
-                                <select ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
-                                    <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
-                                </select>
-                            </div>
-                        </form>
+                        <label class='text-left target-label' style="padding-top:0px;">Interest</label>
+                        <!--<h4 style="font-size:14px;"><strong>Define your audience by including interests</strong></h4>-->
+                        <select class='form-control interest-selection-launch-view bind-select2' ng-model='contest.industry' multiple="multiple" style='width: 100%;'>
+                            <option ng-repeat="(_key,_value) in industries" ng-value="_key">{{_value}}</option>
+                        </select>
                     </div>
-                </div>
-                <!--<div class="row">
+                    <div class='form-group col-xs-12 col-sm-3 col-sm-offset-3' style="padding-top:25px;">
+                        <label class='text-left target-label' style="padding-top:0px;">Locations</label>
+                        <!--<h4 style="font-size:14px;"><strong>Enter one or more states to show your campaign to people in those locations</strong></h4>-->
+                        <select ng-init="contest.location = locations[0]" ng-model="contest.location" class='form-control location-selection-launch-view bind-select2' multiple="multiple" style="width:100%;">
+                            <option ng-repeat="(_key,_value) in locations" ng-value="_key">{{_value}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--<div class="row">
             <div class="col-xs-12 col-sm-10 col-sm-offset-2">
                 <p style="font-size:12px;"><small>Learn about campaign priorities <a href="/priority" style="cursor:pointer;" target="_blank">here</a>.</small></p>
             </div>
         </div>-->
-                <div class='row' style="padding-top:40px;">
-                    <div style="padding-bottom:20px;padding-left:10px;">
-                        <button class="btn-md btn btn-secondary" ng-click="showOptions = !showOptions">More Options</button>
+        <div class='row' style="padding-top:40px;">
+            <div style="padding-bottom:20px;padding-left:10px;">
+                <button class="btn-md btn btn-secondary" ng-click="showOptions = !showOptions">More Options</button>
+            </div>
+            <div ng-show="showOptions">
+                <label uib-tooltip="Based on the style you pick, our creators will know what to explore." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Style
+                    <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
+                </label>
+                <div class="col-sm-10">
+                    <div ng-class='{"package-highlight" : contest.style == "Authoritative"}' class='launch-page-btn text-center' ng-click='select_style("Authoritative")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/NYT.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Authoritative</h4>
                     </div>
-                    <div ng-show="showOptions">
-                        <label uib-tooltip="Based on the style you pick, our creators will know what to explore." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;">Style
-                            <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
-                        </label>
-                        <div class="col-sm-10">
-                            <div ng-repeat="contest_style in contest_styles" ng-class="{'package-highlight' : contest.style.indexOf(contest_style.name) > -1}" class="launch-page-btn text-center" ng-click="select_style(contest_style)">
-                                <img ng-src="https://s3-us-west-2.amazonaws.com/tappyn/{{contest_style.img}}.jpg" style="max-height:30px;float:none;margin-right:0px;">
-                                <br>
-                                <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;" ng-bind="contest_style.name"></h4>
-                            </div>
-                            <!--<div ng-class='{"package-highlight" : contest.style == "Humorous"}' class='launch-page-btn text-center' ng-click='select_style("Humorous")'>
+                    <div ng-class='{"package-highlight" : contest.style == "Informed"}' class='launch-page-btn text-center' ng-click='select_style("Informed")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/eco.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Informed</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Instructional"}' class='launch-page-btn text-center' ng-click='select_style("Instructional")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/MH.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Instructional</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Advice"}' class='launch-page-btn text-center' ng-click='select_style("Advice")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Cosmo.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Advice</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Viral"}' class='launch-page-btn text-center' ng-click='select_style("Viral")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Buzz.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Viral</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Catchy"}' class='launch-page-btn text-center' ng-click='select_style("Catchy")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/chub.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Catchy</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Casual"}' class='launch-page-btn text-center' ng-click='select_style("Casual")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/People.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Casual</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Conversational"}' class='launch-page-btn text-center' ng-click='select_style("Conversational")'>
+                        <img src="https://s3-us-west-2.amazonaws.com/tappyn/Face.jpg" style="max-height:30px;float:none;margin-right:0px;">
+                        <br>
+                        <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Conversational</h4>
+                    </div>
+                    <div ng-class='{"package-highlight" : contest.style == "Humorous"}' class='launch-page-btn text-center' ng-click='select_style("Humorous")'>
                         <img src="https://s3-us-west-2.amazonaws.com/tappyn/DSC.jpg" style="max-height:30px;float:none;margin-right:0px;">
                         <br>
                         <h4 class='text-center' style="cursor:default;padding-top:5px;float:none;">Humorous</h4>
-                    </div>-->
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div ng-show='current.step == "detail"'>
-        <div class='form-forizontal'>
-            <div class="row" ng-show='user'>
-                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Summary of product or service</h4>
-                        <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
-                        <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
-                        <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
-                        <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
-                        <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
-                        <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messaging.</p>
-                    </div>
+</div>
+</div>
+<div ng-show='current.step == "detail"'>
+    <div class='form-forizontal'>
+        <div class="row" ng-show='user'>
+            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Summary of product or service</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messaging.</p>
                 </div>
             </div>
-            <div class="row" ng-show='!user'>
-                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Company Name</h4>
-                        <input class='form-control' ng-model='contest.name' placeholder="What name would you like in your message?" type='text' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Company Website</h4>
-                        <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Describe what your organization or product does.</h4>
-                        <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
-                        <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
-                        <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
-                        <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
-                        <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
-                        <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messages.</p>
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Company Logo</h4>
-                        <input ng-file-select='select_logo($files, contest)' type='file' required>
-                    </div>
-                    <div class='form-group'>
-                        <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
-                    </div>
+        </div>
+        <div class="row" ng-show='!user'>
+            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Profile</label>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Company Name</h4>
+                    <input class='form-control' ng-model='contest.name' placeholder="What name would you like in your message?" type='text' style="max-width:50%;">
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Company Website</h4>
+                    <input class='form-control' ng-model='contest.company_url' placeholder='This is where traffic will be directed to.' type='text' style="max-width:50%;">
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Describe what your organization or product does.</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.summary' placeholder='i.e., We sell machine parts to corn farmers in the Mid West.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.summary'>0</span><span ng-if='contest.summary'>{{contest.summary.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;"><strong>Tip:</strong> This short summary will be the first thing our users will see about your company. The more interesting, the better!</p>
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Describe what makes you different (and better) than your competition.</h4>
+                    <textarea class='form-control' rows='4' ng-model='contest.different' placeholder='i.e., For every good purchase we donate the same industrial part to a developing country.' style="max-width:70%;" maxlength="250"></textarea>
+                    <div class='input-count' style="max-width:70%;"><span ng-if='!contest.different'>0</span><span ng-if='contest.different'>{{contest.different.length}}</span> of 250 characters</div>
+                    <p class='launch-page-message' style="font-size:12px;">Tip: Be as clear and definitive as possible to allow for the best messages.</p>
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Company Logo</h4>
+                    <input ng-file-select='select_logo($files, contest)' type='file' required>
+                </div>
+                <div class='form-group'>
+                    <img class='img-responsive' ng-src='{{contest.logo_url}}' style="max-height:100px;">
                 </div>
             </div>
-            <hr style="color:#ccc;">
-            <div class="row" style="padding-bottom:200px;" ng-show="!user">
-                <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Account</label>
-                <div class="col-sm-9">
-                    <div class="form-group">
-                        <!--<a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>-->
-                        <!--<h4><strong>Create New Business Account</strong></h4>-->
-                        <h4 style="font-weight:400;">Company Email</h4>
-                        <input class='form-control' ng-model='contest.identity' placeholder="Enter your e-mail so we can save your campaign." type='email' style="max-width:50%;">
-                    </div>
-                    <div class="form-group">
-                        <h4 style="font-weight:400;">Password</h4>
-                        <input class='form-control' ng-model='contest.password' type='password' style="max-width:50%;">
-                    </div>
+        </div>
+        <hr style="color:#ccc;">
+        <div class="row" style="padding-bottom:200px;" ng-show="!user">
+            <label class='text-left col-sm-3 control-label' ng-init="contest.additional_info_box=1">Company Account</label>
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <!--<a class='text-center pull-right' style='color:#333;cursor:pointer;' ng-click='open_company_login()'>Already have an account? Log in now!</a>-->
+                    <!--<h4><strong>Create New Business Account</strong></h4>-->
+                    <h4 style="font-weight:400;">Company Email</h4>
+                    <input class='form-control' ng-model='contest.identity' placeholder="Enter your e-mail so we can save your campaign." type='email' style="max-width:50%;">
+                </div>
+                <div class="form-group">
+                    <h4 style="font-weight:400;">Password</h4>
+                    <input class='form-control' ng-model='contest.password' type='password' style="max-width:50%;">
                 </div>
             </div>
         </div>
     </div>
-    <div ng-show='current.step == "preview"'>
-        <div class='row'>
-            <div class='col-xs-12' style="padding-bottom:200px;">
-                <div class="col-xs-8 col-xs-offset-2">
-                    <div class='launch-page-box launch-preview'>
-                        <div class='row row-preview1'>
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Interest:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}</span></p>
-                            </div>
+</div>
+<div ng-show='current.step == "preview"'>
+    <div class='row'>
+        <div class='col-xs-12' style="padding-bottom:200px;">
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class='launch-page-box launch-preview'>
+                    <div class='row row-preview1'>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Interest:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p><span ng-repeat="_interest in contest.industry">{{industries[_interest]}}</span></p>
                         </div>
-                        <hr>
-                        <div class='row row-preview2'>
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Audience:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>
-                                    <span>{{contest.min_age}}-{{contest.max_age}}</span>
-                                    <span ng-switch on="contest.gender">
+                    </div>
+                    <hr>
+                    <div class='row row-preview2'>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Audience:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>
+                                <span>{{contest.min_age}}-{{contest.max_age}}</span>
+                                <span ng-switch on="contest.gender">
                                     <span ng-switch-when="1"> Men</span>
-                                    <span ng-switch-when="2"> Women</span>
-                                    <span ng-switch-default> Men and Women</span>
-                                    </span>
-                                </p>
-                            </div>
+                                <span ng-switch-when="2"> Women</span>
+                                <span ng-switch-default> Men and Women</span>
+                                </span>
+                            </p>
                         </div>
-                        <hr>
-                        <div class='row row-preview2'>
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Location:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.location_box.text}}</p>
-                                <p><span ng-repeat="_location in contest.location">{{locations[_location]}}</span></p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row row-preview2'>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Target Location:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.location_box.text}}</p>
+                            <p><span ng-repeat="_location in contest.location">{{locations[_location]}}</span></p>
                         </div>
-                        <hr>
-                        <div class='row row-preview2' style="display:none;">
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Platform:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.platform}}</p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row row-preview2' style="display:none;">
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Platform:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.platform}}</p>
                         </div>
-                        <hr>
-                        <div class='row row-preview2'>
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Priority:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <p>{{contest.objective}}</p>
-                            </div>
+                    </div>
+                    <hr>
+                    <div class='row row-preview2'>
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Priority:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <p>{{contest.objective}}</p>
                         </div>
-                        <hr>
-                        <div class='row row-preview2' style="display:none;">
-                            <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Ad Photo:</h3>
-                            <div class="col-sm-9 col-xs-12">
-                                <div ng-show="contest.photo">
-                                    <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                        <div class="img-preview">
-                                            <img ng-if="contest.photo && contest.photo!='use_attachment'" ng-src="{{contest.photo}}">
-                                            <img ng-if="contest.photo && contest.photo=='use_attachment'" ng-src="{{contest.attachment}}">
-                                        </div>
+                    </div>
+                    <hr>
+                    <div class='row row-preview2' style="display:none;">
+                        <h3 class='col-sm-3 col-xs-12' style="font-size: 1.17em;font-weight:400;">Ad Photo:</h3>
+                        <div class="col-sm-9 col-xs-12">
+                            <div ng-show="contest.photo">
+                                <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                                    <div class="img-preview">
+                                        <img ng-if="contest.photo && contest.photo!='use_attachment'" ng-src="{{contest.photo}}">
+                                        <img ng-if="contest.photo && contest.photo=='use_attachment'" ng-src="{{contest.attachment}}">
                                     </div>
                                 </div>
-                                <p ng-hide="contest.photo">
-                                    Included in campaign
-                                </p>
                             </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row" ng-show='current.step == "chose-plan"' style="padding-bottom:120px;">
-        <div class='col-xs-12 col-sm-8 col-sm-offset-2 text-center launch-step-plan'>
-            <table class="table table-condensed" style='border-radius:5px;'>
-                <thead>
-                    <tr>
-                        <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
-                        <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
-                        <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
-                        <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;">
-                            <center>
-                                <img src="https://s3-us-west-2.amazonaws.com/tappyn/rec.jpg" width=150px height=35px; style="display:block;margin-bottom:0px;" alt="Fabel Recommended">
-                            </center>
-                        </td>
-                        <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
-                        </td>
-                        <td class="text-left top-box-left" style="font-size:32px;font-weight:600;width:200px;">Written</td>
-                        <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                        <td class="text-left top-box-mid" style="font-size:32px;font-weight:600;width:200px;">Visual</td>
-                        <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                        <td class="text-left top-box-right" style="font-size:32px;font-weight:600;width:200px;">Video</td>
-                    </tr>
-                </thead>
-                <tr>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    </td>
-                    <td class="mid-box-left" style="width:200px;">
-                        <p>
-                            <span style="font-size:16px;font-weight:300;color:#777;">Just getting started.</span>
-                        </p>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:500px;width:10%;">
-                    </td>
-                    <td class="mid-box-mid" style="width:200px;">
-                        <p>
-                            <span style="font-size:16px;font-weight:300;color:#777;">Developing a new audience.<br></span>
-                        </p>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;width:10%;">
-                    </td>
-                    <td class="mid-box-right" style="width:200px;">
-                        <p>
-                            <span style="font-size:16px;font-weight:300;color:#777;">Accelerating multiple audiences.</span>
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    </td>
-                    <td class="bot-box-left" style="width:200px;">
-                        <p>
-                            <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$99</span>
-                        </p>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    </td>
-                    <td class="bot-box-mid" style="width:200px;">
-                        <p>
-                            <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$199</span>
-                        </p>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
-                    </td>
-                    <td class="bot-box-right" style="width:200px;">
-                        <p>
-                            <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$499</span>
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
-                        <span uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on what they would respond to." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
-                    </td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages and images</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 videos</td>
-                </tr>
-                <tr>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
-                        <span uib-tooltip="Every package includes the ability to target our creator base to source messages from specific demographics." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
-                    </td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Basic creator targeting</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Deeper creator targeting</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expert creator targeting</td>
-                </tr>
-                <tr>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
-                        <span uib-tooltip="Never worry how your message will perform again. We test the ones you like to show real results." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
-                    </td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Testing</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Larger testing</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Machine learning testing</td>
-                </tr>
-                <tr>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
-                        <span uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
-                    </td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
-                    <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
-                    <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
-                </tr>
-                <tr>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                </tr>
-                <tr>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                        <center class="hidden-xs hidden-sm">
-                            <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                        </center>
-                        <center class="hidden-md hidden-lg">
-                            <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;"></button>
-                        </center>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                        <center class="hidden-xs hidden-sm">
-                            <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                        </center>
-                        <center class="hidden-md hidden-lg">
-                            <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
-                        </center>
-                    </td>
-                    <td class="text-center" style="background:#EBEEF0;"></td>
-                    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
-                        <center class="hidden-xs hidden-sm">
-                            <button class='btn btn-last btn-lg sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
-                        </center>
-                        <center class="hidden-md hidden-lg">
-                            <button class='btn btn-last btn-md sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;">Select</button>
-                        </center>
-                    </td>
-                </tr>
-            </table>
-            <div id="bottom" style="padding-bottom:300px;display:none;">
-                <div class="col-xs-12 col-sm-9 col-sm-offset-3 text-left" ng-show="contest.chosen_creative == true">
-                    <div class="form-group" ng-init="contest.attachment = ''">
-                        <h4 style="font-size:22px;"><strong>Choose the photo you're planning on using with your message.</strong></h4>
-                        <p style="font-size:18px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
-                        <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
-                    </div>
-                    <div class="row form-group" ng-show="new_img">
-                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                            <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
-                                <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
-                            </div>
+                            <p ng-hide="contest.photo">
+                                Included in campaign
+                            </p>
                         </div>
                     </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div ng-show='current.step == "done"'>
-        <div class="row">
-            <div class='col-xs-12 text-center' style='padding-top:10px;'>
-                <h3>You can easily keep track of your new campaign in your account dashboard.</h3>
-                <h4>We'll notify you as soon as your messages are ready for testing!</h4>
-                <div class="addthis_toolbox" addthis:url="https://fabel.us/contest/{{contest.id}}" addthis:title="{{user.first_name}}" addthis:description="Check out our new campaign on Fabel!" addthis:media="{{contest.attachment_url}}" addthis:attachment="{{contest.attachment_url}}">
-                    <a class="addthis_button_facebook">Share via Facebook</a>
-                    <a class="addthis_button_email">Share via Email</a>
+</div>
+<div class="row" ng-show='current.step == "chose-plan"' style="padding-bottom:120px;">
+    <div class='col-xs-12 col-sm-8 col-sm-offset-2 text-center launch-step-plan'>
+        <table class="table table-condensed" style='border-radius:5px;'>
+            <thead>
+                <tr>
+
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;">
+                        <center>
+                            <img src="https://s3-us-west-2.amazonaws.com/tappyn/rec.jpg" width=150px height=35px; style="display:block;margin-bottom:0px;" alt="Fabel Recommended">
+                        </center>
+                    </td>
+                    <td class="text-center" style="font-size:22px;background:#EBEEF0;width:200px;"></td>
+                </tr>
+                <tr>
+                    <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                    </td>
+                    <td class="text-left top-box-left" style="font-size:32px;font-weight:600;width:200px;">Written</td>
+                    <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
+                    <td class="text-left top-box-mid" style="font-size:32px;font-weight:600;width:200px;">Visual</td>
+                    <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
+                    <td class="text-left top-box-right" style="font-size:32px;font-weight:600;width:200px;">Video</td>
+                </tr>
+            </thead>
+            <tr>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                </td>
+                <td class="mid-box-left" style="width:200px;">
+                    <p>
+                        <span style="font-size:16px;font-weight:300;color:#777;">Just getting started.</span>
+                    </p>
+                </td>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:500px;width:10%;">
+                </td>
+                <td class="mid-box-mid" style="width:200px;">
+                    <p>
+                        <span style="font-size:16px;font-weight:300;color:#777;">Developing a new audience.<br></span>
+                    </p>
+                </td>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;width:10%;">
+                </td>
+                <td class="mid-box-right" style="width:200px;">
+                    <p>
+                        <span style="font-size:16px;font-weight:300;color:#777;">Accelerating multiple audiences.</span>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                </td>
+                <td class="bot-box-left" style="width:200px;">
+                    <p>
+                        <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$99</span>
+                    </p>
+                </td>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                </td>
+                <td class="bot-box-mid" style="width:200px;">
+                    <p>
+                        <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$199</span>
+                    </p>
+                </td>
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                </td>
+                <td class="bot-box-right" style="width:200px;">
+                    <p>
+                        <span class="pull-right" style="font-size:32px;font-weight:600;padding-right:10px;">$499</span>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
+                <span uib-tooltip="Receive original, authentic messages from the people you plan on connecting with based on what they would respond to." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
+                </td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 messages and images</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expect 30 videos</td>
+            </tr>
+            <tr>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
+                <span uib-tooltip="Every package includes the ability to target our creator base to source messages from specific demographics." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
+                </td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Basic creator targeting</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Deeper creator targeting</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Expert creator targeting</td>
+            </tr>
+            <tr>
+
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
+                <span uib-tooltip="Never worry how your message will perform again. We test the ones you like to show real results." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
+                </td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Testing</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Larger testing</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;border-bottom: 1px solid #ccc;">Machine learning testing</td>
+            </tr>
+            <tr>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;width:1%;">
+                <span uib-tooltip="If you're not 100% satisfied with your purchase, contact us and we're happy to refund you in full." class="glyphicon glyphicon-info-sign" style="color: #ccc;font-size: 12px;position: relative;top: 10px;"></span>
+                </td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
+                <td class="text-right" style="background:#EBEEF0;color:#333;max-width:50px;"></td>
+                <td style="background:#EBEEF0;color:#333;max-width:100px;font-size:18px;">Money back guarantee</td>
+            </tr>
+            <tr>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+                <td class="text-center" style="background:#EBEEF0;"></td>
+            </tr>
+
+            <tr>
+    <td class="text-center" style="background:#EBEEF0;"></td>
+    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+        <center class="hidden-xs hidden-sm">
+            <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;padding-right:50px;padding-left:50px;"></button>
+        </center>
+        <center class="hidden-md hidden-lg">
+            <button ng-class="{'btn-secondary':contest.chosen_creative,'btn-first':!contest.chosen_creative}" ng-bind="contest.chosen_creative?'Selected':'Select'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('basic')" style="float:none;"></button>
+        </center>
+    </td>
+    <td class="text-center" style="background:#EBEEF0;"></td>
+    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+        <center class="hidden-xs hidden-sm">
+            <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-lg sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
+        </center>
+        <center class="hidden-md hidden-lg">
+            <button ng-class="{'btn-secondary':!contest.chosen_creative,'btn-wj':contest.chosen_creative}" ng-bind="contest.chosen_creative?'Select':'Selected'" class='btn btn-md sign-up-btn' ng-click="set_launch_plan('premium')" style="float:none;padding-right:50px;padding-left:50px;"></button>
+        </center>
+    </td>
+    <td class="text-center" style="background:#EBEEF0;"></td>
+    <td class="text-center" style="background:#EBEEF0;max-width:100px;">
+        <center class="hidden-xs hidden-sm">
+            <button class='btn btn-last btn-lg sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;padding-right:50px;padding-left:50px;">Select</button>
+        </center>
+        <center class="hidden-md hidden-lg">
+            <button class='btn btn-last btn-md sign-up-btn' ng-click="set_launch_plan('platinum')" style="float:none;">Select</button>
+        </center>
+    </td>
+</tr>
+        </table>
+        <div id="bottom" style="padding-bottom:300px;display:none;">
+            <div class="col-xs-12 col-sm-9 col-sm-offset-3 text-left" ng-show="contest.chosen_creative == true">
+                <div class="form-group" ng-init="contest.attachment = ''">
+                    <h4 style="font-size:22px;"><strong>Choose the photo you're planning on using with your message.</strong></h4>
+                    <p style="font-size:18px;"><small>Learn about effective creatives <a href="/guide" style="cursor:pointer;" target="_blank">here</a>.</small></p>
+                    <input custom-on-change="image_cropper" id="contest-photo" type="file" accept="image/*" />
+                </div>
+                <div class="row form-group" ng-show="new_img">
+                    <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                        <div class="docs-preview" ng-class='{"preview-ig" : contest.platform == "instagram", "preview-fb" : contest.platform != "instagram", "preview-tw" : contest.platform == "twitter"}'>
+                            <img ng-show="contest.photo || contest.use_attachment" id="upload_contest" ng-src="{{contest.attachment}}">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class='launch-page-overlaybox launch-page-box'>
-        <div class="container">
-            <div class='row'>
-                <div ng-show='current.step == "tp-prior"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')" style="padding-left:50px;padding-right:50px;">Continue</button>
+</div>
+<div ng-show='current.step == "done"'>
+    <div class="row">
+        <div class='col-xs-12 text-center' style='padding-top:10px;'>
+            <h3>You can easily keep track of your new campaign in your account dashboard.</h3>
+            <h4>We'll notify you as soon as your messages are ready for testing!</h4>
+            <div class="addthis_toolbox" addthis:url="https://fabel.us/contest/{{contest.id}}" addthis:title="{{user.first_name}}" addthis:description="Check out our new campaign on Fabel!" addthis:media="{{contest.attachment_url}}" addthis:attachment="{{contest.attachment_url}}">
+                <a class="addthis_button_facebook">Share via Facebook</a>
+                <a class="addthis_button_email">Share via Email</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class='launch-page-overlaybox launch-page-box'>
+    <div class="container">
+        <div class='row'>
+            <div ng-show='current.step == "tp-prior"'>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="set_step('detail')" style="padding-left:50px;padding-right:50px;">Continue</button>
+            </div>
+            <div ng-show='current.step == "detail"'>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")' style="margin-top:25px;">Save & Continue</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")' style="margin-top:25px;">Back</button>
+                <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
+            </div>
+            <div ng-show='current.step == "chose-plan"'>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")' style="margin-top:25px;">Continue</button>
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")' style="margin-top:25px;">Back</button>
+            </div>
+            <div ng-show='current.step == "preview"'>
+                <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Launch</button>
+                <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
+                <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("chose-plan")'>Back</button>
+            </div>
+            <div ng-show='current.step == "done"'>
+                <div class='col-xs-12 col-sm-6'>
+                    <div class='text-center'><a class='btn btn-lg btn-oj' href='/edit/{{contest.id}}'>Edit Your Campaign</a></div>
                 </div>
-                <div ng-show='current.step == "detail"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("chose-plan")' style="margin-top:25px;">Save & Continue</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("tp-prior")' style="margin-top:25px;">Back</button>
-                    <!--<button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='submit_contest(contest, false)' ng-hide='!user'>Save</button>-->
+                <div class='col-xs-12 col-sm-6'>
+                    <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
                 </div>
-                <div ng-show='current.step == "chose-plan"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='set_step("preview")' style="margin-top:25px;">Continue</button>
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("detail")' style="margin-top:25px;">Back</button>
-                </div>
-                <div ng-show='current.step == "preview"'>
-                    <button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'launch')">Launch</button>
-                    <!--<button class='btn btn-oj btn-lg pull-right' type='button' ng-click="submit_contest(contest, 'draft')">Save & Dashboard</button>-->
-                    <button class='btn btn-oj btn-lg pull-right btn-secondary' type='button' ng-click='set_step("chose-plan")'>Back</button>
-                </div>
-                <div ng-show='current.step == "done"'>
-                    <div class='col-xs-12 col-sm-6'>
-                        <div class='text-center'><a class='btn btn-lg btn-oj' href='/edit/{{contest.id}}'>Edit Your Campaign</a></div>
-                    </div>
-                    <div class='col-xs-12 col-sm-6'>
-                        <div class='text-center'><a class='btn btn-lg btn-oj' href='/dashboard'>Visit Your Dashboard</a></div>
-                    </div>
-                </div>
-                <div class='text-left' ng-show='current.step == "preview"'>
-                    <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "preview"'>
+                <h4 class='text-left' style='color:#333'>
                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
                         <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
                             <span style='font-weight:300;font-size:22;top:10px;'>
                                  81% of consumers ignore messages they find irrelevant.
                             </span>
                 </h4>
-                </div>
-                <div class='text-left' ng-show='current.step == "detail"'>
-                    <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "detail"'>
+                <h4 class='text-left' style='color:#333'>
                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
                       <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
                         <span style='font-weight:bold;font-size:22px;position:relative;'>
@@ -617,9 +630,9 @@
                               <span style="font-size:14px;padding-left:260px;top:-15px;position:relative;">A message you love or your money back</span>
                             </span>
                 </h4>
-                </div>
-                <div class='text-left' ng-show='current.step == "chose-plan"'>
-                    <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "chose-plan"'>
+                <h4 class='text-left' style='color:#333'>
                     <img class='img-responsive' src='public/img/truste.png' style='max-width: 150px; height: auto; margin: 10px 20px; display: inline-block;'>
                       <span class='glyphicon glyphicon-ok circle-it-oj' style="float:none;"></span>
                         <span style='font-weight:bold;font-size:22px;position:relative;'>
@@ -628,196 +641,196 @@
                               <span style="font-size:14px;padding-left:260px;top:-15px;position:relative;">A message you love or your money back</span>
                             </span>
                 </h4>
-                </div>
-                <div class='text-left' ng-show='current.step == "tp-prior"'>
-                    <h4 class='text-left' style='color:#333'>
+            </div>
+            <div class='text-left' ng-show='current.step == "tp-prior"'>
+                <h4 class='text-left' style='color:#333'>
                       <span class='glyphicon glyphicon-ok circle-it-oj'></span>
                         <span style='font-weight:300;font-size:22;top:10px;position:relative;'>
                               70% of consumers trust messages from strangers more than brands.
                         </span>
                 </h4>
-                </div>
             </div>
         </div>
     </div>
-    <script>
-    fbq('track', 'PageView');
-    </script>
-    <script type="text/javascript">
-    $(function() {
-        $(".location-selection-launch-view").select2({
-            placeholder: "Add Locations",
-        });
-        $(".interest-selection-launch-view").select2({
-            placeholder: "Add interest",
-            maximumSelectionLength: 1
-        });
+</div>
+<script>
+fbq('track', 'PageView');
+</script>
+<script type="text/javascript">
+$(function() {
+    $(".location-selection-launch-view").select2({
+        placeholder: "Add Locations",
     });
-    </script>
-    <style>
-    .btn:focus {
-        color: #019F6E;
-    }
-    
-    .target-label {
-        font-size: 16px;
-        font-weight: 400;
-    }
-    
-    .payment .form-control {
-        margin: 0;
-        border-radius: 0;
-    }
-    
-    li.value-list:before {
-        content: "\e067";
-        font-family: 'Glyphicons Halflings';
-        font-size: 12px;
-        float: left;
-        margin-top: 4px;
-        margin-left: -17px
-    }
-    
-    .table>tbody>tr>td {
-        padding: 5px !important;
-        border-top: none;
-    }
-    
-    .table>thead>tr>td {
-        border-top: none;
-    }
-    
-    .payment-method-container {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-    
-    .payment-method-card {
-        padding: 10px;
-    }
-    
-    .default_method {
-        border: 1px solid #00aaff;
-        border-radius: 5px;
-    }
-    
-    .payment-method-card:hover {
-        background-color: #f2f2f2;
-    }
-    
-    .btn-sel {
-        background: #fff;
-        color: #019F6E;
-        border: 1px solid #019F6E
-    }
-    
-    .btn-sel:hover {
-        color: #019F6E;
-    }
-    
-    .btn-sel:focus {
-        color: #019F6E !important;
-    }
-    
-    .payment-method-actions {
-        margin: auto;
-        position: absolute;
-        right: 20px;
-        top: 50%;
-    }
-    
-    hr {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-    
-    .inputfile {
-        width: 0.1px;
-        height: 0.1px;
-        opacity: 0;
-        overflow: hidden;
-        position: absolute;
-        z-index: -1;
-    }
-    
-    .inputfile+ label {
-        font-size: 1.25em;
-        font-weight: 500;
-        color: white;
-        background-color: #019F6E;
-        display: inline-block;
-        cursor: pointer;
-        padding: 7px 14px;
-        border-radius: 5px;
-        border: 1px solid transparent;
-    }
-    
-    .inputfile+ label:hover {
-        background-color: red;
-    }
-    
-    .circle-it-oj {
-        padding: 10px;
-        border: solid 1px #019F6E;
-        border-radius: 30px;
-        background: #019F6E;
-        color: #fff;
-        float: left;
-        margin-right: 20px;
-    }
-    
-    .control-label {
-        font-weight: 400;
-        font-size: 24px;
-        text-align: right !important;
-    }
-    
-    .radio label {
-        cursor: auto;
-    }
-    
-    .row-preview1 {
-        margin-bottom: -40px;
-    }
-    
-    .row-preview2 {
-        margin-bottom: -40px;
-        margin-top: -40px;
-    }
-    
-    .addthis_toolbox {
-        margin-top: 40px;
-    }
-    
-    .addthis_button_facebook .at-icon-wrapper,
-    .addthis_button_email .at-icon-wrapper {
-        display: none;
-    }
-    
-    .addthis_button_facebook {
-        background-color: #3b5998;
-        color: white;
-        padding: 10px 30px;
-        font-size: 18px;
-    }
-    
-    .addthis_button_facebook:hover,
-    .addthis_button_email:hover {
-        color: white;
-        text-decoration: none;
-    }
-    
-    .addthis_button_email {
-        background-color: #848484;
-        color: white;
-        padding: 10px 30px;
-        font-size: 18px;
-    }
-    
-    .addthis_button_facebook,
-    .addthis_button_email {
-        margin: 0 10px;
-    }
-    </style>
+    $(".interest-selection-launch-view").select2({
+        placeholder: "Add interest",
+        maximumSelectionLength: 1
+    });
+});
+</script>
+<style>
+.btn:focus {
+    color: #019F6E;
+}
+
+.target-label {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.payment .form-control {
+    margin: 0;
+    border-radius: 0;
+}
+
+li.value-list:before {
+    content: "\e067";
+    font-family: 'Glyphicons Halflings';
+    font-size: 12px;
+    float: left;
+    margin-top: 4px;
+    margin-left: -17px
+}
+
+.table>tbody>tr>td {
+    padding: 5px !important;
+    border-top: none;
+}
+
+.table>thead>tr>td {
+    border-top: none;
+}
+
+.payment-method-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.payment-method-card {
+    padding: 10px;
+}
+
+.default_method {
+    border: 1px solid #00aaff;
+    border-radius: 5px;
+}
+
+.payment-method-card:hover {
+    background-color: #f2f2f2;
+}
+
+.btn-sel {
+    background: #fff;
+    color: #019F6E;
+    border: 1px solid #019F6E
+}
+
+.btn-sel:hover {
+    color: #019F6E;
+}
+
+.btn-sel:focus {
+    color: #019F6E !important;
+}
+
+.payment-method-actions {
+    margin: auto;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+}
+
+hr {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.inputfile+ label {
+    font-size: 1.25em;
+    font-weight: 500;
+    color: white;
+    background-color: #019F6E;
+    display: inline-block;
+    cursor: pointer;
+    padding: 7px 14px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+
+.inputfile+ label:hover {
+    background-color: red;
+}
+
+.circle-it-oj {
+    padding: 10px;
+    border: solid 1px #019F6E;
+    border-radius: 30px;
+    background: #019F6E;
+    color: #fff;
+    float: left;
+    margin-right: 20px;
+}
+
+.control-label {
+    font-weight: 400;
+    font-size: 24px;
+    text-align: right !important;
+}
+
+.radio label {
+    cursor: auto;
+}
+
+.row-preview1 {
+    margin-bottom: -40px;
+}
+
+.row-preview2 {
+    margin-bottom: -40px;
+    margin-top: -40px;
+}
+
+.addthis_toolbox {
+    margin-top: 40px;
+}
+
+.addthis_button_facebook .at-icon-wrapper,
+.addthis_button_email .at-icon-wrapper {
+    display: none;
+}
+
+.addthis_button_facebook {
+    background-color: #3b5998;
+    color: white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.addthis_button_facebook:hover,
+.addthis_button_email:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.addthis_button_email {
+    background-color: #848484;
+    color: white;
+    padding: 10px 30px;
+    font-size: 18px;
+}
+
+.addthis_button_facebook,
+.addthis_button_email {
+    margin: 0 10px;
+}
+</style>
