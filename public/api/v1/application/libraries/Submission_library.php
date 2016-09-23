@@ -22,7 +22,7 @@ class Submission_library
      * @param  array $data Fields required for creation
      * @return boolean
      */
-    public function create($cid, $headline = null, $text = null, $link_explanation = null, $attachment = null)
+    public function create($cid, $headline = null, $text = null, $link_explanation = null, $attachment = null, $obstacle = '')
     {
         if (!$this->ion_auth->logged_in()) {
             $this->errors = "You must be logged in to create submissions";
@@ -63,6 +63,7 @@ class Submission_library
             'text'             => $text,
             'attachment'       => null,
             'thumbnail_url'    => null,
+            'obstacle'         => $obstacle,
         );
         if (!is_null($attachment)) {
             $data['attachment']    = $attachment . '.jpg';

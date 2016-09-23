@@ -60,11 +60,11 @@ class Submissions extends CI_Controller
         usort($submissions, function ($a, $b) {
             if ($a->ctr != $b->ctr) {
                 return ((float) $b->ctr < (float) $a->ctr) ? -1 : 1;
-            } else if ($a->test_result['impressions'] != $b->test_result['impressions']) {
+            } else if (isset($a->test_result['impressions']) && $a->test_result['impressions'] != $b->test_result['impressions']) {
                 return $b->test_result['impressions'] < $a->test_result['impressions'] ? -1 : 1;
-            } else if ($a->test_result['cost_per_result'] != $b->test_result['cost_per_result']) {
+            } else if (isset($a->test_result['cost_per_result']) && $a->test_result['cost_per_result'] != $b->test_result['cost_per_result']) {
                 return $b->test_result['cost_per_result'] < $a->test_result['cost_per_result'] ? -1 : 1;
-            } else if ($a->test_result['results'] != $b->test_result['results']) {
+            } else if (isset($a->test_result['results']) && $a->test_result['results'] != $b->test_result['results']) {
                 return $b->test_result['results'] < $a->test_result['results'] ? -1 : 1;
             } else {
                 return ((int) $b->votes < (int) $a->votes) ? -1 : 1;
@@ -205,7 +205,7 @@ class Submissions extends CI_Controller
             }
         }
 
-        if ($sid = $this->submission_library->create($contest_id, $headline, $this->input->post('text'), $this->input->post('link_explanation'), $attachment_url)) {
+        if ($sid = $this->submission_library->create($contest_id, $headline, $this->input->post('text'), $this->input->post('link_explanation'), $attachment_url, $this->input->post('obstacle'))) {
             // If this submission would cap the contest, we set the contesst to end in 1 day!
             if (($contest->submission_count + 1) == $contest->submission_limit) {
                 $this->contest->update($contest_id, array('stop_time' => date('Y-m-d H:i:S', strtotime('+1 day'))));

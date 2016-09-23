@@ -53,7 +53,7 @@ class Contest extends MY_Model
             $contest->tone_of_voice_box = explode(',', $contest->tone_of_voice_box);
             $contest->others            = unserialize($contest->others);
             $contest->others            = ($contest->others) ? $contest->others : [];
-            $contest->style             = $contest->others['style'] ? $contest->others['style'] : [];
+            $contest->style             = isset($contest->others['style']) ? $contest->others['style'] : [];
             return $contest;
         }
         return false;
