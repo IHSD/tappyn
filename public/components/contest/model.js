@@ -10,16 +10,16 @@ tappyn.service("contestModel", function() {
         var layout = {};
         if (contest.platform == "facebook") {
             layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
-            layout.obstacle = { limit: 90, placeholder: 'What is the primary obstacle keeping you from using this?' };
+            layout.obstacle = { limit: 90, placeholder: 'What is the primary obstacle keeping you from this goal?' };
             //if (contest.objective == 'conversions' || contest.objective == "clicks_to_website")
             layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
         } else if (contest.platform == "twitter") {
             if (contest.display_type == 'with_photo') {
                 layout.text = { limit: 116, placeholder: 'How would you describe this business to your friends?' };
-                layout.obstacle = { limit: 116, placeholder: 'What is the primary obstacle keeping you from using this?' };
+                layout.obstacle = { limit: 116, placeholder: 'What is the primary obstacle keeping you from this goal?' };
             } else {
                 layout.text = { limit: 140, placeholder: 'How would you describe this business to your friends?' };
-                layout.obstacle = { limit: 140, placeholder: 'What is the primary obstacle keeping you from using this?' };
+                layout.obstacle = { limit: 140, placeholder: 'What is the primary obstacle keeping you from this goal?' };
             }
 
             if (contest.objective == "site_clicks_conversions") {
@@ -33,7 +33,7 @@ tappyn.service("contestModel", function() {
             layout.headline = { limit: 35, placeholder: "What is the primary goal this audience is after?" };
         } else if (contest.platform == "instagram") {
             layout.text = { limit: 90, placeholder: 'How would you describe this business to your friends?' };
-            layout.obstacle = { limit: 90, placeholder: 'What is the primary obstacle keeping you from using this?' };
+            layout.obstacle = { limit: 90, placeholder: 'What is the primary obstacle keeping you from this goal?' };
         }
 
 
