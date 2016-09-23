@@ -40,7 +40,7 @@
         </div>
         <div ng-show='current.step == "detail"' class='col-xs-12 text-left'>
             <div style="padding-top:25px;">
-                <h2 style="font-weight:400;font-size:48px;">Your brief.</h2>
+                <h2 style="font-weight:400;font-size:48px;">Your messaging brief.</h2>
                 <h4>Based on how you describe yourself, creators will know what to emphasize.</h4>
             </div>
         </div>
@@ -62,8 +62,8 @@
                 <h4>We just launched your campaign.</h4>
             </div>
         </div>
-        <div ng-show="current.step == 'chose-plan' || current.step == 'preview'" class="hidden-xs col-sm-3">
-            <center><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
+        <div ng-show="current.step == 'chose-plan' || current.step == 'preview'" class="hidden-xs col-sm-3" style="padding-top:25px;">
+            <center style="margin-top:20px;"><span class="glyphicon glyphicon-ok" style="font-size:28px;color:#019f6e;padding-bottom:10px;"></span>
                 <p>
                     <small>
                     Fully Refundable.<br>
@@ -144,7 +144,7 @@
             </div>
         </div>
         <div class="row">
-            <label uib-tooltip="Define who you'd like to create your messaging and who you want to show them to." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
+            <label uib-tooltip="Define who you'd like to create your messaging and who you plan on showing it to." class='text-left col-sm-2' style="padding-top:0px;font-size:20px;cursor:default;">Audience
                 <span class="glyphicon glyphicon-info-sign hidden-xs hidden-sm" style="font-size:10px;position:relative;top:0px;left:5px;color: #8e8e8e;"></span>
             </label>
             <div class="col-sm-10">
@@ -420,11 +420,11 @@
                 <tr>
                     <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
                     </td>
-                    <td class="text-left top-box-left" style="font-size:32px;font-weight:600;width:200px;">Basic</td>
+                    <td class="text-left top-box-left" style="font-size:32px;font-weight:600;width:200px;">Written</td>
                     <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                    <td class="text-left top-box-mid" style="font-size:32px;font-weight:600;width:200px;">Premium</td>
+                    <td class="text-left top-box-mid" style="font-size:32px;font-weight:600;width:200px;">Visual</td>
                     <td class="text-left" style="font-size:22px;background:#EBEEF0;max-width:50px;"></td>
-                    <td class="text-left top-box-right" style="font-size:32px;font-weight:600;width:200px;">Platinum</td>
+                    <td class="text-left top-box-right" style="font-size:32px;font-weight:600;width:200px;">Video</td>
                 </tr>
             </thead>
             <tr>
@@ -435,18 +435,18 @@
                         <span style="font-size:16px;font-weight:300;color:#777;">Just getting started.</span>
                     </p>
                 </td>
-                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:500px;">
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:500px;width:10%;">
                 </td>
                 <td class="mid-box-mid" style="width:200px;">
                     <p>
-                        <span style="font-size:16px;font-weight:300;color:#777;">Developing new audiences.<br></span>
+                        <span style="font-size:16px;font-weight:300;color:#777;">Developing a new audience.<br></span>
                     </p>
                 </td>
-                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;">
+                <td class="text-center" style="background:#EBEEF0;color:#333;max-width:50px;width:10%;">
                 </td>
                 <td class="mid-box-right" style="width:200px;">
                     <p>
-                        <span style="font-size:16px;font-weight:300;color:#777;">Accelerating all audiences.</span>
+                        <span style="font-size:16px;font-weight:300;color:#777;">Accelerating multiple audiences.</span>
                     </p>
                 </td>
             </tr>
