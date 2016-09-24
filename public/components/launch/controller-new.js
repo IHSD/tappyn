@@ -13,7 +13,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         // $scope.current = $scope.steps['tp-platform'];
     $scope.current = $scope.steps['tp-prior'];
     $scope.personalities = emotions;
-    $scope.contest = { chosen_creative: false, plan: 'basic',style:[] };
+    $scope.contest = { chosen_creative: false, plan: 'premium',style:[] };
     $scope.plan_name = 'premium';
     $scope.company = {};
     $scope.save_method = false;
@@ -364,7 +364,7 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
     });
 
     $scope.$on('payContestDone', function(event) {
-        $scope.set_step('done');
+        window.location = "/dashboard";
     });
 
     $scope.set_creative = function(boo) {
