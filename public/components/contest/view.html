@@ -66,10 +66,10 @@
                     <p ng-if="contest.objective == 'Meet'">This business would like to create a message with the goal of getting people to remember their brand. The key here is to make something distinct and memorable.</p>
                     <p ng-if="contest.objective == 'Close'">This business would like to create a message with the goal of getting people to use their product. The key here is to make something that personally speaks to the problem they are trying to solve.</p>
                 </div>
-                <!--<div ng-show="contest.style" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
-                    <h3 style='margin-bottom: 0;'>Our Style</h3>
-                    <p><span ng-repeat="contest_style in contest.contest_style"> {{contest_styles[contest_style]}}</span></p>
-                </div>-->
+                <div ng-show="contest.style" class="col-xs-12" style="border:1px solid #019F6E;border-radius:6px;">
+                    <h3 style="margin-bottom: 0;">Our Style</h3>
+                    <p><span ng-repeat="contest_style in contest.style" ng-bind="' '+contest_style"></span></p>
+                </div>
                 <div class='row'>
                     <div class="col-md-12 col-xs-12 text-center">
                         <div class='btn-group' style='margin-top: 20px; margin-bottom: 20px;'>
