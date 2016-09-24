@@ -408,63 +408,58 @@
                             </h5>
                             </div>
                         </div>
-                    </div>
+
                     <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;">
-                        <div class="col-xs-12 col-md-6">
-                        <div class="col-xs-12" style="padding-top:25px;padding-bottom:25px;">
-                            <a class="btn btn-yl col-xs-12 text-center" href="{{winner.winner.attachment}}" download>Download Full</a>
-                        </div>
-                        <div class="col-xs-12" style="padding-top:25px;">
-                            <a class="btn btn-oj col-xs-12 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>
-                        </div>
-                        <div class='col-xs-12' ng-switch on='winner.contest.platform' style="padding-top:10px;">
-                            <a ng-switch-when='facebook' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Facebook</a>
-                            <a ng-switch-when='instagram' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Instagram</a>
-                            <a ng-switch-when='twitter' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://ads.twitter.com'>Go To Twitter</a>
-                        </div>
+                        <div class="col-xs-12">
+                            <h2 class="text-center" style="border-bottom:2px solid #ccc;">{{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h2>
+                            <div class='avatar'>
+                                <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' crossorigin="anonymous" alt=''>
+                            </div>
                     </div>
                 </div>
             </div>
                     <div class="row">
                         <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12">
+                                <h2 class="text-center" style="border-bottom:2px solid #ccc;">Message</h2>
+                                <div class="contest-image">
+                                    <img ng-src="{{winner.winner.attachment}}" crossorigin="anonymous">
+                                </div>
+                                <div class='contest-company text-left'>
+                                    <span class='company-name'>from {{user.first_name}}</span>
+                                </div>
+                                <div class='contest-entry text-left'>
+                                    <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
+                                    <h4 ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
+                                    <h4 ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
+                                    <div class='contest-upvotes disable-click'>
+                                        <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
+                                    </div>
+                                </div>
                             <div class="col-xs-12" style="padding-top:25px;padding-bottom:25px;">
-                                <a class="btn btn-yl col-xs-12 text-center" href="{{winner.winner.attachment}}" download>Download Full</a>
+                                <a class="btn btn-yl col-xs-12 text-center" href="{{winner.winner.attachment}}" download>Download Full Message</a>
                             </div>
                             <div class="col-xs-12" style="padding-top:25px;">
                                 <a class="btn btn-oj col-xs-12 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>
                             </div>
-                            <div class='col-xs-12' ng-switch on='winner.contest.platform' style="padding-top:10px;">
+                            <!--<div class='col-xs-12' ng-switch on='winner.contest.platform' style="padding-top:10px;">
                                 <a ng-switch-when='facebook' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Facebook</a>
                                 <a ng-switch-when='instagram' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Instagram</a>
                                 <a ng-switch-when='twitter' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://ads.twitter.com'>Go To Twitter</a>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                     <div class='contest-box row dash-round-reverse col-xs-12 col-sm-6' style="padding:10px;">
                         <div class='col-xs-12'>
-                            <div class="contest-image">
-                                <img ng-src="{{winner.winner.attachment}}" crossorigin="anonymous">
-                            </div>
-                            <div class='contest-company text-left'>
-                                <span class='company-name'>from {{user.first_name}}</span>
-                            </div>
-                            <div class='contest-entry text-left'>
-                                <h3 ng-show='winner.winner.headline'>{{winner.winner.headline}}</h3>
-                                <h4 ng-show='winner.winner.link_explanation'>{{winner.winner.link_explanation}}<br></h4>
-                                <h4 ng-show='winner.winner.text'>{{winner.winner.text}}</h4>
-                                <div class='contest-upvotes disable-click'>
-                                    <span class='glyphicon glyphicon-heart'></span> {{winner.winner.votes | number}}
-                                </div>
-                            </div>
-                            <div class="contest-full-result contest-winner text-left">
-                                <div class='avatar'>
-                                    <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' crossorigin="anonymous" alt=''>
-                                </div>
-                                <h5 class='winner-name'> {{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h5>
-                                <div ng-if="winner.winner.test_result_array" class="contest-test-result col-xs-12 text-center">
-                                    <span ng-if="test_result.key != 'sid'" ng-repeat="test_result in winner.winner.test_result_array | orderBy:test_big(winner.contest)" class="test-{{test_result.key}}" uib-tooltip="{{tooltip_title[test_result.key]}}" ng-bind="test_result_content(test_result)" ng-click="showctr(test_result.key)"></span>
-                                </div>
+                            <h2 class="text-center" style="border-bottom:2px solid #ccc;">Brief</h2>
+                            <h4>Objective</h4>
+                            <h5 style="color:#777;">
+                                <span>{{winner_contest.objective}}</span>
+                            </h5>
+                            <h4>Style</h4>
+                            <h5 style="color:#777;">
+                                <span ng-repeat="_contest_style in winner.contest.contest_style">{{contest_styles[_contest_style]}}</span>
+                            </h5>
                         </div>
                     </div>
                     </div>
