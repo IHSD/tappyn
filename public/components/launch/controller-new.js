@@ -363,10 +363,6 @@ tappyn.controller('launchControllerNew', function($scope, $location, $anchorScro
         cropBoxMovable: false,
     });
 
-    $scope.$on('payContestDone', function(event) {
-        window.location = "/dashboard";
-    });
-
     $scope.set_creative = function(boo) {
         $scope.contest.chosen_creative = boo;
         if (boo) {

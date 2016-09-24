@@ -311,6 +311,11 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         } else if (code == 404) $location.path('/not_found')
     }
 
+    $scope.$on('payContestDone', function(event) {
+        window.location = "/dashboard";
+        $scope.set_alert("Your campaign has launched", "default");
+    });
+
     $scope.alert_close_text = 'x';
     $scope.alert = { show: false, message: '', type: '' }; //default our alert to a blank nonshowing object
     $scope.set_alert = function(msg, type) {
