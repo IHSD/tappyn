@@ -632,7 +632,7 @@ li.value-list:before {
     background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg');
     background-size: cover;
     background-color: #EEEEEE;
-    height: 400px;
+    height: 500px;
     overflow: hidden;
     background-position: left
 }
@@ -755,9 +755,28 @@ li.value-list:before {
 .features-box h3 {
     font-size: 30px;
     margin: 0 0 20px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 24px;
     color: #019F6E
+}
+
+.hov-right:hover {
+    border-top:1px solid #019F6E;
+    border-left:1px solid #019F6E;
+    border-bottom:1px solid #019F6E;
+    border-right: 1px solid #019F6E;
+}
+.hov-right {
+    border-top:1px solid #fff;
+    border-left:1px solid #fff;
+    border-bottom:1px solid #fff;
+    border-right: 1px solid #EBEFF2;
+}
+.hov {
+    border:1px solid #fff;
+}
+.hov:hover {
+    border:1px solid #019F6E;
 }
 
 .features-box p {
