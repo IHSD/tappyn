@@ -643,6 +643,7 @@ li.value-list:before {
     background-size: cover;
     background-color: #EEEEEE;
     height: 580px;
+    min-height: 580px;
     overflow: hidden;
     background-position: left
 }
@@ -1376,7 +1377,7 @@ footer {
 
 .footer-nav {
     list-style: none;
-    line-height: 2em;
+    line-height: 3em;
 }
 
 .footer-nav li a {
