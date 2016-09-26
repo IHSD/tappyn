@@ -68,7 +68,8 @@ tappyn.config(function($routeProvider, $locationProvider) {
             controller: 'companiesController'
         })
         .when('/for_companies', {
-            templateUrl: 'components/company/view.html'
+            templateUrl: 'components/company/view.html',
+            controller: 'companyController'
         })
         .when('/faq', {
             templateUrl: 'components/faq/view-new.html',

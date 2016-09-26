@@ -729,6 +729,12 @@ Author: Rashid Shafique | rmughal@gmail.com
     opacity: 1;
 }
 
+#company-hero-banner {
+    /* change ease time here */
+    transition: background-image 1s ease-in-out;
+    background-repeat: no-repeat;
+}
+
 @media screen and (min-width: 768px) {
     .launch-page-btn {
         max-width: 48%;
