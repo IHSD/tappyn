@@ -29,6 +29,17 @@
             <a class="pull-right" href="#" ng-click="submission_link_act(submission,'cancel')">Cancel</a>
         </div>
     </div>
+    <div ng-show="submission.obstacle">
+        <div ng-hide="submission.obstacle_editor">
+            <h4 uib-tooltip="Primary Message" style="display:inline;">{{submission.obstacle}}</h4>
+            <a ng-show="winner_contest.status == 'pending_testing'" href="#" ng-click="submission_obstacle_act(submission,'edit')"><span class="glyphicon glyphicon-pencil" style="padding-left: 5px;font-size: 12;color: #06883F;"></span></a>
+        </div>
+        <div ng-show="submission.obstacle_editor">
+            <input class='form-control' ng-model='submission.obstacle_temp' type='text'>
+            <a ng-show="submission.obstacle_temp.length > 1" href="#" ng-click="submission_obstacle_act(submission,'save')">Save</a>
+            <a class="pull-right" href="#" ng-click="submission_obstacle_act(submission,'cancel')">Cancel</a>
+        </div>
+    </div>
     <div ng-show="submission.text">
         <div ng-hide="submission.text_editor">
             <h4 uib-tooltip="Primary Message" style="display:inline;">{{submission.text}}</h4>

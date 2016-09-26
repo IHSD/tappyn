@@ -376,6 +376,8 @@ label {
     color: #019F6E;
     font-weight: 400;
     border: 1px solid #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-hiw:hover {
@@ -383,6 +385,8 @@ label {
     color: #019F6E;
     font-weight: 400;
     border: 1px solid #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-wj {
@@ -390,18 +394,24 @@ label {
     color: #fff;
     font-weight: 400;
     border: 1px solid #fff;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-wj:hover {
     background: #fff;
     color: #019F6E;
     border: 1px solid #019F6E;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-wj:focus {
     color: #019F6E;
     background: #fff;
     border: 1px solid #019F6E;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-last {
@@ -632,7 +642,7 @@ li.value-list:before {
     background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg');
     background-size: cover;
     background-color: #EEEEEE;
-    height: 500px;
+    height: 600px;
     overflow: hidden;
     background-position: left
 }
@@ -640,28 +650,28 @@ li.value-list:before {
 @media only screen and (max-device-width:480px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
         background-size: cover;
     }
 }
@@ -696,7 +706,7 @@ li.value-list:before {
 
 .hero-content h1 {
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 600;
     font-size: 50;
     color: #333;
 }
@@ -704,7 +714,7 @@ li.value-list:before {
 .hero-content h3 {
     font-family: 'Roboto', sans-serif;
     font-weight: 100;
-    font-size: 28;
+    font-size: 18;
     color: #fff;
 }
 
@@ -713,6 +723,37 @@ li.value-list:before {
     line-height: 50px;
 }
 
+.hiw {
+    font-size:18px;
+    font-weight:400;
+    color: #019F6E;
+}
+.hiw:hover {
+    font-size:18px;
+    font-weight:400;
+    color: #0287A5;
+}
+
+.hiw-nav {
+    font-size:18;
+    margin-bottom:20px;
+    line-height:130%;
+    border-right:1px solid #fff;
+    border-left:1px solid #fff;
+}
+
+.hiw-nav-none {
+    font-size:18;
+    margin-bottom:20px;
+    line-height:130%;
+}
+
+.hiw-nav-right {
+    font-size:18;
+    margin-bottom:20px;
+    line-height:130%;
+    border-right:1px solid #fff;
+}
 
 /** How it works **/
 
@@ -1328,7 +1369,7 @@ li.value-list:before {
 /** Footer **/
 
 footer {
-    background: #2B2B2B;
+    background: #F3F2F0;
     font-size: 12px;
     padding: 50px 0;
 }
@@ -2650,6 +2691,18 @@ footer {
     position: relative;
     top: -75px;
     visibility: hidden;
+}
+
+@media (min-width: 880px) {
+    .pad-price {
+    margin-top: -100px;
+    }
+}
+
+@media (min-width: 1197px) {
+    .pad-price-long {
+    margin-top: -400px;
+    }
 }
 
 

@@ -39,7 +39,7 @@
                     </ul>
                 </li>
                 <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_login("default", "")'>Login</a></li>
-                <li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>
+                <!--<li ng-if='!user' style='cursor:pointer' class='pull-right'><a ng-click='open_register("default", "", "1")'>Sign Up</a></li>-->
                 <li ng-hide='user.type == "member" && !user.is_admin' class='pull-right'><a class="btn btn-wj btn-lg hidden-xs hidden-sm new-campaign" href="/launch">New Campaign</a></li>
             </ul>
         </nav>

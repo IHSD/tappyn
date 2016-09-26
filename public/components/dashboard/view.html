@@ -369,43 +369,43 @@
                     <div class="col-xs-12 dash-round" style="background:#fff;margin-bottom:20px;">
                         <table>
                             <thead>
-                                <tr>
+                                <tr style="font-weight:300;">
                                     <td style="padding-top:10px;">Started On:</td>
                                     <td style="padding-top:10px;">Ended On:</td>
                                     <td ng-if="winner.contest.total_amount" style="padding-top:10px;">Total:</td>
                                 </tr>
                             </thead>
                             <tr>
-                                <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{contest.start_time | dashDate}}</td>
-                                <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{contest.stop_time | dashDate}}</td>
-                                <td ng-if="winner.contest.total_amount" style="padding-bottom:10px;font-weight:300;">{{winner.contest.total_amount | currency}}</td>
+                                <td style="padding-bottom:10px;padding-right:50px;font-weight:400;">{{contest.start_time | dashDate}}</td>
+                                <td style="padding-bottom:10px;padding-right:50px;font-weight:400;">{{contest.stop_time | dashDate}}</td>
+                                <td ng-if="winner.contest.total_amount" style="padding-bottom:10px;font-weight:400;">{{winner.contest.total_amount | currency}}</td>
                             </tr>
                         </table>
                     </div>
-                    <div class="row">
-                    <div class='contest-box row dash-round-reverse col-xs-12 col-sm-6' style="padding:10px;height:337px;">
+
+                    <div class='contest-box row dash-round-reverse col-xs-12 col-sm-6' style="padding:10px;height:337px;margin:0px;">
                         <div id="winner-div" class='col-xs-12 submission-text' style=''>
-                            <h2 class="text-left" style="border-bottom:2px solid #ccc;">Audience</h2>
+                            <h2 class="text-left" style="border-bottom:2px solid #ccc;font-weight:300;">Audience</h2>
                             <div class="col-xs-12">
-                            <label class='text-left target-label'>Locations</label>
+                            <label class='text-left target-label' style="color:#777;font-weight:300;">Locations</label>
                             <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                                 <span ng-repeat="_location in winner.contest.location">{{locations[_location]}}</span>
                             </h4>
                         </div>
                         </div>
                         <div class="col-xs-12">
-                            <label class='text-left target-label'>Age</label>
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Age</label>
                             <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                                 <span>{{winner.contest.min_age}} to {{winner.contest.max_age}}</span>
                             </h4>
                         </div>
                         </div>
                         <div class="col-xs-12">
-                            <label class='text-left target-label'>Gender</label>
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Gender</label>
                             <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                                 <span ng-switch on="winner.contest.gender">
                                   <span ng-switch-when="1">Men</span>
                                   <span ng-switch-when="2">Women</span>
@@ -415,85 +415,79 @@
                       </div>
                       </div>
                       <div class="col-xs-12">
-                          <label class='text-left target-label'>Interest</label>
+                          <label class='text-left target-label' style="font-weight:300;color:#777;">Interest</label>
                           <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                             <span ng-repeat="_industry in winner.contest.industry">{{industries[_industry]}}</span>
                         </h4>
                     </div>
                         </div>
                             </div>
                         </div>
-                    <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;">
+                    <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;margin:0px;">
                         <div class="col-xs-12">
-                            <h2 class="text-left" style="border-bottom:2px solid #ccc;">{{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h2>
+                            <h2 class="text-center" style="border-bottom:2px solid #ccc;font-weight:300;">{{winner.winner.first_name}} {{winner.winner.last_name | firstChar}}.</h2>
                             <div class='avatar text-center'>
                                 <img ng-src='{{winner.winner.avatar_url}}' src='public/img/avatar.png' crossorigin="anonymous" alt='' style="border-radius:50%;height:250px;">
                             </div>
                     </div>
                 </div>
-            </div>
-                    <div class="row">
-                        <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;">
-                            <div class="col-xs-12">
-                                <h2 class="text-left" style="border-bottom:2px solid #ccc;">Message</h2>
-                                <label class='text-left target-label'>Image Direction</label>
-                                <div class="contest-image">
-                                    <img ng-src="{{winner.winner.attachment}}" crossorigin="anonymous">
-                                </div>
-                            <div class="col-xs-12">
-                                <label class='text-left target-label'>Primary Goal</label>
-                                <div class='contest-entry text-left' style="display:inline-block;">
-                                    <h4 style="color:#777;" ng-show='winner.winner.headline'>{{winner.winner.headline | capitalize}}</h4>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <label class='text-left target-label'>Primary Obstacle</label>
-                                <div class='contest-entry text-left' style="display:inline-block;">
-                                    <h4 style="color:#777;" ng-show='winner.winner.obstacle'>{{winner.winner.obstacle | capitalize}}<br></h4>
-                                </div>
-                            </div>
-                            <div class="col-xs-12">
-                                <label class='text-left target-label'>Your Message</label>
-                                <div class='contest-entry text-left' style="display:inline-block;">
-                                    <h4 style="color:#777;" ng-show='winner.winner.text'>{{winner.winner.text | capitalize}}</h4>
-                                </div>
-                            </div>
-                            <div class="col-xs-12" style="padding-top:25px;">
-                                <a class="btn btn-oj col-xs-12 col-sm-6 col-sm-offset-3 text-center" href="{{winner.winner.attachment}}" download>Download Full Message</a>
-                            </div>
-                            <div class="col-xs-12" style="padding-top:10px;">
-                                <a class="btn btn-oj col-xs-12 col-sm-6 col-sm-offset-3 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>
-                            </div>
-                            <!--<div class='col-xs-12' ng-switch on='winner.contest.platform' style="padding-top:10px;">
-                                <a ng-switch-when='facebook' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Facebook</a>
-                                <a ng-switch-when='instagram' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://business.facebook.com'>Go To Instagram</a>
-                                <a ng-switch-when='twitter' class='btn btn-oj col-xs-12 text-center' target='_blank' href='https://ads.twitter.com'>Go To Twitter</a>
-                            </div>-->
-                        </div>
-                    </div>
-                    <div class='contest-box row dash-round-reverse col-xs-12 col-sm-6' style="padding:10px;">
+                    <div class='contest-box row dash-round-reverse col-xs-12 col-sm-6' style="padding:10px;margin:0px;">
                         <div class='col-xs-12'>
-                            <h2 class="text-left" style="border-bottom:2px solid #ccc;">Brief</h2>
+                            <h2 class="text-left" style="border-bottom:2px solid #ccc;font-weight:300;">Brief</h2>
                         <div class="col-xs-12">
-                            <label class='text-left target-label'>Objective</label>
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Objective</label>
                             <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                                 <span>{{winner.contest.objective}}</span>
                             </h4>
                         </div>
                         </div>
                         <div class="col-xs-12">
-                            <label class='text-left target-label'>Style</label>
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Style</label>
                             <div class='contest-entry text-left' style="display:inline-block;">
-                            <h4 style="color:#777;">
+                            <h4 style="font-weight:400;">
                                 <span ng-repeat="contest_style in winner.contest.style" ng-bind="' '+contest_style"></span>
                             </h4>
                         </div>
                         </div>
                         </div>
                     </div>
+                    <div class="contest-box row dash-round-reverse col-xs-12 col-sm-6" style="padding:10px;margin:0px;">
+                        <div class="col-xs-12">
+                            <h2 class="text-left" style="border-bottom:2px solid #ccc;font-weight:300;">Message</h2>
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Image Direction</label>
+                            <div class="contest-image">
+                                <img ng-src="{{winner.winner.attachment}}" crossorigin="anonymous">
+                            </div>
+                        <div class="col-xs-12">
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Primary Goal</label>
+                            <div class='contest-entry text-left' style="display:inline-block;">
+                                <h4 style="font-weight:400;" ng-show='winner.winner.headline'>{{winner.winner.headline | capitalize}}</h4>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Primary Obstacle</label>
+                            <div class='contest-entry text-left' style="display:inline-block;">
+                                <h4 style="font-weight:400;" ng-show='winner.winner.obstacle'>{{winner.winner.obstacle | capitalize}}<br></h4>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <label class='text-left target-label' style="font-weight:300;color:#777;">Your Message</label>
+                            <div class='contest-entry text-left' style="display:inline-block;">
+                                <h4 style="font-weight:400;" ng-show='winner.winner.text'>{{winner.winner.text | capitalize}}</h4>
+                            </div>
+                        </div>
+                        <!--<div class="col-xs-12" style="padding-top:25px;">
+                            <a class="btn btn-oj col-xs-12 col-sm-6 col-sm-offset-3 text-center" href="{{winner.winner.attachment}}" download>Download Full Message</a>
+                        </div>
+                        <div class="col-xs-12" style="padding-top:10px;">
+                            <a class="btn btn-oj col-xs-12 col-sm-6 col-sm-offset-3 text-center" ng-click="download_winner_image()" href="javascript:void(0)">Download Image</a>
+                        </div>-->
                     </div>
+                </div>
+
+
                 </div>
             </div>
         </div>
