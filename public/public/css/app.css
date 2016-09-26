@@ -639,10 +639,10 @@ li.value-list:before {
 /*** Hero Banner CSS Starts Here ***/
 
 .hero-banner {
-    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/bannernew.jpg');
+    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg');
     background-size: cover;
     background-color: #EEEEEE;
-    height: 600px;
+    height: 580px;
     overflow: hidden;
     background-position: left
 }
@@ -650,28 +650,28 @@ li.value-list:before {
 @media only screen and (max-device-width:480px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
     }
 }
 
 @media (min-width: 1501px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/base.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
     }
 }
