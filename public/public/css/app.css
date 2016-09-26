@@ -642,8 +642,6 @@ li.value-list:before {
     background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg');
     background-size: cover;
     background-color: #EEEEEE;
-    height: 580px;
-    min-height: 580px;
     overflow: hidden;
     background-position: left
 }
@@ -653,13 +651,26 @@ li.value-list:before {
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
+        height: 580px;
+        min-height: 580px;
     }
 }
 
-@media (min-width: 641px) and (max-width: 1024px) {
+@media (min-width:965px) and (max-width:1284px) {
+    /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
+        height:780px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 964px) {
+    .hero-banner {
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background-size: cover;
+        height: 580px;
+        min-height: 580px;
     }
 }
 
@@ -667,6 +678,8 @@ li.value-list:before {
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
+        height: 580px;
+        min-height: 580px;
     }
 }
 
@@ -674,6 +687,8 @@ li.value-list:before {
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
         background-size: cover;
+        height: 580px;
+        min-height: 580px;
     }
 }
 
