@@ -656,7 +656,7 @@ li.value-list:before {
     }
 }
 
-@media only screen and (min-width:965px) and (max-width:1284px) {
+@media only screen and (min-device-width:965px) and (max-device-width:1284px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
