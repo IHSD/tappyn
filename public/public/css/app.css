@@ -1389,6 +1389,7 @@ footer {
     text-decoration: underline;
 }
 
+
 .socials {
     padding: 0;
     list-style: none;
@@ -2697,6 +2698,11 @@ footer {
 @media (min-width: 880px) {
     .pad-price {
     margin-top: -100px;
+    }
+}
+@media (min-width: 880px) {
+    .pad-price-2 {
+    margin-top: -200px;
     }
 }
 
