@@ -2727,6 +2727,12 @@ footer {
     }
 }
 
+@media (min-width: 800px) {
+    .pad-price-long-2 {
+    margin-top: -400px;
+    }
+}
+
 
 /*** Some info ***/
 
