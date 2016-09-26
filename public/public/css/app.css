@@ -638,12 +638,18 @@ li.value-list:before {
 
 /*** Hero Banner CSS Starts Here ***/
 
-
+.hero-banner {
+    background-image: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg');
+    background-size: cover;
+    background-color: #EEEEEE;
+    overflow: hidden;
+    background-position: left
+}
 
 @media only screen and (max-device-width:480px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
         background-size: cover;
         height: 580px;
         min-height: 580px;
@@ -653,7 +659,7 @@ li.value-list:before {
 @media (min-width:965px) and (max-width:1284px) {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
         background-size: cover;
         height:780px;
     }
@@ -661,7 +667,7 @@ li.value-list:before {
 
 @media (min-width: 641px) and (max-width: 964px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
         background-size: cover;
         height: 580px;
         min-height: 580px;
@@ -670,7 +676,7 @@ li.value-list:before {
 
 @media (min-width: 1025px) and (max-width: 1500px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
         background-size: cover;
         height: 580px;
         min-height: 580px;
@@ -679,7 +685,7 @@ li.value-list:before {
 
 @media (min-width: 1501px) {
     .hero-banner {
-        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban1.jpg') no-repeat;
+        background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
         background-size: cover;
         height: 580px;
         min-height: 580px;
