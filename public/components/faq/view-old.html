@@ -1,4 +1,3 @@
-
 <script type="text/ng-template" id="group-template.html">
     <div class="panel tp-faq">
         <div class="panel-heading">
@@ -15,25 +14,16 @@
         </div>
     </div>
 </script>
-<div class=container-fluid>
-	<section class="love-raw" style="background:#fff;padding-top:0px;">
-	<div class="row">
-	 <div class="col-xs-12" style="background:#EBEEF0;padding-bottom:10px;padding-top:50px;">
-		 <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-				<h2 class="pull-left price-head">FAQ</h2>
-		 </div>
-	 </div>
-
- </div>
- </section>
- </div>
+<div class="container">
+    <div class='content-padding'>
+        <h2 class='text-center' style='font-weight:300;'>Frequently Asked Questions</h2>
         <div class='row'>
             <div class="col-xs-12 launch-page-box">
                 <uib-tabset active="active">
-                    <uib-tab index="0" heading="If you're a creator" style="font-size:18px;padding-left:40%;">
+                    <uib-tab index="0" heading="Creators" style="font-size:18px;">
                         <div class="row">
-                            <uib-accordion class='col-xs-12 col-sm-6 col-sm-offset-3'>
-                                <h3 class="text-center" style="font-size:40px;">New to Fabel?</h3>
+                            <uib-accordion class='col-sm-4 col-xs-12'>
+                                <h3>About Fabel</h3>
                                 <uib-accordion-group heading="What is Fabel?" template-url="group-template.html">
                                     Fabel is a place to create authentic messages for people like you. Businesses looking for messages and branding will launch a campaign, and you'll have the opportunity to create an message for them based on your personal experiences. Most messages only ask for a sentence or two, but some ask you to select a photo you think would perform well. Messages on Fabel only require a few minutes to make, and you'll earn $20-$40 for every ad that a company purchases.
                                 </uib-accordion-group>
@@ -44,8 +34,8 @@
                                     When an message gets purchased, the creator of that message gets immediately paid!
                                 </uib-accordion-group>
                             </uib-accordion>
-                            <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                                <h3 class="text-center" style="font-size:40px;">Entering A Campaign</h3>
+                            <uib-accordion class='col-sm-4 col-xs-12'>
+                                <h3>Entering A Campaign</h3>
                                 <uib-accordion-group heading="How do I join?" template-url="group-template.html">
                                     It's 100% free to join Fabel. Either sign in with your email or through Facebook. If you choose the email sign up option, you'll immediately be sent a verification link. Once you're verified, you're ready to go! Be sure to read our
                                     <a href="/guide">helpful copywriting guide</a> before creating your first message.
@@ -80,8 +70,8 @@
                                     If a campaign ends, and a company decides to not purchase at least one message, Fabel will personally purchase the message with the most likes. Be sure to share your message, so your friends and family can like it!
                                 </uib-accordion-group>
                             </uib-accordion>
-                            <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                                <h3 class="text-center" style="font-size:40px;">Payment</h3>
+                            <uib-accordion class='col-sm-4 col-xs-12'>
+                                <h3>Payment</h3>
                                 <uib-accordion-group heading="What is a payout and how do I request one?" template-url="group-template.html">
                                     When your message is purchased by a company, you'll be instantly notified, and you'll be paid $20-$50 by that company. You can claim your winnings either through our secure Stripe system in your account or via PayPal. It's as easy as that!
                                 </uib-accordion-group>
@@ -101,8 +91,8 @@
                                     You'll immediately get a killer e-mail from us, and it will also show up on your account dashboard.
                                 </uib-accordion-group>
                             </uib-accordion>
-                            <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                                <h3 class="text-center" style="font-size:40px;">Dashboard</h3>
+                            <uib-accordion class='col-sm-4 col-xs-12'>
+                                <h3>Dashboard</h3>
                                 <uib-accordion-group heading="What do the different message statuses mean?" template-url="group-template.html">
                                     You can see the campaign status that your message was submitted to right in your dashboard. Here's a breakdown of what they mean...
                                     <br> -Live: This means that a campaign hasn't ended yet, and more messages are in the process of being created. Once a campaign reaches its cap of 30 messages or time runs out, it will be ready to start testing.
@@ -115,9 +105,9 @@
                             </uib-accordion>
                         </div>
                     </uib-tab>
-                    <uib-tab id="business-tab" index="$index + 1" heading="If you're a customer" class='row' style="font-size:18px;">
-                        <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                            <h3 class="text-center" style="font-size:40px;">Ad Testing</h3>
+                    <uib-tab id="business-tab" index="$index + 1" heading="Customers" class='row' style="font-size:18px;">
+                        <uib-accordion class='col-sm-4 col-xs-12'>
+                            <h3>Ad Testing</h3>
                             <uib-accordion-group id="test-hash" heading="What do you mean by 'testing'?" template-url="group-template.html">
                                 Once your campaign has reached 30 messages, we want to show you how well the perform. To do this, we've built a system to run the messages on the platform you selected to obtain actual performance results.
                             </uib-accordion-group>
@@ -143,8 +133,8 @@
                                 If some messages are not showing any results, that means that they were either omitted from testing or the testing budget expired before anyone could click on those messages.
                             </uib-accordion-group>
                         </uib-accordion>
-                        <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                            <h3 class="text-center" style="font-size:40px;">How Campaigns Work</h3>
+                        <uib-accordion class='col-sm-4 col-xs-12'>
+                            <h3>How Campaigns Work</h3>
                             <uib-accordion-group heading="What is Fabel?" template-url="group-template.html">
                                 Fabel crowdsources digital messages from your target audience. These are messages your audience is guaranteed to love because it was created by them. Launching a campaign on Fabel also gives you exposure to potential customers in itself. We're building a future where you never have to create another message again.
                             </uib-accordion-group>
@@ -164,14 +154,14 @@
                                 Absolutely. As each campaign is tailored for a specific social media platform, having different campaigns active can drastically expand your messages reach.
                             </uib-accordion-group>
                         </uib-accordion>
-                        <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                            <h3 class="text-center" style="font-size:40px;">Managing Your Campaign</h3>
+                        <uib-accordion class='col-sm-4 col-xs-12'>
+                            <h3>Managing Your Campaign</h3>
                             <uib-accordion-group heading="How do I edit my campaign?" template-url="group-template.html">
                                 Log into your account, and simply hit edit campaign in your dashboard. Contact us if you have any questions at all during this process.
                             </uib-accordion-group>
                         </uib-accordion>
-                        <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                            <h3 class="text-center" style="font-size:40px;">Choosing A Winner</h3>
+                        <uib-accordion class='col-sm-4 col-xs-12'>
+                            <h3>Choosing A Winner</h3>
                             <uib-accordion-group heading="How do I choose a winner?" template-url="group-template.html">
                                 From your dashboard, click on the campaign that has recently closed and press "Choose Winner" underneath your favorite message.
                             </uib-accordion-group>
@@ -182,8 +172,8 @@
                                 You have 3 days from when the campaign closes to choose a winner. Otherwise, we'll pick the one with the highest up-votes to complete your campaign.
                             </uib-accordion-group>
                         </uib-accordion>
-                        <uib-accordion class='col-sm-6 col-sm-offset-3 col-xs-12'>
-                            <h3 class="text-center" style="font-size:40px;" id="test">Selecting Your Favorite Message</h3>
+                        <uib-accordion class='col-sm-4 col-xs-12'>
+                            <h3 id="test">Selecting Your Favorite Message</h3>
                             <uib-accordion-group heading="How do I decide which message to select?" template-url="group-template.html">
                                 Sometimes it can be confusing to decide which message to purchase. We recommend picking one metric and focusing on that entirely. For most of our campaigns, we suggest using the Click Through Rate (CTR). It's straightforward and one of the most impactful for the growth of your business. If you care more about volume of traffic instead of traffic quality, however, Cost Per Click might be a better metric for you.
                             </uib-accordion-group>
@@ -191,7 +181,7 @@
                     </uib-tab>
                 </uib-tabset>
             </div>
-
+        </div>
     </div>
 </div>
 <style>
