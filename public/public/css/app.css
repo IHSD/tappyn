@@ -360,6 +360,8 @@ label {
     color: #019F6E;
     border: 1px solid #019F6E;
     font-weight: 400;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
@@ -369,6 +371,8 @@ label {
 .btn-secondary:hover {
     background: #eee;
     color: #019F6E;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .btn-hiw {
