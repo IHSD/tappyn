@@ -15,6 +15,6 @@ tappyn.controller("companyController", function($scope, $rootScope) {
             if (i >= hero.length) {
                 i = 0;
             }
-        }, 5000);
+        }, 2000);
     }
 });
