@@ -5,7 +5,6 @@ tappyn.controller("companyController", function($scope, $rootScope) {
         'https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg',
         'https://s3-us-west-2.amazonaws.com/tappyn/ban-2.jpg',
         'https://s3-us-west-2.amazonaws.com/tappyn/ban-3.jpg',
-        'https://s3-us-west-2.amazonaws.com/tappyn/ban-4.jpg',
     ];
 
     if (hero.length) {
