@@ -664,7 +664,8 @@ li.value-list:before {
     /* styles for mobile browsers smaller than 480px; (iPhone) */
     .hero-banner {
         background: url('https://s3-us-west-2.amazonaws.com/tappyn/ban-1.jpg') no-repeat;
-        background-size: cover;
+        background-size: auto 100%;
+       background-position: right center;
         height:580px;
         overflow: hidden;
     }
