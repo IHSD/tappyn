@@ -230,6 +230,110 @@ tappyn.controller('dashController', function($scope, $rootScope, $route, $filter
 
     }
 
+  $scope.dataSource1 = {
+    "chart": {
+      "animation": "1",
+      "animateClockwise": "1",
+      "animationDuration": "1",
+      "caption": "1. How likely is it that you will recommend this company to a friend or company?",
+      "captionFontSize": "25",
+      "paletteColors": "#019F6E,#374A5F",
+      "showBorder": "0",
+      "showZeroPies": "1",
+      "showPercentValues": "1",
+      "showPercentInToolTip": "1",
+      "showLabels": "1",
+      "showValues": "1",
+      "bgColor": "#ffffff",
+      "showShadow": "0",
+      "showHoverEffect": "1",
+      "use3DLighting": "0",
+      "showLegend": "1",
+      "legendBgColor": "#ffffff",
+      "legendBorderAlpha": "0",
+      "legendShadow": "0",
+      "legendItemFontSize": "16",
+      "legendItemFontColor": "#666666",
+      "toolTipColor": "#ffffff",
+      "toolTipBorderThickness": "0",
+      "toolTipBgColor": "#000000",
+      "toolTipBgAlpha": "80",
+      "toolTipBorderRadius": "2",
+      "toolTipPadding": "5",
+      "startingAngle": "0",
+      "baseFontSize": "14",
+      "enableMultiSlicing": "0",
+    },
+    "data": [{
+        "label": "Very Likely",
+        "value": "75"
+      },
+      {
+          "label": "Not Likely",
+          "value": "25"
+        },
+    ]
+  };
+  $scope.dataSource2 = {
+    "chart": {
+      "animation": "1",
+      "animateClockwise": "1",
+      "animationDuration": "1",
+      "caption": "2. Overall, how satisfied or dissatisfied are you with our company?",
+      "captionFontSize": "25",
+      "paletteColors": "#019F6E,#374A5F,#B2AEAD,#57CDA5,#5E7EA3",
+      "showBorder": "0",
+      "showZeroPies": "1",
+      "showPercentValues": "1",
+      "showPercentInToolTip": "1",
+      "showLabels": "1",
+      "showValues": "1",
+      "bgColor": "#ffffff",
+      "showShadow": "0",
+      "showHoverEffect": "1",
+      "use3DLighting": "0",
+      "showLegend": "1",
+      "legendBgColor": "#ffffff",
+      "legendBorderAlpha": "0",
+      "legendShadow": "0",
+      "legendItemFontSize": "16",
+      "legendItemFontColor": "#666666",
+      "toolTipColor": "#ffffff",
+      "toolTipBorderThickness": "0",
+      "toolTipBgColor": "#000000",
+      "toolTipBgAlpha": "80",
+      "toolTipBorderRadius": "2",
+      "toolTipPadding": "5",
+      "startingAngle": "0",
+      "baseFontSize": "14",
+      "enableMultiSlicing": "0",
+      "captionPadding": "25",
+      "startingAngle": "25",
+      "decimals": "1",
+    },
+    "data": [{
+        "label": "Very Satisfied",
+        "value": "10"
+      },
+      {
+          "label": "Somewhat Satisfied",
+          "value": "20"
+      },
+      {
+          "label": "Neither Satisfied Or Dissatisfied",
+          "value": "30"
+      },
+      {
+          "label": "Somewhat Dissatisfied",
+          "value": "13"
+      },
+      {
+          "label": "Very Dissatisfied",
+          "value": "9"
+      },
+    ]
+  };
+
     /** start winner functions, functions for assembling the winner view, opening and closing the modal for
         confirmation and the actual choosing of a winner **/
     $scope.choosing_winner = function(contest) {

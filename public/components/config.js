@@ -3,7 +3,8 @@ var tappyn = angular.module('tappyn', [
     'ui.bootstrap',
     'ngAnimate',
     'angularFileUpload',
-    'ngSanitize'
+    'ngSanitize',
+    'ng-fusioncharts'
 ]);
 
 tappyn.config(function($routeProvider, $locationProvider) {

@@ -354,7 +354,7 @@ tappyn.controller("ApplicationController", function($scope, $rootScope, $upload,
         $scope.signing_in.type = ($scope.signing_in.type) ? $scope.signing_in.type : 'default';
         $scope.signing_in.object = ($scope.signing_in.object) ? $scope.signing_in.object : '';
         $scope.registration = { show: true, type: $scope.signing_in.type, object: $scope.signing_in.object };
-        $scope.registrar = { show: true, group_id: 2, step: 1, interests: [] };
+        $scope.registrar = { show: true, group_id: 3, step: 1, interests: [] };
         $scope.signing_in = { show: false, type: '', object: '' };
     }
     $scope.register_to_login = function() {

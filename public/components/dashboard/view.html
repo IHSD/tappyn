@@ -177,14 +177,15 @@
             <table ng-show='view == "table"' class='table table-hover' style='border-radius:5px;background:#fff;'>
                 <thead>
                     <tr>
-                        <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Campaign</td>
+                        <td style='cursor:pointer' ng-click='predicate="platform";reverse=!reverse'>Survey</td>
                         <td style='cursor:pointer' ng-click='predicate="status";reverse=!reverse'>Status</td>
-                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Messages</td>
+                        <td style='cursor:pointer' ng-click='predicate="submission_count";reverse=!reverse'>Responses</td>
                     </tr>
                 </thead>
                 <tr ng-repeat='contest in dash.contests | filter : {status : type} | orderBy : predicate : reverse'>
                     <td>
-                        <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}} -
+                      <span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}}
+                        <!--<span ng-if='contest.status != "Complete" && contest.status != "draft"' style='color:#019F6E;cursor:default;'>{{contest.objective | capUnderscore}} -
                         <span ng-switch on="winner.contest.gender">
                           <span ng-switch-when="1">Men</span>
                           <span ng-switch-when="2">Women</span>
@@ -201,14 +202,22 @@
                           <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft - </span>
                           <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.stop_time | dashDate}}</span>
                           <span ng-if='contest.status == "draft"' style="cursor:default;">No stop : Draft</span>
-                      </small>
+                      </small>-->
+                      </span>
+                      <br>
+                      <small>
+                        <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.start_time | dashDate}} - </span>
+                        <span ng-if='contest.status == "draft"' style="cursor:default;">No start : Draft - </span>
+                        <span ng-if='contest.status != "draft"' style="cursor:default;">{{contest.stop_time | dashDate}}</span>
+                        <span ng-if='contest.status == "draft"' style="cursor:default;">No stop : Draft</span>
+                    </small>
                     </td>
                     <td style="cursor:default;">{{contest.status | capUnderscore}}</td>
-                    <td style="cursor:default;">{{contest.submission_count | number}}/{{contest.submission_limit}}</td>
+                    <td style="cursor:default;">75</td>
                     <td>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "Complete" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Campaign</a>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest)' style='margin-right: 10px;'>View Campaign</a>
-                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Campaign</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status != "Complete" && contest.status != "draft"' ng-click='choosing_winner(contest)' style='margin-right: 10px;'>View Survey</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "Complete"' ng-click='view_pcp(contest)' style='margin-right: 10px;'>View Survey</a>
+                        <a class='btn btn-oj btn-lg pull-right' ng-if='contest.status == "draft"' href='/launch/{{contest.id}}' style='margin-right: 10px;'>View Survey</a>
                     </td>
                 </tr>
             </table>
@@ -223,23 +232,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12" style="padding-bottom:10px;">
+                <div class="col-xs-12" style="padding:0 0 10px 0;">
                     <div class="col-xs-12 dash-round" style="background:#fff;border-radius:6px;">
                     <table>
                         <thead>
                             <tr>
+                                <td style="padding-top:10px;">Survey Name</td>
+                                <td style="padding-top:10px;padding-right:15px;">Total Responses</td>
+                                <td style="padding-top:10px;">Status</td>
                                 <td style="padding-top:10px;">Started On:</td>
                                 <td style="padding-top:10px;">
                                     <span ng-if="winner_contest.status != 'live'">
                                         Ended On:
                                     </span>
                                 </td>
-                                <!--<td style="padding-top:10px;">Platform:</td>-->
+                                <!--<td style="padding-top:10px;">Platform:</td>
                                 <td style="padding-top:10px;">Objective:</td>
-                                <td style="padding-top:10px;">Audience:</td>
+                                <td style="padding-top:10px;">Audience:</td>-->
                             </tr>
                         </thead>
                         <tr>
+                            <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">Survey Name</td>
+                            <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">75</td>
+                            <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">Live</td>
                             <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{contest.start_time | dashDate}}</td>
                             <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">
                                 <span ng-if="winner_contest.status != 'live'">
@@ -247,7 +262,7 @@
                                 </span>
                             </td>
                             <!--<td style="padding-bottom:10px;padding-right:50px;font-weight:300;">{{winner_contest.platform | capitalize}}</td>-->
-                            <td style="padding-bottom:10px;padding-right:50px;font-weight:300;">
+                            <!--<td style="padding-bottom:10px;padding-right:50px;font-weight:300;">
                                 <span ng-if="winner_contest.objective == 'clicks_to_website'">Quality</span>
                                 <span ng-if="winner_contest.objective != 'clicks_to_website'">{{winner_contest.objective}}</span>
                             </td>
@@ -259,10 +274,32 @@
                                 </span> -
                                 {{winner_contest.min_age}} to {{winner_contest.max_age}} -
                                 <span>{{winner_contest.industry | capitalize}}</span>
-                            </td>
+                            </td>-->
                         </tr>
                     </table>
                 </div>
+                </div>
+                <div class="col-xs-12" style="background-color:#fff;border-radius:4px;">
+                  <div>
+                    <fusioncharts
+                      width= "100%"
+                      height= "400"
+                      type= "pie2d"
+                      dataFormat= "json"
+                      dataSource= "{{dataSource1}}">
+                    </fusioncharts>
+                    <hr>
+                  </div>
+                  <div style="border-radius:4px;">
+                    <fusioncharts
+                      width= "100%"
+                      height= "400"
+                      type= "pie2d"
+                      dataFormat= "json"
+                      dataSource= "{{dataSource2}}">
+                    </fusioncharts>
+
+                  </div>
                 </div>
                 <div class="col-xs-12" ng-if="submissions.length">
                     <div class='col-sm-4 hidden-xs'>
@@ -290,16 +327,16 @@
                     <span ng-show="winner_contest.status =='draft'">
                     <h4 style="font-size:22px;">After you launch your campaign, this is where your messages will appear.</h4>
                 </span>
-                    <span ng-show="winner_contest.status =='live'" style="padding-top:25px;">
+                    <!--<span ng-show="winner_contest.status =='live'" style="padding-top:25px;">
                     <h4 style="font-size:22px;">Your campaign is currently live. As soon as it starts receiving messages, you'll see them here.</h4>
-                </span>
+                </span>-->
                 </div>
             </div>
-            <div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box' style="height:70px;">
+            <!--<div ng-hide="view == 'table'" class='launch-page-overlaybox launch-page-box' style="height:70px;">
                 <div class="container">
                     <div class='row'>
                         <div ng-show="winner_contest.status == 'testing'">
-                            <!--<a class='btn btn-oj btn-lg pull-right' href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>Questions?</a>-->
+                            <a class='btn btn-oj btn-lg pull-right' href="mailto:alek@tappyn.com?Subject=Hey%20there!"target=_top>Questions?</a>
                         </div>
                         <div ng-show="winner_contest.status == 'live' && view != 'pcp'">
                             <a class='btn btn-oj btn-lg pull-right' href='/edit/{{winner_contest.id}}'>Edit Campaign</a>
@@ -315,7 +352,7 @@
                         </div>
                         <div ng-show="winner_contest.status == 'pending_selection' && view != 'pcp'">
                             <button class='btn btn-oj btn-lg pull-right' type='button' ng-click='before_open_payment(winner_contest,"confirm_selection")'>Select <span class="glyphicon glyphicon-shopping-cart"></span></button>
-                            <!--<button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test <span class="glyphicon glyphicon-share-alt"></span></button>-->
+                            <button class='btn btn-oj btn-secondary btn-dash btn-lg pull-right' type='button' ng-click="before_open_payment(winner_contest,'confirm_re_ab')">Re-test <span class="glyphicon glyphicon-share-alt"></span></button>
                         </div>
                         <div class='text-left' ng-show="winner_contest.status == 'draft'">
                             <h4 class='text-left' style='color:#333'>
@@ -361,7 +398,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div ng-show='view == "pcp"'>
     <div class='col-xs-12'>
         <button class='btn btn-oj btn-lg btn-secondary' style="margin-bottom:30px;" ng-click='back_table()'><span class="glyphicon glyphicon-arrow-left"></span> Back</button>
@@ -454,6 +491,18 @@ window.Intercom('update');
 @media (min-width: 768px) .modal-content {
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
     box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+}
+
+.raphael-group-3-creditgroup {
+  display: none !important;
+}
+
+.raphael-group-8-creditgroup {
+  display: none !important;
+}
+
+.table-hover>tbody>tr:hover {
+  background-color: #fff !important;
 }
 
 .modal-header {
