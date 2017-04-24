@@ -5,7 +5,7 @@
         <div class="logo" style="padding-bottom:25px;padding-top:20px;">
             <img src="public/img/beta_logo.png" width='200'>
         </div>
-        <!--<div class='col-xs-12 text-center hidden-xs hidden-sm'>
+        <div class='col-xs-12 text-center hidden-xs hidden-sm'>
             <div class="btn-group" data-toggle="buttons">
                 <label class='btn btn-lg' ng-class='{"btn-log" : login_scope.user == "1", "btn-default" : login_scope.user != "1"}' ng-click="login_scope.user=1">
                     I'm a user
@@ -14,8 +14,8 @@
                     I'm a business
                 </label>
             </div>
-        </div>-->
-        <!--<div class='col-xs-12 text-center hidden-md hidden-lg'>
+        </div>
+        <div class='col-xs-12 text-center hidden-md hidden-lg'>
             <div class="btn-group" data-toggle="buttons">
                 <label class='btn btn-md' ng-class='{"btn-log" : login_scope.user == "1", "btn-default" : login_scope.user != "1"}' ng-click="login_scope.user=1">
                     I'm a user
@@ -24,7 +24,7 @@
                     I'm a business
                 </label>
             </div>
-        </div>-->
+        </div>
         <div ng-show="!forgot">
             <div ng-show="login_scope.user == '1'">
                 <div class="col-xs-10 col-xs-offset-1">
@@ -39,7 +39,7 @@
             </div>
             <br>
             <form class='form' ng-submit="log_in(identity, password)">
-                <!--<div ng-show="login_scope.user == '1' || login_scope.user == '2'" class="col-xs-12">-->
+                <div ng-show="login_scope.user == '1' || login_scope.user == '2'" class="col-xs-12">
                   <div class="col-xs-12">
                     <center>
                         <div class='form-group' style='5px;max-width:60%;'>
