@@ -68,11 +68,11 @@ if (php_sapi_name() === 'cli') {
  * By default development will show errors but testing and live will hide them.
  */
 switch (ENVIRONMENT) {
+    //case 'development':
+    //    error_reporting(-1);
+    //   ini_set('display_errors', 1);
+    //   break;
     case 'development':
-        error_reporting(-1);
-        ini_set('display_errors', 1);
-        break;
-
     case 'testing':
     case 'production':
         ini_set('display_errors', 0);
