@@ -875,19 +875,19 @@ class Ion_auth_model extends CI_Model
         $id = $this->db->insert_id();
 
         if (isset($id)) {
-            //$this->db->insert('profiles', array('id' => $id, 'age' => isset($additional_data['age']) ? $additional_data['age'] : null, 'gender' => isset($additional_data['gender']) ? $additional_data['gender'] : null));
+            $this->db->insert('profiles', array('id' => $id, 'age' => isset($additional_data['age']) ? $additional_data['age'] : null, 'gender' => isset($additional_data['gender']) ? $additional_data['gender'] : null));
         }
         // add in groups array if it doesn't exits and stop adding into default group if default group ids are set
         if (isset($default_group->id) && empty($groups)) {
             $groups[] = $default_group->id;
         }
 
-        //if (!empty($groups)) {
+        if (!empty($groups)) {
             // add to groups
-            //foreach ($groups as $group) {
-                //$this->add_to_group($group, $id);
-            //}
-        //}
+            foreach ($groups as $group) {
+                $this->add_to_group($group, $id);
+            }
+        }
         $this->trigger_events('post_register');
 
         return (isset($id)) ? $id : false;
@@ -1376,38 +1376,38 @@ class Ion_auth_model extends CI_Model
      * @return bool
      * @author Ben Edmunds
      **/
-    //public function add_to_group($group_ids, $user_id = false)
-    //{
-        //$this->trigger_events('add_to_group');
+    public function add_to_group($group_ids, $user_id = false)
+    {
+        $this->trigger_events('add_to_group');
 
         // if no id was passed use the current users id
-        //$user_id || $user_id = $this->session->userdata('user_id');
+        $user_id || $user_id = $this->session->userdata('user_id');
 
-        //if (!is_array($group_ids)) {
-            //$group_ids = array($group_ids);
-        //}
+        if (!is_array($group_ids)) {
+            $group_ids = array($group_ids);
+        }
 
-        //$return = 0;
+        $return = 0;
 
         // Then insert each into the database
-        //foreach ($group_ids as $group_id) {
-            //if ($this->db->insert($this->tables['users_groups'], array($this->join['groups'] => (float) $group_id, $this->join['users'] => (float) $user_id))) {
-                //if (isset($this->_cache_groups[$group_id])) {
-                    //$group_name = $this->_cache_groups[$group_id];
-                //} else {
-                    //$group                          = $this->group($group_id)->result();
-                    //$group_name                     = $group[0]->name;
-                    //$this->_cache_groups[$group_id] = $group_name;
-                //}
-                //$this->_cache_user_in_group[$user_id][$group_id] = $group_name;
+        foreach ($group_ids as $group_id) {
+            if ($this->db->insert($this->tables['users_groups'], array($this->join['groups'] => (float) $group_id, $this->join['users'] => (float) $user_id))) {
+                if (isset($this->_cache_groups[$group_id])) {
+                    $group_name = $this->_cache_groups[$group_id];
+                } else {
+                    $group                          = $this->group($group_id)->result();
+                    $group_name                     = $group[0]->name;
+                    $this->_cache_groups[$group_id] = $group_name;
+                }
+                $this->_cache_user_in_group[$user_id][$group_id] = $group_name;
 
                 // Return the number of groups added
-                //$return += 1;
-            //}
-        //}
+                $return += 1;
+            }
+        }
 
-        //return $return;
-    //}
+        return $return;
+    }
 
     /**
      * remove_from_group

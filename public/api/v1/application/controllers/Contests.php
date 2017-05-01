@@ -291,6 +291,8 @@ class Contests extends CI_Controller
                 'submission_limit'    => $this->input->post('submission_limit') ? $this->input->post('submission_limit') : 30,
                 'prize'               => $prize,
                 'others'              => serialize($others),
+                'test_start_time'     => date('Y-m-d H:i:s'),
+                'test_upload_time'    => date('Y-m-d H:i:s'),
             );
 
             $images = array();

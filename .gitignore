@@ -50,3 +50,4 @@ Dockerfile
 # Test
 
 .deploy_args.php
+sftp-config.json
